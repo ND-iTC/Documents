@@ -685,7 +685,7 @@ The Evaluation Activities defined in [SD] describe actions that the evaluator wi
 The conventions used in descriptions of the SFRs are as follows:
 
 * Unaltered SFRs are stated in the form used in [CC2] or their extended component definition (ECD);
-* Refinement made in the PP: the refinement text is indicated with *bold text* and [line-through]*strikethroughs*;
+* Refinement made in the PP: the refinement text is indicated with *bold text* and +++<del>+++strikethroughs+++</del>+++;
 * Selection wholly or partially completed in the PP: the selection values (i.e. the selection values adopted in the PP or the remaining selection values available for the ST) are indicated with [.underline]#underlined text#
 +
 e.g. ‘[selection: _disclosure, modification, loss of use_]’ in [CC2] or an ECD might become ‘[.underline]#disclosure’# (completion) or ‘[selection: [.underline]#disclosure#, [.underline]#modification#]’ (partial completion) in the PP;
