@@ -1,17 +1,8 @@
 ---
 name: cPP change request
 about: Suggest an idea for this project
-title: ''
+title: cPP change
 labels: ''
-assignees: ''
-
----
-
----
-name: cPP change request
-about: Suggest an idea for this project
-title: "[cPP CHANGE] "
-labels: cPP, enhancement
 assignees: ''
 
 ---
