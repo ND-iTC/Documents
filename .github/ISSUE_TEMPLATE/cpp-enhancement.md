@@ -1,7 +1,7 @@
 ---
 name: cPP Enhancement
 about: Request to implement something that is not covered today, (e.g. support for
-  new-crypto-algorithm X or protocol Y).
+  new-crypto-algorithm X or protocol Y)
 title: "[cPP ENHANCEMENT]"
 labels: cPP, enhancement
 assignees: ''
