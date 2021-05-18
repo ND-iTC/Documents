@@ -1,9 +1,8 @@
 ---
-name: cPP Enhancement
-about: Request to implement something that is not covered today, (e.g. support for
-  new-crypto-algorithm X or protocol Y).
-title: "[cPP ENHANCEMENT]"
-labels: cPP, enhancement
+name: cPP Typo
+about: Issue with grammar, spelling, formatting
+title: "[cPP TYPO]"
+labels: cPP, typo
 assignees: ''
 
 ---
@@ -11,7 +10,7 @@ assignees: ''
 **Provide cPP location.**
 section/page/paragraph
 
-**What is the enhancement request for the cPP? Please describe.**
+**What is the typo request for the cPP? Please describe.**
 A clear and concise description of this issue.
 
 **Describe the solution you'd like**

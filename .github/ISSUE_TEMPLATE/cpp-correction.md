@@ -1,9 +1,8 @@
 ---
-name: cPP Enhancement
-about: Request to implement something that is not covered today, (e.g. support for
-  new-crypto-algorithm X or protocol Y).
-title: "[cPP ENHANCEMENT]"
-labels: cPP, enhancement
+name: cPP Correction
+about: Issues with the way in which something has been written (not necessarily incorrect)
+title: "[cPP Correction]"
+labels: cPP, correction
 assignees: ''
 
 ---
@@ -11,8 +10,8 @@ assignees: ''
 **Provide cPP location.**
 section/page/paragraph
 
-**What is the enhancement request for the cPP? Please describe.**
-A clear and concise description of this issue.
+**What is the correction request for the cPP? Please describe.**
+A clear and concise description of this request.
 
 **Describe the solution you'd like**
 A clear and concise description of what change you want to see implemented. Please provide an example.
