@@ -1,6 +1,6 @@
 ---
 name: Request for Interpretation
-about: Suggest an idea for this project
+about: Submit an request for interpretation
 title: "[NIT REQUEST] "
 labels: Interpretation
 assignees: ''
