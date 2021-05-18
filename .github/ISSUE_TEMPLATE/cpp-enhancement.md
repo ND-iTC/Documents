@@ -6,7 +6,7 @@ labels: cPP, enhancement
 assignees: ''
 
 ---
-**Location of the typo**
+**Provide a location within the cPP.**
 section/page/paragraph
 
 **What is the change request for the cPP? Please describe.**
