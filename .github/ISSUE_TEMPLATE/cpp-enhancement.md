@@ -1,17 +1,19 @@
 ---
-name: cPP change request - Enhancement
+name: cPP Enhancement
 about: Request to implement something that is not covered today, (e.g. support for new-crypto-algorithm X or protocol Y).
-title: "[cPP CHANGE - ENHANCEMENT] "
+title: "[cPP ENHANCEMENT]"
 labels: cPP, enhancement
 assignees: ''
 
 ---
+**Location of the typo**
+section/page/paragraph
 
 **What is the change request for the cPP? Please describe.**
-A clear and concise description of what the change is. This could be a problem with the existing document or just a new request
+A clear and concise description of what the change is.
 
 **Describe the solution you'd like**
-A clear and concise description of what change you want to see implemented. Please provide an example. A link to the existing location where the change should happen is preferred.
+A clear and concise description of what change you want to see implemented. Please provide an example.
 
 **Describe alternatives you've considered**
 A clear and concise description of any alternative solutions you've considered using the existing cPP requirements.
