@@ -1,8 +1,8 @@
 ---
-name: cPP Correction
+name: SD Correction
 about: Issues with the way in which something has been written (not necessarily incorrect).
-title: "[cPP Correction]"
-labels: cPP, correction
+title: "[SD Correction]"
+labels: SD, correction
 assignees: ''
 
 ---

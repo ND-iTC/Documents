@@ -1,8 +1,8 @@
 ---
-name: cPP Typo
-about: Highlight a typographical issue with the cPP.
-title: "[cPP TYPO] "
-labels: cPP, typo
+name: SD Typo
+about: Highlight a typographical issue with the SD.
+title: "[SD TYPO] "
+labels: SD, typo
 assignees: ''
 
 ---
