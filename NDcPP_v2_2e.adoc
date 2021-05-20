@@ -1671,8 +1671,6 @@ _The audit event “Unsuccessful attempt to validate a certificate” for FIA_X5
 
 ==== Security Audit Event Storage (FAU_STG.1 & Extended – FAU_STG_EXT)
 
-Local storage space for audit data may be necessary on the TOE itself, and the TOE may then claim protection of the audit trail against unauthorised modification (including deletion) as described in FAU_STG.1. The local storage space for audit data of a Network Device is also limited, and if the local storage space is exceeded then audit data might be lost. A security Administrator might be interested in the number of dropped, overwritten, etc. audit records. This number might serve as an indication if a severe problem has occurred after the storage space was exceeded that continuously generated audit data. Therefore, FAU_STG_EXT.2/LocSpace and FAU_STG_EXT.3/LocSpace are defined to express these optional capabilities of a Network Device.
-
 =====  FAU_STG.1 Protected Audit Trail Storage
 
 *FAU_STG.1 Protected Audit Trail Storage*
