@@ -1864,7 +1864,7 @@ If the TOE acts as the server during the claimed DTLS sessions, the ST author sh
 
 *FCS_DTLSC_EXT.2 DTLS Client Support for Mutual Authentication*
 
-*FCS_DTLSC_EXT.2.1* The TSF shall support mutual authentication using X.509v3 certificates.
+*FCS_DTLSC_EXT.2.1* The TSF shall support DTLS communication with mutual authentication of DTLS Clients using X.509v3 certificates.
 
 *_Application Note 49_*
 
@@ -1874,7 +1874,7 @@ _The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This
 
 *_Application Note 50_*
 
-_The Message Authentication Code (MAC) is negotiated during the DTLS handshake phase and is used to protect the integrity of messages received from the sender during DTLS data exchange. If MAC verification fails, the session must be terminated, or the record must be silently discarded._
+_The Message Authentication Code (MAC) is negotiated during the DTLS handshake phase and is used to protect the integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC (tbd - current draft for DTLS 1.3 is V38), section 4.5.2 and 4.1.2.7 in RFC 6347(DTLS 1.2)). If MAC verification fails, the session must be terminated, or the record must be silently discarded._
 
 *FCS_DTLSC_EXT.2.3* The TSF shall detect and silently discard replayed messages for:
 
@@ -1883,7 +1883,7 @@ _The Message Authentication Code (MAC) is negotiated during the DTLS handshake p
 
 *_Application Note 51_*
 
-_Replay Detection is described in section 4.1.2.6 of DTLS 1.2 (RFC 6347) and section 4.1.2.5 of DTLS 1.0 (RFC 4347). For each received record, the receiver verifies the record contains a sequence number that is within the sliding receive window and does not duplicate the sequence number of any other record received during the session._
+_Replay Detection is described in section 4.5.1 of DTLS 1.3 (RFC tbd, current draft version is V38), 4.1.2.6 of DTLS 1.2 (RFC 6347) and section 4.1.2.5 of DTLS 1.0 (RFC 4347). For each received record, the receiver verifies the record contains a sequence number that is within the sliding receive window and does not duplicate the sequence number of any other record received during the session._
 
 _"Silently Discard" means the TOE discards the packet without responding._
 
