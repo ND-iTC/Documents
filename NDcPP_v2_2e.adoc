@@ -1874,7 +1874,7 @@ _The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This
 
 *_Application Note 50_*
 
-_The Message Authentication Code (MAC) is negotiated during the DTLS handshake phase and is used to protect the integrity of messages received from the sender during DTLS data exchange. If MAC verification fails, the session must be terminated, or the record must be silently discarded._
+_The Message Authentication Code (MAC) is negotiated during the DTLS handshake phase and is used to protect the integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC (tbd - current draft for DTLS 1.3 is V38), section 4.5.2 and 4.1.2.7 in RFC 6347(DTLS 1.2)). If MAC verification fails, the session must be terminated, or the record must be silently discarded._
 
 *FCS_DTLSC_EXT.2.3* The TSF shall detect and silently discard replayed messages for:
 
