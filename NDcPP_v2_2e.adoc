@@ -1864,7 +1864,7 @@ If the TOE acts as the server during the claimed DTLS sessions, the ST author sh
 
 *FCS_DTLSC_EXT.2 DTLS Client Support for Mutual Authentication*
 
-*FCS_DTLSC_EXT.2.1* The TSF shall support mutual authentication using X.509v3 certificates.
+*FCS_DTLSC_EXT.2.1* The TSF shall support DTLS communication with mutual authentication of DTLS Clients using X.509v3 certificates.
 
 *_Application Note 49_*
 
