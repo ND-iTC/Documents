@@ -1929,6 +1929,35 @@ _If DTLS is selected in FPT_ITT, then certificate validity is tested in accordan
 
 _The client identifier may be in the Subject field or the Subject Alternative Name extension of the certificate. The expected identifier may either be configured, may be compared to the Domain Name, IP address, username, or email address used by the peer, or may be passed to a directory server for comparison._
 
+*FCS_DTLSS_EXT.2.4* The TSF shall [selection:
+
+* _present a DTLS1.0 Certificate Request message containing the following ClientCertificateTypes: [selection:_
+** rsa_sign,
+** ecdsa_sign,
+** ] and no other ClientCertificateTypes;
+* present a [selection: DTLSv1.2, DTLSv1.3] Certificate Request message containing the following algorithms: [selection:
+** rsa_pkcs1 with sha256(0x0401),
+** rsa_pkcs1 with sha384(0x0501),
+** rsa_pkcs1 with sha512(0x0601),
+** ecdsa_secp256r1 with sha256(0x0403),
+** ecdsa_secp384r1 with sha384(0x0503),
+** ecdsa_secp521r1 with sha512(0x0603),
+** rsa_pss_rsae with sha256(0x0804),
+** rsa_pss_rsae with sha384(0x0805),
+** rsa_pss_rsae with sha512(0x0806),
+** rsa_pss_pss with sha256(0x0809),
+** rsa_pss_pss with sha384(0x080a),
+** rsa_pss_pss with sha512(0x080b)
+** ] and no other algorithms;
+
+].
+
+*_Application Note 54_*
+
+_The selected ClientCertificateTypes and algorithms must be consistent with FCS_COP.1/SigGen and FCS_COP.1/Hash.
+The DTLS 1.2 Certificate Request message includes the algorithms as a list of  SignatureAndHashAlgorithms in the supported signature algorithms list. The signature algorithm is also specified in the certificate_types list.
+The DTLS 1.3 Certificate Request message includes the algorithms as a list of  SignatureSchemes in the signature_algorithms extension._
+
 =====  FCS_TLSC_EXT & FCS_TLSS_EXT TLS Protocol
 
 TLS is not a required component of this cPP. If a TOE implements TLS, a corresponding selection in FPT_ITT.1, FTP_ITC.1, or FTP_TRP.1/Admin should be made to define what the TLS protocol is implemented to protect. If a corresponding option to support TLS has been selected in at least one of the SFRs named above, the corresponding selection-based TLS-related SFRs should be added to the ST from chap. B.3.1.6 (i.e. FCS_TLSC_EXT.1 and/or FCS_TLSS_EXT.1). The SFRs therein cover only the minimum TLS-related requirements without support for mutual authentication. The support for mutual authentication is optional when using TLS. If a TOE implements TLS with mutual authentication, the corresponding optional SFRs should be added to the ST from chap. A.7.1.1 (i.e. FCS_TLSC_EXT.2 and/or FCS_TLSS_EXT.2) in addition to the corresponding SFRs from chap. B.3.1.6.
