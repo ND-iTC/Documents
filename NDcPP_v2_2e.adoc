@@ -2603,8 +2603,8 @@ _In a future version of this cPP TLS v1.2 will be required for all TOEs._
 
 *FCS_TLSC_EXT.1.2* The TSF shall verify that the presented identifier matches [selection: _the reference identifier per RFC 6125 section 6[.underline]##,## IPv4 address in CN or SAN, IPv6 address in the CN or SAN, IPv4 address in SAN, IPv6 address in the SAN, the identifier per RFC 5280 Appendix A using [selection: id-at-commonName, id-at-countryName, id-at-dnQualifier, id-at-generationQualifier, id-at-givenName, id-at-initials, id-at-localityName, id-at-name, id-at-organizationalUnitName, id-at-organizationName, id-at-pseudonym, id-at-serialNumber, id-at-stateOrProvinceName, id-at-surname, id-at-title] and no other attribute types_].
 
-[arabic, start=105]
-. {blank}
+*_Application Note {counter:appnote_count}_*
+
 
 Where TLS is used for connections to/from non-TOE entities (relevant to FTP_ITC and FTP_TRP), the ST author shall select RFC 6125. For distributed TOEs (TLS connections relevant to FPT_ITT), the ST author may select either RFC 6125 or RFC 5280. If RFC 5280 is selected, the selection is completed by listing the AttributeType (e.g. ‘id-at-serialNumber’) as defined in RFC 5280 Appendix A. The selection should only list those attributes that are significant (i.e. those which are used by the client for reference identifier matching), though the Subject field (DN) may contain other attribute types that are not significant for the purpose of reference identifier matching. In the TSS the ST author describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier. The ST author selects “_the reference identifier per RFC 6125 section 6” for TOEs that support FQDN, SRV, and URI identifiers._
 
@@ -2623,8 +2623,8 @@ Finally, the client should avoid constructing reference identifiers using wildca
 
 ].
 
-[arabic, start=106]
-. {blank}
+*_Application Note {counter:appnote_count}_*
+
 
 ‘Revocation status’ refers to an OCSP or CRL response that indicates the presented certificate is invalid. Inability to make a connection to determine validity shall be handled as specified in FIA_X509_EXT.2.2. If the revocation status of a certificate received by the TOE is ambiguous (e.g. ‘unknown’), this should be treated similar to the situation where no connection could be established to the revocation server and the option ‘determine the revocation status’ could be chosen for this.
 
@@ -2636,8 +2636,8 @@ If TLS is selected in FPT_ITT, then certificate validity is tested in accordance
 
 *FCS_TLSC_EXT.1.4* The TSF shall [selection: _not present the Supported Elliptic Curves/Supported Groups Extension, present the Supported Elliptic Curves/Supported Groups Extension with the following curves/groups:_ [selection: _secp256r1, secp384r1, secp521r1, ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192_] _and no other curves/groups_] in the Client Hello.
 
-[arabic, start=107]
-. {blank}
+*_Application Note {counter:appnote_count}_*
+
 
 If ciphersuites with elliptic curves were selected in FCS_TLSC_EXT.1.1, a selection of one or more curves is required. If no ciphersuites with elliptic curves were selected in FCS_TLSC_EXT.1.1, then “not present the Support Elliptic Curves/Supported Groups Extension” should be selected.
 
@@ -2645,43 +2645,45 @@ This requirement limits the elliptic curves allowed for authentication and key a
 
 If ciphersuites with DHE key agreement were selected FCS_TLSC_EXT.1.1 and the TOE supports TLS FFC groups (e.g. ffdhe2048), this extension is required. This extension is not required if the TOE only supports non-TLS FFC groups (e.g. Group 14).
 
-*FCS_TLSS_EXT.1 TLS Server Protocol Without Mutual Authentication*
+*FCS_TLSS_EXT.1 TLS Server Protocol*
 
-*FCS_TLSS_EXT.1.1* The TSF shall implement [selection: __TLS 1.2 (RFC 5246), TLS 1.1 (RFC 4346)__[.underline]##]## and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
+*FCS_TLSS_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [selection: _TLS 1.1 (RFC 4346), no additional TLS version_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
 
-____
-[selection:
+_[selection:_
 
-[.underline]#_select supported ciphersuites from List 1_] _and no other ciphersuites_#.
-____
+* _select supported ciphersuites for TLSv1.1 and/or TLSv1.2 from List 1_
 
-[arabic, start=108]
-. {blank}
+* _select supported ciphersuites for TLSv1.3 from List 2_
 
-The ciphersuites to be tested in the evaluated configuration are limited by this requirement and must be selected from the ciphersuites defined in List 1. The ST author should select the optional ciphersuites that are supported. Even though RFC 5246 mandates implementation of specific ciphers, there is no requirement to implement TLS_RSA_WITH_AES_128_CBC_SHA in order to claim conformance to this cPP.
+_]_ and no other ciphersuites.
 
-These requirements will be revisited as new TLS versions are standardized by the IETF.
+
+*_Application Note {counter:appnote_count}_*
+
+
+_The ciphersuites to be tested in the evaluated configuration are limited by this requirement and must be selected from the ciphersuites defined in List 1. The ST author should select the optional ciphersuites that are supported. Even though RFC 5246 mandates implementation of specific ciphers, this cPP depreciates use of SHA-1. Support for TLS_RSA_WITH_AES_128_CBC_SHA is not claimed in order to claim conformance to this cPP._
+
+
+_These requirements will be revisited as new TLS versions are standardized by the IETF._
 
 _In a future version of this cPP TLS v1.2 will be required for all TOEs._
 
 *FCS_TLSS_EXT.1.2* The TSF shall deny connections from clients requesting _SSL 2.0, SSL 3.0, TLS 1.0 and [selection: TLS 1.1, TLS 1.2, none]_.
 
-[arabic, start=109]
-. {blank}
+*_Application Note {counter:appnote_count}_*
+
 
 _All SSL versions and TLS v1.0 are denied. Any TLS versions not selected in FCS_TLSS_EXT.1.1 should be selected here. (If ‘none’ is the selection for this element then the ST author may omit the words “and none”.)_
 
 *FCS_TLSS_EXT.1.3* The TSF shall perform key establishment for TLS using [selection: _RSA with key size_ [selection: _2048 bits, 3072 bits, 4096 bits_]_, Diffie-Hellman parameters with size_ [selection: _2048 bits, 3072 bits, 4096 bits, 6144 bits, 8192 bits_]_, Diffie-Hellman groups_ [selection: _ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192, no other groups_]_, ECDHE curves_ [selection: _secp256r1, secp384r1, secp521r1] and no other curves_]].
 
-[arabic, start=110]
-. {blank}
+*_Application Note {counter:appnote_count}_*
 
 The appropriate options shall be selected in the ST according to the key establishment options supported by the TOE. FMT_SMF.1 requires the configuration of the key agreement parameters to establish the security strength of the TLS connection.
 
 *FCS_TLSS_EXT.1.4* The TSF shall support [selection: _no session resumption or session tickets, session resumption based on session IDs according to RFC 4346 (TLS1.1) or RFC 5246 (TLS1.2), session resumption based on session tickets according to RFC 5077_].
 
-[arabic, start=111]
-. {blank}
+*_Application Note {counter:appnote_count}_*
 
 _If the TOE does not support session resumption or session tickets, select 'no session resumption or session tickets’. If the TOE supports session resumption based on session IDs according to RFC 4346 (TLS1.1) or RFC 5246 (TLS1.2), select 'session resumption based on session IDs according to RFC 4346 (TLS1.1) or RFC 5246 (TLS1.2)'. If the TOE supports session resumption based on session tickets according to RFC 5077, select 'session resumption based on session tickets according to RFC 5077'._
 
