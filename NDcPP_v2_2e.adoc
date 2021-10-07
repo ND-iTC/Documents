@@ -1972,6 +1972,18 @@ A TOE may act as the client, the server, or both in TLS sessions. The requiremen
 
 _The use of X.509v3 certificates for TLS is addressed in FIA_X509_EXT.2.1. This requirement adds that the client must be capable of presenting a certificate to a TLS server for TLS mutual authentication._
 
+*FCS_TLSC_EXT.3 TLS Client Support for renegotiation (TLSv1.1/v1.2 only)*
+
+*FCS_TLSC_EXT.3.1* The product shall support secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746.
+
+*_Application Note {counter:appnote_count}_*
+
+_This component may only be claimed for TLSv1.1 and TLSv1.2 but not TLSv1.3._
+
+_RFC 5746 defines an extension to TLS that binds renegotiation handshakes to the cryptography in the original handshake._
+
+_Per RFC 5746, the client may present either the "renegotiation_info" extension or the signaling cipher suite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message to indicate support for renegotiation. (A signaling cipher suite value (SCSV) is presented as a cipher suite, but its only purpose is to provide other information and not to advertise support for a cipher suite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling cipher suite value exists as an alternative to presenting the "renegotation_info" extension so that TLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it. In any case, RFC 5746 states that during any renegotiation the "renegotiation_info" extension must be presented by the peer initiating renegotiation, and so the client must support use of this extension._
+
 *FCS_TLSS_EXT.2 TLS Server Support for Mutual Authentication*
 
 *FCS_TLSS_EXT.2.1* The TSF shall support TLS communication with mutual authentication of TLS clients using X.509v3 certificates.
@@ -2006,6 +2018,18 @@ _If TLS is selected in FPT_ITT, then certificate validity is tested in accordanc
 _If the identifier is not a FQDN, then the TSS shall describe how the identifier is parsed from the certificate and matched._
 
 _The client identifier may be in the Subject field or the Subject Alternative Name extension of the certificate. The expected identifier may either be configured, may be compared to the FQDN, IP address, username, or email address used by the client, or may be passed to a directory server for comparison._
+
+*FCS_TLSS_EXT.3 TLS Server Support for renegotiation (TLSv1.1/v1.2 only)*
+
+*FCS_TLSS_EXT.3.1* The product shall support the "renegotiation_info" TLS extension in accordance with RFC 5746.
+
+*FCS_TLSS_EXT.3.2* The product shall include the renegotiation_info extension in ServerHello messages.
+
+*_Application Note {counter:appnote_count}_*
+
+_This component may only be claimed for TLSv1.1 and TLSv1.2 but not TLSv1.3._
+
+_RFC 5746 defines an extension to TLS that binds renegotiation handshakes to the cryptography in the original handshake._
 
 [appendix]
 == Selection-Based Requirements
@@ -2127,24 +2151,19 @@ To ensure audit requirements are properly met, a DTLS receiver may need to monit
 
 If the TOE acts as the server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSS_EXT requirements. In this case the TOE needs to claim at least the FCS_DTLSS_EXT.1 requirements in chap. B.3.1.1 (no support for mutual authentication). If the TOE acts as DTLS server and in addition also supports mutual authentication, the FCS_DTLSS_EXT.2 requirements in chap. A.7.1.1 need to be claimed in addition. If the TOE acts as both a client and server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSC_EXT and FCS_DTLSS_EXT requirements.
 
-*FCS_DTLSC_EXT.1 DTLS Client Protocol Without Mutual Authentication*
+*FCS_DTLSC_EXT.1 DTLS Client Protocol*
 
-*FCS_DTLSC_EXT.1.1* The TSF shall implement [selection: _DTLS 1.2 (RFC 6347), DTLS 1.0 (RFC 4347)_] supporting the following ciphersuites:
+*FCS_DTLSC_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC tbd), DTLS 1.2 (RFC 6347)] and [selection: DTLS 1.0 (RFC 4347), no additional DTLS version_] supporting the following ciphersuites:
 
 * [selection:
-** [.underline]#_select supported ciphersuites from List 1] and no other ciphersuites_.#
-
-].
+** [.underline]#_select supported ciphersuites for DTLS 1.0 and 1.2 from List 1]_#
+** [.underline]#_select supported ciphersuites for DTLS 1.3 from List 2] and no other ciphersuites_.#
 
 *_Application Note {counter:appnote_count}_*
 
-_The ciphersuites to be tested in the evaluated configuration are limited by this requirement and must be selected from the ciphersuites defined in List 1, chap..B.3.1.6. The ST author should select the ciphersuites that are supported. Even though RFC 5246 and RFC 6347 mandate implementation of specific ciphers, there is no requirement to implement TLS_RSA_WITH_AES_128_CBC_SHA in order to claim conformance to this cPP._
+_The ciphersuites to be tested in the evaluated configuration are limited by this requirement requirement and shall be selected from the ciphersuites defined in List 1 (DTLS 1.0/1.2) and List 2 (DTLS 1.3), respectively (both in chap. B.3.1.6). The ST author should select the ciphersuites that are supported. Even though RFC 5246 and RFC 6347 mandate implementation of specific ciphers, this cPP deprecates use of SHA-1. Support for TLS_RSA_WITH_AES_128_CBC_SHA is not claimed in order to claim conformance to this cPP._
 
 _These requirements will be revisited as new DTLS versions are standardized by the IETF._
-
-_In a future version of this cPP DTLS v1.2 will be required for all TOEs._
-
-_FCS_DTLSC_EXT.1 should only be used if the TOE transmits application-layer data to an external entity using a trusted channel provided by DTLS without receiving application data that needs to be protected._
 
 *FCS_DTLSC_EXT.1.2* The TSF shall verify that the presented identifier matches [selection: _the reference identifier per RFC 6125 section 6, IPv4 address in CN or SAN, IPv6 address in the CN or SAN, IPv4 address in SAN, IPv6 address in the SAN, the identifier per RFC 5280 Appendix A using [selection: id-at-commonName, id-at-countryName, id-at-dnQualifier, id-at-generationQualifier, id-at-givenName, id-at-initials, id-at-localityName, id-at-name, id-at-organizationalUnitName, id-at-organizationName, id-at-pseudonym, id-at-serialNumber, id-at-stateOrProvinceName, id-at-surname, id-at-title] and no other attribute types_].
 
@@ -2160,10 +2179,10 @@ _The preferred method for verification is the Subject Alternative Name using DNS
 
 _Finally, the client should avoid constructing reference identifiers using wildcards. However, if the presented identifiers include wildcards and the TOE supports wildcard, the client must follow the best practices regarding matching; these best practices are captured in the evaluation activity. The exception being, the use of wildcards is not supported when using IP address as the reference identifier._
 
-*FCS_DTLSC_EXT.1.3* When establishing a trusted channel, by default the TSF shall not establish a trusted channel if the server certificate is invalid. The TSF shall also [selection:
+*FCS_DTLSC_EXT.1.3* The TSF shall not establish a trusted channel if the server certificate is invalid [selection:
 
-* _Not implement any administrator override mechanism_
-* _require administrator authorization to establish the connection if the TSF fails to [selection: match the reference identifier, validate certificate path, validate expiration date, determine the revocation status] of the presented server certificate_
+* _without any administrator override mechanism._
+* _except with the following administrator override:   If the TSF fails to [selection: match the reference identifier, validate certificate path, validate expiration date, determine the revocation status] the TSF shall allow the administrator to provide override authorization to establish the connection on a per certificate basis._
 
 ].
 
@@ -2171,21 +2190,107 @@ _Finally, the client should avoid constructing reference identifiers using wildc
 
 _‘Revocation status’ refers to an OCSP or CRL response that indicates the presented certificate is invalid. Inability to make a connection to determine validity shall be handled as specified in FIA_X509_EXT.2.2. If the revocation status of a certificate received by the TOE is ambiguous (e.g. ‘unknown’), this should be treated similar to the situation where no connection could be established to the revocation server and the option ‘determine the revocation status’ could be chosen for this._
 
-_The purpose of the explicit selection in the SFR is to prevent the TOE from providing an override mechanism for situations other than specified in the selection (e.g. one or more certificates in the certification path have been revoked and this status is known to the TOE)._
+_The purpose of the explicit selection in the SFR is to prevent the TOE to provide an override authorization for situations other than specified in the selection (e.g. one or more certificates in the certification path have been revoked and this status is known to the TOE).  Override may be sought or granted at any time, though this typically occurs when an invalid certificate is presented during connection setup.  Override decisions may be stored and then consulted later, to permit connections using these otherwise-invalid certificates to establish trusted channels without user or administrator action._
 
 _If DTLS is selected in FTP_ITC then certificate validity is tested in accordance with testing performed for FIA_X509_EXT.1/Rev._
 
 _If DTLS is selected in FPT_ITT, then certificate validity is tested in accordance with testing performed for FIA_X509_EXT.1/ITT._
 
-*FCS_DTLSC_EXT.1.4* The TSF shall [selection: _not present the_ _Supported Elliptic Curves/Supported Groups Extension, present the Supported Elliptic Curves/Supported Groups Extension with the following curves/groups:_ [selection: _secp256r1, secp384r1, secp521r1, ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192_] _and no other curves/groups_] in the Client Hello.
+*FCS_DTLSC_EXT.1.4* The TSF shall [selection: _not present the Supported Groups Extension, present the Supported Groups Extension with the following curves/groups:_ [selection: _secp256r1, secp384r1, secp521r1, ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192_] _and no other curves/groups_] in the Client Hello.
 
 *_Application Note {counter:appnote_count}_*
 
-_If ciphersuites with elliptic curves were selected in FCS_DTLSC_EXT.1.1, a selection of one or more curves is required. If no ciphersuites with elliptic curves were selected in FCS_DTLSC_EXT.1.1, then “not present the Supported Elliptic Curves Extension” should be selected._
+_The “Supported Elliptic Curves” extension was renamed to “Supported Groups” by RFC 7919; however, both terms refer to the same extension._
 
-_This requirement limits the elliptic curves allowed for authentication and key agreement to the NIST curves from FCS_COP.1/SigGen and FCS_CKM.1 and FCS_CKM.2. This extension is required for clients supporting Elliptic Curve ciphersuites._
+_The following table provides the ST author with instructions for completing the selections._
 
-_If ciphersuites with DHE key agreement were selected FCS_DTLSC_EXT.1.1 and the TOE supports TLS FFC groups (e.g. ffdhe2048), this extension is required. This extension is not required if the TOE only supports non-TLS FFC groups (e.g. Group 14)._
+
+[cols="1,1,1"]
+|===
+| |_not present the Supported Groups Extension_|_present the Supported Groups Extension_
+|_DTLS 1.3 with or without DTLS 1.2 or DTLS 1.0_|_Shall not select_|_Shall select with any secp curves or any ffdhe groups – If DTLS 1.2 or DTLS 1.0 is supported, see the following rows for additional instructions._
+|_DTLS 1.2 or DTLS 1.0 with support for at least one ECDHE ciphersuite_|_Shall not select_|_Shall select – at least one secp curve shall be selected_
+|_DTLS 1.2 or DTLS 1.0 with support for at least one DHE ciphersuite_|_May select_ +
+
+_This extension is not required, because older TLS implementations did not negotiate FFC parameters (e.g. Group 14)._|_May select – at least one ffdhe group shall be selected_
+|===
+
+_Subsequent versions of this cPP will require support for the Supported Groups extension and prohibit use of legacy DH groups for key establishment._
+
+*FCS_DTLSC_EXT.1.5* The TSF shall [selection:
+
+* _present the signature_algorithms extension with support for the following algorithms: +
+[selection:_
+
+** _rsa_pkcs1 with sha256(0x0401),_
+** _rsa_pkcs1with sha384(0x0501),_
+** _rsa_pkcs1 with sha512(0x0601),_
+** _ecdsa_secp256r1 with sha256(0x0403),_
+** _ecdsa_secp384r1 with sha384(0x0503),_
+** _ecdsa_secp521r1 with sha512(0x0603),_
+** _rsa_pss_rsae with sha256(0x0804),_
+** _rsa_pss_rsae with sha384(0x0805),_
+** _rsa_pss_rsae with sha512(0x0806),_
+** _rsa_pss_pss with sha256(0x0809),_
+** _rsa_pss_pss with sha384(0x080a),_
+** _rsa_pss_pss with sha512(0x080b)_
+** ] and no other algorithms;
+
+* _present the signature_algorithms_cert extension with the following Signature Schemes:_ +
+_[selection:_
+
+** _rsa_pkcs1 with sha256(0x0401),_
+** _rsa_pkcs1with sha384(0x0501),_
+** _rsa_pkcs1 with sha512(0x0601),_
+** _ecdsa_secp256r1 with sha256(0x0403),_
+** _ecdsa_secp384r1 with sha384(0x0503),_
+** _ecdsa_secp521r1 with sha512(0x0603),_
+** _rsa_pss_rsae with sha256(0x0804),_
+** _rsa_pss_rsae with sha384(0x0805),_
+** _rsa_pss_rsae with sha512(0x0806),_
+** _rsa_pss_pss with sha256(0x0809),_
+** _rsa_pss_pss with sha384(0x080a),_
+** _rsa_pss_pss with sha512(0x080b)_
+** _] and no other SignatureSchemes;_
+
+_]._
+
+*_Application Note {counter:appnote_count}_*
+
+_The selected algorithms and SignatureSchemes must be consistent with FCS_COP.1/SigGen and FCS_COP.1/Hash._
+
+_DTLS 1.2 and DTLS 1.3 define different signature_algorithms extension formats. DTLS 1.2 specifies the HashAlgorithm and SignatureAlgorithm independently while DTLS 1.3 specifies SignatureSchemes. This element intentionally limits the signature and hash algorithms that may be selected_
+
+_The following table provides the ST author with instructions for completing the selections._
+
+[cols="1,1,1"]
+|===
+| |_present the signature_algorithms extension_|_present the signature_algorithms_cert extension_
+|_DTLS 1.3_|_Shall select_|_May select_
+|_DTLS 1.2 without DTLS 1.3_|_May select_|_Shall not select_
+|===
+
+
+*FCS_DTLSC_EXT.1.6* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_DTLSC_EXT.1.1.
+
+*_Application Note {counter:appnote_count}_*
+
+_The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_DTLSC_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise the option 'does not provide' shall be selected._
+
+*FCS_DTLSC_EXT.1.7* The TSF shall prohibit the use of the following extensions:
+
+* Early data extension
+* post-handshake client authentication according to RFC(tbd- current draft for DTLS 1.3 is V38), section 5.7.3.
+
+*_Application Note {counter:appnote_count}_*
+
+_The use of the early data extension and the post-handshake client authentication is prohibited in the configured TOE. Prohibiting post-handshake client authentication might be dropped in a future version of NDcPP_
+
+*FCS_DTLSC_EXT.1.8* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
+
+*_Application Note {counter:appnote_count}_*
+
+_The use of out-of-band provisioned pre-shared keys creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE. PSKs are used in DTLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material.  Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
 
 *FCS_DTLSS_EXT.1 DTLS Server Protocol Without Mutual Authentication*
 
@@ -3163,21 +3268,69 @@ FIA_X509_EXT.1 X.509 Certificate Validation
 FIA_X509_EXT.2 X.509 Certificate Authentication
 ____
 
-*FCS_DTLSC_EXT.1.1* The TSF shall implement [selection: _DTLS 1.2 (RFC 6347), DTLS 1.0 (RFC 4347)_] supporting the following ciphersuites:
+*FCS_DTLSC_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC tbd), DTLS 1.2 (RFC 6347)] and [selection: DTLS 1.0 (RFC 4347), no additional DTLS version_] supporting the following ciphersuites:
 
-* _[assignment: List of optional ciphersuites and reference to RFC in which each is defined]._
+* [selection:
+** [.underline]#_select supported ciphersuites for DTLS 1.0 and 1.2 from List 1]_#
+** [.underline]#_select supported ciphersuites for DTLS 1.3 from List 2] and no other ciphersuites_.#
 
 *FCS_DTLSC_EXT.1.2* The TSF shall verify that the presented identifier matches [selection: _the reference identifier per RFC 6125 section 6, IPv4 address in CN or SAN, IPv6 address in the CN or SAN, IPv4 address in SAN, IPv6 address in the SAN, the identifier per RFC 5280 Appendix A using [selection: id-at-commonName, id-at-countryName, id-at-dnQualifier, id-at-generationQualifier, id-at-givenName, id-at-initials, id-at-localityName, id-at-name, id-at-organizationalUnitName, id-at-organizationName, id-at-pseudonym, id-at-serialNumber, id-at-stateOrProvinceName, id-at-surname, id-at-title] and no other attribute types_].
 
-*FCS_DTLSC_EXT.1.3* When establishing a trusted channel, by default the TSF shall not establish a trusted channel if the server certificate is invalid. The TSF shall also [selection:
+*FCS_DTLSC_EXT.1.3* The TSF shall not establish a trusted channel if the server certificate is invalid [selection:
 
-* _Not implement any administrator override mechanism_
-* _require administrator authorization to establish the connection if the TSF fails to [selection: match the reference identifier, validate certificate path, validate expiration date, determine the revocation status] of the presented server certificate_
+* _without any administrator override mechanism._
+* _except with the following administrator override:   If the TSF fails to [selection: match the reference identifier, validate certificate path, validate expiration date, determine the revocation status] the TSF shall allow the administrator to provide override authorization to establish the connection on a per certificate basis._
 
 ].
 
-*FCS_DTLSC_EXT.1.4* The TSF shall [selection: _not present the Supported Elliptic Curves/Supported Groups Extension, present the Supported Elliptic Curves/Supported Groups Extension with the following curves/groups: [selection: secp256r1, secp384r1, secp521r1, ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192] and no other curves/groups_] in the Client Hello.
+*FCS_DTLSC_EXT.1.4* The TSF shall [selection: _not present the Supported Groups Extension, present the Supported Groups Extension with the following curves/groups:_ [selection: _secp256r1, secp384r1, secp521r1, ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192_] _and no other curves/groups_] in the Client Hello.
 
+*FCS_DTLSC_EXT.1.5* The TSF shall [selection:
+
+* _present the signature_algorithms extension with support for the following algorithms: +
+[selection:_
+
+** _rsa_pkcs1 with sha256(0x0401),_
+** _rsa_pkcs1with sha384(0x0501),_
+** _rsa_pkcs1 with sha512(0x0601),_
+** _ecdsa_secp256r1 with sha256(0x0403),_
+** _ecdsa_secp384r1 with sha384(0x0503),_
+** _ecdsa_secp521r1 with sha512(0x0603),_
+** _rsa_pss_rsae with sha256(0x0804),_
+** _rsa_pss_rsae with sha384(0x0805),_
+** _rsa_pss_rsae with sha512(0x0806),_
+** _rsa_pss_pss with sha256(0x0809),_
+** _rsa_pss_pss with sha384(0x080a),_
+** _rsa_pss_pss with sha512(0x080b)_
+** ] and no other algorithms;
+
+* _present the signature_algorithms_cert extension with the following Signature Schemes:_ +
+_[selection:_
+
+** _rsa_pkcs1 with sha256(0x0401),_
+** _rsa_pkcs1with sha384(0x0501),_
+** _rsa_pkcs1 with sha512(0x0601),_
+** _ecdsa_secp256r1 with sha256(0x0403),_
+** _ecdsa_secp384r1 with sha384(0x0503),_
+** _ecdsa_secp521r1 with sha512(0x0603),_
+** _rsa_pss_rsae with sha256(0x0804),_
+** _rsa_pss_rsae with sha384(0x0805),_
+** _rsa_pss_rsae with sha512(0x0806),_
+** _rsa_pss_pss with sha256(0x0809),_
+** _rsa_pss_pss with sha384(0x080a),_
+** _rsa_pss_pss with sha512(0x080b)_
+** _] and no other SignatureSchemes;_
+
+_]._
+
+*FCS_DTLSC_EXT.1.6* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_DTLSC_EXT.1.1.
+
+*FCS_DTLSC_EXT.1.7* The TSF shall prohibit the use of the following extensions:
+
+* Early data extension
+* post-handshake client authentication according to RFC(tbd- current draft for DTLS 1.3 is V38), section 5.7.3.
+
+*FCS_DTLSC_EXT.1.8* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
 ____
 *FCS_DTLSC_EXT.2 DTLS Client Support for Mutual Authentication*
 
@@ -3761,6 +3914,34 @@ ____
 
 *FCS_TLSC_EXT.2.1* The TSF shall support TLS communication with mutual authentication using X.509v3 certificates.
 
+*FCS_TLSC_EXT.3 TLS Client Support for renegotiation (TLSv1.1/v1.2 only)*
+
+____
+Hierarchical to: No other components
+
+Dependencies: FCS_CKM.1Cryptographic Key Generation
+
+FCS_CKM.2 Cryptographic Key Establishment
+
+FCS_COP.1/DataEncryption Cryptographic operation (AES Data encryption/decryption)
+
+FCS_COP.1/SigGen Cryptographic operation (Signature Generation and Verification)
+
+FCS_COP.1/Hash Cryptographic operation (Hash Algorithm)
+
+FCS_COP.1/KeyedHash Cryptographic operation (Keyed Hash Algorithm)
+
+FCS_RBG_EXT.1 Random Bit Generation
+
+FCS_TLSC_EXT.1 TLS Client Protocol
+
+FIA_X509_EXT.1 X.509 Certificate Validation
+
+FIA_X509_EXT.2 X.509 Certificate Authentication
+____
+
+*FCS_TLSC_EXT.3.1* The product shall support secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746.
+
 =====  FCS_TLSS_EXT TLS Server Protocol
 
 *Family Behaviour*
@@ -3863,6 +4044,35 @@ ____
 ].
 
 *FCS_TLSS_EXT.2.3* The TSF shall not establish a trusted channel if the identifier contained in a certificate does not match an expected identifier for the client. If the identifier is a Fully Qualified Domain Name (FQDN), then the TSF shall match the identifiers according to RFC 6125, otherwise the TSF shall parse the identifier from the certificate and match the identifier against the expected identifier of the client as described in the TSS.
+
+*FCS_TLSS_EXT.3 TLS Server Support for renegotiation (TLSv1.1/v1.2 only)*
+____
+Hierarchical to: No other components
+
+Dependencies: FCS_CKM.1 Cryptographic Key Generation
+
+FCS_CKM.2 Cryptographic Key Establishment
+
+FCS_COP.1/DataEncryption Cryptographic operation (AES Data encryption/decryption)
+
+FCS_COP.1/SigGen Cryptographic operation (Signature Generation and Verification)
+
+FCS_COP.1/Hash Cryptographic operation (Hash Algorithm)
+
+FCS_COP.1/KeyedHash Cryptographic operation (Keyed Hash Algorithm)
+
+FCS_RBG_EXT.1 Random Bit Generation
+
+FCS_TLSS_EXT.1 TLS Server Protocol
+
+FIA_X509_EXT.1 X.509 Certificate Validation
+
+FIA_X509_EXT.2 X.509 Certificate Authentication
+____
+
+*FCS_TLSS_EXT.3.1* The product shall support the "renegotiation_info" TLS extension in accordance with RFC 5746.
+
+*FCS_TLSS_EXT.3.2* The product shall include the renegotiation_info extension in ServerHello messages.
 
 === Identification and Authentication (FIA)
 
