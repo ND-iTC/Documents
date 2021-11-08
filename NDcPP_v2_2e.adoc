@@ -1891,7 +1891,7 @@ _"Silently Discard" means the TOE discards the packet without responding._
 
 *FCS_DTLSS_EXT.2.1* The TSF shall support DTLS communication with mutual authentication of DTLS clients using X.509v3 certificates and shall [selection:
 
-* reject the connection if the client does either not provide a client certificate at all or the client certificate cannot be successfully validated by the TOE (except for override mechanisms that might be defined in FCS_DTLSS_EXT.2.2) ('hard fail')
+* reject the connection if the client does not provide a client certificate at all or the client certificate cannot be successfully validated by the TOE (except for override mechanisms that might be defined in FCS_DTLSS_EXT.2.2) ('hard fail')
 
 * accept the connection even if the client does not provide a client certificate at all, as long as a fall-back authentication is performed using one of the other authentication mechanisms defined in this cPP before any other TSF-mediated action is performed via this channel ('soft fail')
 
@@ -1915,7 +1915,7 @@ _There are different behaviours of the TOE possible for the 'soft fail' option d
 
 _The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This requirement adds that this use must include support for client-side certificates for DTLS mutual authentication. If the revocation status of a certificate received by the TOE is ambiguous (e.g. ‘unknown’), this should be treated similar to the situation where no connection could be established to the revocation server and the option ‘determine the revocation status’ could be chosen for this._
 
-_The purpose of the explicit selection in the SFR is to prevent the TOE to provide an override mechanism for situations other than specified in the selection (e.g. one or more certificates in the certification path have been revoked and this status is known to the TOE)._
+_The purpose of the explicit selection in the SFR is to prevent the TOE from providing an override mechanism for situations other than specified in the selection (e.g. one or more certificates in the certification path have been revoked and this status is known to the TOE)._
 
 _‘Revocation status’ refers to an OCSP or CRL response that indicates the presented certificate is invalid. Inability to make a connection to determine validity shall be handled as specified in FIA_X509_EXT.2.2._
 
@@ -1955,8 +1955,10 @@ _The client identifier may be in the Subject field or the Subject Alternative Na
 *_Application Note 54_*
 
 _The selected ClientCertificateTypes and algorithms must be consistent with FCS_COP.1/SigGen and FCS_COP.1/Hash.
-The DTLS 1.2 Certificate Request message includes the algorithms as a list of  SignatureAndHashAlgorithms in the supported signature algorithms list. The signature algorithm is also specified in the certificate_types list.
-The DTLS 1.3 Certificate Request message includes the algorithms as a list of  SignatureSchemes in the signature_algorithms extension._
+
+The DTLS 1.2 Certificate Request message includes the algorithms as a list of  SignatureAndHashAlgorithms in the supported signature algorithms list. The signature algorithm is also specified in the certificate_types list._
+
+The DTLS 1.3 Certificate Request message includes the algorithms as a list of  SignatureSchemes in the signature_algorithms extension.
 
 =====  FCS_TLSC_EXT & FCS_TLSS_EXT TLS Protocol
 
@@ -2157,7 +2159,8 @@ If the TOE acts as the server during the claimed DTLS sessions, the ST author sh
 
 * [selection:
 ** [.underline]#_select supported ciphersuites for DTLS 1.0 and 1.2 from List 1]_#
-** [.underline]#_select supported ciphersuites for DTLS 1.3 from List 2] and no other ciphersuites_.#
+** [.underline]#_select supported ciphersuites for DTLS 1.3 from List 2
+] and no other ciphersuites_.#
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2215,7 +2218,7 @@ _The following table provides the ST author with instructions for completing the
 _This extension is not required, because older TLS implementations did not negotiate FFC parameters (e.g. Group 14)._|_May select – at least one ffdhe group shall be selected_
 |===
 
-_Subsequent versions of this cPP will require support for the Supported Groups extension and prohibit use of legacy DH groups for key establishment._
+Subsequent versions of this cPP will require support for the Supported Groups extension and prohibit use of legacy DH groups for key establishment.
 
 *FCS_DTLSC_EXT.1.5* The TSF shall [selection:
 
@@ -2277,10 +2280,10 @@ _The following table provides the ST author with instructions for completing the
 
 _The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_DTLSC_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise the option 'does not provide' shall be selected._
 
-*FCS_DTLSC_EXT.1.7* The TSF shall prohibit the use of the following extensions:
+*FCS_DTLSC_EXT.1.7* The TSF _shall prohibit the use of the following extensions:
 
 * Early data extension
-* post-handshake client authentication according to RFC(tbd- current draft for DTLS 1.3 is V38), section 5.7.3.
+* post-handshake client authentication according to RFC(tbd- current draft for DTLS 1.3 is V38), section 5.7.3._
 
 *_Application Note {counter:appnote_count}_*
 
