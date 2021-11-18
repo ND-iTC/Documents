@@ -1935,7 +1935,7 @@ _The use of X.509v3 certificates for TLS is addressed in FIA_X509_EXT.2.1. This 
 
 *FCS_TLSS_EXT.2.1* The TSF shall support TLS communication with mutual authentication of TLS clients using X.509v3 certificates and shall [selection:
 
-* _reject the connection if the client does either not provide a client certificate at all or the client certificate cannot be successfully validated by the TOE (except for override mechanisms that might be defined in FCS_TLSS_EXT.2.2) ('hard fail')_
+* _reject the connection if the client either does not provide a client certificate at all or the client certificate cannot be successfully validated by the TOE (except for override mechanisms that might be defined in FCS_TLSS_EXT.2.2) ('hard fail')_
 * _accept the connection even if the client does not provide a client certificate at all, as long as a fall-back authentication is performed using one of the other authentication mechanisms defined in this cPP before any other TSF-mediated action is performed via this channel ('soft fail')_
 
 *_Application Note {counter:appnote_count}_*
