@@ -1995,8 +1995,10 @@ _]._
 
 *_Application Note {counter:appnote_count}_*
 
-_The selected ClientCertificateTypes and algorithms must be consistent with FCS_COP.1/SigGen and FCS_COP.1/Hash._ +
-_The TLS 1.2 Certificate Request message includes the algorithms as a list of  SignatureAndHashAlgorithms in the supported signature algorithms list. The signature algorithm is also specified in the certificate_types list._ +
+_The selected ClientCertificateTypes and algorithms must be consistent with FCS_COP.1/SigGen and FCS_COP.1/Hash._
+
+_The TLS 1.2 Certificate Request message includes the algorithms as a list of  SignatureAndHashAlgorithms in the supported signature algorithms list. The signature algorithm is also specified in the certificate_types list._
+
 _The TLS 1.3 Certificate Request message includes the algorithms as a list of SignatureSchemes in the signature_algorithms extension._
 
 [appendix]
