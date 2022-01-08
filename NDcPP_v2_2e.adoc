@@ -2924,13 +2924,13 @@ _The use of out-of-band provisioned pre-shared keys creates a potential security
 
 *FCS_TLSS_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [selection: _TLS 1.1 (RFC 4346), no additional TLS version_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
 
-_[selection:_
+[selection:
 
 * _select supported ciphersuites for TLSv1.1 and/or TLSv1.2 from List 1_
 
 * _select supported ciphersuites for TLSv1.3 from List 2_
 
-_]_ and no other ciphersuites.
+] and no other ciphersuites.
 
 
 *_Application Note {counter:appnote_count}_*
@@ -2974,8 +2974,8 @@ _The following table provides the ST author with instructions for completing the
 [cols=",,,",options="header",]
 |===
 | |RSA key establishment... |EC Diffie-Hellman key agreement... |Diffie-Hellman key agreement...
-|TLS 1.3 without TLS 1.2 or TLS 1.1 | Shall not select | Shall select at least one  | 
-|TLS 1.3 with TLS 1.2 or TLS 1.1 |See the following rows |Shall select at least one- see the following rows for additional instructions |
+|TLS 1.3 without TLS 1.2 or TLS 1.1 | Shall not select 2+| Shall select at least one   
+|TLS 1.3 with TLS 1.2 or TLS 1.1 |See the following rows 2+|Shall select at least one- see the following rows for additional instructions 
 |TLS 1.2 or TLS 1.1 with support for at least one TLS_RSA_WITH... ciphersuite |Shall select |N/A |N/A
 |TLS 1.2 or TLS 1.1 without support for any TLS_RSA_WITH... ciphersuite |Shall not select |N/A |N/A
 |TLS 1.2 or TLS 1.1 with support for at least one ECDHE ciphersuite |N/A |Shall select |N/A
@@ -2990,7 +2990,7 @@ _The RSA key size(s) specified in FCS_TLSS_EXT.1.3 are used for RSA key establis
 
 _Subsequent versions of this cPP will require support for the Supported Groups extension and prohibit use of legacy DH groups for key establishment._
 
-*FCS_TLSS_EXT.1.4* The TSF shall support [selection: _no session resumption, sessiion resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)_].
+*FCS_TLSS_EXT.1.4* The TSF shall support [selection: [.underline]#no session resumption, sessiion resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)#].
 
 *_Application Note {counter:appnote_count}_*
 
@@ -4228,16 +4228,12 @@ ____
 
 *FCS_TLSS_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [selection: _TLS 1.1 (RFC 4346, no additional TLS version)_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
 
-* {blank}
-+
-____
-_[selection: 
+[selection: 
 
 * _select supported ciphersuites for TLSv1.1 and/or TLSv1.2 from List 1_
 * _select supported ciphersuites for TLSv1.3 from List 2_
 
-]_ and no other ciphersuites. 
-____
+] and no other ciphersuites. 
 
 *FCS_TLSS_EXT.1.2* The TSF shall authenticate itself using X.509 certificate(s) using [selection: _RSA with key size [selection: 2048 bits, 3072 bits, 4096 bits]; ECDSA over NIST curves [selection: secp256r1, secp384r1, secp521r1] and no other curves_].
 
@@ -4251,7 +4247,7 @@ ____
 
 ].
 
-*FCS_TLSS_EXT.1.4* The TSF shall support [selection: _no session resumption, session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)_].
+*FCS_TLSS_EXT.1.4* The TSF shall support [selection: [.underline]#no session resumption, session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)#].
 
 *FCS_TLSS_EXT.1.5* The TSF [selection: _provide, do not provide_] the ability of configuring the list of supported ciphersuites as defined in FCS_TLSS_EXT.1.1.
 
