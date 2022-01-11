@@ -2364,6 +2364,8 @@ _The process to validate the DTLS client is specified in section tbd of RFC tbd 
 
 _The selected algorithms and key sizes must be consistent with FCS_COP.1/SigGen and FCS_CKM.1. NDcPP does not support raw public keys as defined in RFC8446._
 
+_If the ST includes DTLS 1.0 or DTLS 1.2 in FCS_DTLSS_EXT.1.1, the selected algorithms must be consistent with the ciphersuites selected in FCS_DTLSS_EXT.1.1._
+
 *FCS_DTLSS_EXT.1.4* The TSF shall perform key exchange using: [selection:
 
 * _RSA key establishment with key size [selection: 2048 bits, 3072 bits, 4096 bits];_
