@@ -2429,11 +2429,10 @@ _If the TOE doesn't support session resumption or session tickets, select 'no se
 
 _The option 'provides' shall be selected if the TOE allows configuration of the list of ciphers as defined in FCS_DTLSS_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise the option 'does not provide' shall be selected._
 
-*FCS_DTLSS_EXT.1.9* The TSF shall prohibit the use of the following extensions: [
+*FCS_DTLSS_EXT.1.9* The TSF shall prohibit the use of the following extensions:
 
-* [.underline]#Early data extension#
+* _Early data extension_
 
-].
 
 *_Application Note {counter:appnote_count}_*
 
@@ -3693,7 +3692,7 @@ ____
 
 *FCS_DTLSS_EXT.1.8* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_DTLSS_EXT.1.1.
 
-*FCS_DTLSS_EXT.1.9* The TSF shall prohibit the use of the following extensions: [assignment: [.underline]#list of prohibited DTLS extensions#].
+*FCS_DTLSS_EXT.1.9* The TSF shall prohibit the use of the following extensions: [assignment: _list of prohibited DTLS extensions_].
 
 *FCS_DTLSS_EXT.1.10* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
 
