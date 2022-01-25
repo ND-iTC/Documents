@@ -166,13 +166,13 @@ Case 1, illustrated in Figure 1, is where the TOE is represented by the vND alon
 
 image:extracted-media/media/vnd_case_1.png[image,width=166,height=277]
 
-[#_Ref567439821 .anchor]_Figure 1: vND evaluated configuration Case 1_
+[#_Ref567439821]#Figure 1: vND evaluated configuration Case 1#
 
 Case 2, illustrated in Figure 2, is where the vND is evaluated as a pND.
 
 image:extracted-media/media/vnd_case_2.jpg[image,width=166,height=277]
 
-[#_Ref557439821 .anchor]_Figure 2: vND evaluated configuration Case 2_
+[#_Ref557439821]#Figure 2: vND evaluated configuration Case 2#
 
 To evaluate a vND as a pND means that:
 
@@ -241,7 +241,7 @@ The following discussion provides guidance over the supported distributed TOE us
 
 image:extracted-media/media/d_toe_3.png[image,width=397,height=286]
 
-[#_Toc456887372]##Figure 5: Basic distributed TOE use case#
+[#_Toc456887372]#Figure 5: Basic distributed TOE use case#
 
 The first and most basic use case is where multiple interconnected Network Device components need to operate together to fulfil the requirements of the cPP. To be considered a distributed TOE, a minimum of 2 interconnected components are required.
 
@@ -251,7 +251,7 @@ A Network Device may require more than one component in order to fulfil all of t
 
 image:extracted-media/media/d_toe_4.png[image,width=347,height=277]
 
-[#_Ref443655034 .anchor]####Figure 6: Distributed TOE use case with Management Component out of scope
+[#_Ref443655034]#Figure 6: Distributed TOE use case with Management Component out of scope#
 
 For the case depicted in Figure 6, the Management Component may be certified separately according to a different (c)PP.
 
@@ -261,19 +261,19 @@ A Network Device that requires the Management Component to satisfy all SFRs of t
 
 image:extracted-media/media/d_toe_5.png[image,width=349,height=136]
 
-[#_Toc456887375 .anchor]####Figure 7: Management Component required to fulfil cPP requirements
+[#_Toc456887375]#Figure 7: Management Component required to fulfil cPP requirements#
 
 A Management Component may also be considered part of the distributed TOE alongside multiple distributed Network Devices if it is required to fulfil all SFRs of this cPP.
 
 image:extracted-media/media/d_toe_6.png[image,width=349,height=276]
 
-[#_Toc456887376 .anchor]####Figure 8: Distributed Network Devices plus Management Component required to fulfil cPP requirements
+[#_Toc456887376]#Figure 8: Distributed Network Devices plus Management Component required to fulfil cPP requirements#
 
 Where several Network Devices are managed by one Management Component, the TOE may also be considered to be distributed but the focus of the certification should be restricted to the simplest combination of Network Device and Management Component. By the use of an equivalency argument, the combination of multiple Network Devices together with one Management Component can then be regarded as certified solutionfootnote:[[SD, B.4] describes how to define the components of a distributed TOE in terms of a “minimum configuration” and allowance for iteration of equivalent components.].
 
 image:extracted-media/media/d_toe_7.png[image,width=364,height=282]
 
-[#_Toc456887377 .anchor]####Figure 9: Distributed TOE extended through equivalency argument
+[#_Toc456887377]#Figure 9: Distributed TOE extended through equivalency argument#
 
 In this model the individual Network Device components rely on functionality within the Management Component to fulfil the requirements of this cPP and therefore a direct relationship between Network Device components themselves is optional.
 
@@ -287,7 +287,7 @@ The following discussion provides guidance for the distributed TOE use cases tha
 
 image:extracted-media/media/d_toe_8.png[image,width=388,height=389]
 
-[#_Ref463365882 .anchor]####Figure 10: Unsupported Enterprise Management use case
+[#_Ref463365882]#Figure 10: Unsupported Enterprise Management use case#
 
 Although apparently similar to Use Case 3 above, in this case a single Management Component is shared between the distributed Network Device TOE and another distinct product (Figure 8 shows an example in which the other product is a Firewall device). In this case the Management Component is considered to be an “Enterprise Manager” (a central management component for different types of devices), and this use case is not supported by this version of the cPP. A similar situation would apply if any other Network Device TOE component was shared with another product.
 
@@ -297,7 +297,7 @@ The case where one device, distributed TOE or combination of TOEs according to C
 
 image:extracted-media/media/d_toe_9.png[image,width=346,height=275]
 
-[#_Toc456887379 .anchor]####Figure 11: Unsupported use case with Multiple Management Components
+[#_Toc456887379]#Figure 11: Unsupported use case with Multiple Management Components#
 
 === Registration of Components of a Distributed TOE
 
@@ -307,25 +307,25 @@ The underlying model for creation of the TOE is to have a ‘registration proces
 
 image:extracted-media/media/d_toe_10.png[image,width=542,height=265]
 
-[#_Ref476931288 .anchor]####Figure 12: Distributed TOE registration using channel satisfying FPT_ITT.1 or FTP_ITC.1
+[#_Ref476931288]#Figure 12: Distributed TOE registration using channel satisfying FPT_ITT.1 or FTP_ITC.1#
 
 The second approach (Figure 13) utilises an alternative registration channel and supports use-cases where the channel relies on environmental security constraints to provide the necessary protection of the registration exchange.
 
 image:extracted-media/media/d_toe_11.png[image,width=532,height=253]
 
-[#_Ref476931310 .anchor]####Figure 13: Distributed TOE registration using channel satisfying FTP_TRP.1/Join
+[#_Ref476931310]#Figure 13: Distributed TOE registration using channel satisfying FTP_TRP.1/Join#
 
 The final approach (Figure 14) supports use-cases where registration is performed manually through direct configuration of both the joiner and gatekeeper devices. Once configured, the two components establish an internal TSF channel that satisfies FPT_ITT.1 or FTP_ITC.1.
 
 image:extracted-media/media/d_toe_12.png[image,width=388,height=237]
 
-[#_Ref476931325 .anchor]####Figure 14: Distributed TOE registration without a registration channel
+[#_Ref476931325]#Figure 14: Distributed TOE registration without a registration channel#
 
 In each case, during the registration process, the Security Administrator must positively enable the joining components before it can act as part of the TSF. The following figure illustrates the approaches that this enablement step may take;
 
 image:extracted-media/media/d_toe_13.png[image,width=517,height=292]
 
-[#_Toc456887383 .anchor]####Figure 15: Joiner enablement options for Distributed TOEs
+[#_Toc456887383]#Figure 15: Joiner enablement options for Distributed TOEs#
 
 Note that in the case where no registration channel is required, that is the joiner and gatekeeper are directly configured (Figure 14), enablement is implied as part of this direct configuration process.
 
@@ -409,7 +409,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FMT_MOF.1/AutoUpdate |Management of security functions behaviour |Feature Dependent
 |===
 
-[#_Ref443331358 .anchor]####Table 1: Security Functional Requirements for Distributed TOEs
+[#_Ref443331358]#Table 1: Security Functional Requirements for Distributed TOEs#
 
 The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE. (Note that this deliverable is examined as part of the ASE_TSS.1 and AVA_VAN.1 Evaluation Activities as described in [SD, 5.1.2] and [SD, 5.6.1.1] respectively.) The ST for a distributed TOE may also introduce a ‘minimum configuration’ and identify components that may have instances added to an operational configuration without affecting the validity of the CC certification. [SD, B.4] describes Evaluation Activities relating to these equivalency aspects of a distributed TOE (and hence what is expected in the ST).
 
@@ -728,29 +728,29 @@ In the diagrams, the SFRs from Appendix B are both described as ‘Discretionary
 
 image:extracted-media/media/arch_1.png[image,width=678,height=506]
 
-[#_Ref399516751 .anchor]####Figure 16: Protected Communications SFR Architecture
+[#_Ref399516751]#Figure 16: Protected Communications SFR Architecture#
 
 image:extracted-media/media/arch_2.png[image,width=460,height=312]
 
-[#_Ref399517041 .anchor]####Figure 17: Administrator Authentication SFR Architecture
+[#_Ref399517041]#Figure 17: Administrator Authentication SFR Architecture#
 
 image:extracted-media/media/arch_3.png[image,width=471,height=202]
 
-[#_Toc27125738 .anchor]####Figure 18: Correct Operation SFR Architecture
+[#_Toc27125738]#Figure 18: Correct Operation SFR Architecture#
 
 image:extracted-media/media/arch_4.png[image,width=590,height=354]
 
 image:extracted-media/media/arch_5.png[image,width=535,height=301]
 
-[#_Toc27125739 .anchor]####Figure 19: Trusted Update and Audit SFR Architecture
+[#_Toc27125739]#Figure 19: Trusted Update and Audit SFR Architecture#
 
 image:extracted-media/media/arch_6.png[image,width=591,height=304]
 
-[#_Ref399850426 .anchor]####Figure 20: Management SFR Architecture
+[#_Ref399850426]#Figure 20: Management SFR Architecture#
 
 image:extracted-media/media/arch_7.png[image,width=686,height=339]
 
-[#_Ref443496257 .anchor]####Figure 21: Distributed TOE SFR Architecture
+[#_Ref443496257]#Figure 21: Distributed TOE SFR Architecture#
 
 === Security Audit (FAU)
 
@@ -853,7 +853,7 @@ _The ST author replaces the cross-reference to the table of audit events with an
 |None.
 |===
 
-[#_Ref397359830 .anchor]####Table 2: Security Functional Requirements and Auditable Events
+[#_Ref397359830]#Table 2: Security Functional Requirements and Auditable Events#
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1537,7 +1537,7 @@ The TOE security assurance requirements are identified in Table 3.
 |Vulnerability Assessment (AVA) |Vulnerability survey (AVA_VAN.1)
 |===
 
-[#_Ref237676489 .anchor]####Table 3: Security Assurance Requirements
+[#_Ref237676489]#Table 3: Security Assurance Requirements#
 
 === ASE: Security Target
 
@@ -1663,7 +1663,7 @@ a|
 |FCS_TLSS_EXT.2 |Failure to authenticate the client |Reason for failure
 |===
 
-[#_Ref397655544 .anchor]####Table 4: TOE Optional SFRs and Auditable Events
+[#_Ref397655544]#Table 4: TOE Optional SFRs and Auditable Events#
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2011,7 +2011,7 @@ a|
 |FMT_MOF.1/Functions |None. |None.
 |===
 
-[#_Ref397655557 .anchor]####Table 5: Selection-Based SFRs and Auditable Events
+[#_Ref397655557]#Table 5: Selection-Based SFRs and Auditable Events#
 
 *_Application Note {counter:appnote_count}_*
 
@@ -4463,7 +4463,7 @@ FMT_SMF.1 included
 |FTP_TRP.1/Admin |None |
 |===
 
-[#_Toc456887395 .anchor]####Table 6: SFR Dependencies Rationale for Mandatory SFRs
+[#_Toc456887395]#Table 6: SFR Dependencies Rationale for Mandatory SFRs#
 
 [cols=",,",options="header",]
 |===
@@ -4482,7 +4482,7 @@ FAU_STG_EXT.1
 |FCO_CPC_EXT.1 |None |
 |===
 
-[#_Toc456887396 .anchor]####Table 7: SFR Dependencies Rationale for Optional SFRs
+[#_Toc456887396]#Table 7: SFR Dependencies Rationale for Optional SFRs#
 
 [cols=",,",options="header",]
 |===
@@ -4834,7 +4834,7 @@ FMT_SMF.1 included
 
 |===
 
-[#_Toc27041928 .anchor]####Table 8: SFR Dependencies Rationale for Selection-Based SFRs
+[#_Toc27041928]#Table 8: SFR Dependencies Rationale for Selection-Based SFRs#
 
 ==  Glossary
 
