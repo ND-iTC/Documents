@@ -164,13 +164,13 @@ A virtual Network Device (vND) is a software implementation of network device fu
 
 Case 1, illustrated in Figure 1, is where the TOE is represented by the vND alone. The evaluated configuration includes the vND and the Virtualisation System (VS) where the VS encompasses the virtual hardware abstraction, the hypervisor or virtual machine manager (VMM), all supporting software and the physical chassis.
 
-image:extracted-media/media/vnd_case_1.png[image,width=188,height=71]
+image:extracted-media/media/vnd_case_1.png[image,width=166,height=277]
 
 [#_Ref567439821 .anchor]_Figure 1: vND evaluated configuration Case 1_
 
 Case 2, illustrated in Figure 2, is where the vND is evaluated as a pND.
 
-image:extracted-media/media/vnd_case_2.jpg[image,width=188,height=71]
+image:extracted-media/media/vnd_case_2.jpg[image,width=166,height=277]
 
 [#_Ref557439821 .anchor]_Figure 2: vND evaluated configuration Case 2_
 
@@ -225,13 +225,13 @@ There are a number of different architectures; but fundamentally, they are varia
 
 image:extracted-media/media/d_toe_1.png[image,width=376,height=143]
 
-[#_Toc456887371 .anchor]###Figure 3 : Generalized Distributed TOE Model
+[#_Toc456887371]#Figure 3 : Generalized Distributed TOE Model#
 
 Some Network Devices are designed to operate alongside a Management Component. A Network Device that operates in this manner, but still satisfy all SFRs in the cPP without the Management Component will not be considered a distributed TOE. It will be certified according to this cPP without the Management Component.
 
 image:extracted-media/media/d_toe_2.png[image,width=352,height=136]
 
-[#_Ref17189087 .anchor]####Figure 4 : Non-distributed TOE use case
+[#_Ref17189087]#Figure 4 : Non-distributed TOE use case#
 
 === Supported Distributed TOE Use Cases
 
@@ -241,7 +241,7 @@ The following discussion provides guidance over the supported distributed TOE us
 
 image:extracted-media/media/d_toe_3.png[image,width=397,height=286]
 
-[#_Toc456887372 .anchor]####Figure 5: Basic distributed TOE use case
+[#_Toc456887372]##Figure 5: Basic distributed TOE use case#
 
 The first and most basic use case is where multiple interconnected Network Device components need to operate together to fulfil the requirements of the cPP. To be considered a distributed TOE, a minimum of 2 interconnected components are required.
 
