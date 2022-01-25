@@ -542,7 +542,7 @@ Security mechanisms of the Network Device generally build up from roots of trust
 
 ===== T.SECURITY_FUNCTIONALITY_FAILURE
 
-*An external, unauthorized entity could make use of failed or compromised security functionality and might therefore subsequently use or abuse security functions without prior authentication to access, change or modify device data, critical network traffic or security functionality of the device.*
+An external, unauthorized entity could make use of failed or compromised security functionality and might therefore subsequently use or abuse security functions without prior authentication to access, change or modify device data, critical network traffic or security functionality of the device.
 
 SFR Rationale:
 
