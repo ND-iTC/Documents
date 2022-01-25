@@ -704,7 +704,7 @@ The Evaluation Activities defined in [SD] describe actions that the evaluator wi
 The conventions used in descriptions of the SFRs are as follows:
 
 * Unaltered SFRs are stated in the form used in [CC2] or their extended component definition (ECD);
-* Refinement made in the PP: the refinement text is indicated with *bold text* and [line-through]*strikethroughs*;
+* Refinement made in the PP: the refinement text is indicated with *bold text* and +++<del>+++strikethroughs+++</del>+++;
 * Selection wholly or partially completed in the PP: the selection values (i.e. the selection values adopted in the PP or the remaining selection values available for the ST) are indicated with [.underline]#underlined text#
 +
 e.g. ‘[selection: _disclosure, modification, loss of use_]’ in [CC2] or an ECD might become ‘[.underline]#disclosure’# (completion) or ‘[selection: [.underline]#disclosure#, [.underline]#modification#]’ (partial completion) in the PP;
@@ -932,7 +932,7 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 * _FFC schemes using cryptographic key sizes of 2048-bit or greater that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.1_
 * _FFC Schemes using ‘safe-prime’ groups that meet the following: “NIST Special Publication 800-56A Revision 3, Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and_ [selection__: RFC 3526, RFC 7919__]_._
 
-] [line-through]*and specified cryptographic key sizes [assignment: _cryptographic key sizes_] that meet the following: [assignment: _list of standards_]*.
+] +++<del>+++and specified cryptographic key sizes [assignment: _cryptographic key sizes_] that meet the following: \[assignment: _list of standards_]+++</del>+++.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -953,7 +953,7 @@ _In a distributed TOE, if the TOE component acts as a receiver in the key establ
 * _Finite field-based key establishment schemes that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography”;_
 * _FFC Schemes using “safe-prime” groups that meet the following: ‘NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and_ [selection: _RFC 3526, RFC 7919]._
 
-] [line-through]*that meets the following: [assignment: _list of standards_]*.
+] +++<del>+++that meets the following: \[assignment: _list of standards_]+++</del>+++.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1022,7 +1022,7 @@ _The ST Author chooses the algorithm(s) implemented to perform digital signature
 
 *FCS_COP.1/Hash Cryptographic Operation (Hash Algorithm)*
 
-*FCS_COP.1.1/Hash* The TSF shall perform _cryptographic hashing services_ in accordance with a specified cryptographic algorithm [selection: _SHA-1, SHA-256, SHA-384, SHA-512_] [line-through]*and cryptographic key sizes [_assignment:_ _cryptographic key sizes_*] and *message digest sizes [selection: _160, 256, 384, 512_] bits* that meet the following: _ISO/IEC 10118-3:2004._
+*FCS_COP.1.1/Hash* The TSF shall perform _cryptographic hashing services_ in accordance with a specified cryptographic algorithm [selection: _SHA-1, SHA-256, SHA-384, SHA-512_] +++<del>+++and cryptographic key sizes [_assignment:_ _cryptographic key sizes_+++</del>+++] and *message digest sizes [selection: _160, 256, 384, 512_] bits* that meet the following: _ISO/IEC 10118-3:2004._
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1788,9 +1788,9 @@ This iteration of FTP_TRP.1 is defined as one of the options selectable for dist
 
 *FTP_TRP.1/Join Trusted Path*
 
-*FTP_TRP.1.1/Join* The TSF shall provide a communication path between itself and *a joining component* [line-through]*[selection: remote, local] users* that is logically distinct from other communication paths and provides assured identification of *[selection: _the TSF endpoint, both joining component and TSF endpoint_]* [line-through]*its end points* and protection of the communicated data from [.underline]##modification [selection: _and disclosure, none_##**]**.
+*FTP_TRP.1.1/Join* The TSF shall provide a communication path between itself and *a joining component* +++<del>+++\[selection: remote, local] users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of *[selection: _the TSF endpoint, both joining component and TSF endpoint_]* +++<del>+++its end points+++</del>+++ and protection of the communicated data from [.underline]##modification [selection: _and disclosure, none_##**]**.
 
-*FTP_TRP.1.2/Join* The TSF shall permit [selection: _[.underline]#the TSF, *the joining component*#_ [line-through]*local users, remote users*] to initiate communication via the trusted path.
+*FTP_TRP.1.2/Join* The TSF shall permit [selection: _[.underline]#the TSF, *the joining component*#_ +++<del>+++local users, remote users+++</del>+++] to initiate communication via the trusted path.
 
 *FTP_TRP.1.3/Join* The TSF shall require the use of the trusted path for _joining components to the TSF under environmental constraints identified in [assignment: reference to operational guidance]_.
 
@@ -2795,7 +2795,7 @@ It is acceptable to provide a manual method for an administrator to provide revo
 
 *FMT_MOF.1/Services Management of Security Functions Behaviour*
 
-*FMT_MOF.1.1/Services* The TSF shall restrict the ability to *start and stop* [line-through]*the functions* *services* to _Security Administrators_.
+*FMT_MOF.1.1/Services* The TSF shall restrict the ability to *start and stop* +++<del>+++the functions+++</del>+++ *services* to _Security Administrators_.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2894,7 +2894,7 @@ This component defines the requirements for the TSF to be able to securely trans
 
 *Component levelling*
 
-image:extracted-media/media/FAU_STG_EXT.png[image,width=380,height=143]
+image:extracted-media/media/FAU_STG_EXT.png[image,width=400,height=163]
 
 FAU_STG_EXT.1 Protected audit event storage requires the TSF to use a trusted channel implementing a secure protocol.
 
@@ -3042,7 +3042,7 @@ The component in this family addresses the ability for a client to use DTLS to p
 
 *Component levelling*
 
-image:extracted-media/media/FCS_DTLSC_EXT.png[image,width=500,height=48]
+image:extracted-media/media/FCS_DTLSC_EXT.png[image,width=440,height=78]
 
 FCS_DTLSC_EXT.1 DTLS Client requires that the client side of DTLS be implemented as specified.
 
@@ -3144,7 +3144,7 @@ The component in this family addresses the ability for a server to use DTLS to p
 
 *Component levelling*
 
-image:extracted-media/media/FCS_DTLSS_EXT.png[image,width=500,height=48]
+image:extracted-media/media/FCS_DTLSS_EXT.png[image,width=440,height=78]
 
 FCS_DTLSS_EXT.1 DTLS Server requires that the server side of TLS be implemented as specified.
 
@@ -3584,7 +3584,7 @@ The component in this family addresses the ability for a client to use TLS to pr
 
 *Component levelling*
 
-image:extracted-media/media/FCS_TLSC_EXT.png[image,width=500,height=48]
+image:extracted-media/media/FCS_TLSC_EXT.png[image,width=440,height=78]
 
 FCS_TLSC_EXT.1 TLS Client requires that the client side of TLS be implemented as specified.
 
@@ -3682,7 +3682,7 @@ The component in this family addresses the ability for a server to use TLS to pr
 
 *Component levelling*
 
-image:extracted-media/media/FCS_TLSS_EXT.png[image,width=500,height=48]
+image:extracted-media/media/FCS_TLSS_EXT.png[image,width=440,height=78]
 
 FCS_TLSS_EXT.1 TLS Server requires that the server side of TLS be implemented as specified.
 
@@ -3905,7 +3905,7 @@ This family defines the behaviour, management, and use of X.509 certificates for
 
 *Component levelling*
 
-image:extracted-media/media/FIA_X509_EXT.png[image,width=500,height=48]
+image:extracted-media/media/FIA_X509_EXT.png[image,width=440,height=98]
 
 FIA_X509_EXT.1 X509 Certificate Validation, requires the TSF to check and validate certificates in accordance with the RFCs and rules specified in the component.
 
@@ -4107,7 +4107,7 @@ Components in this family address the requirements for updating the TOE firmware
 
 *Component levelling*
 
-image:extracted-media/media/FPT_TUD_EXT.png[image,width=500,height=48]
+image:extracted-media/media/FPT_TUD_EXT.png[image,width=440,height=78]
 
 FPT_TUD_EXT.1 Trusted Update requires management tools be provided to update the TOE firmware and software, including the ability to verify the updates prior to installation.
 
@@ -4290,7 +4290,7 @@ Hierarchical to: No other components.
 Dependencies: No other components.
 
 
-*FCO_CPC_EXT.1.1* The TSF shall require a Security Administrator to enable communications between any pair of TOE components before such communication can take place.*
+*FCO_CPC_EXT.1.1* The TSF shall require a Security Administrator to enable communications between any pair of TOE components before such communication can take place.
 
 *FCO_CPC_EXT.1.2* The TSF shall implement a registration process in which components establish and use a communications channel that uses [assignment: _list of different types of channel given in the form of a selection_]* for at least [assignment: _type of data for which the channel must be used_].
 
