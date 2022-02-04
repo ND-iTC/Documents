@@ -1610,24 +1610,24 @@ Some TOEs may set up the registration channel before the enablement step is carr
 
 *FCS_TLSC_EXT.3.1*
 
-[arabic, start=320]
+[arabic, start=299]
 . None.
 
 ===== Guidance Documentation
 
 *FCS_TLSC_EXT.3.1*
 
-[arabic, start=321]
+[arabic, start=300]
 . None
 
 ===== Tests
 
-[arabic, start=322]
+[arabic, start=301]
 . The evaluator shall perform the following tests.
 
 *FCS_TLSC_EXT.3.1*
 
-[arabic, start=323]
+[arabic, start=302]
 . Test 1: The evaluator shall use a network packet analyzer/sniffer to capture the traffic between the two TLS endpoints. The evaluator shall verify that either the “renegotiation_info” field or the SCSV cipher suite is included in the ClientHello message during the initial handshake.
 . Test 2: The evaluator shall verify the Client’s handling of ServerHello messages received during the initial handshake that include the “renegotiation_info” extension. The evaluator shall modify the length portion of this field in the ServerHello message to be non-zero and verify that the client sends a failure and terminates the connection. The evaluator shall verify that a properly formatted field results in a successful TLS connection.
 . Test 3: The evaluator shall verify that ServerHello messages received during secure renegotiation contain the “renegotiation_info” extension. The evaluator shall modify either the “client_verify_data” or “server_verify_data” value and verify that the client terminates the connection.
@@ -1697,24 +1697,24 @@ Some TOEs may set up the registration channel before the enablement step is carr
 
 *FCS_TLSS_EXT.3.1 and FCS_TLSS_EXT.3.2*
 
-[arabic, start=320]
+[arabic, start=328]
 . None.
 
 ===== Guidance Documentation
 
 *FCS_TLSS_EXT.3.1 and FCS_TLSS_EXT.3.2*
 
-[arabic, start=321]
+[arabic, start=329]
 . None
 
 ===== Tests
 
-[arabic, start=322]
+[arabic, start=330]
 . The evaluator shall perform the following tests. The following tests require connection with a client that supports secure renegotiation and the "renegotiation_info" extension.
 
 *FCS_TLSS_EXT.3.1 and FCS_TLSS_EXT.3.2*
 
-[arabic, start=323]
+[arabic, start=331]
 . Test 1: The evaluator shall use a network packet analyzer/sniffer to capture the traffic between the two TLS endpoints. The evaluator shall verify that the “renegotiation_info” field is included in the ServerHello message.
 . Test 2: The evaluator shall modify the length portion of the field in the ClientHello message in the initial handshake to be non-zero and verify that the server sends a failure and terminates the connection. The evaluator shall verify that a properly formatted field results in a successful TLS connection.
 . Test 3: The evaluator shall modify the "client_verify_data" or "server_verify_data" value in the ClientHello message received during secure renegotiation and verify that the server terminates the connection.
