@@ -2648,7 +2648,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 [arabic, start=550]
 . Test 1 [conditional]: If the TOE presents the Supported Elliptic Curves/Supported Groups Extension, _the evaluator shall configure the server to perform ECDHE or DHE (as applicable) key exchange using each of the TOE’s supported curves and/or groups. The evaluator shall verify that the TOE successfully connects to the server.
 
-==== FCS_TLSS_EXT.1 Extended: TLS Server Protocol without mutual authentication
+==== FCS_TLSS_EXT.1 Extended: TLS Server Protocol
 
 ===== TSS
 
@@ -2676,7 +2676,9 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 [arabic, start=555]
 . The evaluator shall verify that the TSS describes if session resumption based on session IDs is supported (RFC 4346 and/or RFC 5246), if session resumption based on session tickets is supported (RFC 5077) and/or if session resumption according to RFC8446 is supported.
+
 . If session tickets are supported, the evaluator shall verify that the TSS describes that the session tickets are encrypted using symmetric algorithms consistent with FCS_COP.1/DataEncryption. The evaluator shall verify that the TSS identifies the key lengths and algorithms used to protect session tickets.
+
 . If session tickets are supported, the evaluator shall verify that the TSS describes that session tickets adhere to the structural format provided in section 4 of RFC 5077 and if not, a justification shall be given of the actual session ticket format.
 
 *FCS_TLSS_EXT.1.6*
@@ -2684,7 +2686,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 [arabic, start=556]
 . The evaluator shall verify that TSS describes whether the list of supported ciphersuites can be configured or not.
 
-*FCS_TLSS_EXT.1.7*
+*FCS_TLSS_EXT.1.8*
 
 [arabic, start=557]
 . The evaluator shall verify in the TSS that, for TLS 1.3, the TOE shall not permit out-of-band provisioning of pre-shared keys (PSKs) in the evaluated configuration.
@@ -2711,10 +2713,10 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 [arabic, start=559]
 . If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall verify that AGD guidance includes configuration of the list of supported ciphersuites.
 
-*FCS_TLSS_EXT.1.7*
+*FCS_TLSS_EXT.1.8*
 
 [arabic, start=559]
-. If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall verify that AGD guidance includes configuration of the list of supported ciphersuites.
+. The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 ===== Tests
 
