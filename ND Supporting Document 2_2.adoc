@@ -1932,8 +1932,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 [loweralpha]
 ... The evaluator shall examine the Client Hello message and verify it contains the signature_algorihtms_cert extension and the SignatureSchemes match the SignatureSchemes specified in the requirement.
 ... The evaluator shall establish a DTLS connection using a certificate chain using each of the SignatureSchemes specified by the requirement. The evaluator shall ensure the signatures used in the certificate chain are consistent with the SignatureScheme being tested.
-[arabic]
-
++
 Remark: The server must ensure the DTLS handshake is valid (e.g. certificate key, Certificate Verify message, message formatting, hashes, and signatures), except for the certificate chain using a SignatureScheme not proposed by the client. The selected legacy SignatureScheme shall be as similar to one of the supported SignatureSchemes as possible. For example: 1) ecdsa_sha1 shall not be used if the TOE only supports RSA signatures, 2) ecdsa_sha1 must use a supported ECDSA curve or P-256 if only EdDSA curves are supported.
 
 *FCS_DTLSC_EXT.1.6 [conditional]*
