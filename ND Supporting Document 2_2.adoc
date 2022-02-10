@@ -1691,7 +1691,6 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 
 [arabic, start=334]
 . Note: Testing the validity of the client certificate is performed as part of X.509 testing.
-. The evaluator shall demonstrate that using an invalid certificate results in the function failing as follows:
 . Test 5 [conditional]: The purpose of this test is to verify that only selected certificate validation failures could be administratively overridden. If any override mechanism is defined for failed certificate validation, the evaluator shall configure a new presented certificate that does not contain a valid entry in one of the mandatory fields or parameters (e.g. inappropriate value in extendedKeyUsage field) but is otherwise valid and signed by a trusted CA. The evaluator shall confirm that the certificate validation fails (i.e. certificate is rejected), and there is no administrative override available to accept such certificate.
 
 *FCS_TLSS_EXT.2.3*
