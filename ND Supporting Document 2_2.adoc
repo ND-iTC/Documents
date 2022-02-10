@@ -1700,18 +1700,19 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 
 *FCS_TLSS_EXT.2.4*
 
-. The evaluator shall perform the following tests:
-. Test 1 [conditional]: The evaluator shall perform the following tests if “present a TLS1.1 Certificate Request message” is selected:
+[arabic, start=339]
+The evaluator shall perform the following tests:
+Test 1 [conditional]: The evaluator shall perform the following tests if “present a TLS1.1 Certificate Request message” is selected:
 [loweralpha]
 .. The evaluator shall perform a TLS1.1 handshake and examine the Certificate Request message. The evaluator shall verify the ClientCertificateTypes match those specified in the requirement.
 .. The evaluator shall establish a TLS1.1 connection and authenticate the client using each selected ClientCertificateType. The evaluator shall verify the connection succeeds. 
-. Test 2 [conditional]: If “present a [selection: TLSv1.2, TLSv1.3] Certificate Request message” is selected, the evaluator shall perform the following tests for each selected version of TLS:
+Test 2 [conditional]: If “present a [selection: TLSv1.2, TLSv1.3] Certificate Request message” is selected, the evaluator shall perform the following tests for each selected version of TLS:
 [loweralpha]
 .. The evaluator shall examine the Certificate Request message. The evaluator shall verify that the SignatureAndHashAlgorithms (TLSv1.2) or the SignatureSchemes (TLSv1.3) match the SignatureAndHashAlgorithms specified in the requirement.
 .. The evaluator shall establish a connection and authenticate the client using each selected SignatureAndHashAlgorithm. The evaluator shall verify the connection succeeds.
 +
 Remark: The server must ensure the TLS handshake is valid (e.g. certificate key, message formatting, hashes, and signatures), except for using a SignatureScheme not proposed by the client. The selected legacy SignatureScheme shall be as similar to one of the supported SignatureSchemes as possible. For example: 1) ecdsa_sha1 shall not be used if the TOE only supports RSA signatures, 2) ecdsa_sha1 must use a supported ECDSA curve or P-256 if only EdDSA curves are supported.
-. Test 3 [conditional]: ]: If TLSv1.3 is supported, the evaluator shall perform the following tests if “present the signature_algorithms_cert extension” is selected:
+Test 3 [conditional]: ]: If TLSv1.3 is supported, the evaluator shall perform the following tests if “present the signature_algorithms_cert extension” is selected:
 [loweralpha]
 .. The evaluator shall examine the Certificate Request message and verify it contains the signature_algorihtms_cert extension and the SignatureSchemes match the SignatureSchemes specified in the requirement.
 .. The evaluator shall establish a TLS connection and perform client authentication using a certificate chain using each of the SignatureSchemes specified by the requirement. The evaluator shall ensure the signatures used in the certificate chain are consistent with the SignatureScheme being tested.
