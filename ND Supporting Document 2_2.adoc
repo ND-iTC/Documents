@@ -1651,7 +1651,7 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 *FCS_TLSS_EXT.2.4*
 
 [arabic, start=322]
-. 308	The evaluator shall verify that TSS describes the signature_algorithm extension and whether the required behavior is performed by default or may be configured.
+. The evaluator shall verify that TSS describes the signature_algorithm extension and whether the required behavior is performed by default or may be configured.
 
 ===== Guidance Documentation
 
@@ -1669,7 +1669,7 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 *FCS_TLSS_EXT.2.4*
 
 [arabic, start=325]
-. 312	If the TSS indicates that the signature_algorithm extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the signature_algorithm extension.
+. If the TSS indicates that the signature_algorithm extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the signature_algorithm extension.
 
 ===== Tests
 
