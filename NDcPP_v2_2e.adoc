@@ -5,7 +5,7 @@
 :revnumber: 2.2e
 :revdate: 23-03-2020
 
-= collaborative Protection Profile for Network Devices
+= collaborative Protection Profile for Network Devices for demo testing
 
 Version: {revnumber}
 
