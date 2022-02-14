@@ -19,7 +19,7 @@ This collaborative Protection Profile (cPP) was developed by the Network Device 
 
 === Objectives of Document
 
-This document presents the Common Criteria (CC) collaborative Protection Profile (cPP) to express the Security Functional Requirements (SFRs) and Security Assurance Requirements (SARs) for a Network Device (ND). The Evaluation Activities (EA) that specify the actions the evaluator performs to determine if a product satisfies the SFRs captured within this cPP are described in the Supporting Document (SD) [SD].
+This document presents the Common Criteria (CC) collaborative Protection Profile (cPP) to express the Security Functional Requirements (SFRs) and Security Assurance Requirements (SARs) for a Network Device (ND). The Evaluation Activities (EA) that specify the actions the evaluator performs to determine if a product satisfies the SFRs captured within this cPP are described in the Supporting Document (SD) [SD]. Test edit,
 
 === Scope of Document
 
@@ -3011,11 +3011,11 @@ _The selected algorithms and key sizes must be consistent with FCS_COP.1/SigGen 
 
 _If the ST includes TLS 1.1 or TLS 1.2 in FCS_TLSS_EXT.1.1, the selected algorithms must be consistent with the ciphersuites selected in FCS_TLSS_EXT.1.1._
 
-*FCS_TLSS_EXT.1.3* The TSF shall perform key exchange using: [selection: 
+*FCS_TLSS_EXT.1.3* The TSF shall perform key exchange using: [selection:
 
-* _RSA key establishment with key size [selection: 2048 bits, 3072 bits, 4096 bits];_ 
+* _RSA key establishment with key size [selection: 2048 bits, 3072 bits, 4096 bits];_
 
-* _EC Diffie-Hellman key agreement over NIST curves [selection: secp256r1, secp384r1, secp521r1] and no other curves;_ 
+* _EC Diffie-Hellman key agreement over NIST curves [selection: secp256r1, secp384r1, secp521r1] and no other curves;_
 
 * _Diffie-Hellman parameters [selection: of size 2048 bits, of size 3072 bits, of size 4096 bits, of size 6144 bits, of size 8192 bits, ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]_
 
@@ -3030,8 +3030,8 @@ _The following table provides the ST author with instructions for completing the
 [cols=",,,",options="header",]
 |===
 | |RSA key establishment... |EC Diffie-Hellman key agreement... |Diffie-Hellman key agreement...
-|TLS 1.3 without TLS 1.2 or TLS 1.1 | Shall not select 2+| Shall select at least one   
-|TLS 1.3 with TLS 1.2 or TLS 1.1 |See the following rows 2+|Shall select at least one- see the following rows for additional instructions 
+|TLS 1.3 without TLS 1.2 or TLS 1.1 | Shall not select 2+| Shall select at least one
+|TLS 1.3 with TLS 1.2 or TLS 1.1 |See the following rows 2+|Shall select at least one- see the following rows for additional instructions
 |TLS 1.2 or TLS 1.1 with support for at least one TLS_RSA_WITH... ciphersuite |Shall select |N/A |N/A
 |TLS 1.2 or TLS 1.1 without support for any TLS_RSA_WITH... ciphersuite |Shall not select |N/A |N/A
 |TLS 1.2 or TLS 1.1 with support for at least one ECDHE ciphersuite |N/A |Shall select |N/A
@@ -3066,7 +3066,7 @@ _The option 'provides' shall be selected if the TOE allows configuration of the 
 
 _The use of the early data extension is prohibited in the configured TOE._
 
-*FCS_TLSS_EXT.1.7* The TSF shall not permit TLSv1.3 connections using an out-of-band provisioned pre-shared key (PSK). Any use of PSKs in TLSv1.3 must use (EC)DHE to provide forward secrecy. 
+*FCS_TLSS_EXT.1.7* The TSF shall not permit TLSv1.3 connections using an out-of-band provisioned pre-shared key (PSK). Any use of PSKs in TLSv1.3 must use (EC)DHE to provide forward secrecy.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -3682,7 +3682,7 @@ ____
 
 *FCS_DTLSS_EXT.1.5* The TSF shall [selection: _terminate the DTLS session, silently discard the record_] if a message received contains an invalid MAC.
 
-*FCS_DTLSS_EXT.1.6* The TSF shall detect and silently discard replayed messages for: 
+*FCS_DTLSS_EXT.1.6* The TSF shall detect and silently discard replayed messages for:
 
 * DTLS records previously received.
 * DTLS Records too old to fit in the sliding window.
@@ -4302,16 +4302,16 @@ ____
 
 *FCS_TLSS_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [selection: _TLS 1.1 (RFC 4346, no additional TLS version)_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
 
-[selection: 
+[selection:
 
 * _select supported ciphersuites for TLSv1.1 and/or TLSv1.2 from List 1_
 * _select supported ciphersuites for TLSv1.3 from List 2_
 
-] and no other ciphersuites. 
+] and no other ciphersuites.
 
 *FCS_TLSS_EXT.1.2* The TSF shall authenticate itself using X.509 certificate(s) using [selection: _RSA with key size [selection: 2048 bits, 3072 bits, 4096 bits]; ECDSA over NIST curves [selection: secp256r1, secp384r1, secp521r1] and no other curves_].
 
-*FCS_TLSS_EXT.1.3* The TSF shall perform key exchange using: [selection: 
+*FCS_TLSS_EXT.1.3* The TSF shall perform key exchange using: [selection:
 
 * _RSA key establishment with key size [selection: 2048 bits, 3072 bits, 4096 bits];_
 
