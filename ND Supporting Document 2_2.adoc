@@ -1631,7 +1631,7 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 *FCS_TLSC_EXT.2.1*
 
 [loweralpha]
-.. (covered by FCS_TLSC_EXT.1.1 Test 1 and testing for FIA_X.509_EXT.).
+.. (covered by FCS_TLSC_EXT.1.1 Test 1 and testing for FIA_X.509_EXT.*).
 
 ==== FCS_TLSS_EXT.2 Extended: TLS Server support for mutual authentication
 
