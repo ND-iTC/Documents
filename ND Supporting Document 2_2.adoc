@@ -1528,7 +1528,7 @@ Some TOEs may set up the registration channel before the enablement step is carr
 
 [arabic, start=296]
 . The evaluator shall ensure that the TSS description required per FIA_X509_EXT.2.1 includes the use of client-side certificates for DTLS mutual authentication.
-. The evaluator shall verify the TSS describes how the TSF uses certificates to authenticate the DTLS client and how the TOE reacts in case either the client does not send a client certificate or the verification of the client certificate fails. The evaluator shall verify the TSS describes whether the TSF supports any fallback authentication functions (e.g. username/password, challenge response) the TSF uses to authenticate DTLS clients that do not present a certificate. If fallback authentication functions are supported, the evaluator shall verify the TSS describes whether the fallback authentication functions can be disabled.*
+. The evaluator shall verify the TSS describes how the TSF uses certificates to authenticate the DTLS client and how the TOE reacts in case either the client does not send a client certificate or the verification of the client certificate fails. The evaluator shall verify the TSS describes whether the TSF supports any fallback authentication functions (e.g. username/password, challenge response) the TSF uses to authenticate DTLS clients that do not present a certificate. If fallback authentication functions are supported, the evaluator shall verify the TSS describes whether the fallback authentication functions can be disabled.
 
 *FCS_DTLSS_EXT.2.3*
 
