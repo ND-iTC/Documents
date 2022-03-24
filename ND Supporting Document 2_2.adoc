@@ -2722,6 +2722,11 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 [arabic, start=531]
 . The evaluator shall verify that TSS describes the Supported Elliptic Curves/Supported Groups Extension and whether the required behaviour is performed by default or may be configured.
 
+*FCS_TLSC_EXT.1.8*
+[arabic, start=532]
+. The evaluator shall verify in the TSS that, for TLS 1.3, the TOE shall not permit out-of-band provisioning of pre-shared keys (PSKs) in the evaluated configuration.
+
+
 ===== Guidance Documentation
 
 *FCS_TLSC_EXT.1.1*
@@ -2739,6 +2744,12 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 
 [arabic, start=535]
 . If the TSS indicates that the Supported Elliptic Curves/Supported Groups Extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the Supported Elliptic Curves/Supported Groups Extension.
+
+*FCS_TLSC_EXT.1.8*
+
+[arabic, start=536]
+.	The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
+
 
 ===== Tests
 
