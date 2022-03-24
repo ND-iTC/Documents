@@ -2646,7 +2646,11 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 *FCS_TLSC_EXT.1.4*
 
 [arabic, start=550]
-. Test 1 [conditional]: If the TOE presents the Supported Elliptic Curves/Supported Groups Extension, _the evaluator shall configure the server to perform ECDHE or DHE (as applicable) key exchange using each of the TOE’s supported curves and/or groups. The evaluator shall verify that the TOE successfully connects to the server.
+.	Test 1 [conditional]: If “not present the Supported Groups Extension” is selected, the evaluator shall examine the Client Hello message and verify it does not contain the Supported Groups extension.
+.	Test 2 [conditional]: If “present the Supported Groups Extension” is selected, the evaluator shall configure the server to perform ECDHE or DHE (as applicable) key exchange using each of the TOE’s supported groups. The evaluator shall verify that the connection succeeds. This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for TLSv1.3 and Server Key Exchange Message for TLSv1.1 or TLSv1.2).
+.	Test 3 [conditional]: If secp groups are selected, the evaluator shall configure the server to perform an ECDHE key exchange in the TLS connection using a non-supported curve and shall verify that the connection fails and no application data flows. The non-supported curve shall be as similar to the selected curve(s) as possible (i.e. a non-selected curve when not all curves are selected or P-224). This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for TLSv1.3 and Server Key Exchange Message for TLSv1.1 or TLSv1.2).
+.	Test 4 [conditional]: If ffdhe curves are selected, the evaluator shall configure the server to perform an DHE key exchange in the TLS connection using a non-supported group and shall verify that the connection fails and no application data flows. The non-supported group shall be as similar to the selected group(s) as possible (i.e. a non-selected group when not all groups are selected or undefined Codepoint 0x0105 (ffdhe8192 + 1)). This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for TLSv1.3 and Server Key Exchange Message for TLSv1.1 or TLSv1.2). 
+
 
 ==== FCS_TLSS_EXT.1 Extended: TLS Server Protocol without mutual authentication
 
