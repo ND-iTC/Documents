@@ -2722,6 +2722,10 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 [arabic, start=531]
 . The evaluator shall verify that TSS describes the Supported Elliptic Curves/Supported Groups Extension and whether the required behaviour is performed by default or may be configured.
 
+*FCS_TLSC_EXT.1.6*
+[arabic, start=532]
+.	The evaluator shall verify that TSS describes whether the list of supported ciphersuites can be configured or not.
+
 ===== Guidance Documentation
 
 *FCS_TLSC_EXT.1.1*
