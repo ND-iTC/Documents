@@ -760,56 +760,6 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 
 === Identification and Authentication (FIA)
 
-==== FIA_AFL.1 Authentication Failure Management
-
-===== TSS
-
-[arabic, start=145]
-. The evaluator shall examine the TSS to determine that it contains a description, for each supported method for remote administrative actions, of how successive unsuccessful authentication attempts are detected and tracked. The TSS shall also describe the method by which the remote administrator is prevented from successfully logging on to the TOE, and the actions necessary to restore this ability.
-. The evaluator shall examine the TSS to confirm that the TOE ensures that authentication failures by remote administrators cannot lead to a situation where no administrator access is available, either permanently or temporarily (e.g. by providing local logon which is not subject to blocking).
-
-===== Guidance Documentation
-
-[arabic, start=147]
-. The evaluator shall examine the guidance documentation to ensure that instructions for configuring the number of successive unsuccessful authentication attempts and time period (if implemented) are provided, and that the process of allowing the remote administrator to once again successfully log on is described for each “action” specified (if that option is chosen). If different actions or mechanisms are implemented depending on the secure protocol employed (e.g., TLS vs. SSH), all must be described.
-. The evaluator shall examine the guidance documentation to confirm that it describes, and identifies the importance of, any actions that are required in order to ensure that administrator access will always be maintained, even if remote administration is made permanently or temporarily unavailable due to blocking of accounts as a result of FIA_AFL.1.
-
-===== Tests
-
-[arabic, start=149]
-. The evaluator shall perform the following tests for each method by which remote administrators access the TOE (e.g. any passwords entered as part of establishing the connection protocol or the remote administrator application):
-[loweralpha]
-.. Test 1: The evaluator shall use the operational guidance to configure the number of successive unsuccessful authentication attempts allowed by the TOE (and, if the time period selection in FIA_AFL.1.2 is included in the ST, then the evaluator shall also use the operational guidance to configure the time period after which access is re-enabled). The evaluator shall test that once the authentication attempts limit is reached, authentication attempts with valid credentials are no longer successful.
-[loweralpha, start=3]
-.. Test 2: After reaching the limit for unsuccessful authentication attempts as in Test 1 above, the evaluator shall proceed as follows.
-+
-If the administrator action selection in FIA_AFL.1.2 is included in the ST, then the evaluator shall confirm by testing that following the operational guidance and performing each action specified in the ST to re-enable the remote administrator’s access results in successful access (when using valid credentials for that administrator).
-+
-If the time period selection in FIA_AFL.1.2 is included in the ST, then the evaluator shall wait for just less than the time period configured in Test 1 and show that an authorisation attempt using valid credentials does not result in successful access. The evaluator shall then wait until just after the time period configured in Test 1 and show that an authorisation attempt using valid credentials results in successful access.
-
-==== FIA_PMG_EXT.1 Password Management
-
-===== TSS
-
-[arabic, start=150]
-. The evaluator shall examine the TSS to determine that it contains the lists of the supported special character(s) and minimum and maximum number of charters supported for administrator passwords.
-
-===== Guidance Documentation
-
-[arabic, start=151]
-. The evaluator shall examine the guidance documentation to determine that it:
-[loweralpha]
-.. identifies the characters that may be used in passwords and provides guidance to security administrators on the composition of strong passwords, and
-.. provides instructions on setting the minimum password length and describes the valid minimum password lengths supported.
-
-===== Tests
-
-[arabic, start=152]
-. The evaluator shall perform the following tests.
-[loweralpha]
-.. Test 1: The evaluator shall compose passwords that meet the requirements in some way. For each password, the evaluator shall verify that the TOE supports the password. While the evaluator is not required (nor is it feasible) to test all possible compositions of passwords, the evaluator shall ensure that all characters, and a minimum length listed in the requirement are supported and justify the subset of those characters chosen for testing.
-.. Test 2: The evaluator shall compose passwords that do not meet the requirements in some way. For each password, the evaluator shall verify that the TOE does not support the password. While the evaluator is not required (nor is it feasible) to test all possible compositions of passwords, the evaluator shall ensure that the TOE enforces the allowed characters and the minimum length listed in the requirement and justify the subset of those characters chosen for testing.
-
 ==== FIA_UIA_EXT.1 User Identification and Authentication
 
 ===== TSS
@@ -817,8 +767,8 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 [arabic, start=153]
 . The evaluator shall examine the TSS to determine that it describes the logon process for each logon method (local, remote (HTTPS, SSH, etc.)) supported for the product. This description shall contain information pertaining to the credentials allowed/used, any protocol transactions that take place, and what constitutes a “successful logon”.
 . The evaluator shall examine the TSS to determine that it describes which actions are allowed before user identification and authentication. The description shall cover authentication and identification for local and remote TOE administration.
-. For distributed TOEs the evaluator shall examine that the TSS details how Security Administrators are authenticated and identified by all TOE components. If not, all TOE components support authentication of Security Administrators according to FIA_UIA_EXT.1 and FIA_UAU_EXT.2, the TSS _shall describe how the overall TOE functionality is split between TOE components including how it is ensured that no unauthorized access to any TOE component can occur._
-. For distributed TOEs, the evaluator shall examine the TSS to determine that it describes for each TOE component which actions are allowed before user identification and authentication. The description shall cover authentication and identification for local and remote TOE administration. For each TOE component that does not support authentication of Security Administrators according to FIA_UIA_EXT.1 and FIA_UAU_EXT.2 the TSS shall describe any unauthenticated services/services that are supported by the component.
+. For distributed TOEs the evaluator shall examine that the TSS details how Security Administrators are authenticated and identified by all TOE components. If not, all TOE components support authentication of Security Administrators according to FIA_UIA_EXT.1, the TSS _shall describe how the overall TOE functionality is split between TOE components including how it is ensured that no unauthorized access to any TOE component can occur._
+. For distributed TOEs, the evaluator shall examine the TSS to determine that it describes for each TOE component which actions are allowed before user identification and authentication. The description shall cover authentication and identification for local and remote TOE administration. For each TOE component that does not support authentication of Security Administrators according to FIA_UIA_EXT.1 the TSS shall describe any unauthenticated services/services that are supported by the component.
 
 ===== Guidance Documentation
 
@@ -833,31 +783,7 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 .. Test 1: The evaluator shall use the guidance documentation to configure the appropriate credential supported for the login method. For that credential/login method, the evaluator shall show that providing correct I&A information results in the ability to access the system, while providing incorrect information results in denial of access.
 .. Test 2: The evaluator shall configure the services allowed (if any) according to the guidance documentation, and then determine the services available to an external remote entity. The evaluator shall determine that the list of services available is limited to those specified in the requirement.
 .. Test 3: For local access, the evaluator shall determine what services are available to a local administrator prior to logging in, and make sure this list is consistent with the requirement.
-.. Test 4: For distributed TOEs where not all TOE components support the authentication of Security Administrators according to FIA_UIA_EXT.1 and FIA_UAU_EXT.2, the evaluator shall test that the components authenticate Security Administrators as described in the TSS.
-
-==== FIA_UAU_EXT.2 Password-based Authentication Mechanism
-
-[arabic, start=159]
-. Evaluation Activities for this requirement are covered under those for FIA_UIA_EXT.1. If other authentication mechanisms are specified, the evaluator shall include those methods in the activities for FIA_UIA_EXT.1.
-
-==== FIA_UAU.7 Protected Authentication Feedback
-
-===== TSS
-
-[arabic, start=160]
-. None.
-
-===== Guidance Documentation
-
-[arabic, start=161]
-. The evaluator shall examine the guidance documentation to determine that any necessary preparatory steps to ensure authentication data is not revealed while entering for each local login allowed.
-
-===== Tests
-
-[arabic, start=162]
-. The evaluator shall perform the following test for each method of local login allowed:
-[loweralpha]
-.. Test 1: The evaluator shall locally authenticate to the TOE. While making this attempt, the evaluator shall verify that at most obscured feedback is provided while entering the authentication information.
+.. Test 4: For distributed TOEs where not all TOE components support the authentication of Security Administrators according to FIA_UIA_EXT.1, the evaluator shall test that the components authenticate Security Administrators as described in the TSS.
 
 === Security management (FMT)
 
@@ -964,13 +890,6 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 [arabic, start=185]
 . The evaluator shall examine the TSS to determine that it details how any pre-shared keys, symmetric keys, and private keys are stored and that they are unable to be viewed through an interface designed specifically for that purpose, as outlined in the application note. If these values are not stored in plaintext, the TSS shall describe how they are protected/obscured.
 
-==== FPT_APW_EXT.1 Protection of Administrator Passwords
-
-===== TSS
-
-[arabic, start=186]
-. The evaluator shall examine the TSS to determine that it details all authentication data that are subject to this requirement, and the method used to obscure the plaintext password data when stored. The TSS shall also detail passwords are stored in such a way that they are unable to be viewed through an interface designed specifically for that purpose, as outlined in the application note.
-
 ==== FPT_TST_EXT.1 TSF testing
 
 ===== TSS
@@ -1073,25 +992,6 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 === TOE Access (FTA)
 
-==== FTA_SSL_EXT.1 TSF-initiated Session Locking
-
-===== TSS
-
-[arabic, start=214]
-. The evaluator shall examine the TSS to determine that it details whether local administrative session locking or termination is supported and the related inactivity time period settings.
-
-===== Guidance Documentation
-
-[arabic, start=215]
-. The evaluator shall confirm that the guidance documentation states whether local administrative session locking or termination is supported and instructions for configuring the inactivity time period.
-
-===== Tests
-
-[arabic, start=216]
-. The evaluator shall perform the following test:
-[loweralpha]
-.. Test 1: The evaluator follows the guidance documentation to configure several different values for the inactivity time period referenced in the component. For each period configured, the evaluator establishes a local interactive session with the TOE. The evaluator then observes that the session is either locked or terminated after the configured time period. If locking was selected from the component, the evaluator then ensures that re-authentication is needed when trying to unlock the session.
-
 ==== FTA_SSL.3 TSF-initiated Termination
 
 ===== TSS
@@ -1116,19 +1016,19 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 ===== TSS
 
 [arabic, start=220]
-. The evaluator shall examine the TSS to determine that it details how the local and remote administrative sessions are terminated.
+. The evaluator shall examine the TSS to determine that it details how the remote administrative session (and if applicable the local administrative session) are terminated.
 
 ===== Guidance Documentation
 
 [arabic, start=221]
-. The evaluator shall confirm that the guidance documentation states how to terminate a local or remote interactive session.
+. The evaluator shall confirm that the guidance documentation states how to terminate a remote interactive session (and if applicable the local administrative session).
 
 ===== Tests
 
 [arabic, start=222]
 . For each method of remote administration, the evaluator shall perform the following tests:
 [loweralpha]
-.. Test 1: The evaluator initiates an interactive local session with the TOE. The evaluator then follows the guidance documentation to exit or log off the session and observes that the session has been terminated.
+.. Test 1: [conditional]: If the TOE supports local administration, the evaluator initiates an interactive local session with the TOE. The evaluator then follows the guidance documentation to exit or log off the session and observes that the session has been terminated.
 .. Test 2: The evaluator initiates an interactive remote session with the TOE. The evaluator then follows the guidance documentation to exit or log off the session and observes that the session has been terminated.
 
 ==== FTA_TAB.1 Default TOE Access Banners
@@ -1136,7 +1036,7 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 ===== TSS
 
 [arabic, start=223]
-. The evaluator shall check the TSS to ensure that it details each administrative method of access (local and remote) available to the Security Administrator (e.g., serial port, SSH, HTTPS). The evaluator shall check the TSS to ensure that all administrative methods of access available to the Security Administrator are listed and that the TSS states that the TOE is displaying an advisory notice and a consent warning message for each administrative method of access. The advisory notice and the consent warning message might be different for different administrative methods of access and might be configured during initial configuration (e.g. via configuration file).
+. The evaluator shall check the TSS to ensure that it details each administrative method of access (local and/or remote) available to the Security Administrator (e.g., serial port, SSH, HTTPS). The evaluator shall check the TSS to ensure that all administrative methods of access available to the Security Administrator are listed and that the TSS states that the TOE is displaying an advisory notice and a consent warning message for each administrative method of access. The advisory notice and the consent warning message might be different for different administrative methods of access and might be configured during initial configuration (e.g. via configuration file).
 
 ===== Guidance Documentation
 
@@ -2833,7 +2733,83 @@ Test 1b: The evaluator shall then 'break' the chain used in Test 1a by either re
 .. Test 1: The evaluator shall use the guidance documentation to cause the TOE to generate a Certification Request. The evaluator shall capture the generated message and ensure that it conforms to the format specified. The evaluator shall confirm that the Certification Request provides the public key and other required information, including any necessary user-input information.
 .. Test 2: The evaluator shall demonstrate that validating a response message to a Certification Request without a valid certification path results in the function failing. The evaluator shall then load a certificate or certificates as trusted CAs needed to validate the certificate response message and demonstrate that the function succeeds.
 
+==== FIA_AFL.1 Authentication Failure Management
+
+===== TSS
+
+[arabic, start=145]
+. The evaluator shall examine the TSS to determine that it contains a description, for each supported method for remote administrative actions, of how successive unsuccessful authentication attempts are detected and tracked. The TSS shall also describe the method by which the remote administrator is prevented from successfully logging on to the TOE, and the actions necessary to restore this ability.
+. The evaluator shall examine the TSS to confirm that the TOE ensures that authentication failures by remote administrators cannot lead to a situation where no administrator access is available, either permanently or temporarily (e.g. by providing local logon which is not subject to blocking).
+
+===== Guidance Documentation
+
+[arabic, start=147]
+. The evaluator shall examine the guidance documentation to ensure that instructions for configuring the number of successive unsuccessful authentication attempts and time period (if implemented) are provided, and that the process of allowing the remote administrator to once again successfully log on is described for each “action” specified (if that option is chosen). If different actions or mechanisms are implemented depending on the secure protocol employed (e.g., TLS vs. SSH), all must be described.
+. The evaluator shall examine the guidance documentation to confirm that it describes, and identifies the importance of, any actions that are required in order to ensure that administrator access will always be maintained, even if remote administration is made permanently or temporarily unavailable due to blocking of accounts as a result of FIA_AFL.1.
+
+===== Tests
+
+[arabic, start=149]
+. The evaluator shall perform the following tests for each method by which remote administrators access the TOE (e.g. any passwords entered as part of establishing the connection protocol or the remote administrator application):
+[loweralpha]
+.. Test 1: The evaluator shall use the operational guidance to configure the number of successive unsuccessful authentication attempts allowed by the TOE (and, if the time period selection in FIA_AFL.1.2 is included in the ST, then the evaluator shall also use the operational guidance to configure the time period after which access is re-enabled). The evaluator shall test that once the authentication attempts limit is reached, authentication attempts with valid credentials are no longer successful.
+[loweralpha, start=3]
+.. Test 2: After reaching the limit for unsuccessful authentication attempts as in Test 1 above, the evaluator shall proceed as follows.
++
+If the administrator action selection in FIA_AFL.1.2 is included in the ST, then the evaluator shall confirm by testing that following the operational guidance and performing each action specified in the ST to re-enable the remote administrator’s access results in successful access (when using valid credentials for that administrator).
++
+If the time period selection in FIA_AFL.1.2 is included in the ST, then the evaluator shall wait for just less than the time period configured in Test 1 and show that an authorisation attempt using valid credentials does not result in successful access. The evaluator shall then wait until just after the time period configured in Test 1 and show that an authorisation attempt using valid credentials results in successful access.
+
+==== FIA_PMG_EXT.1 Password Management
+
+===== TSS
+
+[arabic, start=150]
+. The evaluator shall examine the TSS to determine that it contains the lists of the supported special character(s) and minimum and maximum number of charters supported for administrator passwords.
+
+===== Guidance Documentation
+
+[arabic, start=151]
+. The evaluator shall examine the guidance documentation to determine that it:
+[loweralpha]
+.. identifies the characters that may be used in passwords and provides guidance to security administrators on the composition of strong passwords, and
+.. provides instructions on setting the minimum password length and describes the valid minimum password lengths supported.
+
+===== Tests
+
+[arabic, start=152]
+. The evaluator shall perform the following tests.
+[loweralpha]
+.. Test 1: The evaluator shall compose passwords that meet the requirements in some way. For each password, the evaluator shall verify that the TOE supports the password. While the evaluator is not required (nor is it feasible) to test all possible compositions of passwords, the evaluator shall ensure that all characters, and a minimum length listed in the requirement are supported and justify the subset of those characters chosen for testing.
+.. Test 2: The evaluator shall compose passwords that do not meet the requirements in some way. For each password, the evaluator shall verify that the TOE does not support the password. While the evaluator is not required (nor is it feasible) to test all possible compositions of passwords, the evaluator shall ensure that the TOE enforces the allowed characters and the minimum length listed in the requirement and justify the subset of those characters chosen for testing.
+
+==== FIA_UAU.7 Protected Authentication Feedback
+
+===== TSS
+
+[arabic, start=160]
+. None.
+
+===== Guidance Documentation
+
+[arabic, start=161]
+. The evaluator shall examine the guidance documentation to determine that any necessary preparatory steps to ensure authentication data is not revealed while entering for each local login allowed.
+
+===== Tests
+
+[arabic, start=162]
+. The evaluator shall perform the following test for each method of local login allowed:
+[loweralpha]
+.. Test 1: The evaluator shall locally authenticate to the TOE. While making this attempt, the evaluator shall verify that at most obscured feedback is provided while entering the authentication information.
+
 === Protection of the TSF (FPT)
+
+==== FPT_APW_EXT.1 Protection of Administrator Passwords
+
+===== TSS
+
+[arabic, start=186]
+. The evaluator shall examine the TSS to determine that it details all authentication data that are subject to this requirement, and the method used to obscure the plaintext password data when stored. The TSS shall also detail passwords are stored in such a way that they are unable to be viewed through an interface designed specifically for that purpose, as outlined in the application note.
 
 ==== FPT_TUD_EXT.2 Trusted Update based on certificates
 
@@ -2946,6 +2922,27 @@ Test 1b: The evaluator shall then 'break' the chain used in Test 1a by either re
 [arabic, start=624]
 . The evaluator shall try to perform at least one of the related actions (modify, delete, generate/import) without prior authentication as Security Administrator (either by authentication as a non-administrative user, if supported, or without authentication at all). Attempts to perform related actions without prior authentication should fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt to manage cryptographic keys can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator.
 . The evaluator shall try to perform at least one of the related actions with prior authentication as Security Administrator. This attempt should be successful.
+
+=== TOE Access (FTA)
+
+==== FTA_SSL_EXT.1 TSF-initiated Session Locking
+
+===== TSS
+
+[arabic, start=214]
+. The evaluator shall examine the TSS to determine that it details whether local administrative session locking or termination is supported and the related inactivity time period settings.
+
+===== Guidance Documentation
+
+[arabic, start=215]
+. The evaluator shall confirm that the guidance documentation states whether local administrative session locking or termination is supported and instructions for configuring the inactivity time period.
+
+===== Tests
+
+[arabic, start=216]
+. The evaluator shall perform the following test:
+[loweralpha]
+.. Test 1: The evaluator follows the guidance documentation to configure several different values for the inactivity time period referenced in the component. For each period configured, the evaluator establishes a local interactive session with the TOE. The evaluator then observes that the session is either locked or terminated after the configured time period. If locking was selected from the component, the evaluator then ensures that re-authentication is needed when trying to unlock the session.
 
 == Evaluation Activities for SARs
 
