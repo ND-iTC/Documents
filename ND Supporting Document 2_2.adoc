@@ -2829,6 +2829,11 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 [arabic, start=550]
 . Test 1 [conditional]: If the TOE presents the Supported Elliptic Curves/Supported Groups Extension, _the evaluator shall configure the server to perform ECDHE or DHE (as applicable) key exchange using each of the TOE’s supported curves and/or groups. The evaluator shall verify that the TOE successfully connects to the server.
 
+*FCS_TLSC_EXT.1.7*
+[arabic, start=551]
+. The evaluator shall establish a TLS connection with a server and observe that the early data extension and the post-handshake client authentication extension according to RFC8446 Section 4.2 are not advertised in the Client Hello Message. This test shall be executed for all TLS versions supported by the TOE.
+
+
 ==== FCS_TLSS_EXT.1 Extended: TLS Server Protocol
 
 ===== TSS
