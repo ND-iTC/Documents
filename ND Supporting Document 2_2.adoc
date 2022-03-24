@@ -2722,6 +2722,12 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 [arabic, start=531]
 . The evaluator shall verify that TSS describes the Supported Elliptic Curves/Supported Groups Extension and whether the required behaviour is performed by default or may be configured.
 
+*FCS_TLSC_EXT.1.5*
+[arabic, start=532]
+. The evaluator shall verify that TSS describes the signature_algorithm extension and whether the required behavior is performed by default or may be configured.
+.	If “not present the signature_algorithms extension” is selected, the evaluator shall verify that the TSS describes support for at least one RSA ciphersuite, RSA in FCS_COP.1/SigGen, and SHA-1 for FCS_COP.1/Hash.
+
+
 ===== Guidance Documentation
 
 *FCS_TLSC_EXT.1.1*
