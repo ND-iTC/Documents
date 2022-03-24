@@ -2744,6 +2744,12 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 [arabic, start=535]
 . If the TSS indicates that the Supported Elliptic Curves/Supported Groups Extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the Supported Elliptic Curves/Supported Groups Extension.
 
+*FCS_TLSC_EXT.1.6*
+[arabic, start=536]
+
+.	If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall verify that AGD guidance includes configuration of the list of supported ciphersuites.
+
+
 ===== Tests
 
 [arabic, start=536]
