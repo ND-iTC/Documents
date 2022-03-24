@@ -2829,6 +2829,21 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 [arabic, start=550]
 . Test 1 [conditional]: If the TOE presents the Supported Elliptic Curves/Supported Groups Extension, _the evaluator shall configure the server to perform ECDHE or DHE (as applicable) key exchange using each of the TOE’s supported curves and/or groups. The evaluator shall verify that the TOE successfully connects to the server.
 
+*FCS_TLSC_EXT.1.5*
+[arabic, start=551]
+
+. The evaluator shall perform the following tests:
+. Test 1 [conditional]: If “not present the signature_algorithms extension” is selected, the evaluator shall examine the Client Hello message and verify it does not contain the signature_algorihtms extension or the signature_algorithms_cert extension.
+. Test 2 [conditional]: The evaluator shall perform the following tests if “present the signature_algorithms extension” is selected:
+.. The evaluator shall examine the Client Hello message and verify it contains the signature_algorihtms extension and the SignatureSchemes match the SignatureSchemes specified in the requirement.
+.. The evaluator shall establish a TLS connection using each of the SignatureSchemes specified by the requirement and observes the session is successfully completed. The evaluator shall ensure the test server sends Certificate and Certificate Verify messages that are consistent with the SignatureScheme being tested. 
+Remark: The server must ensure the TLS handshake is valid (e.g. certificate key, message formatting, hashes, and signatures), except for using a SignatureScheme not proposed by the client. The selected legacy SignatureScheme shall be as similar to one of the supported SignatureSchemes as possible. For example: 1) ecdsa_sha1 shall not be used if the TOE only supports RSA signatures, 2) ecdsa_sha1 must use a supported ECDSA curve or P-256 if only EdDSA curves are supported.
+.	Test 3 [conditional]: The evaluator shall perform the following tests if “present the signature_algorithms_cert extension” is selected:
+.. The evaluator shall examine the Client Hello message and verify it contains the signature_algorihtms_cert extension and the SignatureSchemes match the SignatureSchemes specified in the requirement.
+.. The evaluator shall establish a TLS connection using a certificate chain using each of the SignatureSchemes specified by the requirement. The evaluator shall ensure the signatures used in the certificate chain are consistent with the SignatureScheme being tested.
+Remark: The server must ensure the TLS handshake is valid (e.g. certificate key, Certificate Verify message, message formatting, hashes, and signatures), except for the certificate chain using a SignatureScheme not proposed by the client. The selected legacy SignatureScheme shall be as similar to one of the supported SignatureSchemes as possible. For example: 1) ecdsa_sha1 shall not be used if the TOE only supports RSA signatures, 2) ecdsa_sha1 must use a supported ECDSA curve or P-256 if only EdDSA curves are supported.
+
+
 ==== FCS_TLSS_EXT.1 Extended: TLS Server Protocol
 
 ===== TSS
