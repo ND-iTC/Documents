@@ -2727,6 +2727,10 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 . The evaluator shall verify in the TSS that, for TLS 1.3, the TOE shall not permit out-of-band provisioning of pre-shared keys (PSKs) in the evaluated configuration.
 
 
+*FCS_TLSC_EXT.1.6*
+[arabic, start=532]
+.	The evaluator shall verify that TSS describes whether the list of supported ciphersuites can be configured or not.
+
 ===== Guidance Documentation
 
 *FCS_TLSC_EXT.1.1*
@@ -2749,6 +2753,12 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 
 [arabic, start=536]
 .	The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
+
+
+*FCS_TLSC_EXT.1.6*
+[arabic, start=536]
+
+.	If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall verify that AGD guidance includes configuration of the list of supported ciphersuites.
 
 
 ===== Tests
@@ -2851,6 +2861,12 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 *FCS_TLSC_EXT.1.7*
 [arabic, start=551]
 . The evaluator shall establish a TLS connection with a server and observe that the early data extension and the post-handshake client authentication extension according to RFC8446 Section 4.2 are not advertised in the Client Hello Message. This test shall be executed for all TLS versions supported by the TOE.
+
+
+
+*FCS_TLSC_EXT.1.6 [conditional]*
+[arabic, start=551]
+. If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a TLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported TLS versions. This test should be considered to be performed together with FCS_TLSC_EXT.1.1 Test 1. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
 
 
 ==== FCS_TLSS_EXT.1 Extended: TLS Server Protocol
