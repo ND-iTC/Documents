@@ -2147,11 +2147,12 @@ The evaluator shall verify that the Finished message (Content type hexadecimal 1
 _Test Objective: To demonstrate that the TOE will not resume a session for which the client failed to complete the handshake (independent of TOE support for session resumption)_
 
 [arabic, start=396]
-. Test 1[conditional]: If the TOE does not support session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), or session tickets according to RFC5077 (TLS1.2) or session resumption according to RFC8446 (TLS1.3), the evaluator shall perform the following test:
+. Test 1 [conditional]: If the TOE does not support session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), or session tickets according to RFC5077 (TLS1.2) or session resumption according to RFC8446 (TLS1.3), the evaluator shall perform the following test:
 [loweralpha]
 .. For all supported TLS versions the client shall send a Client Hello with a zero-length session identifier and with a SessionTicket extension containing a zero-length ticket. A non-zero length session identifier for TLSv1.3 would result in testing compatibility mode which is not the objective of this test. For TLSv1.3, the evaluator shall ensure that a 'psk_key_exchange_modes' extension is included in the Client Hello.
 .. The client verifies the server does not send a NewSessionTicket handshake message (at any point in the handshake).
 .. The client verifies the Server Hello message contains a zero-length session identifier. For TLSv1.1 and TLSv1.2 the client could alternatively pass the following steps (not applicable for TLSv1.3):
++
 Note: The following steps are only performed if the ServerHello message contains a non-zero length SessionID.
 .. The client completes the TLS handshake, captures the SessionID from the ServerHello.
 .. The client sends a ClientHello containing the SessionID captured in step d). This can be done e.g. by keeping the TLS session in step d) open or start a new TLS session using the SessionID captured in step d).
