@@ -912,7 +912,7 @@ _For vNDs, local storage is any storage accessible by TOE software. In a virtual
 
 *FAU_STG_EXT.1/LocSpace Local Audit Event Storage*
 
-*FAU_STG_EXT.1.1/LocSpace* The TSF shall maintain a [_selection: log file, database, buffer, assignment:[other local logging method]_] of audit records in the event that an interruption of communication with the remote syslog server occurs.
+*FAU_STG_EXT.1.1/LocSpace* The TSF shall maintain a [_selection: log file, database, buffer, [assignment:other local logging method]_] of audit records in the event that an interruption of communication with the remote syslog server occurs.
 
 *FAU_STG_EXT.1.2/LocSpace* The TSF shall be able to store [_selection: persistent, non-persistent_] audit records locally with a minimum storage size of [_assignment: number of records, file/buffer size(s)_].
 
