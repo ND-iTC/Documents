@@ -347,7 +347,7 @@ In general, when using open source libraries like OpenSSL, passing on error mess
 
 [arabic, start=41]
 . The evaluator shall examine the TSS to ensure it describes the amount of audit data that can be stored locally and how these records are protected against unauthorized modification or deletion.
-. The evaluator shall ensure that the TSS describes the method implemented for local logging, including format (e.g. buffer, log file, database) and whether the logs are persistent or non-persistent. If the logs are non-persistent, . the evaluator shall ensure that a statement is provided on how long the file is maintained.
+. The evaluator shall ensure that the TSS describes the method implemented for local logging, including format (e.g. buffer, log file, database) and whether the logs are persistent or non-persistent.
 . The evaluator shall ensure that the TSS describes the conditions that must be met for authorized deletion of audit records.
 . The evaluator shall examine the TSS to ensure that it details the behaviour of the TOE when the storage space for audit data is full. When the option ‘overwrite previous audit record’ is selected this description should include an outline of the rule for overwriting audit data. If ‘other actions’ are chosen such as sending the new audit data to an external IT entity, then the related behaviour of the TOE shall also be detailed in the TSS.
 . For distributed TOEs the evaluator shall examine the TSS to ensure it describes which TOE components are storing audit information locally and which components are buffering audit information and forwarding the information to another TOE component for local storage. For every component the TSS shall describe the behaviour when local storage space or buffer space is exhausted.
@@ -367,10 +367,10 @@ In general, when using open source libraries like OpenSSL, passing on error mess
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1: The evaluator shall access the local audit trail without authentication as Security Administrator (either by authentication as a non-administrative user, if supported, or without authentication at all) and attempt to modify and delete the audit records. The evaluator shall verify that these attempts fail. If the interface cannot be accessed to attempt the command due to permissions or configuration, this test requirement is satisfied.
-.. (Conditional – if local log can be viewed) Test 2: The evaluator shall perform operations that generate audit data and verify that this data is stored locally. The evaluator shall then make note of whether the TSS claims persistent or non-persistent logging and perform one of the following actions:
+.. Test 2: The evaluator shall perform operations that generate audit data and verify that this data is stored locally. The evaluator shall then make note of whether the TSS claims persistent or non-persistent logging and perform one of the following actions:
 [arabic]
-... If persistent logging is claimed, the evaluator shall perform a power cycle of the TOE and ensure that following power on operations the log events generated are still maintained within the local audit storage.
-... If non-persistent logging is claimed, the evaluator shall perform a power cycle of the TOE and ensure that following power on operations the log events generated are no longer present within the local audit storage unless otherwise claimed in the TSS.
+... If persistent logging is selected, the evaluator shall perform a power cycle of the TOE and ensure that following power on operations the log events generated are still maintained within the local audit storage.
+... If non-persistent logging is selected, the evaluator shall perform a power cycle of the TOE and ensure that following power on operations the log events generated are no longer present within the local audit storage.
 [loweralpha, start=3]
 .. Test 3: The evaluator shall perform operations that generate audit data until the local storage space is exceeded and verifies that the TOE complies with the behaviour defined in FAU_STG_EXT.1.3. Depending on the configuration this means that the evaluator has to check the content of the audit data when the audit data is just filled to the maximum and then verifies that:
 [arabic]
@@ -379,6 +379,7 @@ In general, when using open source libraries like OpenSSL, passing on error mess
 ...	The TOE behaves as specified (for the option ‘other action’ in FAU_STG_EXT.1.3/LocSpace).
 [loweralpha, start=4]
 .. Test 4: For distributed TOEs, Test 1 defined above should be applicable to all TOE components that forward audit data to an external audit server. For the local storage according to FAU_STG_EXT.1.2 and FAU_STG_EXT.1.3 the Test 2 specified above shall be applied to all TOE components that store audit data locally. For all TOE components that store audit data locally and comply with FAU_STG_EXT.2/LocSpace Test 3 specified above shall be applied. The evaluator shall verify that the transfer of audit data to an external audit server is implemented
+.. Test 5: The evaluator shall cause an interrupt in the connection between the TOE and remote audit server. During interruption, the evaluator shall perform a TSF-mediated action and verify the event is recorded in the audit trail. The evaluator shall re-establish the connection to the audit server and repeat the action performing, confirming it is logged to the remote audit server.
 
 
 === Cryptographic Support (FCS)
