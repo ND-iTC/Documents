@@ -2248,9 +2248,9 @@ _The following table provides the ST author with instructions for completing the
 [cols="1,1,1"]
 |===
 | |_not present the Supported Groups Extension_|_present the Supported Groups Extension_
-|_DTLS 1.3 with or without DTLS 1.2 or DTLS 1.0_|_Shall not select_|_Shall select with any secp curves or any ffdhe groups – If DTLS 1.2 or DTLS 1.0 is supported, see the following rows for additional instructions._
-|_DTLS 1.2 or DTLS 1.0 with support for at least one ECDHE ciphersuite_|_Shall not select_|_Shall select – at least one secp curve shall be selected_
-|_DTLS 1.2 or DTLS 1.0 with support for at least one DHE ciphersuite_|_May select_ +
+|_DTLS 1.3 with or without DTLS 1.2_|_Shall not select_|_Shall select with any secp curves or any ffdhe groups – If DTLS 1.2 is supported, see the following rows for additional instructions._
+|_DTLS 1.2 with support for at least one ECDHE ciphersuite_|_Shall not select_|_Shall select – at least one secp curve shall be selected_
+|_DTLS 1.2 with support for at least one DHE ciphersuite_|_May select_ +
 
 _This extension is not required, because older TLS implementations did not negotiate FFC parameters (e.g. Group 14)._|_May select – at least one ffdhe group shall be selected_
 |===
@@ -2381,15 +2381,16 @@ _The following table provides the ST author with instructions for completing the
 
 [cols=",,,",options="header",]
 |===
-| |_RSA key establishment..._|_EC Diffie-Hellman key agreement..._|_Diffie-Hellman key agreement..._
-|_DTLS 1.3 without DTLS 1.2 or DTLS 1.0_|_Shall not select_ 2+|_Shall select at least one_
-|_DTLS 1.3 with DTLS 1.2 or DTLS 1.0_|_See the following rows_ 2+|_Shall select at least one - see the following rows for additional instructions_
-|_DTLS 1.2 or DTLS 1.0 with support for at least one TLS_RSA_WITH... ciphersuite_|_Shall select_|_N/A_|_N/A_
-|_DTLS 1.2 or DTLS 1.0 without support for any TLS_RSA_WITH... ciphersuites_|_Shall not select_|_N/A_|_N/A_
-|_DTLS 1.2 or DTLS 1.0 with support for at least one ECDHE ciphersuite_|_N/A_|_Shall select_|_N/A_
-|_DTLS 1.2 or DTLS 1.0 without support for DTLS 1.3 or any ECDHE ciphersuites_|_N/A_|_Shall not select_|_N/A_
-|_DTLS 1.2 & DTLS 1.0 with support for at least one DHE ciphersuite_|_N/A_|_N/A_|_Shall select_
-|_DTLS 1.2 & DTLS 1.0 without support for DTLS 1.3 or any DHE ciphersuites_|_N/A_|_N/A_|_Shall not select_
+| |RSA key establishment... |EC Diffie-Hellman key agreement... |Diffie-Hellman key agreement...
+|DTLS 1.3 | N/A +
+DTLS 1.3 does not use RSA key establishment 2+| Shall select at least one +
+- If Diffie-Hellman is selected, at least one ffdhe group must be selected 
+|DTLS 1.2 with support for at least one TLS_RSA_WITH... ciphersuite |Shall select |N/A |N/A
+|DTLS 1.2 without support for any TLS_RSA_WITH... ciphersuite |Shall not select |N/A |N/A
+|DTLS 1.2 with support for at least one ECDHE ciphersuite |N/A |Shall select |N/A
+|DTLS 1.2 without support for DTLS 1.3 or any ECDHE ciphersuites |N/A |Shall not select |N/A
+|DTLS 1.2 with support for at least one DHE ciphersuite |N/A |N/A |Shall select
+|DTLS 1.2 without support for DTLS 1.3 or any DHE ciphersuites |N/A |N/A |Shall not select
 |===
 
 _N/A indicates the options do not affect whether the selection is selected or not._
@@ -2416,11 +2417,11 @@ _Replay Detection is described in section 4.5.1 of DTLS 1.3 (RFC tbd, current dr
 
 _"Silently Discard" means the TOE discards the packet without responding._
 
-*FCS_DTLSS_EXT.1.7* The TSF shall support [selection: _no session resumption or session tickets, session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)_].
+*FCS_DTLSS_EXT.1.7* The TSF shall support [selection: _no session resumption or session tickets, session resumption based on session IDs according to RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)_].
 
 *_Application Note {counter:appnote_count}_*
 
-_If the TOE doesn't support session resumption or session tickets, select 'no session resumption or session tickets'. If the TOE supports session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), select 'session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2)'. If the TOE supports session resumption based on session tickets according to RFC5077, select 'session resumption based on session tickets according to RFC5077 (TLS1.2)'. If the TOE supports session resumption according to RFC8446 (TLS1.3), select 'session resumption according to RFC8446 (TLS1.3)'._
+_If the TOE doesn't support session resumption or session tickets, select 'no session resumption or session tickets'. If the TOE supports session resumption based on session IDs according to RFC5246 (TLS1.2), select 'session resumption based on session IDs according to RFC5246 (TLS1.2)'. If the TOE supports session resumption based on session tickets according to RFC5077, select 'session resumption based on session tickets according to RFC5077 (TLS1.2)'. If the TOE supports session resumption according to RFC8446 (TLS1.3), select 'session resumption according to RFC8446 (TLS1.3)'._
 
 *FCS_DTLSS_EXT.1.8* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_DTLSS_EXT.1.1.
 
@@ -2891,7 +2892,7 @@ _If TLS is selected in FTP_ITC, then certificate validity is tested in accordanc
 
 _If TLS is selected in FPT_ITT, then certificate validity is tested in accordance with testing performed for FIA_X509_EXT.1/ITT._
 
-*FCS_TLSC_EXT.1.4* The TSF shall [selection: _not present the Supported Groups Extension, present the Supported Groups Extension with the following curves/groups:[selection: secp256r1, secp384r1, secp521r1, ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192]and no other curves/groups_] in the Client Hello.
+*FCS_TLSC_EXT.1.4* The TSF shall [selection: _not present the Supported Groups Extension, present the Supported Groups Extension with the following curves/groups:[selection: secp256r1, secp384r1, secp521r1, ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192] and no other curves/groups_] in the Client Hello.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2902,9 +2903,9 @@ _The following table provides the ST author with instructions for completing the
 [cols="1,1,1"]
 |===
 | |_not present the Supported Groups Extension_|_present the Supported Groups Extension_
-|_TLS 1.3 with or without TLS 1.2 or TLS 1.1_|_Shall not select_|_Shall select with any secp curves or any ffdhe groups – If TLS 1.2 or TLS 1.1 is supported, see the following rows for additional instructions._
-|_TLS 1.2 or TLS 1.1 with support for at least one ECDHE ciphersuite_|_Shall not select_|_Shall select – at least one secp curve shall be selected_
-|_TLS 1.2 or TLS 1.1 with support for at least one DHE ciphersuite_|_May select_ +
+|_TLS 1.3 with or without TLS 1.2_|_Shall not select_|_Shall select with any secp curves or any ffdhe groups – If TLS 1.2 is supported, see the following rows for additional instructions._
+|_TLS 1.2 with support for at least one ECDHE ciphersuite_|_Shall not select_|_Shall select – at least one secp curve shall be selected_
+|_TLS 1.2 with support for at least one DHE ciphersuite_|_May select_ +
 
 _This extension is not required, because older TLS implementations did not negotiate FFC parameters (e.g. Group 14)._|_May select – at least one ffdhe group shall be selected_
 |===
@@ -2960,8 +2961,10 @@ _The following table provides the ST author with instructions for completing the
 [cols="1,1,1"]
 |===
 | |_present the signature_algorithms extension_|_present the signature_algorithms_cert extension_
-|_TLS 1.3_|_Shall select_|_May select_
-|_TLS 1.2 without TLS 1.3_|_May select_|_Shall not select_
+|_TLS 1.3_|_Shall select_ +
+_This extension is required by TLS 1.3_|_May select_
+|_TLS 1.2 without TLS 1.3_|_May select_|_Shall not select_ +
+_This extension is not defined in TLS 1.2_
 |===
 
 *FCS_TLSC_EXT.1.6* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_TLSC_EXT.1.1.
@@ -3032,21 +3035,22 @@ _If the ST includes TLS 1.1 or TLS 1.2 in FCS_TLSS_EXT.1.1, the selected algorit
 
 *_Application Note {counter:appnote_count}_*
 
-_The selected algorithms and key sizes must be consistent with FCS_CKM.2_
+_The selected algorithms and key sizes must be consistent with FCS_CKM.2._
 
 _The following table provides the ST author with instructions for completing the selections._
 
 [cols=",,,",options="header",]
 |===
 | |RSA key establishment... |EC Diffie-Hellman key agreement... |Diffie-Hellman key agreement...
-|TLS 1.3 without TLS 1.2 or TLS 1.1 | Shall not select 2+| Shall select at least one
-|TLS 1.3 with TLS 1.2 or TLS 1.1 |See the following rows 2+|Shall select at least one- see the following rows for additional instructions
-|TLS 1.2 or TLS 1.1 with support for at least one TLS_RSA_WITH... ciphersuite |Shall select |N/A |N/A
-|TLS 1.2 or TLS 1.1 without support for any TLS_RSA_WITH... ciphersuite |Shall not select |N/A |N/A
-|TLS 1.2 or TLS 1.1 with support for at least one ECDHE ciphersuite |N/A |Shall select |N/A
-|TLS 1.2 or TLS 1.1 without support for TLS1.3 or any ECDHE ciphersuites |N/A |Shall not select |N/A
-|TLS 1.2 & TLS 1.1 with support for at least one DHE ciphersuite |N/A |N/A |Shall select
-|TLS 1.2 & TLS 1.1 without support for TLS 1.3 or any DHE ciphersuites |N/A |N/A |Shall not select
+|TLS 1.3 | N/A +
+TLS 1.3 does not use RSA key establishment 2+| Shall select at least one +
+- If Diffie-Hellman is selected, at least one ffdhe group must be selected 
+|TLS 1.2 with support for at least one TLS_RSA_WITH... ciphersuite |Shall select |N/A |N/A
+|TLS 1.2 without support for any TLS_RSA_WITH... ciphersuite |Shall not select |N/A |N/A
+|TLS 1.2 with support for at least one ECDHE ciphersuite |N/A |Shall select |N/A
+|TLS 1.2 without support for TLS 1.3 or any ECDHE ciphersuites |N/A |Shall not select |N/A
+|TLS 1.2 with support for at least one DHE ciphersuite |N/A |N/A |Shall select
+|TLS 1.2 without support for TLS 1.3 or any DHE ciphersuites |N/A |N/A |Shall not select
 |===
 
 _N/A indicates the options do not affect whether the selection is selected or not._
@@ -3055,11 +3059,11 @@ _The RSA key size(s) specified in FCS_TLSS_EXT.1.3 are used for RSA key establis
 
 _Subsequent versions of this cPP will require support for the Supported Groups extension and prohibit use of legacy DH groups for key establishment._
 
-*FCS_TLSS_EXT.1.4* The TSF shall support [selection: _no session resumption, sessiion resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)_].
+*FCS_TLSS_EXT.1.4* The TSF shall support [selection: _no session resumption, sessiion resumption based on session IDs according to RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)_].
 
 *_Application Note {counter:appnote_count}_*
 
-_If the TOE doesn't support session resumption or session tickets, select 'no session resumption'. If the TOE supports session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), select 'sessiion resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2)'. If the TOE supports session resumption based on session tickets according to RFC5077, select 'session resumption based on session tickets according to RFC5077 (TLS1.2)'. If the TOE supports session resumption according to RFC8446 (TLS1.3), select 'session resumption according to RFC8446 (TLS1.3)'._
+_If the TOE doesn't support session resumption or session tickets, select 'no session resumption'. If the TOE supports session resumption based on session IDs according to RFC5246 (TLS1.2), select 'sessiion resumption based on session IDs according to RFC5246 (TLS1.2)'. If the TOE supports session resumption based on session tickets according to RFC5077, select 'session resumption based on session tickets according to RFC5077 (TLS1.2)'. If the TOE supports session resumption according to RFC8446 (TLS1.3), select 'session resumption according to RFC8446 (TLS1.3)'._
 
 *FCS_TLSS_EXT.1.5* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_TLSS_EXT.1.1.
 
@@ -3697,7 +3701,7 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 * DTLS Records too old to fit in the sliding window.
 
 
-*FCS_DTLSS_EXT.1.7* The TSF shall support [selection: _no session resumption or session tickets, session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)_].
+*FCS_DTLSS_EXT.1.7* The TSF shall support [selection: _no session resumption or session tickets, session resumption based on session IDs according to RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)_].
 
 *FCS_DTLSS_EXT.1.8* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_DTLSS_EXT.1.1.
 
@@ -4335,7 +4339,7 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 ].
 
-*FCS_TLSS_EXT.1.4* The TSF shall support [selection: _no session resumption, session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)_].
+*FCS_TLSS_EXT.1.4* The TSF shall support [selection: _no session resumption, session resumption based on session IDs according to  RFC5246 (TLS1.2), session resumption based on session tickets according to RFC5077 (TLS1.2), session resumption according to RFC8446 (TLS1.3)_].
 
 *FCS_TLSS_EXT.1.5* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_TLSS_EXT.1.1.
 
