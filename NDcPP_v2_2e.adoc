@@ -2347,7 +2347,7 @@ _The ciphersuites to be tested in the evaluated configuration are limited by thi
 
 *_Application Note {counter:appnote_count}_*
 
-_The process to validate the DTLS client is specified in section tbd of RFC 9147 (DTLS 1.3) and section 4.2.1 of RFC 6347 (DTLS 1.2). The TOE validates the DTLS client during Connection Establishment (Handshaking) and prior to the TSF sending a Server Hello message. After receiving a ClientHello, the DTLS Server sends a HelloRetryRequest message (DTLS 1.3)/HelloVerify message (DTLS 1.2) along with a cookie. The cookie is a signed message using the keyed hash function specified in FCS_COP.1/KeyedHash. The DTLS Client then sends another ClientHello with the cookie attached. If the DTLS server successfully verifies the signed cookie, the Client is not using a spoofed IP address._
+_The process to validate the DTLS client is specified in section 5.1 of RFC 9147 (DTLS 1.3) and section 4.2.1 of RFC 6347 (DTLS 1.2). The TOE validates the DTLS client during Connection Establishment (Handshaking) and prior to the TSF sending a Server Hello message. After receiving a ClientHello, the DTLS Server sends a HelloRetryRequest message (DTLS 1.3)/HelloVerify message (DTLS 1.2) along with a cookie. The cookie is a signed message using the keyed hash function specified in FCS_COP.1/KeyedHash. The DTLS Client then sends another ClientHello with the cookie attached. If the DTLS server successfully verifies the signed cookie, the Client is not using a spoofed IP address._
 
 *FCS_DTLSS_EXT.1.3* The TSF shall authenticate itself using X.509 certificate(s) using [selection: _RSA with key size [selection: 2048 bits, 3072 bits, 4096 bits]; ECDSA over NIST curves [selection: secp256r1, secp384r1, secp521r1] and no other curves_].
 
