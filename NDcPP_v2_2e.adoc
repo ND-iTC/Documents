@@ -1875,7 +1875,7 @@ _The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This
 
 *_Application Note {counter:appnote_count}_*
 
-_The Message Authentication Code (MAC) is negotiated during the DTLS handshake phase and is used to protect the integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC (tbd - current draft for DTLS 1.3 is V38), section 4.5.2 and 4.1.2.7 in RFC 6347(DTLS 1.2)). If MAC verification fails, the session must be terminated, or the record must be silently discarded._
+_The Message Authentication Code (MAC) is negotiated during the DTLS handshake phase and is used to protect the integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC 9147 section 4.5.2 and 4.1.2.7 in RFC 6347(DTLS 1.2)). If MAC verification fails, the session must be terminated, or the record must be silently discarded._
 
 *FCS_DTLSC_EXT.2.3* The TSF shall detect and silently discard replayed messages for:
 
@@ -1884,7 +1884,7 @@ _The Message Authentication Code (MAC) is negotiated during the DTLS handshake p
 
 *_Application Note {counter:appnote_count}_*
 
-_Replay Detection is described in section 4.5.1 of DTLS 1.3 (RFC tbd, current draft version is V38), 4.1.2.6 of DTLS 1.2 (RFC 6347) and section 4.1.2.5 of DTLS 1.0 (RFC 4347). For each received record, the receiver verifies the record contains a sequence number that is within the sliding receive window and does not duplicate the sequence number of any other record received during the session._
+_Replay Detection is described in section 4.5.1 of DTLS 1.3 (RFC 9147) and 4.1.2.6 of DTLS 1.2 (RFC 6347). For each received record, the receiver verifies the record contains a sequence number that is within the sliding receive window and does not duplicate the sequence number of any other record received during the session._
 
 _"Silently Discard" means the TOE discards the packet without responding._
 
@@ -1931,10 +1931,6 @@ _The client identifier may be in the Subject field or the Subject Alternative Na
 
 *FCS_DTLSS_EXT.2.4* The TSF shall [selection:
 
-* _present a DTLS1.0 Certificate Request message containing the following ClientCertificateTypes: [selection:_
-** rsa_sign,
-** ecdsa_sign,
-** ] and no other ClientCertificateTypes;
 * present a [selection: DTLSv1.2, DTLSv1.3] Certificate Request message containing the following algorithms: [selection:
 ** rsa_pkcs1 with sha256(0x0401),
 ** rsa_pkcs1 with sha384(0x0501),
@@ -2192,16 +2188,16 @@ Due to the structural differences between TLSv1.1/v1.2 on the one hand and TLSv1
 
 *FCS_DTLSC_EXT.1 DTLS Client Protocol*
 
-*FCS_DTLSC_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC tbd), DTLS 1.2 (RFC 6347)] and [selection: DTLS 1.0 (RFC 4347), no additional DTLS version_] supporting the following ciphersuites:
+*FCS_DTLSC_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC 9147), DTLS 1.2 (RFC 6347)_] supporting the following ciphersuites:
 
 * [selection:
-** [.underline]#_select supported ciphersuites for DTLS 1.0 and 1.2 from List 1]_#
+** [.underline]#_select supported ciphersuites for DTLS 1.2 from List 1]_#
 ** [.underline]#_select supported ciphersuites for DTLS 1.3 from List 2
 ] and no other ciphersuites_.#
 
 *_Application Note {counter:appnote_count}_*
 
-_The ciphersuites to be tested in the evaluated configuration are limited by this requirement requirement and shall be selected from the ciphersuites defined in List 1 (DTLS 1.0/1.2) and List 2 (DTLS 1.3), respectively (both in chap. B.3.1.6). The ST author should select the ciphersuites that are supported. Even though RFC 5246 and RFC 6347 mandate implementation of specific ciphers, this cPP deprecates use of SHA-1. Support for TLS_RSA_WITH_AES_128_CBC_SHA is not claimed in order to claim conformance to this cPP._
+_The ciphersuites to be tested in the evaluated configuration are limited by this requirement requirement and shall be selected from the ciphersuites defined in List 1 (DTLS 1.2) and List 2 (DTLS 1.3), respectively (both in chap. B.3.1.6). The ST author should select the ciphersuites that are supported. Even though RFC 5246 and RFC 6347 mandate implementation of specific ciphers, this cPP deprecates use of SHA-1. Support for TLS_RSA_WITH_AES_128_CBC_SHA is not claimed in order to claim conformance to this cPP._
 
 _These requirements will be revisited as new DTLS versions are standardized by the IETF._
 
@@ -2320,7 +2316,7 @@ _The option 'provides' shall be selected if the TOE provides the ability to conf
 *FCS_DTLSC_EXT.1.7* The TSF _shall prohibit the use of the following extensions:
 
 * Early data extension
-* post-handshake client authentication according to RFC(tbd- current draft for DTLS 1.3 is V38), section 5.7.3._
+* post-handshake client authentication according to RFC 9147, section 5.8.4.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2334,10 +2330,10 @@ _The use of out-of-band provisioned pre-shared keys creates a potential security
 
 *FCS_DTLSS_EXT.1 DTLS Server Protocol*
 
-*FCS_DTLSS_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC tbd), DTLS 1.2 (RFC 6347)_] and [selection: _DTLS 1.0 (RFC 4347), no additional DTLS version_] supporting the following ciphersuites:
+*FCS_DTLSS_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC 9147), DTLS 1.2 (RFC 6347)_] supporting the following ciphersuites:
 
 * [selection:
-** _select supported ciphersuites for DTLS 1.0/1.2 from List 1_
+** _select supported ciphersuites for DTLS 1.2 from List 1_
 ** _select supported ciphersuites for DTLS 1.3 from List 2_
 
 +
@@ -2347,15 +2343,11 @@ _The use of out-of-band provisioned pre-shared keys creates a potential security
 
 _The ciphersuites to be tested in the evaluated configuration are limited by this requirement and must be selected from the ciphersuites defined in List 1, chap. B.3.1.6. The ST author should select the ciphersuites that are supported. Even though RFC 5246 and RFC 6347 mandate implementation of specific ciphers, this cPP depreciates use of SHA-1. Support for TLS_RSA_WITH_AES_128_CBC_SHA is not claimed in order to claim conformance to this cPP._
 
-_These requirements will be revisited as new DTLS versions are standardized by the IETF._
-
-_This version of the cPP does not require the TOE to deny DTLS v1.0. In a future version of this cPP DTLS v1.0 will be required to be denied for all TOEs._
-
 *FCS_DTLSS_EXT.1.2* The TSF shall not proceed with a connection handshake attempt if the DTLS server cannot successfully validate the cookie returned by the DTLS Client.
 
 *_Application Note {counter:appnote_count}_*
 
-_The process to validate the DTLS client is specified in section tbd of RFC tbd (DTLS 1.3), section 4.2.1 of RFC 6347 (DTLS 1.2) and RFC 4347 (DTLS 1.0). The TOE validates the DTLS client during Connection Establishment (Handshaking) and prior to the TSF sending a Server Hello message. After receiving a ClientHello, the DTLS Server sends a HelloRetryRequest message (DTLS 1.3)/HelloVerify message (DTLS 1.2/1.0) along with a cookie. The cookie is a signed message using the keyed hash function specified in FCS_COP.1/KeyedHash. The DTLS Client then sends another ClientHello with the cookie attached. If the DTLS server successfully verifies the signed cookie, the Client is not using a spoofed IP address._
+_The process to validate the DTLS client is specified in section 5.1 of RFC 9147 (DTLS 1.3) and section 4.2.1 of RFC 6347 (DTLS 1.2). The TOE validates the DTLS client during Connection Establishment (Handshaking) and prior to the TSF sending a Server Hello message. After receiving a ClientHello, the DTLS Server sends a HelloRetryRequest message (DTLS 1.3)/HelloVerify message (DTLS 1.2) along with a cookie. The cookie is a signed message using the keyed hash function specified in FCS_COP.1/KeyedHash. The DTLS Client then sends another ClientHello with the cookie attached. If the DTLS server successfully verifies the signed cookie, the Client is not using a spoofed IP address._
 
 *FCS_DTLSS_EXT.1.3* The TSF shall authenticate itself using X.509 certificate(s) using [selection: _RSA with key size [selection: 2048 bits, 3072 bits, 4096 bits]; ECDSA over NIST curves [selection: secp256r1, secp384r1, secp521r1] and no other curves_].
 
@@ -2363,7 +2355,7 @@ _The process to validate the DTLS client is specified in section tbd of RFC tbd 
 
 _The selected algorithms and key sizes must be consistent with FCS_COP.1/SigGen and FCS_CKM.1. NDcPP does not support raw public keys as defined in RFC8446._
 
-_If the ST includes DTLS 1.0 or DTLS 1.2 in FCS_DTLSS_EXT.1.1, the selected algorithms must be consistent with the ciphersuites selected in FCS_DTLSS_EXT.1.1._
+_If the ST includes DTLS 1.2 in FCS_DTLSS_EXT.1.1, the selected algorithms must be consistent with the ciphersuites selected in FCS_DTLSS_EXT.1.1._
 
 *FCS_DTLSS_EXT.1.4* The TSF shall perform key exchange using: [selection:
 
@@ -2384,7 +2376,7 @@ _The following table provides the ST author with instructions for completing the
 | |RSA key establishment... |EC Diffie-Hellman key agreement... |Diffie-Hellman key agreement...
 |DTLS 1.3 | N/A +
 DTLS 1.3 does not use RSA key establishment 2+| Shall select at least one +
-- If Diffie-Hellman is selected, at least one ffdhe group must be selected 
+- If Diffie-Hellman is selected, at least one ffdhe group must be selected
 |DTLS 1.2 with support for at least one TLS_RSA_WITH... ciphersuite |Shall select |N/A |N/A
 |DTLS 1.2 without support for any TLS_RSA_WITH... ciphersuite |Shall not select |N/A |N/A
 |DTLS 1.2 with support for at least one ECDHE ciphersuite |N/A |Shall select |N/A
@@ -2403,7 +2395,7 @@ _Subsequent versions of this cPP will require support for the Supported Groups e
 
 *_Application Note {counter:appnote_count}_*
 
-_The Message Authentication Code (MAC) is negotiated during DTLS handshake phase and is used to protect integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC (tbd - current draft for DTLS 1.3 is V38), section 4.5.2 and 4.1.2.7 in RFC 6347(DTLS 1.2)).  If MAC verification fails, the session must be terminated or the record must be silently discarded._
+_The Message Authentication Code (MAC) is negotiated during DTLS handshake phase and is used to protect integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC 9147, section 4.5.2 and 4.1.2.7 in RFC 6347(DTLS 1.2)).  If MAC verification fails, the session must be terminated or the record must be silently discarded._
 
 *FCS_DTLSS_EXT.1.6* The TSF shall detect and silently discard replayed messages for:
 
@@ -2413,7 +2405,7 @@ _The Message Authentication Code (MAC) is negotiated during DTLS handshake phase
 
 *_Application Note {counter:appnote_count}_*
 
-_Replay Detection is described in section 4.5.1 of DTLS 1.3 (RFC tbd, current draft version is V38), 4.1.2.6 of DTLS 1.2 (RFC 6347) and section 4.1.2.5 of DTLS 1.0 (RFC 4347).  For each received record, the receiver verifies the record contains a sequence number that is within the sliding receive window and does not duplicate the sequence number of any other record received during the session._
+_Replay Detection is described in section 4.5.1 of DTLS 1.3 (RFC 9147) and 4.1.2.6 of DTLS 1.2 (RFC 6347).  For each received record, the receiver verifies the record contains a sequence number that is within the sliding receive window and does not duplicate the sequence number of any other record received during the session._
 
 _"Silently Discard" means the TOE discards the packet without responding._
 
@@ -3044,7 +3036,7 @@ _The following table provides the ST author with instructions for completing the
 | |RSA key establishment... |EC Diffie-Hellman key agreement... |Diffie-Hellman key agreement...
 |TLS 1.3 | N/A +
 TLS 1.3 does not use RSA key establishment 2+| Shall select at least one +
-- If Diffie-Hellman is selected, at least one ffdhe group must be selected 
+- If Diffie-Hellman is selected, at least one ffdhe group must be selected
 |TLS 1.2 with support for at least one TLS_RSA_WITH... ciphersuite |Shall select |N/A |N/A
 |TLS 1.2 without support for any TLS_RSA_WITH... ciphersuite |Shall not select |N/A |N/A
 |TLS 1.2 with support for at least one ECDHE ciphersuite |N/A |Shall select |N/A
@@ -3522,10 +3514,10 @@ FIA_X509_EXT.1 X.509 Certificate Validation
 FIA_X509_EXT.2 X.509 Certificate Authentication
 
 
-*FCS_DTLSC_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC tbd), DTLS 1.2 (RFC 6347)] and [selection: DTLS 1.0 (RFC 4347), no additional DTLS version_] supporting the following ciphersuites:
+*FCS_DTLSC_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC 9147), DTLS 1.2 (RFC 6347)_] supporting the following ciphersuites:
 
 * [selection:
-** [.underline]#_select supported ciphersuites for DTLS 1.0 and 1.2 from List 1]_#
+** [.underline]#_select supported ciphersuites for DTLS 1.2 from List 1]_#
 ** [.underline]#_select supported ciphersuites for DTLS 1.3 from List 2] and no other ciphersuites_.#
 
 *FCS_DTLSC_EXT.1.2* The TSF shall verify that the presented identifier matches [selection: _the reference identifier per RFC 6125 section 6, IPv4 address in CN or SAN, IPv6 address in the CN or SAN, IPv4 address in SAN, IPv6 address in the SAN, the identifier per RFC 5280 Appendix A using [selection: id-at-commonName, id-at-countryName, id-at-dnQualifier, id-at-generationQualifier, id-at-givenName, id-at-initials, id-at-localityName, id-at-name, id-at-organizationalUnitName, id-at-organizationName, id-at-pseudonym, id-at-serialNumber, id-at-stateOrProvinceName, id-at-surname, id-at-title] and no other attribute types_].
@@ -3582,7 +3574,7 @@ _]._
 *FCS_DTLSC_EXT.1.7* The TSF shall prohibit the use of the following extensions:
 
 * Early data extension
-* post-handshake client authentication according to RFC(tbd- current draft for DTLS 1.3 is V38), section 5.7.3.
+* post-handshake client authentication according to RFC 9147, section 5.8.4.
 
 *FCS_DTLSC_EXT.1.8* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
 
@@ -3672,10 +3664,10 @@ FIA_X509_EXT.1 X.509 Certificate Validation
 FIA_X509_EXT.2 X.509 Certificate Authentication
 
 
-*FCS_DTLSS_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC tbd), DTLS 1.2 (RFC 6347)_] and [selection: _DTLS 1.0 (RFC 4347), no additional DTLS version_] supporting the following ciphersuites:
+*FCS_DTLSS_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC 9147), DTLS 1.2 (RFC 6347)_] supporting the following ciphersuites:
 
 * [selection:
-** _select supported ciphersuites for DTLS 1.0/1.2 from List 1_
+** _select supported ciphersuites for DTLS 1.2 from List 1_
 ** _select supported ciphersuites for DTLS 1.3 from List 2_
 
 +
