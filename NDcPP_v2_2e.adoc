@@ -1970,13 +1970,13 @@ A TOE may act as the client, the server, or both in TLS sessions. The requiremen
 
 _The use of X.509v3 certificates for TLS is addressed in FIA_X509_EXT.2.1. This requirement adds that the client must be capable of presenting a certificate to a TLS server for TLS mutual authentication._
 
-*FCS_TLSC_EXT.3 TLS Client Support for renegotiation (TLSv1.1/v1.2 only)*
+*FCS_TLSC_EXT.3 TLS Client Support for renegotiation (TLSv1.2 only)*
 
 *FCS_TLSC_EXT.3.1* The product shall support secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746.
 
 *_Application Note {counter:appnote_count}_*
 
-_This component may only be claimed for TLSv1.1 and TLSv1.2 but not TLSv1.3._
+_This component may only be claimed for TLSv1.2 but not TLSv1.3._
 
 _RFC 5746 defines an extension to TLS that binds renegotiation handshakes to the cryptography in the original handshake._
 
@@ -2024,10 +2024,6 @@ _The client identifier may be in the Subject field or the Subject Alternative Na
 
 *FCS_TLSS_EXT.2.4* The TSF shall [selection:
 
-* _present a TLS1.1 Certificate Request message containing the following ClientCertificateTypes: [selection:_
-** _rsa_sign,_
-** _ecdsa_sign,_
-** _] and no other ClientCertificateTypes;_
 * _present a [selection: TLSv1.2, TLSv1.3] Certificate Request message containing the following algorithms: [selection:_
 ** _rsa_pkcs1 with sha256(0x0401),_
 ** _rsa_pkcs1 with sha384(0x0501),_
@@ -2052,7 +2048,7 @@ _The TLS 1.2 Certificate Request message includes the algorithms as a list of  S
 
 _The TLS 1.3 Certificate Request message includes the algorithms as a list of SignatureSchemes in the signature_algorithms extension._
 
-*FCS_TLSS_EXT.3 TLS Server Support for renegotiation (TLSv1.1/v1.2 only)*
+*FCS_TLSS_EXT.3 TLS Server Support for renegotiation (TLSv1.2 only)*
 
 *FCS_TLSS_EXT.3.1* The product shall support the "renegotiation_info" TLS extension in accordance with RFC 5746.
 
@@ -2060,7 +2056,7 @@ _The TLS 1.3 Certificate Request message includes the algorithms as a list of Si
 
 *_Application Note {counter:appnote_count}_*
 
-_This component may only be claimed for TLSv1.1 and TLSv1.2 but not TLSv1.3._
+_This component may only be claimed for TLSv1.2 but not TLSv1.3._
 
 _RFC 5746 defines an extension to TLS that binds renegotiation handshakes to the cryptography in the original handshake._
 
@@ -2184,7 +2180,7 @@ To ensure audit requirements are properly met, a DTLS receiver may need to monit
 
 If the TOE acts as the server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSS_EXT requirements. In this case the TOE needs to claim at least the FCS_DTLSS_EXT.1 requirements in chap. B.3.1.1 (no support for mutual authentication). If the TOE acts as DTLS server and in addition also supports mutual authentication, the FCS_DTLSS_EXT.2 requirements in chap. A.7.1.1 need to be claimed in addition. If the TOE acts as both a client and server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSC_EXT and FCS_DTLSS_EXT requirements.
 
-Due to the structural differences between TLSv1.1/v1.2 on the one hand and TLSv1.3 on the other hand, some of the requirements are separated. The lists of DTLS-/TLS-related ciphersuites, for example, are kept separately as follows.
+Due to the structural differences between TLSv1.2 on the one hand and TLSv1.3 on the other hand, some of the requirements are separated. The lists of DTLS-/TLS-related ciphersuites, for example, are kept separately as follows.
 
 *FCS_DTLSC_EXT.1 DTLS Client Protocol*
 
@@ -2792,9 +2788,9 @@ A TOE may act as the client, the server, or both in TLS sessions. The requiremen
 
 Additionally, TLS may or may not be performed with client authentication. The ST author shall claim FCS_TLSC_EXT.1 and/or FCS_TLSS_EXT.1 if the TOE does not support client authentication. The ST author should claim FCS_TLSC_EXT.2 and/or FCS_TLSS_EXT.2 if client authentication is performed by the TOE.
 
-Due to the structural differences between TLSv1.1/v1.2 on the one hand and TLSv1.3 on the other hand, some of the requirements are separated. The lists of DTLS-/TLS-related ciphersuites, for example, are kept separately as follows.
+Due to the structural differences between TLSv1.2 on the one hand and TLSv1.3 on the other hand, some of the requirements are separated. The lists of DTLS-/TLS-related ciphersuites, for example, are kept separately as follows.
 
-The following list contains all DTLS-/TLS-related ciphersuites supported by this cPP for TLSv1.1 and/or TLSv1.2.
+The following list contains all DTLS-/TLS-related ciphersuites supported by this cPP for TLSv1.2.
 
 * _[.underline]#TLS_RSA_WITH_AES_128_CBC_SHA as defined in RFC 3268#_
 * _[.underline]#TLS_RSA_WITH_AES_256_CBC_SHA as defined in RFC 3268#_
@@ -2821,7 +2817,7 @@ The following list contains all DTLS-/TLS-related ciphersuites supported by this
 * _[.underline]#TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 as defined in RFC 5289#_
 * _[.underline]#TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 as defined in RFC 5289#_
 
-_List 1: List of supported TLS-related ciphersuites for TLSv1.1 and/or TLSv1.2_
+_List 1: List of supported TLS-related ciphersuites for TLSv1.2_
 
 The following list contains all DTLS-/TLS-related ciphersuites supported by this cPP for TLSv1.3.
 
@@ -2835,11 +2831,11 @@ _List 2: List of supported TLS-related ciphersuites for TLSv1.3_
 
 *FCS_TLSC_EXT.1 TLS Client Protocol*
 
-*FCS_TLSC_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [selection:  _TLS 1.1 (RFC 4346), no additional TLS version_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
+*FCS_TLSC_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [assignment:  _no additional TLS version_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
 
 [selection:
 
-* [.underline]#_select supported ciphersuites for TLSv1.1 and/or TLSv1.2 from List 1_#
+* [.underline]#_select supported ciphersuites for TLSv1.2 from List 1_#
 
 * [.underline]#_select supported ciphersuites for TLSv1.3 from List 2_#
 
@@ -2847,7 +2843,7 @@ _List 2: List of supported TLS-related ciphersuites for TLSv1.3_
 
 *_Application Note {counter:appnote_count}_*
 
-_The ciphersuites to be tested in the evaluated configuration are limited by this requirement and must be selected from the ciphersuites defined in List 1 (TLSv1.1/v1.2) and List 2 (TLSv1.3), respectively. The ST author should select the ciphersuites that are supported. Even though RFC 5246 mandates implementation of specific ciphers for TLSv1.2 this cPP depreciates use of SHA-1. Support for TLS_RSA_WITH_AES_128_CBC_SHA is not claimed in order to claim conformance to this cPP._
+_The ciphersuites to be tested in the evaluated configuration are limited by this requirement and must be selected from the ciphersuites defined in List 1 (TLSv1.2) and List 2 (TLSv1.3), respectively. The ST author should select the ciphersuites that are supported. Even though RFC 5246 mandates implementation of specific ciphers for TLSv1.2 this cPP depreciates use of SHA-1. Support for TLS_RSA_WITH_AES_128_CBC_SHA is not claimed in order to claim conformance to this cPP._
 
 _These requirements will be revisited as new TLS versions are standardized by the IETF._
 
@@ -2982,11 +2978,11 @@ _The use of out-of-band provisioned pre-shared keys creates a potential security
 
 *FCS_TLSS_EXT.1 TLS Server Protocol*
 
-*FCS_TLSS_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [selection: _TLS 1.1 (RFC 4346), no additional TLS version_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
+*FCS_TLSS_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [assignment: _no additional TLS version_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
 
 [selection:
 
-* _select supported ciphersuites for TLSv1.1 and/or TLSv1.2 from List 1_
+* _select supported ciphersuites for TLSv1.2 from List 1_
 
 * _select supported ciphersuites for TLSv1.3 from List 2_
 
@@ -3013,7 +3009,7 @@ _The TOE shall not negotiate sessions using any of the SSL versions as well as T
 
 _The selected algorithms and key sizes must be consistent with FCS_COP.1/SigGen and FCS_CKM.1. NDcPP does not support raw public keys as defined in RFC8446._
 
-_If the ST includes TLS 1.1 or TLS 1.2 in FCS_TLSS_EXT.1.1, the selected algorithms must be consistent with the ciphersuites selected in FCS_TLSS_EXT.1.1._
+_If the ST includes TLS 1.2 in FCS_TLSS_EXT.1.1, the selected algorithms must be consistent with the ciphersuites selected in FCS_TLSS_EXT.1.1._
 
 *FCS_TLSS_EXT.1.3* The TSF shall perform key exchange using: [selection:
 
@@ -4136,11 +4132,11 @@ FIA_X509_EXT.1 X.509 Certificate Validation
 FIA_X509_EXT.2 X.509 Certificate Authentication
 
 
-*FCS_TLSC_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [selection: _TLS 1.1 (RFC 4346), no additional TLS version_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
+*FCS_TLSC_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [assingment: _no additional TLS version_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
 
 [selection:
 
-* [.underline]#_select supported ciphersuites for TLSv1.1 and/or TLSv1.2 from List 1_#
+* [.underline]#_select supported ciphersuites for TLSv1.2 from List 1_#
 
 * [.underline]#_select supported ciphersuites for TLSv1.3 from List 2_#
 
@@ -4230,7 +4226,7 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 *FCS_TLSC_EXT.2.1* The TSF shall support TLS communication with mutual authentication using X.509v3 certificates.
 
-*FCS_TLSC_EXT.3 TLS Client Support for renegotiation (TLSv1.1/v1.2 only)*
+*FCS_TLSC_EXT.3 TLS Client Support for renegotiation (TLSv1.2 only)*
 
 
 Hierarchical to: No other components
@@ -4310,11 +4306,11 @@ FIA_X509_EXT.1 X.509 Certificate Validation
 FIA_X509_EXT.2 X.509 Certificate Authentication
 
 
-*FCS_TLSS_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [selection: _TLS 1.1 (RFC 4346, no additional TLS version)_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
+*FCS_TLSS_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and [assignment: _no additional TLS version)_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
 
 [selection:
 
-* _select supported ciphersuites for TLSv1.1 and/or TLSv1.2 from List 1_
+* _select supported ciphersuites for TLSv1.2 from List 1_
 * _select supported ciphersuites for TLSv1.3 from List 2_
 
 ] and no other ciphersuites.
@@ -4384,10 +4380,6 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 *FCS_TLSS_EXT.2.4* The TSF shall [selection:
 
-* _present a TLS1.1 Certificate Request message containing the following ClientCertificateTypes: [selection:_
-** _rsa_sign,_
-** _ecdsa_sign,_
-** _] and no other ClientCertificateTypes;_
 * _present a [selection: TLSv1.2, TLSv1.3] Certificate Request message containing the following algorithms: [selection:_
 ** _rsa_pkcs1 with sha256(0x0401),_
 ** _rsa_pkcs1 with sha384(0x0501),_
@@ -4404,7 +4396,7 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 ** _] and no other algorithms;_ +
 _]._
 
-*FCS_TLSS_EXT.3 TLS Server Support for renegotiation (TLSv1.1/v1.2 only)*
+*FCS_TLSS_EXT.3 TLS Server Support for renegotiation (TLSv1.2 only)*
 
 Hierarchical to: No other components
 
