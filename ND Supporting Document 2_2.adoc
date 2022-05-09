@@ -1727,7 +1727,7 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 
 [arabic, start=339]
 . The evaluator shall perform the following tests:
-. . Test 1 [conditional]: If “present a [selection: TLS 1.2, TLS 1.3] Certificate Request message” is selected, the evaluator shall perform the following tests for each selected version of TLS:
+. Test 1 [conditional]: If “present a [selection: TLS 1.2, TLS 1.3] Certificate Request message” is selected, the evaluator shall perform the following tests for each selected version of TLS:
 [loweralpha]
 .. The evaluator shall examine the Certificate Request message. The evaluator shall verify that the SignatureAndHashAlgorithms (TLS 1.2) or the SignatureSchemes (TLS 1.3) match the SignatureAndHashAlgorithms specified in the requirement.
 .. The evaluator shall establish a connection and authenticate the client using each selected SignatureAndHashAlgorithm. The evaluator shall verify the connection succeeds.
