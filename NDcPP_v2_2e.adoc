@@ -378,7 +378,6 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FIA_AFL.1 |Authentication Failure Management |One
 |FIA_PMG_EXT.1 |Password Management |One
 |FIA_UIA_EXT.1 |User Identification and Authentication |One
-|FIA_UAU_EXT.2 |Password-based Authentication Mechanism |One
 |FIA_UAU.7 |Protected Authentication Feedback |Feature Dependent
 |FIA_X509_EXT.1/Rev |X.509 Certification Validation |Feature Dependent
 |FIA_X509_EXT.1/ITT |X.509 Certification Validation |Feature Dependent
@@ -437,11 +436,11 @@ SFR Rationale:
 
 * The Administrator role is defined in FMT_SMR.2 and the relevant administration capabilities are defined in FMT_SMF.1 and FMT_MTD.1/CoreData, with optional additional capabilities in FMT_MOF.1/Services and FMT_MOF.1/Functions
 * The actions allowed before authentication of an Administrator are constrained by FIA_UIA_EXT.1, and include the advisory notice and consent warning message displayed according to FTA_TAB.1
-* The requirement for the Administrator authentication process is described in FIA_UAU_EXT.2
+* The requirement for the Administrator authentication process is described in FIA_UIA_EXT.1
 * Locking of Administrator sessions is ensured by FTA_SSL_EXT.1 (for local sessions), FTA_SSL.3 (for remote sessions), and FTA_SSL.4 (for all interactive sessions)
 * The secure channel used for remote Administrator connections is specified in FTP_TRP.1/Admin
 * (Malicious actions carried out from an Administrator session are separately addressed by T.UNDETECTED_ACTIVITY)
-* (Protection of the Administrator credentials is separately addressed by T.PASSWORD_CRACKING).
+* If the TOE provides remote administration using a password-based authentication mechanism, FIA_AFL.1 provides actions on reaching a threshold number of consecutive password failures.
 
 ===== T.WEAK_CRYPTOGRAPHY
 
@@ -516,25 +515,15 @@ Lack of secure storage and improper handling of credentials and data, such as un
 
 ===== T.SECURITY_FUNCTIONALITY_COMPROMISE
 
-Threat agents may compromise credentials and device data enabling continued access to the Network Device and its critical data. The compromise of credentials includes replacing existing credentials with an attacker’s credentials, modifying existing credentials, or obtaining the Administrator or device credentials for use by the attacker.
+Threat agents may compromise credentials and device data enabling continued access to the Network Device and its critical data. The compromise of credentials includes replacing existing credentials with an attacker’s credentials, modifying existing credentials, or obtaining the Administrator or device credentials for use by the attacker.  Threat agents may also be able to take advantage of weak administrative passwords to gain privileged access to the device.
 
 SFR Rationale:
 
 * Protection of secret/private keys against compromise is specified in FPT_SKP_EXT.1
 * Secure destruction of keys is specified in FCS_CKM.4
 * If (optionally) management of keys is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MTD.1/CryptoKeys
-* (Protection of passwords is separately covered under T.PASSWORD_CRACKING)
-
-===== T.PASSWORD_CRACKING
-
-Threat agents may be able to take advantage of weak administrative passwords to gain privileged access to the device. Having privileged access to the device provides the attacker unfettered access to the network traffic and may allow them to take advantage of any trust relationships with other Network Devices.
-
-SFR Rationale:
-
-* Requirements for password lengths and available characters are set in FIA_PMG_EXT.1
-* Protection of password entry by providing only obscured feedback is specified in FIA_UAU.7
-* Actions on reaching a threshold number of consecutive password failures are specified in FIA_AFL.1
-* Requirements for secure storage of passwords are set in FPT_APW_EXT.1.
+* If optional local administration using a password-based authentication mechanism is provided by the TOE, FIA_UAU.7 provides protection of password entry by providing only obscured feedback at the local console.
+* If the TOE provides password-based authentication mechanisms, requirements for password lengths and available characters are set in FIA_PMG_EXT.1.  Requirements for secure storage of passwords are set in FPT_APW_EXT.1
 
 ==== Device Failure
 
@@ -774,8 +763,7 @@ Loss of communication with the audit server is problematic. While there are seve
 * Administrative login and logout (name of user account shall be logged if individual user accounts are required for Administrators).
 * Changes to TSF data related to configuration changes (in addition to the information that a change occurred it shall be logged what has been changed).
 * Generating/import of, changing, or deleting of cryptographic keys (in addition to the action itself a unique key name or key reference shall be logged).
-* Resetting passwords (name of related user account shall be logged).
-* [selection: no other actions, [assignment: [list of other uses of privileges]]];
+* [selection: Resetting passwords (name of related user account shall be logged), no other actions, [assignment: [list of other uses of privileges]]];
 . _Specifically defined auditable events listed in_ _Table 2_.
 
 *_Application Note {counter:appnote_count}_*
@@ -820,22 +808,15 @@ _The ST author replaces the cross-reference to the table of audit events with an
 |FCS_COP.1/Hash |None. |None.
 |FCS_COP.1/KeyedHash |None. |None.
 |FCS_RBG_EXT.1 |None. |None.
-|FIA_AFL.1 |Unsuccessful login attempts limit is met or exceeded. |Origin of the attempt (e.g., IP address).
-|FIA_PMG_EXT.1 |None. |None.
-|FIA_UIA_EXT.1 |All use of identification and authentication mechanism. |Origin of the attempt (e.g., IP address).
-|FIA_UAU_EXT.2 |All use of identification and authentication mechanism. |Origin of the attempt (e.g., IP address).
-|FIA_UAU.7 |None. |None.
+|FIA_UIA_EXT.1 |All use of identification and authentication mechanisms. |Origin of the attempt (e.g., IP address).
 |FMT_MOF.1/ManualUpdate |Any attempt to initiate a manual update |None.
 |FMT_MTD.1/CoreData |None. |None.
 |FMT_SMF.1 |All management activities of TSF data. |None.
 |FMT_SMR.2 |None. |None.
 |FPT_SKP_EXT.1 |None. |None.
-|FPT_APW_EXT.1 |None. |None.
 |FPT_TST_EXT.1 |None. |None.
 |FPT_TUD_EXT.1 |Initiation of update; result of the update attempt (success or failure) |None.
 |FPT_STM_EXT.1 |Discontinuous changes to time - either Administrator actuated or changed via an automated process. (Note that no continuous changes to time need to be logged. See also application note on FPT_STM_EXT.1) |For discontinuous changes to time: The old and new values for the time. Origin of the attempt to change time for success and failure (e.g., IP address).
-|FTA_SSL_EXT.1 (if “lock the session” is selected) |Any attempts at unlocking of an interactive session. |None.
-|FTA_SSL_EXT.1 (if “terminate the session” is selected) |The termination of a local session by the session locking mechanism. |None.
 |FTA_SSL.3 |The termination of a remote session by the session locking mechanism. |None.
 |FTA_SSL.4 |The termination of an interactive session. |None.
 |FTA_TAB.1 |None. |None.
@@ -1060,41 +1041,7 @@ _If the key length for the AES implementation used here is different than that u
 
 === Identification and Authentication (FIA)
 
-In order to provide a trusted means for Administrators to interact with the TOE, the TOE provides a password-based logon mechanism. The Administrator must have the capability to compose a strong password and have mechanisms in place so that the password must be changed regularly. To avoid attacks where an attacker might observe a password being typed by an Administrator, passwords must be obscured during logon. Session locking or termination must also be implemented to mitigate the risk of an account being used illegitimately. Passwords must be stored in an obscured form, and there must be no interface provided for specifically reading the password or password file such that the passwords are displayed in plain text.
-
-==== Authentication Failure Management (FIA_AFL)
-
-===== FIA_AFL.1 Authentication Failure Management (Refinement)
-
-*FIA_AFL.1 Authentication Failure Management*
-
-*FIA_AFL.1.1* The TSF shall detect when an Administrator configurable positive integer within _[assignment: range of acceptable values]_ unsuccessful authentication attempts occur related to _Administrators attempting to authenticate remotely using a password_.
-
-*FIA_AFL.1.2* When the defined number of unsuccessful authentication attempts has been +++<u>+++met+++</u>+++, the TSF shall [selection: _prevent the offending Administrator from successfully establishing a remote session using any authentication method that involves a password until_ _[assignment: action to unlock] is taken by an Administrator; prevent the offending Administrator from successfully establishing a remote session using any authentication method that involves a password until an Administrator defined time period has elapsed]_.
-
-*_Application Note {counter:appnote_count}_*
-
-_This requirement applies to a defined number of successive unsuccessful remote password-based authentication attempts and does not apply to local Administrative access, since it does not make sense to lock a local Administrator’s account in this fashion. Compliant TOEs may optionally include cryptographic authentication failures and/or local authentication failures in the number of unsuccessful authentication attempts. This could be addressed by (for example) requiring a separate account for local Administrators or having the authentication mechanism implementation distinguish local and remote login attempts. The ‘action’ taken by a local Administrator is implementation specific and would be defined in the Administrator guidance (for example, lockout reset, or password reset). The ST author chooses one or both of the selections for handling of authentication failures depending on how the TOE has implemented this handler._
-
-_The TSS describes how the TOE ensures that authentication failures by remote Administrators cannot lead to a situation where no Administrator access is available, either permanently or temporarily (e.g. by providing local logon which is not subject to blocking). The Operational Guidance describes, and identifies the importance of, any actions that are required in order to ensure that Administrator access will always be maintained, even if remote administration is made permanently or temporarily unavailable due to blocking of accounts as a result of FIA_AFL.1._
-
-==== Password Management (Extended – FIA_PMG_EXT)
-
-===== FIA_PMG_EXT.1 Password Management
-
-*FIA_PMG_EXT.1 Password Management*
-
-*FIA_PMG_EXT.1.1* The TSF shall provide the following password management capabilities for administrative passwords:
-
-[loweralpha]
-. Passwords shall be able to be composed of any combination of upper and lower case letters, numbers and the following special characters: [selection: _"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", [assignment: other characters]_];
-. Minimum password length shall be _configurable to between [assignment: minimum number of characters supported by the TOE] and [assignment: number of characters greater than or equal to 15] characters._
-
-*_Application Note {counter:appnote_count}_*
-
-_The ST author selects the special characters that are supported by the TOE. They may optionally list additional special characters supported using the assignment. "Administrative passwords" refers to passwords used by Administrators at the local console, over protocols that support passwords, such as SSH and HTTPS, or to grant configuration data that supports other SFRs in the Security Target._
-
-_The second assignment should be configured with the largest minimum password length the Security Administrator can configure._
+In order to provide a trusted means for Administrators to interact with the TOE, the TOE provides an identification and authentication mechanism.
 
 ==== User Identification and Authentication (Extended – FIA_UIA_EXT)
 
@@ -1113,37 +1060,25 @@ _The second assignment should be configured with the largest minimum password le
 
 _This requirement applies to users (Administrators and external IT entities) of services available from the TOE directly, and not services available by connecting through the TOE. While it should be the case that few or no services are available to external entities prior to identification and authentication, if there are some available (perhaps ICMP echo) these should be listed in the assignment statement; if automated generation of cryptographic keys is supported without administrator authentication, the option "automated generation of cryptographic keys" should be selected; otherwise the option “no other actions” should be selected._
 
-_Authentication can be password-based through the local console or through a protocol that supports passwords (such as SSH), or be certificate based (such as SSH, TLS)._
+*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate, [assignment: other authentication mechanism]]_ and local authentication mechanisms [selection: _none, password-based, [assignment: other authentication mechanism]]_.
+
+*_Application Note {counter:appnote_count}_*
+
+_The TOE must support at least one remote authentication mechanism. Remote authentication mechanisms are defined as those that occur using a cryptographic protocol specified in FTP_TRP.1/Admin.   Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console.  See Application Note 22 for examples of compliant local administrative interfaces._
+
+_The ST author selects the authentication mechanisms necessary to support remote administration.  If "Web GUI password" or "SSH password" is selected for remote authentication mechanism the ST author specifies an appropriate cryptographic protocol in FTP_TRP.1/Admin (e.g., "HTTPS" or "SSH") and includes FIA_AFL.1, FIA_PMG_EXT.1, FPT_APW_EXT.1 from Appendix B._
+
+_The ST author selects "X.509 certificate" if the TOE supports X.509 certificate authentication of the remote endpoint and an appropriate cryptographic protocol is specified in FTP_TRP.1/Admin and included from Appendix B.  For example, if "X.509 certificate" is selected, the ST author specifies "HTTPS" in FTP_TRP.1/Admin and includes FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication) from Appendix B._
+
+_If the optional selection of "Ability to administer the TOE locally" is specified in FMT_SMF.1 the ST author selects "password-based" local authentication mechanism and includes FIA_PMG_EXT.1 and FPT_APW_EXT.1 from Appendix B.  Alternatively, the ST author may complete the assignment operation to specify a local authentication mechanism that is non-password based._
 
 _For communications with external IT entities (an audit server, for instance), such connections must be performed in accordance with FTP_ITC.1, whose protocols perform identification and authentication. This means that such communications (e.g., establishing the IPsec connection to the authentication server) would not have to be specified in the assignment, since establishing the connection ‘counts’ as initiating the identification and authentication process._
 
-_According to the application note for FMT_SMR.2, for distributed TOEs at least one TOE component has to support the authentication of Security Administrators according to FIA_UIA_EXT.1 and FIA_UAU_EXT.2 but not necessarily all TOE components. In case not all TOE components support this way of authentication for Security Administrators the TSS must describe how Security Administrators are authenticated and identified._
-
-==== User authentication (FIA_UAU) (Extended – FIA_UAU_EXT)
-
-===== FIA_UAU_EXT.2 Password-based Authentication Mechanism
-
-*FIA_UAU_EXT.2 Password-based Authentication Mechanism*
-
-*FIA_UAU_EXT.2.1* The TSF shall provide a local [selection: _password-based, SSH public key-based, certificate-based, [assignment: other authentication mechanism(s)]_] authentication mechanism to perform local administrative user authentication.
+*FIA_UIA_EXT.1.4* The TSF shall authenticate any administrative user's claimed identity according to each authentication mechanism specified in FIA_UIA_EXT.1.3.
 
 *_Application Note {counter:appnote_count}_*
 
-_The assignment should be used to identify any additional local authentication mechanisms supported. Local authentication mechanisms are defined as those that occur through the local console; remote administrative sessions (and their associated authentication mechanisms) are specified in FTP_TRP.1/Admin._
-
-_According to the application note for FMT_SMR.2, for distributed TOEs at least one TOE component has to support the authentication of Security Administrators according to FIA_UIA_EXT.1 and FIA_UAU_EXT.2 but not necessarily all TOE components. In case not all TOE components support this way of authentication for Security Administrators the TSS must describe how Security Administrators are authenticated and identified._
-
-_SSH public key-based and certificate-based authentication mechanisms can only be selected when an appropriate cryptographic protocol is used to provide local administrative access._
-
-===== FIA_UAU.7 Protected Authentication Feedback
-
-*FIA_UAU.7 Protected Authentication Feedback*
-
-*FIA_UAU.7.1* The TSF shall provide only _obscured feedback_ to the administrative user while the authentication is in progress *at the local console*.
-
-*_Application Note {counter:appnote_count}_*
-
-_‘Obscured feedback’ implies the TSF does not produce a visible display of any authentication data entered by a user (such as the echoing of a password), although an obscured indication of progress may be provided (such as an asterisk for each character). It also implies that the TSF does not return any information during the authentication process to the user that may provide any indication of the authentication data._
+_According to the application note for FMT_SMR.2, for distributed TOEs at least one TOE component has to support the authentication of Security Administrators according to FIA_UIA_EXT.1.3 and FIA_UIA_EXT.1.4 but not necessarily all TOE components. In case not all TOE components support this way of authentication for Security Administrators the TSS must describe how Security Administrators are authenticated and identified._
 
 === Security Management (FMT)
 
@@ -1185,11 +1120,10 @@ _The word ‘manage’ includes but is not limited to create, initialize, view, 
 
 *FMT_SMF.1.1* The TSF shall be capable of performing the following management functions:
 
-* _Ability to administer the TOE locally and remotely;_
+* _Ability to administer the TOE remotely;_
 * _Ability to configure the access banner;_
-* _Ability to configure the session inactivity time before session termination or locking;_
+* _Ability to configure the remote session inactivity time before session termination;_
 * _Ability to update the TOE, and to verify the updates using_ [selection: _digital signature, hash comparison_] _capability prior to installing those updates;_
-* _Ability to configure the authentication failure parameters for FIA_AFL.1;_
 * [selection:
 ** _Ability to start and stop services;_
 ** _Ability to configure audit behaviour (e.g. changes to storage locations for audit; changes to behaviour when local audit storage space is full);_
@@ -1207,18 +1141,21 @@ _The word ‘manage’ includes but is not limited to create, initialize, view, 
 ** _Ability to configure the reference identifier for the peer;_
 ** _Ability to manage the TOE's trust store and designate X509.v3 certificates as trust anchors;_
 ** _Ability to import X.509v3 certificates to the TOE's trust store;_
+** _Ability to administer the TOE locally;_
+** _Ability to configure the local session inactivity time before session termination or locking;_
+** _Ability to configure the authentication failure parameters for FIA_AFL.1;_
 ** _No other capabilities_].
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE must provide functionality for both local and remote administration in general. However, this cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Local administration is defined as administration using a dedicated physical interface that (from the TOE’s point of view) is directly connected to the device(s) the administrator interacts with and therefore falls under the physical protection (OE.PHYSICAL). Any administrator choice to extend a local console so it is remotely accessible (e.g. console server or remote KVM) is outside the scope of the NDcPP. The following are examples of compliant local administrative interfaces:_
+_The TOE must provide functionality for remote administration. Local administration is optional.  This cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Remote administrative sessions are specified in FTP_TRP.1/Admin.  Local administration is defined as administration using a dedicated physical interface that (from the TOE’s point of view) is directly connected to the device(s) the administrator interacts with and therefore falls under the physical protection (OE.PHYSICAL). Any administrator choice to extend a local console so it is remotely accessible (e.g. console server or remote KVM) is outside the scope of the NDcPP. The following are examples of compliant local administrative interfaces:_
 
 [loweralpha]
 . _RS-232 terminal._
 . _Peripherals (e.g. keyboard, monitor, mouse)._
-. _Use of a dedicated Ethernet port that only supports communication with a whitelisted local IP address. Guidance shall provide instructions for configuring the whitelisted IP address as well as ensuring physical protection from the TOE to the IP address. The management protocol does not need to meet FTP_TRP.1/Admin; however, the appropriate authentication must be claimed in FIA_UAU_EXT.2. Note: A local management protocol that does not meet FTP_TRP.1/Admin shall not be available on any other network ports._
+. _Use of a dedicated Ethernet port that only supports communication with a whitelisted local IP address. Guidance shall provide instructions for configuring the whitelisted IP address as well as ensuring physical protection from the TOE to the IP address. The management protocol does not need to meet FTP_TRP.1/Admin; however, the appropriate authentication must be claimed in FIA_UIA_EXT.1.3. Note: A local management protocol that does not meet FTP_TRP.1/Admin shall not be available on any other network ports._
 
-_The TOE must provide functionality to configure the access banner for FTA_TAB.1 and the session inactivity time(s) for FTA_SSL_EXT.1 and FTA_SSL.3._
+_The TOE must provide functionality to configure the access banner for FTA_TAB.1 and the session inactivity time(s) for FTA_SSL.3 and FTA_SSL_EXT.1 if "Ability to administer the TOE locally" is selected._
 
 _The option “Ability to update the TOE, and to verify the updates using digital signature capability prior to installing those updates” includes the relevant management functions from FMT_MOF.1/ManualUpdate and FPT_TUD_EXT.1. Based on selections in FPT_TUD_EXT.1.2, FMT_MOF.1/AutoUpdate must be included if the option “Ability to enable or disable automatic checking for updates or automatic updates” is included in the ST. Similarly, the selection “Ability to configure audit behaviour” includes the relevant management functions from FMT_MOF.1/Services and FMT_MOF.1/Functions, (for all of these SFRs that are included in the ST) and is intended to cover security relevant configuration options (if any) to the audit behaviour (like changes to the behaviour when the local audit storage space is full)). The option "Ability to modify the behaviour of the transmission of audit data to an external IT entity" is intended to cover the management functionalities related to the transmission of local audit information to an external IT entity._
 
@@ -1264,18 +1201,17 @@ _For distributed TOEs that implement a registration channel (as described in FCO
 
 *FMT_SMR.2.3 The TSF shall ensure that the conditions*
 
-* _The Security Administrator role shall be able to administer the TOE locally;_
 * _The Security Administrator role shall be able to administer the TOE remotely_
 
 are satisfied.
 
 *_Application Note {counter:appnote_count}_*
 
-_FMT_SMR.2.3 requires that a Security Administrator be able to administer the TOE through the local console and through a remote mechanism. See Application Note 24 for the definition of local vs. remote administration. The ST Author must select FTP_ITC.1, FPT_ITT.1 and/or FTP_TRP.1/Admin to demonstrate how secure communication is achieved._
+_FMT_SMR.2.3 requires that a Security Administrator be able to administer the TOE through a remote mechanism. See Application Note 18 for the definition of remote administration._
 
-_For distributed TOEs not every TOE component is required to implement its own user management to fulfil this SFR. At least one component has to support authentication and identification of Security Administrators according to FIA_UIA_EXT.1 and FIA_UAU_EXT.2. For the other TOE components authentication as Security Administrator can be realized through the use of a trusted channel (either according to FTP_ITC.1 or FPT_ITT.1) from a component that supports the authentication of Security Administrators according to FIA_UIA_EXT.1 and FIA_UAU_EXT.2. The identification of users according to FIA_UIA_EXT.1.2 and the association of users with roles according to FMT_SMR.2.2 is done through the components that support the authentication of Security Administrators according to FIA_UIA_EXT.1 and FIA_UAU_EXT.2. TOE components that authenticate Security Administrators through the use of a trusted channel are not required to support local administration of the component as defined in FMT_SMR.2.3._
+_For distributed TOEs not every TOE component is required to implement its own user management to fulfil this SFR. At least one component has to support authentication and identification of Security Administrators according to FIA_UIA_EXT.1. For the other TOE components authentication as Security Administrator can be realized through the use of a trusted channel (either according to FTP_ITC.1 or FPT_ITT.1) from a component that supports the authentication of Security Administrators according to FIA_UIA_EXT.1. The identification of users according to FIA_UIA_EXT.1.2 and the association of users with roles according to FMT_SMR.2.2 is done through the components that support the authentication of Security Administrators according to FIA_UIA_EXT.1.4. TOE components that authenticate Security Administrators through the use of a trusted channel are not required to support local administration of the component._
 
-_A single user associated with the Security Administrator role does not necessarily have to be able to perform all security management functions defined in FMT_SMF.1 and does not necessarily have to able to perform local and remote administration. All users associated with the Security Administrator role together need to be able to perform all security management functions defined in FMT_SMF.1 (mandatory and selected ones) and need to be able to perform local and remote administration._
+_A single user associated with the Security Administrator role does not necessarily have to be able to perform all security management functions defined in FMT_SMF.1 and does not necessarily have to able to perform local administration. All users associated with the Security Administrator role together need to be able to perform all security management functions defined in FMT_SMF.1 (mandatory and selected ones) and need to be able to perform remote administration._
 
 _This implies that a user that can perform only a single security management function defined in FMT_SMF.1 needs to be regarded as Security Administrator of the TOE._
 
@@ -1294,22 +1230,6 @@ This section defines requirements for the TOE to protect critical security data 
 *_Application Note {counter:appnote_count}_*
 
 _The intent of this requirement is for the device to protect keys, key material, and authentication credentials from unauthorized disclosure. This data should only be accessed for the purposes of their assigned security functionality, and there is no need for them to be displayed/accessed at any other time. This requirement does not prevent the device from providing indication that these exist, are in use, or are still valid. It does, however, restrict the reading of the values outright._ 
-
-==== Protection of Administrator Passwords (Extended – FPT_APW_EXT)
-
-===== FPT_APW_EXT.1 Protection of Administrator Passwords
-
-*FPT_APW_EXT.1 Protection of Administrator Passwords*
-
-*FPT_APW_EXT.1.1* The TSF shall store administrative passwords in non-plaintext form.
-
-*FPT_APW_EXT.1.2* The TSF shall prevent the reading of plaintext administrative passwords.
-
-*_Application Note {counter:appnote_count}_*
-
-_The intent of the requirement is that raw password authentication data of Security Administrators is not stored in the clear, and that no user or Administrator is able to read the plaintext password of a Security Administrator through “normal” interfaces. An all-powerful Administrator could directly read memory to capture a password but is trusted not to do so. Passwords should be obscured during entry on the local console in accordance with FIA_UAU.7._
-
-_Although this is out-of-scope of this cPP, it is strongly advised to protect all authentication data of the device the same way and/or with similar strength as administrative passwords to reduce the risk of attacks like privilege escalation, etc._
 
 ==== TSF Testing (Extended – FPT_TST_EXT)
 
@@ -1413,24 +1333,7 @@ _For distributed TOEs it is expected that the Security Administrator ensures syn
 
 === TOE Access (FTA)
 
-This section specifies requirements associated with security of administrative sessions carried out on the TOE. In particular, both local and remote sessionsfootnote:[Refer to Application Note 24 for the definition of local and remote sessions.] are monitored for inactivity and either locked or terminated when a threshold time period is reached. Administrators must also be able to positively terminate their own interactive sessions and must have an advisory notice displayed at the start of each session.
-
-==== TSF-initiated Session Locking (Extended – FTA_SSL_EXT)
-
-===== FTA_SSL_EXT.1 TSF-initiated Session Locking
-
-*FTA_SSL_EXT.1 TSF-initiated Session Locking*
-
-*FTA_SSL_EXT.1.1* The TSF shall, for local interactive sessions, [selection:
-
-* _lock the session - disable any activity of the user’s data access/display devices other than unlocking the session, and requiring that the Administrator re-authenticate to the TSF prior to unlocking the session;_
-* _terminate the session_]
-
-after a Security Administrator-specified time period of inactivity.
-
-*_Application Note {counter:appnote_count}_*
-
-_An interactive session governed by this SFR is a session in which an authenticated state is achieved and then preserved across multiple commands. By contrast, if authentication accompanies each individual command (without preservation of the same authenticated state) then this is not considered an interactive session._
+This section specifies requirements associated with security of administrative sessions carried out on the TOE. In particular, remote sessions are monitored for inactivity and either locked or terminated when a threshold time period is reached.  If the TOE supports local administration the ST author includes FTA_SSL_EXT.1 from Appendix B and local sessionsfootnote:[Refer to Application Note 22 for the definition of local and remote sessions.] must also monitored for inactivity and either locked or terminated when a threshold time period is reached. Administrators must also be able to positively terminate their own interactive sessions and must have an advisory notice displayed at the start of each session.
 
 ==== Session Locking and Termination (FTA_SSL)
 
@@ -1506,7 +1409,7 @@ _If the TOE claims FCS_TLSS_EXT.2 (TLS Servers with mutual authentication) and t
 
 *_Application Note {counter:appnote_count}_*
 
-This requirement ensures that authorized remote Administrators initiate all communication with the TOE via a trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection are included in the ST.
+This requirement ensures that authorized remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection are included in the ST.
 
 == Security Assurance Requirements
 
@@ -1994,6 +1897,9 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |FCS_SSHS_EXT.1 |Failure to establish an SSH session |Reason for failure
 |FCS_TLSC_EXT.1 |Failure to establish a TLS Session |Reason for failure
 |FCS_TLSS_EXT.1 |Failure to establish a TLS Session |Reason for failure
+|FIA_AFL.1 |Unsuccessful login attempts limit is met or exceeded. |Origin of the attempt (e.g., IP address).
+|FIA_PMG_EXT.1 |None. |None.
+|FIA_UAU.7 |None. |None.
 |FIA_X509_EXT.1/Rev a|
 * Unsuccessful attempt to validate a certificate
 * Any addition, replacement or removal of trust anchors in the TOE's trust store
@@ -2004,7 +1910,10 @@ a|
 
 |FIA_X509_EXT.2 |None |None
 |FIA_X509_EXT.3 |None. |None.
+|FPT_APW_EXT.1 |None. |None.
 |FPT_TUD_EXT.2 |Failure of update |Reason for failure (including identifier of invalid certificate)
+|FTA_SSL_EXT.1 (if “lock the session” is selected) |Any attempts at unlocking of an interactive session. |None.
+|FTA_SSL_EXT.1 (if “terminate the session” is selected) |The termination of a local session by the session lock
 |FMT_MOF.1/Services |None. |None.
 |FMT_MTD.1/CryptoKeys |None. |None.
 |FMT_MOF.1/AutoUpdate |None. |None.
@@ -2764,7 +2673,73 @@ _The public key is the public key portion of the public-private key pair generat
 
 *FIA_X509_EXT.3.2* The TSF shall validate the chain of certificates from the Root CA upon receiving the CA Certificate Response.
 
+==== Authentication Failure Management (FIA_AFL)
+If the TOE provides remote administration using a password-based authentication mechanism, FIA_AFL.1 specifies actions upon reaching the number of successive unsuccessful authentication attempts.
+
+===== FIA_AFL.1 Authentication Failure Management (Refinement)
+
+*FIA_AFL.1 Authentication Failure Management*
+
+*FIA_AFL.1.1* The TSF shall detect when an Administrator configurable positive integer within _[assignment: range of acceptable values]_ unsuccessful authentication attempts occur related to _Administrators attempting to authenticate remotely using a password_.
+
+*FIA_AFL.1.2* When the defined number of unsuccessful authentication attempts has been +++<u>+++met+++</u>+++, the TSF shall [selection: _prevent the offending Administrator from successfully establishing a remote session using any authentication method that involves a password until_ _[assignment: action to unlock] is taken by an Administrator; prevent the offending Administrator from successfully establishing a remote session using any authentication method that involves a password until an Administrator defined time period has elapsed]_.
+
+*_Application Note {counter:appnote_count}_*
+
+_This requirement applies to a defined number of successive unsuccessful remote password-based authentication attempts and does not apply to local Administrative access, since it does not make sense to lock a local Administrator’s account in this fashion. Compliant TOEs may optionally include cryptographic authentication failures and/or local authentication failures in the number of unsuccessful authentication attempts. This could be addressed by (for example) requiring a separate account for local Administrators or having the authentication mechanism implementation distinguish local and remote login attempts. The ‘action’ taken by a local Administrator is implementation specific and would be defined in the Administrator guidance (for example, lockout reset, or password reset). The ST author chooses one or both of the selections for handling of authentication failures depending on how the TOE has implemented this handler._
+
+_The TSS describes how the TOE ensures that authentication failures by remote Administrators cannot lead to a situation where no Administrator access is available, either permanently or temporarily (e.g. by providing local logon which is not subject to blocking). The Operational Guidance describes, and identifies the importance of, any actions that are required in order to ensure that Administrator access will always be maintained, even if remote administration is made permanently or temporarily unavailable due to blocking of accounts as a result of FIA_AFL.1._
+
+==== Protected Authentication Feedback (FIA_UAU)
+If the TOE provides a password-based local authentication mechanism passwords must be obscured during logon at the local console to avoid attacks where an attacker might observe a password being typed by an Administrator.
+
+===== FIA_UAU.7 Protected Authentication Feedback
+
+*FIA_UAU.7 Protected Authentication Feedback*
+
+*FIA_UAU.7.1* The TSF shall provide only _obscured feedback_ to the administrative user while the authentication is in progress *at the local console*.
+
+*_Application Note {counter:appnote_count}_*
+
+_‘Obscured feedback’ implies the TSF does not produce a visible display of any authentication data entered by a user (such as the echoing of a password), although an obscured indication of progress may be provided (such as an asterisk for each character). It also implies that the TSF does not return any information during the authentication process to the user that may provide any indication of the authentication data._
+
+==== Password Management (Extended – FIA_PMG_EXT)
+If the TOE provides a password-based authentication mechanism the Administrator must have the capability to compose a strong password and have mechanisms in place so that the password must be changed regularly.
+
+===== FIA_PMG_EXT.1 Password Management
+
+*FIA_PMG_EXT.1 Password Management*
+
+*FIA_PMG_EXT.1.1* The TSF shall provide the following password management capabilities for administrative passwords:
+
+[loweralpha]
+. Passwords shall be able to be composed of any combination of upper and lower case letters, numbers and the following special characters: [selection: _"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", [assignment: other characters]_];
+. Minimum password length shall be _configurable to between [assignment: minimum number of characters supported by the TOE] and [assignment: number of characters greater than or equal to 15] characters._
+
+*_Application Note {counter:appnote_count}_*
+
+_The ST author selects the special characters that are supported by the TOE. They may optionally list additional special characters supported using the assignment. "Administrative passwords" refers to passwords used by Administrators at the local console, over protocols that support passwords, such as SSH and HTTPS, or to grant configuration data that supports other SFRs in the Security Target._
+
+_The second assignment should be configured with the largest minimum password length the Security Administrator can configure._
+
 === Protection of the TSF (FPT)
+If the TOE provides a password-based authentication mechanism there must be no interface provided for specifically reading the password or password file such that the passwords are displayed in plain text.
+
+==== Protection of Administrator Passwords (Extended – FPT_APW_EXT)
+
+===== FPT_APW_EXT.1 Protection of Administrator Passwords
+
+*FPT_APW_EXT.1 Protection of Administrator Passwords*
+
+*FPT_APW_EXT.1.1* The TSF shall store administrative passwords in non-plaintext form.
+
+*FPT_APW_EXT.1.2* The TSF shall prevent the reading of plaintext administrative passwords.
+
+*_Application Note {counter:appnote_count}_*
+
+_The intent of the requirement is that raw password authentication data of Security Administrators is not stored in the clear, and that no user or Administrator is able to read the plaintext password of a Security Administrator through “normal” interfaces. An all-powerful Administrator could directly read memory to capture a password but is trusted not to do so. Passwords should be obscured during entry on the local console in accordance with FIA_UAU.7._
+
+_Although this is out-of-scope of this cPP, it is strongly advised to protect all authentication data of the device the same way and/or with similar strength as administrative passwords to reduce the risk of attacks like privilege escalation, etc._
 
 ==== Trusted Update (FPT_TUD_EXT)
 
@@ -2841,6 +2816,24 @@ _The first selection for ‘determine the behaviour of’ and ‘modify the beha
 *_Application Note {counter:appnote_count}_*
 
 _FMT_MTD.1.1/CryptoKeys restricts management of cryptographic keys to Security Administrators. It should be included if cryptographic keys can be managed (e.g. modified, deleted or generated/imported) by the Security Administrator. The identifier ‘CryptoKeys’ has been added here to separate this iteration of FMT_MTD.1 from the mandatory iteration of FMT_MTD.1 defined in Chapter 6.6.2.1 (FMT_MTD.1/CoreData)._
+
+==== TSF-initiated Session Locking (Extended – FTA_SSL_EXT)
+If the TOE provides the Security Administrator the ability to administer the TOE locally, session locking or termination must be implemented to mitigate the risk of an account being used illegitimately,
+
+===== FTA_SSL_EXT.1 TSF-initiated Session Locking
+
+*FTA_SSL_EXT.1 TSF-initiated Session Locking*
+
+*FTA_SSL_EXT.1.1* The TSF shall, for local interactive sessions, [selection:
+
+* _lock the session - disable any activity of the user’s data access/display devices other than unlocking the session, and requiring that the Administrator re-authenticate to the TSF prior to unlocking the session;_
+* _terminate the session_]
+
+after a Security Administrator-specified time period of inactivity.
+
+*_Application Note {counter:appnote_count}_*
+
+_An interactive session governed by this SFR is a session in which an authenticated state is achieved and then preserved across multiple commands. By contrast, if authentication accompanies each individual command (without preservation of the same authenticated state) then this is not considered an interactive session._
 
 [appendix]
 ==  Extended Component Definitions
@@ -3860,43 +3853,9 @@ Dependencies: FTA_TAB.1 Default TOE Access Banners
 
 *FIA_UIA_EXT.1.2* The TSF shall require each administrative user to be successfully identified and authenticated before allowing any other TSF-mediated actions on behalf of that administrative user.
 
-==== User authentication (FIA_UAU_EXT)
+*FIA_UIA_EXT.1.3* The TSF shall provide the following authentication mechanisms: [selection: _password-based, X.509 certificate, SSH public key, SSH password [assignment: other]_].
 
-*Family Behaviour*
-
-Provides for a locally based administrative user authentication mechanism
-
-*Component levelling*
-
-image:extracted-media/media/FIA_UAU_EXT.png[image,width=500,height=48]
-
-FIA_UAU_EXT.2 The password-based authentication mechanism provides administrative users a locally based authentication mechanism.
-
-*Management: FIA_UAU_EXT.2*
-
-The following actions could be considered for the management functions in FMT:
-
-[loweralpha]
-. None
-
-*Audit: FIA_UAU_EXT.2*
-
-The following actions should be auditable if FAU_GEN Security audit data generation is included in the PP/ST:
-
-[loweralpha]
-. Minimal: All use of the authentication mechanism
-
-=====  FIA_UAU_EXT.2 Password-based Authentication Mechanism
-
-*FIA_UAU_EXT.2 Password-based Authentication Mechanism*
-
-
-Hierarchical to: No other components.
-
-Dependencies: No other components.
-
-
-*FIA_UAU_EXT.2.1* The TSF shall provide a local [selection: _password-based, SSH public key-based, certificate-based, [assignment: other authentication mechanism(s)]_] authentication mechanism to perform local administrative user authentication.
+*FIA_UIA_EXT.1.4* The TSF shall authenticate any administrative user's claimed identity according to each authentication mechanism specified in FIA_UIA_EXT.1.3.
 
 ==== Authentication using X.509 certificates (FIA_X509_EXT)
 
@@ -4426,7 +4385,6 @@ FCS_CKM.4 included
 |FIA_AFL.1 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication
 |FIA_PMG_EXT.1 |None |
 |FIA_UIA_EXT.1 |FTA_TAB.1 |FTA_TAB.1 included
-|FIA_UAU_EXT.2 |None |
 |FIA_UAU.7 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication
 |FMT_MOF.1/ManualUpdate a|
 FMT_SMR.1
