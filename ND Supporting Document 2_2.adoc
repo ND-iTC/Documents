@@ -322,34 +322,65 @@ In general, when using open source libraries like OpenSSL, passing on error mess
 
 [arabic, start=34]
 . The evaluator shall examine the TSS to ensure it describes the means by which the audit data are transferred to the external audit server, and how the trusted channel is provided.
-. The evaluator shall examine the TSS to ensure it describes the amount of audit data that are stored locally; what happens when the local audit data store is full; and how these records are protected against unauthorized access.
 . The evaluator shall examine the TSS to ensure it describes whether the TOE is a standalone TOE that stores audit data locally or a distributed TOE that stores audit data locally on each TOE component or a distributed TOE that contains TOE components that cannot store audit data locally on themselves but need to transfer audit data to other TOE components that can store audit data locally. The evaluator shall examine the TSS to ensure that for distributed TOEs it contains a list of TOE components that store audit data locally. The evaluator shall examine the TSS to ensure that for distributed TOEs that contain components which do not store audit data locally but transmit their generated audit data to other components it contains a mapping between the transmitting and storing TOE components.
-. The evaluator shall examine the TSS to ensure that it details the behaviour of the TOE when the storage space for audit data is full. When the option ‘overwrite previous audit record’ is selected this description should include an outline of the rule for overwriting audit data. If ‘other actions’ are chosen such as sending the new audit data to an external IT entity, then the related behaviour of the TOE shall also be detailed in the TSS.
 . The evaluator shall examine the TSS to ensure that it details whether the transmission of audit information to an external IT entity can be done in real-time or periodically. In case the TOE does not perform transmission in real-time the evaluator needs to verify that the TSS provides details about what event stimulates the transmission to be made as well as the possible acceptable frequency for the transfer of audit data.
 . For distributed TOEs the evaluator shall examine the TSS to ensure it describes to which TOE components this SFR applies and how audit data transfer to the external audit server is implemented among the different TOE components (e.g. every TOE components does its own transfer or the data is sent to another TOE component for central transfer of all audit events to the external audit server).
-. For distributed TOEs the evaluator shall examine the TSS to ensure it describes which TOE components are storing audit information locally and which components are buffering audit information and forwarding the information to another TOE component for local storage. For every component the TSS shall describe the behaviour when local storage space or buffer space is exhausted.
+
 
 ===== Guidance Documentation
 
-[arabic, start=41]
+[arabic, start=38]
 . The evaluator shall also examine the guidance documentation to ensure it describes how to establish the trusted channel to the audit server, as well as describe any requirements on the audit server (particular audit server protocol, version of the protocol required, etc.), as well as configuration of the TOE needed to communicate with the audit server.
 . The evaluator shall also examine the guidance documentation to determine that it describes the relationship between the local audit data and the audit data that are sent to the audit log server. For example, when an audit event is generated, is it simultaneously sent to the external server and the local store, or is the local store used as a buffer and “cleared” periodically by sending the data to the audit server.
-. The evaluator shall also ensure that the guidance documentation describes all possible configuration options for FAU_STG_EXT.1.3 and the resulting behaviour of the TOE for each possible configuration. The description of possible configuration options and resulting behaviour shall correspond to those described in the TSS.
+
 
 ===== Tests
 
-[arabic, start=44]
-. Testing of the trusted channel mechanism for audit will be performed as specified in the associated assurance activities for the particular trusted channel mechanism. The evaluator shall perform the following additional tests for this requirement:
+[arabic, start=40]
+. Testing of the trusted channel mechanism for audit will be performed as specified in the associated assurance activities for the particular trusted channel mechanism. The evaluator shall perform the following additional test for this requirement:
 [loweralpha]
 .. Test 1: The evaluator shall establish a session between the TOE and the audit server according to the configuration guidance provided. The evaluator shall then examine the traffic that passes between the audit server and the TOE during several activities of the evaluator’s choice designed to generate audit data to be transferred to the audit server. The evaluator shall observe that these data are not able to be viewed in the clear during this transfer, and that they are successfully received by the audit server. The evaluator shall record the particular software (name, version) used on the audit server during testing. The evaluator shall verify that the TOE is capable of transferring audit data to an external audit server automatically without administrator intervention.
-.. Test 2: The evaluator shall perform operations that generate audit data and verify that this data is stored locally. The evaluator shall perform operations that generate audit data until the local storage space is exceeded and verifies that the TOE complies with the behaviour defined in FAU_STG_EXT.1.3. Depending on the configuration this means that the evaluator has to check the content of the audit data when the audit data is just filled to the maximum and then verifies that
+
+==== FAU_STG_EXT.1/LocSpace Local audit event storage
+
+===== TSS
+
+[arabic, start=41]
+. The evaluator shall examine the TSS to ensure it describes the amount of audit data that can be stored locally and how these records are protected against unauthorized modification or deletion.
+. The evaluator shall ensure that the TSS describes the method implemented for local logging, including format (e.g. buffer, log file, database) and whether the logs are persistent or non-persistent.
+. The evaluator shall ensure that the TSS describes the conditions that must be met for authorized deletion of audit records.
+. The evaluator shall examine the TSS to ensure that it details the behaviour of the TOE when the storage space for audit data is full. When the option ‘overwrite previous audit record’ is selected this description should include an outline of the rule for overwriting audit data. If ‘other actions’ are chosen such as sending the new audit data to an external IT entity, then the related behaviour of the TOE shall also be detailed in the TSS.
+. For distributed TOEs the evaluator shall examine the TSS to ensure it describes which TOE components are storing audit information locally and which components are buffering audit information and forwarding the information to another TOE component for local storage. For every component the TSS shall describe the behaviour when local storage space or buffer space is exhausted.
+
+
+===== Guidance Documentation
+
+[arabic, start=46]
+. The evaluator shall examine the guidance documentation to determine that it describes any configuration required for protection of the locally stored audit data against unauthorized modification or deletion.
+. If the storage size is configurable, the evaluator shall review the Guidance Documentation to ensure that it contains instructions on specifying the required parameters.
+. If more than one selection is made for FAU_STG_EXT.1.3/LocSpace, the evaluator shall review the Guidance Documentation to ensure that it contains instructions on specifying which action is performed when the local storage space is full
+
+
+===== Tests
+
+[arabic, start=49]
+. The evaluator shall perform the following tests:
+[loweralpha, start=1]
+.. Test 1: The evaluator shall access the local audit trail without authentication as Security Administrator (either by authentication as a non-administrative user, if supported, or without authentication at all) and attempt to modify and delete the audit records. The evaluator shall verify that these attempts fail. If the interface cannot be accessed to attempt the command due to permissions or configuration, this test requirement is satisfied.
+.. Test 2: The evaluator shall perform operations that generate audit data and verify that this data is stored locally. The evaluator shall then make note of whether the TSS claims persistent or non-persistent logging and perform one of the following actions:
 [arabic]
-... The audit data remains unchanged with every new auditable event that should be tracked but that the audit data is recorded again after the local storage for audit data is cleared (for the option ‘drop new audit data’ in FAU_STG_EXT.1.3).
-... The existing audit data is overwritten with every new auditable event that should be tracked according to the specified rule (for the option ‘overwrite previous audit records’ in FAU_STG_EXT.1.3)
-... The TOE behaves as specified (for the option ‘other action’ in FAU_STG_EXT.1.3).
+... If persistent logging is selected, the evaluator shall perform a power cycle of the TOE and ensure that following power on operations the log events generated are still maintained within the local audit storage.
+... If non-persistent logging is selected, the evaluator shall perform a power cycle of the TOE and ensure that following power on operations the log events generated are no longer present within the local audit storage.
 [loweralpha, start=3]
-.. Test 3: If the TOE complies with FAU_STG_EXT.2/LocSpace the evaluator shall verify that the numbers provided by the TOE according to the selection for FAU_STG_EXT.2/LocSpace are correct when performing the tests for FAU_STG_EXT.1.3
-.. Test 4: For distributed TOEs, Test 1 defined above should be applicable to all TOE components that forward audit data to an external audit server. For the local storage according to FAU_STG_EXT.1.2 and FAU_STG_EXT.1.3 the Test 2 specified above shall be applied to all TOE components that store audit data locally. For all TOE components that store audit data locally and comply with FAU_STG_EXT.2/LocSpace Test 3 specified above shall be applied. The evaluator shall verify that the transfer of audit data to an external audit server is implemented.
+.. Test 3: The evaluator shall perform operations that generate audit data until the local storage space is exceeded and verifies that the TOE complies with the behaviour defined in FAU_STG_EXT.1.3. Depending on the configuration this means that the evaluator has to check the content of the audit data when the audit data is just filled to the maximum and then verifies that:
+[arabic]
+...	The audit data remains unchanged with every new auditable event that should be tracked but that the audit data is recorded again after the local storage for audit data is cleared (for the option ‘drop new audit data’ in FAU_STG_EXT.1.3/LocSpace).
+... The existing audit data is overwritten with every new auditable event that should be tracked according to the specified rule (for the option ‘overwrite previous audit records’ in FAU_STG_EXT.1.3/LocSpace)
+...	The TOE behaves as specified (for the option ‘other action’ in FAU_STG_EXT.1.3/LocSpace).
+[loweralpha, start=4]
+.. Test 4: For distributed TOEs, Test 1 defined above should be applicable to all TOE components that forward audit data to an external audit server. For the local storage according to FAU_STG_EXT.1.2 and FAU_STG_EXT.1.3 the Test 2 specified above shall be applied to all TOE components that store audit data locally. For all TOE components that store audit data locally and comply with FAU_STG_EXT.2/LocSpace Test 3 specified above shall be applied. The evaluator shall verify that the transfer of audit data to an external audit server is implemented
+.. Test 5: The evaluator shall cause an interrupt in the connection between the TOE and remote audit server. During interruption, the evaluator shall perform a TSF-mediated action and verify the event is recorded in the audit trail. The evaluator shall re-establish the connection to the audit server and repeat the action performed, confirming new auditdable events are logged to the remote audit server. This test can be performed in conjunction with FTP_ITC_EXT.1.
+
 
 === Cryptographic Support (FCS)
 
@@ -357,22 +388,22 @@ In general, when using open source libraries like OpenSSL, passing on error mess
 
 ===== TSS
 
-[arabic, start=45]
+[arabic, start=50]
 . The evaluator shall ensure that the TSS identifies the key sizes supported by the TOE. If the ST specifies more than one scheme, the evaluator shall examine the TSS to verify that it identifies the usage for each scheme.
 
 ===== Guidance Documentation
 
-[arabic, start=46]
+[arabic, start=51]
 . The evaluator shall verify that the AGD guidance instructs the administrator how to configure the TOE to use the selected key generation scheme(s) and key size(s) for all cryptographic protocols defined in the Security Target.
 
 ===== Tests
 
-[arabic, start=47]
+[arabic, start=52]
 . Note: The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products. Generation of long-term cryptographic keys (i.e. keys that are not ephemeral keys/session keys) might be performed automatically (e.g. during initial start-up). Testing of key generation must cover not only administrator invoked key generation but also automated key generation (if supported).
 
 *Key Generation for FIPS PUB 186-4 RSA Schemes*
 
-[arabic, start=48]
+[arabic, start=53]
 . The evaluator shall verify the implementation of RSA Key Generation by the TOE using the Key Generation test. This test verifies the ability of the TSF to correctly produce values for the key components including the public verification exponent _e_, the private prime factors _p_ and _q_, the public modulus _n_ and the calculation of the private signature exponent _d_.
 . Key Pair generation specifies 5 ways (or methods) to generate the primes _p_ and _q_. These include:
 [loweralpha]
@@ -387,45 +418,45 @@ In general, when using open source libraries like OpenSSL, passing on error mess
 * Primes p1, p2, q1, and q2 shall be provable primes and p and q shall be probable primes
 * Primes p1, p2, q1, q2, p and q shall all be probable primes
 
-[arabic, start=50]
+[arabic, start=55]
 . To test the key generation method for the Random Provable primes method and for all the Primes with Conditions methods, the evaluator must seed the TSF key generation routine with sufficient data to deterministically generate the RSA key pair. This includes the random seed(s), the public exponent of the RSA key, and the desired key length. For each key length supported, the evaluator shall have the TSF generate 25 key pairs. The evaluator shall verify the correctness of the TSF’s implementation by comparing values generated by the TSF with those generated from a known good implementation.
 
 *Key Generation for Elliptic Curve Cryptography (ECC)*
 
 _FIPS 186-4 ECC Key Generation Test_
 
-[arabic, start=51]
+[arabic, start=56]
 . For each supported NIST curve, i.e., P-256, P-384 and P-521, the evaluator shall require the implementation under test (IUT) to generate 10 private/public key pairs. The private key shall be generated using an approved random bit generator (RBG). To determine correctness, the evaluator shall submit the generated key pairs to the public key verification (PKV) function of a known good implementation.
 
 _FIPS 186-4 Public Key Verification (PKV) Test_
 
-[arabic, start=52]
+[arabic, start=57]
 . For each supported NIST curve, i.e., P-256, P-384 and P-521, the evaluator shall generate 10 private/public key pairs using the key generation function of a known good implementation and modify five of the public key values so that they are incorrect, leaving five values unchanged (i.e., correct). The evaluator shall obtain in response a set of 10 PASS/FAIL values.
 
 *Key Generation for Finite-Field Cryptography (FFC)*
 
-[arabic, start=53]
+[arabic, start=58]
 . The evaluator shall verify the implementation of the Parameters Generation and the Key Generation for FFC by the TOE using the Parameter Generation and Key Generation test. This test verifies the ability of the TSF to correctly produce values for the field prime p, the cryptographic prime q (dividing p-1), the cryptographic group generator g, and the calculation of the private key x and public key y.
 . The Parameter generation specifies 2 ways (or methods) to generate the cryptographic prime q and the field prime p:
 
 * Primes q and p shall both be provable primes 
 * Primes q and field prime p shall both be probable primes
 
-[arabic, start=55]
+[arabic, start=60]
 . and two ways to generate the cryptographic group generator g:
 
 * Generator g constructed through a verifiable process
 * Generator g constructed through an unverifiable process.
 
 
-[arabic, start=56]
+[arabic, start=61]
 . The Key generation specifies 2 ways to generate the private key x:
 
 * len(q) bit output of RBG where 1 <=x <= q-1 
 * len(q) + 64 bit output of RBG, followed by a mod q-1 operation and a +1 operation, where 1<= x<=q-1.
 
 
-[arabic, start=57]
+[arabic, start=62]
 . The security strength of the RBG must be at least that of the security offered by the FFC parameter set.
 . To test the cryptographic and field prime generation method for the provable primes method and/or the group generator g for a verifiable process, the evaluator must seed the TSF parameter generation routine with sufficient data to deterministically generate the parameter set.
 . For each key length supported, the evaluator shall have the TSF generate 25 parameter sets and key pairs. The evaluator shall verify the correctness of the TSF’s implementation by comparing values generated by the TSF with those generated from a known good implementation. Verification must also confirm
@@ -435,19 +466,19 @@ _FIPS 186-4 Public Key Verification (PKV) Test_
 * g^q mod p = 1
 * g^x mod p = y
 
-[arabic, start=60]
+[arabic, start=65]
 . for each FFC parameter set and key pair.
 
 *Diffie-Hellman Group 14 and FFC Schemes using “safe-prime” groups*
 
-[arabic, start=61]
+[arabic, start=66]
 . Testing for FFC Schemes using Diffie-Hellman group 14 and/or safe-prime groups is done as part of testing in CKM.2.1.
 
 ==== FCS_CKM.2 Cryptographic Key Establishment
 
 ===== TSS
 
-[arabic, start=62]
+[arabic, start=67]
 . The evaluator shall ensure that the supported key establishment schemes correspond to the key generation schemes identified in FCS_CKM.1.1. If the ST specifies more than one scheme, the evaluator shall examine the TSS to verify that it identifies the usage for each scheme. It is sufficient to provide the scheme, SFR, and service in the TSS.
 . If Diffie-Hellman group 14 is selected from FCS_CKM.2.1, the TSS shall claim the TOE meets RFC 3526 Section 3.
 . The intent of this activity is to be able to identify the scheme being used by each service. This would mean, for example, one way to document scheme usage could be:
@@ -465,24 +496,24 @@ The information provided in the example above does not necessarily have to be in
 
 ===== Guidance Documentation
 
-[arabic, start=65]
+[arabic, start=70]
 . The evaluator shall verify that the AGD guidance instructs the administrator how to configure the TOE to use the selected key establishment scheme(s).
 
 ===== Tests
 
 *_Key Establishment Schemes_*
 
-[arabic, start=66]
+[arabic, start=70]
 . The evaluator shall verify the implementation of the key establishment schemes of the supported by the TOE using the applicable tests below.
 
 *_SP800-56A Key Establishment Schemes_*
 
-[arabic, start=67]
+[arabic, start=72]
 . The evaluator shall verify a TOE's implementation of SP800-56A key agreement schemes using the following Function and Validity tests. These validation tests for each key agreement scheme verify that a TOE has implemented the components of the key agreement scheme according to the specifications in the Recommendation. These components include the calculation of the DLC primitives (the shared secret value Z) and the calculation of the derived keying material (DKM) via the Key Derivation Function (KDF). If key confirmation is supported, the evaluator shall also verify that the components of key confirmation have been implemented correctly, using the test procedures described below. This includes the parsing of the DKM, the generation of MACdata and the calculation of MACtag.
 
 _Function Test_
 
-[arabic, start=68]
+[arabic, start=73]
 . The Function test verifies the ability of the TOE to implement the key agreement schemes correctly. To conduct this test the evaluator shall generate or obtain test vectors from a known good implementation of the TOE supported schemes. For each supported key agreement scheme-key agreement role combination, KDF type, and, if supported, key confirmation role- key confirmation type combination, the tester shall generate 10 sets of test vectors. The data set consists of one set of domain parameter values (FFC) or the NIST approved curve (ECC) per 10 sets of public keys. These keys are static, ephemeral or both depending on the scheme being tested.
 . The evaluator shall obtain the DKM, the corresponding TOE’s public keys (static and/or ephemeral), the MAC tag(s), and any inputs used in the KDF, such as the Other Information field OI and TOE id fields.
 . If the TOE does not use a KDF defined in SP 800-56A, the evaluator shall obtain only the public keys and the hashed value of the shared secret.
@@ -491,31 +522,31 @@ _Function Test_
 
 _Validity Test_
 
-[arabic, start=73]
+[arabic, start=78]
 . The Validity test verifies the ability of the TOE to recognize another party’s valid and invalid key agreement results with or without key confirmation. To conduct this test, the evaluator shall obtain a list of the supporting cryptographic functions included in the SP800-56A key agreement implementation to determine which errors the TOE should be able to recognize. The evaluator generates a set of 24 (FFC) or 30 (ECC) test vectors consisting of data sets including domain parameter values or NIST approved curves, the evaluator’s public keys, the TOE’s public/private key pairs, MACTag, and any inputs used in the KDF, such as the other info and TOE id fields.
 . The evaluator shall inject an error in some of the test vectors to test that the TOE recognizes invalid key agreement results caused by the following fields being incorrect: the shared secret value Z, the DKM, the other information field OI, the data to be MACed, or the generated MACTag. If the TOE contains the full or partial (only ECC) public key validation, the evaluator will also individually inject errors in both parties’ static public keys, both parties’ ephemeral public keys and the TOE’s static private key to assure the TOE detects errors in the public key validation function and/or the partial key validation function (in ECC only). At least two of the test vectors shall remain unmodified and therefore should result in valid key agreement results (they should pass).
 . The TOE shall use these modified test vectors to emulate the key agreement scheme using the corresponding parameters. The evaluator shall compare the TOE’s results with the results using a known good implementation verifying that the TOE detects these errors.
 
 *_RSA-based key establishment_*
 
-[arabic, start=76]
+[arabic, start=81]
 . The evaluator shall verify the correctness of the TSF’s implementation of RSAES-PKCS1-v1_5 by using a known good implementation for each protocol selected in FTP_TRP.1/Admin, FTP_TRP.1/Join, FTP_ITC.1 and FPT_ITT.1 that uses RSAES-PKCS1-v1_5.
 
 *_Diffie-Hellman Group 14_*
 
-[arabic, start=77]
+[arabic, start=82]
 . The evaluator shall verify the correctness of the TSF’s implementation of Diffie-Hellman group 14 by using a known good implementation for each protocol selected in FTP_TRP.1/Admin, FTP_TRP.1/Join, FTP_ITC.1 and FPT_ITT.1 that uses Diffie-Hellman group 14.
 
 *_FFC Schemes using “safe-prime” groups_*
 
-[arabic, start=78]
+[arabic, start=83]
 . The evaluator shall verify the correctness of the TSF’s implementation of safe-prime groups by using a known good implementation for each protocol selected in FTP_TRP.1/Admin, FTP_TRP.1/Join, FTP_ITC.1 and FPT_ITT.1 that uses safe-prime groups. This test must be performed for each safe-prime group that each protocol uses.
 
 ==== FCS_CKM.4 Cryptographic Key Destruction
 
 ===== TSS
 
-[arabic, start=79]
+[arabic, start=84]
 . The evaluator examines the TSS to ensure it lists all relevant keys (describing the origin and storage location of each), all relevant key destruction situations (e.g. factory reset or device wipe function, disconnection of trusted channels, key change as part of a secure channel protocol), and the destruction method used in each case. For the purpose of this Evaluation Activity the relevant keys are those keys that are relied upon to support any of the SFRs in the Security Target. The evaluator confirms that the description of keys and storage locations is consistent with the functions carried out by the TOE (e.g. that all keys for the TOE-specific secure channels and protocols, or that support FPT_APW.EXT.1 and FPT_SKP_EXT.1, are accounted forfootnote:[Where keys are stored encrypted or wrapped under another key then this may need to be explained in order to allow the evaluator to confirm the consistency of the description of keys with the TOE functions.]). In particular, if a TOE claims not to store plaintext keys in non-volatile memory then the evaluator checks that this is consistent with the operation of the TOE.
 . The evaluator shall check to ensure the TSS identifies how the TOE destroys keys stored as plaintext in non-volatile memory, and that the description includes identification and description of the interfaces that the TOE uses to destroy keys (e.g., file system APIs, key store APIs).
 . Note that where selections involve ‘_destruction of reference_’ (for volatile memory) or ‘_invocation of an interface’_ (for non-volatile memory) then the relevant interface definition is examined by the evaluator to ensure that the interface supports the selection(s) and description in the TSS. In the case of non-volatile memory, the evaluator includes in their examination the relevant interface description for each media type on which plaintext keys are stored. The presence of OS-level and storage device-level swap and cache files is not examined in the current version of the Evaluation Activity.
@@ -525,32 +556,32 @@ _Validity Test_
 
 ===== Guidance Documentation
 
-[arabic, start=85]
+[arabic, start=90]
 . A TOE may be subject to situations that could prevent or delay key destruction in some cases. The evaluator shall check that the guidance documentation identifies configurations or circumstances that may not strictly conform to the key destruction requirement, and that this description is consistent with the relevant parts of the TSS (and any other supporting information used). The evaluator shall check that the guidance documentation provides guidance on situations where key destruction may be delayed at the physical layer.
 . For example, when the TOE does not have full access to the physical memory, it is possible that the storage may be implementing wear-levelling and garbage collection. This may result in additional copies of the key that are logically inaccessible but persist physically. Where available, the TOE might then describe use of the TRIM commandfootnote:[Where TRIM is used then the TSS and/or guidance documentation is also expected to describe how the keys are stored such that they are not inaccessible to TRIM, (e.g. they would need not to be contained in a file less than 982 bytes which would be completely contained in the master file table).] and garbage collection to destroy these persistent copies upon their deletion (this would be explained in TSS and Operational Guidance).
 
 ===== Tests
 
-[arabic, start=87]
+[arabic, start=92]
 . None
 
 ==== FCS_COP.1/DataEncryption Cryptographic Operation (AES Data Encryption/Decryption)
 
 ===== TSS
 
-[arabic, start=88]
+[arabic, start=93]
 . The evaluator shall examine the TSS to ensure it identifies the key size(s) and mode(s) supported by the TOE for data encryption/decryption.
 
 ===== Guidance Documentation
 
-[arabic, start=89]
+[arabic, start=94]
 . The evaluator shall verify that the AGD guidance instructs the administrator how to configure the TOE to use the selected mode(s) and key size(s) defined in the Security Target supported by the TOE for data encryption/decryption.
 
 ===== Tests
 
 *AES-CBC Known Answer Tests*
 
-[arabic, start=90]
+[arabic, start=95]
 . There are four Known Answer Tests (KATs), described below. In all KATs, the plaintext, ciphertext, and IV values shall be 128-bit blocks. The results from each test may either be obtained by the evaluator directly or by supplying the inputs to the implementer and receiving the results in response. To determine correctness, the evaluator shall compare the resulting values to those obtained by submitting the same inputs to a known good implementation.
 . *KAT-1.* To test the encrypt functionality of AES-CBC, the evaluator shall supply a set of 10 plaintext values and obtain the ciphertext value that results from AES-CBC encryption of the given plaintext using a key value of all zeros and an IV of all zeros. Five plaintext values shall be encrypted with a 128-bit all-zeros key, and the other five shall be encrypted with a 256-bit all-zeros key.
 . To test the decrypt functionality of AES-CBC, the evaluator shall perform the same test as for encrypt, using 10 ciphertext values as input and AES-CBC decryption.
@@ -563,13 +594,13 @@ _Validity Test_
 
 *AES-CBC Multi-Block Message Test*
 
-[arabic, start=99]
+[arabic, start=104]
 . The evaluator shall test the encrypt functionality by encrypting an _i_-block message where 1 < __i <=__10. The evaluator shall choose a key, an IV and plaintext message of length _i_ blocks and encrypt the message, using the mode to be tested, with the chosen key and IV. The ciphertext shall be compared to the result of encrypting the same plaintext message with the same key and IV using a known good implementation.
 . The evaluator shall also test the decrypt functionality for each mode by decrypting an _i_-block message where 1 < _i_ <=10. The evaluator shall choose a key, an IV and a ciphertext message of length _i_ blocks and decrypt the message, using the mode to be tested, with the chosen key and IV. The plaintext shall be compared to the result of decrypting the same ciphertext message with the same key and IV using a known good implementation.
 
 *AES-CBC Monte Carlo Tests*
 
-[arabic, start=101]
+[arabic, start=106]
 . The evaluator shall test the encrypt functionality using a set of 200 plaintext, IV, and key 3-tuples. 100 of these shall use 128 bit keys, and 100 shall use 256 bit keys. The plaintext and IV values shall be 128-bit blocks. For each 3-tuple, 1000 iterations shall be run as follows:
 
 +# Input: PT, IV, Key+
@@ -582,13 +613,13 @@ _Validity Test_
         CT[i] = AES-CBC-Encrypt(Key, PT)
         PT = CT[i-1]
 
-[arabic, start=102]
+[arabic, start=107]
 . The ciphertext computed in the 1000^th^ iteration (i.e., CT[1000]) is the result for that trial. This result shall be compared to the result of running 1000 iterations with the same values using a known good implementation.
 . The evaluator shall test the decrypt functionality using the same test as for encrypt, exchanging CT and PT and replacing AES-CBC-Encrypt with AES-CBC-Decrypt.
 
 *AES-GCM Test*
 
-[arabic, start=104]
+[arabic, start=109]
 . The evaluator shall test the authenticated encrypt functionality of AES-GCM for each combination of the following input parameter lengths:
 +
 *_128 bit and 256 bit keys_*
@@ -597,7 +628,7 @@ _Validity Test_
 .. *Three AAD lengths*. One AAD length shall be 0, if supported. One AAD length shall be a non-zero integer multiple of 128 bits, if supported. One AAD length shall not be an integer multiple of 128 bits, if supported.
 .. *Two IV lengths*. If 96 bit IV is supported, 96 bits shall be one of the two IV lengths tested.
 
-[arabic, start=105]
+[arabic, start=110]
 . The evaluator shall test the encrypt functionality using a set of 10 key, plaintext, AAD, and IV tuples for each combination of parameter lengths above and obtain the ciphertext value and tag that results from AES-GCM authenticated encrypt. Each supported tag length shall be tested at least once per set of 10. The IV value may be supplied by the evaluator or the implementation being tested, as long as it is known.
 . The evaluator shall test the decrypt functionality using a set of 10 key, ciphertext, tag, AAD, and IV 5-tuples for each combination of parameter lengths above and obtain a Pass/Fail result on authentication and the decrypted plaintext if Pass. The set shall include five tuples that Pass and five that Fail.
 . The results from each test may either be obtained by the evaluator directly or by supplying the inputs to the implementer and receiving the results in response. To determine correctness, the evaluator shall compare the resulting values to those obtained by submitting the same inputs to a known good implementation.
@@ -853,10 +884,11 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 . The evaluator shall examine the TSS, Guidance Documentation and the TOE as observed during all other testing and shall confirm that the management functions specified in FMT_SMF.1 are provided by the TOE. The evaluator shall confirm that the TSS details which security management functions are available through which interface(s) (local administration interface, remote administration interface).
 . The evaluator shall examine the TSS and Guidance Documentation to verify they both describe the local administrative interface. The evaluator shall ensure the Guidance Documentation includes appropriate warnings for the administrator to ensure the interface is local.
 . For distributed TOEs with the option 'ability to configure the interaction between TOE components' the evaluator shall examine that the ways to configure the interaction between TOE components is detailed in the TSS and Guidance Documentation. The evaluator shall check that the TOE behaviour observed during testing of the configured SFRs is as described in the TSS and Guidance Documentation.
+. (If configure local audit is selected) The evaluator shall examine the TSS and Guidance Documentation to ensure that a description of the logging implementation is described in enough detail to determine how log files are maintained on the TOE.
 
 ===== Guidance Documentation
 
-[arabic, start=180]
+[arabic, start=181]
 . See section 2.4.4.1.
 
 ===== Tests
