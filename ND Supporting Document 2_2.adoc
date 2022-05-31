@@ -2013,7 +2013,7 @@ Remark: The server must ensure the DTLS handshake is valid (e.g. certificate key
 *FCS_DTLSS_EXT.1.3*
 
 [arabic, start=377]
-. The evaluator shall verify that the TSS describes how the DTLS Client IP address is validated prior to issuing a ServerHello message. The evaluator shall confirm that the TSS describes how the server presents a HelloVerify message (DTLS v1.2)/HelloRetry message (DTLS v1.3) containing a cookie and how the cookie is validated when the server receives the subsequent Client Hello message.
+. The evaluator shall verify that the TSS describes how the DTLS Client IP address is validated prior to issuing a ServerHello message. The evaluator shall confirm that the TSS describes how the server presents a HelloVerify message (DTLS 1.2)/HelloRetry message (DTLS 1.3) containing a cookie and how the cookie is validated when the server receives the subsequent Client Hello message.
 
 *FCS_DTLSS_EXT.1.4*
 
