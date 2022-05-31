@@ -2307,7 +2307,7 @@ _The following table provides the ST author with instructions for completing the
 
 *_Application Note {counter:appnote_count}_*
 
-_The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_DTLSC_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' shall be selected._
+_The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_DTLSC_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' shall be selected. If the 'provides' option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1._
 
 *FCS_DTLSC_EXT.1.7* The TSF _shall prohibit the use of the following extensions:
 
@@ -2415,7 +2415,7 @@ _If the TOE doesn't support session resumption or session tickets, select 'no se
 
 *_Application Note {counter:appnote_count}_*
 
-_The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_DTLSS_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' shall be selected._
+_The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_DTLSS_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' shall be selected. If the 'provides' option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1._
 
 *FCS_DTLSS_EXT.1.9* The TSF _shall prohibit the use of the following extensions:_
 
@@ -2959,7 +2959,7 @@ _This extension is not defined in TLS 1.2_
 
 *_Application Note {counter:appnote_count}_*
 
-_The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_TLSC_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' shall be selected._
+_The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_TLSC_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' shall be selected. If the 'provides' option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1._
 
 *FCS_TLSC_EXT.1.7* The TSF _shall prohibit the use of the following extensions:_
 
@@ -3057,7 +3057,7 @@ _If the TOE doesn't support session resumption or session tickets, select 'no se
 
 *_Application Note {counter:appnote_count}_*
 
-_The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_TLSS_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' shall be selected._
+_The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_TLSS_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' shall be selected. If the 'provides' option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1._
 
 *FCS_TLSS_EXT.1.6* The TSF _shall prohibit the use of the following extensions:_
 
