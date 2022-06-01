@@ -3040,7 +3040,7 @@ The evaluator shall verify that the Finished message (Content type hexadecimal 1
 *FCS_TLSS_EXT.1.2*
 
 [arabic, start=563]
-. Test 1: The evaluator shall attempt to establish a TLS/SSL connection using each of the TLS/SSL versions (i.e., TLS 1.3, TLS 1.2, TLS 1.1, TLS 1.0,  .0, SSL 2.0). The client shall be configured so it only supports the version being tested. The evaluator shall verify that the versions specified in FCS_TLSS_EXT.1.1 are successfully established and all other versions not successfully established. If the TOE attempts to downgrade the version, it is acceptable for the test client to terminate the connection; however, the version selected by the TOE shall always be a version specified in FCS_TLSS_EXT.1.1.
+. Test 1: The evaluator shall attempt to establish a TLS/SSL connection using each of the TLS/SSL versions (i.e., TLS 1.3, TLS 1.2, TLS 1.1, TLS 1.0, SSL 3.0, SSL 2.0). The client shall be configured so it only supports the version being tested. The evaluator shall verify that the versions specified in FCS_TLSS_EXT.1.1 are successfully established and all other versions not successfully established. If the TOE attempts to downgrade the version, it is acceptable for the test client to terminate the connection; however, the version selected by the TOE shall always be a version specified in FCS_TLSS_EXT.1.1.
 
 *FCS_TLSS_EXT.1.3 and FCS_TLSS_EXT.1.4*
 
