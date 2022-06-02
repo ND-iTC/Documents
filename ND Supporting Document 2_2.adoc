@@ -1306,7 +1306,7 @@ In the case where the TOE is able to detect when the cable is removed from the d
 +
 Test 1b: The evaluator shall then 'break' the chain used in Test 1a by either removing the trust anchor in the TOE's trust store used to terminate the chain, or by removing one of the intermediate CA certificates (provided together with the leaf certificate in Test 1a) to complete the chain. The evaluator shall show that an attempt to validate this broken chain fails.
 .. Test 2: The evaluator shall demonstrate that validating an expired certificate results in the function failing.
-.. Test 3: The evaluator shall test that the TOE can properly handle revoked certificates-–conditional on whether CRL or OCSP is selected; if both are selected, then a test shall be performed for each method. The evaluator shall test revocation of the TOE certificate and revocation of the TOE intermediate CA certificate i.e. the intermediate CA certificate should be revoked by the root CA. The evaluator shall ensure that a valid certificate is used, and that the validation function succeeds. The evaluator then attempts the test with a certificate that has been revoked (for each method chosen in the selection) to ensure when the certificate is no longer valid that the validation function fails. No testing is required if no revocation method is selected. Revocation checking is only applied to certificates that are not designated as trust anchors. Therefore, the revoked certificate(s) used for testing shall not be a trust anchor.
+.. Test 3: The evaluator shall test that the TOE can properly handle revoked certificates-–depending on whether CRL or OCSP is selected; if both are selected, then a test shall be performed for each method. The evaluator shall test revocation of the TOE certificate and revocation of the TOE intermediate CA certificate i.e. the intermediate CA certificate should be revoked by the root CA. The evaluator shall ensure that a valid certificate is used, and that the validation function succeeds. The evaluator then attempts the test with a certificate that has been revoked (for each method chosen in the selection) to ensure when the certificate is no longer valid that the validation function fails. No testing is required if no revocation method is selected. Revocation checking is only applied to certificates that are not designated as trust anchors. Therefore, the revoked certificate(s) used for testing shall not be a trust anchor.
 .. Test 4: If OCSP is selected, the evaluator shall configure the OCSP server or use a man-in-the-middle tool to present a certificate that does not have the OCSP signing purpose and verify that validation of the OCSP response fails. If CRL is selected, the evaluator shall configure the CA to sign a CRL with a certificate that does not have the cRLsign key usage bit set and verify that validation of the CRL fails.
 .. Test 5: The evaluator shall modify any byte in the first eight bytes of the certificate and demonstrate that the certificate fails to validate. (The certificate will fail to parse correctly.)
 .. Test 6: The evaluator shall modify any byte in the last byte of the certificate and demonstrate that the certificate fails to validate. (The signature on the certificate will not validate.)
@@ -1317,7 +1317,7 @@ Test 1b: The evaluator shall then 'break' the chain used in Test 1a by either re
 . The goal of the following tests is to verify that the TOE accepts a certificate as a CA certificate only if it has been marked as a CA certificate by using basicConstraints with the CA flag set to True (and implicitly tests that the TOE correctly parses the basicConstraints extension as part of X509v3 certificate chain validation).
 . For each of the following tests the evaluator shall create a chain of at least two certificates: a self-signed root CA certificate and a leaf (node) certificate. The properties of the certificates in the chain are adjusted as described in each individual test below (and this modification shall be the only invalid aspect of the relevant certificate chain).
 [loweralpha]
-.. Test 1: The evaluator shall ensure that one CA in the chain does not contain the basicConstraints extension. The evaluator confirms that the TOE rejects such a certificate at one (or both) of the following points: (i) as part of the validation of the leaf certificate belonging to this chain; (ii) when attempting to add a CA certificate without the basicConstraints extension to the TOE’s trust store (i.e. when attempting to install the CA certificate as one which will be retrieved from the TOE itself when validating future certificate chains).
+.. Test 1: The evaluator shall ensure that one CA in the chain does not contain the basicConstraints extension. The evaluator confirms that the TOE rejects such a certificate at each of the following points supported: (i) as part of the validation of the leaf certificate belonging to this chain; (ii) when attempting to add a CA certificate without the basicConstraints extension to the TOE’s trust store (i.e. when attempting to install the CA certificate as one which will be retrieved from the TOE itself when validating future certificate chains).
 .. Test 2: The evaluator shall ensure that at least one of the CA certificates in the chain has a basicConstraints extension in which the CA flag is set to FALSE. The evaluator confirms that the TOE rejects such a certificate at one (or both) of the following points: (i) as part of the validation of the leaf certificate belonging to this chain; (ii) when attempting to add a CA certificate with the CA flag set to FALSE to the TOE’s trust store (i.e. when attempting to install the CA certificate as one which will be retrieved from the TOE itself when validating future certificate chains).
 
 === Protection of the TSF (FPT)
@@ -1574,8 +1574,8 @@ Some TOEs may set up the registration channel before the enablement step is carr
 . Test 3: The evaluator shall configure the client to send a certificate with the Client Authentication purpose in the extendedKeyUsage field and verify that the server accepts the attempted connection. The evaluator shall repeat this test without the Client Authentication purpose and shall verify that the server denies the connection. Ideally, the two certificates should be identical except for the Client Authentication purpose.
 . Test 4: The evaluator shall perform the following modifications to the traffic:
 [loweralpha]
-.. [conditional]: Perform this test only if support of DTLS 1.0 or DTLS 1.2 is claimed. Configure the server to require mutual authentication and then connect to the server with a client configured to send a client certificate that is signed by a Certificate Authority trusted by the TOE. The evaluator shall verify that the server accepts the connection.
-.. [conditional]: Perform this test only if support of DTLS 1.0 or DTLS 1.2 is claimed. Configure the server to require mutual authentication and then modify a byte in the signature block of the client’s Certificate Verify handshake message (see RFC5246 Sec 7.4.8). The evaluator shall verify that the server rejects the connection.
+.. [conditional]: Perform this test only if support of DTLS 1.2 is claimed. Configure the server to require mutual authentication and then connect to the server with a client configured to send a client certificate that is signed by a Certificate Authority trusted by the TOE. The evaluator shall verify that the server accepts the connection.
+.. [conditional]: Perform this test only if support of DTLS 1.2 is claimed. Configure the server to require mutual authentication and then modify a byte in the signature block of the client’s Certificate Verify handshake message (see RFC5246 Sec 7.4.8). The evaluator shall verify that the server rejects the connection.
 [arabic, start=311]
 . Note: Testing the validity of the client certificate is performed as part of X.509 testing.
 . Test 5 [conditional]: The purpose of this test is to verify that only selected certificate validation failures could be administratively overridden. If any override mechanism is defined for failed certificate validation, the evaluator shall configure a new presented certificate that does not contain a valid entry in one of the mandatory fields or parameters (e.g. inappropriate value in extendedKeyUsage field) but is otherwise valid and signed by a trusted CA. The evaluator shall confirm that the certificate validation fails (i.e. certificate is rejected), and there is no administrative override available to accept such certificate.
@@ -1589,17 +1589,13 @@ Some TOEs may set up the registration channel before the enablement step is carr
 [arabic, start=316]
 . The evaluator shall perform the following tests:
 
-. Test 1: [conditional]: The evaluator shall perform the following tests if “present a DTLS 1.0 Certificate Request message” is selected:
-[loweralpha]
-.. The evaluator shall perform a DTLS 1.0 handshake and examine the Certificate Request message. The evaluator shall verify the ClientCertificateTypes match those specified in the requirement.
-.. The evaluator shall establish a DTLS 1.0 connection and authenticate the client using each selected ClientCertificateType. The evaluator shall verify the connection succeeds.
-. Test 2: [conditional]: If “present a [selection: DTLS 1.2, DTLS 1.3] Certificate Request message” is selected, the evaluator shall perform the following tests for each selected version of DTLS:
+. Test 1: [conditional]: If “present a [selection: DTLS 1.2, DTLS 1.3] Certificate Request message” is selected, the evaluator shall perform the following tests for each selected version of DTLS:
 [loweralpha]
 .. The evaluator shall examine the Certificate Request message. The evaluator shall verify that the SignatureAndHashAlgorithms (DTLS 1.2) or the SignatureSchemes (DTLS 1.3) match the SignatureAndHashAlgorithms specified in the requirement.
 .. The evaluator shall establish a connection and authenticate the client using each selected SignatureAndHashAlgorithm. The evaluator shall verify the connection succeeds.
 +
 Remark: The server must ensure the DTLS handshake is valid (e.g. certificate key, message formatting, hashes, and signatures), except for using a SignatureScheme not proposed by the client. The selected legacy SignatureScheme shall be as similar to one of the supported SignatureSchemes as possible. For example: 1) ecdsa_sha1 shall not be used if the TOE only supports RSA signatures, 2) ecdsa_sha1 must use a supported ECDSA curve or P-256 if only EdDSA curves are supported.
-. Test 3: [conditional]: If DTLS 1.3 is supported, the evaluator shall perform the following tests if “present the signature_algorithms_cert extension” is selected:
+. Test 2: [conditional]: If DTLS 1.3 is supported, the evaluator shall perform the following tests if “present the signature_algorithms_cert extension” is selected:
 [loweralpha]
 .. The evaluator shall examine the Certificate Request message and verify it contains the signature_algorihtms_cert extension and the SignatureSchemes match the SignatureSchemes specified in the requirement.
 .. The evaluator shall establish a TLS connection and perform client authentication using a certificate chain using each of the SignatureSchemes specified by the requirement. The evaluator shall ensure the signatures used in the certificate chain are consistent with the SignatureScheme being tested.
@@ -1633,7 +1629,7 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 [loweralpha]
 .. (covered by FCS_TLSC_EXT.1.1 Test 1 and testing for FIA_X.509_EXT.*).
 
-==== FCS_TLSC_EXT.3 Extended: TLS Client support for secure renegotiation (TLSv1.1/v1.2 only)
+==== FCS_TLSC_EXT.3 Extended: TLS Client support for secure renegotiation (TLSv1.2 only)
 
 ===== TSS
 
@@ -1714,8 +1710,8 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 . Test 3: The evaluator shall configure the client to send a certificate with the Client Authentication purpose in the extendedKeyUsage field and verify that the server accepts the attempted connection. The evaluator shall repeat this test without the Client Authentication purpose and shall verify that the server denies the connection. Ideally, the two certificates should be identical except for the Client Authentication purpose.
 . Test 4: The evaluator shall perform the following modifications to the traffic:
 [loweralpha]
-.. [conditional]: Perform this test only if support of TLSv1.1 or TLSv1.2 is claimed. Configure the server to require mutual authentication and then connect to the server with a client configured to send a client certificate that is signed by a Certificate Authority trusted by the TOE. The evaluator shall verify that the server accepts the connection.
-.. [conditional]: Perform this test only if support of TLSv1.1 or TLSv1.2 is claimed. Configure the server to require mutual authentication and then modify a byte in the signature block of the client’s Certificate Verify handshake message (see RFC5246 Sec 7.4.8). The evaluator shall verify that the server rejects the connection.
+.. [conditional]: Perform this test only if support of TLS 1.2 is claimed. Configure the server to require mutual authentication and then connect to the server with a client configured to send a client certificate that is signed by a Certificate Authority trusted by the TOE. The evaluator shall verify that the server accepts the connection.
+.. [conditional]: Perform this test only if support of TLS 1.2 is claimed. Configure the server to require mutual authentication and then modify a byte in the signature block of the client’s Certificate Verify handshake message (see RFC5246 Sec 7.4.8). The evaluator shall verify that the server rejects the connection.
 
 [arabic, start=334]
 . Note: Testing the validity of the client certificate is performed as part of X.509 testing.
@@ -1731,17 +1727,13 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 
 [arabic, start=339]
 . The evaluator shall perform the following tests:
-. Test 1 [conditional]: The evaluator shall perform the following tests if “present a TLS1.1 Certificate Request message” is selected:
+. Test 1 [conditional]: If “present a [selection: TLS 1.2, TLS 1.3] Certificate Request message” is selected, the evaluator shall perform the following tests for each selected version of TLS:
 [loweralpha]
-.. The evaluator shall perform a TLS1.1 handshake and examine the Certificate Request message. The evaluator shall verify the ClientCertificateTypes match those specified in the requirement.
-.. The evaluator shall establish a TLS1.1 connection and authenticate the client using each selected ClientCertificateType. The evaluator shall verify the connection succeeds. 
-. Test 2 [conditional]: If “present a [selection: TLSv1.2, TLSv1.3] Certificate Request message” is selected, the evaluator shall perform the following tests for each selected version of TLS:
-[loweralpha]
-.. The evaluator shall examine the Certificate Request message. The evaluator shall verify that the SignatureAndHashAlgorithms (TLSv1.2) or the SignatureSchemes (TLSv1.3) match the SignatureAndHashAlgorithms specified in the requirement.
+.. The evaluator shall examine the Certificate Request message. The evaluator shall verify that the SignatureAndHashAlgorithms (TLS 1.2) or the SignatureSchemes (TLS 1.3) match the SignatureAndHashAlgorithms specified in the requirement.
 .. The evaluator shall establish a connection and authenticate the client using each selected SignatureAndHashAlgorithm. The evaluator shall verify the connection succeeds.
 +
 Remark: The server must ensure the TLS handshake is valid (e.g. certificate key, message formatting, hashes, and signatures), except for using a SignatureScheme not proposed by the client. The selected legacy SignatureScheme shall be as similar to one of the supported SignatureSchemes as possible. For example: 1) ecdsa_sha1 shall not be used if the TOE only supports RSA signatures, 2) ecdsa_sha1 must use a supported ECDSA curve or P-256 if only EdDSA curves are supported.
-. Test 3 [conditional]: If TLSv1.3 is supported, the evaluator shall perform the following tests if “present the signature_algorithms_cert extension” is selected:
+. Test 2 [conditional]: If TLS 1.3 is supported, the evaluator shall perform the following tests if “present the signature_algorithms_cert extension” is selected:
 [loweralpha]
 .. The evaluator shall examine the Certificate Request message and verify it contains the signature_algorihtms_cert extension and the SignatureSchemes match the SignatureSchemes specified in the requirement.
 .. The evaluator shall establish a TLS connection and perform client authentication using a certificate chain using each of the SignatureSchemes specified by the requirement. The evaluator shall ensure the signatures used in the certificate chain are consistent with the SignatureScheme being tested.
@@ -1749,7 +1741,7 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 +
 Remark: The server must ensure the TLS handshake is valid (e.g. certificate key, Certificate Verify message, message formatting, hashes, and signatures), except for the certificate chain using a SignatureScheme not proposed by the client. The selected legacy SignatureScheme shall be as similar to one of the supported SignatureSchemes as possible. For example: 1) ecdsa_sha1 shall not be used if the TOE only supports RSA signatures, 2) ecdsa_sha1 must use a supported ECDSA curve or P-256 if only EdDSA curves are supported.
 
-==== FCS_TLSS_EXT.3 Extended: TLS Server support for secure renegotiation (TLSv1.1/v1.2 only)
+==== FCS_TLSS_EXT.3 Extended: TLS Server support for secure renegotiation (TLSv1.2 only)
 
 ===== TSS
 
@@ -1812,7 +1804,7 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 
 === Cryptographic Support (FCS)
 
-==== FCS_DTLSC_EXT.1 Extended: DTLS Client Protocol without mutual authentication
+==== FCS_DTLSC_EXT.1 Extended: DTLS Client Protocol
 
 ===== TSS
 
@@ -1897,26 +1889,26 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 . The goal of the following test is to verify that the TOE accepts only certificates with appropriate values in the extendedKeyUsage extension, and implicitly that the TOE correctly parses the extendedKeyUsage extension as part of X.509v3 server certificate validation.
 +
 Test 2: The evaluator shall attempt to establish the connection using a server with a server certificate that contains the Server Authentication purpose in the extendedKeyUsage extension and verify that a connection is established. The evaluator shall repeat this test using a different, but otherwise valid and trusted, certificate that lacks the Server Authentication purpose in the extendedKeyUsage extension and ensure that a connection is not established. Ideally, the two certificates should be similar in structure, the types of identifiers used, and the chain of trust.
-. Test 3: [conditional]: Perform this test only if support of DTLS 1.0 or DTLS 1.2 is claimed (corresponding testing for DTLS 1.3 is covered by the tests for FCS_DTLSC_EXT.1.5). The evaluator shall send a server certificate in the DTLS connection that does not match the server-selected ciphersuite (for example, send an ECDSA certificate while using the TLS_RSA_WITH_AES_128_CBC_SHA ciphersuite). The evaluator shall verify that the TOE disconnects after receiving the server’s Certificate handshake message.
+. Test 3: [conditional]: Perform this test only if support of DTLS 1.2 is claimed (corresponding testing for DTLS 1.3 is covered by the tests for FCS_DTLSC_EXT.1.5). The evaluator shall send a server certificate in the DTLS connection that does not match the server-selected ciphersuite (for example, send an ECDSA certificate while using the TLS_RSA_WITH_AES_128_CBC_SHA ciphersuite). The evaluator shall verify that the TOE disconnects after receiving the server’s Certificate handshake message.
 . Test 4: The evaluator shall perform the following 'negative tests':
 [loweralpha]
-.. [conditional]: Perform this test only if support of DTLS 1.0 or DTLS 1.2 is claimed. The evaluator shall configure the server to select the TLS_NULL_WITH_NULL_NULL ciphersuite and verify that the client denies the connection.
+.. [conditional]: Perform this test only if support of DTLS 1.2 is claimed. The evaluator shall configure the server to select the TLS_NULL_WITH_NULL_NULL ciphersuite and verify that the client denies the connection.
 .. Modify the server’s selected ciphersuite in the Server Hello handshake message to be a ciphersuite (compatible with the server-selected version of DTLS) not presented in the Client Hello handshake message. The evaluator shall verify that the client rejects the connection after receiving the Server Hello.
-.. The evaluator shall attempt to establish a DTLS connection using each of the DTLS versions (i.e. DTLS 1.3, DTLS 1.2, DTLS 1.0). The evaluator shall verify that the versions specified in FCS_DTLSC_EXT.1.1 are successfully established and all other versions are rejected by the client. The evaluator must ensure the ServerHello is valid for the DTLS version being negotiated. If the TOE includes the Supported Versions extension in its ClientHello, the evaluator shall also ensure the version(s) specified in the extension match the version(s) in FCS_DTLSC_EXT.1.1.
+.. The evaluator shall attempt to establish a DTLS connection using each of the DTLS versions (i.e. DTLS 1.3, DTLS 1.2). The evaluator shall verify that the versions specified in FCS_DTLSC_EXT.1.1 are successfully established and all other versions are rejected by the client. The evaluator must ensure the ServerHello is valid for the DTLS version being negotiated. If the TOE includes the Supported Versions extension in its ClientHello, the evaluator shall also ensure the version(s) specified in the extension match the version(s) in FCS_DTLSC_EXT.1.1.
 
 [arabic, start=365]
 . Test 5: The evaluator performs the following modifications to the traffic (i.e. Man-in-the-middle modifications that result in invalid signatures and MACs):
 [loweralpha]
-.. [conditional]: Perform this test only if support of DTLS 1.0 or DTLS 1.2 is claimed. If using DHE or ECDH ciphersuites, modify the signature block in the Server’s Key Exchange handshake message, and verify that the client denies the connection and no application data flows. The handshake shall be valid (e.g. the Finished message is calculated using the modified signature), with the exception of the invalid signature. This test does not apply to cipher suites using RSA key exchange. If a TOE only supports RSA key exchange in conjunction with DTLS then this test shall be omitted.
+.. [conditional]: Perform this test only if support of DTLS 1.2 is claimed. If using DHE or ECDH ciphersuites, modify the signature block in the Server’s Key Exchange handshake message, and verify that the client denies the connection and no application data flows. The handshake shall be valid (e.g. the Finished message is calculated using the modified signature), with the exception of the invalid signature. This test does not apply to cipher suites using RSA key exchange. If a TOE only supports RSA key exchange in conjunction with DTLS then this test shall be omitted.
 .. [conditional]: Perform this test only if support of DTLS 1.3 is claimed. Modify the signature block in the Server’s Certificate Verify handshake message, and verify that the client denies the connection and no application data flows. The handshake shall be valid (e.g. the Finished message is calculated using the modified signature), with the exception of the invalid signature.
 . Test 6: The evaluator performs the following 'scrambled message tests':
 [loweralpha]
 .. Modify a byte in the Server Finished handshake message and verify that the handshake is not finished successfully and no application data flows. (_Note: This modification must be performed prior to the contents of the Finished message being encrypted.)_
-.. [conditional]: Perform this test only if support of DTLS 1.0 or DTLS 1.2 is claimed. Send a garbled message from the Server after the Server has issued the ChangeCipherSpec message and verify that the handshake is not finished successfully and no application data flows.
+.. [conditional]: Perform this test only if support of DTLS 1.2 is claimed. Send a garbled message from the Server after the Server has issued the ChangeCipherSpec message and verify that the handshake is not finished successfully and no application data flows.
 +
 _(Note: DTLS 1.3 provides for a dummy ChangeCipherSpec message to aid in middlebox compatibility if such an option is enabled in the specific implementation [see section D.4 in RFC 8446].  If DTLS 1.3 middlebox compatibility mode is enabled a ChangeCipherSpec message may appear in packet traces, but it does not influence the protocol. To be clear: for DTLS 1.3, this test does not need to be performed.)_
-.. [conditional] Perform this test only if support of DTLSv1.3 is claimed . Send a plaintext EncryptedExtensions message from the server and verify that the handshake is not finished successfully and no application data flows.  _(Note: Under DTLS 1.3, the EncryptedExtensions message is the first message to be encrypted with the handshake traffic secret.)_
-.. [conditional]: Perform this test only if support of DTLS 1.0 or DTLS 1.2 is claimed. Modify at least one byte in the server’s nonce in the Server Hello handshake message and verify that the client rejects the Server Key Exchange handshake message (if using a DHE or ECDHE ciphersuite) or that the server denies the client’s Finished handshake message.
+.. [conditional] Perform this test only if support of DTLS 1.3 is claimed . Send a plaintext EncryptedExtensions message from the server and verify that the handshake is not finished successfully and no application data flows.  _(Note: Under DTLS 1.3, the EncryptedExtensions message is the first message to be encrypted with the handshake traffic secret.)_
+.. [conditional]: Perform this test only if support of DTLS 1.2 is claimed. Modify at least one byte in the server’s nonce in the Server Hello handshake message and verify that the client rejects the Server Key Exchange handshake message (if using a DHE or ECDHE ciphersuite) or that the server denies the client’s Finished handshake message.
 
 *FCS_DTLSC_EXT.1.2*
 
@@ -1972,9 +1964,9 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 [arabic, start=372]
 . Test 1 [conditional]: If “not present the Supported Groups Extension” is selected, the evaluator shall examine the Client Hello message and verify it does not contain the Supported Groups extension.
-. Test 2 [conditional]: If “present the Supported Groups Extension” is selected, the evaluator shall configure the server to perform ECDHE or DHE (as applicable) key exchange using each of the TOE’s supported groups. The evaluator shall verify that the connection succeeds. This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for DTLS 1.3 and Server Key Exchange Message for DTLS 1.0 or DTLS 1.2).
-. Test 3 [conditional]: If secp groups are selected, the evaluator shall configure the server to perform an ECDHE key exchange in the TLS connection using a non-supported curve and shall verify that the connection fails and no application data flows. The non-supported curve shall be as similar to the selected curve(s) as possible (i.e. a non-selected curve when not all curves are selected or P-224). This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for DTLS 1.3 and Server Key Exchange Message for DTLS 1.0 or DTLS 1.2).
-. Test 4 [conditional]: If ffdhe curves are selected, the evaluator shall configure the server to perform an DHE key exchange in the TLS connection using a non-supported group and shall verify that the connection fails and no application data flows. The non-supported group shall be as similar to the selected group(s) as possible (i.e. a non-selected group when not all groups are selected or undefined Codepoint 0x0105 (ffdhe8192 + 1)). This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for DTLS 1.3 and Server Key Exchange Message for DTLSv1.0 or DTLS 1.2).
+. Test 2 [conditional]: If “present the Supported Groups Extension” is selected, the evaluator shall configure the server to perform ECDHE or DHE (as applicable) key exchange using each of the TOE’s supported groups. The evaluator shall verify that the connection succeeds. This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for DTLS 1.3 and Server Key Exchange Message for DTLS 1.2).
+. Test 3 [conditional]: If secp groups are selected, the evaluator shall configure the server to perform an ECDHE key exchange in the TLS connection using a non-supported curve and shall verify that the connection fails and no application data flows. The non-supported curve shall be as similar to the selected curve(s) as possible (i.e. a non-selected curve when not all curves are selected or P-224). This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for DTLS 1.3 and Server Key Exchange Message for DTLS 1.2).
+. Test 4 [conditional]: If ffdhe curves are selected, the evaluator shall configure the server to perform an DHE key exchange in the TLS connection using a non-supported group and shall verify that the connection fails and no application data flows. The non-supported group shall be as similar to the selected group(s) as possible (i.e. a non-selected group when not all groups are selected or undefined Codepoint 0x0105 (ffdhe8192 + 1)). This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for DTLS 1.3 and Server Key Exchange Message for DTLS 1.2).
 
 *FCS_DTLSC_EXT.1.5*
 
@@ -2002,9 +1994,9 @@ Remark: The server must ensure the DTLS handshake is valid (e.g. certificate key
 *FCS_DTLSC_EXT.1.7*
 
 [arabic, start=381]
-. The evaluator shall establish a DTLS connection with a server and observe that the early data extension and the post-handshake client authentication extension according to RFC(tbd- current draft for DTLS 1.3 is V38), section 5.7.3 are not advertised in the Client Hello Message. This test shall be executed for all DTLS versions supported by the TOE.
+. The evaluator shall establish a DTLS connection with a server and observe that the early data extension and the post-handshake client authentication extension according to RFC 9147, section 5.8.4 are not advertised in the Client Hello Message. This test shall be executed for all DTLS versions supported by the TOE.
 
-==== FCS_DTLSS_EXT.1 Extended: DTLS Server Protocol without mutual authentication
+==== FCS_DTLSS_EXT.1 Extended: DTLS Server Protocol
 
 ===== TSS
 
@@ -2013,41 +2005,76 @@ Remark: The server must ensure the DTLS handshake is valid (e.g. certificate key
 [arabic, start=376]
 . The evaluator shall check the description of the implementation of this protocol in the TSS to ensure that the ciphersuites supported are specified. The evaluator shall check the TSS to ensure that the ciphersuites specified are identical to those listed for this component.
 
+*FCS_DTLSS_EXT.1.2*
+
+[arabic, start=376]
+. The evaluator shall verify that the TSS contains a description of how the TOE technically prevents the use of unsupported and undefined DTLS versions.
+
 *FCS_DTLSS_EXT.1.3*
 
 [arabic, start=377]
-. The evaluator shall verify that the TSS describes how the DTLS Client IP address is validated prior to issuing a ServerHello message.
+. The evaluator shall verify that the TSS describes how the DTLS Client IP address is validated prior to issuing a ServerHello message. The evaluator shall confirm that the TSS describes how the server presents a HelloVerify message (DTLS 1.2)/HelloRetry message (DTLS 1.3) containing a cookie and how the cookie is validated when the server receives the subsequent Client Hello message.
 
 *FCS_DTLSS_EXT.1.4*
 
 [arabic, start=378]
-. If using ECDHE or DHE ciphers, the evaluator shall verify that the TSS describes the key agreement parameters of the server Key Exchange message.
+. The evaluator shall verify that the TSS describes the algorithms and key sizes the TSF supports for authenticating itself to DTLS clients. The evaluator shall ensure these algorithms are consistent with the selected ciphersuites.
 
 *FCS_DTLSS_EXT.1.5*
 
 [arabic, start=379]
-. The evaluator shall verify that the TSS describes the actions that take place if a message received from the DTLS Client fails the MAC integrity check.
+. The evaluator shall verify that the TSS describes the key exchange parameters of the server Key Exchange message. The evaluator shall ensure these algorithms are consistent with the selected ciphersuites.
 
 *FCS_DTLSS_EXT.1.6*
 
 [arabic, start=380]
-. The evaluator shall verify that TSS describes how replay is detected and silently discarded for DTLS records that have previously been received and too old to fit in the sliding window.
+. The evaluator shall verify that the TSS describes the actions that take place if a message received from the DTLS Client fails the MAC integrity check.
 
 *FCS_DTLSS_EXT.1.7*
 
+[arabic, start=380]
+. The evaluator shall verify that TSS describes how replay is detected and silently discarded for DTLS records that have previously been received and too old to fit in the sliding window.
+
+*FCS_DTLSS_EXT.1.8*
+
 [arabic, start=381]
-. The evaluator shall verify that the TSS describes if session resumption based on session IDs is supported (RFC 4346 and/or RFC 5246) and/or if session resumption based on session tickets is supported (RFC 5077).
+. The evaluator shall verify that the TSS describes if session resumption based on session IDs is supported (RFC 4346 and/or RFC 5246) and/or if session resumption based on session tickets is supported (RFC 5077) and/or if session resumption according to RFC8446 is supported.
 . If session tickets are supported, the evaluator shall verify that the TSS describes that the session tickets are encrypted using symmetric algorithms consistent with FCS_COP.1/DataEncryption. The evaluator shall verify that the TSS identifies the key lengths and algorithms used to protect session tickets.
 . If session tickets are supported, the evaluator shall verify that the TSS describes that session tickets adhere to the structural format provided in section 4 of RFC 5077 and if not, a justification shall be given of the actual session ticket format.
+
+*FCS_DTLSS_EXT.1.9*
+
+[arabic, start=380]
+. The evaluator shall verify that TSS describes whether the list of supported ciphersuites can be configured or not.
+
+*FCS_DTLSS_EXT.1.10*
+
+[arabic, start=380]
+. The evaluator shall verify in the TSS that, for DTLS 1.3, the TOE shall not permit out-of-band provisioning of pre-shared keys (PSKs) in the evaluated configuration.
 
 ===== Guidance Documentation
 
 *FCS_DTLSS_EXT.1.1*
 
 [arabic, start=384]
-. The evaluator shall also check the guidance documentation to ensure that it contains instructions on configuring the TOE so that DTLS conforms to the description in the TSS (for instance, the set of ciphersuites advertised by the TOE may have to be restricted to meet the requirements).
+. The evaluator shall also check the guidance documentation to ensure that it contains instructions on configuring the TOE so that DTLS conforms to the description in the TSS (for instance, the set of ciphersuites advertised by the TOE or DTLS versions supported by the TOE may have to be restricted to meet the requirements).
 
 *FCS_DTLSS_EXT.1.4*
+
+[arabic, start=385]
+. The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
+
+*FCS_DTLSS_EXT.1.5*
+
+[arabic, start=385]
+. The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
+
+*FCS_DTLSS_EXT.1.9*
+
+[arabic, start=385]
+. If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall verify that AGD guidance includes configuration of the list of supported ciphersuites.
+
+*FCS_DTLSS_EXT.1.10*
 
 [arabic, start=385]
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
@@ -2061,68 +2088,93 @@ Remark: The server must ensure the DTLS handshake is valid (e.g. certificate key
 
 [arabic, start=387]
 . Test 1: The evaluator shall establish a DTLS connection using each of the ciphersuites specified by the requirement. This connection may be established as part of the establishment of a higher-level application protocol, e.g., as part of a syslog session. It is sufficient to observe the successful negotiation of a ciphersuite to satisfy the intent of the test; it is not necessary to examine the characteristics of the encrypted traffic in an attempt to discern the ciphersuite being used (for example, that the cryptographic algorithm is 128-bit AES and not 256-bit AES).
-. Test 2: The evaluator shall send a Client Hello to the server with a list of ciphersuites that does not contain any of the ciphersuites in the server’s ST and verify that the server denies the connection. Additionally, the evaluator shall send a Client Hello to the server containing only the TLS_NULL_WITH_NULL_NULL ciphersuite and verify that the server denies the connection.
+. Test 2: The evaluator shall perform the following tests:
+.. The evaluator shall send a Client Hello to the server with a list of ciphersuites that does not contain any of the ciphersuites in the server’s ST and verify that the server denies the connection.
+.. [conditional]: Perform this test only if support of DTLS 1.2 is claimed. The evaluator shall send a Client Hello to the server containing only the TLS_NULL_WITH_NULL_NULL ciphersuite and verify that the server denies the connection.
 . Test 3: The evaluator shall perform the following modifications to the traffic:
 [loweralpha]
-.. Modify a byte in the Client Finished handshake message and verify that the server rejects the connection and does not send any application data.
+.. [conditional]: Perform this test only if support of DTLS 1.2 is claimed. Modify a byte in the Client Finished handshake message and verify that the server rejects the connection and does not send any application data.
 .. (Test Intent: The intent of this test is to ensure that the server's TLS implementation immediately makes use of the key exchange and authentication algorithms to: a) Correctly encrypt (D)TLS Finished message and b) Encrypt every (D)TLS message after session keys are negotiated.)
 +
-The evaluator shall use one of the claimed ciphersuites to complete a successful handshake and observe transmission of properly encrypted application data. The evaluator shall verify that no Alert with alert level Fatal (2) messages were sent.
+[conditional]: Perform this test only if support of DTLS 1.2 is claimed. The evaluator shall use one of the claimed ciphersuites to complete a successful handshake and observe transmission of properly encrypted application data. The evaluator shall verify that no Alert with alert level Fatal (2) messages were sent.
 +
 The evaluator shall verify that the Finished message (Content type hexadecimal 16 and handshake message type hexadecimal 14) is sent immediately after the server's ChangeCipherSpec (Content type hexadecimal 14) message. The evaluator shall examine the Finished message (encrypted example in hexadecimal of a TLS record containing a Finished message, 16 03 03 00 40 11 22 33 44 55...) and confirm that it does not contain unencrypted data (unencrypted example in hexadecimal of a TLS record containing a Finished message, 16 03 03 00 40 14 00 00 0c...), by verifying that the first byte of the encrypted Finished message does not equal hexadecimal 14 for at least one of three test messages. There is a chance that an encrypted Finished message contains a hexadecimal value of '14' at the position where a plaintext Finished message would contain the message type code '14'. If the observed Finished message contains a hexadecimal value of '14' at the position where the plaintext Finished message would contain the message type code, the test shall be repeated three times in total. In case the value of '14' can be observed in all three tests it can be assumed that the Finished message has indeed been sent in plaintext and the test has to be regarded as 'failed'. Otherwise it has to be assumed that the observation of the value '14' has been due to chance and that the Finished message has indeed been sent encrypted. In that latter case the test shall be regarded as 'passed'.
+.. [conditional]: Perform this test only if support of DTLS 1.3 is claimed. The evaluator shall use a client to send a Client Hello message containing a single curve in the Supported Groups extension. The curve that is selected to be presented in this extension should not be supported by the TOE. The evaluator shall verify that the TOE disconnects after receiving the Client Hello message.
+.. [conditional]: Perform this test only if support of DTLS 1.3 is claimed. The evaluator shall use a client to send a Client Hello message containing multiple curves in the Supported Groups extension. These curves should be chosen such that only one of these curves is supported by the TOE. The evaluator shall verify that the TOE responds with a Hello Retry Request message selecting the supported curve. This shall be reflected in the Key Share extension of the Hello Retry Request message.
 
+*FCS_DTLSS_EXT.1.2*
+
+[arabic, start=390]
+. The evaluator shall attempt to establish a DTLS connection using each of the DTLS versions (i.e., DTLS 1.3, DTLS 1.2). The client shall be configured so it only supports the version being tested. The evaluator shall verify that the versions specified in FCS_DTLSS_EXT.1.1 are successfully established and all other versions not successfully established. If the TOE attempts to downgrade the version, it is acceptable for the test client to terminate the connection; however, the version selected by the TOE shall always be a version specified in FCS_TLSS_EXT.1.1.
 
 *FCS_DTLSS_EXT.1.3*
 
 [arabic, start=390]
-. Modify at least one byte in the cookie from the Server's HelloVerifyRequest message and verify that the Server rejects the Client's handshake message.
+. [conditional]: If the DTLS server supports cookies, the DTLS server shall present a HelloRetryRequest message (DTLS 1.3)/ HelloVerify message (DTLS 1.2) containing a cookie. In the subsequent client hello message sent by the client to the server to validate the cookie, the evaluator shall modify at least one byte in the cookie from the Server's HelloVerifyRequest message, and verify that the Server rejects the Client's handshake message.
 
-*FCS_DTLSS_EXT.1.4*
+*FCS_DTLSS_EXT.1.4 and FCS_DTLSS_EXT.1.5*
 
 [arabic, start=391]
-. Test 1 [conditional]: If ECDHE ciphersuites are supported:
+. Test 1 [conditional]: If ECDHE ciphersuites/groups are supported:
 [loweralpha]
-.. The evaluator shall repeat this test for each supported elliptic curve. The evaluator shall attempt a connection using a supported ECDHE ciphersuite and a single supported elliptic curve specified in the Elliptic Curves Extension. The evaluator shall verify (through a packet capture or instrumented client) that the TOE selects the same curve in the Server Key Exchange message and successfully establishes the connection.
-
-.. The evaluator shall attempt a connection using a supported ECDHE ciphersuite and a single unsupported elliptic curve (e.g. secp192r1 (0x13)) specified in RFC4492, chap. 5.1.1. The evaluator shall verify that the TOE does not send a Server Hello message and the connection is not successfully established.
-. Test 2 [conditional]: If DHE ciphersuites are supported, the evaluator shall repeat the following test for each supported parameter size. If any configuration is necessary, the evaluator shall configure the TOE to use a supported Diffie-Hellman parameter size. The evaluator shall attempt a connection using a supported DHE ciphersuite. The evaluator shall verify (through a packet capture or instrumented client) that the TOE sends a Server Key Exchange Message where p Length is consistent with the configured Diffie-Hellman parameter size(s).
+.. The evaluator shall repeat this test for each supported elliptic curve. The evaluator shall attempt a connection using a supported ECDHE ciphersuite (DTLS 1.2) or group (DTLS 1.3) and a single supported elliptic curve specified in the supported groups extension. The evaluator shall verify (through a packet capture or instrumented client) that the TOE selects the same curve in the Server Key Exchange (DTLS 1.2) or Server Hello (key_share, for DTLS 1.3) message and successfully establishes the connection.
+.. The evaluator shall attempt a connection using a supported_groups extension containing a single unsupported elliptic curve (e.g. secp192r1 (0x13)). Note: For DTLS 1.2 connections, a single supported ECDHE ciphersuite shall be proposed. The evaluator shall verify that the TOE does not send a Server Hello message and the connection is not successfully established.
+. Test 2 [conditional]: If DHE ciphersuites are supported, the evaluator shall repeat the following test for each supported parameter size. If any configuration is necessary, the evaluator shall configure the TOE to use a supported Diffie-Hellman parameter size. The evaluator shall attempt a connection using a supported DHE ciphersuite.
+. For DTLS 1.2, the evaluator shall verify (through a packet capture or instrumented client) that the TOE sends a Server Key Exchange Message where p Length is consistent with the configured Diffie-Hellman parameter size(s).
+. For DTLS 1.3, the evaluator shall verify (through a packet capture or instrumented client) that the TOE sends a Server Key Share Extension Message where the KeyShareServerHello structure contains a KeyShareEntry structure with an opaque key_exchange value whose Length is consistent with the configured Diffie-Hellman parameter size(s).
 . Test 3 [conditional]: If RSA key establishment ciphersuites are supported, the evaluator shall repeat this test for each RSA key establishment key size. If any configuration is necessary, the evaluator shall configure the TOE to perform RSA key establishment using a supported key size (e.g. by loading a certificate with the appropriate key size). The evaluator shall attempt a connection using a supported RSA key establishment ciphersuite. The evaluator shall verify (through a packet capture or instrumented client) that the TOE sends a certificate whose modulus is consistent with the configured RSA key size.
-+
-*FCS_DTLSS_EXT.1.5*
-. The evaluator shall establish a connection using a client. The evaluator will then modify at least one byte in a record message and verify that the Server discards the record or terminates the DTLS session.
 
 *FCS_DTLSS_EXT.1.6*
 
 [arabic, start=395]
-. The evaluator shall set up a DTLS connection. The evaluator shall then capture traffic sent from the DTLS Client to the TOE. The evaluator shall retransmit copies of this traffic to the TOE in order to impersonate the DTLS Client. The evaluator shall observe that the TSF does not take action in response to receiving these packets and that the audit log indicates that the replayed traffic was discarded.*
+. The evaluator shall establish a connection using a client.  The evaluator will then modify at least one byte in a record message, and verify that the Server discards the record or terminates the DTLS session.
 
 *FCS_DTLSS_EXT.1.7*
+
+[arabic, start=395]
+. The evaluator shall set up a DTLS connection. The evaluator shall then capture traffic sent from the DTLS Client to the TOE. The evaluator shall retransmit copies of this traffic to the TOE in order to impersonate the DTLS Client. The evaluator shall observe that the TSF does not take action in response to receiving these packets and that the audit log indicates that the replayed traffic was discarded.
+
+*FCS_DTLSS_EXT.1.8*
 
 _Test Objective: To demonstrate that the TOE will not resume a session for which the client failed to complete the handshake (independent of TOE support for session resumption)_
 
 [arabic, start=396]
-. Test 1 [conditional]: If the TOE does not support session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2) or session tickets according to RFC5077, the evaluator shall perform the following test:
+. Test 1 [conditional]: If the TOE does not support session resumption based on session IDs according to RFC4346 (TLS 1.1) or RFC5246 (TLS 1.2), or session tickets according to RFC5077 (TLS 1.2) or session resumption according to RFC8446 (TLS 1.3), the evaluator shall perform the following test:
 [loweralpha]
-.. The client sends a Client Hello with a zero-length session identifier and with a SessionTicket extension containing a zero-length ticket.
+.. For all supported TLS versions the client shall send a Client Hello with a zero-length session identifier and with a SessionTicket extension containing a zero-length ticket. A non-zero length session identifier for TLS 1.3 would result in testing compatibility mode which is not the objective of this test. For TLS 1.3, the evaluator shall ensure that a 'psk_key_exchange_modes' extension is included in the Client Hello.
 .. The client verifies the server does not send a NewSessionTicket handshake message (at any point in the handshake).
-.. The client verifies the Server Hello message contains a zero-length session identifier or passes the following steps:
+.. The client verifies the Server Hello message contains a zero-length session identifier. For TLS 1.2 the client could alternatively pass the following steps (not applicable for TLS 1.3):
 +
 Note: The following steps are only performed if the ServerHello message contains a non-zero length SessionID.
-[loweralpha, start=4]
-.. The client completes the TLS handshake and captures the SessionID from the ServerHello.
-.. The client sends a ClientHello containing the SessionID captured in step d). This can be done by keeping the TLS session from step d) open or by starting a new TLS session using the SessionID captured in step d).
-.. The client verifies the TOE (1) implicitly rejects the SessionID by sending a ServerHello containing a different SessionID and by performing a full handshake (as shown in Figure 1 of RFC 4346 or RFC 5246), or (2) terminates the connection in some way that prevents the flow of application data.
+.. The client completes the TLS handshake, captures the SessionID from the ServerHello.
+.. The client sends a ClientHello containing the SessionID captured in step d). This can be done e.g. by keeping the TLS session in step d) open or start a new TLS session using the SessionID captured in step d).
+.. The client verifies the TOE (1) implicitly rejects the SessionID by sending a ServerHello containing a different SessionID and by performing a full handshake (as shown into shown in figure 1 of RFC 4346 or RFC 5246), or (2) terminates the connection in some way that prevents the flow of application data.
 
 [arabic, start=397]
-. Test 2 [conditional]: If the TOE supports session resumption using session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), the evaluator shall carry out the following steps (note that for each of these tests, it is not necessary to perform the test case for each supported version of TLS):
+. Test 2 [conditional]: If the TOE supports session resumption using session IDs according to RFC4346 (TLS 1.1) or RFC5246 (TLS 1.2), the evaluator shall carry out the following steps (note that for each of these tests, it is not necessary to perform the test case for each supported version of TLS):
 [loweralpha]
-.. The evaluator shall conduct a successful handshake and capture the TOE-generated session ID in the Server Hello message. The evaluator shall then initiate a new TLS connection and send the previously captured session ID to show that the TOE resumed the previous session by responding with ServerHello containing the same SessionID immediately followed by ChangeCipherSpec and Finished messages (as shown in figure 2 of RFC 4346 or RFC 5246).
+.. The evaluator shall conduct a successful handshake and capture the TOE-generated session ID in the Server Hello message. The evaluator shall then initiate a new TLS connection and send the previously captured session ID to show that the TOE resumed the previous session by responding with ServerHello containing the same SessionID immediately followed by ChangeCipherSpec and Finished messages (as shown in figure 2 of RFC 4346 or RFC 5246). When the session is resumed, the evaluator shall verify on the TLS Client used for performing this test, that the TOE (TLS Server) has not advertised support for the early data extension.
 .. The evaluator shall initiate a handshake and capture the TOE-generated session ID in the Server Hello message. The evaluator shall then, within the same handshake, generate or force an unencrypted fatal Alert message immediately before the client would otherwise send its ChangeCipherSpec message thereby disrupting the handshake. The evaluator shall then initiate a new Client Hello using the previously captured session ID, and verify that the server (1) implicitly rejects the session ID by sending a ServerHello containing a different SessionID and performing a full handshake (as shown in figure 1 of RFC 4346 or RFC 5246), or (2) terminates the connection in some way that prevents the flow of application data.
 [arabic, start=398]
-. Test 3 [conditional]: If the TOE supports session tickets according to RFC5077, the evaluator shall carry out the following steps (note that for each of these tests, it is not necessary to perform the test case for each supported version of TLS):
+. Test 3 [conditional]: If the TOE supports session tickets according to RFC5077 (supported only by TLS 1.2), the evaluator shall carry out the following steps (note that for each of these tests, it is not necessary to perform the test case for each supported version of TLS):
 [loweralpha]
-.. The evaluator shall permit a successful TLS handshake to occur in which a session ticket is exchanged with the non-TOE client. The evaluator shall then attempt to correctly reuse the previous session by sending the session ticket in the ClientHello. The evaluator shall confirm that the TOE responds with a ServerHello with an empty SessionTicket extension, NewSessionTicket, ChangeCipherSpec and Finished messages (as seen in figure 2 of RFC 5077).
+.. The evaluator shall permit a successful TLS handshake to occur in which a session ticket is exchanged with the non-TOE client. The evaluator shall then attempt to correctly reuse the previous session by sending the session ticket in the ClientHello. The evaluator shall confirm that the TOE responds with a ServerHello with an empty SessionTicket extension, NewSessionTicket, ChangeCipherSpec and Finished messages (as seen in figure 2 of RFC 5077). When the session is resumed, the evaluator shall verify on the TLS Client used for performing this test, that the TOE (TLS Server) has not advertised support for the early data extension.
 .. The evaluator shall permit a successful TLS handshake to occur in which a session ticket is exchanged with the non-TOE client. The evaluator will then modify the session ticket and send it as part of a new Client Hello message. The evaluator shall confirm that the TOE either (1) implicitly rejects the session ticket by performing a full handshake (as shown in figure 3 or 4 of RFC 5077), or (2) terminates the connection in some way that prevents the flow of application data.
+
+. Test 4 [conditional]: If the TOE supports session resumption according to RFC8446 (supported only by TLS 1.3), the evaluator shall carry out the following steps:
+.. The evaluator shall permit a successful TLS handshake to occur in which a session ticket is exchanged with the non-TOE client.  The evaluator shall then attempt to correctly reuse the previous session by sending the pre-shared key in the ClientHello. The evaluator shall confirm that the TOE responds similarly to figure 3 of RFC 8446 after successfully reusing the pre-shared-key to resume the session. Specifically, the server must not send back a Certificate message if the session is correctly resumed. When the session is resumed, the evaluator shall verify on the TLS Client used for performing this test, that the TOE (TLS Server) has not advertised support for the early data extension.
+.. The evaluator shall permit a successful TLS handshake to occur in which a session ticket is exchanged with the non-TOE client.  The evaluator will then modify the pre-shared key and send it as part of a new Client Hello message.  The evaluator shall confirm that the TOE either (1) implicitly rejects the session ticket by performing a full handshake, or (2) terminates the connection in some way that prevents the flow of application data.
+.. The evaluator shall permit a successful TLS handshake to occur in which a session ticket is exchanged with the non-TOE client.  The evaluator will then force the non-TOE client to attempt to establish a new connection using the previous session ticket material as a pre-shared key, but set psk_key_exchange_modes with a value of psk_ke in the Client Hello message and omit the psk_ke_dhe.  The evaluator shall confirm that the TOE either (1) implicitly rejects the session ticket by performing a full handshake, or (2) terminates the connection in some way that prevents the flow of application data.
+
+*FCS_DTLSS_EXT.1.9*
+
+[arabic, start=398]
+. If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a DTLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported DTLS versions. This test should be considered to be performed together with FCS_DTLSS_EXT.1.1 Test 1. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
+
+*FCS_DTLSS_EXT.1.10*
+
+[arabic, start=398]
+. According to RFC8446 section 4.2.10, a PSK is required to use the early data extension. As NDcPP only allows the use of PSK in conjunction with session resumption, a NDcPP conformant TOE which acts as DTLS Server cannot use the early data extension if session resumption is not supported. For TOEs that do not support session resumption, execution of test FCS_DTLSS_EXT.1.8 Test 1 is regarded as sufficient that the TOE does not support the early data extension. For TOEs that support session resumption, FCS_DTLSS_EXT.1.8 Test 2a, 3a or 4a (depending on the supported TLS versions and the way session resumption is implemented) ensure that the TOE does not support the early data extension.
 
 ==== FCS_HTTPS_EXT.1 HTTPS Protocol
 
@@ -2701,7 +2753,7 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 [arabic, start=526]
 . {blank}
 
-==== FCS_TLSC_EXT.1 Extended: TLS Client Protocol without mutual authentication
+==== FCS_TLSC_EXT.1 Extended: TLS Client Protocol
 
 ===== TSS
 
@@ -2720,7 +2772,21 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 *FCS_TLSC_EXT.1.4*
 
 [arabic, start=531]
-. The evaluator shall verify that TSS describes the Supported Elliptic Curves/Supported Groups Extension and whether the required behaviour is performed by default or may be configured.
+. The evaluator shall verify that TSS describes the Supported Groups Extension and whether the required behaviour is performed by default or may be configured.
+
+*FCS_TLSC_EXT.1.5*
+[arabic, start=532]
+. The evaluator shall verify that TSS describes the signature_algorithm extension and whether the required behavior is performed by default or may be configured.
+.	If “not present the signature_algorithms extension” is selected, the evaluator shall verify that the TSS describes support for at least one RSA ciphersuite, RSA in FCS_COP.1/SigGen, and SHA-1 for FCS_COP.1/Hash.
+
+*FCS_TLSC_EXT.1.6*
+[arabic, start=532]
+.	The evaluator shall verify that TSS describes whether the list of supported ciphersuites can be configured or not.
+
+*FCS_TLSC_EXT.1.8*
+[arabic, start=532]
+. The evaluator shall verify in the TSS that, for TLS 1.3, the TOE shall not permit out-of-band provisioning of pre-shared keys (PSKs) in the evaluated configuration.
+
 
 ===== Guidance Documentation
 
@@ -2738,7 +2804,24 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 *FCS_TLSC_EXT.1.4*
 
 [arabic, start=535]
-. If the TSS indicates that the Supported Elliptic Curves/Supported Groups Extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the Supported Elliptic Curves/Supported Groups Extension.
+. If the TSS indicates that the Supported Groups Extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the Supported Groups Extension.
+
+
+*FCS_TLSC_EXT.1.5*
+
+[arabic, start=536]
+.	If the TSS indicates that the signature_algorithm extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the signature_algorithm extension.
+
+*FCS_TLSC_EXT.1.6*
+[arabic, start=536]
+
+.	If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall verify that AGD guidance includes configuration of the list of supported ciphersuites.
+
+*FCS_TLSC_EXT.1.8*
+
+[arabic, start=536]
+.	The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
+
 
 ===== Tests
 
@@ -2750,25 +2833,29 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 [arabic, start=537]
 . Test 1: The evaluator shall establish a TLS connection using each of the ciphersuites specified by the requirement. This connection may be established as part of the establishment of a higher-level protocol, e.g., as part of an HTTPS session. It is sufficient to observe the successful negotiation of a ciphersuite to satisfy the intent of the test; it is not necessary to examine the characteristics of the encrypted traffic to discern the ciphersuite being used (for example, that the cryptographic algorithm is 128-bit AES and not 256-bit AES).
 . Test 2: The evaluator shall attempt to establish the connection using a server with a server certificate that contains the Server Authentication purpose in the extendedKeyUsage field and verify that a connection is established. The evaluator will then verify that the client rejects an otherwise valid server certificate that lacks the Server Authentication purpose in the extendedKeyUsage field, and a connection is not established. Ideally, the two certificates should be identical except for the extendedKeyUsage field.
-. Test 3: The evaluator shall send a server certificate in the TLS connection that does not match the server-selected ciphersuite (for example, send an ECDSA certificate while using the TLS_RSA_WITH_AES_128_CBC_SHA ciphersuite). The evaluator shall verify that the TOE disconnects after receiving the server’s Certificate handshake message.
+. Test 3 [conditional]: Perform this test only if support of TLS 1.2 is claimed (corresponding testing for TLS 1.3 is covered by the tests for FCS_TLSC_EXT.1.5). The evaluator shall send a server certificate in the TLS connection that does not match the server-selected ciphersuite (for example, send an ECDSA certificate while using the TLS_RSA_WITH_AES_128_CBC_SHA ciphersuite). The evaluator shall verify that the TOE disconnects after receiving the server’s Certificate handshake message.
 . Test 4: The evaluator shall perform the following 'negative tests':
 [loweralpha]
-.. The evaluator shall configure the server to select the TLS_NULL_WITH_NULL_NULL ciphersuite and verify that the client denies the connection.
-.. Modify the server’s selected ciphersuite in the Server Hello handshake message to be a ciphersuite not presented in the Client Hello handshake message. The evaluator shall verify that the client rejects the connection after receiving the Server Hello.
-.. [conditional]: If the TOE presents the Supported Elliptic Curves/Supported Groups Extension the evaluator shall configure the server to perform an ECDHE or DHE key exchange in the TLS connection using a non-supported curve/group (for example P-192) and shall verify that the TOE disconnects after receiving the server’s Key Exchange handshake message.
+.. [conditional]: Perform this test only if support of TLS 1.2 is claimed. The evaluator shall configure the server to select the TLS_NULL_WITH_NULL_NULL ciphersuite and verify that the client denies the connection.
+.. Modify the server’s selected ciphersuite in the Server Hello handshake message to be a ciphersuite (compatible with the server-selected version of TLS) not presented in the Client Hello handshake message. The evaluator shall verify that the client rejects the connection after receiving the Server Hello.
+.. The evaluator shall attempt to establish a TLS connection using each of the TLS/SSL versions (i.e. TLS 1.3, TLS 1.2, TLS 1.1, TLS 1.0, SSL 3.0, SSL 2.0). The evaluator shall verify that the versions specified in FCS_TLSC_EXT.1.1 are successfully established and all other versions are rejected by the client. The evaluator must ensure the ServerHello is valid for the TLS version being negotiated. If the TOE includes the Supported Versions extension in its ClientHello, the evaluator shall also ensure the version(s) specified in the extension match the version(s) in FCS_TLSC_EXT.1.1.
+
 
 [arabic, start=541]
-. Test 5: The evaluator performs the following modifications to the traffic:
+. Test 5: The evaluator performs the following modifications to the traffic (i.e. Man-in-the-middle modifications that result in invalid signatures and MACs):
 [loweralpha]
-.. Change the TLS version selected by the server in the Server Hello to a non-supported TLS version and verify that the client rejects the connection.
-.. [conditional]: If using DHE or ECDH, modify the signature block in the Server’s Key Exchange handshake message, and verify that the handshake does not finished successfully, and no application data flows. This test does not apply to cipher suites using RSA key exchange. If a TOE only supports RSA key exchange in conjunction with TLS, then this test shall be omitted.
+
+.. [conditional]: Perform this test only if support of TLS 1.2 is claimed. If using DHE or ECDH ciphersuites, modify the signature block in the Server’s Key Exchange handshake message, and verify that the client denies the connection and no application data flows. The handshake shall be valid (e.g. the Finished message is calculated using the modified signature), with the exception of the invalid signature. This test does not apply to cipher suites using RSA key exchange. If a TOE only supports RSA key exchange in conjunction with TLS, then this test shall be omitted.
+
+.. [conditional]: Perform this test only if support of TLS 1.3 is claimed. Modify the signature block in the Server’s Certificate Verify handshake message, and verify that the client denies the connection and no application data flows. The handshake shall be valid (e.g. the Finished message is calculated using the modified signature), with the exception of the invalid signature.
 
 [arabic, start=542]
 . Test 6: The evaluator performs the following 'scrambled message tests':
 [loweralpha]
-.. Modify a byte in the Server Finished handshake message and verify that the handshake does not finish successfully and no application data flows.
-.. Send a garbled message from the server after the server has issued the ChangeCipherSpec message and verify that the handshake does not finish successfully and no application data flows.
-.. Modify at least one byte in the server’s nonce in the Server Hello handshake message and verify that the client rejects the Server Key Exchange handshake message (if using a DHE or ECDHE ciphersuite) or that the server denies the client’s Finished handshake message.
+.. Modify a byte in the Server Finished handshake message and verify that the handshake does not finish successfully and no application data flows. (Note: This modification must be performed prior to the contents of the Finished message being encrypted.)
+.. [conditional]:  Perform this test only if support of TLS 1.2 is claimed. Send a garbled message from the server after the server has issued the ChangeCipherSpec message and verify that the handshake is not finished successfully and no application data flows. (Note: TLS 1.3 provides for a dummy ChangeCipherSpec message to aid in middlebox compatibility if such an option is enabled in the specific implementation [see section D.4 in RFC 8446].  If TLS 1.3 middlebox compatibility mode is enabled a ChangeCipherSpec message may appear in packet traces, but it does not influence the protocol. To be clear: for TLS 1.3, this test does not need to be performed.)
+.. [conditional]: Perform this test only if support of TLS 1.3 is claimed. Send a plaintext EncryptedExtensions message from the server and verify that the handshake is not finished successfully and no application data flows.  (Note: Under TLS 1.3, the EncryptedExtensions message is the first message to be encrypted with the handshake traffic secret.)
+.. [conditional]: Perform this test only if support of TLS 1.2 is claimed. Modify at least one byte in the server’s nonce in the Server Hello handshake message and verify that the client rejects the Server Key Exchange handshake message (if using a DHE or ECDHE ciphersuite) or that the server denies the client’s Finished handshake message.
 
 *FCS_TLSC_EXT.1.2*
 
@@ -2827,7 +2914,34 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 *FCS_TLSC_EXT.1.4*
 
 [arabic, start=550]
-. Test 1 [conditional]: If the TOE presents the Supported Elliptic Curves/Supported Groups Extension, _the evaluator shall configure the server to perform ECDHE or DHE (as applicable) key exchange using each of the TOE’s supported curves and/or groups. The evaluator shall verify that the TOE successfully connects to the server.
+. Test 1 [conditional]: If “not present the Supported Groups Extension” is selected, the evaluator shall examine the Client Hello message and verify it does not contain the Supported Groups extension.
+.	Test 2 [conditional]: If “present the Supported Groups Extension” is selected, the evaluator shall configure the server to perform ECDHE or DHE (as applicable) key exchange using each of the TOE’s supported groups. The evaluator shall verify that the connection succeeds. This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for TLS 1.3 and Server Key Exchange Message for TLS 1.2).
+.	Test 3 [conditional]: If secp groups are selected, the evaluator shall configure the server to perform an ECDHE key exchange in the TLS connection using a non-supported curve and shall verify that the connection fails and no application data flows. The non-supported curve shall be as similar to the selected curve(s) as possible (i.e. a non-selected curve when not all curves are selected or P-224). This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for TLS 1.3 and Server Key Exchange Message for TLS 1.2).
+.	Test 4 [conditional]: If ffdhe curves are selected, the evaluator shall configure the server to perform an DHE key exchange in the TLS connection using a non-supported group and shall verify that the connection fails and no application data flows. The non-supported group shall be as similar to the selected group(s) as possible (i.e. a non-selected group when not all groups are selected or undefined Codepoint 0x0105 (ffdhe8192 + 1)). This test shall be repeated for each type of key exchange message/extension supported (i.e. Key Share extension for TLS 1.3 and Server Key Exchange Message for TLS 1.2).
+
+*FCS_TLSC_EXT.1.5*
+[arabic, start=551]
+
+. The evaluator shall perform the following tests:
+. Test 1 [conditional]: If “not present the signature_algorithms extension” is selected, the evaluator shall examine the Client Hello message and verify it does not contain the signature_algorihtms extension or the signature_algorithms_cert extension.
+. Test 2 [conditional]: The evaluator shall perform the following tests if “present the signature_algorithms extension” is selected:
+.. The evaluator shall examine the Client Hello message and verify it contains the signature_algorihtms extension and the SignatureSchemes match the SignatureSchemes specified in the requirement.
+.. The evaluator shall establish a TLS connection using each of the SignatureSchemes specified by the requirement and observes the session is successfully completed. The evaluator shall ensure the test server sends Certificate and Certificate Verify messages that are consistent with the SignatureScheme being tested.
+.	Test 3 [conditional]: The evaluator shall perform the following tests if “present the signature_algorithms_cert extension” is selected:
+.. The evaluator shall examine the Client Hello message and verify it contains the signature_algorihtms_cert extension and the SignatureSchemes match the SignatureSchemes specified in the requirement.
+.. The evaluator shall establish a TLS connection using a certificate chain using each of the SignatureSchemes specified by the requirement. The evaluator shall ensure the signatures used in the certificate chain are consistent with the SignatureScheme being tested.
++
+Remark: The server must ensure the TLS handshake is valid (e.g. certificate key, Certificate Verify message, message formatting, hashes, and signatures), except for the certificate chain using a SignatureScheme not proposed by the client. The selected legacy SignatureScheme shall be as similar to one of the supported SignatureSchemes as possible. For example: 1) ecdsa_sha1 shall not be used if the TOE only supports RSA signatures, 2) ecdsa_sha1 must use a supported ECDSA curve or P-256 if only EdDSA curves are supported.
+
+
+*FCS_TLSC_EXT.1.6 [conditional]*
+[arabic, start=551]
+. If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a TLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported TLS versions. This test should be considered to be performed together with FCS_TLSC_EXT.1.1 Test 1. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
+
+*FCS_TLSC_EXT.1.7*
+[arabic, start=551]
+. The evaluator shall establish a TLS connection with a server and observe that the early data extension and the post-handshake client authentication extension according to RFC8446 Section 4.2 are not advertised in the Client Hello Message. This test shall be executed for all TLS versions supported by the TOE.
+
 
 ==== FCS_TLSS_EXT.1 Extended: TLS Server Protocol
 
@@ -2906,42 +3020,42 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 [arabic, start=560]
 . Test 1: The evaluator shall establish a TLS connection using each of the ciphersuites specified by the requirement. This connection may be established as part of the establishment of a higher-level protocol, e.g., as part of an HTTPS session. It is sufficient to observe the successful negotiation of a ciphersuite to satisfy the intent of the test; it is not necessary to examine the characteristics of the encrypted traffic to discern the ciphersuite being used (for example, that the cryptographic algorithm is 128-bit AES and not 256-bit AES).
 . Test 2: The evaluator shall perform the following tests:
-.. The evaluator shall send a Client Hello to the server with a list of ciphersuites that does not contain any of the ciphersuites in the server’s ST and verify that the server denies the connection. 
-.. [conditional]: Perform this test only if support of TLSv1.1 or TLSv1.2 is claimed. The evaluator shall send a Client Hello to the server containing only the TLS_NULL_WITH_NULL_NULL ciphersuite and verify that the server denies the connection.
+.. The evaluator shall send a Client Hello to the server with a list of ciphersuites that does not contain any of the ciphersuites in the server’s ST and verify that the server denies the connection.
+.. [conditional]: Perform this test only if support of TLS 1.2 is claimed. The evaluator shall send a Client Hello to the server containing only the TLS_NULL_WITH_NULL_NULL ciphersuite and verify that the server denies the connection.
 . Test 3: The evaluator shall perform the following modifications to the traffic:
 [loweralpha]
-.. [conditional]: Perform this test only if support of TLSv1.1 or TLSv1.2 is claimed. Modify a byte in the Client Finished handshake message, and verify that the server rejects the connection and does not send any application data.
+.. [conditional]: Perform this test only if support of TLS 1.2 is claimed. Modify a byte in the Client Finished handshake message, and verify that the server rejects the connection and does not send any application data.
 .. (Test Intent: The intent of this test is to ensure that the server's TLS implementation immediately makes use of the key exchange and authentication algorithms to: a) Correctly encrypt (D)TLS Finished message and b) Encrypt every (D)TLS message after session keys are negotiated.)
 +
 
-[conditional]: Perform this test only if support of TLSv1.1 or TLSv1.2 is claimed. The evaluator shall use one of the claimed ciphersuites to complete a successful handshake and observe transmission of properly encrypted application data. The evaluator shall verify that no Alert with alert level Fatal (2) messages were sent.
+[conditional]: Perform this test only if support of TLS 1.2 is claimed. The evaluator shall use one of the claimed ciphersuites to complete a successful handshake and observe transmission of properly encrypted application data. The evaluator shall verify that no Alert with alert level Fatal (2) messages were sent.
 +
 
 The evaluator shall verify that the Finished message (Content type hexadecimal 16 and handshake message type hexadecimal 14) is sent immediately after the server's ChangeCipherSpec (Content type hexadecimal 14) message. The evaluator shall examine the Finished message (encrypted example in hexadecimal of a TLS record containing a Finished message, 16 03 03 00 40 11 22 33 44 55...) and confirm that it does not contain unencrypted data (unencrypted example in hexadecimal of a TLS record containing a Finished message, 16 03 03 00 40 14 00 00 0c...), by verifying that the first byte of the encrypted Finished message does not equal hexadecimal 14 for at least one of three test messages. There is a chance that an encrypted Finished message contains a hexadecimal value of '14' at the position where a plaintext Finished message would contain the message type code '14'. If the observed Finished message contains a hexadecimal value of '14' at the position where the plaintext Finished message would contain the message type code, the test shall be repeated three times in total. In case the value of '14' can be observed in all three tests it can be assumed that the Finished message has indeed been sent in plaintext and the test has to be regarded as 'failed'. Otherwise it has to be assumed that the observation of the value '14' has been due to chance and that the Finished message has indeed been sent encrypted. In that latter case the test shall be regarded as 'passed'.
 
-.. [conditional]: Perform this test only if support of TLSv1.3 is claimed. The evaluator shall use a client to send a Client Hello message containing a single curve in the Supported Groups extension. The curve that is selected to be presented in this extension should not be supported by the TOE. The evaluator shall verify that the TOE disconnects after receiving the Client Hello message.
+.. [conditional]: Perform this test only if support of TLS 1.3 is claimed. The evaluator shall use a client to send a Client Hello message containing a single curve in the Supported Groups extension. The curve that is selected to be presented in this extension should not be supported by the TOE. The evaluator shall verify that the TOE disconnects after receiving the Client Hello message.
 
-.. [conditional]: Perform this test only if support of TLSv1.3 is claimed. The evaluator shall use a client to send a Client Hello message containing a multiple curves in the Supported Groups extension. These curves should be chosen such that only one of these curves is supported by the TOE. The evaluator shall verify that the TOE responds with a Hello Retry Request message selecting the supported curve. This shall be reflected in the Key Share extension of the Hello Retry Request message.
+.. [conditional]: Perform this test only if support of TLS 1.3 is claimed. The evaluator shall use a client to send a Client Hello message containing multiple curves in the Supported Groups extension. These curves should be chosen such that only one of these curves is supported by the TOE. The evaluator shall verify that the TOE responds with a Hello Retry Request message selecting the supported curve. This shall be reflected in the Key Share extension of the Hello Retry Request message.
 
 *FCS_TLSS_EXT.1.2*
 
 [arabic, start=563]
-. Test 1: The evaluator shall attempt to establish a TLS/SSL connection using each of the TLS/SSL versions (i.e., TLS1.3, TLS1.2, TLS1.1, TLS1.0, SSL3.0, SSL2.0). The client shall be configured so it only supports the version being tested. The evaluator shall verify that the versions specified in FCS_TLSS_EXT.1.1 are successfully established and all other versions not successfully established. If the TOE attempts to downgrade the version, it is acceptable for the test client to terminate the connection; however, the version selected by the TOE shall always be a version specified in FCS_TLSS_EXT.1.1.
+. Test 1: The evaluator shall attempt to establish a TLS/SSL connection using each of the TLS/SSL versions (i.e., TLS 1.3, TLS 1.2, TLS 1.1, TLS 1.0, SSL 3.0, SSL 2.0). The client shall be configured so it only supports the version being tested. The evaluator shall verify that the versions specified in FCS_TLSS_EXT.1.1 are successfully established and all other versions not successfully established. If the TOE attempts to downgrade the version, it is acceptable for the test client to terminate the connection; however, the version selected by the TOE shall always be a version specified in FCS_TLSS_EXT.1.1.
 
 *FCS_TLSS_EXT.1.3 and FCS_TLSS_EXT.1.4*
 
 [arabic, start=564]
 . Test 1: [conditional] If ECDHE ciphersuites/group are supported:
 [loweralpha]
-.. The evaluator shall repeat this test for each supported elliptic curve. The evaluator shall attempt a connection using a supported ECDHE ciphersuite (TLSv1.1/v1.2) or group (TLSv1.3) and a single supported elliptic curve specified in the supported groups extension. The Evaluator shall verify (through a packet capture or instrumented client) that the TOE selects the same curve in the Server Key Exchange (TLSv1.1/v1.2) or Server Hello (key_share, for TLSv1.3) message and successfully establishes the connection.
-.. The evaluator shall attempt a connection using a supported ECDHE ciphersuite (TLSv1.1/1.2) or group (TLSv1.3) and a single unsupported elliptic curve (e.g. secp192r1 (0x13)) specified in RFC4492, chap. 5.1.1. The evaluator shall verify that the TOE does not send a Server Hello message and the connection is not successfully established.
-. Test 2: [conditional] If DHE ciphersuites are supported, the evaluator shall repeat the following test for each supported parameter size. If any configuration is necessary, the evaluator shall configure the TOE to use a supported Diffie-Hellman parameter size. The evaluator shall attempt a connection using a supported DHE ciphersuite. 
+.. The evaluator shall repeat this test for each supported elliptic curve. The evaluator shall attempt a connection using a supported ECDHE ciphersuite (TLS 1.2) or group (TLS 1.3) and a single supported elliptic curve specified in the supported groups extension. The Evaluator shall verify (through a packet capture or instrumented client) that the TOE selects the same curve in the Server Key Exchange (TLS 1.2) or Server Hello (key_share, for TLS 1.3) message and successfully establishes the connection.
+.. The evaluator shall attempt a connection using a supported ECDHE ciphersuite (TLS 1.2) or group (TLS 1.3) and a single unsupported elliptic curve (e.g. secp192r1 (0x13)) specified in RFC4492, chap. 5.1.1. The evaluator shall verify that the TOE does not send a Server Hello message and the connection is not successfully established.
+. Test 2: [conditional] If DHE ciphersuites are supported, the evaluator shall repeat the following test for each supported parameter size. If any configuration is necessary, the evaluator shall configure the TOE to use a supported Diffie-Hellman parameter size. The evaluator shall attempt a connection using a supported DHE ciphersuite.
 +
 
-For TLS1.1 and TLS.1.2, the evaluator shall verify (through a packet capture or instrumented client) that the TOE sends a Server Key Exchange Message where p Length is consistent with the message are the ones configured Diffie-Hellman parameter size(s).
+For TLS 1.2, the evaluator shall verify (through a packet capture or instrumented client) that the TOE sends a Server Key Exchange Message where p Length is consistent with the message are the ones configured Diffie-Hellman parameter size(s).
 +
 
-For TLS1.3, the evaluator shall verify (through a packet capture or instrumented client) that the TOE sends a Server Key Share Extension Message where the KeyShareServerHello structure contains a KeyShareEntry structure with an opaque key_exchange value whose Length is consistent with the configured Diffie-Hellman parameter size(s). 
+For TLS 1.3, the evaluator shall verify (through a packet capture or instrumented client) that the TOE sends a Server Key Share Extension Message where the KeyShareServerHello structure contains a KeyShareEntry structure with an opaque key_exchange value whose Length is consistent with the configured Diffie-Hellman parameter size(s).
 
 . Test 3: [conditional] If RSA key establishment ciphersuites are supported, the evaluator shall repeat this test for each RSA key establishment key size. If any configuration is necessary, the evaluator shall configure the TOE to perform RSA key establishment using a supported key size (e.g. by loading a certificate with the appropriate key size). The evaluator shall attempt a connection using a supported RSA key establishment ciphersuite. The evaluator shall verify (through a packet capture or instrumented client) that the TOE sends a certificate whose modulus is consistent with the configured RSA key size.
 
@@ -2950,11 +3064,11 @@ For TLS1.3, the evaluator shall verify (through a packet capture or instrumented
 _Test Objective: To demonstrate that the TOE will not resume a session for which the client failed to complete the handshake (independent of TOE support for session resumption)._
 
 [arabic, start=567]
-. Test 1 [conditional]: If the TOE does not support session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2) or session tickets according to RFC5077 (TLS1.2) or session resumption according to RFC8446 (TLS1.3), the evaluator shall perform the following test:
+. Test 1 [conditional]: If the TOE does not support session resumption based on session IDs according to RFC4346 (TLS 1.1) or RFC5246 (TLS 1.2) or session tickets according to RFC5077 (TLS 1.2) or session resumption according to RFC8446 (TLS 1.3), the evaluator shall perform the following test:
 [loweralpha]
-.. For all supported TLS versions the client shall send a Client Hello with a zero-length session identifier and with a SessionTicket extension containing a zero-length ticket. A non-zero length session identifier for TLSv1.3 would result in testing compatibility mode which is not the objective of this test. For TLSv1.3, the evaluator shall ensure that a 'psk_key_exchange_modes' extension is included in the Client Hello.
+.. For all supported TLS versions the client shall send a Client Hello with a zero-length session identifier and with a SessionTicket extension containing a zero-length ticket. A non-zero length session identifier for TLS 1.3 would result in testing compatibility mode which is not the objective of this test. For TLS 1.3, the evaluator shall ensure that a 'psk_key_exchange_modes' extension is included in the Client Hello.
 .. The client verifies the server does not send a NewSessionTicket handshake message (at any point in the handshake).
-.. The client verifies the Server Hello message contains a zero-length session identifier. For TLSv1.1 and TLSv1.2 the client could alternatively pass the following steps (not applicable for TLSv1.3):
+.. The client verifies the Server Hello message contains a zero-length session identifier. For TLS 1.2 the client could alternatively pass the following steps (not applicable for TLS 1.3):
 +
 Note: The following steps are only performed if the ServerHello message contains a non-zero length SessionID.
 [loweralpha, start=4]
@@ -2963,19 +3077,19 @@ Note: The following steps are only performed if the ServerHello message contains
 .. The client verifies the TOE (1) implicitly rejects the SessionID by sending a ServerHello containing a different SessionID and by performing a full handshake (as shown in Figure 1 of RFC 4346 or RFC 5246), or (2) terminates the connection in some way that prevents the flow of application data.
 
 [arabic, start=568]
-. Test 2 [conditional]: If the TOE supports session resumption using session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), the evaluator shall carry out the following steps (note that for each of these tests, it is not necessary to perform the test case for each supported version of TLS):
+. Test 2 [conditional]: If the TOE supports session resumption using session IDs according to RFC4346 (TLS 1.1) or RFC5246 (TLS 1.2), the evaluator shall carry out the following steps (note that for each of these tests, it is not necessary to perform the test case for each supported version of TLS):
 [loweralpha]
-.. The evaluator shall conduct a successful handshake and capture the TOE-generated session ID in the Server Hello message. The evaluator shall then initiate a new TLS connection and send the previously captured session ID to show that the TOE resumed the previous session by responding with ServerHello containing the same SessionID immediately followed by ChangeCipherSpec and Finished messages (as shown in Figure 2 of RFC 4346 or RFC 5246). When the session is resumed, the evaluator shall verify on the TLS Client used for performing this test, that the TOE (TLS Server) has not advertised support for the early data extension. 
+.. The evaluator shall conduct a successful handshake and capture the TOE-generated session ID in the Server Hello message. The evaluator shall then initiate a new TLS connection and send the previously captured session ID to show that the TOE resumed the previous session by responding with ServerHello containing the same SessionID immediately followed by ChangeCipherSpec and Finished messages (as shown in Figure 2 of RFC 4346 or RFC 5246). When the session is resumed, the evaluator shall verify on the TLS Client used for performing this test, that the TOE (TLS Server) has not advertised support for the early data extension.
 .. The evaluator shall initiate a handshake and capture the TOE-generated session ID in the Server Hello message. The evaluator shall then, within the same handshake, generate or force an unencrypted fatal Alert message immediately before the client would otherwise send its ChangeCipherSpec message thereby disrupting the handshake. The evaluator shall then initiate a new Client Hello using the previously captured session ID, and verify that the server (1) implicitly rejects the session ID by sending a ServerHello containing a different SessionID and performing a full handshake (as shown in figure 1 of RFC 4346 or RFC 5246), or (2) terminates the connection in some way that prevents the flow of application data.
 
 [arabic, start=569]
-. Test 3 [conditional]: If the TOE supports session tickets according to RFC5077 (supported only by TLSv1.2), the evaluator shall carry out the following steps:
+. Test 3 [conditional]: If the TOE supports session tickets according to RFC5077 (supported only by TLS 1.2), the evaluator shall carry out the following steps:
 [loweralpha]
 .. The evaluator shall permit a successful TLS handshake to occur in which a session ticket is exchanged with the non-TOE client. The evaluator shall then attempt to correctly reuse the previous session by sending the session ticket in the ClientHello. The evaluator shall confirm that the TOE responds with a ServerHello with an empty SessionTicket extension, NewSessionTicket, ChangeCipherSpec and Finished messages (as seen in figure 2 of RFC 5077). When the session is resumed, the evaluator shall verify on the TLS Client used for performing this test, that the TOE (TLS Server) has not advertised support for the early data extension.
 .. The evaluator shall permit a successful TLS handshake to occur in which a session ticket is exchanged with the non-TOE client. The evaluator will then modify the session ticket and send it as part of a new Client Hello message. The evaluator shall confirm that the TOE either (1) implicitly rejects the session ticket by performing a full handshake (as shown in figure 3 or 4 of RFC 5077), or (2) terminates the connection in some way that prevents the flow of application data.
 
 [arabic, start=569]
-. Test 4 [conditional]: If the TOE supports session resumption according to RFC8446 (supported only by TLSv1.3), the evaluator shall carry out the following steps: 
+. Test 4 [conditional]: If the TOE supports session resumption according to RFC8446 (supported only by TLS 1.3), the evaluator shall carry out the following steps:
 [loweralpha]
 .. The evaluator shall permit a successful TLS handshake to occur in which a session ticket is exchanged with the non-TOE client.  The evaluator shall then attempt to correctly reuse the previous session by sending the pre-shared key in the ClientHello. The evaluator shall confirm that the TOE responds similarly to figure 3 of RFC 8446 after successfully reusing the pre-shared-key to resume the session. Specifically, the server must not send back a Certificate message if the session is correctly resumed. When the session is resumed, the evaluator shall verify on the TLS Client used for performing this test, that the TOE (TLS Server) has not advertised support for the early data extension.
 .. The evaluator shall permit a successful TLS handshake to occur in which a session ticket is exchanged with the non-TOE client.  The evaluator will then modify the pre-shared key and send it as part of a new Client Hello message.  The evaluator shall confirm that the TOE either (1) implicitly rejects the session ticket by performing a full handshake, or (2) terminates the connection in some way that prevents the flow of application data.
@@ -2989,7 +3103,7 @@ Note: The following steps are only performed if the ServerHello message contains
 *FCS_TLSS_EXT.1.7*
 
 [arabic, start=569]
-. According to RFC8446 section 4.2.10, a PSK is required to use the early data extension. As NDcPP only allows the use of PSK in conjunction with session resumption, a NDcPP conformant TOE which acts as TLS Server cannot use the early data extension if session resumption is not supported. For TOEs that do not support session resumption, execution of test FCS_TLSS_EXT.1.5 Test 1 is regarded as sufficient that the TOE does not support the early data extension. For TOEs that support session resumption, FCS_TLSS_EXT.1.5 Test 2a, 3a or 4a (depending on the supported TLS versions and the way session resumption is implemented) ensure that the TOE does not support the early data extension. 
+. According to RFC8446 section 4.2.10, a PSK is required to use the early data extension. As NDcPP only allows the use of PSK in conjunction with session resumption, a NDcPP conformant TOE which acts as TLS Server cannot use the early data extension if session resumption is not supported. For TOEs that do not support session resumption, execution of test FCS_TLSS_EXT.1.5 Test 1 is regarded as sufficient that the TOE does not support the early data extension. For TOEs that support session resumption, FCS_TLSS_EXT.1.5 Test 2a, 3a or 4a (depending on the supported TLS versions and the way session resumption is implemented) ensure that the TOE does not support the early data extension.
 
 === Identification and Authentication (FIA)
 
