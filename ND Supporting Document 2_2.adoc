@@ -1629,7 +1629,7 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 [loweralpha]
 .. (covered by FCS_TLSC_EXT.1.1 Test 1 and testing for FIA_X.509_EXT.*).
 
-==== FCS_TLSC_EXT.3 Extended: TLS Client support for renegotiation (TLS 1.2 only)
+==== FCS_TLSC_EXT.3 Extended: TLS Client support for secure renegotiation (TLSv1.2 only)
 
 ===== TSS
 
@@ -1741,18 +1741,18 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 +
 Remark: The server must ensure the TLS handshake is valid (e.g. certificate key, Certificate Verify message, message formatting, hashes, and signatures), except for the certificate chain using a SignatureScheme not proposed by the client. The selected legacy SignatureScheme shall be as similar to one of the supported SignatureSchemes as possible. For example: 1) ecdsa_sha1 shall not be used if the TOE only supports RSA signatures, 2) ecdsa_sha1 must use a supported ECDSA curve or P-256 if only EdDSA curves are supported.
 
-==== FCS_TLSS_EXT.3 Extended: TLS Server support for renegotiation (TLS 1.2 only)
+==== FCS_TLSS_EXT.3 Extended: TLS Server support for secure renegotiation (TLSv1.2 only)
 
 ===== TSS
 
-*FCS_TLSS_EXT.3.1 and FCS_TLSS_EXT.3.2*
+*FCS_TLSS_EXT.3.1*
 
 [arabic, start=328]
 . None.
 
 ===== Guidance Documentation
 
-*FCS_TLSS_EXT.3.1 and FCS_TLSS_EXT.3.2*
+*FCS_TLSS_EXT.3.1*
 
 [arabic, start=329]
 . None
@@ -1760,9 +1760,9 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 ===== Tests
 
 [arabic, start=330]
-. The evaluator shall perform the following tests. The following tests require connection with a client that supports secure renegotiation and the "renegotiation_info" extension.
+. The evaluator shall perform the following tests. The following tests require connection with a client that supports secure renegotiation and the ”renegotiation_info” extension.
 
-*FCS_TLSS_EXT.3.1 and FCS_TLSS_EXT.3.2*
+*FCS_TLSS_EXT.3.1*
 
 [arabic, start=331]
 . Test 1: The evaluator shall use a network packet analyzer/sniffer to capture the traffic between the two TLS endpoints. The evaluator shall verify that the “renegotiation_info” field is included in the ServerHello message.
