@@ -3158,11 +3158,26 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 [arabic, start=663]
 . When evaluating the developer’s coverage of the TOE in their CM system, the evaluator performs the work units as presented in the CEM.
 
+==== Basic flaw remediation (ALC_FLR.1) (optional)
+
+[arabic, start=664]
+. When evaluating the developer’s procedures regarding basic flaw remediation, the evaluator performs the work units as presented in the CEM.
+
+==== Flaw reporting procedures (ALC_FLR.2) (optional)
+
+[arabic, start=665]
+. When evaluating the developer’s flaw reporting procedures, the evaluator performs the work units as presented in the CEM.
+
+==== Systematic flaw remediation (ALC_FLR.3) (optional)
+
+[arabic, start=666]
+. When evaluating the developer’s procedures regarding systematic flaw remediation, the evaluator performs the work units as presented in the CEM.
+
 === ATE: Tests
 
 ==== Independent Testing – Conformance (ATE_IND.1)
 
-[arabic, start=664]
+[arabic, start=667]
 . The focus of the testing is to confirm that the requirements specified in the SFRs are being met. Additionally, testing is performed to confirm the functionality described in the TSS, as well as the dependencies on the Operational guidance documentation is accurate.
 . The evaluator performs the CEM work units associated with the ATE_IND.1 SAR. Specific testing requirements and EAs are captured for each SFR in Sections 2, 3 and 4.
 . The evaluator should consult Appendix 709 when determining the appropriate strategy for testing multiple variations or models of the TOE that may be under evaluation.
