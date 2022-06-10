@@ -368,8 +368,6 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FCS_HTTPS_EXT.1 |HTTPS Protocol |Feature Dependent
 |FCS_IPSEC_EXT.1 |IPsec Protocol |Feature Dependent
 |FCS_NTP_EXT.1 |NTP Protocol |Feature Dependent
-|FCS_SSHC_EXT.1 |SSH Client |Feature Dependent
-|FCS_SSHS_EXT.1 |SSH Server |Feature Dependent
 |FCS_TLSC_EXT.1 |TLS Client |Feature Dependent
 |FCS_TLSC_EXT.2 |TLS Client with authentication |Feature Dependent
 |FCS_TLSS_EXT.1 |TLS Server |Feature Dependent
@@ -411,6 +409,8 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 [#_Ref443331358]#Table 1: Security Functional Requirements for Distributed TOEs#
 
 The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE. (Note that this deliverable is examined as part of the ASE_TSS.1 and AVA_VAN.1 Evaluation Activities as described in [SD, 5.1.2] and [SD, 5.6.1.1] respectively.) The ST for a distributed TOE may also introduce a ‘minimum configuration’ and identify components that may have instances added to an operational configuration without affecting the validity of the CC certification. [SD, B.4] describes Evaluation Activities relating to these equivalency aspects of a distributed TOE (and hence what is expected in the ST).
+
+If an SSH channel is used for communication between the components, then the TSF shall be validated against the version of the Functional Package for Secure Shell referenced in the "Allowed Packages" list. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
 == Security Problem Definition
 
@@ -460,7 +460,8 @@ Threat agents may attempt to target Network Devices that do not use standardized
 SFR Rationale:
 
 * The general use of secure protocols for identified communication channels is described at the top level in FTP_ITC.1 and FTP_TRP.1/Admin; for distributed TOEs the requirements for inter-component communications are addressed by the requirements in FPT_ITT.1
-* Requirements for the use of secure communication protocols are set for all the allowed protocols in FCS_DTLSC_EXT.1, FCS_DTLSC_EXT.2, FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2, FCS_HTTPS_EXT.1, FCS_IPSEC_EXT.1, FCS_SSHC_EXT.1, FCS_SSHS_EXT.1, FCS_TLSC_EXT.1, FCS_TLSC_EXT.2, FCS_TLSS_EXT.1, FCS_TLSS_EXT.2
+* Requirements for the use of secure communication protocols are set for allowed protocols in FCS_DTLSC_EXT.1, FCS_DTLSC_EXT.2, FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2, FCS_HTTPS_EXT.1, FCS_IPSEC_EXT.1, FCS_TLSC_EXT.1, FCS_TLSC_EXT.2, FCS_TLSS_EXT.1, FCS_TLSS_EXT.2
+* Requirements for the use of secure communication protocols implemented by the "Allowed Packages" may be found in the respective package's document.
 * Optional and selection-based requirements for use of public key certificates to support secure protocols are defined in FIA_X509_EXT.1, FIA_X509_EXT.2, FIA_X509_EXT.3
 
 
@@ -926,7 +927,7 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author selects all key generation schemes used for key establishment (including generation of ephemeral keys) and device authentication. When key generation is used for key establishment, the schemes in FCS_CKM.2.1 and selected cryptographic protocols must match the selection. When key generation is used for device authentication, other than SSH-RSA, ECDSA-SHA2-NISTP256, ECDSA-SHA2-NISTP384 and ECDSA-SHA2-NISTP521, the public key is expected to be associated with an X.509v3 certificate._
+_The ST author selects all key generation schemes used for key establishment (including generation of ephemeral keys) and device authentication. When key generation is used for key establishment, the schemes in FCS_CKM.2.1 and selected cryptographic protocols must match the selection. When key generation is used for device authentication, other than ssh-rsa (RFC 4253),  ecdsa-sha2-nistp256 (RFC 5656), ecdsa-sha2-nistp384 (RFC 5656) and ecdsa-sha2-nistp521 (RFC 5656), the public key is expected to be associated with an X.509v3 certificate._
 
 _If the TOE acts as a receiver in the key establishment schemes and is not configured to support mutual authentication, the TOE does not need to implement key generation._
 
@@ -1177,8 +1178,6 @@ _The selection "Ability to manage the cryptographic keys" should be included in 
 
 _The selection "Ability to configure the list of TOE-provided services available before an entity is identified and authenticated, as specified in FIA_UIA_EXT.1" should be included in the ST if the TOE supports configuration of the list of TOE-provided services which are available before any entity is identified and authenticated. The term 'list' refers to the resulting list of available services as a result of the configuration activities. The configuration activity itself does not necessarily have to be modification of a list but could be any type of activation and deactivation procedure._
 
-_The selection “Ability to configure thresholds for SSH rekeying” should be included in the ST if the TOE supports configuration of the thresholds for the mechanisms used to fulfil FCS_SSHC_EXT.1.8 or FCS_SSHS_EXT.1.8. If the TOE places limits on the values accepted for the thresholds, then this is stated in the TSS._
-
 _The selection “Ability to configure lifetime for IPsec SAs” must be included in the ST if the TOE supports secure communication via IPsec and the FCS_IPSEC_EXT.1 requirements are included in the ST. The configuration of the lifetime for IPsec SAs needs to be in line with the selection in FCS_IPSEC_EXT.1.7._
 
 _The selection “Ability to set the time which is used for time-stamps” should be included in the ST if the TOE allows the Administrator to set the time of the device which is then used in time stamps. This option should not be selected if the TOE does not allow manual time setting but only relies on synchronization with external time sources like NTP servers._
@@ -1190,6 +1189,8 @@ _The selection “Ability to configure the reference identifier for the peer” 
 _The selection “Ability to manage the TOE's trust store and designate X509.v3 certificates as trust anchors" should be included in the ST if the TOE supports management and configuration of the TOE's trust store. This means the TOE supports X.509v3 certificates for some security functions._
 
 _The selection "Ability to import X.509v3 certificates to the TOE's trust store" must be included in the ST if the TOE supports loading of X.509 certificates to the TOE's trust store._
+
+_The selection "Ability to configure thresholds for SSH rekeying" may only be selected if SSH is selected within FTP_ITC.1, FTP_TRP.1 or FPT_ITT.1_
 
 _For distributed TOEs the interaction between TOE components will be configurable (see FCO_CPC_EXT.1). Therefore, the ST author includes the selection "Ability to configure the interaction between TOE components" for distributed TOEs. A simple example would be the change of communication protocol according to FPT_ITT.1. Another example would be changing the management of a TOE component from direct remote administration to remote administration through another TOE component. A more complex use case would be if the realization of an SFR is achieved through two or more TOE components and the responsibilities between the two or more components could be modified._
 
@@ -1401,7 +1402,11 @@ _The requirement implies that not only are communications protected when they ar
 
 _Where public key certificates are used in support of an FTP_ITC.1 channel, FIA_X509_EXT.1/Rev is to be used (this requires checking certificate revocation), and not the iteration FIA_X509_EXT.1/ITT which is only for use in inter-component channels of a distributed TOE._
 
-_If the TOE claims FCS_TLSS_EXT.2 (TLS Servers with mutual authentication) and the TOE passes presented identifiers of clients used for client authentication to a directory server for comparison, then the connection to the directory server used to verify presented identifiers of TLS clients need to be protected by a trusted channel (i.e. FPT_ITC.1). If a trusted channel is used for the integrity protection for communication between the TOE and a directory server, then the directory server must be added to the assignment for other capabilities in FTP_ITC.1. Note that the directory server is only expected to handle the comparison of the presented identifier but not to perform full X.509 certificate validation on behalf of the TOE._
+_If the TOE claims FCS_TLSS_EXT.2 (TLS Servers with mutual authentication) and the TOE passes presented identifiers of clients used for client authentication to a directory server for comparison, then the connection to the directory server used to verify presented identifiers of TLS clients need to be protected by a trusted channel (i.e. FTP_ITC.1). If a trusted channel is used for the integrity protection for communication between the TOE and a directory server, then the directory server must be added to the assignment for other capabilities in FTP_ITC.1. Note that the directory server is only expected to handle the comparison of the presented identifier but not to perform full X.509 certificate validation on behalf of the TOE._
+
+_If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell referenced in the "Allowed Packages" list_  
+
+
 
 ==== Trusted Path (FTP_TRP)
 
@@ -1417,7 +1422,9 @@ _If the TOE claims FCS_TLSS_EXT.2 (TLS Servers with mutual authentication) and t
 
 *_Application Note {counter:appnote_count}_*
 
-This requirement ensures that authorized remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection are included in the ST.
+This requirement ensures that authorized remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection, or the protocol requirements of the "Allowed Packages" are included in the ST.
+
+If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in the "Allowed Packages" list. 
 
 == Security Assurance Requirements
 
@@ -1691,6 +1698,9 @@ _This channel may also be used as the registration channel for the registration 
 
 _If TLS is selected, then the requirements to have the reference identifier established by the user (FCS_TLSC_EXT.1.2) are relaxed and the identifier may also be established through a “gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component._
 
+_If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in the "Allowed Packages" list_ 
+
+
 === Trusted Path/Channels (FTP)
 
 ==== Trusted Path (FTP_TRP)
@@ -1901,8 +1911,6 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 * Removal of configured time server
 
 |Identity if new/removed time server
-|FCS_SSHC_EXT.1 |Failure to establish an SSH session |Reason for failure
-|FCS_SSHS_EXT.1 |Failure to establish an SSH session |Reason for failure
 |FCS_TLSC_EXT.1 |Failure to establish a TLS Session |Reason for failure
 |FCS_TLSS_EXT.1 |Failure to establish a TLS Session |Reason for failure
 |FIA_AFL.1 |Unsuccessful login attempts limit is met or exceeded. |Origin of the attempt (e.g., IP address).
@@ -1988,7 +1996,7 @@ _TOE components are not required to monitor or audit connectivity or network out
 
 === Cryptographic Support (FCS)
 
-==== Cryptographic Protocols (Extended – FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_HTTPS_EXT, FCS_ IPSEC_EXT, FCS_NTP_EXT, FCS_SSHC_EXT, FCS_SSHS_EXT, FCS_TLSC_EXT, FCS_TLSS_EXT)
+==== Cryptographic Protocols (Extended – FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_HTTPS_EXT, FCS_ IPSEC_EXT, FCS_NTP_EXT,  FCS_TLSC_EXT, FCS_TLSS_EXT)
 
 ===== FCS_DTLSC_EXT & FCS_DTLSS_EXT DTLS Protocol
 
@@ -2313,159 +2321,6 @@ This SFR is not applicable if the TOE cannot be configured to operate as an NTP 
 
 _The TOE has to support configuration of at least 3 time sources though it is not mandated that the TOE is configured to always use at least 3 time sources._
 
-=====  FCS_SSHC_EXT & FCS_SSHS_EXT SSH Protocol
-
-SSH is not a required component of this cPP. If a TOE implements SSH, a corresponding selection in FTP_ITC.1, FPT_ITT.1 and/or FTP_TRP.1/Admin should have been made that defines what the SSH protocol is implemented to protect.
-
-A TOE may act as the client or the server in an SSH session. The requirement has been separated into SSH Client (FCS_SSHC_EXT) and SSH Server (FCS_SSHS_EXT) requirements to allow for these differences.
-
-*FCS_SSHC_EXT.1 SSH Client Protocol*
-
-*FCS_SSHC_EXT.1.1* The TSF shall implement the SSH protocol in accordance with: RFCs _4251, 4252, 4253, 4254,_ [selection: _4256, 4344, 5647, 5656, 6187, 6668, 8268, 8308 section 3.1, 8332_].
-
-*_Application Note {counter:appnote_count}_*
-
-_The following mapping is provided as a guide to ST authors to ensure the appropriate RFC selections are made:_
-
-_RFC 4256 – Select if keyboard-interactive authentication is available_
-
-_RFC 4344 – Select if AES-128-CTR or AES-256-CTR modes are available_
-
-_RFC 5647 – Select if AEAD_AES_128_GCM or AEAD_AES_256_GCM are available_
-
-_RFC 5656 – Select if elliptical curve cryptography is available_
-
-_RFC 6187 – Select if X.509 certificates are available for public key algorithms_
-
-_RFC 6668 – Select if HMAC-SHA-2 algorithms are available_
-
-_RFC 8268 – Select if FFC DH groups with SHA-2 are available_
-
-_RFC 8308 Section 3.1 – Select if RFC 8332 is selected_
-
-_RFC 8332 – Select if SHA-2 is available with ssh-rsa selection for public key algorithms_
-
-_If the negotiated encryption algorithm is one of the aes*-gcm@openssh.com algorithms, then the MAC field is ignored during negotiation and implicitly selects AES-GCM for the MAC. However once negotiated the connection is conformant with RFC 5647 and this should be selected when using aes*-gcm@openssh.com algorithms. aes*-gcm@openssh.com is specified in Section 1.6 of the OpenSSH Protocol Specification (https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/PROTOCOL?rev=1.31)._
-
-_The ST author selects which of the additional RFCs to which conformance is being claimed. An SSH product can implement additional RFCs, but only those listed in the selection can be claimed as conformant under common criteria. The RFC selections for this requirement need to be consistent with selections in later elements of this Package (e.g., cryptographic algorithms permitted). RFC 4253 indicates that certain cryptographic algorithms are “REQUIRED”. This means that the implementation must include support, not that the algorithms must be enabled for use. Ensuring that algorithms indicated as “REQUIRED” but not listed in the later elements of this component are implemented is out of scope of the evaluation activity for this requirement._
-
-*FCS_SSHC_EXT.1.2* The TSF shall ensure that the SSH protocol implementation supports the following authentication methods as described in RFC 4252: public key-based, [selection: _password-based, no other method_].
-
-*FCS_SSHC_EXT.1.3* The TSF shall ensure that, as described in RFC 4253, packets greater than _[assignment: number of bytes]_ bytes in an SSH transport connection are dropped.
-
-*_Application Note {counter:appnote_count}_*
-
-_RFC 4253 provides for the acceptance of ‘large packets’ with the caveat that the packets should be of ‘reasonable length’ or dropped. The assignment should be filled in by the ST author with the maximum packet size accepted, thus defining ‘reasonable length’ for the TOE._
-
-*FCS_SSHC_EXT.1.4* The TSF shall ensure that the SSH transport implementation uses the following encryption algorithms and rejects all other encryption algorithms: [selection: _aes128-cbc, aes256-cbc, aes128-ctr, aes256-ctr, AEAD_AES_128_GCM, AEAD_AES_256_GCM, aes128-gcm@openssh.com, aes256-gcm@openssh.com_].
-
-*_Application Note {counter:appnote_count}_*
-
-_RFC 5647 specifies the use of the AEAD_AES_128_GCM and AEAD_AES_256_GCM algorithms in SSH. As described in RFC 5647, AEAD_AES_128_GCM and AEAD_AES_256_GCM can only be chosen as encryption algorithms when the same algorithm is being used as the MAC algorithm. Corresponding FCS_COP entries are included in the ST for the algorithms selected here._
-
-*FCS_SSHC_EXT.1.5* The TSF shall ensure that the SSH public-key based authentication implementation uses [selection: _ssh-rsa, rsa-sha2-256, rsa-sha2-512, ecdsa-sha2-nistp256, x509v3-ssh-rsa, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, x509v3-ecdsa-sha2-nistp256, x509v3-ecdsa-sha2-nistp384, x509v3-ecdsa-sha2-nistp521, x509v3-rsa2048-sha256_] as its public key algorithm(s) and rejects all other public key algorithms.
-
-*_Application Note {counter:appnote_count}_*
-
-_If x509v3-ssh-rsa, x509v3-ecdsa-sha2-nistp256, x509v3-ecdsa-sha2-nistp384, x509v3-ecdsa-sha2-nistp521 or x509v3-rsa2048-sha256 are selected, then the list of trusted certification authorities must be selected in FCS_SSHC_EXT.1.9 and the FIA_X509_EXT SFRs in Appendix B are applicable._
-
-_It is recommended to configure the TOE to reject presented RSA keys with a key length below 2048 bit. RFC 8332 specifies the use of rsa-sha2-256 or rsa-sha2-512 in SSH._
-
-_Public-key or certificate-based client authentication within the SSH protocol is based on demonstrated possession of a private key matching a public key associated with a given authorized account on a system._
-
-_If x509v3-based authentication is claimed, the ST shall also include the appropriate FIA_X509_EXT SFRs._
-
-_SSH client implementations that claim to support x509v3-based public key authentication algorithms are expected to be able to parse server certificates that comply with RFC 6187 Section 4 recommendations._
-
-*FCS_SSHC_EXT.1.6* The TSF shall ensure that the SSH transport implementation uses [selection: _hmac-sha1, hmac-sha1-96, hmac-sha2-256, hmac-sha2-512, AEAD_AES_128_GCM, AEAD_AES_256_GCM, implicit_] as its data integrity MAC algorithm(s) and rejects all other MAC algorithm(s).
-
-*_Application Note {counter:appnote_count}_*
-
-_RFC 5647 specifies the use of the AEAD_AES_128_GCM and AEAD_AES_256_GCM algorithms in SSH. As described in RFC 5647, AEAD_AES_128_GCM and AEAD_AES_256_GCM can only be chosen as MAC algorithms when the same algorithm is being used as the encryption algorithm. RFC 6668 specifies the use of the sha2 algorithms in SSH._
-
-_The ST author selects “implicit” when, and only when, aes*-gcm@openssh.com is selected as an encryption algorithm. When aes*-gcm@openssh.com is negotiated as the encryption algorithm, the MAC algorithm field is ignored and GCM is implicitly used as the MAC. “implicit” is not an SSH algorithm identifier and will not be seen on the wire; however, the negotiated MAC might be decoded as “implicit”._
-
-*FCS_SSHC_EXT.1.7* The TSF shall ensure that [selection: _diffie-hellman-group14-sha1, diffie-hellman-group15-sha512, ecdh-sha2-nistp256_] and [selection__: diffie-hellman-group14-sha256, diffie-hellman-group16-sha512, diffie-hellman-group17-sha512, diffie-hellman-group18-sha512, ecdh-sha2-nistp384, ecdh-sha2-nistp521, no other methods__] are the only allowed key exchange methods used for the SSH protocol.
-
-*FCS_SSHC_EXT.1.8* The _TSF shall ensure that within SSH connections, the same session keys are used for a threshold of no longer than one hour, and each encryption key is used to protect no more than one gigabyte of data. After any of the thresholds are reached, a rekey needs to be performed_.
-
-*_Application Note {counter:appnote_count}_*
-
-_This SFR defines two thresholds - one for the maximum time span the same session keys can be used and the other one for the maximum amount of data that can be transmitted using the same session keys. Both thresholds need to be implemented and a rekey needs to be performed on whichever threshold is reached first. For the maximum transmitted data threshold, the encrypted traffic per encryption key needs to be counted. It is also acceptable to count the totally transmitted data per encryption key, the total encrypted traffic for incoming and outgoing data or the total transmitted incoming and outgoing data because the encrypted traffic per encryption key will always be lower or equal to the other options. The rekey requirement applies to all session keys (encryption, integrity protection) for incoming and outgoing traffic._
-
-_It is acceptable for a TOE to implement lower thresholds than the maximum values defined in the SFR._
-
-_For any configurable threshold related to this requirement the guidance documentation needs to specify how the threshold can be configured. The allowed values must either be specified in the guidance documentation and must be lower or equal to the thresholds specified in this SFR or the TOE must not accept values beyond the thresholds specified in this SFR._
-
-*FCS_SSHC_EXT.1.9* The TSF shall ensure that the SSH client authenticates the identity of the SSH server using a local database associating each host name with its corresponding public key and [selection: _a list of trusted certification authorities, no other methods_] as described in RFC 4251 section 4.1.
-
-*_Application Note {counter:appnote_count}_*
-
-_The list of trusted certification authorities can only be selected if x509v3-ssh-rsa, x509v3-ecdsa-sha2-nistp256, x509v3-ecdsa-sha2-nistp384, x509v3-ecdsa-sha2-nistp521 or x509v3-rsa2048-sha256 are selected in FCS_SSHC_EXT.1.5._
-
-*FCS_SSHS_EXT.1 SSH Server* *Protocol*
-
-*FCS_SSHS_EXT.1.1* The TSF shall implement the SSH protocol in accordance with: RFCs 4251, 4252, 4253, 4254, [selection: _4256, 4344, 5647, 5656, 6187, 6668, 8268, 8308_ section 3.1, 8332].
-
-*_Application Note {counter:appnote_count}_*
-
-_The mapping provided in Application Note 90 may be used as a guide here as well to ensure the appropriate RFC selections are made._
-
-_If the negotiated encryption algorithm is one of the aes*-gcm@openssh.com algorithms, then the MAC field is ignored during negotiation and implicitly selects AES-GCM for the MAC. However once negotiated the connection is conformant with RFC 5647 and this should be selected when using aes*-gcm@openssh.com algorithms. aes*-gcm@openssh.com is specified in Section 1.6 of the OpenSSH Protocol Specification (https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/usr.bin/ssh/PROTOCOL?rev=1.31)._
-
-_The ST author selects which of the additional RFCs to which conformance is being claimed. An SSH product can implement additional RFCs, but only those listed in the selection can be claimed as conformant under common criteria. The RFC selections for this requirement need to be consistent with selections in later elements of this Package (e.g., cryptographic algorithms permitted). RFC 4253 indicates that certain cryptographic algorithms are “REQUIRED”. This means that the implementation must include support, not that the algorithms must be enabled for use. Ensuring that algorithms indicated as “REQUIRED” but not listed in the later elements of this component are implemented is out of scope of the evaluation activity for this requirement._
-
-*FCS_SSHS_EXT.1.2* The TSF shall ensure that the SSH protocol implementation supports the following authentication methods as described in RFC 4252: public key-based, [selection: _password-based, no other method_].
-
-*_Application Note {counter:appnote_count}_*
-
-_If the TOE supports password-based authentication, the option 'password-based' must be selected. If the TOE supports only public key-based authentication, the option 'no other method' must be chosen._
-
-*FCS_SSHS_EXT.1.3* The TSF shall ensure that, as described in RFC 4253, packets greater than _[assignment: number of bytes]_ bytes in an SSH transport connection are dropped.
-
-*_Application Note {counter:appnote_count}_*
-
-_RFC 4253 provides for the acceptance of ‘large packets’ with the caveat that the packets should be of ‘reasonable length’ or dropped. The assignment should be filled in by the ST author with the maximum packet size accepted, thus defining ‘reasonable length’ for the TOE._
-
-*FCS_SSHS_EXT.1.4* The TSF shall ensure that the SSH transport implementation uses the following encryption algorithms and rejects all other encryption algorithms: [selection: _aes128-cbc, aes256-cbc, aes128-ctr, aes256-ctr, AEAD_AES_128_GCM, AEAD_AES_256_GCM, aes128-gcm@openssh.com, aes256-gcm@openssh.com_.
-
-*_Application Note {counter:appnote_count}_*
-
-_RFC 5647 specifies the use of the AEAD_AES_128_GCM and AEAD_AES_256_GCM algorithms in SSH. As described in RFC 5647, AEAD_AES_128_GCM and AEAD_AES_256_GCM can only be chosen as encryption algorithms when the same algorithm is being used as the MAC algorithm. Corresponding FCS_COP entries are included in the ST for the algorithms selected here._
-
-*FCS_SSHS_EXT.1.5* The TSF shall ensure that the SSH public-key based authentication implementation uses [selection: _ssh-rsa, rsa-sha2-256, rsa-sha2-512, ecdsa-sha2-nistp256, x509v3-ssh-rsa, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, x509v3-ecdsa-sha2-nistp256, x509v3-ecdsa-sha2-nistp384, x509v3-ecdsa-sha2-nistp521, x509v3-rsa2048-sha256_] as its public key algorithm(s) and rejects all other public key algorithms.
-
-*_Application Note {counter:appnote_count}_*
-
-_If x509v3-ssh-rsa, x509v3-ecdsa-sha2-nistp256, x509v3-ecdsa-sha2-nistp384, x509v3-ecdsa-sha2-nistp521 or x509v3-rsa2048-sha256 are selected, then the FIA_X509_EXT SFRs in Appendix B are applicable._
-
-_It is recommended to configure the TOE to reject presented RSA keys with a key length below 2048 bit. RFC 8332 specifies the use of rsa-sha2-256 or rsa-sha2-512 in SSH._
-
-_Public-key or certificate-based client authentication within the SSH protocol is based on the demonstrated possession of a private key matching a public key associated with a given authorized account on a system._
-
-_If x509v3-based authentication is claimed, the ST shall also include the appropriate FIA_X509_EXT SFRs._
-
-_An SSH server implementation that claims to support x509v3-based public key authentication algorithms is expected to comply with RFC 6187 Section 4 recommendations when identifying itself with an x.509v3 certificate to SSH clients._
-
-*FCS_SSHS_EXT.1.6* The TSF shall ensure that the SSH transport implementation uses [selection: hmac-sha1, hmac-sha1-96, hmac-sha2-256, hmac-sha2-512, AEAD_AES_128_GCM, AEAD_AES_256_GCM, implicit] as its MAC algorithm(s) and rejects all other MAC algorithm(s).
-
-*_Application Note {counter:appnote_count}_*
-
-_RFC 5647 specifies the use of the AEAD_AES_128_GCM and AEAD_AES_256_GCM algorithms in SSH. As described in RFC 5647, AEAD_AES_128_GCM and AEAD_AES_256_GCM can only be chosen as MAC algorithms when the same algorithm is being used as the encryption algorithm. RFC 6668 specifies the use of the sha2 algorithms in SSH._
-
-_The ST author selects “implicit” when, and only when, aes*-gcm@openssh.com is selected as an encryption algorithm. When aes*-gcm@openssh.com is negotiated as the encryption algorithm, the MAC algorithm field is ignored and GCM is implicitly used as the MAC. “implicit” is not an SSH algorithm identifier and will not be seen on the wire; however, the negotiated MAC might be decoded as “implicit”._
-
-*FCS_SSHS_EXT.1.7* The TSF shall ensure that [selection: _diffie-hellman-group14-sha1, diffie-hellman-group15-sha512, ecdh-sha2-nistp256_] and [selection: _diffie-hellman-group14-sha256, diffie-hellman-group16-sha512, diffie-hellman-group17-sha512, diffie-hellman-group18-sha512, ecdh-sha2-nistp384, ecdh-sha2-nistp521, no other methods_] are the only allowed key exchange methods used for the SSH protocol.
-
-*FCS_SSHS_EXT.1.8* The _TSF shall ensure that within SSH connections, the same session keys are used for a threshold of no longer than one hour, and each encryption key is used to protect no more than one gigabyte of data. After any of the thresholds are reached, a rekey needs to be performed_.
-
-*_Application Note {counter:appnote_count}_*
-
-_This SFR defines two thresholds - one for the maximum time span the same session keys can be used and the other one for the maximum amount of data that can be transmitted using the same session keys. Both thresholds need to be implemented and a rekey needs to be performed on whichever threshold is reached first. For the maximum transmitted data threshold, the encrypted traffic per encryption key needs to be counted. It is also acceptable to count the totally transmitted data per encryption key, the total encrypted traffic for incoming and outgoing data or the total transmitted incoming and outgoing data because the encrypted traffic per encryption key will always be lower or equal to the other options. The rekey requirement applies to all session keys (encryption, integrity protection) for incoming and outgoing traffic._
-
-_It is acceptable for a TOE to implement lower thresholds than the maximum values defined in the SFR._
-
-_For any configurable threshold related to this requirement the guidance documentation needs to specify how the threshold can be configured. The allowed values must either be specified in the guidance documentation and must be lower or equal to the thresholds specified in this SFR or the TOE must not accept values beyond the thresholds specified in this SFR._
 
 =====  FCS_TLSC_EXT & FCS_TLSS_EXT TLS Protocol
 
@@ -2600,9 +2455,9 @@ _If the TOE does not support session resumption or session tickets, select 'no s
 
 ==== Authentication using X.509 certificates (Extended – FIA_X509_EXT)
 
-X.509 certificate-based authentication is required if IPsec or TLS communications are claimed for FPT_ITT, FTP_ITC.1 or FTP_TRP. These SFRs are also required if FPT_TUD_EXT.2 is claimed. If SSH client communications are claimed and any x509 algorithms are claimed in FCS_SSHC_EXT.1.5 or FCS_SSHS_EXT.1.5, these SFRs are required. In the case of the TOE only acting as the SSH server or acting as the client, but not claiming any x509 algorithms in FCS_SSHC_EXT.1.5 or FCS_SSHS_EXT.1.5, these SFRs are optional.
+X.509 certificate-based authentication is required if IPsec or TLS communications are claimed for FPT_ITT, FTP_ITC.1 or FTP_TRP. These SFRs are also required if FPT_TUD_EXT.2 is claimed. 
 
-Although the functionality in FIA_X509_EXT.1/Rev and FIA_X509_EXT.2 is always required when using X.509 certificate-based authentication, the TOE only needs to be able to generate a Certification Request if the TOE needs to present an X.509 certificate to another endpoint via the TSF for authentication (i.e. if at least one of the following SFRs is included in the ST: FCS_DTLSC_EXT.2, FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2, FCS_IPSEC_EXT.1, FCS_SSHC_EXT.1.5 (applicable only if at least one of the x509v3-* ciphers is selected), FCS_SSHS_EXT.1.5 (applicable only if at least one of the x509v3-* ciphers is selected), FCS_TLSC_EXT.2, FCS_TLSS_EXT.1, FCS_TLSS_EXT.2).. Therefore FIA_X509_EXT.3 only needs to be added to the ST in this case. If the TOE does not need to present an X.509 certificate to another endpoint via the TSF for authentication (e.g. a client not supporting mutual authentication) the use of FIA_X509_EXT.3 is optional.
+Although the functionality in FIA_X509_EXT.1/Rev and FIA_X509_EXT.2 is always required when using X.509 certificate-based authentication, the TOE only needs to be able to generate a Certification Request if the TOE needs to present an X.509 certificate to another endpoint via the TSF for authentication (i.e. if at least one of the following SFRs is included in the ST: FCS_DTLSC_EXT.2, FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2, FCS_IPSEC_EXT.1, FCS_TLSC_EXT.2, FCS_TLSS_EXT.1, FCS_TLSS_EXT.2).. Therefore FIA_X509_EXT.3 only needs to be added to the ST in this case. If the TOE does not need to present an X.509 certificate to another endpoint via the TSF for authentication (e.g. a client not supporting mutual authentication) the use of FIA_X509_EXT.3 is optional.
 
 =====  FIA_X509_EXT.1 X.509 Certificate Validation
 
@@ -2643,7 +2498,7 @@ _If the TOE implements mutual authentication or acts as a server, there is no ex
 
 _FIA_X509_EXT.1.2/Rev applies to certificates that are used and processed by the TSF and restricts the certificates that may be added as trusted CA certificates._
 
-_The ST author must include FIA_X509_EXT.1/Rev in all instances except when only SSH is selected within FTP_ITC.1 or FPT_ITT.1, and implementation is limited to public-key authentication that does not rely on X.509 certificates. Additionally, FIA_X509_EXT.1/Rev must also be included if FPT_TUD_EXT is included in the ST._
+_The ST author must include FIA_X509_EXT.1/Rev in all instances except when only SSH is selected within FTP_ITC.1, FTP_TRP.1 or FPT_ITT.1, and implementation is limited to public-key authentication that does not rely on X.509 certificates. Additionally, FIA_X509_EXT.1/Rev must also be included if FPT_TUD_EXT is included in the ST._
 
 =====  FIA_X509_EXT.2 X.509 Certificate Authentication
 
@@ -2657,7 +2512,9 @@ _The ST author must include FIA_X509_EXT.1/Rev in all instances except when only
 
 *_Application Note {counter:appnote_count}_*
 
-_In FIA_X509_EXT.2.1, the ST author’s selection includes IPsec, TLS, or HTTPS if these protocols are included in FTP_ITC.1.1 or FPT_ITT.1. SSH should be included if authentication other than ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, and/or ecdsa-sha2-nistp521 is selected in FCS_SSHC_EXT.1.5 or FCS_SSHS_EXT.1.5. The ST author selects “code signing for system software updates” when “X.509 certificate” is selected in FPT_TUD_EXT.1.3._
+_In FIA_X509_EXT.2.1, the ST author’s selection includes IPsec, TLS, or HTTPS if these protocols are included in FTP_ITC.1.1 or FPT_ITT.1. The ST author selects “code signing for system software updates” when “X.509 certificate” is selected in FPT_TUD_EXT.1.3._
+
+_SSH should be included if the TSF shall be validated against the version of the Functional Package for Secure Shell referenced in the "Allowed Packages" list, and authentication other than ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, and/or ecdsa-sha2-nistp521 is selected._
 
 _Often a connection must be established to check the revocation status of a certificate - either to download a CRL or to perform a lookup using OCSP. In FIA_X509_EXT.2.2 the selection is used to describe the behaviour in the event that such a connection cannot be established (for example, due to a network error). If the TOE has determined the certificate is valid according to all other rules in FIA_X509_EXT.1/Rev, the behaviour indicated in the selection determines the validity. The TOE must not accept the certificate if it fails any of the other validation rules in FIA_X509_EXT.1/Rev. If the Administrator-configured option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1. The selection should be consistent with the validation requirements in FCS_IPSEC_EXT.1.14, FCS_TLSC_EXT.1.3 and FCS_TLSC_EXT.2.3._
 
@@ -2667,7 +2524,7 @@ _The ST author must include FIA_X509_EXT.2 in all instances except when only SSH
 
 =====  FIA_X509_EXT.3 X.509 Certificate Requests
 
-Although the functionality in FIA_X509_EXT.1/Rev and FIA_X509_EXT.2 is always required when using X.509 certificate-based authentication, the TOE only needs to be able to generate a Certification Request if the TOE needs to present an X.509 certificate to another endpoint via the TSF for authentication (i.e. if at least one of the following SFRs is included in the ST: FCS_DTLSC_EXT.2, FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2, FCS_IPSEC_EXT.1, FCS_SSHC_EXT.1.5 (applicable only if at least one of the x509v3-* ciphers is selected), FCS_SSHS_EXT.1.5 (applicable only if at least one of the x509v3-* ciphers is selected), FCS_TLSC_EXT.2, FCS_TLSS_EXT.1, FCS_TLSS_EXT.2). Therefore FIA_X509_EXT.3 only needs to be added to the ST in this case. If the TOE does not need to present an X.509 certificate to another endpoint via the TSF for authentication (e.g. a client not supporting mutual authentication) the use of FIA_X509_EXT.3 is optional. This element must be included in the ST if X.509 certificates are used as part of FTP_ITC.1, FTP_TRP.1/Admin, or FPT_ITT.1 where the TOE authenticating itself to external IT entities, administrators, or distributed components.
+Although the functionality in FIA_X509_EXT.1/Rev and FIA_X509_EXT.2 is always required when using X.509 certificate-based authentication, the TOE only needs to be able to generate a Certification Request if the TOE needs to present an X.509 certificate to another endpoint via the TSF for authentication (i.e. if at least one of the following SFRs is included in the ST: FCS_DTLSC_EXT.2, FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2, FCS_IPSEC_EXT.1, FCS_TLSC_EXT.2, FCS_TLSS_EXT.1, FCS_TLSS_EXT.2). Therefore FIA_X509_EXT.3 only needs to be added to the ST in this case. If the TOE does not need to present an X.509 certificate to another endpoint via the TSF for authentication (e.g. a client not supporting mutual authentication) the use of FIA_X509_EXT.3 is optional. This element must be included in the ST if X.509 certificates are used as part of FTP_ITC.1, FTP_TRP.1/Admin, or FPT_ITT.1 where the TOE authenticating itself to external IT entities, administrators, or distributed components.
 
 
 *FIA_X509_EXT.3 X.509 Certificate Requests*
@@ -3049,7 +2906,7 @@ Dependencies: No other components
 
 *FCS_RBG_EXT.1.2* The deterministic RBG shall be seeded by at least one entropy source that accumulates entropy from [selection: _[assignment: number of software-based sources] software-based noise source, [assignment: number of platform-based sources] platform-based noise source_] with a minimum of [selection: _128 bits, 192 bits, 256 bits_] of entropy at least equal to the greatest security strength, according to ISO/IEC 18031:2011 Table C.1 “Security Strength Table for Hash Functions”, of the keys and hashes that it will generate.
 
-==== Cryptographic Protocols (FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_HTTPS_EXT, FCS_IPSEC_EXT, FCS_NTP_EXT, FCS_SSHC_EXT, FCS_SSHS_EXT, FCS_TLSC_EXT, FCS_TLSS_EXT)
+==== Cryptographic Protocols (FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_HTTPS_EXT, FCS_IPSEC_EXT, FCS_NTP_EXT, FCS_TLSC_EXT, FCS_TLSS_EXT)
 
 =====  FCS_DTLSC_EXT DTLS Client Protocol
 
@@ -3464,134 +3321,6 @@ Dependencies: FCS_COP.1 Cryptographic operation
 
 *FCS_NTP_EXT.1.4* The TSF shall support configuration of at least three (3) NTP time sources in the Operational Environment.
 
-=====  FCS_SSHC_EXT.1 SSH Client
-
-*Family Behaviour*
-
-The component in this family addresses the ability for a client to use SSH to protect data between the client and a server using the SSH protocol.
-
-*Component levelling*
-
-image:extracted-media/media/FCS_SSHC_EXT.png[image,width=500,height=48]
-
-FCS_SSHC_EXT.1 SSH Client requires that the client side of SSH be implemented as specified.
-
-*Management: FCS_SSHC_EXT.1*
-
-The following actions could be considered for the management functions in FMT:
-
-[loweralpha]
-. There are no management activities foreseen.
-
-*Audit: FCS_SSHC_EXT.1*
-
-The following actions should be considered for audit if FAU_GEN Security audit data generation is included in the PP/ST:
-
-[loweralpha]
-. Failure of SSH session establishment
-. SSH session establishment
-. SSH session termination
-
-*FCS_SSHC_EXT.1 SSH Client Protocol*
-
-Hierarchical to: No other components
-
-Dependencies: FCS_CKM.1 Cryptographic Key Generation
-
-FCS_CKM.2 Cryptographic Key Establishment
-
-FCS_COP.1/DataEncryption Cryptographic operation (AES Data encryption/decryption)
-
-FCS_COP.1/SigGen Cryptographic operation (Signature Generation and Verification)
-
-FCS_COP.1/Hash Cryptographic operation (Hash Algorithm)
-
-FCS_COP.1/KeyedHash Cryptographic operation (Keyed Hash Algorithm)
-
-FCS_RBG_EXT.1 Random Bit Generation
-
-
-*FCS_SSHC_EXT.1.1* The TSF shall implement the SSH protocol in accordance with: RFCs _4251, 4252, 4253, 4254,_ [selection: _4256, 4344, 5647, 5656, 6187, 6668, 8268, 8308 section 3.1, 8332_].
-
-*FCS_SSHC_EXT.1.2* The TSF shall ensure that the SSH protocol implementation supports the following authentication methods as described in RFC 4252: public key-based, [selection: password-based, no other method].
-
-*FCS_SSHC_EXT.1.3* The TSF shall ensure that, as described in RFC 4253, packets greater than _[assignment: number of bytes]_ bytes in an SSH transport connection are dropped.
-
-*FCS_SSHC_EXT.1.4* The TSF shall ensure that the SSH transport implementation uses the following encryption algorithms and rejects all other encryption algorithms: [assignment: _list of encryption algorithms_].
-
-*FCS_SSHC_EXT.1.5* The TSF shall ensure that the SSH public-key based authentication implementation uses [selection: _ssh-rsa, rsa-sha2-256, rsa-sha2-512, ecdsa-sha2-nistp256, x509v3-ssh-rsa, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, x509v3-ecdsa-sha2-nistp256, x509v3-ecdsa-sha2-nistp384, x509v3-ecdsa-sha2-nistp521, x509v3-rsa2048-sha256_] as its public key algorithm(s) and rejects all other public key algorithms
-
-*FCS_SSHC_EXT.1.6* The TSF shall ensure that the SSH transport implementation uses _[assignment: list of data integrity MAC algorithms]_ as its data integrity MAC algorithm(s) and rejects all other MAC algorithm(s).
-
-*FCS_SSHC_EXT.1.7* The TSF shall ensure that _[assignment: list of key exchange methods]_ are the only allowed key exchange methods used for the SSH protocol.
-
-*FCS_SSHC_EXT.1.8* The _TSF shall ensure that within SSH connections, the same session keys are used for a threshold of no longer than one hour, and each encryption key is used to protect no more than one gigabyte of data. After any of the thresholds are reached, a rekey needs to be performed_.
-
-*FCS_SSHC_EXT.1.9* The TSF shall ensure that the SSH client authenticates the identity of the SSH server using a local database associating each host name with its corresponding public key and [selection: _a list of trusted certification authorities, no other methods_] as described in RFC 4251 section 4.1.
-
-=====  FCS_SSHS_EXT.1 SSH Server Protocol
-
-*Family Behaviour*
-
-The component in this family addresses the ability for a server to offer SSH to protect data between a client and the server using the SSH protocol.
-
-*Component levelling*
-
-image:extracted-media/media/FCS_SSHS_EXT.png[image,width=500,height=48]
-
-FCS_SSHS_EXT.1 SSH Server requires that the server side of SSH be implemented as specified.
-
-*Management: FCS_SSHS_EXT.1*
-
-The following actions could be considered for the management functions in FMT:
-
-[loweralpha]
-. There are no management activities foreseen.
-
-*Audit: FCS_SSHS_EXT.1*
-
-The following actions should be considered for audit if FAU_GEN Security audit data generation is included in the PP/ST:
-
-[loweralpha]
-. Failure of SSH session establishment
-. SSH session establishment
-. SSH session termination
-
-*FCS_SSHS_EXT.1 SSH Server* *Protocol*
-
-
-Hierarchical to: No other components
-
-Dependencies: FCS_CKM.1Cryptographic Key Generation
-
-FCS_CKM.2 Cryptographic Key Establishment
-
-FCS_COP.1/DataEncryption Cryptographic operation (AES Data encryption/decryption)
-
-FCS_COP.1/SigGen Cryptographic operation (Signature Generation and Verification)
-
-FCS_COP.1/Hash Cryptographic operation (Hash Algorithm)
-
-FCS_COP.1/KeyedHash Cryptographic operation (Keyed Hash Algorithm)
-
-FCS_RBG_EXT.1 Random Bit Generation
-
-
-*FCS_SSHS_EXT.1.1* The TSF shall implement the SSH protocol in accordance with: RFCs 4251, 4252, 4253, 4254, [selection: _4256, 4344, 5647, 5656, 6187, 6668, 8268, 8308_ section 3.1, 8332].
-
-*FCS_SSHS_EXT.1.2* The TSF shall ensure that the SSH protocol implementation supports the following authentication methods as described in RFC 4252: public key-based, [selection: _password-based, no other method_].
-
-*FCS_SSHS_EXT.1.3* The TSF shall ensure that, as described in RFC 4253, packets greater than _[assignment: number of bytes]_ bytes in an SSH transport connection are dropped.
-
-*FCS_SSHS_EXT.1.4* The TSF shall ensure that the SSH transport implementation uses the following encryption algorithms and rejects all other encryption algorithms: _[assignment: encryption algorithms]_.
-
-*FCS_SSHS_EXT.1.5* The TSF shall ensure that the SSH public-key based authentication implementation uses [selection: _ssh-rsa, rsa-sha2-256, rsa-sha2-512, ecdsa-sha2-nistp256, x509v3-ssh-rsa, ecdsa-sha2-nistp384, ecdsa-sha2-nistp521, x509v3-ecdsa-sha2-nistp256, x509v3-ecdsa-sha2-nistp384, x509v3-ecdsa-sha2-nistp521, x509v3-rsa2048-sha256_] as its public key algorithm(s) and rejects all other public key algorithms.
-
-*FCS_SSHS_EXT.1.6* The TSF shall ensure that the SSH transport implementation uses _[assignment: list of MAC algorithms]_ as its MAC algorithm(s) and rejects all other MAC algorithm(s).
-
-*FCS_SSHS_EXT.1.7* The TSF shall ensure that _[assignment: list of key exchange methods]_ are the only allowed key exchange methods used for the SSH protocol.
-
-*FCS_SSHS_EXT.1.8* The _TSF shall ensure that within SSH connections, the same session keys are used for a threshold of no longer than one hour, and each encryption key is used to protect no more than one gigabyte of data. After any of the thresholds are reached, a rekey needs to be performed_.
 
 =====  FCS_TLSC_EXT TLS Client Protocol
 
@@ -4634,53 +4363,6 @@ FCS_IPSEC_EXT.1 included
 
 FCS_DTLSC_EXT.1 included
 
-|FCS_SSHC_EXT.1 a|
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-a|
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
-
-|FCS_SSHS_EXT.1 a|
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-a|
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
 
 |FCS_TLSC_EXT.1 a|
 FCS_CKM.1
