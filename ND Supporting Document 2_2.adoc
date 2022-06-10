@@ -487,8 +487,7 @@ _FIPS 186-4 Public Key Verification (PKV) Test_
 |===
 |*Scheme* |*SFR* |*Service*
 |RSA |FCS_TLSS_EXT.1 |Administration
-|ECDH |FCS_SSHC_EXT.1 |Audit Server
-|Diffie-Hellman (Group 14) |FCS_SSHC_EXT.1 |Backup Server
+|Diffie-Hellman (Group 14) |FCS_IPSEC_EXT.1 |Backup Server
 |ECDH |FCS_IPSEC_EXT.1 |Authentication Server
 |===
 
@@ -636,7 +635,7 @@ _Validity Test_
 *AES-CTR Known Answer Tests*
 
 [arabic, start=108]
-. The Counter (CTR) mode is a confidentiality mode that features the application of the forward cipher to a set of input blocks, called counters, to produce a sequence of output blocks that are exclusive-ORed with the plaintext to produce the ciphertext, and vice versa. Since the Counter Mode does not specify the counter that is used, it is not possible to implement an automated test for this mode. The generation and management of the counter is tested through FCS_SSH*_EXT.1.4. If CBC and/or GCM are selected in FCS_COP.1/DataEncryption, the test activities for those modes sufficiently demonstrate the correctness of the AES algorithm. If CTR is the only selection in FCS_COP.1/DataEncryption, the AES-CBC Known Answer Test, AES-GCM Known Answer Test, or the following test shall be performed (all of these tests demonstrate the correctness of the AES algorithm):
+. The Counter (CTR) mode is a confidentiality mode that features the application of the forward cipher to a set of input blocks, called counters, to produce a sequence of output blocks that are exclusive-ORed with the plaintext to produce the ciphertext, and vice versa. Since the Counter Mode does not specify the counter that is used, it is not possible to implement an automated test for this mode. The generation and management of the counter is tested if the TSF is validated against the requirements of the Functional Package for Secure Shell referenced in the "Allowed Packages" list. If CBC and/or GCM are selected in FCS_COP.1/DataEncryption, the test activities for those modes sufficiently demonstrate the correctness of the AES algorithm. If CTR is the only selection in FCS_COP.1/DataEncryption, the AES-CBC Known Answer Test, AES-GCM Known Answer Test, or the following test shall be performed (all of these tests demonstrate the correctness of the AES algorithm):
 . There are four Known Answer Tests (KATs) described below to test a basic AES encryption operation (AES-ECB mode). For all KATs, the plaintext[line-through]*, IV,* and ciphertext values shall be 128-bit blocks. The results from each test may either be obtained by the validator directly or by supplying the inputs to the implementer and receiving the results in response. To determine correctness, the evaluator shall compare the resulting values to those obtained by submitting the same inputs to a known good implementation.
 . KAT-1 To test the encrypt functionality, the evaluator shall supply a set of 5 plaintext values for each selected keysize and obtain the ciphertext value that results from encryption of the given plaintext using a key value of all zeros.
 . KAT-2 To test the encrypt functionality, the evaluator shall supply a set of 5 key values for each selected keysize and obtain the ciphertext value that results from encryption of an all zeros plaintext using the given key value.
@@ -911,7 +910,7 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 ===== Tests
 
 [arabic, start=184]
-. In the course of performing the testing activities for the evaluation, the evaluator shall use all supported interfaces, although it is not necessary to repeat each test involving an administrative action with each interface. The evaluator shall ensure, however, that each supported method of administering the TOE that conforms to the requirements of this cPP be tested; for instance, if the TOE can be administered through a local hardware interface; SSH; and TLS/HTTPS; then all three methods of administration must be exercised during the evaluation team’s test activities.
+. In the course of performing the testing activities for the evaluation, the evaluator shall use all supported interfaces, although it is not necessary to repeat each test involving an administrative action with each interface. The evaluator shall ensure, however, that each supported method of administering the TOE that conforms to the requirements of this cPP be tested; for instance, if the TOE can be administered through a local hardware interface; SSH, if the TSF shall be validated against the Functional Package for Secure Shell referenced in the "Allowed Packages" list; and TLS/HTTPS; then all three methods of administration must be exercised during the evaluation team’s test activities.
 
 === Protection of the TSF (FPT)
 
@@ -2192,265 +2191,9 @@ The captured traffic is also used to verify that the appropriate message digest 
 [arabic, start=460]
 . The evaluator shall also confirm that the TOE does not synchronize to any other time sources by configuring another NTP source operating in the server mode and inducing (e.g. send synch request with a forged source IP address) it to send timestamp updates to the TOE. The evaluator shall check that the TSF does not act on the received NTP updates and does not update system time. The evaluator shall confirm that the time stamp is not updated for a valid reason (e.g. failure to recognize NTP authentication key or rejection of unrequested NTP synchronization).
 
-==== FCS_SSHC_EXT.1 SSH Client
 
-===== TSS
 
-*FCS_SSHC_EXT.1.2*
 
-[arabic, start=461]
-. The evaluator shall check to ensure that the TSS contains a description of the public key algorithms that are acceptable for use for authentication and that this list conforms to FCS_SSHC_EXT.1.5. and ensure that if password-based authentication methods have been selected in the ST then these are also described.
-
-*FCS_SSHC_EXT.1.3*
-
-[arabic, start=462]
-. The evaluator shall check that the TSS describes how “large packets” in terms of RFC 4253 are detected and handled.
-
-*FCS_SSHC_EXT.1.4*
-
-[arabic, start=463]
-. The evaluator shall check the description of the implementation of this protocol in the TSS to ensure that optional characteristics are specified, and the encryption algorithms supported are specified as well. The evaluator shall check the TSS to ensure that the encryption algorithms specified are identical to those listed for this component.
-
-*FCS_SSHC_EXT.1.5*
-
-[arabic, start=464]
-. The evaluator shall check the description of the implementation of this protocol in the TSS to ensure that optional characteristics are specified, and the public key algorithms supported are specified as well. The evaluator shall check the TSS to ensure that the public key algorithms specified are identical to those listed for this component.
-+
-If x509v3-based public key authentication algorithms are claimed, the evaluator shall confirm that the TSS includes the description of how the TOE establishes the server’s identity and how this identity is confirmed with the one that is presented in the provided certificate. For example, the TOE could verify that a server’s configured IP address matches the one presented in the server’s x.509v3 certificate.
-
-*FCS_SSHC_EXT.1.6*
-
-[arabic, start=465]
-. The evaluator shall check the TSS to ensure that it lists the supported data integrity algorithms, and that the list corresponds to the list in this component.
-
-*FCS_SSHC_EXT.1.7*
-
-[arabic, start=466]
-. The evaluator shall check the TSS to ensure that it lists the supported key exchange algorithms, and that the list corresponds to the list in this component.
-
-*FCS_SSHC_EXT.1.8*
-
-[arabic, start=467]
-. The evaluator shall check that the TSS specifies the following:
-[loweralpha]
-.. Both thresholds are checked by the TOE.
-.. Rekeying is performed upon reaching the threshold that is hit first.
-
-===== Guidance Documentation
-
-*FCS_SSHC_EXT.1.4*
-
-[arabic, start=468]
-. The evaluator shall also check the guidance documentation to ensure that it contains instructions on configuring the TOE so that SSH conforms to the description in the TSS (for instance, the set of algorithms advertised by the TOE may have to be restricted to meet the requirements).
-
-*FCS_SSHC_EXT.1.5*
-
-[arabic, start=469]
-. The evaluator shall also check the guidance documentation to ensure that it contains instructions on configuring the TOE so that SSH conforms to the description in the TSS (for instance, the set of algorithms advertised by the TOE may have to be restricted to meet the requirements).
-
-*FCS_SSHC_EXT.1.6*
-
-[arabic, start=470]
-. The evaluator shall also check the guidance documentation to ensure that it contains instructions to the Security Administrator on how to ensure that only the allowed data integrity algorithms are used in SSH connections with the TOE (specifically, that the “none” MAC algorithm is not allowed).
-
-*FCS_SSHC_EXT.1.7*
-
-[arabic, start=471]
-. The evaluator shall also check the guidance documentation to ensure that it contains instructions to the Security Administrator on how to ensure that only the allowed key exchange algorithms are used in SSH connections with the TOE.
-
-*FCS_SSHC_EXT.1.8*
-
-[arabic, start=472]
-. If one or more thresholds that are checked by the TOE to fulfil the SFR are configurable, then the evaluator shall check that the guidance documentation describes how to configure those thresholds. Either the allowed values are specified in the guidance documentation and must not exceed the limits specified in the SFR (one hour of session time, one gigabyte of transmitted traffic) or the TOE must not accept values beyond the limits specified in the SFR. The evaluator shall check that the guidance documentation describes that the TOE reacts to the first threshold reached.
-
-===== Tests
-
-*FCS_SSHC_EXT.1.2*
-
-[arabic, start=473]
-. Test 1: If password-based authentication methods have been selected in the ST then using the guidance documentation, the evaluator shall configure the TOE to perform password-based authentication to an SSH server and demonstrate that a Security Administrator can be successfully authenticated by the TOE to an SSH server using a password as an authenticator.
-+
-Note: Public key authentication is tested as part of testing for FCS_SSHC_EXT.1.5
-
-*FCS_SSHC_EXT.1.3*
-
-[arabic, start=474]
-. The evaluator shall demonstrate that if the TOE receives a packet larger than that specified in this component, that packet is dropped.
-
-*FCS_SSHC_EXT.1.4*
-
-[arabic, start=475]
-. The evaluator must ensure that only claimed ciphers and cryptographic primitives are used to establish an SSH connection. To verify this, the evaluator shall start session establishment for an SSH connection with a remote server (referred to as ‘remote endpoint’ below). The evaluator shall capture the traffic exchanged between the TOE and the remote endpoint during protocol negotiation (e.g. using a packet capture tool or information provided by the endpoint, respectively). The evaluator shall verify from the captured traffic that the TOE offers all the ciphers defined in the TSS for the TOE for SSH sessions, but no additional ones compared to the definition in the TSS. The evaluator shall perform one successful negotiation of an SSH session to verify that the TOE behaves as expected. It is sufficient to observe the successful negotiation of the session to satisfy the intent of the test. If the evaluator detects that not all ciphers defined in the TSS for SSH are supported by the TOE and/or the TOE supports one or more additional ciphers not defined in the TSS for SSH, the test shall be regarded as failed.
-
-*FCS_SSHC_EXT.1.5*
-
-[arabic, start=476]
-. Test 1: The evaluator shall establish an SSH connection using each of the public key algorithms specified by the requirement to authenticate an SSH server to the TOE. It is sufficient to observe (on the wire) the successful negotiation of the algorithm to satisfy the intent of the test. Test objective: The purpose of this positive test is to check the authentication of the server by the client (when establishing the transport layer connection), and not for checking generation of the authentication message from the client (in the User Authentication Protocol). The evaluator shall therefore establish sufficient separate SSH connections (with an appropriately configured server) to cause the TOE to demonstrate use of all public key algorithms claimed in FCS_SSHC_EXT.1.5 in the ST.
-. Test 2: The evaluator shall configure an SSH server to only allow a public key algorithm that is not included in the ST selection. The evaluator shall attempt to establish an SSH connection from the TOE to the SSH server and observe that the connection is rejected.
-
-*FCS_SSHC_EXT.1.6*
-
-[arabic, start=478]
-. Test 1: [conditional, if an HMAC or AEAD_AES_*_GCM algorithm is selected in the ST] The evaluator shall establish an SSH connection using each of the algorithms, except “implicit”, specified by the requirement. It is sufficient to observe (on the wire) the successful negotiation of the algorithm to satisfy the intent of the test.
-. Note: To ensure the observed algorithm is used, the evaluator shall ensure a non-aes*-gcm@openssh.com encryption algorithm is negotiated while performing this test.
-. Test 2: [conditional, if an HMAC or AEAD_AES_*_GCM algorithm is selected in the ST] The evaluator shall configure an SSH server to only allow a MAC algorithm that is not included in the ST selection. The evaluator shall attempt to connect from the TOE to the SSH server and observe that the attempt fails.
-. Note: To ensure the proposed MAC algorithm is used, the evaluator shall ensure a non-aes*-gcm@openssh.com encryption algorithm is negotiated while performing this test.
-
-*FCS_SSHC_EXT.1.7*
-
-[arabic, start=482]
-. Test 1: The evaluator shall configure an SSH server to permit all allowed key exchange methods. The evaluator shall attempt to connect from the TOE to the SSH server using each allowed key exchange method and observe that each attempt succeeds.
-
-*FCS_SSHC_EXT.1.8*
-
-[arabic, start=483]
-. The evaluator needs to perform testing that rekeying is performed according to the description in the TSS. The evaluator shall test both, the time-based threshold and the traffic-based threshold.
-. For testing of the time-based threshold, the evaluator shall use the TOE to connect to an SSH server and keep the session open until the threshold is reached. The evaluator shall verify that the SSH session has been active longer than the threshold value and shall verify that the TOE initiated a rekey (the method of verification shall be reported by the evaluator).
-. Testing does not necessarily have to be performed with the threshold configured at the maximum allowed value of one hour of session time, but the value used for testing shall not exceed one hour. The evaluator needs to ensure that the rekeying has been initiated by the TOE and not by the SSH server the TOE is connected to.
-. For testing of the traffic-based threshold the evaluator shall use the TOE to connect to an SSH server and shall transmit data to and/or receive data from the TOE within the active SSH session until the threshold for data protected by either encryption key is reached. It is acceptable if the rekey occurs before the threshold is reached (e.g. because the traffic is counted according to one of the alternatives given in the Application Note for FCS_SSHC_EXT.1.8).
-. The evaluator shall verify that more data has been transmitted within the SSH session than the threshold allows and shall verify that the TOE initiated a rekey (the method of verification shall be reported by the evaluator).
-. Testing does not necessarily have to be performed with the threshold configured at the maximum allowed value of one gigabyte of transferred traffic, but the value used for testing shall not exceed one gigabyte. The evaluator needs to ensure that the rekeying has been initiated by the TOE and not by the SSH server the TOE is connected to.
-. If one or more thresholds that are checked by the TOE to fulfil the SFR are configurable, the evaluator needs to verify that the threshold(s) can be configured as described in the guidance documentation and the evaluator needs to test that modification of the thresholds is restricted to Security Administrators (as required by FMT_MOF.1/Functions).
-. In cases where data transfer threshold could not be reached due to hardware limitations it is acceptable to omit testing of this (SSH rekeying based on data transfer threshold) threshold if both the following conditions are met:_ _
-[loweralpha]
-.. An argument is present in the TSS section describing this hardware-based limitation and
-.. All hardware components that are the basis of such argument are definitively identified in the ST. For example, if specific Ethernet Controller or WiFi radio chip is the root cause of such limitation, these chips must be identified.
-
-*FCS_SSHC_EXT.1.9*
-
-[arabic, start=491]
-. Test 1: The evaluator shall delete all entries in the TOE’s list of recognized SSH server host keys and, if selected, all entries in the TOE’s list of trusted certification authorities. The evaluator shall initiate a connection from the TOE to an SSH server. The evaluator shall ensure that the TOE either rejects the connection or displays the SSH server’s public key (either the key bytes themselves or a hash of the key using any allowed hash algorithm) and prompts the Security Administrator to accept or deny the key before continuing the connection.
-. Test 2: The evaluator shall add an entry associating a host name with a public key into the TOE’s local database. The evaluator shall replace, on the corresponding SSH server, the server’s host key with a different host key. If 'password-based' is selected for the TOE in FCS_SSHC_EXT.1.2, the evaluator shall initiate a connection from the TOE to the SSH server using password-based authentication, shall ensure that the TOE rejects the connection, and shall ensure that the password was not transmitted to the SSH server (for example, by instrumenting the SSH server with a debugging capability to output received passwords). If 'password-based' is not selected for the TOE in FCS_SSHC_EXT.1.2, the evaluator shall initiate a connection from the TOE to the SSH server using public key-based authentication and shall ensure that the TOE rejects the connection.
-
-==== FCS_SSHS_EXT.1 SSH Server
-
-===== TSS
-
-*FCS_SSHS_EXT.1.2*
-
-[arabic, start=493]
-. The evaluator shall check to ensure that the TSS contains a description of the public key algorithms that are acceptable for use for authentication and that this list conforms to FCS_SSHS_EXT.1.5. and ensure that if password-based authentication methods have been selected in the ST then these are also described.
-
-*FCS_SSHS_EXT.1.3*
-
-[arabic, start=494]
-. The evaluator shall check that the TSS describes how “large packets” in terms of RFC 4253 are detected and handled.
-
-*FCS_SSHS_EXT.1.4*
-
-[arabic, start=495]
-. The evaluator shall check the description of the implementation of this protocol in the TSS to ensure that optional characteristics are specified, and the encryption algorithms supported are specified as well. The evaluator shall check the TSS to ensure that the encryption algorithms specified are identical to those listed for this component.
-
-*FCS_SSHS_EXT.1.5*
-
-[arabic, start=496]
-. The evaluator shall check the description of the implementation of this protocol in the TSS to ensure that optional characteristics are specified, and the public key algorithms supported are specified as well. The evaluator shall check the TSS to ensure that the public key algorithms specified are identical to those listed for this component.
-+
-The evaluator shall confirm that the TSS includes the description of how the TOE establishes a user identity when an SSH client presents a public key or X.509v3 certificate. For example, the TOE could verify that the SSH client’s presented public key matches one that is stored within the SSH server’s authorized_keys file.
-
-*FCS_SSHS_EXT.1.6*
-
-[arabic, start=497]
-. The evaluator shall check the TSS to ensure that it lists the supported data integrity algorithms, and that the list corresponds to the list in this component.
-
-*FCS_SSHS_EXT.1.7*
-
-[arabic, start=498]
-. The evaluator shall check the TSS to ensure that it lists the supported key exchange algorithms, and that the list corresponds to the list in this component.
-
-*FCS_SSHS_EXT.1.8*
-
-[arabic, start=499]
-. The evaluator shall check that the TSS specifies the following:
-[loweralpha]
-.. Both thresholds are checked by the TOE.
-.. Rekeying is performed upon reaching the threshold that is hit first.
-
-===== Guidance Documentation
-
-*FCS_SSHS_EXT.1.4*
-
-[arabic, start=500]
-. The evaluator shall also check the guidance documentation to ensure that it contains instructions on configuring the TOE so that SSH conforms to the description in the TSS (for instance, the set of algorithms advertised by the TOE may have to be restricted to meet the requirements).
-
-*FCS_SSHS_EXT.1.5*
-
-[arabic, start=501]
-. The evaluator shall also check the guidance documentation to ensure that it contains instructions on configuring the TOE so that SSH conforms to the description in the TSS (for instance, the set of algorithms advertised by the TOE may have to be restricted to meet the requirements).
-
-*FCS_SSHS_EXT.1.6*
-
-[arabic, start=502]
-. The evaluator shall also check the guidance documentation to ensure that it contains instructions to the Security Administrator on how to ensure that only the allowed data integrity algorithms are used in SSH connections with the TOE (specifically, that the “none” MAC algorithm is not allowed).
-
-*FCS_SSHS_EXT.1.7*
-
-[arabic, start=503]
-. The evaluator shall also check the guidance documentation to ensure that it contains instructions to the Security Administrator on how to ensure that only the allowed key exchange algorithms are used in SSH connections with the TOE.
-
-*FCS_SSHS_EXT.1.8*
-
-[arabic, start=504]
-. If one or more thresholds that are checked by the TOE to fulfil the SFR are configurable, then the evaluator shall check that the guidance documentation describes how to configure those thresholds. Either the allowed values are specified in the guidance documentation and must not exceed the limits specified in the SFR (one hour of session time, one gigabyte of transmitted traffic) or the TOE must not accept values beyond the limits specified in the SFR. The evaluator shall check that the guidance documentation describes that the TOE reacts to the first threshold reached.
-
-===== Tests
-
-*FCS_SSHS_EXT.1.2*
-
-[arabic, start=505]
-. Test 1: If password-based authentication methods have been selected in the ST then using the guidance documentation, the evaluator shall configure the TOE to accept password-based authentication and demonstrate that user authentication succeeds when the correct password is provided by the user.
-. Test 2: If password-based authentication methods have been selected in the ST then the evaluator shall use an SSH client, enter an incorrect password to attempt to authenticate to the TOE, and demonstrate that the authentication fails.
-+
-Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.5.
-
-*FCS_SSHS_EXT.1.3*
-
-[arabic, start=507]
-. The evaluator shall demonstrate that if the TOE receives a packet larger than that specified in this component, that packet is dropped.
-
-*FCS_SSHS_EXT.1.4*
-
-[arabic, start=508]
-. The evaluator must ensure that only claimed ciphers and cryptographic primitives are used to establish an SSH connection. To verify this, the evaluator shall start session establishment for an SSH connection from a remote client (referred to as ‘remote endpoint’ below). The evaluator shall capture the traffic exchanged between the TOE and the remote endpoint during protocol negotiation (e.g. using a packet capture tool or information provided by the endpoint, respectively). The evaluator shall verify from the captured traffic that the TOE offers all the ciphers defined in the TSS for the TOE for SSH sessions, but no additional ones compared to the definition in the TSS. The evaluator shall perform one successful negotiation of an SSH session to verify that the TOE behaves as expected. It is sufficient to observe the successful negotiation of the session to satisfy the intent of the test. If the evaluator detects that not all ciphers defined in the TSS for SSH are supported by the TOE and/or the TOE supports one or more additional ciphers not defined in the TSS for SSH, the test shall be regarded as failed.
-
-*FCS_SSHS_EXT.1.5*
-
-[arabic, start=509]
-. Test 1: The evaluator shall establish an SSH connection using each of the public key algorithms specified by the requirement to authenticate the TOE to an SSH client. It is sufficient to observe (on the wire) the successful negotiation of the algorithm to satisfy the intent of the test.
-. Test 2: The evaluator shall choose one public key algorithm supported by the TOE. The evaluator shall generate a new key pair for that algorithm without configuring the TOE to recognize the public key for authentication. The evaluator shall use an SSH client to attempt to connect to the TOE with the new key pair and demonstrate that authentication fails. Test objective: The purpose of this negative test is to verify that the server rejects authentication attempts of clients that present a public key that does not match public key(s) associated by the TOE with the identity of the client (i.e. the public keys are unknown to the server). To demonstrate correct functionality, it is sufficient to determine that an SSH connection was not established after using a valid username and an unknown key of supported type.
-. Test 3: The evaluator shall configure an SSH client to only allow a public key algorithm that is not included in the ST selection. The evaluator shall attempt to establish an SSH connection from the SSH client to the TOE and observe that the connection is rejected.
-
-*FCS_SSHS_EXT.1.6*
-
-[arabic, start=512]
-. Test 1: [conditional, if an HMAC or AEAD_AES_*_GCM algorithm is selected in the ST] The evaluator shall establish an SSH connection using each of the algorithms, except “implicit”, specified by the requirement. It is sufficient to observe (on the wire) the successful negotiation of the algorithm to satisfy the intent of the test.
-. Note: To ensure the observed algorithm is used, the evaluator shall ensure a non-aes*-gcm@openssh.com encryption algorithm is negotiated while performing this test.
-. Test 2: [conditional, if an HMAC or AEAD_AES_*_GCM algorithm is selected in the ST] The evaluator shall configure an SSH client to only allow a MAC algorithm that is not included in the ST selection. The evaluator shall attempt to connect from the SSH client to the TOE and observe that the attempt fails.
-. Note: To ensure the proposed MAC algorithm is used, the evaluator shall ensure a non-aes*-gcm@openssh.com encryption algorithm is negotiated while performing this test.
-
-*FCS_SSHS_EXT.1.7*
-
-[arabic, start=516]
-. Test 1: The evaluator shall configure an SSH client to only allow the diffie-hellman-group1-sha1 key exchange. The evaluator shall attempt to connect from the SSH client to the TOE and observe that the attempt fails.
-. Test 2: For each allowed key exchange method, the evaluator shall configure an SSH client to only allow that method for key exchange, attempt to connect from the client to the TOE, and observe that the attempt succeeds.
-
-*FCS_SSHS_EXT.1.8*
-
-[arabic, start=518]
-. The evaluator needs to perform testing that rekeying is performed according to the description in the TSS. The evaluator shall test both, the time-based threshold and the traffic-based threshold.
-. For testing of the time-based threshold, the evaluator shall use an SSH client to connect to the TOE and keep the session open until the threshold is reached. The evaluator shall verify that the SSH session has been active longer than the threshold value and shall verify that the TOE initiated a rekey (the method of verification shall be reported by the evaluator).
-. Testing does not necessarily have to be performed with the threshold configured at the maximum allowed value of one hour of session time, but the value used for testing shall not exceed one hour. The evaluator needs to ensure that the rekeying has been initiated by the TOE and not by the SSH client that is connected to the TOE.
-. For testing of the traffic-based threshold the evaluator shall use the TOE to connect to an SSH client and shall transmit data to and/or receive data from the TOE within the active SSH session until the threshold for data protected by either encryption key is reached. It is acceptable if the rekey occurs before the threshold is reached (e.g. because the traffic is counted according to one of the alternatives given in the Application Note for FCS_SSHS_EXT.1.8).
-. The evaluator shall verify that more data has been transmitted within the SSH session than the threshold allows and shall verify that the TOE initiated a rekey (the method of verification shall be reported by the evaluator).
-. Testing does not necessarily have to be performed with the threshold configured at the maximum allowed value of one gigabyte of transferred traffic, but the value used for testing shall not exceed one gigabyte. The evaluator needs to ensure that the rekeying has been initiated by the TOE and not by the SSH client that is connected to the TOE.
-. If one or more thresholds that are checked by the TOE to fulfil the SFR are configurable, the evaluator needs to verify that the threshold(s) can be configured as described in the guidance documentation and the evaluator needs to test that modification of the thresholds is restricted to Security Administrators (as required by FMT_MOF.1/Functions).
-. In cases where data transfer threshold could not be reached due to hardware limitations it is acceptable to omit testing of this (SSH rekeying based on data transfer threshold) threshold if both the following conditions are met:
-[loweralpha]
-.. An argument is present in the TSS section describing this hardware-based limitation and
-.. All hardware components that are the basis of such argument are definitively identified in the ST. For example, if specific Ethernet Controller or WiFi radio chip is the root cause of such limitation, these chips must be identified.
-
-[arabic, start=526]
-. {blank}
 
 ==== FCS_TLSC_EXT.1 Extended: TLS Client Protocol without mutual authentication
 
@@ -2458,47 +2201,47 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 
 *FCS_TLSC_EXT.1.1*
 
-[arabic, start=527]
+[arabic, start=461]
 . The evaluator shall check the description of the implementation of this protocol in the TSS to ensure that the ciphersuites supported are specified. The evaluator shall check the TSS to ensure that the ciphersuites specified include those listed for this component.
 
 *FCS_TLSC_EXT.1.2*
 
-[arabic, start=528]
+[arabic, start=462]
 . The evaluator shall ensure that the TSS describes the client’s method of establishing all reference identifiers from the administrator/application-configured reference identifier, including which types of reference identifiers are supported (e.g. application-specific Subject Alternative Names) and whether IP addresses and wildcards are supported.
 . Note that where a TLS channel is being used between components of a distributed TOE for FPT_ITT.1, the requirements to have the reference identifier established by the user are relaxed and the identifier may also be established through a “Gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component. Where the secure channel is being used between components of a distributed TOE for FPT_ITT.1 and the ST author selected attributes from RFC 5280, the evaluator shall ensure the TSS describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier. The evaluator shall ensure the TSS presents an argument how the attribute type, or combination of attribute types, uniquely identify the remote TOE component; and the evaluator shall verify the attribute type, or combination of attribute types, is sufficient to support unique identification of the maximum supported number of TOE components.
 . If IP addresses are supported in the CN as reference identifiers, the evaluator shall ensure that the TSS describes the TOE’s conversion of the text representation of the IP address in the CN to a binary representation of the IP address in network byte order. The evaluator shall also ensure that the TSS describes whether canonical format (RFC 5952 for IPv6, RFC 3986 for IPv4) is enforced.
 
 *FCS_TLSC_EXT.1.4*
 
-[arabic, start=531]
+[arabic, start=465]
 . The evaluator shall verify that TSS describes the Supported Elliptic Curves/Supported Groups Extension and whether the required behaviour is performed by default or may be configured.
 
 ===== Guidance Documentation
 
 *FCS_TLSC_EXT.1.1*
 
-[arabic, start=532]
+[arabic, start=466]
 . The evaluator shall check the guidance documentation to ensure that it contains instructions on configuring the TOE so that TLS conforms to the description in the TSS.
 
 *FCS_TLSC_EXT.1.2*
 
-[arabic, start=533]
+[arabic, start=467]
 . _The evaluator shall ensure that the operational guidance describes all supported identifiers, explicitly states whether the TOE supports the SAN extension or not and includes detailed instructions on how to configure the reference identifier(s) used to check the identity of peer(s). If the identifier scheme implemented by the TOE includes support for IP addresses, the evaluator shall ensure that the operational guidance provides a set of warnings and/or CA policy recommendations that would result in secure TOE use._
 . Where the secure channel is being used between components of a distributed TOE for FPT_ITT.1, the SFR selects attributes from RFC 5280, and FCO_CPC_EXT.1.2 selects “no channel”; the evaluator shall verify the guidance provides instructions for establishing unique reference identifiers based on RFC5280 attributes.
 
 *FCS_TLSC_EXT.1.4*
 
-[arabic, start=535]
+[arabic, start=468]
 . If the TSS indicates that the Supported Elliptic Curves/Supported Groups Extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the Supported Elliptic Curves/Supported Groups Extension.
 
 ===== Tests
 
-[arabic, start=536]
+[arabic, start=469]
 . For all tests in this chapter the TLS server used for testing of the TOE shall be configured not to require mutual authentication.
 
 *FCS_TLSC_EXT.1.1*
 
-[arabic, start=537]
+[arabic, start=470]
 . Test 1: The evaluator shall establish a TLS connection using each of the ciphersuites specified by the requirement. This connection may be established as part of the establishment of a higher-level protocol, e.g., as part of an HTTPS session. It is sufficient to observe the successful negotiation of a ciphersuite to satisfy the intent of the test; it is not necessary to examine the characteristics of the encrypted traffic to discern the ciphersuite being used (for example, that the cryptographic algorithm is 128-bit AES and not 256-bit AES).
 . Test 2: The evaluator shall attempt to establish the connection using a server with a server certificate that contains the Server Authentication purpose in the extendedKeyUsage field and verify that a connection is established. The evaluator will then verify that the client rejects an otherwise valid server certificate that lacks the Server Authentication purpose in the extendedKeyUsage field, and a connection is not established. Ideally, the two certificates should be identical except for the extendedKeyUsage field.
 . Test 3: The evaluator shall send a server certificate in the TLS connection that does not match the server-selected ciphersuite (for example, send an ECDSA certificate while using the TLS_RSA_WITH_AES_128_CBC_SHA ciphersuite). The evaluator shall verify that the TOE disconnects after receiving the server’s Certificate handshake message.
@@ -2508,13 +2251,13 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 .. Modify the server’s selected ciphersuite in the Server Hello handshake message to be a ciphersuite not presented in the Client Hello handshake message. The evaluator shall verify that the client rejects the connection after receiving the Server Hello.
 .. [conditional]: If the TOE presents the Supported Elliptic Curves/Supported Groups Extension the evaluator shall configure the server to perform an ECDHE or DHE key exchange in the TLS connection using a non-supported curve/group (for example P-192) and shall verify that the TOE disconnects after receiving the server’s Key Exchange handshake message.
 
-[arabic, start=541]
+[arabic, start=474]
 . Test 5: The evaluator performs the following modifications to the traffic:
 [loweralpha]
 .. Change the TLS version selected by the server in the Server Hello to a non-supported TLS version and verify that the client rejects the connection.
 .. [conditional]: If using DHE or ECDH, modify the signature block in the Server’s Key Exchange handshake message, and verify that the handshake does not finished successfully, and no application data flows. This test does not apply to cipher suites using RSA key exchange. If a TOE only supports RSA key exchange in conjunction with TLS, then this test shall be omitted.
 
-[arabic, start=542]
+[arabic, start=475]
 . Test 6: The evaluator performs the following 'scrambled message tests':
 [loweralpha]
 .. Modify a byte in the Server Finished handshake message and verify that the handshake does not finish successfully and no application data flows.
@@ -2523,7 +2266,7 @@ Note: Public key authentication is tested as part of testing for FCS_SSHS_EXT.1.
 
 *FCS_TLSC_EXT.1.2*
 
-[arabic, start=543]
+[arabic, start=476]
 . Note that the following tests are marked conditional and are applicable under the following conditions:
 [loweralpha]
 .. For TLS-based trusted channel communications according to FTP_ITC.1 where RFC 6125 is selected, tests 1-6 are applicable.
@@ -2543,7 +2286,7 @@ IP addresses are binary values that must be converted to a textual representatio
 
 * IPv6: The CN contains a single IPv6 address that is represented as eight colon separated groups of four lowercase hexadecimal digits, each group representing 16 bits as specified in RFC 4291. Note: Shortened addresses, suppressed zeros, and embedded IPv4 addresses are not tested.
 
-[arabic, start=545]
+[arabic, start=478]
 . The evaluator shall configure the reference identifier according to the AGD guidance and perform the following tests during a TLS connection:
 [loweralpha]
 .. Test 1 [conditional]: The evaluator shall present a server certificate that contains a CN that does not match the reference identifier and does not contain the SAN extension. The evaluator shall verify that the connection fails. The evaluator shall repeat this test for each identifier type (e.g. IPv4, IPv6, FQDN) supported in the CN. When testing IPv4 or IPv6 addresses, the evaluator shall modify a single decimal or hexadecimal digit in the CN.
@@ -2569,7 +2312,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 *FCS_TLSC_EXT.1.3*
 
-[arabic, start=546]
+[arabic, start=479]
 . The evaluator shall demonstrate that using an invalid certificate results in the function failing as follows:
 . Test 1: Using the administrative guidance, the evaluator shall load a CA certificate or certificates needed to validate the presented certificate used to authenticate an external entity and demonstrate that the function succeeds, and a trusted channel can be established.
 . Test 2: The evaluator shall then change the presented certificate(s) so that validation fails and show that the certificate is not automatically accepted. The evaluator shall repeat this test to cover the selected types of failure defined in the SFR (i.e. the selected ones from failed matching of the reference identifier, failed validation of the certificate path, failed validation of the expiration date, failed determination of the revocation status). The evaluator performs the action indicated in the SFR selection observing the TSF resulting in the expected state for the trusted channel (e.g. trusted channel was established) covering the types of failure for which an override mechanism is defined.
@@ -2577,7 +2320,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 *FCS_TLSC_EXT.1.4*
 
-[arabic, start=550]
+[arabic, start=483]
 . Test 1 [conditional]: If the TOE presents the Supported Elliptic Curves/Supported Groups Extension, _the evaluator shall configure the server to perform ECDHE or DHE (as applicable) key exchange using each of the TOE’s supported curves and/or groups. The evaluator shall verify that the TOE successfully connects to the server.
 
 ==== FCS_TLSS_EXT.1 Extended: TLS Server Protocol without mutual authentication
@@ -2586,22 +2329,22 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 *FCS_TLSS_EXT.1.1*
 
-[arabic, start=551]
+[arabic, start=484]
 . The evaluator shall check the description of the implementation of this protocol in the TSS to ensure that the ciphersuites supported are specified. The evaluator shall check the TSS to ensure that the ciphersuites specified are identical to those listed for this component.
 
 *FCS_TLSS_EXT.1.2*
 
-[arabic, start=552]
+[arabic, start=485]
 . The evaluator shall verify that the TSS contains a description of how the TOE technically prevents the use of old SSL and TLS versions.
 
 *FCS_TLSS_EXT.1.3*
 
-[arabic, start=553]
+[arabic, start=486]
 . If using ECDHE or DHE ciphers, the evaluator shall verify that the TSS describes the key agreement parameters of the server Key Exchange message.
 
 *FCS_TLSS_EXT.1.4*
 
-[arabic, start=554]
+[arabic, start=487]
 . The evaluator shall verify that the TSS describes if session resumption based on session IDs is supported (RFC 4346 and/or RFC 5246) and/or if session resumption based on session tickets is supported (RFC 5077).
 . If session tickets are supported, the evaluator shall verify that the TSS describes that the session tickets are encrypted using symmetric algorithms consistent with FCS_COP.1/DataEncryption. The evaluator shall verify that the TSS identifies the key lengths and algorithms used to protect session tickets.
 . If session tickets are supported, the evaluator shall verify that the TSS describes that session tickets adhere to the structural format provided in section 4 of RFC 5077 and if not, a justification shall be given of the actual session ticket format.
@@ -2610,24 +2353,24 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 *FCS_TLSS_EXT.1.1*
 
-[arabic, start=557]
+[arabic, start=490]
 . The evaluator shall check the guidance documentation to ensure that it contains instructions on configuring the TOE so that TLS conforms to the description in the TSS (for instance, the set of ciphersuites advertised by the TOE may have to be restricted to meet the requirements).
 
 *FCS_TLSS_EXT.1.2*
 
-[arabic, start=558]
+[arabic, start=491]
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 *FCS_TLSS_EXT.1.3*
 
-[arabic, start=559]
+[arabic, start=492]
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 ===== Tests
 
 *FCS_TLSS_EXT.1.1*
 
-[arabic, start=560]
+[arabic, start=493]
 . Test 1: The evaluator shall establish a TLS connection using each of the ciphersuites specified by the requirement. This connection may be established as part of the establishment of a higher-level protocol, e.g., as part of an HTTPS session. It is sufficient to observe the successful negotiation of a ciphersuite to satisfy the intent of the test; it is not necessary to examine the characteristics of the encrypted traffic to discern the ciphersuite being used (for example, that the cryptographic algorithm is 128-bit AES and not 256-bit AES).
 . Test 2: The evaluator shall send a Client Hello to the server with a list of ciphersuites that does not contain any of the ciphersuites in the server’s ST and verify that the server denies the connection. Additionally, the evaluator shall send a Client Hello to the server containing only the TLS_NULL_WITH_NULL_NULL ciphersuite and verify that the server denies the connection.
 . Test 3: The evaluator shall perform the following modifications to the traffic:
@@ -2643,12 +2386,12 @@ The evaluator shall verify that the Finished message (Content type hexadecimal 1
 
 *FCS_TLSS_EXT.1.2*
 
-[arabic, start=563]
+[arabic, start=496]
 . The evaluator shall send a Client Hello requesting a connection for all mandatory and selected protocol versions in the SFR (e.g. by enumeration of protocol versions in a test client) and verify that the server denies the connection for each attempt.
 
 *FCS_TLSS_EXT.1.3*
 
-[arabic, start=564]
+[arabic, start=497]
 . Test 1: [conditional] If ECDHE ciphersuites are supported:
 [loweralpha]
 .. The evaluator shall repeat this test for each supported elliptic curve. The evaluator shall attempt a connection using a supported ECDHE ciphersuite and a single supported elliptic curve specified in the Elliptic Curves Extension. The Evaluator shall verify (though a packet capture or instrumented client) that the TOE selects the same curve in the Server Key Exchange message and successfully establishes the connection.
@@ -2660,7 +2403,7 @@ The evaluator shall verify that the Finished message (Content type hexadecimal 1
 
 _Test Objective: To demonstrate that the TOE will not resume a session for which the client failed to complete the handshake (independent of TOE support for session resumption)._
 
-[arabic, start=567]
+[arabic, start=500]
 . Test 1 [conditional]: If the TOE does not support session resumption based on session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2) or session tickets according to RFC5077, the evaluator shall perform the following test:
 [loweralpha]
 .. The client sends a Client Hello with a zero-length session identifier and with a SessionTicket extension containing a zero-length ticket.
@@ -2673,13 +2416,13 @@ Note: The following steps are only performed if the ServerHello message contains
 .. The client sends a ClientHello containing the SessionID captured in step d). This can be done by keeping the TLS session in step d) open or start a new TLS session using the SessionID captured in step d).
 .. The client verifies the TOE (1) implicitly rejects the SessionID by sending a ServerHello containing a different SessionID and by performing a full handshake (as shown in Figure 1 of RFC 4346 or RFC 5246), or (2) terminates the connection in some way that prevents the flow of application data.
 
-[arabic, start=568]
+[arabic, start=501]
 . Test 2 [conditional]: If the TOE supports session resumption using session IDs according to RFC4346 (TLS1.1) or RFC5246 (TLS1.2), the evaluator shall carry out the following steps (note that for each of these tests, it is not necessary to perform the test case for each supported version of TLS):
 [loweralpha]
 .. The evaluator shall conduct a successful handshake and capture the TOE-generated session ID in the Server Hello message. The evaluator shall then initiate a new TLS connection and send the previously captured session ID to show that the TOE resumed the previous session by responding with ServerHello containing the same SessionID immediately followed by ChangeCipherSpec and Finished messages (as shown in Figure 2 of RFC 4346 or RFC 5246).
 .. The evaluator shall initiate a handshake and capture the TOE-generated session ID in the Server Hello message. The evaluator shall then, within the same handshake, generate or force an unencrypted fatal Alert message immediately before the client would otherwise send its ChangeCipherSpec message thereby disrupting the handshake. The evaluator shall then initiate a new Client Hello using the previously captured session ID, and verify that the server (1) implicitly rejects the session ID by sending a ServerHello containing a different SessionID and performing a full handshake (as shown in figure 1 of RFC 4346 or RFC 5246), or (2) terminates the connection in some way that prevents the flow of application data.
 
-[arabic, start=569]
+[arabic, start=502]
 . Test 3 [conditional]: If the TOE supports session tickets according to RFC5077, the evaluator shall carry out the following steps (note that for each of these tests, it is not necessary to perform the test case for each supported version of TLS):
 [loweralpha]
 .. The evaluator shall permit a successful TLS handshake to occur in which a session ticket is exchanged with the non-TOE client. The evaluator shall then attempt to correctly reuse the previous session by sending the session ticket in the ClientHello. The evaluator shall confirm that the TOE responds with a ServerHello with an empty SessionTicket extension, NewSessionTicket, ChangeCipherSpec and Finished messages (as seen in figure 2 of RFC 5077).
@@ -2691,18 +2434,18 @@ Note: The following steps are only performed if the ServerHello message contains
 
 ===== TSS
 
-[arabic, start=570]
+[arabic, start=503]
 . The evaluator shall ensure the TSS describes where the check of validity of the certificates takes place, and that the TSS identifies any of the rules for extendedKeyUsage fields (in FIA_X509_EXT.1.1) that are not supported by the TOE (i.e. where the ST is therefore claiming that they are trivially satisfied). It is expected that revocation checking is performed when a certificate is used in an authentication step and when performing trusted updates (if selected). It is not necessary to verify the revocation status of X.509 certificates during power-up self-tests (if the option for using X.509 certificates for self-testing is selected).
 . The TSS shall describe when revocation checking is performed and on what certificates. If the revocation checking during authentication is handled differently depending on whether a full certificate chain or only a leaf certificate is being presented, any differences must be summarized in the TSS section and explained in the Guidance.
 
 ===== Guidance Documentation
 
-[arabic, start=572]
+[arabic, start=505]
 . The evaluator shall also ensure that the guidance documentation describes where the check of validity of the certificates takes place, describes any of the rules for extendedKeyUsage fields (in FIA_X509_EXT.1.1) that are not supported by the TOE (i.e. where the ST is therefore claiming that they are trivially satisfied) and describes how certificate revocation checking is performed and on which certificate.
 
 ===== Tests
 
-[arabic, start=573]
+[arabic, start=506]
 . The evaluator shall demonstrate that checking the validity of a certificate is performed when a certificate is used in an authentication step or when performing trusted updates (if FPT_TUD_EXT.2 is selected). It is not sufficient to verify the status of a X.509 certificate only when it is loaded onto the TOE. It is not necessary to verify the revocation status of X.509 certificates during power-up self-tests (if the option for using X.509 certificates for self-testing is selected). The evaluator shall perform the following tests for FIA_X509_EXT.1/Rev. These tests must be repeated for each distinct security function that utilizes X.509v3 certificates. For example, if the TOE implements certificate-based authentication with IPSEC and TLS, then it shall be tested with each of these protocols:
 [loweralpha]
 .. Test 1a: The evaluator shall present the TOE with a valid chain of certificates (terminating in a trusted CA certificate) as needed to validate the leaf certificate to be used in the function and shall use this chain to demonstrate that the function succeeds. Test 1a shall be designed in a way that the chain can be 'broken' in Test 1b by either being able to remove the trust anchor from the TOEs trust store, or by setting up the trust store in a way that at least one intermediate CA certificate needs to be provided, together with the leaf certificate from outside the TOE, to complete the chain (e.g. by storing only the root CA certificate in the trust store).
@@ -2715,7 +2458,7 @@ Test 1b: The evaluator shall then 'break' the chain used in Test 1a by either re
 .. Test 6: The evaluator shall modify any byte in the certificate signatureValue field (see RFC5280 Sec. 4.1.1.3), which is normally the last field in the certificate, and demonstrate that the certificate fails to validate. (The signature on the certificate will not validate.)
 .. Test 7: The evaluator shall modify any byte in the public key of the certificate and demonstrate that the certificate fails to validate. (The hash of the certificate will not validate.)
 
-[arabic, start=574]
+[arabic, start=507]
 . The evaluator shall perform the following tests for FIA_X509_EXT.1.2/Rev. The tests described must be performed in conjunction with the other certificate services assurance activities, including the functions in FIA_X509_EXT.2.1/Rev. The tests for the extendedKeyUsage rules are performed in conjunction with the uses that require those rules. Where the TSS identifies any of the rules for extendedKeyUsage fields (in FIA_X509_EXT.1.1) that are not supported by the TOE (i.e. where the ST is therefore claiming that they are trivially satisfied) then the associated extendedKeyUsage rule testing may be omitted.
 . The goal of the following tests is to verify that the TOE accepts a certificate as a CA certificate only if it has been marked as a CA certificate by using basicConstraints with the CA flag set to True (and implicitly tests that the TOE correctly parses the basicConstraints extension as part of X509v3 certificate chain validation).
 . For each of the following tests the evaluator shall create a chain of at least three certificates: a self-signed root CA certificate, an intermediate CA certificate and a leaf (node) certificate. The properties of the certificates in the chain are adjusted as described in each individual test below (and this modification shall be the only invalid aspect of the relevant certificate chain).
@@ -2730,18 +2473,18 @@ Test 1b: The evaluator shall then 'break' the chain used in Test 1a by either re
 
 ===== TSS
 
-[arabic, start=578]
+[arabic, start=510]
 . The evaluator shall check the TSS to ensure that it describes how the TOE chooses which certificates to use, and any necessary instructions in the administrative guidance for configuring the operating environment so that the TOE can use the certificates.
 . The evaluator shall examine the TSS to confirm that it describes the behaviour of the TOE when a connection cannot be established during the validity check of a certificate used in establishing a trusted channel. The evaluator shall verify that any distinctions between trusted channels are described. If the requirement that the administrator is able to specify the default action, then the evaluator shall ensure that the guidance documentation contains instructions on how this configuration action is performed.
 
 ===== Guidance Documentation
 
-[arabic, start=580]
+[arabic, start=512]
 . The evaluator shall also ensure that the guidance documentation describes the configuration required in the operating environment so the TOE can use the certificates. The guidance documentation shall also include any required configuration on the TOE to use the certificates. The guidance document shall also describe the steps for the Security Administrator to follow if the connection cannot be established during the validity check of a certificate used in establishing a trusted channel.
 
 ===== Tests
 
-[arabic, start=581]
+[arabic, start=513]
 . The evaluator shall perform the following test for each trusted channel:
 . The evaluator shall demonstrate that using a valid certificate that requires certificate validation checking to be performed in at least some part by communicating with a non-TOE IT entity. The evaluator shall then manipulate the environment so that the TOE is unable to verify the validity of the certificate and observe that the action selected in FIA_X509_EXT.2.2 is performed. If the selected action is administrator-configurable, then the evaluator shall follow the guidance documentation to determine that all supported administrator-configurable options behave in their documented manner.
 
@@ -2749,17 +2492,17 @@ Test 1b: The evaluator shall then 'break' the chain used in Test 1a by either re
 
 ===== TSS
 
-[arabic, start=583]
+[arabic, start=515]
 . If the ST author selects "device-specific information", the evaluator shall verify that the TSS contains a description of the device-specific fields used in certificate requests.
 
 ===== Guidance Documentation
 
-[arabic, start=584]
+[arabic, start=516]
 . The evaluator shall check to ensure that the guidance documentation contains instructions on requesting certificates from a CA, including generation of a Certificate Request. If the ST author selects "Common Name", "Organization", "Organizational Unit", or "Country", the evaluator shall ensure that this guidance includes instructions for establishing these fields before creating the Certification Request.
 
 ===== Tests
 
-[arabic, start=585]
+[arabic, start=517]
 . The evaluator shall perform the following tests:
 [loweralpha]
 .. Test 1: The evaluator shall use the guidance documentation to cause the TOE to generate a Certification Request. The evaluator shall capture the generated message and ensure that it conforms to the format specified. The evaluator shall confirm that the Certification Request provides the public key and other required information, including any necessary user-input information.
@@ -2769,19 +2512,19 @@ Test 1b: The evaluator shall then 'break' the chain used in Test 1a by either re
 
 ===== TSS
 
-[arabic, start=145]
+[arabic, start=518]
 . The evaluator shall examine the TSS to determine that it contains a description, for each supported method for remote administrative actions, of how successive unsuccessful authentication attempts are detected and tracked. The TSS shall also describe the method by which the remote administrator is prevented from successfully logging on to the TOE, and the actions necessary to restore this ability.
 . The evaluator shall examine the TSS to confirm that the TOE ensures that authentication failures by remote administrators cannot lead to a situation where no administrator access is available, either permanently or temporarily (e.g. by providing local logon which is not subject to blocking).
 
 ===== Guidance Documentation
 
-[arabic, start=147]
+[arabic, start=520]
 . The evaluator shall examine the guidance documentation to ensure that instructions for configuring the number of successive unsuccessful authentication attempts and time period (if implemented) are provided, and that the process of allowing the remote administrator to once again successfully log on is described for each “action” specified (if that option is chosen). If different actions or mechanisms are implemented depending on the secure protocol employed (e.g., TLS vs. SSH), all must be described.
 . The evaluator shall examine the guidance documentation to confirm that it describes, and identifies the importance of, any actions that are required in order to ensure that administrator access will always be maintained, even if remote administration is made permanently or temporarily unavailable due to blocking of accounts as a result of FIA_AFL.1.
 
 ===== Tests
 
-[arabic, start=149]
+[arabic, start=521]
 . The evaluator shall perform the following tests for each method by which remote administrators access the TOE (e.g. any passwords entered as part of establishing the connection protocol or the remote administrator application):
 [loweralpha]
 .. Test 1: The evaluator shall use the operational guidance to configure the number of successive unsuccessful authentication attempts allowed by the TOE (and, if the time period selection in FIA_AFL.1.2 is included in the ST, then the evaluator shall also use the operational guidance to configure the time period after which access is re-enabled). The evaluator shall test that once the authentication attempts limit is reached, authentication attempts with valid credentials are no longer successful.
@@ -2796,12 +2539,12 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=150]
+[arabic, start=522]
 . The evaluator shall examine the TSS to determine that it contains the lists of the supported special character(s) and minimum and maximum number of charters supported for administrator passwords.
 
 ===== Guidance Documentation
 
-[arabic, start=151]
+[arabic, start=523]
 . The evaluator shall examine the guidance documentation to determine that it:
 [loweralpha]
 .. identifies the characters that may be used in passwords and provides guidance to security administrators on the composition of strong passwords, and
@@ -2809,7 +2552,7 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== Tests
 
-[arabic, start=152]
+[arabic, start=524]
 . The evaluator shall perform the following tests.
 [loweralpha]
 .. Test 1: The evaluator shall compose passwords that meet the requirements in some way. For each password, the evaluator shall verify that the TOE supports the password. While the evaluator is not required (nor is it feasible) to test all possible compositions of passwords, the evaluator shall ensure that all characters, and a minimum length listed in the requirement are supported and justify the subset of those characters chosen for testing.
@@ -2819,17 +2562,17 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=160]
+[arabic, start=525]
 . None.
 
 ===== Guidance Documentation
 
-[arabic, start=161]
+[arabic, start=526]
 . The evaluator shall examine the guidance documentation to determine that any necessary preparatory steps to ensure authentication data is not revealed while entering for each local login allowed.
 
 ===== Tests
 
-[arabic, start=162]
+[arabic, start=527]
 . The evaluator shall perform the following test for each method of local login allowed:
 [loweralpha]
 .. Test 1: The evaluator shall locally authenticate to the TOE. While making this attempt, the evaluator shall verify that at most obscured feedback is provided while entering the authentication information.
@@ -2840,26 +2583,26 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=186]
+[arabic, start=528]
 . The evaluator shall examine the TSS to determine that it details all authentication data that are subject to this requirement, and the method used to obscure the plaintext password data when stored. The TSS shall also detail passwords are stored in such a way that they are unable to be viewed through an interface designed specifically for that purpose, as outlined in the application note.
 
 ==== FPT_TUD_EXT.2 Trusted Update based on certificates
 
 ===== TSS
 
-[arabic, start=586]
+[arabic, start=529]
 . The evaluator shall verify that the TSS contains a description of how the certificates are contained on the device. The evaluator also ensures that the TSS (or guidance documentation) describes how the certificates are installed/updated/selected, if necessary.
 . The evaluator shall verify that the TSS describes how the TOE reacts if X.509 certificates are used for trusted updates and the Security Administrator attempts to perform the trusted update using an expired certificate.
 . The TSS shall describe the point at which revocation checking is performed and describe whether the Security Administrator can manually provide revocation information. It is expected that revocation checking is performed when a certificate is used when performing trusted updates. It is not sufficient to verify the status of a X.509 certificate only when it is loaded onto the device.
 
 ===== Guidance Documentation
 
-[arabic, start=589]
+[arabic, start=532]
 . The evaluator shall verify that the guidance documentation describes how the TOE reacts if X.509 certificates are used for trusted updates and the administrator attempts to perform the trusted update using an expired certificate. The evaluator shall verify any Security Administrator actions related to revocation checking, both accepting or rejecting certificates and manually providing revocation information. The description shall correspond to the description in the TSS.
 
 ===== Tests
 
-[arabic, start=590]
+[arabic, start=533]
 . The evaluator shall verify that the update mechanism includes a certificate validation according to FIA_X509_EXT.1 and a check for the Code Signing purpose in the extendedKeyUsage.
 . The evaluator shall digitally sign the update with an invalid certificate and verify that update installation fails. The evaluator shall digitally sign the application with a certificate that does not have the Code Signing purpose and verify that application installation fails. The evaluator shall repeat the test using a valid certificate and a certificate that contains the Code Signing purpose and verify that the application installation succeeds. The evaluator shall use a previously valid but expired certificate and verifies that the TOE reacts as described in the TSS and the guidance documentation. Testing for this element is performed in conjunction with the assurance activities for FPT_TUD_EXT.1.
 . The evaluator shall demonstrate that checking the validity of a certificate is performed at the time a certificate is used when performing trusted updates. It is not sufficient to verify the status of a X.509 certificate only when it is loaded onto the device.
@@ -2870,19 +2613,19 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=593]
+[arabic, start=536]
 . For distributed TOEs see chapter 2.4.1.1.
 . For non-distributed TOEs, the evaluator shall ensure the TSS describes how checking for automatic updates or automated updates (whichever is supported by the TOE) are performed to include required configuration settings to enable and disable automated checking or automated updates.
 
 ===== Guidance Documentation
 
-[arabic, start=595]
+[arabic, start=538]
 . For distributed TOEs see chapter 2.4.1.2.
 . For non-distributed TOEs, the evaluator shall also ensure the TSS describes how checking for automatic updates or automated updates (whichever is supported by the TOE) are performed to include required configuration settings to enable and disable automated checking or automated updates (whichever is supported by the TOE).
 
 ===== Tests
 
-[arabic, start=597]
+[arabic, start=540]
 . The evaluator shall try to enable and disable automatic checking for updates or automatic updates (whichever is supported by the TOE) without prior authentication as Security Administrator (by authenticating as a user with no administrator privileges or without user authentication). The attempt to enable/disable automatic checking for updates should fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt to enable/disable automatic checking for updates can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator.
 . The evaluator shall try to enable and disable automatic checking for updates or automatic updates (whichever is supported by the TOE) with prior authentication as Security Administrator. The attempt to enable/disable automatic checking for updates should be successful.
 
@@ -2890,19 +2633,19 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=599]
+[arabic, start=542]
 . For distributed TOEs see chapter 2.4.1.1.
 . For non-distributed TOEs, the evaluator shall ensure the TSS for each administrative function identified the TSS details how the Security Administrator determines or modifies the behaviour of (whichever is supported by the TOE) transmitting audit data to an external IT entity, handling of audit data, audit functionality when Local Audit Storage Space is full (whichever is supported by the TOE).
 
 ===== Guidance Documentation
 
-[arabic, start=601]
+[arabic, start=544]
 . For distributed TOEs see chapter 2.4.1.2.
 . For non-distributed TOEs, the evaluator shall also ensure the Guidance Documentation describes how the Security Administrator determines or modifies the behaviour of (whichever is supported by the TOE) transmitting audit data to an external IT entity, handling of audit data, audit functionality when Local Audit Storage Space is full (whichever is supported by the TOE) are performed to include required configuration settings.
 
 ===== Tests
 
-[arabic, start=603]
+[arabic, start=546]
 . Test 1 (if ‘transmission of audit data to external IT entity’ is selected from the second selection together with 'modify the behaviour of' in the first selection): The evaluator shall try to modify all security related parameters for configuration of the transmission protocol for transmission of audit data to an external IT entity without prior authentication as Security Administrator (by authentication as a user with no administrator privileges or without user authentication at all). Attempts to modify parameters without prior authentication should fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt to modify the security related parameters can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator.
 . Test 2 (if ‘transmission of audit data to external IT entity’ is selected from the second selection together with 'modify the behaviour of' in the first selection): The evaluator shall try to modify all security related parameters for configuration of the transmission protocol for transmission of audit data to an external IT entity with prior authentication as Security Administrator. The effects of the modifications should be confirmed.
 . The evaluator does not have to test all possible values of the security related parameters for configuration of the transmission protocol for transmission of audit data to an external IT entity but at least one allowed value per parameter.
@@ -2919,19 +2662,19 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=614]
+[arabic, start=557]
 . For distributed TOEs see chapter 2.4.1.1.
 . For non-distributed TOEs, the evaluator shall ensure the TSS lists the services the Security Administrator is able to start and stop and how that how that operation is performed.
 
 ===== Guidance Documentation
 
-[arabic, start=616]
+[arabic, start=559]
 . For distributed TOEs see chapter 2.4.1.2.
 . For non-distributed TOEs, the evaluator shall also ensure the Guidance Documentation describes how the TSS lists the services the Security Administrator is able to start and stop and how that how that operation is performed.
 
 ===== Tests
 
-[arabic, start=618]
+[arabic, start=561]
 . The evaluator shall try to enable and disable at least one of the services as defined in the Application Notes for FAU_GEN.1.1 (whichever is supported by the TOE) without prior authentication as Security Administrator (either by authenticating as a user with no administrator privileges, if possible, or without prior authentication at all). The attempt to enable/disable this service/these services should fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt to enable/disable this service/these services can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator.
 . The evaluator shall try to enable and disable at least one of the services as defined in the Application Notes for FAU_GEN.1.1 (whichever is supported by the TOE) with prior authentication as Security Administrator. The attempt to enable/disable this service/these services should be successful.
 
@@ -2939,19 +2682,19 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=620]
+[arabic, start=563]
 . For distributed TOEs see chapter 2.4.1.1.
 . For non-distributed TOEs, the evaluator shall ensure the TSS lists the keys the Security Administrator is able to manage to include the options available (e.g. generating keys, importing keys, modifying keys or deleting keys) and how that how those operations are performed.
 
 ===== Guidance Documentation
 
-[arabic, start=622]
+[arabic, start=565]
 . For distributed TOEs see chapter 2.4.1.2.
 . For non-distributed TOEs, the evaluator shall also ensure the Guidance Documentation lists the keys the Security Administrator is able to manage to include the options available (e.g. generating keys, importing keys, modifying keys or deleting keys) and how that how those operations are performed.
 
 ===== Tests
 
-[arabic, start=624]
+[arabic, start=567]
 . The evaluator shall try to perform at least one of the related actions (modify, delete, generate/import) without prior authentication as Security Administrator (either by authentication as a non-administrative user, if supported, or without authentication at all). Attempts to perform related actions without prior authentication should fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt to manage cryptographic keys can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator.
 . The evaluator shall try to perform at least one of the related actions with prior authentication as Security Administrator. This attempt should be successful.
 
@@ -2961,24 +2704,24 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=214]
+[arabic, start=569]
 . The evaluator shall examine the TSS to determine that it details whether local administrative session locking or termination is supported and the related inactivity time period settings.
 
 ===== Guidance Documentation
 
-[arabic, start=215]
+[arabic, start=570]
 . The evaluator shall confirm that the guidance documentation states whether local administrative session locking or termination is supported and instructions for configuring the inactivity time period.
 
 ===== Tests
 
-[arabic, start=216]
+[arabic, start=571]
 . The evaluator shall perform the following test:
 [loweralpha]
 .. Test 1: The evaluator follows the guidance documentation to configure several different values for the inactivity time period referenced in the component. For each period configured, the evaluator establishes a local interactive session with the TOE. The evaluator then observes that the session is either locked or terminated after the configured time period. If locking was selected from the component, the evaluator then ensures that re-authentication is needed when trying to unlock the session.
 
 == Evaluation Activities for SARs
 
-[arabic, start=626]
+[arabic, start=572]
 . The sections below specify EAs for the Security Assurance Requirements (SARs) included in the related cPPs (see section 1.1 above). The EAs in Section 2 (Evaluation Activities for SFRs), Section 3 (link:#_Evaluation_Activities_for_1[Evaluation Activities for Optional Requirements]), and Section 4 (Evaluation Activities for Selection-Based Requirements) are an interpretation of the more general CEM assurance requirements as they apply to the specific technology area of the TOE.
 . In this section, each SAR that is contained in the cPP is listed, and the EAs that are not associated with an SFR are captured here, or a reference is made to the CEM, and the evaluator is expected to perform the CEM work units.
 
@@ -2986,12 +2729,12 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ==== General ASE
 
-[arabic, start=628]
+[arabic, start=574]
 . When evaluating a Security Target, the evaluator performs the work units as presented in the CEM. In addition, the evaluator ensures the content of the TSS in the ST satisfies the EAs specified in Section 2 (Evaluation Activities for SFRs).
 
 ==== TOE summary specification (ASE_TSS.1) for Distributed TOEs
 
-[arabic, start=629]
+[arabic, start=575]
 . For distributed TOEs only the SFRs classified as ‘all’ have to be fulfilled by all TOE parts. The SFRs classified as ‘One’ or ‘Feature Dependent’ only have to be fulfilled by either one or some TOE parts, respectively. To make sure that the distributed TOE as a whole fulfills all the SFRs the following actions for ASE_TSS.1 have to be performed as part of ASE_TSS.1.1E.
 
 [cols=",",options="header",]
@@ -3004,14 +2747,14 @@ The evaluator shall verify the sufficiency to fulfil the related SFRs. This incl
 
 |===
 
-[arabic, start=630]
+[arabic, start=576]
 . Note that additional Evaluation Activities for the TSS in the case of a distributed TOE are defined in section A.9.1.1.
 
 === ADV: Development
 
 ==== Basic Functional Specification (ADV_FSP.1)
 
-[arabic, start=631]
+[arabic, start=578]
 . The EAs for this assurance component focus on understanding the interfaces (e.g., application programming interfaces, command line interfaces, graphical user interfaces, network interfaces) described in the AGD documentation, and possibly identified in the TOE Summary Specification (TSS) in response to the SFRs. Specific evaluator actions to be performed against this documentation are identified (where relevant) for each SFR in Section 2, and in EAs for AGD, ATE and AVA SARs in other parts of Section 5.
 . The EAs presented in this section address the CEM work units ADV_FSP.1-1, ADV_FSP.1-2, ADV_FSP.1-3, and ADV_FSP.1-5.
 . The EAs are reworded for clarity and interpret the CEM work units such that they will result in more objective and repeatable actions by the evaluator. The EAs in this SD are intended to ensure the evaluators are consistently performing equivalent actions.
@@ -3046,19 +2789,19 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 ===== Evaluation Activity:
 
-[arabic, start=635]
+[arabic, start=582]
 . _The evaluator shall examine the interface documentation to ensure it describes the purpose and method of use for each TSFI that is identified as being security relevant._
 . In this context, TSFI are deemed security relevant if they are used by the administrator to configure the TOE, or to perform other administrative functions (e.g. audit review or performing updates). Additionally, those interfaces that are identified in the ST, or guidance documentation, as adhering to the security policies (as presented in the SFRs), are also considered security relevant. The intent is that these interfaces will be adequately tested and having an understanding of how these interfaces are used in the TOE is necessary to ensure proper test coverage is applied.
 . The set of TSFI that are provided as evaluation evidence are contained in the Administrative Guidance and User Guidance.
 
 ===== Evaluation Activity
 
-[arabic, start=638]
+[arabic, start=585]
 . _The evaluator shall check the interface documentation to ensure it identifies and describes the parameters for each TSFI that is identified as being security relevant._
 
 ===== Evaluation Activity
 
-[arabic, start=639]
+[arabic, start=586]
 . _The evaluator shall examine the interface documentation to develop a mapping of the interfaces to SFRs._
 . The evaluator uses the provided documentation and first identifies, and then examines a representative set of interfaces to perform the EAs presented in Section 2, including the EAs associated with testing of the interfaces.
 . It should be noted that there may be some SFRs that do not have an interface that is explicitly “mapped” to invoke the desired functionality. For example, generating a random bit string, destroying a cryptographic key that is no longer needed, or the TSF failing to a secure state, are capabilities that may be specified in SFRs, but are not invoked by an interface.
@@ -3066,39 +2809,39 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 === AGD: Guidance Documents
 
-[arabic, start=643]
+[arabic, start=590]
 . It is not necessary for a TOE to provide separate documentation to meet the individual requirements of AGD_OPE and AGD_PRE. Although the EAs in this section are described under the traditionally separate AGD families, the mapping between the documentation provided by the developer and AGD_OPE and AGD_PRE requirements may be many-to-many, as long as all requirements are met in documentation that is delivered to Security Administrators and users (as appropriate) as part of the TOE.
 . Note that additional Evaluation Activities for the guidance documentation in the case of a distributed TOE are defined in section A.9.1.1.
 
 ==== Operational User Guidance (AGD_OPE.1)
 
-[arabic, start=645]
+[arabic, start=592]
 . The evaluator performs the CEM work units associated with the AGD_OPE.1 SAR. Specific requirements and EAs on the guidance documentation are identified (where relevant) in the individual EAs for each SFR.
 . In addition, the evaluator performs the EAs specified below.
 
 ===== Evaluation Activity:
 
-[arabic, start=647]
+[arabic, start=594]
 . _The evaluator shall ensure the Operational guidance documentation is distributed to Security Administrators and users (as appropriate) as part of the TOE, so that there is a reasonable guarantee that Security Administrators and users are aware of the existence and role of the documentation in establishing and maintaining the evaluated configuration._
 
 ===== Evaluation Activity
 
-[arabic, start=648]
+[arabic, start=595]
 . _The evaluator shall ensure that the Operational guidance is provided for every Operational Environment that the product supports as claimed in the Security Target and shall adequately address all platforms claimed for the TOE in the Security Target._
 
 ===== Evaluation Activity
 
-[arabic, start=649]
+[arabic, start=596]
 . _The evaluator shall ensure that the Operational guidance contains instructions for configuring any cryptographic engine associated with the evaluated configuration of the TOE. It shall provide a warning to the administrator that use of other cryptographic engines was not evaluated nor tested during the CC evaluation of the TOE._
 
 ===== Evaluation Activity
 
-[arabic, start=650]
+[arabic, start=597]
 . _The evaluator shall ensure the Operational guidance makes it clear to an administrator which security functionality and interfaces have been assessed and tested by the EAs._
 
 ===== Evaluation Activity
 
-[arabic, start=651]
+[arabic, start=598]
 . In addition, the evaluator shall ensure that the following requirements are also met.
 [loweralpha]
 .. The guidance documentation shall contain instructions for configuring any cryptographic engine associated with the evaluated configuration of the TOE. It shall provide a warning to the administrator that use of other cryptographic engines was not evaluated nor tested during the CC evaluation of the TOE.
@@ -3111,35 +2854,35 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 ==== Preparative Procedures (AGD_PRE.1)
 
-[arabic, start=652]
+[arabic, start=599]
 . The evaluator performs the CEM work units associated with the AGD_PRE.1 SAR. Specific requirements and EAs on the preparative documentation are identified (and where relevant are captured in the Guidance Documentation portions of the EAs) in the individual EAs for each SFR.
 . Preparative procedures are distributed to Security Administrators and users (as appropriate) as part of the TOE, so that there is a reasonable guarantee that Security Administrators and users are aware of the existence and role of the documentation in establishing and maintaining the evaluated configuration.
 . In addition, the evaluator performs the EAs specified below.
 
 ===== Evaluation Activity:
 
-[arabic, start=655]
+[arabic, start=602]
 . _The evaluator shall examine the Preparative procedures to ensure they include a description of how the Security Administrator verifies that the operational environment can fulfil its role to support the security functionality (including the requirements of the Security Objectives for the Operational Environment specified in the Security Target)._
 . The documentation should be in an informal style and should be written with sufficient detail and explanation that they can be understood and used by the target audience (which will typically include IT staff who have general IT experience but not necessarily experience with the TOE product itself).
 
 ===== Evaluation Activity
 
-[arabic, start=657]
+[arabic, start=604]
 . _The evaluator shall examine the Preparative procedures to ensure they are provided for every Operational Environment that the product supports as claimed in the Security Target and shall adequately address all platforms claimed for the TOE in the Security Target._
 
 ===== Evaluation Activity
 
-[arabic, start=658]
+[arabic, start=605]
 . _The evaluator shall examine the preparative procedures to ensure they include instructions to successfully install the TSF in each Operational Environment._
 
 ===== Evaluation Activity
 
-[arabic, start=659]
+[arabic, start=606]
 . _The evaluator shall examine the preparative procedures to ensure they include instructions to manage the security of the TSF as a product and as a component of the larger operational environment._
 
 ===== Evaluation Activity
 
-[arabic, start=660]
+[arabic, start=607]
 . In addition, the evaluator shall ensure that the following requirements are also met.
 . The preparative procedures must
 [loweralpha]
@@ -3150,19 +2893,19 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 ==== Labelling of the TOE (ALC_CMC.1)
 
-[arabic, start=662]
+[arabic, start=609]
 . When evaluating that the TOE has been provided and is labelled with a unique reference, the evaluator performs the work units as presented in the CEM.
 
 ==== TOE CM coverage (ALC_CMS.1)
 
-[arabic, start=663]
+[arabic, start=610]
 . When evaluating the developer’s coverage of the TOE in their CM system, the evaluator performs the work units as presented in the CEM.
 
 === ATE: Tests
 
 ==== Independent Testing – Conformance (ATE_IND.1)
 
-[arabic, start=664]
+[arabic, start=611]
 . The focus of the testing is to confirm that the requirements specified in the SFRs are being met. Additionally, testing is performed to confirm the functionality described in the TSS, as well as the dependencies on the Operational guidance documentation is accurate.
 . The evaluator performs the CEM work units associated with the ATE_IND.1 SAR. Specific testing requirements and EAs are captured for each SFR in Sections 2, 3 and 4.
 . The evaluator should consult Appendix 709 when determining the appropriate strategy for testing multiple variations or models of the TOE that may be under evaluation.
@@ -3172,7 +2915,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 ==== Vulnerability Survey (AVA_VAN.1)
 
-[arabic, start=668]
+[arabic, start=615]
 . While vulnerability analysis is inherently a subjective activity, a minimum level of analysis can be defined and some measure of objectivity and repeatability (or at least comparability) can be imposed on the vulnerability analysis process. In order to achieve such objectivity and repeatability it is important that the evaluator follows a set of well-defined activities and documents their findings so others can follow their arguments and come to the same conclusions as the evaluator. While this does not guarantee that different evaluation facilities will identify exactly the same type of vulnerabilities or come to exactly the same conclusions, the approach defines the minimum level of analysis and the scope of that analysis and provides Certification Bodies a measure of assurance that the minimum level of analysis is being performed by the evaluation facilities.
 . In order to meet these goals some refinement of the AVA_VAN.1 CEM work units is needed. The following table indicates, for each work unit in AVA_VAN.1, whether the CEM work unit is to be performed as written, or if it has been clarified by an Evaluation Activity. If clarification has been provided, a reference to this clarification is provided in the table.
 . {blank}
@@ -3233,12 +2976,12 @@ AVA_VAN.1-11 The evaluator *_shall report_* in the ETR all exploitable vulnerabi
 
 [#_Ref453153408 .anchor]####Table 2: Mapping of AVA_VAN.1 CEM Work Units to Evaluation Activities
 
-[arabic, start=671]
+[arabic, start=618]
 . Because of the level of detail required for the evaluation activities, the bulk of the instructions are contained in Appendix A, while an “outline” of the assurance activity is provided below.
 
 ===== Evaluation Activity (Documentation):
 
-[arabic, start=672]
+[arabic, start=619]
 . In addition to the activities specified by the CEM in accordance with Table 2, the evaluator shall perform the following activities.
 . _The evaluator shall examine the documentation outlined below provided by the developer to confirm that it contains all required information. This documentation is in addition to the documentation already required to be supplied in response to the EAs listed previously._
 . The developer shall provide documentation identifying the list of software and hardware componentsfootnote:[In this sub-section the term “components” refers to parts that make up the TOE. It is therefore distinguished from the term “distributed TOE components”, which refers to the parts of a TOE that are present in one physical part of a distributed TOE. Each distributed TOE component will therefore generally include a number of the hardware and software components that are referred to in this sub-section: for example, each distributed TOE component will generally include hardware components such as processors and software components such as an operating system and libraries.] that compose the TOE. Hardware components should identify at a minimum the processors used by the TOE. Software components include applications, the operating system and other major components that are independently identifiable and reusable (outside the TOE) such as a web server and protocol or cryptographic libraries. This additional documentation is merely a list of the name and version number of the components and will be used by the evaluators in formulating hypotheses during their analysis.
@@ -3250,12 +2993,12 @@ AVA_VAN.1-11 The evaluator *_shall report_* in the ETR all exploitable vulnerabi
 
 ===== Evaluation Activity:
 
-[arabic, start=676]
+[arabic, start=623]
 . The evaluator formulates hypotheses in accordance with process defined in Appendix A. The evaluator documents the flaw hypotheses generated for the TOE in the report in accordance with the guidelines in Appendix A.3. The evaluator shall perform vulnerability analysis in accordance with Appendix A.2. The results of the analysis shall be documented in the report according to Appendix A.3.
 
 == Required Supplementary Information
 
-[arabic, start=677]
+[arabic, start=624]
 . This Supporting Document refers in various places to the possibility that ‘required supplementary information’ may need to be supplied as part of the deliverables for an evaluation. This term is intended to describe information that is not necessarily included in the Security Target or operational guidance, and that may not necessarily be public. Examples of such information could be entropy analysis, or description of a cryptographic key management architecture used in (or in support of) the TOE. The requirement for any such supplementary information will be identified in the relevant cPP.
 . The cPPs associated with this SD require an entropy analysis as described in [NDcPP, Appendix D].
 
@@ -3300,7 +3043,7 @@ Version 2.2, 20 December 2019
 
 === Sources of vulnerability information
 
-[arabic, start=679]
+[arabic, start=626]
 . CEM Work Unit AVA_VAN.1-3 has been supplemented in this Supporting Document to provide a better-defined set of flaws to investigate and procedures to follow based on this particular technology. Terminology used is based on the flaw hypothesis methodology, where the evaluation team hypothesizes flaws and then either proves or disproves those flaws (a flaw is equivalent to a “potential vulnerability” as used in the CEM). Flaws are categorized into four “types” depending on how they are formulated:
 [arabic]
 .. A list of flaw hypotheses applicable to the technology described by the cPP (in this case, a network device) derived from public sources as documented in Section A.1.1 – this fixed set has been agreed by the iTC. Additionally, this will be supplemented with entries for a set of public sources (as indicated below) that are directly applicable to the TOE or its identified components (as defined by the process in Section A.1.1 below); this is to ensure that the evaluators include in their assessment applicable entries that have been discovered since the cPP was published;
@@ -3310,34 +3053,34 @@ Version 2.2, 20 December 2019
 
 ==== Type 1 Hypotheses – Public-Vulnerability-Based
 
-[arabic, start=680]
+[arabic, start=627]
 . The list of public sources of vulnerability information selected by the iTC is given in Section A.4.
 . The evaluators shall perform a search on the sources listed in Section A.4 to determine a list of potential flaw hypotheses that are more recent that the publication date of the cPP, and those that are specific to the TOE and its components as specified by the additional documentation mentioned above. Any duplicates – either in a specific entry, or in the flaw hypothesis that is generated from an entry from the same or a different source – can be noted and removed from consideration by the evaluation team.
 . The search criteria to be used when searching the sources published after the publication date of the cPP shall include:
 
 * The terms “router” and “switch” (or similar generic term describing the device type of the TOE)
 * The following protocols: TCP
-* Any protocols not listed above supported (through an SFR) by the TOE (these will include at least one of the remote management protocols (IPsec, TLS, SSH))
+* Any protocols not listed above supported (through an SFR) by the TOE (these will include at least one of the remote management protocols selected in FTP_TRP.1)
 * The TOE name (including appropriate model information as appropriate)
 
-[arabic, start=683]
+[arabic, start=630]
 . As part of type 1 flaw hypothesis generation for the specific components of the TOE, the evaluator shall also search the component manufacturer’s websites to determine if flaw hypotheses can be generated on this basis (for instance, if security patches have been released for the version of the component being evaluated, the subject of those patches may form the basis for a flaw hypothesis).
 
 ==== Type 2 Hypotheses – iTC-Sourced
 
-[arabic, start=684]
+[arabic, start=631]
 . Section A.5 contains the list of flaw hypothesis generated by the iTC for this technology that must be considered by the evaluation team as flaw hypotheses in performing the vulnerability assessment.
 . If the evaluators discover a Type 3 or Type 4 flaw that they believe should be considered as a Type 2 flaw in future versions of this cPP, they should work with their Certification Body to determine the appropriate means of submitting the flaw for consideration by the iTC.
 
 ==== Type 3 Hypotheses – Evaluation-Team-Generated
 
-[arabic, start=686]
+[arabic, start=633]
 . Type 3 flaws are formulated by the evaluator based on information presented by the product (through on-line help, product documentation and user guides, etc.) and product behaviour during the (functional) testing activities. The evaluator is also free to formulate flaws that are based on material that is not part of the baseline evidence (e.g., information gleaned from an Internet mailing list, or reading interface documentation on interfaces not included in the set provided by the developer), although such activities have the potential to vary significantly based upon the product and evaluation facility performing the analysis.
 . If the evaluators discover a Type 3 flaw that they believe should be considered as a Type 2 flaw in future versions of this cPP, they should work with their Certification Body to determine the appropriate means of submitting the flaw for consideration by the iTC.
 
 ==== Type 4 Hypotheses – Tool-Generated
 
-[arabic, start=688]
+[arabic, start=635]
 . The evaluator shall perform the following activities to generate type 4 flaw hypotheses:
 
 * Fuzz testing
@@ -3348,13 +3091,13 @@ Version 2.2, 20 December 2019
 Since none of these packets will belong to an allowed session, the packets should not be processed by the TOE, and the TOE should not be adversely affected by this traffic. Any results that are unexpected (e.g., core dumps) are candidates for a flaw hypothesis.
 ** Mutation fuzz testing of the remaining fields in the required protocol headers. This testing requires sending mutations of well-formed packets that have both carefully chosen and random values inserted into each header field in turn (i.e. testing is to include both carefully chosen and random insertion test cases). The original well-formed packets would be accepted as part of a normal existing communication stream and may still be accepted as valid packets when subject to the carefully chosen mutations (the individual packet alone would be valid although its contents may not be valid in the context of preceding and/or following packets), but will often not be valid packets when random values are inserted into fields. The carefully chosen values should include semantically significant values that can be determined from the type of the data that the field represents, such as values indicating positive and negative integers, boundary conditions, invalid binary combinations (e.g. for flag sets with dependencies between bits), and missing start or end values. Randomly chosen values may not result in well-formed packets but are included nonetheless to see whether they can lead to the device entering an insecure state. Any results that are unexpected (e.g., core dumps) are candidates for a flaw hypothesis.
 
-[arabic, start=689]
+[arabic, start=636]
 . The iTC has not identified a specific tool to be used in accomplishing the above flaw hypothesis generation activity, so any tool used by the evaluation team is acceptable. The evaluation team shall record in the test report the name, version, parameters, and results of all test tools used for this this activity.
 . If the evaluators discover a Type 4 flaw that they believe should be considered as a Type 2 flaw in future versions of this cPP, they should work with their Certification Body to determine the appropriate means of submitting the flaw for consideration by the iTC.
 
 === Process for Evaluator Vulnerability Analysis
 
-[arabic, start=691]
+[arabic, start=638]
 . As flaw hypotheses are generated from the activities described above, the evaluation team will disposition them; that is, attempt to prove, disprove, or determine the non-applicability of the hypotheses. This process is as follows.
 . The evaluator will refine each flaw hypothesis for the TOE and attempt to disprove it using the information provided by the developer or through penetration testing. During this process, the evaluator is free to interact with the developer to determine if the flaw exists, including requests to the developer for additional evidence (e.g., detailed design information, consultation with engineering staff); however, the CB should be included in all of these discussions. Should the developer object to the information being requested as being not compatible with the overall level of the evaluation activity/cPP and cannot provide evidence otherwise that the flaw is disproved, the evaluator prepares an appropriate set of materials as follows:
 [arabic]
@@ -3362,7 +3105,7 @@ Since none of these packets will belong to an allowed session, the packets shoul
 .. an argument why the flaw hypothesis could not be proven or disproved by the evidence provided so far;
 .. the type of information required to investigate the flaw hypothesis further.
 
-[arabic, start=693]
+[arabic, start=640]
 . The Certification Body (CB) will then either approve or disapprove the request for additional information. If approved, the developer provides the requested evidence to disprove the flaw hypothesis (or, of course, acknowledge the flaw).
 . For each hypothesis, the evaluator will note whether the flaw hypothesis has been successfully disproved, successfully proven to have identified a flaw, or requires further investigation. It is important to have the results documented as outlined in Section A.3 below.
 . If the evaluator finds a flaw, the evaluator will report these flaws to the developer. All reported flaws must be addressed as follows.
@@ -3376,14 +3119,14 @@ Since none of these packets will belong to an allowed session, the packets shoul
 
 === Reporting
 
-[arabic, start=703]
+[arabic, start=650]
 . The evaluators shall produce two reports on the testing effort; one that is public-facing (that is, included in the non-proprietary evaluation report, which is a subset of the Evaluation Technical Report (ETR)) and the complete ETR that is delivered to the overseeing CB.
 . The public-facing report contains:
 
 * The flaw identifiers returned when the procedures for searching public sources were followed according to instructions in the Supporting Document per Section A.1.1;
 * A statement that the evaluators have examined the Type 1 flaw hypotheses specified in this Supporting Document in section A.1.1 (i.e. the flaws listed in the previous bullet) and the Type 2 flaw hypotheses specified in this Supporting Document by the iTC in Section A.1.2;
 
-[arabic, start=705]
+[arabic, start=652]
 . A statement that the evaluation team developed Types 3 and 4 flaw hypotheses in accordance with Sections A.1.3, A.1.4, and A.2, and that no residual vulnerabilities exist that are exploitable by attackers with Basic Attack Potential as defined by the CB in accordance with the guidance in the CEM. It should be noted that this is just a statement about the “fact of” Types 3 and 4 flaw hypotheses being developed, and that no specifics about the number of flaws, the flaws themselves, or the analysis pertaining to those flaws will be included in the public-facing report.
 . No other information is provided in the public-facing report.
 . The internal CB report contains, in addition to the information in the public-facing report:
@@ -3409,7 +3152,7 @@ Since none of these packets will belong to an allowed session, the packets shoul
 
 === Public Vulnerability Sources
 
-[arabic, start=708]
+[arabic, start=655]
 . The following sources of public vulnerabilities are sources for the iTC to consider in both formulating the specific list of flaws to be investigated by the evaluators, as well as to reference in directing the evaluators to perform key-word searches during the evaluation of a specific TOE.
 
 [loweralpha]
@@ -3435,20 +3178,20 @@ https://www.rapid7.com/db/vulnerabilities
 
 === Additional Flaw Hypotheses
 
-[arabic, start=709]
+[arabic, start=656]
 . The following additional tests shall be performed:1.) [Conditional]: If the TOE is a TLS server and supports ciphersuites that use RSA transport (e.g. supporting TLS_RSA_WITH_* ciphers) the following test shall be performed. Where RSA Key Establishment schemes are claimed and especially when PKCS#1 v1.5* padding is used, the evaluators shall test for implementation flaws allowing Bleichenbacher and Klima et al. style attacks, including Bock et al's ROBOT attacks of 2017 in the flaw analysis. Even though Bleichenbacher's original paper is two decades old, Bock et al. found these attacks to still be effective in weakening the security of RSA key establishment in current products. Bleichenbacher and Klima et al. style attacks are complex and may be difficult to detect, but a number of software testing tools have been created to assist in that process. The iTC strongly recommends that at least one of the tools mentioned in Bock et al's ROBOT attacks of 2017 webpage or paper, as effective to detect padding oracle attacks, be used to test TOE communications channels using RSA based Key Establishment (related sources: http://archiv.infsec.ethz.ch/education/fs08/secsem/bleichenbacher98.pdf, https://eprint.iacr.org/2003/052, https://robotattack.org/). Network Device Equivalency Considerations
 
 [appendix]
 == Equivalency
 === Introduction
 
-[arabic, start=710]
+[arabic, start=657]
 . This appendix provides a foundation for evaluators to determine whether a developer’s request for equivalency of products for different models wishing to claim conformance to the Network Device collaborative Protection Profiles is allowed.
 . For the purpose of evaluation, equivalency can be broken into two categories:
 * *Variations in models*: Separate TOE models/variations may include differences that could necessitate separate testing across each model. If there are no variations in any of the categories listed below, the models may be considered equivalent.
 * *Variations in TOE dependencies on the environment (e.g., OS/platform the product is tested on):* The method a TOE provides functionality (or the functionality itself) may vary depending upon the environment on which it is installed. If there is no difference in the TOE-provided functionality or in the manner in which the TOE provides the functionality, the models may be considered equivalent.
 
-[arabic, start=712]
+[arabic, start=659]
 . Determination of equivalency between models can result in several different testing outcomes.
 . If a set of TOE are determined to be equivalent, testing may be performed on a single variation of the TOE. However, if the TOE variations have security-relevant functional differences, each of the TOE models that exhibits either functional or structural differences must be separately tested. Generally speaking, only the difference between each variation of TOE must be separately tested. Other equivalent functionality may be tested on a representative model and not across multiple platforms.
 . If it is determined that a TOE operates the same regardless of the environment, testing may be performed on a single instance for all equivalent configurations. However, if the TOE is determined to provide environment-specific functionality, testing must take place in each environment for which a difference in functionality exists. Similar to the above scenario, only the functionality affected by environment differences must be retested.
@@ -3458,17 +3201,17 @@ https://www.rapid7.com/db/vulnerabilities
 
 ====  Strategy
 
-[arabic, start=716]
+[arabic, start=663]
 . When performing the equivalency analysis, the evaluator should consider each factor independently. A factor may be any number of things at various levels of abstraction, ranging from the processor a device uses, to the underlying operating system and hardware platform a software application relies upon. Examples may be the various chip sets employed by the product, the type of network interface (different device drivers), storage media (solid state drive, spinning disk, EEPROM). It is important to consider how the difference in these factors may influence the TOE’s ability to enforce the SFRs. Each analysis of an individual factor will result in one of two outcomes,
 * For the particular factor, all variations of the TOE on all supported platforms are equivalent. In this case, testing may be performed on a single model in a single test environment and cover all supported models and environments.
 * For the particular factor, a subset of the product has been identified to require separate testing to ensure that it operates identically to all other equivalent TOE. The analysis would identify the specific combinations of models/testing environments that needed to be tested.
 
-[arabic, start=717]
+[arabic, start=664]
 . Complete CC testing of the product would encompass the totality of each individual analysis performed for each of the identified factors.
 
 ====  Guidance for Network Devices
 
-[arabic, start=718]
+[arabic, start=665]
 . The following table provides a description of how an evaluator should consider each of the factors that affect equivalency between TOE model variations and across operating environments. Additionally, the table also identifies scenarios that will result in additional separate testing across models.
 
 [cols=",,",options="header",]
@@ -3494,12 +3237,12 @@ If there are specified differences between platforms/hardware, the evaluator mus
 
 === Test presentation/Truth in advertising
 
-[arabic, start=719]
+[arabic, start=666]
 . In addition to determining what to test, the evaluation results and resulting Certification Report, must identify the actual module and environment combinations that have been tested. The analysis used to determine the testing subset may be considered proprietary and will only optionally be publicly included.
 
 === Evaluating additional components for a distributed TOE
 
-[arabic, start=720]
+[arabic, start=667]
 . In the case of a distributed TOE the Security Target will identify an evaluated configuration that consists of a number of separate components chosen by the ST author, which collectively satisfy the requirements of the cPP. This evaluated configuration need not be the minimum set of components that could _possibly_ meet the cPP (e.g. if the TOE is intended for large enterprise deployments then the evaluated configuration might include some redundancy in components in order to support expected connectivity and loads), but because this is the main configuration referred to in the ST and the evaluation, it is treated in this section as the minimum configuration of interest and is referred to here as the ‘minimum configuration’ as well as the ‘evaluated configuration’.
 . In addition to the minimum configuration above, the ST may also identify (at the author’s discretion, and subject to verification as described in this section) which TOE components can have instances added to an operational configuration without affecting the validity of the CC certification. The ST description may include constraints on how such components are added, including required and/or prohibited configurations of the components.
 . Extra instances of a TOE component must have the same hardware and software as the original component included in the evaluated configuration.
@@ -3509,14 +3252,14 @@ If there are specified differences between platforms/hardware, the evaluator mus
 
 =====  TSS
 
-[arabic, start=724]
+[arabic, start=671]
 . The evaluator shall examine the TSS to identify any extra instances of TOE components allowed in the ST and shall examine the description of how the additional components maintain the SFRs to confirm that it is consistent with the role that the component plays in the evaluated configuration. For example: the secure channels used by the extra component for intra-TOE communications (FPT_ITT) and external communications (FTP_ITC) must be consistent, the audit information generated by the extra component must be maintained, and the management of the extra component must be consistent with that used for the original instance of the component in the minimum configuration.
 
 ==== Evaluator Actions for Assessing the Guidance Documentation
 
 =====  Guidance Documentation
 
-[arabic, start=725]
+[arabic, start=672]
 . The evaluator shall examine the description of the extra instances of TOE components in the guidance documentation to confirm that they are consistent with those identified as allowed in the ST. This includes confirmation that the result of applying the guidance documentation to configure the extra component will leave the TOE in a state such that the claims for SFR support in each component are as described in the ST and therefore that all SFRs continue to be met when the extra components are present.
 . The evaluator shall examine the secure communications described for the extra components to confirm that they are the same as described for the components in the minimum configuration (additional connections between allowed extra components and the components in the minimum configuration are allowed of course).
 
@@ -3524,7 +3267,7 @@ If there are specified differences between platforms/hardware, the evaluator mus
 
 =====  Tests
 
-[arabic, start=727]
+[arabic, start=674]
 . The evaluator tests the TOE in the minimum configuration as defined in the ST (and the guidance documentation).
 . If the description of the use of extra components in the ST and guidance documentation identifies any difference in the SFRs allocated to a component, or the scope of the SFRs involved (e.g. if different selections apply to different instances of the component) then the evaluator tests these additional SFR cases that were not included in the minimum configuration.
 . In addition, the evaluator tests the following aspects for each extra component that is identified as allowed in the distributed TOE:
