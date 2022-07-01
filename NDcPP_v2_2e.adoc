@@ -2186,10 +2186,13 @@ Due to the structural differences between TLS 1.2 on the one hand and TLS 1.3 on
 
 *FCS_DTLSC_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC 9147), DTLS 1.2 (RFC 6347)_] supporting the following ciphersuites:
 
-* [selection:
-** [.underline]#_select supported ciphersuites for DTLS 1.2 from List 1]_#
-** [.underline]#_select supported ciphersuites for DTLS 1.3 from List 2
-] and no other ciphersuites_.#
+[selection:
+
+* _select supported ciphersuites for DTLS 1.2 from List 1_
+
+* _select supported ciphersuites for DTLS 1.3 from List 2_
+
+] and no other ciphersuites.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2326,13 +2329,14 @@ _The use of out-of-band provisioned pre-shared keys creates a potential security
 
 *FCS_DTLSS_EXT.1 DTLS Server Protocol*
 
-*FCS_DTLSS_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC 9147), DTLS 1.2 (RFC 6347)_] supporting the following ciphersuites:
+*FCS_DTLSS_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC 9147), DTLS 1.2 (RFC 6347)_] and reject all other DTLS versions. The DTLS implementation will support the following ciphersuites:
 
-* [selection:
-** _select supported ciphersuites for DTLS 1.2 from List 1_
-** _select supported ciphersuites for DTLS 1.3 from List 2_
+[selection:
 
-+
+* _select supported ciphersuites for DTLS 1.2 from List 1_
+
+* _select supported ciphersuites for DTLS 1.3 from List 2_
+
 ] and no other ciphersuites.
 
 *_Application Note {counter:appnote_count}_*
@@ -2796,10 +2800,10 @@ The following list contains all DTLS-/TLS-related ciphersuites supported by this
 * _[.underline]#TLS_RSA_WITH_AES_256_CBC_SHA as defined in RFC 3268#_
 * _[.underline]#TLS_DHE_RSA_WITH_AES_128_CBC_SHA as defined in RFC 3268#_
 * _[.underline]#TLS_DHE_RSA_WITH_AES_256_CBC_SHA as defined in RFC 3268#_
-* _[.underline]#TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA as defined in RFC 4492#_
-* _[.underline]#TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA as defined in RFC 4492#_
-* _[.underline]#TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA as defined in RFC 4492#_
-* _[.underline]#TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA as defined in RFC 4492#_
+* _[.underline]#TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA as defined in RFC 8422#_
+* _[.underline]#TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA as defined in RFC 8422#_
+* _[.underline]#TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA as defined in RFC 8422#_
+* _[.underline]#TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA as defined in RFC 8422#_
 * _[.underline]#TLS_RSA_WITH_AES_128_CBC_SHA256 as defined in RFC 5246#_
 * _[.underline]#TLS_RSA_WITH_AES_256_CBC_SHA256 as defined in RFC 5246#_
 * _[.underline]#TLS_DHE_RSA_WITH_AES_128_CBC_SHA256 as defined in RFC 5246#_
@@ -2831,23 +2835,21 @@ _List 2: List of supported TLS-related ciphersuites for TLS 1.3_
 
 *FCS_TLSC_EXT.1 TLS Client Protocol*
 
-*FCS_TLSC_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
+*FCS_TLSC_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] supporting the following ciphersuites:
 
 [selection:
 
-* [.underline]#_select supported ciphersuites for TLS 1.2 from List 1_#
+* _select supported ciphersuites for TLS 1.2 from List 1_
 
-* [.underline]#_select supported ciphersuites for TLS 1.3 from List 2_#
+* _select supported ciphersuites for TLS 1.3 from List 2_
 
-] _and no other ciphersuites_.
+] and no other ciphersuites.
 
 *_Application Note {counter:appnote_count}_*
 
 _The ciphersuites to be tested in the evaluated configuration are limited by this requirement and must be selected from the ciphersuites defined in List 1 (TLS 1.2) and List 2 (TLS 1.3), respectively. The ST author should select the ciphersuites that are supported. Even though RFC 5246 mandates implementation of specific ciphers for TLS 1.2 this cPP deprecates use of SHA-1. Support for TLS_RSA_WITH_AES_128_CBC_SHA is not claimed in order to claim conformance to this cPP._
 
 _These requirements will be revisited as new TLS versions are standardized by the IETF._
-
-_In a future version of this cPP TLS v1.2 will be required for all TOEs._
 
 *FCS_TLSC_EXT.1.2* The TSF shall verify that the presented identifier matches [selection: _the reference identifier per RFC 6125 section 6[.underline]##,## IPv4 address in CN or SAN, IPv6 address in the CN or SAN, IPv4 address in SAN, IPv6 address in the SAN, the identifier per RFC 5280 Appendix A using [selection: id-at-commonName, id-at-countryName, id-at-dnQualifier, id-at-generationQualifier, id-at-givenName, id-at-initials, id-at-localityName, id-at-name, id-at-organizationalUnitName, id-at-organizationName, id-at-pseudonym, id-at-serialNumber, id-at-stateOrProvinceName, id-at-surname, id-at-title] and no other attribute types_].
 
@@ -2996,8 +2998,6 @@ _The ciphersuites to be tested in the evaluated configuration are limited by thi
 
 
 _These requirements will be revisited as new TLS versions are standardized by the IETF._
-
-_In a future version of this cPP TLS v1.2 will be required for all TOEs._
 
 *_Application Note {counter:appnote_count}_*
 
@@ -3512,9 +3512,13 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 *FCS_DTLSC_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC 9147), DTLS 1.2 (RFC 6347)_] supporting the following ciphersuites:
 
-* [selection:
-** [.underline]#_select supported ciphersuites for DTLS 1.2 from List 1]_#
-** [.underline]#_select supported ciphersuites for DTLS 1.3 from List 2] and no other ciphersuites_.#
+[selection:
+
+* _select supported ciphersuites for DTLS 1.2 from List 1_
+
+* _select supported ciphersuites for DTLS 1.3 from List 2_
+
+] and no other ciphersuites.
 
 *FCS_DTLSC_EXT.1.2* The TSF shall verify that the presented identifier matches [selection: _the reference identifier per RFC 6125 section 6, IPv4 address in CN or SAN, IPv6 address in the CN or SAN, IPv4 address in SAN, IPv6 address in the SAN, the identifier per RFC 5280 Appendix A using [selection: id-at-commonName, id-at-countryName, id-at-dnQualifier, id-at-generationQualifier, id-at-givenName, id-at-initials, id-at-localityName, id-at-name, id-at-organizationalUnitName, id-at-organizationName, id-at-pseudonym, id-at-serialNumber, id-at-stateOrProvinceName, id-at-surname, id-at-title] and no other attribute types_].
 
@@ -3660,13 +3664,14 @@ FIA_X509_EXT.1 X.509 Certificate Validation
 FIA_X509_EXT.2 X.509 Certificate Authentication
 
 
-*FCS_DTLSS_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC 9147), DTLS 1.2 (RFC 6347)_] supporting the following ciphersuites:
+*FCS_DTLSS_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC 9147), DTLS 1.2 (RFC 6347)_] and reject all other DTLS versions. The DTLS implementation will support the following ciphersuites:
 
-* [selection:
-** _select supported ciphersuites for DTLS 1.2 from List 1_
-** _select supported ciphersuites for DTLS 1.3 from List 2_
+[selection:
 
-+
+* _select supported ciphersuites for DTLS 1.2 from List 1_
+
+* _select supported ciphersuites for DTLS 1.3 from List 2_
+
 ] and no other ciphersuites.
 
 *FCS_DTLSS_EXT.1.2* The TSF shall not proceed with a connection handshake attempt if the DTLS server cannot successfully validate the cookie returned by the DTLS Client.
@@ -4132,15 +4137,15 @@ FIA_X509_EXT.1 X.509 Certificate Validation
 FIA_X509_EXT.2 X.509 Certificate Authentication
 
 
-*FCS_TLSC_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
+*FCS_TLSC_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] supporting the following ciphersuites:
 
 [selection:
 
-* [.underline]#_select supported ciphersuites for TLS 1.2 from List 1_#
+* _select supported ciphersuites for TLS 1.2 from List 1_
 
-* [.underline]#_select supported ciphersuites for TLS 1.3 from List 2_#
+* _select supported ciphersuites for TLS 1.3 from List 2_
 
-] _and no other ciphersuites_.
+] and no other ciphersuites.
 
 *FCS_TLSC_EXT.1.2* The TSF shall verify that the presented identifier matches [selection: _the reference identifier per RFC 6125 section 6, IPv4 address in CN or SAN, IPv6 address in the CN or SAN, IPv4 address in SAN, IPv6 address in the SAN, the identifier per RFC 5280 Appendix A using [selection: id-at-commonName, id-at-countryName, id-at-dnQualifier, id-at-generationQualifier, id-at-givenName, id-at-initials, id-at-localityName, id-at-name, id-at-organizationalUnitName, id-at-organizationName, id-at-pseudonym, id-at-serialNumber, id-at-stateOrProvinceName, id-at-surname, id-at-title] and no other attribute types_].
 
@@ -4310,6 +4315,7 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 [selection:
 
 * _select supported ciphersuites for TLS 1.2 from List 1_
+
 * _select supported ciphersuites for TLS 1.3 from List 2_
 
 ] and no other ciphersuites.
