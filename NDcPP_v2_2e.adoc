@@ -1426,7 +1426,7 @@ This requirement ensures that authorized remote Administrators initiate all comm
 
 If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in the "Allowed Packages" list. 
 
-== Security Assurance Requirements
+== Mandatory Security Assurance Requirements
 
 This cPP identifies the Security Assurance Requirements (SARs) to frame the extent to which the evaluator assesses the documentation applicable for the evaluation and performs independent testing.
 
@@ -1503,7 +1503,7 @@ It is noted that specific requirements for Preparative Procedures are defined in
 
 === Class ALC: Life-cycle Support
 
-At the assurance level provided for TOEs conformant to this cPP, life-cycle support is limited to end-user-visible aspects of the life-cycle, rather than an examination of the TOE developer’s development and configuration management process. This is not meant to diminish the critical role that a developer’s practices play in contributing to the overall trustworthiness of a product; rather, it is a reflection on the information to be made available for evaluation at this assurance level.
+At the assurance level provided for TOEs conformant to this cPP, life-cycle support is limited to end-user-visible aspects of the life-cycle, rather than an examination of the TOE developer’s development and configuration management process. This is not meant to diminish the critical role that a developer’s practices play in contributing to the overall trustworthiness of a product; rather, it is a reflection on the information to be made available for evaluation at this assurance level. Optional ALC requirements for flaw remediation are defined in A.8.
 
 ==== Labelling of the TOE (ALC_CMC.1)
 
@@ -1538,7 +1538,7 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 
 The first type (in this Appendix) comprises requirements that can be included in the ST but are not mandatory for a TOE to claim conformance to this cPP. The second type (in Appendix B) comprises requirements based on selections in other SFRs from the cPP: if certain selections are made, then additional requirements in that appendix will need to be included in the body of the ST (e.g., cryptographic protocols selected in a trusted channel requirement).
 
-If a TOE fulfils any of the optional requirements, the developer is encouraged to add the related functionality to the ST. Therefore, in the application notes of this chapter the wording "This option should be chosen..." is repeatedly used. But it also is used to emphasize that this option should only be chosen if the TOE provides the related functionality and that it is not necessary to implement the related functionality to be compliant to the cPP. ST authors are free to choose none, some or all SFRs defined in this chapter. Just the fact that a product supports a certain functionality does not mandate to add any SFR defined in this chapter.
+If a TOE fulfils any of the optional requirements, the developer is encouraged to add the related functionality to the ST. Therefore, in the application notes of this chapter the wording "This option should be chosen..." is repeatedly used. But it also is used to emphasize that this option should only be chosen if the TOE provides the related functionality and that it is not necessary to implement the related functionality to be compliant to the cPP. ST authors are free to choose none, some or all SFRs defined in this chapter. Just the fact that a product supports a certain functionality does not mandate to add any SFR  or SAR defined in this chapter.
 
 === Audit Events for Optional SFRs
 
@@ -1887,6 +1887,22 @@ _If TLS is selected in FPT_ITT, then certificate validity is tested in accordanc
 _If the identifier is not a FQDN, then the TSS shall describe how the identifier is parsed from the certificate and matched._
 
 _The client identifier may be in the Subject field or the Subject Alternative Name extension of the certificate. The expected identifier may either be configured, may be compared to the FQDN, IP address, username, or email address used by the client, or may be passed to a directory server for comparison._
+
+=== Optional Security Assurance Requirements for Flaw Remediation (ALC_FLR)
+
+The following SARs for ALC_FLR are purely optional and are not required to be added to any ST conformant to this collaborative Protection Profile. If the ST author decides to add ALC_FLR to the ST, only one out of the following SAR components shall be selected.
+
+==== Basic flaw remediation (ALC_FLR.1) (optional)
+
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. The evaluator performs the CEM work units associated with ALC_FLR.1. 
+
+==== Flaw reporting procedures (ALC_FLR.2) (optional)
+
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. The evaluator performs the CEM work units associated with ALC_FLR.2. 
+
+==== Systemtic flaw remediation (ALC_FLR.3) (optional)
+
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. Flaw remediation procedures of the developer need to describe how users can register to receive flaw reports and corrections. The procedures also need to ensure timely responses to reports of security flaws and automatic distribution of security flaw reports. The evaluator performs the CEM work units associated with ALC_FLR.3. 
 
 [appendix]
 == Selection-Based Requirements

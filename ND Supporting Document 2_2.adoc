@@ -2901,6 +2901,21 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 [arabic, start=610]
 . When evaluating the developer’s coverage of the TOE in their CM system, the evaluator performs the work units as presented in the CEM.
 
+==== Basic flaw remediation (ALC_FLR.1) (optional)
+
+[arabic, start=664]
+. When evaluating the developer’s procedures regarding basic flaw remediation, the evaluator performs the work units as presented in the CEM.
+
+==== Flaw reporting procedures (ALC_FLR.2) (optional)
+
+[arabic, start=665]
+. When evaluating the developer’s flaw reporting procedures, the evaluator performs the work units as presented in the CEM.
+
+==== Systematic flaw remediation (ALC_FLR.3) (optional)
+
+[arabic, start=666]
+. When evaluating the developer’s procedures regarding systematic flaw remediation, the evaluator performs the work units as presented in the CEM.
+
 === ATE: Tests
 
 ==== Independent Testing – Conformance (ATE_IND.1)
