@@ -2188,9 +2188,9 @@ Due to the structural differences between TLS 1.2 on the one hand and TLS 1.3 on
 
 [selection:
 
-* _select supported ciphersuites for DTLS 1.2 from List 1_
+* _[.underline]#select supported ciphersuites for DTLS 1.2 from List 1#_
 
-* _select supported ciphersuites for DTLS 1.3 from List 2_
+* _[.underline]#select supported ciphersuites for DTLS 1.3 from List 2#_
 
 ] and no other ciphersuites.
 
@@ -2333,9 +2333,9 @@ _The use of out-of-band provisioned pre-shared keys creates a potential security
 
 [selection:
 
-* _select supported ciphersuites for DTLS 1.2 from List 1_
+* _[.underline]#select supported ciphersuites for DTLS 1.2 from List 1#_
 
-* _select supported ciphersuites for DTLS 1.3 from List 2_
+* _[.underline]#select supported ciphersuites for DTLS 1.3 from List 2#_
 
 ] and no other ciphersuites.
 
@@ -2839,9 +2839,9 @@ _List 2: List of supported TLS-related ciphersuites for TLS 1.3_
 
 [selection:
 
-* _select supported ciphersuites for TLS 1.2 from List 1_
+* _[.underline]#select supported ciphersuites for TLS 1.2 from List 1#_
 
-* _select supported ciphersuites for TLS 1.3 from List 2_
+* _[.underline]#select supported ciphersuites for TLS 1.3 from List 2#_
 
 ] and no other ciphersuites.
 
@@ -2984,9 +2984,9 @@ _The use of out-of-band provisioned pre-shared keys creates a potential security
 
 [selection:
 
-* _select supported ciphersuites for TLS 1.2 from List 1_
+* _[.underline]#select supported ciphersuites for TLS 1.2 from List 1#_
 
-* _select supported ciphersuites for TLS 1.3 from List 2_
+* _[.underline]#select supported ciphersuites for TLS 1.3 from List 2#_
 
 ] and no other ciphersuites.
 
@@ -3668,9 +3668,9 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 [selection:
 
-* _select supported ciphersuites for DTLS 1.2 from List 1_
+* _[.underline]#select supported ciphersuites for DTLS 1.2 from List 1#_
 
-* _select supported ciphersuites for DTLS 1.3 from List 2_
+* _[.underline]#select supported ciphersuites for DTLS 1.3 from List 2#_
 
 ] and no other ciphersuites.
 
@@ -4141,9 +4141,9 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 [selection:
 
-* _select supported ciphersuites for TLS 1.2 from List 1_
+* _[.underline]#select supported ciphersuites for TLS 1.2 from List 1#_
 
-* _select supported ciphersuites for TLS 1.3 from List 2_
+* _[.underline]#select supported ciphersuites for TLS 1.3 from List 2#_
 
 ] and no other ciphersuites.
 
@@ -4314,9 +4314,9 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 [selection:
 
-* _select supported ciphersuites for TLS 1.2 from List 1_
+* _[.underline]#select supported ciphersuites for TLS 1.2 from List 1#_
 
-* _select supported ciphersuites for TLS 1.3 from List 2_
+* _[.underline]#select supported ciphersuites for TLS 1.3 from List 2#_
 
 ] and no other ciphersuites.
 
