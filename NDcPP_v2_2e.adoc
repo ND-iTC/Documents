@@ -3,7 +3,7 @@
 :toc-title!:
 :toc-placement!:
 :revnumber: 2.2e
-:revdate: 07/01/2022
+:revdate: 23-03-2020
 
 = collaborative Protection Profile for Network Devices
 
@@ -1283,7 +1283,7 @@ _For a distributed TOE, the method of determining the installed versions on each
 
 _The selection in FPT_TUD_EXT.1.2 distinguishes the support of automatic checking for updates and support of automatic updates. The first option refers to a TOE that checks whether a new update is available, communicates this to the Administrator (e.g. through a message during an administrative session, through log files) but requires some action by the Administrator to actually perform the update. The second option refers to a TOE that checks for updates and automatically installs them upon availability. If the TOE checks and automatically installs the update, then FMT_MOF.1/AutoUpdate should be included._
 
-*FPT_TUD_EXT.1.3* The TSF shall provide means to authenticate firmware/software updates to the TOE using a [selection: _X.509 certificate, digital signature] prior to installing those updates.
+*FPT_TUD_EXT.1.3* The TSF shall provide means to authenticate firmware/software updates to the TOE using a [selection: _X.509 certificate, digital signature_] prior to installing those updates.
 
 *_Application Note {counter:appnote_count}_*
 
