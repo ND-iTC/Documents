@@ -1130,7 +1130,7 @@ _The word ‘manage’ includes but is not limited to create, initialize, view, 
 * _Ability to administer the TOE remotely;_
 * _Ability to configure the access banner;_
 * _Ability to configure the remote session inactivity time before session termination;_
-* _Ability to update the TOE, and to verify the updates using_ [selection: _digital signature, hash comparison_] _capability prior to installing those updates;_
+* _Ability to update the TOE, and to verify the updates using_ +++<u>+++digital signature+++</u>+++ _capability prior to installing those updates;_
 * [selection:
 ** _Ability to start and stop services;_
 ** _Ability to configure audit behaviour (e.g. changes to storage locations for audit; changes to behaviour when local audit storage space is full);_
