@@ -1293,7 +1293,7 @@ _The ST author selects ‘digital signature’ for all other digital mechanisms 
 
 _The verification of the signature must be performed by the TOE itself._
 
-_For distributed TOEs all TOE components must support Trusted Update. The verification of the signature or hash on the update should either be done by each TOE component itself (signature verification) or for each TOE component (hash verification)._
+_For distributed TOEs all TOE components must support Trusted Update. The verification of the signature on the update should either be done by each TOE component itself (signature verification)._
 
 _Updating a distributed TOE might lead to the situation where different TOE components are running different software versions. Depending on the differences between the different software versions the impact of a mixture of different software versions might be no problem at all or critical to the proper functioning of the TOE. The TSS must detail the mechanisms that support the continuous proper functioning of the TOE during trusted update of distributed TOEs._
 
