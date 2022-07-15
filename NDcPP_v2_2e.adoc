@@ -213,7 +213,19 @@ In order to be conformant to this cPP, a TOE must demonstrate Exact Conformance.
 
 While for SFRs the use of mandatory, optional and selection-based SFRs allows some customization when modelling the TOE, this does not work for the SPD in chapter 4 and the security objectives in chapter 5. Some parts in these chapters are marked as "(applies to ... only)" (e.g. "(applies to distributed TOEs only)", "(applies to vNDs only)"). These parts only need to be included in the ST for TOEs that comply with the corresponding conditions (i.e. parts marked as "(applies to distributed TOEs only)" only need to be included in STs for distributed TOEs and shall be omitted otherwise).
 
-The packages to which exact conformance can be claimed in conjunction with this PP are specified in the ‘Allowed Packages’ list at https://ccusersforum.onlyoffice.com/products/files/doceditor.aspx?fileid=5615628&action=view. The PP-Modules that are allowed to specify this cPP as a base-PP are specified in the ‘Allowed PP-Modules list at https://ccusersforum.onlyoffice.com/products/files/doceditor.aspx?fileid=5615628&action=view
+
+=== Modules
+
+The PP-Modules that are allowed to specify this cPP as a base-PP are specified in the ‘Allowed PP-Modules list at https://ccusersforum.onlyoffice.com/products/files/doceditor.aspx?fileid=5615628&action=view
+
+=== Packages
+
+The packages to which conformance can be claimed in conjunction with this cPP are:
+
+- Functional Package for SSH Version 1.0. 
+
+All cryptographic selections in the above package must comply with FCS_COP and FCS_CKM requirements of this cPP.
+
 
 == Introduction to Distributed TOEs
 
