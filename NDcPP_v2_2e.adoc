@@ -728,7 +728,7 @@ Figure 16, Figure 17, Figure 18, Figure 19, Figure 20, and Figure 21 give a grap
 
 In the diagrams, the SFRs from Appendix B are both described as ‘Discretionary’, meaning that their inclusion in an ST will depend on the particular properties of a product. The SFRs from Appendix B that are required by an ST are determined by the selections made in other SFRs. For example: FTP_ITC.1 and FTP_TRP.1/Admin (in sections 6.9.1.1 and 6.9.2.1 respectively) each contain selections of a protocol to be used for the type of secure channel described by the SFR. The selection of the protocol(s) here determines which of the protocol-specific SFRs in section B.3.1 are also required in the ST. SFRs in Appendix A can be included in the ST if they are provided by the TOE, but are not mandatory in order for a TOE to claim conformance to this cPP.
 
-image:extracted-media/media/arch_1.png[image,width=678,height=506]
+image:extracted-media/media/arch_1_no_ssh.png[image,width=678,height=506]
 
 [#_Ref399516751]#Figure 16: Protected Communications SFR Architecture#
 
