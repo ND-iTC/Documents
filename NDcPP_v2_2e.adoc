@@ -4284,7 +4284,7 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 * _+++<u>+++select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
 
-* __+++<u>+++select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
+* _+++<u>+++select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
 
 ] and no other ciphersuites.
 
