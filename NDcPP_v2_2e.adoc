@@ -2998,10 +2998,6 @@ _The ciphersuites to be tested in the evaluated configuration are limited by thi
 
 _These requirements will be revisited as new TLS versions are standardized by the IETF._
 
-*_Application Note {counter:appnote_count}_*
-
-_The TOE shall not negotiate sessions using any of the SSL versions as well as TLS 1.0._
-
 *FCS_TLSS_EXT.1.2* The TSF shall authenticate itself using X.509 certificate(s) using [selection: _RSA with key size [selection: 2048 bits, 3072 bits, 4096 bits]; ECDSA over NIST curves [selection: secp256r1, secp384r1, secp521r1] and no other curves_].
 
 *_Application Note {counter:appnote_count}_*
