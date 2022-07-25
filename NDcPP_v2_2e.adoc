@@ -1208,7 +1208,7 @@ _The selection “Ability to manage the TOE's trust store and designate X509.v3 
 
 _The selection "Ability to import X.509v3 certificates to the TOE's trust store" must be included in the ST if the TOE supports loading of X.509 certificates to the TOE's trust store._
 
-_The selection "Ability to configure thresholds for SSH rekeying" may only be selected if SSH is selected within FTP_ITC.1, FTP_TRP.1 or FPT_ITT.1_
+_The selection "Ability to configure thresholds for SSH rekeying" may only be selected if SSH is selected within FTP_ITC.1, FTP_TRP.1 or FPT_ITT.1._
 
 _For distributed TOEs the interaction between TOE components will be configurable (see FCO_CPC_EXT.1). Therefore, the ST author includes the selection "Ability to configure the interaction between TOE components" for distributed TOEs. A simple example would be the change of communication protocol according to FPT_ITT.1. Another example would be changing the management of a TOE component from direct remote administration to remote administration through another TOE component. A more complex use case would be if the realization of an SFR is achieved through two or more TOE components and the responsibilities between the two or more components could be modified._
 
@@ -1422,7 +1422,7 @@ _Where public key certificates are used in support of an FTP_ITC.1 channel, FIA_
 
 _If the TOE claims FCS_TLSS_EXT.2 (TLS Servers with mutual authentication) and the TOE passes presented identifiers of clients used for client authentication to a directory server for comparison, then the connection to the directory server used to verify presented identifiers of TLS clients need to be protected by a trusted channel (i.e. FTP_ITC.1). If a trusted channel is used for the integrity protection for communication between the TOE and a directory server, then the directory server must be added to the assignment for other capabilities in FTP_ITC.1. Note that the directory server is only expected to handle the comparison of the presented identifier but not to perform full X.509 certificate validation on behalf of the TOE._
 
-_If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell referenced in section 2.2_  
+_If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell referenced in section 2.2._  
 
 
 
@@ -1716,7 +1716,7 @@ _This channel may also be used as the registration channel for the registration 
 
 _If TLS is selected, then the requirements to have the reference identifier established by the user (FCS_TLSC_EXT.1.2) are relaxed and the identifier may also be established through a “gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component._
 
-_If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in section 2.2_ 
+_If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in section 2.2._ 
 
 
 === Trusted Path/Channels (FTP)
@@ -1976,7 +1976,7 @@ a|
 
 _The audit event “Unsuccessful attempt to validate a certificate” for FIA_X509_EXT.1/Rev requires the Additional Audit Record Contents of “Reason for failure (of certificate validation).” An error message telling the Security Administrator that ‘something is wrong with the certificate’ is not considered as presenting sufficient information about the ‘reason for failure’, because basic information to resolve the issue is missing from the audit record. The log message should inform the Security Administrator at least about the type of error (e.g. that there is a ‘Trust issue’ with the certificate, e.g. due to failed path validation, in contrast to the use of an ‘expired certificate’). The level of detail that needs to be provided to enable the Security Administrator to fix issues based on the information in audit events usually depends on the complexity of the underlying use case. In simple scenarios with only one underlying root cause a single error message might be sufficient whereas in more complex scenarios the granularity of error messages should be higher. The NDcPP only specifies a general guidance on the subject to avoid specifying requirements which are not implementation independent._
 
-_SSH is not a required component of this cPP. If a TOE implements SSH and the ST author selects SSH in FTP_ITC.1.1, FTP_TRP.1.1/Admin, or FPT_ITT.1.1, the ST should include the Functional Package for Secure Shell (SSH) as referenced in section 2.2_
+_SSH is not a required component of this cPP. If a TOE implements SSH and the ST author selects SSH in FTP_ITC.1.1, FTP_TRP.1.1/Admin, or FPT_ITT.1.1, the ST should include the Functional Package for Secure Shell (SSH) as referenced in section 2.2._
 
 === Security Audit (FAU)
 
