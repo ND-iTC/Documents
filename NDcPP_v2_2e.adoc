@@ -216,7 +216,7 @@ While for SFRs the use of mandatory, optional and selection-based SFRs allows so
 
 === Modules
 
-The PP-Modules that are allowed to specify this cPP as a base-PP are specified in the ‘Allowed PP-Modules list at https://ccusersforum.onlyoffice.com/products/files/doceditor.aspx?fileid=5615628&action=view
+The PP-Modules that are allowed to specify this cPP as a base-PP are specified in the ‘Allowed PP-Modules list at https://ccusersforum.onlyoffice.com/Products/Files/DocEditor.aspx?fileid=7620838&action=view
 
 === Packages
 
