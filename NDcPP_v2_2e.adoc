@@ -839,13 +839,19 @@ _The ST author replaces the cross-reference to the table of audit events with an
 * Termination of the trusted channel.
 * Failure of the trusted channel functions.
 
-|Identification of the initiator and target of failed trusted channels establishment attempt.
+a|
+* None
+* None
+* Reason for failure
 |FTP_TRP.1/Admin a|
 * Initiation of the trusted path.
 * Termination of the trusted path.
 * Failure of the trusted path functions.
 
-|None.
+a| 
+* None
+* None
+* Reason for failure
 |===
 
 [#_Ref397359830]#Table 2: Security Functional Requirements and Auditable Events#
