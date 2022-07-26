@@ -1877,7 +1877,7 @@ _The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This
 
 *_Application Note {counter:appnote_count}_*
 
-_The Message Authentication Code (MAC) is negotiated during the DTLS handshake phase and is used to protect the integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC 9147 section 4.5.2 and 4.1.2.7 in RFC 6347(DTLS 1.2)). If MAC verification fails, the session must be terminated, or the record must be silently discarded._
+_The Message Authentication Code (MAC) is negotiated during the DTLS handshake phase and is used to protect the integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC 9147 (DTLS 1.3), section 4.5.2 and RFC 6347 (DTLS 1.2), section 4.1.2.7). If MAC verification fails, the session must be terminated, or the record must be silently discarded._
 
 *FCS_DTLSC_EXT.2.3* The TSF shall detect and silently discard replayed messages for:
 
@@ -2397,7 +2397,7 @@ _Subsequent versions of this cPP will require support for the Supported Groups e
 
 *_Application Note {counter:appnote_count}_*
 
-_The Message Authentication Code (MAC) is negotiated during DTLS handshake phase and is used to protect integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC 9147, section 4.5.2 and 4.1.2.7 in RFC 6347(DTLS 1.2)).  If MAC verification fails, the session must be terminated or the record must be silently discarded._
+_The Message Authentication Code (MAC) is negotiated during DTLS handshake phase and is used to protect integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC 9147 (DTLS 1.3), section 4.5.2 and RFC 6347 (DTLS 1.2), section 4.1.2.7).  If MAC verification fails, the session must be terminated or the record must be silently discarded._
 
 *FCS_DTLSS_EXT.1.6* The TSF shall detect and silently discard replayed messages for:
 
@@ -2849,7 +2849,7 @@ _List 2: List of supported TLS-related ciphersuites for TLS 1.3_
 
 *_Application Note {counter:appnote_count}_*
 
-_The ciphersuites to be tested in the evaluated configuration are limited by this requirement and must be selected from the ciphersuites defined in List 1 (TLS 1.2) and List 2 (TLS 1.3), respectively. The ST author should select the ciphersuites that are supported. Even though RFC 5246 mandates implementation of specific ciphers for TLS 1.2 this cPP deprecates use of SHA-1. Support for TLS_RSA_WITH_AES_128_CBC_SHA is not claimed in order to claim conformance to this cPP._
+_The ciphersuites to be tested in the evaluated configuration are limited by this requirement and must be selected from the ciphersuites defined in List 1 (TLS 1.2) and List 2 (TLS 1.3), respectively. The ST author should select the ciphersuites that are supported. Even though RFC 5246 mandates implementation of specific ciphers for TLS 1.2, this cPP deprecates use of SHA-1. Support for TLS_RSA_WITH_AES_128_CBC_SHA is not claimed in order to claim conformance to this cPP._
 
 _These requirements will be revisited as new TLS versions are standardized by the IETF._
 
