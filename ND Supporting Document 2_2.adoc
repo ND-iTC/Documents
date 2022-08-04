@@ -1214,7 +1214,7 @@ In the case where the TOE is able to detect when the cable is removed from the d
 ===== TSS
 
 [arabic, start=256]
-. The evaluator shall examine the TSS to ensure it describes in what circumstances the check of validity of the certificates takes place (e.g., when the TOE is presented with a certificate during secure channel negotiation), and that the TSS identifies any of the rules for checking extendedKeyUsage fields. If selected, the TSS shall list all supported revocation checking methods, specify in what circumstances revocation checking is performed, and categorically describe what certificates are checked (e.g., all certificates up to a Root CA). The evaluator shall confirm the TSS describes trust store implementation or explicitly states that the trust store is not implemented.
+. The evaluator shall examine the TSS to ensure it describes where the check of validity of the certificates takes place, and that the TSS identifies any of the rules for extendedKeyUsage fields (in FIA_X509_EXT.1.1) that are not supported by the TOE (i.e. where the ST is therefore claiming that they are trivially satisfied). If selected, the TSS shall describe how certificate revocation checking is performed. It is not sufficient to verify the status of a X.509 certificate only when it's loaded onto the device.
 
 ===== Guidance Documentation
 
