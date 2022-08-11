@@ -713,9 +713,9 @@ e.g. ‘[selection: _disclosure, modification, loss of use_]’ in [CC2] or an E
 * Assignment wholly or partially completed in the PP: indicated with _italicized text_;
 * Assignment completed within a selection in the PP: the completed assignment text is indicated with _+++<u>+++italicized and underlined text+++</u>+++_
 +
-e.g. [selection: +++<i>+++change_default, query, modify,
-delete, [assignment: other operations]
-+++</i>+++]’ in [CC2] or an ECD might become ‘+++<u>+++change_default+++</u>+++, _+++<u>+++select_tag_’+++</u>+++ (completion of both selection and assignment) or ‘[selection: +++<u>+++change_default+++</u>+++, _+++<u>+++select_tag, select_value+++</u>+++_]’ (partial completion of selection, and completion of assignment) in the PP;
+e.g. [selection: _change_default, query, modify,
+delete, [assignment: other operations]_
+]’ in [CC2] or an ECD might become ‘+++<u>+++change_default+++</u>+++, _+++<u>+++select_tag_’+++</u>+++ (completion of both selection and assignment) or ‘[selection: +++<u>+++change_default+++</u>+++, _+++<u>+++select_tag, select_value+++</u>+++_]’ (partial completion of selection, and completion of assignment) in the PP;
 * Iteration: indicated by adding a string starting with ‘/’ (e.g. ‘FCS_COP.1/Hash’).
 
 Extended SFRs are identified by having a label ‘EXT’ at the end of the SFR name.
@@ -800,7 +800,7 @@ _With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘servi
 *FAU_GEN.1.2* The TSF shall record within each audit record at least the following information:
 
 [loweralpha]
-. Date and time of the event, type of event, subject identity [.line-through]#(if applicable)#, and the outcome (success or failure) of the event; and
+. Date and time of the event, type of event, subject identity +++<del>+++(if applicable)+++</del>+++, and the outcome (success or failure) of the event; and
 . For each audit event type, based on the auditable event definitions of the functional components included in the cPP/ST, _information specified in column three of_ _Table 2_.
 
 *_Application Note {counter:appnote_count}_*
@@ -1048,7 +1048,7 @@ _The hash selection should be consistent with the overall strength of the algori
 
 *FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash Algorithm)*
 
-*FCS_COP.1.1/KeyedHash* The TSF shall perform _keyed-hash message authentication_ in accordance with a specified cryptographic algorithm [selection: _HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-384, HMAC-SHA-512, implicit_] and cryptographic key sizes _[assignment: key size (in bits) used in HMAC]_ *and message digest sizes __[__selection: _160, 256, 384, 512] bits_* that meet the following: _ISO/IEC 9797-2:2011, Section 7 “MAC Algorithm 2”_.
+*FCS_COP.1.1/KeyedHash* The TSF shall perform _keyed-hash message authentication_ in accordance with a specified cryptographic algorithm [selection: _HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-384, HMAC-SHA-512, implicit_] and cryptographic key sizes _[assignment: key size (in bits) used in HMAC]_ *and message digest sizes [selection: _160, 256, 384, 512] bits_* that meet the following: _ISO/IEC 9797-2:2011, Section 7 “MAC Algorithm 2”_.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1351,7 +1351,7 @@ _The TOE depends on time and date information, either provided by a local real-t
 
 _For a vND, the virtualization system can be used as an external time source. It is assumed that the VS itself uses NTP or some other external source for its time, and that this time is made available to VMs._
 
-_The term ‘reliable time stamps’ refers to the strict use of the time and date information, that is provided, and the logging of all discontinuous changes to the time settings including information about the old and new time. With this information__,__ the real time for all audit data can be determined. Note, that all discontinuous time changes, Administrator actuated or changed via an automated process, must be audited. No audit is needed when time is changed via use of kernel or system facilities – such as daytime (3) – that exhibit no discontinuities in time._
+_The term ‘reliable time stamps’ refers to the strict use of the time and date information, that is provided, and the logging of all discontinuous changes to the time settings including information about the old and new time. With this information, the real time for all audit data can be determined. Note, that all discontinuous time changes, Administrator actuated or changed via an automated process, must be audited. No audit is needed when time is changed via use of kernel or system facilities – such as daytime (3) – that exhibit no discontinuities in time._
 
 _For distributed TOEs it is expected that the Security Administrator ensures synchronization between the time settings of different TOE components. All TOE components should either be in sync (e.g. through synchronisation between TOE components or through synchronisation of different TOE components with an NTP server) or the offset should be known to the Administrator for every pair of TOE components. This includes TOE components synchronized to different time zones._
 
@@ -1375,7 +1375,7 @@ _An interactive session governed by this SFR is a session in which an authentica
 
 *FTA_SSL.4 User-initiated Termination*
 
-*FTA_SSL.4.1:* The TSF shall allow [.line-through]#user# *Administrator*-initiated termination of the [.line-through]#user's# *Administrator’s* own interactive session.
+*FTA_SSL.4.1:* The TSF shall allow +++<del>+++user+++</del>+++ *Administrator*-initiated termination of the +++<del>+++user's+++</del>+++ *Administrator’s* own interactive session.
 
 ==== TOE Access Banners (FTA_TAB)
 
@@ -1383,7 +1383,7 @@ _An interactive session governed by this SFR is a session in which an authentica
 
 *FTA_TAB.1 Default TOE Access Banners*
 
-*FTA_TAB.1.1:* Before establishing *an administrative* [.line-through]#a# user session the TSF shall display *a* *Security Administrator-specified* advisory *notice and consent* warning message regarding [.line-through]#unauthorised# use of the TOE.
+*FTA_TAB.1.1:* Before establishing +++<del>+++a+++</del>+++ *an administrative* user session the TSF shall display *a* *Security Administrator-specified* advisory *notice and consent* warning message regarding +++<del>+++unauthorised+++</del>+++ use of the TOE.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1401,9 +1401,9 @@ In addition to providing protection from disclosure (and detection of modificati
 
 *FTP_ITC.1 Inter-TSF Trusted Channel*
 
-*FTP_ITC.1.1* The TSF shall *be capable of using [selection: _IPsec, SSH, TLS, DTLS, HTTPS_] to* provide a *trusted* communication channel between itself and [.line-through]#another trusted IT product# *authorized IT entities supporting the following capabilities: audit server, [selection: _authentication server, [assignment: other capabilities], no other capabilities_]* that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from [.line-through]#modification or# disclosure *and detection of modification of the channel data*.
+*FTP_ITC.1.1* The TSF shall *be capable of using [selection: _IPsec, SSH, TLS, DTLS, HTTPS_] to* provide a *trusted* communication channel between itself and +++<del>+++another trusted IT product+++</del>+++ *authorized IT entities supporting the following capabilities: audit server, [selection: _authentication server, [assignment: other capabilities], no other capabilities_]* that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from +++<del>+++modification or+++</del>+++ disclosure *and detection of modification of the channel data*.
 
-*FTP_ITC.1.2* The TSF shall permit [selection: +++<i>+++the TSF, +++<s>+++another trusted IT product,+++</s>+++ *the authorized IT entities*+++</i>+++] to initiate communication via the trusted channel.
+*FTP_ITC.1.2* The TSF shall permit [selection: _the TSF, +++<del>+++another trusted IT product,+++</del>+++ *the authorized IT entities_*] to initiate communication via the trusted channel.
 
 *FTP_ITC.1.3* The TSF shall initiate communication via the trusted channel for _[assignment: list of services for which the TSF is able to initiate communications]_.
 
@@ -1429,9 +1429,9 @@ _If "SSH" is selected, then the TSF shall be validated against the version of th
 
 *FTP_TRP.1/Admin Trusted Path*
 
-*FTP_TRP.1.1/Admin* The TSF shall *be capable of using [selection: _DTLS, IPsec, SSH, TLS, HTTPS_] to* provide a communication path between itself and *authorized* +++<u>+++remote+++</u>+++ *Administrators* +++<s>+++users+++</s>+++ that is logically distinct from other communication paths and provides assured identification of its end points and protection of the communicated data from +++<u>+++disclosure+++</u>+++ *and provides detection of modification of the channel data.*
+*FTP_TRP.1.1/Admin* The TSF shall *be capable of using [selection: _DTLS, IPsec, SSH, TLS, HTTPS_] to* provide a communication path between itself and *authorized* +++<u>+++remote+++</u>+++ *Administrators* +++<del>+++users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of its end points and protection of the communicated data from +++<u>+++disclosure+++</u>+++ *and provides detection of modification of the channel data.*
 
-*FTP_TRP.1.2/Admin* The TSF shall permit +++<u>+++remote *Administrators* +++<s>+++users+++</s>+++ +++</u>+++to initiate communication via the trusted path.
+*FTP_TRP.1.2/Admin* The TSF shall permit +++<u>+++remote *Administrators* +++<del>+++users+++<//del>+++ +++</u>+++to initiate communication via the trusted path.
 
 *FTP_TRP.1.3/Admin* The TSF shall require the use of the trusted path for _+++<u>+++initial Administrator authentication and all remote administration actions+++</u>+++_.
 
@@ -1728,9 +1728,9 @@ This iteration of FTP_TRP.1 is defined as one of the options selectable for dist
 
 *FTP_TRP.1.1/Join* The TSF shall provide a communication path between itself and *a joining component* +++<del>+++[selection: remote, local] users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of *[selection: _the TSF endpoint, both joining component and TSF endpoint_]* +++<del>+++its end points+++</del>+++ and protection of the communicated data from +++<u>+++modification \[selection: _and disclosure, none_]+++</u>+++.
 
-*FTP_TRP.1.2/Join* The TSF shall permit [selection: +++<i>+++the TSF, *the joining component*, +++<s>+++local users, remote users+++</s>++++++</i>+++] to initiate communication via the trusted path.
+*FTP_TRP.1.2/Join* The TSF shall permit [selection: _the TSF, *the joining component*, +++<del>+++local users, remote users_+++</del>+++] to initiate communication via the trusted path.
 
-*FTP_TRP.1.3/Join* The TSF shall require the use of the trusted path for +++<u>+++_joining components to the TSF under environmental constraints identified in [assignment: reference to operational guidance]_+++</i>+++.
+*FTP_TRP.1.3/Join* The TSF shall require the use of the trusted path for +++<u>+++_joining components to the TSF under environmental constraints identified in [assignment: reference to operational guidance]_+++</u>+++.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2029,7 +2029,7 @@ _TOE components are not required to monitor or audit connectivity or network out
 
 === Cryptographic Support (FCS)
 
-==== Cryptographic Protocols (Extended – FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_HTTPS_EXT, FCS_ IPSEC_EXT, FCS_NTP_EXT,  FCS_TLSC_EXT, FCS_TLSS_EXT)
+==== Cryptographic Protocols (Extended – FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_HTTPS_EXT, FCS_IPSEC_EXT, FCS_NTP_EXT,  FCS_TLSC_EXT, FCS_TLSS_EXT)
 
 ===== FCS_DTLSC_EXT & FCS_DTLSS_EXT DTLS Protocol
 
@@ -2173,7 +2173,7 @@ HTTPS is not a required component of this cPP. If a TOE implements HTTPS, a corr
 
 _The ST author must provide enough detail to determine how the implementation is complying with the standard(s) identified; this can be done by additional detail in the TSS._
 
-*FCS_HTTPS_EXT.1.2* The TSF shall implement HTTPS +++<s>+++protocol+++</s>+++ using TLS.
+*FCS_HTTPS_EXT.1.2* The TSF shall implement HTTPS +++<del>+++protocol+++</del>+++ using TLS.
 
 *FCS_HTTPS_EXT.1.3* If a peer certificate is presented, the TSF shall [selection: *_not require client authentication_*, _not establish the connection, request authorization to establish the connection, [assignment: other action]_] if the peer certificate is deemed invalid.
 
@@ -2215,8 +2215,8 @@ _When an AES-CBC algorithm is selected, at least one SHA-based HMAC must also be
 
 *FCS_IPSEC_EXT.1.5* The TSF shall implement the protocol: [selection:
 
-* _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, RFC 4109,_ [selection: _no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers_], _and_ [selection: _no other RFCs for hash functions, RFC 4868 for hash functions_]_;
-* _IKEv2 as defined in RFCs 5996 [selection: with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 5996, section 2.23_]_, and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
+* _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, RFC 4109, [selection: no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions];_
+* _IKEv2 as defined in RFCs 5996 [selection: with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 5996, section 2.23], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
 
 ].
 
@@ -2224,7 +2224,7 @@ _When an AES-CBC algorithm is selected, at least one SHA-based HMAC must also be
 
 _If the TOE implements SHA-2 hash algorithms for IKEv1 or IKEv2, the ST author selects RFC 4868. If the TOE implements the use of truncated SHA-based HMACs as described in RFC 4868, they shall be highlighted in the TSS._
 
-*FCS_IPSEC_EXT.1.6* The TSF shall ensure the encrypted payload in the [selection: _IKEv1, IKEv2_] protocol uses the cryptographic algorithms [selection__: AES-CBC-128, AES-CBC-192, AES-CBC-256 (specified in RFC 3602), AES-GCM-128, AES-GCM-192, AES-GCM-256 (specified in RFC 5282)__].
+*FCS_IPSEC_EXT.1.6* The TSF shall ensure the encrypted payload in the [selection: _IKEv1, IKEv2_] protocol uses the cryptographic algorithms [selection: _AES-CBC-128, AES-CBC-192, AES-CBC-256 (specified in RFC 3602), AES-GCM-128, AES-GCM-192, AES-GCM-256 (specified in RFC 5282)_].
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2503,7 +2503,7 @@ Although the functionality in FIA_X509_EXT.1/Rev and FIA_X509_EXT.2 is always re
 * The certification path must terminate with a trusted CA certificate designated as a trust anchor.
 * The TSF shall validate a certification path by ensuring that all CA certificates in the certification path contain the basicConstraints extension with the CA flag set to TRUE.
 
-* The TSF shall validate the revocation status of the certificate using [selection: _the Online Certificate Status Protocol (OCSP) as specified in RFC 6960, a Certificate Revocation List (CRL) as specified in RFC 5280 Section 6.3, Certificate Revocation List (CRL) as specified in RFC 5759 Section 5, +++<s>+++no revocation method_+++</s>+++].
+* The TSF shall validate the revocation status of the certificate using [selection: _the Online Certificate Status Protocol (OCSP) as specified in RFC 6960, a Certificate Revocation List (CRL) as specified in RFC 5280 Section 6.3, Certificate Revocation List (CRL) as specified in RFC 5759 Section 5, +++<del>+++no revocation method_+++</del>+++].
 * The TSF shall validate the extendedKeyUsage field according to the following rules:
 ** _Certificates used for trusted updates and executable code integrity verification shall have the Code Signing purpose (id-kp 3 with OID 1.3.6.1.5.5.7.3.3) in the extendedKeyUsage field._
 ** _Server certificates presented for TLS shall have the Server Authentication purpose (id-kp 1 with OID 1.3.6.1.5.5.7.3.1) in the extendedKeyUsage field._
@@ -2578,7 +2578,7 @@ If the TOE provides remote administration using a password-based authentication 
 
 *FIA_AFL.1 Authentication Failure Management*
 
-*FIA_AFL.1.1* The TSF shall detect when [.underline]#an Administrator configurable positive integer within _[assignment: range of acceptable values]_# unsuccessful authentication attempts occur related to _Administrators attempting to authenticate remotely using a password_.
+*FIA_AFL.1.1* The TSF shall detect when +++<u>+++an Administrator configurable positive integer within _[assignment: range of acceptable values]_+++</u>+++ unsuccessful authentication attempts occur related to _Administrators attempting to authenticate remotely using a password_.
 
 *FIA_AFL.1.2* When the defined number of unsuccessful authentication attempts has been +++<u>+++met+++</u>+++, the TSF shall [selection: _prevent the offending Administrator from successfully establishing a remote session using any authentication method that involves a password until_ _[assignment: action to unlock] is taken by an Administrator; prevent the offending Administrator from successfully establishing a remote session using any authentication method that involves a password until an Administrator defined time period has elapsed]_.
 
@@ -2776,7 +2776,7 @@ Hierarchical to: No other components.
 
 Dependencies: None.
 
-*FAU_GEN_EXT.1.1*. The TSF shall be able to generate audit records for each TOE component. The audit records generated by the TSF of each TOE component shall *include the* subset of security relevant audit events which *can occur on the TOE component*.
+*FAU_GEN_EXT.1.1* The TSF shall be able to generate audit records for each TOE component. The audit records generated by the TSF of each TOE component shall *include the* subset of security relevant audit events which *can occur on the TOE component*.
 
 ==== Protected Audit Event Storage (FAU_STG_EXT)
 
@@ -3192,9 +3192,9 @@ FCS_TLSS_EXT.1 TLS Server Protocol]
 
 *FCS_HTTPS_EXT.1.1* The TSF shall implement the HTTPS protocol that complies with RFC 2818.
 
-*FCS_HTTPS_EXT.1.2* The TSF shall implement the HTTPS protocol using TLS.
+*FCS_HTTPS_EXT.1.2* The TSF shall implement HTTPS +++<del>+++protocol+++</del>+++ using TLS.
 
-*FCS_HTTPS_EXT.1.3* If a peer certificate is presented, the TSF shall [selection: _not establish the connection, request authorization to establish the connection, [assignment: other action]_] if the peer certificate is deemed invalid.
+*FCS_HTTPS_EXT.1.3* If a peer certificate is presented, the TSF shall [selection: *_not require client authentication_*, _not establish the connection, request authorization to establish the connection, [assignment: other action]_] if the peer certificate is deemed invalid.
 
 =====  FCS_IPSEC_EXT.1 IPsec Protocol
 
@@ -3305,7 +3305,7 @@ _]_
 *FCS_IPSEC_EXT.1.11* The TSF shall ensure that IKE protocols implement DH Group(s) [selection:
 
 * _[selection: 14 (2048-bit MODP), 15 (3072-bit MODP), 16 (4096-bit MODP), 17 (6144-bit MODP), 18 (8192-bit MODP)] according to RFC 3526,_
-* [selection__: 19 (256-bit Random ECP), 20 (384-bit Random ECP),__ _21 (521-bit Random ECP), 24 (2048-bit MODP with 256-bit POS)] according to RFC 5114._
+* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),21 (521-bit Random ECP), 24 (2048-bit MODP with 256-bit POS)] according to RFC 5114._
 
 _]._
 
@@ -3419,7 +3419,7 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 *FCS_TLSC_EXT.1.1* The TSF shall implement [selection: _TLS 1.2 (RFC 5246), TLS 1.1 (RFC 4346)_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
 
-* _[assignment: list of optional ciphersuites and reference to RFC in which each is defined]_ and no other ciphersuites__.__
+* _[assignment: list of optional ciphersuites and reference to RFC in which each is defined]_ and no other ciphersuites.
 
 
 *FCS_TLSC_EXT.1.2* The TSF shall verify that the presented identifier matches [selection: _the reference identifier per RFC 6125 section 6, IPv4 address in CN or SAN, IPv6 address in the CN or SAN, IPv4 address in SAN, IPv6 address in the SAN, the identifier per RFC 5280 Appendix A using [selection: id-at-commonName, id-at-countryName, id-at-dnQualifier, id-at-generationQualifier, id-at-givenName, id-at-initials, id-at-localityName, id-at-name, id-at-organizationalUnitName, id-at-organizationName, id-at-pseudonym, id-at-serialNumber, id-at-stateOrProvinceName, id-at-surname, id-at-title] and no other attribute types_].
@@ -3966,9 +3966,7 @@ Dependencies: No other components.
 
 *Family Behaviour*
 
-Components in this family address the requirements for TSF-initiated and user-initiated locking, unlocking, and termination of interactive sessions.
-
-The extended FTA_SSL_EXT family is based on the FTA_SSL family.
+Components in this family address the requirements for TSF-initiated and user-initiated locking, unlocking, and termination of interactive sessions. The extended FTA_SSL_EXT family is based on the FTA_SSL family.
 
 *Component levelling*
 
