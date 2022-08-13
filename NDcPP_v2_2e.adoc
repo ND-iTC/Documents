@@ -1127,7 +1127,7 @@ These core management requirements are supplemented by selection-based requireme
 
 *FMT_MOF.1/ManualUpdate Management of Security Functions Behaviour*
 
-*FMT_MOF.1.1/ManualUpdate* The TSF shall restrict the ability to +++<u>+++enable+++</u>+++ the functions __to perform manual updates__ to __Security Administrators__.
+*FMT_MOF.1.1/ManualUpdate* The TSF shall restrict the ability to +++<u>+++enable+++</u>+++ the functions _to perform manual updates_ to _Security Administrators_.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1139,7 +1139,7 @@ _FMT_MOF.1/ManualUpdate restricts the initiation of manual updates to Security A
 
 *FMT_MTD.1/CoreData Management of TSF Data*
 
-*FMT_MTD.1.1/CoreData* The TSF shall restrict the ability to _+++<u>+++manage+++</u>+++_ the __TSF data__ to __Security Administrators__.
+*FMT_MTD.1.1/CoreData* The TSF shall restrict the ability to _+++<u>+++manage+++</u>+++_ the _TSF data_ to _Security Administrators_.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -3715,7 +3715,7 @@ Hierarchical to: No other components
 Dependencies: FIA_X509_EXT.1 X.509 Certificate Validation
 
 
-*FIA_X509_EXT.2.1* The TSF shall use X.509v3 certificates as defined by RFC 5280 to support authentication for [selection__: DTLS, HTTPS, IPsec, TLS, SSH, [assignment: other protocols], no protocols__], and [selection: _code signing for system software updates [assignment: other uses], no additional uses_].
+*FIA_X509_EXT.2.1* The TSF shall use X.509v3 certificates as defined by RFC 5280 to support authentication for [selection: _DTLS, HTTPS, IPsec, TLS, SSH, [assignment: other protocols], no protocols_], and [selection: _code signing for system software updates [assignment: other uses], no additional uses_].
 
 *FIA_X509_EXT.2.2* When the TSF cannot establish a connection to determine the validity of a certificate, the TSF shall [selection: _allow the Administrator to choose whether to accept the certificate in these cases, accept the certificate, not accept the certificate_].
 
