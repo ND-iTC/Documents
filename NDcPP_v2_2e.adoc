@@ -222,7 +222,7 @@ The PP-Modules that are allowed to specify this cPP as a base-PP are specified i
 
 The packages to which conformance can be claimed in conjunction with this cPP are:
 
-- Functional Package for SSH Version 1.0. 
+- Functional Package for SSH Version 1.0.
 
 All cryptographic selections in the above package must comply with FCS_COP and FCS_CKM requirements of this cPP.
 
@@ -848,7 +848,7 @@ a|
 * Termination of the trusted path.
 * Failure of the trusted path functions.
 
-a| 
+a|
 * None
 * None
 * Reason for failure
@@ -957,7 +957,7 @@ _In a distributed TOE, if the TOE component acts as a receiver in the key establ
 
 *FCS_CKM.2.1* The TSF shall *perform* cryptographic *key establishment* in accordance with a specified cryptographic key *establishment* method: [selection:
 
-* _RSA-based key establishment schemes that meet the following: RSAES-PKCS1-v1_5 as specified in Section 7.2 of RFC +++<u>+++3447+++</u>+++, “Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography Specifications Version 2.1”;_
+* _RSA-based key establishment schemes that meet the following: RSAES-PKCS1-v1_5 as specified in Section 7.2 of RFC +++<u>+++8017+++</u>+++, “Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography Specifications Version 2.2”;_
 * _Elliptic curve-based key establishment schemes that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography”;_
 * _Finite field-based key establishment schemes that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography”;_
 * _FFC Schemes using “safe-prime” groups that meet the following: ‘NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and_ [selection: _RFC 3526, RFC 7919]._
@@ -1412,7 +1412,7 @@ _Where X.509 certificates are used to authenticate remote end points in support 
 
 _If the TOE claims FCS_TLSS_EXT.2 (TLS Servers with mutual authentication) and the TOE passes presented identifiers of clients used for client authentication to a directory server for comparison, then the connection to the directory server used to verify presented identifiers of TLS clients need to be protected by a trusted channel (i.e. FTP_ITC.1). If a trusted channel is used for the integrity protection for communication between the TOE and a directory server, then the directory server must be added to the assignment for other capabilities in FTP_ITC.1. Note that the directory server is only expected to handle the comparison of the presented identifier but not to perform full X.509 certificate validation on behalf of the TOE._
 
-_If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell referenced in section 2.2._  
+_If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell referenced in section 2.2._
 
 
 
@@ -1432,7 +1432,7 @@ _If "SSH" is selected, then the TSF shall be validated against the version of th
 
 This requirement ensures that authorized remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection, or the protocol requirements of the packages specified in section 2.2 are included in the ST. Where X.509 certificates are used to authenticate authorized Administrators, FIA_X509_EXT.1/Rev is to be used (this requires checking certificate revocation, implementing a trust store and supporting certificate chain length of three).
 
-If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in the section 2.2. 
+If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in the section 2.2.
 
 == Mandatory Security Assurance Requirements
 
@@ -1706,7 +1706,7 @@ _This channel may also be used as the registration channel for the registration 
 
 _If TLS is selected, then the requirements to have the reference identifier established by the user (FCS_TLSC_EXT.1.2) are relaxed and the identifier may also be established through a “gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component._
 
-_If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in section 2.2._ 
+_If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in section 2.2._
 
 
 === Trusted Path/Channels (FTP)
@@ -1902,15 +1902,15 @@ The following SARs for ALC_FLR are purely optional and are not required to be ad
 
 ==== Basic flaw remediation (ALC_FLR.1) (optional)
 
-This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. The evaluator performs the CEM work units associated with ALC_FLR.1. 
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. The evaluator performs the CEM work units associated with ALC_FLR.1.
 
 ==== Flaw reporting procedures (ALC_FLR.2) (optional)
 
-This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. The evaluator performs the CEM work units associated with ALC_FLR.2. 
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. The evaluator performs the CEM work units associated with ALC_FLR.2.
 
 ==== Systemtic flaw remediation (ALC_FLR.3) (optional)
 
-This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. Flaw remediation procedures of the developer need to describe how users can register to receive flaw reports and corrections. The procedures also need to ensure timely responses to reports of security flaws and automatic distribution of security flaw reports. The evaluator performs the CEM work units associated with ALC_FLR.3. 
+This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. Flaw remediation procedures of the developer need to describe how users can register to receive flaw reports and corrections. The procedures also need to ensure timely responses to reports of security flaws and automatic distribution of security flaw reports. The evaluator performs the CEM work units associated with ALC_FLR.3.
 
 [appendix]
 == Selection-Based Requirements
@@ -2209,7 +2209,7 @@ _When an AES-CBC algorithm is selected, at least one SHA-based HMAC must also be
 *FCS_IPSEC_EXT.1.5* The TSF shall implement the protocol: [selection:
 
 * _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, RFC 4109,_ [selection: _no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers_], _and_ [selection: _no other RFCs for hash functions, RFC 4868 for hash functions_]_;
-* _IKEv2 as defined in RFC 5996 and_ [selection: _with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 5996, section 2.23)_], _and_ [selection: _no other RFCs for hash functions, RFC 4868 for hash functions_]
+* _IKEv2 as defined in RFC 7296 and_ [selection: _with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 7296, section 2.23)_], _and_ [selection: _no other RFCs for hash functions, RFC 4868 for hash functions_]
 
 ].
 
@@ -2281,7 +2281,7 @@ _Since the implementation may allow different Diffie-Hellman groups to be negoti
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author must select the second option for nonce lengths if IKEv2 is also selected (as this is mandated in RFC 5996). The ST author may select either option for IKEv1._
+_The ST author must select the second option for nonce lengths if IKEv2 is also selected (as this is mandated in RFC 7296). The ST author may select either option for IKEv1._
 
 _For the first option for nonce lengths, since the implementation may allow different Diffie-Hellman groups to be negotiated for use in forming the SAs, the assignment in FCS_IPSEC_EXT.1.10 may contain multiple values. For each DH group supported, the ST author consults Table 2 in NIST SP 800-57 “Recommendation for Key Management –Part 1: General” to determine the security strength (“bits of security”) associated with the DH group. Each unique value is then used to fill in the assignment for this element. For example, suppose the implementation supports DH group 14 (2048-bit MODP) and group 20 (ECDH using NIST curve P-384). From Table 2, the bits of security value for group 14 is 112, and for group 20 it is 192._
 
@@ -3240,7 +3240,7 @@ FCS_RBG_EXT.1 Random Bit Generation
 *FCS_IPSEC_EXT.1.5* The TSF shall implement the protocol: [selection:
 
 * _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, RFC 4109, [selection: no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions];_
-* _IKEv2 as defined in RFCs 5996 [selection: with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 5996, section 2.23)_]_, and_ [selection: _no other RFCs for hash functions, RFC 4868 for hash functions]_].
+* _IKEv2 as defined in RFCs 7296 [selection: with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 7296, section 2.23)_]_, and_ [selection: _no other RFCs for hash functions, RFC 4868 for hash functions]_].
 
 *FCS_IPSEC_EXT.1.6* The TSF shall ensure the encrypted payload in the [selection: _IKEv1, IKEv2_] protocol uses the cryptographic algorithms [selection: _AES-CBC-128, AES_CBC-192 AES-CBC-256 (specified in RFC 3602), AES-GCM-128, AES-GCM-192, AES-GCM-256 (specified in RFC 5282)_].
 
