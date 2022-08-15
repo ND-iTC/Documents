@@ -361,8 +361,8 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_GEN_EXT.1 |Security Audit Data Generation for Distributed TOE component |All
 |FAU_STG_EXT.1 |Protected Audit Event Storage |All
 |FAU_STG.1 |Protected Audit Trail Storage |Feature Dependent
-|FAU_STG_EXT.2/LocSpace |Counting Lost Audit Data |Feature Dependent
-|FAU_STG_EXT.3/LocSpace |Display warning for local storage space |Feature Dependent
+|FAU_STG_EXT.2 |Counting Lost Audit Data |Feature Dependent
+|FAU_STG_EXT.3 |Display warning for local storage space |Feature Dependent
 |FAU_STG_EXT.4 |Protected Local Audit Event Storage for Distributed TOEs |Feature Dependent
 |FAU_STG_EXT.5 |Protected Remote Audit Event Storage for Distributed TOEs |Feature Dependent
 |FCO_CPC_EXT.1 |Communication Partner Control |All
@@ -517,7 +517,7 @@ SFR Rationale:
 * Requirements for basic auditing capabilities are specified in FAU_GEN.1 and FAU_GEN.2, with timestamps provided according to FPT_STM_EXT.1 and if applicable, protection of NTP channels in FCS_NTP_EXT.1
 * Requirements for protecting audit records stored on the TOE are specified in FAU_STG.1
 * Requirements for secure storage and transmission of local audit records to an external IT entity via a secure channel are specified in FAU_STG_EXT.1 and FAU_STG_EXT.1/LocSpace
-* Optional additional requirements for dealing with potential loss of locally stored audit records are specified in FAU_STG_EXT.2/LocSpace, and FAU_STG_EXT.3/LocSpace
+* Optional additional requirements for dealing with potential loss of locally stored audit records are specified in FAU_STG_EXT.2, and FAU_STG_EXT.3
 * If (optionally) configuration of the audit functionality is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MOF.1/Functions.
 
 ==== Administrator and Device Credentials and Data
@@ -713,9 +713,9 @@ e.g. ‘[selection: _disclosure, modification, loss of use_]’ in [CC2] or an E
 * Assignment wholly or partially completed in the PP: indicated with _italicized text_;
 * Assignment completed within a selection in the PP: the completed assignment text is indicated with _+++<u>+++italicized and underlined text+++</u>+++_
 +
-e.g. [selection: +++<i>+++change_default, query, modify,
-delete, [assignment: other operations]
-+++</i>+++]’ in [CC2] or an ECD might become ‘+++<u>+++change_default+++</u>+++, _+++<u>+++select_tag_’+++</u>+++ (completion of both selection and assignment) or ‘[selection: +++<u>+++change_default+++</u>+++, _+++<u>+++select_tag, select_value+++</u>+++_]’ (partial completion of selection, and completion of assignment) in the PP;
+e.g. [selection: _change_default, query, modify,
+delete, [assignment: other operations]_
+]’ in [CC2] or an ECD might become ‘+++<u>+++change_default+++</u>+++, _+++<u>+++select_tag_’+++</u>+++ (completion of both selection and assignment) or ‘[selection: +++<u>+++change_default+++</u>+++, _+++<u>+++select_tag, select_value+++</u>+++_]’ (partial completion of selection, and completion of assignment) in the PP;
 * Iteration: indicated by adding a string starting with ‘/’ (e.g. ‘FCS_COP.1/Hash’).
 
 Extended SFRs are identified by having a label ‘EXT’ at the end of the SFR name.
@@ -764,7 +764,7 @@ In some instances, there may be a large amount of audit information produced tha
 
 Loss of communication with the audit server is problematic. While there are several potential mitigations to this threat, this cPP does not mandate that a specific action takes place; the degree to which this action preserves the audit information and still allows the TOE to meet its functionality responsibilities should drive decisions on the suitability of the TOE in a particular environment.
 
-===== FAU_GEN.1 Audit data generation
+===== FAU_GEN.1 Audit data generation (Refinement)
 
 *FAU_GEN.1 Audit Data Generation*
 
@@ -800,7 +800,7 @@ _With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘servi
 *FAU_GEN.1.2* The TSF shall record within each audit record at least the following information:
 
 [loweralpha]
-. Date and time of the event, type of event, subject identity, and the outcome (success or failure) of the event; and
+. Date and time of the event, type of event, subject identity +++<del>+++(if applicable)+++</del>+++, and the outcome (success or failure) of the event; and
 . For each audit event type, based on the auditable event definitions of the functional components included in the cPP/ST, _information specified in column three of_ _Table 2_.
 
 *_Application Note {counter:appnote_count}_*
@@ -874,7 +874,7 @@ _Where an auditable event is triggered by another component, the component that 
 
 A Network Device TOE is not expected to take responsibility for all audit storage itself. Although it is required to store data locally at the time of generation, and to take some appropriate action if this local storage capacity is exceeded, the TOE is also required to be able to establish a secure link to an external audit server to enable external audit trail storage.
 
-===== FAU_ STG_EXT.1 Protected Audit Event Storage
+===== FAU_STG_EXT.1 Protected Audit Event Storage
 
 *FAU_STG_EXT.1 Protected Audit Event Storage*
 
@@ -908,7 +908,7 @@ _For pNDs, ‘on the TOE itself’ or ‘locally’ means on storage inside or d
 
 _For vNDs, local storage is any storage accessible by TOE software. In a virtualized environment, ‘local’ storage is under the control of the VS and may be physically located on the local host, but it could also be located on a network drive or storage array._
 
-===== FAU_ STG_EXT.1/LocSpace Local Audit Event Storage
+===== FAU_STG_EXT.1/LocSpace Local Audit Event Storage
 
 *FAU_STG_EXT.1/LocSpace Local Audit Event Storage*
 
@@ -939,7 +939,7 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 * _RSA schemes using cryptographic key sizes of 2048-bit or greater that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.3;_
 * _ECC schemes using ‘NIST curves’ [selection: P-256, P-384, P-521] that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.4;_
 * _FFC schemes using cryptographic key sizes of 2048-bit or greater that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.1_
-* _FFC Schemes using ‘safe-prime’ groups that meet the following: “NIST Special Publication 800-56A Revision 3, Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and_ [selection__: RFC 3526, RFC 7919__]_._
+* _FFC Schemes using ‘safe-prime’ groups that meet the following: “NIST Special Publication 800-56A Revision 3, Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: RFC 3526, RFC 7919]._
 
 ] +++<del>+++and specified cryptographic key sizes [assignment: _cryptographic key sizes_] that meet the following: \[assignment: _list of standards_]+++</del>+++.
 
@@ -1013,8 +1013,15 @@ _For the first selection of FCS_COP.1.1/DataEncryption, the ST author chooses th
 
 *FCS_COP.1.1/SigGen* The TSF shall perform _cryptographic signature services (generation and verification)_ in accordance with a specified cryptographic algorithm [selection:
 
-* _RSA Digital Signature Algorithm and cryptographic key sizes (modulus) [assignment: 2048 bits or greater],_
-* _Elliptic Curve Digital Signature Algorithm and cryptographic key sizes [assignment: 256 bits or greater]_
+* _RSA Digital Signature Algorithm,_
+* _Elliptic Curve Digital Signature Algorithm_
+
+]
+
+and cryptographic key sizes [selection:
+
+* _For RSA: modulus 2048 bits or greater,_
+* _For ECDSA: 256 bits or greater_
 
 ]
 
@@ -1041,7 +1048,7 @@ _The hash selection should be consistent with the overall strength of the algori
 
 *FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash Algorithm)*
 
-*FCS_COP.1.1/KeyedHash* The TSF shall perform _keyed-hash message authentication_ in accordance with a specified cryptographic algorithm [selection: _HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-384, HMAC-SHA-512, implicit_] and cryptographic key sizes _[assignment: key size (in bits) used in HMAC]_ *and message digest sizes __[__selection: _160, 256, 384, 512] bits_* that meet the following: _ISO/IEC 9797-2:2011, Section 7 “MAC Algorithm 2”_.
+*FCS_COP.1.1/KeyedHash* The TSF shall perform _keyed-hash message authentication_ in accordance with a specified cryptographic algorithm [selection: _HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-384, HMAC-SHA-512, implicit_] and cryptographic key sizes _[assignment: key size (in bits) used in HMAC]_ *and message digest sizes [selection: _160, 256, 384, 512] bits_* that meet the following: _ISO/IEC 9797-2:2011, Section 7 “MAC Algorithm 2”_.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1120,7 +1127,7 @@ These core management requirements are supplemented by selection-based requireme
 
 *FMT_MOF.1/ManualUpdate Management of Security Functions Behaviour*
 
-*FMT_MOF.1.1/ManualUpdate* The TSF shall restrict the ability to +++<u>+++enable+++</u>+++ the functions _+++<u>+++to perform manual updates to Security Administrators+++</u>+++_.
+*FMT_MOF.1.1/ManualUpdate* The TSF shall restrict the ability to +++<u>+++enable+++</u>+++ the functions _to perform manual updates_ to _Security Administrators_.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1132,7 +1139,7 @@ _FMT_MOF.1/ManualUpdate restricts the initiation of manual updates to Security A
 
 *FMT_MTD.1/CoreData Management of TSF Data*
 
-*FMT_MTD.1.1/CoreData* The TSF shall restrict the ability to +++<u>+++manage+++</u>+++ the _+++<u>+++TSF data to Security Administrators+++</u>+++_.
+*FMT_MTD.1.1/CoreData* The TSF shall restrict the ability to _+++<u>+++manage+++</u>+++_ the _TSF data_ to _Security Administrators_.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1344,7 +1351,7 @@ _The TOE depends on time and date information, either provided by a local real-t
 
 _For a vND, the virtualization system can be used as an external time source. It is assumed that the VS itself uses NTP or some other external source for its time, and that this time is made available to VMs._
 
-_The term ‘reliable time stamps’ refers to the strict use of the time and date information, that is provided, and the logging of all discontinuous changes to the time settings including information about the old and new time. With this information__,__ the real time for all audit data can be determined. Note, that all discontinuous time changes, Administrator actuated or changed via an automated process, must be audited. No audit is needed when time is changed via use of kernel or system facilities – such as daytime (3) – that exhibit no discontinuities in time._
+_The term ‘reliable time stamps’ refers to the strict use of the time and date information, that is provided, and the logging of all discontinuous changes to the time settings including information about the old and new time. With this information, the real time for all audit data can be determined. Note, that all discontinuous time changes, Administrator actuated or changed via an automated process, must be audited. No audit is needed when time is changed via use of kernel or system facilities – such as daytime (3) – that exhibit no discontinuities in time._
 
 _For distributed TOEs it is expected that the Security Administrator ensures synchronization between the time settings of different TOE components. All TOE components should either be in sync (e.g. through synchronisation between TOE components or through synchronisation of different TOE components with an NTP server) or the offset should be known to the Administrator for every pair of TOE components. This includes TOE components synchronized to different time zones._
 
@@ -1368,7 +1375,7 @@ _An interactive session governed by this SFR is a session in which an authentica
 
 *FTA_SSL.4 User-initiated Termination*
 
-*FTA_SSL.4.1:* The TSF shall allow *Administrator*-initiated termination of the *Administrator’s* own interactive session.
+*FTA_SSL.4.1:* The TSF shall allow +++<del>+++user+++</del>+++ *Administrator*-initiated termination of the +++<del>+++user's+++</del>+++ *Administrator’s* own interactive session.
 
 ==== TOE Access Banners (FTA_TAB)
 
@@ -1376,7 +1383,7 @@ _An interactive session governed by this SFR is a session in which an authentica
 
 *FTA_TAB.1 Default TOE Access Banners*
 
-*FTA_TAB.1.1:* Before establishing *an administrative user* session the TSF shall display *a* *Security Administrator-specified* advisory *notice and consent* warning message regarding use of the TOE.
+*FTA_TAB.1.1:* Before establishing +++<del>+++a+++</del>+++ *an administrative* user session the TSF shall display *a* *Security Administrator-specified* advisory *notice and consent* warning message regarding +++<del>+++unauthorised+++</del>+++ use of the TOE.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1394,9 +1401,9 @@ In addition to providing protection from disclosure (and detection of modificati
 
 *FTP_ITC.1 Inter-TSF Trusted Channel*
 
-*FTP_ITC.1.1* The TSF shall *be capable of using [selection: _IPsec, SSH, TLS, DTLS, HTTPS_] to* provide a trusted communication channel between itself and *authorized IT entities supporting the following capabilities: audit server, [selection: _authentication server, [assignment: other capabilities], no other capabilities_]* that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from *disclosure and detection of modification of the channel data*.
+*FTP_ITC.1.1* The TSF shall *be capable of using [selection: _IPsec, SSH, TLS, DTLS, HTTPS_] to* provide a *trusted* communication channel between itself and +++<del>+++another trusted IT product+++</del>+++ *authorized IT entities supporting the following capabilities: audit server, [selection: _authentication server, [assignment: other capabilities], no other capabilities_]* that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from +++<del>+++modification or+++</del>+++ disclosure *and detection of modification of the channel data*.
 
-*FTP_ITC.1.2* The TSF shall permit *the TSF or the authorized IT entities* to initiate communication via the trusted channel.
+*FTP_ITC.1.2* The TSF shall permit [selection: _the TSF, +++<del>+++another trusted IT product,+++</del>+++ *the authorized IT entities_*] to initiate communication via the trusted channel.
 
 *FTP_ITC.1.3* The TSF shall initiate communication via the trusted channel for _[assignment: list of services for which the TSF is able to initiate communications]_.
 
@@ -1422,9 +1429,9 @@ _If "SSH" is selected, then the TSF shall be validated against the version of th
 
 *FTP_TRP.1/Admin Trusted Path*
 
-*FTP_TRP.1.1/Admin* The TSF shall *be capable of using [selection: _DTLS, IPsec, SSH, TLS, HTTPS_] to* provide a communication path between itself and *authorized* +++<u>+++remote+++</u>+++ *Administrators* that is logically distinct from other communication paths and provides assured identification of its end points and protection of the communicated data from *disclosure and provides detection of modification of the channel data.*
+*FTP_TRP.1.1/Admin* The TSF shall *be capable of using [selection: _DTLS, IPsec, SSH, TLS, HTTPS_] to* provide a communication path between itself and *authorized* +++<u>+++remote+++</u>+++ *Administrators* +++<del>+++users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of its end points and protection of the communicated data from +++<u>+++disclosure+++</u>+++ *and provides detection of modification of the channel data.*
 
-*FTP_TRP.1.2/Admin* The TSF shall permit +++<u>+++remote *Administrators*+++</u>+++ to initiate communication via the trusted path.
+*FTP_TRP.1.2/Admin* The TSF shall permit +++<u>+++remote *Administrators* +++<del>+++users+++<//del>+++ +++</u>+++to initiate communication via the trusted path.
 
 *FTP_TRP.1.3/Admin* The TSF shall require the use of the trusted path for _+++<u>+++initial Administrator authentication and all remote administration actions+++</u>+++_.
 
@@ -1554,8 +1561,8 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 |===
 |*Requirement* |*Auditable Events* |*Additional Audit Record Contents*
 |FAU_STG.1 |None. |None.
-|FAU_STG_EXT.2/LocSpace |None. |None.
-|FAU_STG_EXT.3/LocSpace |Low storage space for audit events. |None.
+|FAU_STG_EXT.2 |None. |None.
+|FAU_STG_EXT.3 |Low storage space for audit events. |None.
 |FIA_X509_EXT.1/ITT a|
 * Unsuccessful attempt to validate a certificate
 
@@ -1599,7 +1606,7 @@ _The audit event “Unsuccessful attempt to validate a certificate” for FIA_X5
 
 ==== Security Audit Event Storage (FAU_STG.1 & Extended – FAU_STG_EXT)
 
-Local storage space for audit data may be necessary on the TOE itself, and the TOE may then claim protection of the audit trail against unauthorised modification (including deletion) as described in FAU_STG.1. The local storage space for audit data of a Network Device is also limited, and if the local storage space is exceeded then audit data might be lost. A security Administrator might be interested in the number of dropped, overwritten, etc. audit records. This number might serve as an indication if a severe problem has occurred after the storage space was exceeded that continuously generated audit data. Therefore, FAU_STG_EXT.2/LocSpace and FAU_STG_EXT.3/LocSpace are defined to express these optional capabilities of a Network Device.
+Local storage space for audit data may be necessary on the TOE itself, and the TOE may then claim protection of the audit trail against unauthorised modification (including deletion) as described in FAU_STG.1. The local storage space for audit data of a Network Device is also limited, and if the local storage space is exceeded then audit data might be lost. A security Administrator might be interested in the number of dropped, overwritten, etc. audit records. This number might serve as an indication if a severe problem has occurred after the storage space was exceeded that continuously generated audit data. Therefore, FAU_STG_EXT.2 and FAU_STG_EXT.3 are defined to express these optional capabilities of a Network Device.
 
 =====  FAU_STG.1 Protected Audit Trail Storage
 
@@ -1609,11 +1616,11 @@ Local storage space for audit data may be necessary on the TOE itself, and the T
 
 *FAU_STG.1.2* The TSF shall be able to +++<u>+++prevent+++</u>+++ unauthorised modifications to the stored audit records in the audit trail.
 
-=====  FAU_ STG_EXT.2/LocSpace Counting Lost Audit Data
+=====  FAU_STG_EXT.2 Counting Lost Audit Data
 
-*FAU_STG_EXT.2/LocSpace Counting Lost Audit Data*
+*FAU_STG_EXT.2 Counting Lost Audit Data*
 
-*FAU_STG_EXT.2.1/LocSpace* The TSF shall provide information about the number of [selection: _dropped, overwritten, [assignment: other information]_] audit records in the case where the local storage has been filled and the TSF takes one of the actions defined in FAU_STG_EXT.1.3.
+*FAU_STG_EXT.2.1* The TSF shall provide information about the number of [selection: _dropped, overwritten, [assignment: other information]_] audit records in the case where the local storage has been filled and the TSF takes one of the actions defined in FAU_STG_EXT.1.3.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1623,25 +1630,25 @@ _In case the local storage for audit records is cleared by the Administrator, th
 
 _For distributed TOEs each component that implements counting of lost audit data has to provide a mechanism for Administrator access to, and management of, this information._
 
-_If FAU_STG_EXT.2/LocSpace is added to the ST, the ST has to make clear any situations in which lost audit data is not counted._
+_If FAU_STG_EXT.2 is added to the ST, the ST has to make clear any situations in which lost audit data is not counted._
 
-=====  FAU_ STG_EXT.3/LocSpace Action in Case of Possible Audit Data Loss
+=====  FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss
 
-*FAU_STG_EXT.3/LocSpace Action in Case of Possible Audit Data Loss*
+*FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss*
 
-*FAU_STG_EXT.3.1/LocSpace* The TSF shall _generate a warning to inform the Administrator_ before the audit trail _exceeds the local audit trail storage capacity_.
+*FAU_STG_EXT.3.1* The TSF shall _generate a warning to inform the Administrator_ before the audit trail _exceeds the local audit trail storage capacity_.
 
 *_Application Note {counter:appnote_count}_*
 
 _This option should be chosen if the TOE generates a warning to inform the Administrator before the local storage space for audit data is used up. This SFR only applies to local storage of audit information._
 
-_It has to be ensured that the warning message required by FAU_STG_EXT.3.1/LocSpace can be communicated to the Administrator. The communication should be done via the audit log itself because it cannot be guaranteed that an administrative session is active at the time the event occurs._
+_It has to be ensured that the warning message required by FAU_STG_EXT.3.1 can be communicated to the Administrator. The communication should be done via the audit log itself because it cannot be guaranteed that an administrative session is active at the time the event occurs._
 
 _The warning should inform the Administrator when the local space to store audit data is used up and/or the TOE will lose audit data due to insufficient local space._
 
 _For distributed TOEs that implement displaying a warning when local storage space for audit data is exhausted, it has to be described which TOE components support this feature (not necessarily all TOE components have to support this feature if selected for the overall TOE). Each component that supports this feature must either generate a warning itself or through another component._
 
-_If FAU_STG_EXT.3/LocSpace is added to the ST, the ST has to make clear any situations in which audit records might be “invisibly lost”._
+_If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in which audit records might be “invisibly lost”._
 
 === Identification and Authentication (FIA)
 
@@ -1653,7 +1660,7 @@ _If FAU_STG_EXT.3/LocSpace is added to the ST, the ST has to make clear any situ
 
 *FIA_X509_EXT.1.1/ITT* The TSF shall validate certificates in accordance with the following rules:
 
-* RFC 5280 certificate validation and certification path validation supporting a minimum path length of two certificates.
+* RFC 5280 certificate validation and certification path validation *supporting a minimum path length of two certificates*.
 * The certification path must terminate with a trusted CA certificate designated as a trust anchor.
 * The TSF shall validate a certification path by ensuring that all CA certificates in the certification path contain the basicConstraints extension with the CA flag set to TRUE.
 
@@ -1696,7 +1703,7 @@ _This requirement applies to certificates that are used and processed by the TSF
 
 *FPT_ITT.1 Basic internal TSF data transfer protection*
 
-*FPT_ITT.1.1* The TSF shall protect TSF data from +++<u>+++disclosure and *detect its* modification+++</u>+++ when it is transmitted between separate parts of the TOE *through the use of [selection: _IPsec, SSH, TLS, DTLS, HTTPS_]*.
+*FPT_ITT.1.1* The TSF shall protect TSF data from +++<u>+++disclosure *and detect its modification*+++</u>+++ when it is transmitted between separate parts of the TOE *through the use of [selection: _IPsec, SSH, TLS, DTLS, HTTPS_]*.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1721,9 +1728,9 @@ This iteration of FTP_TRP.1 is defined as one of the options selectable for dist
 
 *FTP_TRP.1.1/Join* The TSF shall provide a communication path between itself and *a joining component* +++<del>+++[selection: remote, local] users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of *[selection: _the TSF endpoint, both joining component and TSF endpoint_]* +++<del>+++its end points+++</del>+++ and protection of the communicated data from +++<u>+++modification \[selection: _and disclosure, none_]+++</u>+++.
 
-*FTP_TRP.1.2/Join* The TSF shall permit [selection: _+++<u>+++the TSF, *the joining component*+++</u>+++_ +++<del>+++local users, remote users+++</del>+++] to initiate communication via the trusted path.
+*FTP_TRP.1.2/Join* The TSF shall permit [selection: _the TSF, *the joining component*, +++<del>+++local users, remote users_+++</del>+++] to initiate communication via the trusted path.
 
-*FTP_TRP.1.3/Join* The TSF shall require the use of the trusted path for _joining components to the TSF under environmental constraints identified in [assignment: reference to operational guidance]_.
+*FTP_TRP.1.3/Join* The TSF shall require the use of the trusted path for +++<u>+++_joining components to the TSF under environmental constraints identified in [assignment: reference to operational guidance]_+++</u>+++.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2022,7 +2029,7 @@ _TOE components are not required to monitor or audit connectivity or network out
 
 === Cryptographic Support (FCS)
 
-==== Cryptographic Protocols (Extended – FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_HTTPS_EXT, FCS_ IPSEC_EXT, FCS_NTP_EXT,  FCS_TLSC_EXT, FCS_TLSS_EXT)
+==== Cryptographic Protocols (Extended – FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_HTTPS_EXT, FCS_IPSEC_EXT, FCS_NTP_EXT,  FCS_TLSC_EXT, FCS_TLSS_EXT)
 
 ===== FCS_DTLSC_EXT & FCS_DTLSS_EXT DTLS Protocol
 
@@ -2166,9 +2173,9 @@ HTTPS is not a required component of this cPP. If a TOE implements HTTPS, a corr
 
 _The ST author must provide enough detail to determine how the implementation is complying with the standard(s) identified; this can be done by additional detail in the TSS._
 
-*FCS_HTTPS_EXT.1.2* The TSF shall implement HTTPS using TLS.
+*FCS_HTTPS_EXT.1.2* The TSF shall implement HTTPS +++<del>+++protocol+++</del>+++ using TLS.
 
-*FCS_HTTPS_EXT.1.3 If a peer certificate is presented,* the TSF shall [selection: _not require client authentication, not establish the connection, request authorization to establish the connection, [assignment: other action]_] if the peer certificate is deemed invalid.
+*FCS_HTTPS_EXT.1.3* If a peer certificate is presented, the TSF shall [selection: *_not require client authentication_*, _not establish the connection, request authorization to establish the connection, [assignment: other action]_] if the peer certificate is deemed invalid.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2208,8 +2215,8 @@ _When an AES-CBC algorithm is selected, at least one SHA-based HMAC must also be
 
 *FCS_IPSEC_EXT.1.5* The TSF shall implement the protocol: [selection:
 
-* _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, RFC 4109,_ [selection: _no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers_], _and_ [selection: _no other RFCs for hash functions, RFC 4868 for hash functions_]_;
-* _IKEv2 as defined in RFC 7296 and_ [selection: _with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 7296, section 2.23)_], _and_ [selection: _no other RFCs for hash functions, RFC 4868 for hash functions_]
+* _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, RFC 4109, [selection: no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions];_
+* _IKEv2 as defined in RFC 7296 [selection: with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 7296, section 2.23], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
 
 ].
 
@@ -2217,7 +2224,7 @@ _When an AES-CBC algorithm is selected, at least one SHA-based HMAC must also be
 
 _If the TOE implements SHA-2 hash algorithms for IKEv1 or IKEv2, the ST author selects RFC 4868. If the TOE implements the use of truncated SHA-based HMACs as described in RFC 4868, they shall be highlighted in the TSS._
 
-*FCS_IPSEC_EXT.1.6* The TSF shall ensure the encrypted payload in the [selection: _IKEv1, IKEv2_] protocol uses the cryptographic algorithms [selection__: AES-CBC-128, AES-CBC-192, AES-CBC-256 (specified in RFC 3602), AES-GCM-128, AES-GCM-192, AES-GCM-256 (specified in RFC 5282)__].
+*FCS_IPSEC_EXT.1.6* The TSF shall ensure the encrypted payload in the [selection: _IKEv1, IKEv2_] protocol uses the cryptographic algorithms [selection: _AES-CBC-128, AES-CBC-192, AES-CBC-256 (specified in RFC 3602), AES-GCM-128, AES-GCM-192, AES-GCM-256 (specified in RFC 5282)_].
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2496,7 +2503,7 @@ Although the functionality in FIA_X509_EXT.1/Rev and FIA_X509_EXT.2 is always re
 * The certification path must terminate with a trusted CA certificate designated as a trust anchor.
 * The TSF shall validate a certification path by ensuring that all CA certificates in the certification path contain the basicConstraints extension with the CA flag set to TRUE.
 
-* The TSF shall validate the revocation status of the certificate using [selection: +++<u>+++_the Online Certificate Status Protocol (OCSP) as specified in RFC 6960, a Certificate Revocation List (CRL) as specified in RFC 5280 Section 6.3, Certificate Revocation List (CRL) as specified in RFC 5759 Section 5_+++</u>+++].
+* The TSF shall validate the revocation status of the certificate using [selection: _the Online Certificate Status Protocol (OCSP) as specified in RFC 6960, a Certificate Revocation List (CRL) as specified in RFC 5280 Section 6.3, Certificate Revocation List (CRL) as specified in RFC 5759 Section 5, +++<del>+++no revocation method_+++</del>+++].
 * The TSF shall validate the extendedKeyUsage field according to the following rules:
 ** _Certificates used for trusted updates and executable code integrity verification shall have the Code Signing purpose (id-kp 3 with OID 1.3.6.1.5.5.7.3.3) in the extendedKeyUsage field._
 ** _Server certificates presented for TLS shall have the Server Authentication purpose (id-kp 1 with OID 1.3.6.1.5.5.7.3.1) in the extendedKeyUsage field._
@@ -2571,7 +2578,7 @@ If the TOE provides remote administration using a password-based authentication 
 
 *FIA_AFL.1 Authentication Failure Management*
 
-*FIA_AFL.1.1* The TSF shall detect when an Administrator configurable positive integer within _[assignment: range of acceptable values]_ unsuccessful authentication attempts occur related to _Administrators attempting to authenticate remotely using a password_.
+*FIA_AFL.1.1* The TSF shall detect when +++<u>+++an Administrator configurable positive integer within _[assignment: range of acceptable values]_+++</u>+++ unsuccessful authentication attempts occur related to _Administrators attempting to authenticate remotely using a password_.
 
 *FIA_AFL.1.2* When the defined number of unsuccessful authentication attempts has been +++<u>+++met+++</u>+++, the TSF shall [selection: _prevent the offending Administrator from successfully establishing a remote session using any authentication method that involves a password until_ _[assignment: action to unlock] is taken by an Administrator; prevent the offending Administrator from successfully establishing a remote session using any authentication method that involves a password until an Administrator defined time period has elapsed]_.
 
@@ -2586,9 +2593,9 @@ If the TOE provides a password-based local authentication mechanism passwords mu
 
 ===== FIA_UAU.7 Protected Authentication Feedback
 
-*FIA_UAU.7 Protected Authentication Feedback*
+*FIA_UAU.7 Protected Authentication Feedback (Refinement)*
 
-*FIA_UAU.7.1* The TSF shall provide only _obscured feedback_ to the administrative user while the authentication is in progress *at the local console*.
+*FIA_UAU.7.1* The TSF shall provide only _obscured feedback_ to the *administrative* user while the authentication is in progress *at the local console*.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2691,7 +2698,7 @@ _FMT_MOF.1/AutoUpdate is only applicable and should be included if the TOE suppo
 _FMT_MOF.1/Functions should be chosen if one or more of the following scenarios apply:_
 
 * _If the transmission protocol for transmission of audit data to an external IT entity as defined in FAU_STG_EXT.1.1 is configurable, “transmission of audit data to an external IT entity” shall be chosen._
-* _If the handling of audit data is configurable, “handling of audit data” must be chosen. The term “handling of audit data” refers to the different options for selection and assignments in SFRs FAU_STG_EXT.1.3 and FAU_STG_EXT.2/LocSpace._
+* _If the handling of audit data is configurable, “handling of audit data” must be chosen. The term “handling of audit data” refers to the different options for selection and assignments in SFRs FAU_STG_EXT.1.3 and FAU_STG_EXT.2._
 * _If the behaviour of the audit functionality is configurable when Local Audit Storage Space is full, “audit functionality when Local Audit Storage Space is full” must be chosen._
 
 _The first selection for ‘determine the behaviour of’ and ‘modify the behaviour of’ should be done as appropriate. It might be necessary to have different selections for the first selection depending on the second selection (e.g. “handling of audit data” might require “determine the behaviour of” and “modify the behaviour of” for the first selection on the one hand and “audit functionality when Local Audit Storage Space is full” might require “modify the behaviour of” only). In that case_ _FMT_MOF.1/Functions should be iterated with increasing number appended (i.e. FMT_MOF.1/Functions1, FMT_MOF.1/Functions2, etc.)._
@@ -2717,7 +2724,7 @@ If the TOE provides the Security Administrator the ability to administer the TOE
 
 *FTA_SSL_EXT.1.1* The TSF shall, for local interactive sessions, [selection:
 
-* _lock the session - disable any activity of the user’s data access/display devices other than unlocking the session, and requiring that the Administrator re-authenticate to the TSF prior to unlocking the session;_
+* _lock the session - disable any activity of the Administrator’s data access/display devices other than unlocking the session, and requiring that the Administrator re-authenticate to the TSF prior to unlocking the session;_
 * _terminate the session_]
 
 after a Security Administrator-specified time period of inactivity.
@@ -2739,7 +2746,7 @@ This appendix contains the definitions for the extended requirements that are us
 
 *Family Behaviour*
 
-This component defines the requirements for components in a distributed TOE to generate security audit data.
+This component defines the requirements for components in a distributed TOE to generate security audit data. This is a new family defined for the FAU class.
 
 *Component levelling*
 
@@ -2761,7 +2768,7 @@ The following actions should be auditable if FAU_GEN Security audit data generat
 [loweralpha]
 . No audit necessary.
 
-=====  FAU_ GEN_EXT.1 Security Audit Data Generation for Distributed TOE Components
+=====  FAU_GEN_EXT.1 Security Audit Data Generation for Distributed TOE Components
 
 *FAU_GEN_EXT.1 Security Audit Data Generation*
 
@@ -2769,13 +2776,13 @@ Hierarchical to: No other components.
 
 Dependencies: None.
 
-*FAU_GEN_EXT.1.1*. The TSF shall be able to generate audit records for each TOE component. The audit records generated by the TSF of each TOE component shall *include the* subset of security relevant audit events which *can occur on the TOE component*.
+*FAU_GEN_EXT.1.1* The TSF shall be able to generate audit records for each TOE component. The audit records generated by the TSF of each TOE component shall *include the* subset of security relevant audit events which *can occur on the TOE component*.
 
 ==== Protected Audit Event Storage (FAU_STG_EXT)
 
 *Family Behaviour*
 
-This component defines the requirements for the TSF to be able to securely transmit audit data between the TOE and an external IT entity.
+This component defines the requirements for the TSF to be able to securely transmit audit data between the TOE and an external IT entity. This is a new family defined for the FAU class.
 
 *Component levelling*
 
@@ -2805,7 +2812,7 @@ The following actions should be auditable if FAU_GEN Security audit data generat
 [loweralpha]
 . No audit necessary.
 
-=====  FAU_ STG_EXT.1 Protected Audit Event Storage
+=====  FAU_STG_EXT.1 Protected Audit Event Storage
 
 *FAU_STG_EXT.1 Protected Audit Event Storage*
 
@@ -2824,7 +2831,7 @@ Dependencies: FAU_GEN.1 Audit data generation, FTP_ITC.1 Inter-TSF Trusted Chann
 
 *FAU_STG_EXT.1.3* The TSF shall [selection: _drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_] when the local storage space for audit data is full.
 
-=====  FAU_ STG_EXT.1/LocSpace Local Audit Event Storage
+=====  FAU_STG_EXT.1/LocSpace Local Audit Event Storage
 
 *FAU_STG_EXT.1/LocSpace Local Audit Event Storage*
 
@@ -2839,7 +2846,7 @@ Dependencies: FAU_GEN.1 Audit data generation, FAU_STG_EXT.1 Protected Audit Eve
 
 *FAU_STG_EXT.1.3/LocSpace* The TSF shall [_selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_] when the local storage space for audit data is full.
 
-=====  FAU_ STG_EXT.2 Counting Lost Audit Data
+=====  FAU_STG_EXT.2 Counting Lost Audit Data
 
 *FAU_STG_EXT.2 Counting Lost Audit Data*
 
@@ -2849,7 +2856,7 @@ Dependencies: FAU_GEN.1 Audit data generation, FAU_STG_EXT.1 External Audit Trai
 
 *FAU_STG_EXT.2.1* The TSF shall provide information about the number of [selection: _dropped, overwritten, [assignment: other information]_] audit records in the case where the local storage has been filled and the TSF takes one of the actions defined in FAU_STG_EXT.1.3.
 
-=====  FAU_ STG_EXT.3 Action in Case of Possible Audit Data Loss
+=====  FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss
 
 *FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss*
 
@@ -2859,9 +2866,9 @@ Dependencies: FAU_GEN.1 Audit data generation
 
 FAU_STG_EXT.1 External Audit Trail Storage
 
-*FAU_STG_EXT.3.1/LocSpace* The TSF shall _generate a warning to inform the Administrator_ before the audit trail _exceeds the local audit trail storage capacity_.
+*FAU_STG_EXT.3.1* The TSF shall _generate a warning to inform the Administrator_ before the audit trail _exceeds the local audit trail storage capacity_.
 
-=====  FAU_ STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs
+=====  FAU_STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs
 
 *FAU_STG_EXT.4 Protected Audit Event Storage*
 
@@ -2876,7 +2883,7 @@ FTP_ITC.1 Inter-TSF Trusted Channel]
 
 *FAU_STG_EXT.4.1* The TSF of each TOE component which stores security audit data locally shall perform the following actions when the local storage space for audit data is full: _[assignment:_ _table of components and for each component its action chosen according to the following:_ [selection: _drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_]].
 
-=====  FAU_ STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
+=====  FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
 
 *FAU_STG_EXT.5 Protected Audit Event Storage*
 
@@ -2938,7 +2945,7 @@ Dependencies: No other components
 
 *Family Behaviour*
 
-The component in this family addresses the ability for a client to use DTLS to protect data between the client and a server using the DTLS protocol.
+The component in this family addresses the ability for a client to use DTLS to protect data between the client and a server using the DTLS protocol. This is a new family defined for the FCS class.
 
 *Component levelling*
 
@@ -3027,6 +3034,8 @@ FIA_X509_EXT.1 X.509 Certificate Validation
 
 FIA_X509_EXT.2 X.509 Certificate Authentication
 
+FIA_X509_EXT.3 X.509 Certificate Request
+
 *FCS_DTLSC_EXT.2.1* The TSF shall support mutual authentication using X.509v3 certificates.
 
 *FCS_DTLSC_EXT.2.2* The TSF shall [selection: _terminate the DTLS session, silently discard the record_] if a message received contains an invalid MAC.
@@ -3040,7 +3049,7 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 *Family Behaviour*
 
-The component in this family addresses the ability for a server to use DTLS to protect data between a client and the server using the DTLS protocol.
+The component in this family addresses the ability for a server to use DTLS to protect data between a client and the server using the DTLS protocol. This is a new family defined for the FCS class.
 
 *Component levelling*
 
@@ -3127,6 +3136,12 @@ FCS_RBG_EXT.1 Random Bit Generation
 
 FCS_DTLSS_EXT.1 DTLS Server Protocol
 
+FIA_X509_EXT.1 X.509 Certificate Validation
+
+FIA_X509_EXT.2 X.509 Certificate Authentication
+
+FIA_X509_EXT.3 X.509 Certificate Requests
+
 *FCS_DTLSS_EXT.2.1* The TSF shall support mutual authentication of DTLS clients using X.509v3 certificates.
 
 *FCS_DTLSS_EXT.2.2* When establishing a trusted channel, by default the TSF shall not establish a trusted channel if the client certificate is invalid. The TSF shall also [selection:
@@ -3177,15 +3192,15 @@ FCS_TLSS_EXT.1 TLS Server Protocol]
 
 *FCS_HTTPS_EXT.1.1* The TSF shall implement the HTTPS protocol that complies with RFC 2818.
 
-*FCS_HTTPS_EXT.1.2* The TSF shall implement the HTTPS protocol using TLS.
+*FCS_HTTPS_EXT.1.2* The TSF shall implement HTTPS +++<del>+++protocol+++</del>+++ using TLS.
 
-*FCS_HTTPS_EXT.1.3* If a peer certificate is presented, the TSF shall [selection: _not establish the connection, request authorization to establish the connection, [assignment: other action]_] if the peer certificate is deemed invalid.
+*FCS_HTTPS_EXT.1.3* If a peer certificate is presented, the TSF shall [selection: *_not require client authentication_*, _not establish the connection, request authorization to establish the connection, [assignment: other action]_] if the peer certificate is deemed invalid.
 
 =====  FCS_IPSEC_EXT.1 IPsec Protocol
 
 *Family Behaviour*
 
-Components in this family address the requirements for protecting communications using IPsec.
+Components in this family address the requirements for protecting communications using IPsec. This is a new family defined for the FCS class.
 
 *Component levelling*
 
@@ -3240,7 +3255,7 @@ FCS_RBG_EXT.1 Random Bit Generation
 *FCS_IPSEC_EXT.1.5* The TSF shall implement the protocol: [selection:
 
 * _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, RFC 4109, [selection: no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions];_
-* _IKEv2 as defined in RFCs 7296 [selection: with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 7296, section 2.23)_]_, and_ [selection: _no other RFCs for hash functions, RFC 4868 for hash functions]_].
+* _IKEv2 as defined in RFC 7296 [selection: with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 7296, section 2.23], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
 
 *FCS_IPSEC_EXT.1.6* The TSF shall ensure the encrypted payload in the [selection: _IKEv1, IKEv2_] protocol uses the cryptographic algorithms [selection: _AES-CBC-128, AES_CBC-192 AES-CBC-256 (specified in RFC 3602), AES-GCM-128, AES-GCM-192, AES-GCM-256 (specified in RFC 5282)_].
 
@@ -3290,7 +3305,7 @@ _]_
 *FCS_IPSEC_EXT.1.11* The TSF shall ensure that IKE protocols implement DH Group(s) [selection:
 
 * _[selection: 14 (2048-bit MODP), 15 (3072-bit MODP), 16 (4096-bit MODP), 17 (6144-bit MODP), 18 (8192-bit MODP)] according to RFC 3526,_
-* [selection__: 19 (256-bit Random ECP), 20 (384-bit Random ECP),__ _21 (521-bit Random ECP), 24 (2048-bit MODP with 256-bit POS)] according to RFC 5114._
+* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),21 (521-bit Random ECP), 24 (2048-bit MODP with 256-bit POS)] according to RFC 5114._
 
 _]._
 
@@ -3304,7 +3319,7 @@ _]._
 
 *Family Behaviour*
 
-The component in this family addresses the ability for a TOE to protect NTP time synchronization traffic.
+The component in this family addresses the ability for a TOE to protect NTP time synchronization traffic. This is a new family defined for the FCS class.
 
 *Component levelling*
 
@@ -3352,7 +3367,7 @@ Dependencies: FCS_COP.1 Cryptographic operation
 
 *Family Behaviour*
 
-The component in this family addresses the ability for a client to use TLS to protect data between the client and a server using the TLS protocol.
+The component in this family addresses the ability for a client to use TLS to protect data between the client and a server using the TLS protocol. This is a new family defined for the FCS class.
 
 *Component levelling*
 
@@ -3404,7 +3419,7 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 *FCS_TLSC_EXT.1.1* The TSF shall implement [selection: _TLS 1.2 (RFC 5246), TLS 1.1 (RFC 4346)_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
 
-* _[assignment: list of optional ciphersuites and reference to RFC in which each is defined]_ and no other ciphersuites__.__
+* _[assignment: list of optional ciphersuites and reference to RFC in which each is defined]_ and no other ciphersuites.
 
 
 *FCS_TLSC_EXT.1.2* The TSF shall verify that the presented identifier matches [selection: _the reference identifier per RFC 6125 section 6, IPv4 address in CN or SAN, IPv6 address in the CN or SAN, IPv4 address in SAN, IPv6 address in the SAN, the identifier per RFC 5280 Appendix A using [selection: id-at-commonName, id-at-countryName, id-at-dnQualifier, id-at-generationQualifier, id-at-givenName, id-at-initials, id-at-localityName, id-at-name, id-at-organizationalUnitName, id-at-organizationName, id-at-pseudonym, id-at-serialNumber, id-at-stateOrProvinceName, id-at-surname, id-at-title] and no other attribute types_].
@@ -3443,6 +3458,7 @@ FIA_X509_EXT.1 X.509 Certificate Validation
 
 FIA_X509_EXT.2 X.509 Certificate Authentication
 
+FIA_X509_EXT.3 X.509 Certificate Request
 
 *FCS_TLSC_EXT.2.1* The TSF shall support TLS communication with mutual authentication using X.509v3 certificates.
 
@@ -3450,7 +3466,7 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 *Family Behaviour*
 
-The component in this family addresses the ability for a server to use TLS to protect data between a client and the server using the TLS protocol.
+The component in this family addresses the ability for a server to use TLS to protect data between a client and the server using the TLS protocol. This is a new family defined for the FCS class.
 
 *Component levelling*
 
@@ -3536,6 +3552,7 @@ FIA_X509_EXT.1 X.509 Certificate Validation
 
 FIA_X509_EXT.2 X.509 Certificate Authentication
 
+FIA_X509_EXT.3 X.509 Certificate Request
 
 *FCS_TLSS_EXT.2.1* The TSF shall support TLS communication with mutual authentication of TLS clients using X.509v3 certificates.
 
@@ -3554,7 +3571,7 @@ FIA_X509_EXT.2 X.509 Certificate Authentication
 
 *Family Behaviour*
 
-The TOE defines the attributes of passwords used by administrative users to ensure that strong passwords and passphrases can be chosen and maintained.
+The TOE defines the attributes of passwords used by administrative users to ensure that strong passwords and passphrases can be chosen and maintained. This is a new family defined for the FIA class.
 
 *Component levelling*
 
@@ -3590,7 +3607,7 @@ Dependencies: No other components.
 
 *Family Behaviour*
 
-The TSF allows certain specified actions before the non-TOE entity goes through the identification and authentication process.
+The TSF allows certain specified actions before the non-TOE entity goes through the identification and authentication process. This is a new family defined for the FIA class.
 
 *Component levelling*
 
@@ -3605,7 +3622,7 @@ The following actions could be considered for the management functions in FMT:
 [loweralpha]
 . Ability to configure the list of TOE services available before an entity is identified and authenticated
 
-*Audit: FIA_UIA_EXT.N*
+*Audit: FIA_UIA_EXT.1*
 
 The following actions should be auditable if FAU_GEN Security audit data generation is included in the PP/ST:
 
@@ -3639,7 +3656,7 @@ Dependencies: FTA_TAB.1 Default TOE Access Banners
 
 *Family Behaviour*
 
-This family defines the behaviour, management, and use of X.509 certificates for functions to be performed by the TSF. Components in this family require validation of certificates according to a specified set of rules, use of certificates for authentication for protocols and integrity verification, and the generation of certificate requests.
+This family defines the behaviour, management, and use of X.509 certificates for functions to be performed by the TSF. Components in this family require validation of certificates according to a specified set of rules, use of certificates for authentication for protocols and integrity verification, and the generation of certificate requests. This is a new family defined for the FIA class.
 
 *Component levelling*
 
@@ -3698,7 +3715,7 @@ Hierarchical to: No other components
 Dependencies: FIA_X509_EXT.1 X.509 Certificate Validation
 
 
-*FIA_X509_EXT.2.1* The TSF shall use X.509v3 certificates as defined by RFC 5280 to support authentication for [selection__: DTLS, HTTPS, IPsec, TLS, SSH, [assignment: other protocols], no protocols__], and [selection: _code signing for system software updates [assignment: other uses], no additional uses_].
+*FIA_X509_EXT.2.1* The TSF shall use X.509v3 certificates as defined by RFC 5280 to support authentication for [selection: _DTLS, HTTPS, IPsec, TLS, SSH, [assignment: other protocols], no protocols_], and [selection: _code signing for system software updates [assignment: other uses], no additional uses_].
 
 *FIA_X509_EXT.2.2* When the TSF cannot establish a connection to determine the validity of a certificate, the TSF shall [selection: _allow the Administrator to choose whether to accept the certificate in these cases, accept the certificate, not accept the certificate_].
 
@@ -3764,7 +3781,7 @@ Dependencies: No other components.
 
 *Family Behaviour*
 
-Components in this family ensure that the TSF will protect plaintext credential data such as passwords from unauthorized disclosure.
+Components in this family ensure that the TSF will protect plaintext credential data such as passwords from unauthorized disclosure. This is a new family defined for the FPT class.
 
 *Component levelling*
 
@@ -3804,7 +3821,7 @@ Dependencies: No other components.
 
 *Family Behaviour*
 
-Components in this family address the requirements for self-testing the TSF for selected correct operation.
+Components in this family address the requirements for self-testing the TSF for selected correct operation. This is a new family defined for the FPT class.
 
 *Component levelling*
 
@@ -3841,7 +3858,7 @@ Dependencies: No other components.
 
 *Family Behaviour*
 
-Components in this family address the requirements for updating the TOE firmware and/or software.
+Components in this family address the requirements for updating the TOE firmware and/or software. This is a new family defined for the FPT class.
 
 *Component levelling*
 
@@ -3906,7 +3923,7 @@ Dependencies: FPT_TUD_EXT.1
 
 *Family Behaviour*
 
-Components in this family extend FPT_STM requirements by describing the source of time used in timestamps.
+Components in this family extend FPT_STM requirements by describing the source of time used in timestamps. This is a new family defined for the FPT class.
 
 *Component levelling*
 
@@ -3949,9 +3966,7 @@ Dependencies: No other components.
 
 *Family Behaviour*
 
-Components in this family address the requirements for TSF-initiated and user-initiated locking, unlocking, and termination of interactive sessions.
-
-The extended FTA_SSL_EXT family is based on the FTA_SSL family.
+Components in this family address the requirements for TSF-initiated and user-initiated locking, unlocking, and termination of interactive sessions. The extended FTA_SSL_EXT family is based on the FTA_SSL family.
 
 *Component levelling*
 
@@ -3996,7 +4011,7 @@ after a Security Administrator-specified time period of inactivity.
 
 *Family Behaviour*
 
-This family is used to define high-level constraints on the ways that partner IT entities communicate. For example, there may be constraints on when communication channels can be used, how they are established, and links to SFRs expressing lower-level security properties of the channels.
+This family is used to define high-level constraints on the ways that partner IT entities communicate. For example, there may be constraints on when communication channels can be used, how they are established, and links to SFRs expressing lower-level security properties of the channels. This is a new family defined for the FCO class.
 
 *Component levelling*
 
@@ -4204,20 +4219,20 @@ FMT_SMF.1 included
 [cols=",,",options="header",]
 |===
 |*SFR* |*Dependencies* |*Rationale Statement*
-|FAU_STG.1 |FAU_STG.3 |FAU_STG_EXT.3/LocSpace included as optional SFR
+|FAU_STG.1 |FAU_STG.3 |FAU_STG_EXT.3 included as optional SFR
 |FAU_STG_EXT.1/LocSpace a|
 FAU_GEN.1
 
 FAU_STG_EXT.1
 
 |FAU_GEN.1 & FAU_STG_EXT.1 included
-|FAU_STG_EXT.2/LocSpace a|
+|FAU_STG_EXT.2 a|
 FAU_GEN.1
 
 FAU_STG_EXT.1
 
 |FAU_GEN.1 & FAU_STG_EXT.1 included
-|FAU_STG_EXT.3/LocSpace |FAU_STG.1 |FAU_STG.1 included as optional SFR
+|FAU_STG_EXT.3 |FAU_STG.1 |FAU_STG.1 included as optional SFR
 |FIA_X509_EXT.1/ITT |FIA_X509_EXT.2 |*_FIA_X509_EXT.2 (selection-based SFR) included_*
 |FPT_ITT.1 |None |
 |FTP_TRP.1/Join |None |
@@ -4267,6 +4282,10 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
 a|
 FCS_CKM.1 included
 
@@ -4275,6 +4294,10 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
 
 |FCS_DTLSC_EXT.2 a|
 FCS_CKM.1
@@ -4291,6 +4314,12 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+FIA_X509_EXT.3 X.509
+
 a|
 FCS_CKM.1 included
 
@@ -4299,6 +4328,12 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
+
+FIA_X509_EXT.3 (selection-based SFR) included
 
 |FCS_DTLSS_EXT.1 a|
 FCS_CKM.1
@@ -4315,6 +4350,10 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
 a|
 FCS_CKM.1 included
 
@@ -4323,6 +4362,10 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
 
 |FCS_DTLSS_EXT.2 a|
 FCS_CKM.1
@@ -4339,6 +4382,12 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+FIA_X509_EXT.3 X.509
+
 a|
 FCS_CKM.1 included
 
@@ -4347,6 +4396,12 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
+
+FIA_X509_EXT.3 (selection-based SFR) included
 
 |FCS_HTTPS_EXT.1 |FCS_TLSC_EXT.1 or FCS_TLSS_EXT.1 |FCS_TLSC_EXT.1 and FCS_TLSS_EXT.1 included as selection-based SFRs
 |FCS_IPSEC_EXT.1 a|
@@ -4405,6 +4460,10 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
 a|
 FCS_CKM.1 included
 
@@ -4413,6 +4472,10 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
 
 |FCS_TLSC_EXT.2 a|
 FCS_CKM.1
@@ -4429,6 +4492,12 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+FIA_X509_EXT.3 X.509
+
 a|
 FCS_CKM.1 included
 
@@ -4437,6 +4506,12 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
+
+FIA_X509_EXT.3 (selection-based SFR) included
 
 |FCS_TLSS_EXT.1 a|
 FCS_CKM.1
@@ -4453,6 +4528,10 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
 a|
 FCS_CKM.1 included
 
@@ -4461,6 +4540,10 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
 
 |FCS_TLSS_EXT.2 a|
 FCS_CKM.1
@@ -4477,6 +4560,12 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+FIA_X509_EXT.3 X.509
+
 a|
 FCS_CKM.1 included
 
@@ -4485,6 +4574,12 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
+
+FIA_X509_EXT.3 (selection-based SFR) included
 
 |FPT_TUD_EXT.2 |FPT_TUD_EXT.1 |FPT_TUD_EXT.1 included
 |FMT_MOF.1/AutoUpdate a|
