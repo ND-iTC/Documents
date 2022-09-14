@@ -2765,7 +2765,6 @@ _Test Objective: To demonstrate that the TOE will not resume a session for which
 .. For all supported TLS versions the client shall send a Client Hello with a zero-length session identifier and with a SessionTicket extension containing a zero-length ticket. A non-zero length session identifier for TLS 1.3 would result in testing compatibility mode which is not the objective of this test. For TLS 1.3, the evaluator shall ensure that a 'psk_key_exchange_modes' extension is included in the Client Hello.
 .. The client verifies the server does not send a NewSessionTicket handshake message (at any point in the handshake).
 .. The client verifies the Server Hello message contains a zero-length session identifier. For TLS 1.2 the client could alternatively pass the following steps (not applicable for TLS 1.3):
-+image::images\ND_Supporting_Document_2_2-8fb20.png[]
 Note: The following steps are only performed if the ServerHello message contains a non-zero length SessionID.
 [loweralpha, start=4]
 .. The client completes the TLS handshake and captures the SessionID from the ServerHello.
