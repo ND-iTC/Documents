@@ -366,7 +366,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_STG_EXT.4 |Protected Local Audit Event Storage for Distributed TOEs |Feature Dependent
 |FAU_STG_EXT.5 |Protected Remote Audit Event Storage for Distributed TOEs |Feature Dependent
 |FCO_CPC_EXT.1 |Communication Partner Control |All
-|FCS_CKM.1 |Cryptographic Key Generation |Onefootnote:[Each component of a distributed TOE will be required either to perform on-board key generation and (if the TOE uses X.509 certificates as in Appendix B.4.1) RFC 2986 Certificate Request generation, or else to receive its keys and certificates, generated on some other component of the TOE, using a secure registration channel at the point where the component is joined to the TOE. (subsequent changes of keys and certificates may then use the post-registration inter-component secure channel). Certificate request generation will be required from either the component that generates the key or the component that receives the key.]
+|FCS_CKM.1 |Cryptographic Key Generation |Onefootnote:[The overall TOE is required to support on-board key generation and (if the TOE uses X.509 certificates as in Appendix B.4.1) RFC 2986 Certificate Request generation. If not all TOE components are supporting on- board key generation (and generation of certificate requests, where applicable), the TOE shall support distribution of keys to the TOE components that are not supporting key generation themselves. Depending on the life-cycle phase, either a secure registration channel shall be used for key distribution at the point where the component is joined to the TOE or an inter-component secure channel shall be used for key distribution post-registration.]
 |FCS_CKM.2 |Cryptographic Key Establishment |All
 |FCS_CKM.4 |Cryptographic Key Destruction |All
 |FCS_COP.1/DataEncryption |Cryptographic Operation (AES Data Encryption/Decryption) |All
@@ -564,7 +564,7 @@ The Network Device is assumed to be physically protected in its operational envi
 
 The device is assumed to provide networking functionality as its core function and not provide functionality/services that could be deemed as general purpose computing. For example, the device should not provide a computing platform for general purpose applications (unrelated to networking functionality).
 
-In the case of vNDs, the VS is considered part of the TOE with only one vND instance for each physical hardware platform. The exception being where components of the distributed TOE run inside more than one virtual machine (VM) on a single VS. There are no other guest VMs on the physical platform providing non-Network Device functionality.
+If a virtual TOE evaluated as a pND, following Case 2 vNDs as specified in Section 1.2, the VS is considered part of the TOE with only one vND instance for each physical hardware platform. The exception being where components of a distributed TOE run inside more than one virtual machine (VM) on a single VS. In Case 2 vND, no non-TOE guest VMs are allowed on the platform.
 
 {empty}[OE.NO_GENERAL_PURPOSE]
 
@@ -809,6 +809,8 @@ _With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘servi
 
 _The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST. This must also include the relevant parts of Table 4 and Table 5 for optional and selection-based SFRs included in the ST._
 
+_The date and time information for any audit event shall be recorded as part of each audit record to ensure the timing of the event can be unambiguously determined from the data contained in the audit record. The representation of date and time information recorded for each event needs to allow unanimous determination of at least day, month and year information for the date and hours, minutes and second information for the time._
+
 [cols=",,",options="header",]
 |===
 |*Requirement* |*Auditable Events* |*Additional Audit Record Contents*
@@ -949,10 +951,6 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 
 _The ST author selects all key generation schemes used for key establishment (including generation of ephemeral keys) and device authentication. When key generation is used for key establishment, the schemes in FCS_CKM.2.1 and selected cryptographic protocols must match the selection. When key generation is used for device authentication, other than ssh-rsa (RFC 4253),  ecdsa-sha2-nistp256 (RFC 5656), ecdsa-sha2-nistp384 (RFC 5656) and ecdsa-sha2-nistp521 (RFC 5656), the public key is expected to be associated with an X.509v3 certificate._
 
-_If the TOE acts as a receiver in the key establishment schemes and is not configured to support mutual authentication, the TOE does not need to implement key generation._
-
-_In a distributed TOE, if the TOE component acts as a receiver in the key establishment scheme, the TOE does not need to implement key generation._
-
 ===== FCS_CKM.2 Cryptographic Key Establishment (Refinement)
 
 *FCS_CKM.2 Cryptographic Key Establishment*
@@ -962,7 +960,7 @@ _In a distributed TOE, if the TOE component acts as a receiver in the key establ
 * _RSA-based key establishment schemes that meet the following: RSAES-PKCS1-v1_5 as specified in Section 7.2 of RFC +++<u>+++8017+++</u>+++, “Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography Specifications Version 2.2”;_
 * _Elliptic curve-based key establishment schemes that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography”;_
 * _Finite field-based key establishment schemes that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography”;_
-* _FFC Schemes using “safe-prime” groups that meet the following: ‘NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and_ [selection: _RFC 3526, RFC 7919]._
+* _FFC Schemes using “safe-prime” groups that meet the following: ‘NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: groups listed in RFC 3526, groups listed in RFC 7919]._
 
 ] +++<del>+++that meets the following: \[assignment: _list of standards_]+++</del>+++.
 
@@ -975,6 +973,8 @@ _The ST author selects all key establishment schemes used for the selected crypt
 _The elliptic curves used for the key establishment scheme correlate with the curves specified in FCS_CKM.1.1._
 
 _The domain parameters used for the finite field-based key establishment scheme are specified by the key generation according to FCS_CKM.1.1._
+
+_The option "FFC Schemes using “safe-prime” groups that meet the following: ‘NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: groups listed in RFC 3526, groups listed in RFC 7919]." shall be read as 'the TOE performs Key Agreement as specified in SP800-56Ar3', but not necessarily adhering to the protocol restrictions for these groups, as indicated in Appendix D, tables 25 and 26._ _Instead, the use of those methods for particular protocols is in accordance with the SFR for the specific protocols. E.g. the use of DH group 14 for (D)TLS is specified in FCS_DTLS.1.4 or FCS_TLS.1.4._
 
 ===== FCS_CKM.4 Cryptographic Key Destruction
 
@@ -1181,6 +1181,7 @@ _The word ‘manage’ includes but is not limited to create, initialize, view, 
 ** _Ability to administer the TOE locally;_
 ** _Ability to configure the local session inactivity time before session termination or locking;_
 ** _Ability to configure the authentication failure parameters for FIA_AFL.1;_
+** _Ability to manage the trusted public keys database;_
 ** _No other capabilities_].
 
 *_Application Note {counter:appnote_count}_*
@@ -1223,6 +1224,8 @@ _The selection "Ability to configure thresholds for SSH rekeying" may only be se
 _For distributed TOEs the interaction between TOE components will be configurable (see FCO_CPC_EXT.1). Therefore, the ST author includes the selection "Ability to configure the interaction between TOE components" for distributed TOEs. A simple example would be the change of communication protocol according to FPT_ITT.1. Another example would be changing the management of a TOE component from direct remote administration to remote administration through another TOE component. A more complex use case would be if the realization of an SFR is achieved through two or more TOE components and the responsibilities between the two or more components could be modified._
 
 _For distributed TOEs that implement a registration channel (as described in FCO_CPC_EXT.1.2), the ST author uses the selection “Ability to configure the cryptographic functionality” in this SFR, and its corresponding mapping in the TSS, to describe the configuration of any cryptographic aspects of the registration channel that can be modified by the operational environment in order to improve the channel security (cf. the description of the content of Preparative Procedures in [SD, 3.6.1.2])._
+
+_If the TOE offers ability for a remote authorized IT entities or authorized remote Administrators to connect via an interface secured with SSH, then the ST author must select the option “Ability to manage the trusted public keys database” to account for management of public key authentication. It is acceptable for this management function to be implemented as part of general TOE user management functionality or as a standalone management function._
 
 ==== Security management roles (FMT_SMR)
 
@@ -1344,7 +1347,7 @@ _All discrete firmware and software elements (e.g. applications, drivers, and ke
 
 *FPT_STM_EXT.1.1* The TSF shall be able to provide reliable time stamps for its own use.
 
-*FPT_STM_EXT.1.2* The TSF shall [selection: _allow the Security Administrator to set the time, synchronise time with an NTP server_].
+*FPT_STM_EXT.1.2* The TSF shall [selection: _allow the Security Administrator to set the time, synchronise time with an NTP server, obtain time from the underlying virtualization system_].
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1352,7 +1355,7 @@ _Reliable time stamps are expected to be used with other TSF, e.g. for the gener
 
 _The TOE depends on time and date information, either provided by a local real-time clock that is manually managed by the Security Administrator or through the use of one or more NTP servers. The corresponding option(s) must be chosen from the selection in FPT_STM_EXT.1.2. The use of the automatic synchronisation with an NTP server is recommended but not mandated. Note that for the communication with an NTP server, FCS_NTP_EXT.1 must be claimed. The ST author describes in the TSS how the external time and date information is received by the TOE and how this information is maintained._
 
-_For a vND, the virtualization system can be used as an external time source. It is assumed that the VS itself uses NTP or some other external source for its time, and that this time is made available to VMs._
+_For a Case 1 vND, the virtualization system can be used as an external time source. For a Case 2 vND, the virtualization system is part of the TOE, so the time must be set by a security administrator or synchronized with an NTP server._
 
 _The term ‘reliable time stamps’ refers to the strict use of the time and date information, that is provided, and the logging of all discontinuous changes to the time settings including information about the old and new time. With this information, the real time for all audit data can be determined. Note, that all discontinuous time changes, Administrator actuated or changed via an automated process, must be audited. No audit is needed when time is changed via use of kernel or system facilities – such as daytime (3) – that exhibit no discontinuities in time._
 
@@ -1609,7 +1612,7 @@ _The audit event “Unsuccessful attempt to validate a certificate” for FIA_X5
 
 ==== Security Audit Event Storage (FAU_STG.1 & Extended – FAU_STG_EXT)
 
-Local storage space for audit data may be necessary on the TOE itself, and the TOE may then claim protection of the audit trail against unauthorised modification (including deletion) as described in FAU_STG.1. The local storage space for audit data of a Network Device is also limited, and if the local storage space is exceeded then audit data might be lost. A security Administrator might be interested in the number of dropped, overwritten, etc. audit records. This number might serve as an indication if a severe problem has occurred after the storage space was exceeded that continuously generated audit data. Therefore, FAU_STG_EXT.2 and FAU_STG_EXT.3 are defined to express these optional capabilities of a Network Device.
+The local storage space for audit data of a Network Device is also limited, and if the local storage space is exceeded then audit data might be lost. A security Administrator might be interested in the number of dropped, overwritten, etc. audit records. This number might serve as an indication if a severe problem has occurred after the storage space was exceeded that continuously generated audit data. Therefore, FAU_STG_EXT.2 and FAU_STG_EXT.3 are defined to express these optional capabilities of a Network Device.
 
 =====  FAU_STG.1 Protected Audit Trail Storage
 
@@ -2943,11 +2946,11 @@ _The ST author must include FIA_X509_EXT.1/Rev in all instances except when only
 
 *_Application Note {counter:appnote_count}_*
 
-_In FIA_X509_EXT.2.1, the ST author’s selection includes IPsec, TLS, or HTTPS if these protocols are included in FTP_ITC.1.1 or FPT_ITT.1. The ST author selects “code signing for system software updates” when “X.509 certificate” is selected in FPT_TUD_EXT.1.3._
+_In FIA_X509_EXT.2.1, the ST author’s selection includes IPsec, (D)TLS, or HTTPS if these protocols are included in FTP_ITC.1.1 or FPT_ITT.1. The ST author selects “code signing for system software updates” when “X.509 certificate” is selected in FPT_TUD_EXT.1.3._
 
 _SSH should be included if the TSF shall be validated against the version of the Functional Package for Secure Shell referenced in section 2.2, and authentication other than ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, and/or ecdsa-sha2-nistp521 is selected._
 
-_Often a connection must be established to check the revocation status of a certificate - either to download a CRL or to perform a lookup using OCSP. In FIA_X509_EXT.2.2 the selection is used to describe the behaviour in the event that such a connection cannot be established (for example, due to a network error). If the TOE has determined the certificate is valid according to all other rules in FIA_X509_EXT.1/Rev, the behaviour indicated in the selection determines the validity. The TOE must not accept the certificate if it fails any of the other validation rules in FIA_X509_EXT.1/Rev. If the Administrator-configured option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1. The selection should be consistent with the validation requirements in FCS_IPSEC_EXT.1.14, FCS_TLSC_EXT.1.3 and FCS_TLSC_EXT.2.3._
+_Often a connection must be established to check the revocation status of a certificate - either to download a CRL or to perform a lookup using OCSP. In FIA_X509_EXT.2.2 the selection is used to describe the behaviour in the event that such a connection cannot be established (for example, due to a network error). If the TOE has determined the certificate is valid according to all other rules in FIA_X509_EXT.1/Rev, the behaviour indicated in the selection determines the validity. The TOE must not accept the certificate if it fails any of the other validation rules in FIA_X509_EXT.1/Rev. If the Administrator-configured option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1. The selection should be consistent with the validation requirements for the secure communication protocols._
 
 _If the TOE is distributed and FIA_X509_EXT.1/ITT is selected, then certificate revocation checking is optional. This is due to additional authorization actions being performed in the enabling and disabling of the intra-TOE trusted channel as defined in FCO_CPC_EXT.1. In this case, a connection is not required to determine certificate validity and this SFR is trivially satisfied._
 
@@ -5600,9 +5603,9 @@ a|
 
 TOE Security Functionality
 
-TSF = TOE for pND
+TSF = TOE for pND or Case 1 vND according to section 1.2
 
-TSF = TOE + VS for vND
+TSF = TOE + VS for Case 2 vND (vND evaluated as a pND) according to section 1.2
 
 
 a|
