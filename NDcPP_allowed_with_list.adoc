@@ -1,0 +1,128 @@
+= Network Device cPP Allowed with List
+
+[cols="1,2",options=,]
+|===
+
+|*Allowed-with list version*|2.1r13
+|*Date*|15 September 2022 
+
+|===
+
+This document contains the lists of allowed packages and PP-Modules to which exact conformance can be claimed in conjunction with the above cPP. It is used in conjunction with the ‘CC Conformance’ section of the cPP to provide the complete conformance statement for the cPP. 
+ 
+Inclusion of an object on one of these lists does not imply endorsement of the object by the NDFW iTC, nor does it imply that the relevant object has been checked for compliance with the assurance requirements applicable to a PP-Configuration or ST that uses the cPP in conjunction with the relevant object. 
+ 
+Conformance claims from other Protection Profiles (apart from PP-Configurations that may be defined using the PP above and the allowed objects below) are not allowed by ND cPP. 
+
+== NDcPP v2.2e
+
+[cols="1,2",options=,]
+|===
+
+|cPP to which this list applies:|collaborative Protection Profile for Network Devices
+|Latest definitive cPP version:|V2.2e, 27 March 2020
+|Supporting Document for cPP:|Evaluation Activities for Network Device cPP
+|Latest definitive SD version:|V2.2, 4 December 2019
+
+|===
+
+
+*Allowed Packages:*
+
+No objects of this type are currently allowed with the cPP.
+
+*Allowed PP-Modules:*
+
+[cols="0,1,2",options=,]
+|===
+
+.4+|1.|Object ID:|PP-Module for Stateful Traffic Filter Firewalls
+
+|Object version:|1.4 +Errata 20200625 (25 June 2020)
+
+|Owner:|NDFW iTC (ndfw-itc@ccdbinfo.org)
+
+|Notes:|None
+
+.4+|2.|Object ID:|PP-Module for Voice/Video over IP (VVoIP) Endpoints
+
+|Object version:|1.0 (28 October 2020)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+.4+|3.|Object ID:|PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)
+
+|Object version:|1.0 (30 September 2020)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+.4+|4.|Object ID:|PP-Module for Enterprise Session Controller (ESC)
+
+|Object version:|1.0 (19 November 2020)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+.4+|5.|Object ID:|PP-Module for Intrusion Prevention Systems (IPS)
+
+|Object version:|1.0 (11 May 2021)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+.4+|6.|Object ID:|PP-Module for Virtual Private Network (VPN) Gateways
+
+|Object version:|1.2 (31 March 2022) 
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+.4+|7.|Object ID:|PP-Module for Wireless Local Area Network (WLAN) Access System
+
+|Object version:|1.0 (31 March 2022)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+|===
+
+
+== NDcPP v3.0
+
+[cols="1,2",options=,]
+|===
+
+|cPP to which this list applies:|collaborative Protection Profile for Network Devices
+|Latest definitive cPP version:|v3.0, Date TBD
+|Supporting Document for cPP:|Evaluation Activities for Network Device cPP
+|Latest definitive SD version:|v3.0, Date TBD
+
+|===
+
+
+*Allowed Packages:*
+
+No objects of this type are currently allowed with the cPP.
+
+*Allowed PP-Modules:*
+
+[cols="0,1,2",options=,]
+|===
+
+.4+|1.|Object ID:|TBD
+
+|Object version:|TBD
+
+|Owner:|TBD 
+
+|Notes:|TBD
+
+|===
