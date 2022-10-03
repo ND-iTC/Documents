@@ -3831,7 +3831,7 @@ Dependencies: FCS_COP.1 Cryptographic operation
 
 *FCS_NTP_EXT.1.2* The TSF shall update its system time using [selection:
 
-* Authentication using [selection: +++<u>+++_SHA1, SHA256, SHA384, SHA512, AES-CBC-128, AES-CBC-256+++</u>+++_] as the message digest algorithm(s);
+* Authentication using [selection: _+++<u>+++SHA1, SHA256, SHA384, SHA512, AES-CBC-128, AES-CBC-256+++</u>+++_] as the message digest algorithm(s);
 * [selection: _+++<u>+++IPsec, DTLS+++</u>+++_] to provide trusted communication between itself and an NTP time source.
 
 ].
@@ -4677,6 +4677,7 @@ Dependencies: No other components.
 
 *FCO_CPC_EXT.1.3* The TSF shall enable a Security Administrator to disable communications between any pair of TOE components.*
 
+[appendix]
 ==  Entropy Documentation and Assessment
 
 This appendix describes the required supplementary information for each entropy source used by the TOE.
@@ -4715,6 +4716,7 @@ The entropy rate may be affected by conditions outside the control of the entrop
 
 More specifically, all entropy source health tests and their rationale will be documented. This will include a description of the health tests, the rate and conditions under which each health test is performed (e.g., at start up, continuously, or on-demand), the expected results for each health test, TOE behaviour upon entropy source failure, and rationale indicating why each test is believed to be appropriate for detecting one or more failures in the entropy source.
 
+[appendix]
 == Rationales
 
 === SFR Dependencies Analysis
