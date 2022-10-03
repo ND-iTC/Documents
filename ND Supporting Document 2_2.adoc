@@ -280,9 +280,7 @@ _Additional Note for Distributed TOEs_
 * Signature validation failure for any certificate in the certificate path; failure to establish revocation status; revoked certificate
 
 [arabic, start=23]
-. As such for audit information related to the use of X.509 certificates that it uniquely identifies the certificate that could not be successfully verified. For example, identification of a certificate could include Key Subject and Key ID, where key subject is an identifier contained in the CN or SAN and where Key ID is a certificate's serial number and issuer name or subject key identifier (SKI) and authority key identifier (AKI).
-+
-In general, when using open source libraries like OpenSSL, passing on error messages from such libraries to the Security Administrator is regarded as good practice.
+. As such for audit information related to the use of X.509 certificates that it uniquely identifies the certificate that could not be successfully verified. For example, identification of a certificate could include Key Subject and Key ID, where key subject is an identifier contained in the CN or SAN and where Key ID is a certificate's serial number and issuer name or subject key identifier (SKI) and authority key identifier (AKI). In general, when using open source libraries like OpenSSL, passing on error messages from such libraries to the Security Administrator is regarded as good practice.
 
 ===== TSS
 
@@ -480,7 +478,7 @@ _FIPS 186-4 Public Key Verification (PKV) Test_
 
 [arabic, start=67]
 . The evaluator shall ensure that the supported key establishment schemes correspond to the key generation schemes identified in FCS_CKM.1.1. If the ST specifies more than one scheme, the evaluator shall examine the TSS to verify that it identifies the usage for each scheme. It is sufficient to provide the scheme, SFR, and service in the TSS.
-. The intent of this activity is to be able to identify the scheme being used by each service. This would mean, for example, one way to document scheme usage could be:
+. The intent of this activity is to be able to identify the scheme being used by each service. This would mean, for example, one way to document scheme usage could be as shown in the table below. The information provided in this example does not necessarily have to be included as a table but can be presented in other ways as long as the necessary data is available.
 
 [cols=",,",options="header",]
 |===
@@ -489,7 +487,6 @@ _FIPS 186-4 Public Key Verification (PKV) Test_
 |ECDH |FCS_IPSEC_EXT.1 |Authentication Server
 |===
 
-The information provided in the example above does not necessarily have to be included as a table but can be presented in other ways as long as the necessary data is available.
 
 ===== Guidance Documentation
 
