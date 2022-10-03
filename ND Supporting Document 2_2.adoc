@@ -1427,8 +1427,9 @@ Some TOEs may set up the registration channel before the enablement step is carr
 *FCS_DTLSC_EXT.2.1*
 
 [arabic, start=292]
-. (covered by FCS_DTLSC_EXT.1.1 Test 1 and testing for FIA_X.509_EXT.*).
-. {blank}
+. Test 1: The evaluator shall establish a connection to a peer server that is configured for mutual authentication (i.e. sends a server Certificate Request (type 13) message). The evaluator observes that the TOE DTLS client sends both client Certificate (type 11) and client Certificate Verify (type 15) messages during its negotiation of a DTLS channel and that Application Data is sent.
++
+In addition, all other testing in FCS_DTLSC_EXT.1 and FIA_X509_EXT.* must be performed as per the requirements.
 
 *FCS_DTLSC_EXT.2.2*
 
@@ -1546,8 +1547,10 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 
 *FCS_TLSC_EXT.2.1*
 
-[loweralpha]
-.. (covered by FCS_TLSC_EXT.1.1 Test 1 and testing for FIA_X.509_EXT.*).
+[arabic, start=320]
+. Test 1: The evaluator shall establish a connection to a peer server that is configured for mutual authentication (i.e. sends a server Certificate Request (type 13) message). The evaluator observes that the TOE TLS client sends both client Certificate (type 11) and client Certificate Verify (type 15) messages during its negotiation of a TLS channel and that Application Data is sent.
++
+In addition, all other testing in FCS_TLSC_EXT.1 and FIA_X509_EXT.* must be performed as per the requirements.
 
 ==== FCS_TLSC_EXT.3 Extended: TLS Client support for secure renegotiation (TLSv1.2 only)
 
@@ -1799,7 +1802,6 @@ Remark: The server must ensure the TLS handshake is valid (e.g. certificate key,
 ===== Tests
 
 [arabic, start=363]
-. For all tests in this chapter the DTLS server used for testing of the TOE shall be configured not to require mutual authentication.
 . For clarification: DTLS communication packets might be received in a different order than sent due to the use of the UDP protocol. All tests requiring a specific order of test steps ("before", "after") are therefore referring to the sequence numbering of DTLS packets.
 
 *FCS_DTLSC_EXT.1.1*
@@ -2497,9 +2499,6 @@ The captured traffic is also used to verify that the appropriate message digest 
 
 
 ===== Tests
-
-[arabic, start=469]
-. For all tests in this chapter the TLS server used for testing of the TOE shall be configured not to require mutual authentication.
 
 *FCS_TLSC_EXT.1.1*
 
