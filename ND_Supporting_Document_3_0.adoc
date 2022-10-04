@@ -2,8 +2,8 @@
 :toclevels: 3
 :toc-title!:
 :toc-placement!:
-:revnumber: 2.2
-:revdate: 20-12-2019
+:revnumber: 3.0 Draft
+:revdate: 03-10-2022
 image:extracted-media/media/image1.png[image,width=688,height=212]
 
 = Evaluation Activities for Network Device cPP
@@ -22,6 +22,8 @@ This SD has been developed by the Network International Technical Community (ND 
 *Technical Editor:* Network Device International Technical Community (ND iTC)
 
 *Document history:*
+
+V3.0, 03 October 2022 (Updated draft published for public review)
 
 V2.2, 20 December 2019 (published version)
 
