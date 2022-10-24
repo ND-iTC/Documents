@@ -1,10 +1,10 @@
-= Network Device cPP Allowed with List
+= NDFW iTC allowed-with list for Network Device cPP
 
 [cols="1,2",options=,]
 |===
 
 |*Allowed-with list version*|3.0r1
-|*Date*|27 September 2022 
+|*Date*|TBD
 
 |===
 
