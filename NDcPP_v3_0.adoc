@@ -3561,7 +3561,7 @@ Dependencies:
 
 *FCS_DTLSS_EXT.1.8* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_DTLSS_EXT.1.1.
 
-*FCS_DTLSS_EXT.1.9* The TSF _shall prohibit the use of the following extensions:_
+*FCS_DTLSS_EXT.1.9* The TSF shall prohibit the use of the following extensions:
 
 * _Early data extension_
 
@@ -3908,7 +3908,7 @@ _]._
 
 *FCS_TLSC_EXT.1.6* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_TLSC_EXT.1.1.
 
-*FCS_TLSC_EXT.1.7* The TSF _shall prohibit the use of the following extensions:_
+*FCS_TLSC_EXT.1.7* The TSF shall prohibit the use of the following extensions:
 
 * _Early data extension_
 * _post-handshake client authentication according to RFC 8446, section 4.2.6._
@@ -4027,7 +4027,7 @@ Dependencies:
 
 *FCS_TLSS_EXT.1.5* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_TLSS_EXT.1.1.
 
-*FCS_TLSS_EXT.1.6* The TSF _shall prohibit the use of the following extensions:_
+*FCS_TLSS_EXT.1.6* The TSF shall prohibit the use of the following extensions:
 
 * _Early data extension_
 
