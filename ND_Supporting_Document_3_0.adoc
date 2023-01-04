@@ -170,7 +170,7 @@ _Additional Note for Distributed TOEs_
 
 [arabic, start=20]
 . The main reasons for collecting audit information are to detect and identify error conditions, security violations, etc. and to provide sufficient information to the Security Administrator to resolve the issue. The audit information to be collected according to FAU_GEN.1, and the failure conditions identified in tables 2, 4, and 5 need to enable the Security Administrator at least to detect and identify the problem and provide at least basic information to resolve the issue. Also for this level of detail, the other FAU requirements apply, in particular the need for local and remote storage of audit information according to FAU_STG_EXT.1.
-. The level of detail that needs to be provided to the Security Administrator to actually resolve an issue usually depends on the complexity of the underlying use case. It is expected that a product provides additional levels of auditing to support resolution of error conditions, security violations, etc. beyond the level required by FAU_GEN.1, but it should also be clear that a high level of granularity cannot be maintained on most systems by default due to the high number of audit events that would be generated in such a configuration. It is expected that the TOE will be capable of auditing sufficient information to meet the requirements of FAU_GEN.1. This may include audits that are generated only when configured if the TOE configuration can be modified without taking the TOE out of the evaluated configuration.
+. The level of detail that needs to be provided to the Security Administrator to actually resolve an issue usually depends on the complexity of the underlying use case. It is expected that a product provides additional levels of auditing to support resolution of error conditions, security violations, etc. beyond the level required by FAU_GEN.1, but it should also be clear that a high level of granularity cannot be maintained on most systems by default due to the high number of audit events that would be generated in such a configuration. It is expected that the TOE will be capable of auditing sufficient information to meet the requirements of FAU_GEN.1. If the TOE allows configuration of the level of auditing without taking the TOE out of the evaluated configuration, some of the audit events required by FAU_GEN.1 may only be recorded after corresponding configuration of the audit functionality.
 . The issue described above explicitly refers to the use of X.509 certificates. In case a certificate-based authentication fails, an error message telling the Security Administrator that ‘something is wrong with the certificate’ shall not be considered as sufficient information about the ‘reason for failure’ as a basic information to resolve the issue. The log message will inform the Security Administrator of at least the following:
 
 * ‘Trust issue’ with the certificate, e.g. due to failed path validation
@@ -3020,12 +3020,12 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 === ASE: Security Target Evaluation
 
-==== General ASE
+==== General evaluation activities for TOE summary specification (ASE_TSS.1) for all TOEs
 
 [arabic, start=632]
 . When evaluating a Security Target, the evaluator performs the work units as presented in the CEM. In addition, the evaluator ensures the content of the TSS in the ST satisfies the EAs specified in Section 2 (Evaluation Activities for SFRs).
 
-==== TOE summary specification (ASE_TSS.1) for Distributed TOEs
+==== Additional evaluation activities for TOE summary specification (ASE_TSS.1) for Distributed TOEs
 
 [arabic, start=633]
 . For distributed TOEs only the SFRs classified as ‘all’ have to be fulfilled by all TOE parts. The SFRs classified as ‘One’ or ‘Feature Dependent’ only have to be fulfilled by either one or some TOE parts, respectively. To make sure that the distributed TOE as a whole fulfills all the SFRs the following actions for ASE_TSS.1 have to be performed as part of ASE_TSS.1.1E.
@@ -3069,11 +3069,11 @@ TSFI.
 
 |5.2.1.2 Evaluation Activity: The evaluator shall check the interface documentation to ensure it identifies and describes the parameters for each TSFI that is identified as being security relevant.
 |ADV_FSP.1-4 The evaluator *_shall examine_* the rationale provided by the developer for the implicit categorisation of interfaces as SFR-non-interfering to determine that it is accurate. a|
-Paragraph 561 from the CEM: “In the case where the developer has provided adequate documentation to perform the analysis called for by the rest of the work units for this component without explicitly identifying SFR-enforcing and SFR-supporting interfaces, this work unit should be considered satisfied.”
+Paragraph 609 from the CEM: “In the case where the developer has provided adequate documentation to perform the analysis called for by the rest of the work units for this component without explicitly identifying SFR-enforcing and SFR-supporting interfaces, this work unit should be considered satisfied.”
 
 Since the rest of the ADV_FSP.1 work units will have been satisfied upon completion of the EAs, it follows that this work unit is satisfied as well.
 
-|ADV_FSP.1-5 The evaluator *_shall check_* that the tracing links the SFRs to the corresponding TSFIs. |5.2.1.3 Evaluation Activity: The evaluator shall examine the interface documentation to develop a mapping of the interfaces to SFRs.
+|ADV_FSP.1-5 The evaluator *_shall check_* that the tracing links the SFRs to the corresponding TSFIs. |5.2.1.3 Evaluation Activity: The evaluator shall examine the interface documentation and confirm that all security-relevant interfaces are described. The evaluator shall also confirm that all internal (FPT_ITT.1), administrative (FTP_TRP.1/Admin), and trusted channel (FTP_ITC.1) requirements unambiguously trace to documented interfaces.
 |ADV_FSP.1-6 The evaluator *_shall examine_* the functional specification to determine that it is a complete instantiation of the SFRs. |EAs that are associated with the SFRs in Section 2, and, if applicable, Sections 3 and 4, are performed to ensure that all the SFRs where the security functionality is externally visible (i.e. at the TSFI) are covered. Therefore, the intent of this work unit is covered.
 |ADV_FSP.1-7 The evaluator *_shall examine_* the functional specification to determine that it is an accurate instantiation of the SFRs. |EAs that are associated with the SFRs in Section 2, and, if applicable, Sections 3 and 4, are performed to ensure that all the SFRs where the security functionality is externally visible (i.e. at the TSFI) are addressed, and that the description of the interfaces is accurate with respect to the specification captured in the SFRs. Therefore, the intent of this work unit is covered.
 |===
@@ -3084,8 +3084,8 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 [arabic, start=639]
 . _The evaluator shall examine the interface documentation to ensure it describes the purpose and method of use for each TSFI that is identified as being security relevant._
-. In this context, TSFI are deemed security relevant if they are used by the administrator to configure the TOE, or to perform other administrative functions (e.g. audit review or performing updates). Additionally, those interfaces that are identified in the ST, or guidance documentation, as adhering to the security policies (as presented in the SFRs), are also considered security relevant. The intent is that these interfaces will be adequately tested and having an understanding of how these interfaces are used in the TOE is necessary to ensure proper test coverage is applied.
-. The set of TSFI that are provided as evaluation evidence are contained in the Administrative Guidance and User Guidance.
+. In this context, TSFI are deemed security relevant if they are used by the administrator to configure the TOE, or to perform other administrative functions (e.g. audit review or performing updates). Explicitly labeling TSFI as security relevant or non-security relevant is not necessary. A TSFI is implicitly security relevant if is is used to satisfy an evaluation activity, or if it is identified in the ST or guidance documentation as adhering to the security policies (as presented in the SFRs). The intent is that these interfaces will be adequately tested and having an understanding of how these interfaces are used in the TOE is necessary to ensure proper test coverage is applied. According to the description above 'security relevant' corresponds to the combination of 'SFR-enforcing' and 'SFR-supporting' as defined in CC Part 3, paragraph 224 and 225.
+. The set of TSFI that are provided as evaluation evidence are contained in the Security Target and the guidance documentation.
 
 ===== Evaluation Activity
 
@@ -3097,8 +3097,8 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 [arabic, start=643]
 . _The evaluator shall examine the interface documentation to develop a mapping of the interfaces to SFRs._
 . The evaluator uses the provided documentation and first identifies, and then examines a representative set of interfaces to perform the EAs presented in Section 2, including the EAs associated with testing of the interfaces.
-. It should be noted that there may be some SFRs that do not have an interface that is explicitly “mapped” to invoke the desired functionality. For example, generating a random bit string, destroying a cryptographic key that is no longer needed, or the TSF failing to a secure state, are capabilities that may be specified in SFRs, but are not invoked by an interface.
-. However, if the evaluator is unable to perform some other required EA because there is insufficient design and interface information, then the evaluator is entitled to conclude that an adequate functional specification has not been provided, and hence that the verdict for the ADV_FSP.1 assurance component is a ‘fail’.
+. It should be noted that there may be some SFRs that do not have a TSFI that is explicitly “mapped” to invoke the desired functionality. For example, generating a random bit string or destroying a cryptographic key that is no longer needed are capabilities that may be specified in SFRs, but are not invoked by an interface.
+. The required EAs define the design and interface information required to meet ADV_FSP.1. If the evaluator is unable to perform some EA, then the evaluator shall conclude that an adequate functional specification has not been provided.
 
 === AGD: Guidance Documents
 
@@ -3109,7 +3109,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 ==== Operational User Guidance (AGD_OPE.1)
 
 [arabic, start=649]
-. The evaluator performs the CEM work units associated with the AGD_OPE.1 SAR. Specific requirements and EAs on the guidance documentation are identified (where relevant) in the individual EAs for each SFR.
+. The evaluator performs the CEM work units associated with the AGD_OPE.1 SAR. Specific requirements and EAs on the guidance documentation are identified (where relevant) in the individual EAs for each SFR. For the related evaluation activities, the evaluation evidence documents Security Target, AGD documentation (user guidance) and functional specification documentation (if provided) shall be used as input documents. Each input document is subject to ALC_CMS.1-2 requirements.
 . In addition, the evaluator performs the EAs specified below.
 
 ===== Evaluation Activity
@@ -3125,7 +3125,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 ===== Evaluation Activity
 
 [arabic, start=653]
-. _The evaluator shall ensure that the Operational guidance contains instructions for configuring any cryptographic engine associated with the evaluated configuration of the TOE. It shall provide a warning to the administrator that use of other cryptographic engines was not evaluated nor tested during the CC evaluation of the TOE._
+. _The evaluator shall ensure that the Operational guidance contains instructions for configuring any cryptographic implementation associated with the evaluated configuration of the TOE. It shall provide a warning to the administrator that use of other cryptographic implementations was not evaluated nor tested during the CC evaluation of the TOE._
 
 ===== Evaluation Activity
 
@@ -3137,11 +3137,8 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 [arabic, start=655]
 . In addition, the evaluator shall ensure that the following requirements are also met.
 [loweralpha]
-.. The guidance documentation shall contain instructions for configuring any cryptographic engine associated with the evaluated configuration of the TOE. It shall provide a warning to the administrator that use of other cryptographic engines was not evaluated nor tested during the CC evaluation of the TOE.
-.. The documentation must describe the process for verifying updates to the TOE for each method selected for FPT_TUD_EXT.1.3 in the Security Target. The evaluator shall verify that this process includes the following steps:
-[lowerroman]
-... Instructions for obtaining the update itself. This should include instructions for making the update accessible to the TOE (e.g., placement in a specific directory).
-... Instructions for initiating the update process, as well as discerning whether the process was successful or unsuccessful. This includes instructions that describe at least one method of validating the hash/digital signature.
+.. The guidance documentation shall contain instructions for configuring any cryptographic implementation associated with the evaluated configuration of the TOE. It shall provide a warning to the administrator that use of other cryptographic implementations was not evaluated nor tested during the CC evaluation of the TOE.
+.. The evaluator shall verify that this process includes instructions for obtaining the update itself. This should include instructions for making the update accessible to the TOE (e.g., placement in a specific directory).
 [loweralpha, start=3]
 .. The TOE will likely contain security functionality that does not fall in the scope of evaluation under this cPP. The guidance documentation shall make it clear to an administrator which security functionality is covered by the Evaluation Activities.
 
@@ -3161,7 +3158,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 ===== Evaluation Activity
 
 [arabic, start=661]
-. _The evaluator shall examine the Preparative procedures to ensure they are provided for every Operational Environment that the product supports as claimed in the Security Target and shall adequately address all platforms claimed for the TOE in the Security Target._
+. _The evaluator shall examine the preparative procedures to ensure they are provided for every Operational Environment that the product supports as claimed in the Security Target and shall adequately address all platforms claimed for the TOE in the Security Target._
 
 ===== Evaluation Activity
 
@@ -3171,7 +3168,9 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 ===== Evaluation Activity
 
 [arabic, start=663]
-. _The evaluator shall examine the preparative procedures to ensure they include instructions to manage the security of the TSF as a product and as a component of the larger operational environment._
+. _The evaluator shall examine the preparative procedures to ensure they include instructions on how to manage the TSF as a product and as a component of the larger Operational Environment in a manner that allows to preserve integrity of the TSF._
+
+. _The intent of this requirement is to ensure there exists adequate preparative procedures (guidance in most cases) to put the TSF in a secure state (i.e., evaluated configuration). AGD_PRE.1 lists general requirements, the specific assurance activities implementing it are performed as part of FMT_SMF.1, FMT_MTD.1 and FMT_MOF.1 series of SFRs._
 
 ===== Evaluation Activity
 
@@ -3180,7 +3179,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 . The preparative procedures must
 [loweralpha]
 .. include instructions to provide a protected administrative capability; and
-.. identify TOE passwords that have default values associated with them and instructions shall be provided for how these can be changed.
+.. identify TOE passwords that have default values associated with them and mandate that they shall be changed.
 
 === ALC: Life-cycle Support
 
@@ -3216,7 +3215,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 [arabic, start=671]
 . The focus of the testing is to confirm that the requirements specified in the SFRs are being met. Additionally, testing is performed to confirm the functionality described in the TSS, as well as the dependencies on the Operational guidance documentation is accurate.
 . The evaluator performs the CEM work units associated with the ATE_IND.1 SAR. Specific testing requirements and EAs are captured for each SFR in Sections 2, 3 and 4.
-. The evaluator should consult Appendix 709 when determining the appropriate strategy for testing multiple variations or models of the TOE that may be under evaluation.
+. The evaluator should consult Appendix B when determining the appropriate strategy for testing multiple variations or models of the TOE that may be under evaluation.
 . Note that additional Evaluation Activities relating to evaluator testing in the case of a distributed TOE are defined in section A.9.3.1.
 
 === AVA: Vulnerability Assessment
@@ -3291,7 +3290,7 @@ AVA_VAN.1-11 The evaluator *_shall report_* in the ETR all exploitable vulnerabi
 [arabic, start=678]
 . In addition to the activities specified by the CEM in accordance with Table 2, the evaluator shall perform the following activities.
 . _The evaluator shall examine the documentation outlined below provided by the developer to confirm that it contains all required information. This documentation is in addition to the documentation already required to be supplied in response to the EAs listed previously._
-. The developer shall provide documentation identifying the list of software and hardware componentsfootnote:[In this sub-section the term “components” refers to parts that make up the TOE. It is therefore distinguished from the term “distributed TOE components”, which refers to the parts of a TOE that are present in one physical part of a distributed TOE. Each distributed TOE component will therefore generally include a number of the hardware and software components that are referred to in this sub-section: for example, each distributed TOE component will generally include hardware components such as processors and software components such as an operating system and libraries.] that compose the TOE. Hardware components should identify at a minimum the processors used by the TOE. Software components include applications, the operating system and other major components that are independently identifiable and reusable (outside of the TOE), for example a web server, protocol or cryptographic libraries, (independently identifiable and reusable components are not limited to the list provided in the example). This additional documentation is merely a list of the name and version number of the components and will be used by the evaluators in formulating vulnerability hypotheses during their analysis.
+. The developer shall provide documentation identifying the list of software and hardware componentsfootnote:[In this sub-section the term “components” refers to parts that make up the TOE. It is therefore distinguished from the term “distributed TOE components”, which refers to the parts of a TOE that are present in one physical part of a distributed TOE. Each distributed TOE component will therefore generally include a number of the hardware and software components that are referred to in this sub-section: for example, each distributed TOE component will generally include hardware components such as processors and software components such as an operating system and libraries.] that compose the TOE. Hardware components should identify compute-capable hardware components, at a minimum that must include the processor, and where applicable, discrete crypto ASICs, TPMs, etc. used by the TOE. Software components include applications, the operating system and other major components that are independently identifiable and reusable (outside of the TOE), for example a web server, protocol or cryptographic implementations, (independently identifiable and reusable components are not limited to the list provided in the example). This additional documentation is merely a list of the name and version number of the components and will be used by the evaluators in formulating vulnerability hypotheses during their analysis.
 . If the TOE is a distributed TOE then the developer shall provide:
 [loweralpha]
 .. documentation describing the allocation of requirements between distributed TOE components as in [NDcPP, 3.4]
@@ -3400,7 +3399,7 @@ If fuzz testing is performed, the evaluator should focus on security-relevant pa
 
 [arabic, start=697]
 . As flaw hypotheses are generated from the activities described above, the evaluation team will disposition them; that is, attempt to prove, disprove, or determine the non-applicability of the hypotheses. This process is as follows.
-. The evaluator will refine each flaw hypothesis for the TOE and attempt to disprove it using the information provided by the developer or through penetration testing. During this process, the evaluator is free to interact with the developer to determine if the flaw exists, including requests to the developer for additional evidence (e.g., detailed design information, consultation with engineering staff); however, the CB should be included in all of these discussions. Should the developer object to the information being requested as being not compatible with the overall level of the evaluation activity/cPP and cannot provide evidence otherwise that the flaw is disproved, the evaluator prepares an appropriate set of materials as follows:
+. The evaluator will refine each flaw hypothesis for the TOE and attempt to disprove it using the information provided by the developer or through penetration testing. During this process, the evaluator is free to interact with the developer to determine if the flaw exists, including requests to the developer for additional evidence (e.g., detailed design information, consultation with engineering staff). In case of a confirmed flaw, the CB should be informed. Should the developer object to the information being requested as being not compatible with the overall level of the evaluation activity/cPP and cannot provide evidence otherwise that the flaw is disproved, the evaluator prepares an appropriate set of materials as follows:
 [arabic]
 .. the source documents used in formulating the hypothesis, and why it represents a potential compromise against a specific TOE function;
 .. an argument why the flaw hypothesis could not be proven or disproved by the evidence provided so far;
@@ -3416,7 +3415,6 @@ If fuzz testing is performed, the evaluator should focus on security-relevant pa
 . Disagreements between evaluator and developer regarding questions of the existence of a flaw, its attack potential, or whether it should be deemed critical to fix are resolved by the CB.
 . Any testing performed by the evaluator shall be documented in the test report as outlined in Section A.3 below.
 . As indicated in Section A.3, the public statement with respect to vulnerability analysis that is performed on TOEs conformant to the cPP is constrained to coverage of flaws associated with Types 1 and 2 (defined in Section A.1) flaw hypotheses only. The fact that the iTC generates these candidate hypotheses indicates these must be addressed.
-. For flaws of Types 3 and 4, each CB will be responsible for determining what constitutes Basic Attack Potential for the purposes of determining whether a flaw is exploitable in the TOE’s environment. The determination criteria shall be documented in the CB-internal report as specified in Section A.3. As this is a per-CB activity, no public claims are made with respect to the resistance of a particular TOE against flaws of Types 3 and 4; rather, the claim is that the activities outlined in this appendix were carried out, and the evaluation team and CB agreed that any residual vulnerabilities are not exploitable by an attacker with Basic Attack Potential.
 
 === Reporting
 
@@ -3552,7 +3550,7 @@ If there are specified differences between platforms/hardware, the evaluator mus
 =====  TSS
 
 [arabic, start=730]
-. The evaluator shall examine the TSS to identify any extra instances of TOE components allowed in the ST and shall examine the description of how the additional components maintain the SFRs to confirm that it is consistent with the role that the component plays in the evaluated configuration. For example: the secure channels used by the extra component for intra-TOE communications (FPT_ITT) and external communications (FTP_ITC) must be consistent, the audit information generated by the extra component must be maintained, and the management of the extra component must be consistent with that used for the original instance of the component in the minimum configuration.
+. The evaluator shall examine the TSS to confirm it identifies any extra instances of TOE components allowed in the ST and what effects will occur when extra instances of distributed TOE components are added. The information in the TSS shall allow the evaluator to understand how a system with one component behaves in comparison to a system with multiple components.  The TSS also needs to describe how the additional components maintain the SFRs to determine it is consistent with the role the component plays in the evaluated configuration and cannot be used in a way that the security functionality would be corrupted or bypassed. In general, any additional TOE-component shouldn't have a negative impact on other components that are already part of the TOE.
 
 ==== Evaluator Actions for Assessing the Guidance Documentation
 
