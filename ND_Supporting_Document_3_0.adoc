@@ -1845,7 +1845,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 *FCS_DTLSC_EXT.1.6*
 
 [arabic, start=389]
-. [conditional]: If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a DTLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported DTLS versions. This test should be considered to be performed together with FCS_DTLSC_EXT.1.1 Test 1. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
+. [conditional]: If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a DTLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported DTLS versions. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
 
 *FCS_DTLSC_EXT.1.7*
 
@@ -2043,7 +2043,7 @@ Remark: If multiple contexts are supported for session resumption, for each of t
 *FCS_DTLSS_EXT.1.8*
 
 [arabic, start=427]
-. If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a DTLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported DTLS versions. This test should be considered to be performed together with FCS_DTLSS_EXT.1.1 Test 1. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
+. If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a DTLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported DTLS versions. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
 
 *FCS_DTLSS_EXT.1.9*
 
@@ -2558,7 +2558,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 *FCS_TLSC_EXT.1.6*
 [arabic, start=530]
-. [conditional]: If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a TLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported TLS versions. This test should be considered to be performed together with FCS_TLSC_EXT.1.1 Test 1. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
+. [conditional]: If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a TLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported TLS versions. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
 
 *FCS_TLSC_EXT.1.7*
 [arabic, start=531]
@@ -2728,7 +2728,7 @@ Remark: If multiple contexts are supported for session resumption, for each of t
 *FCS_TLSS_EXT.1.5*
 
 [arabic, start=557]
-. Test 1[conditional]: If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a TLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported TLS versions. This test should be considered to be performed together with FCS_TLSS_EXT.1.1 Test 1. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
+. Test 1[conditional]: If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a TLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported TLS versions. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
 
 *FCS_TLSS_EXT.1.6*
 
