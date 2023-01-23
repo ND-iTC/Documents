@@ -1192,9 +1192,8 @@ _The TOE must provide functionality for remote administration. Local administrat
 [loweralpha]
 . _RS-232 terminal._
 . _Peripherals (e.g. keyboard, monitor, mouse)._
-. _Use of a dedicated Ethernet port that only supports communication with a whitelisted local IP address. Guidance shall provide instructions for configuring the whitelisted IP address as well as ensuring physical protection from the TOE to the IP address. The management protocol does not need to meet FTP_TRP.1/Admin; however, the appropriate authentication must be claimed in FIA_UIA_EXT.1.3. Note: A local management protocol that does not meet FTP_TRP.1/Admin shall not be available on any other network ports._
 
-_The TOE must provide functionality to configure the access banner for FTA_TAB.1 and the session inactivity time(s) for FTA_SSL.3 and FTA_SSL_EXT.1 if "Ability to administer the TOE locally" is selected._
+_The TOE must provide functionality to configure the access banner for FTA_TAB.1 and the session inactivity time(s) for FTA_SSL.3 and (if included) FTA_SSL_EXT.1._
 
 _The option “Ability to update the TOE, and to verify the updates using digital signature capability prior to installing those updates” includes the relevant management functions from FMT_MOF.1/ManualUpdate and FPT_TUD_EXT.1. Based on selections in FPT_TUD_EXT.1.2, FMT_MOF.1/AutoUpdate must be included if the option “Ability to enable or disable automatic checking for updates or automatic updates” is included in the ST. Similarly, the selection “Ability to configure audit behaviour” includes the relevant management functions from FMT_MOF.1/Services and FMT_MOF.1/Functions, (for all of these SFRs that are included in the ST) and is intended to cover security relevant configuration options (if any) to the audit behaviour (like changes to the behaviour when the local audit storage space is full). The option "Ability to modify the behaviour of the transmission of audit data to an external IT entity" is intended to cover the management functionalities related to the transmission of local audit information to an external IT entity._
 
