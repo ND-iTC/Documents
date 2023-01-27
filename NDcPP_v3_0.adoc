@@ -134,11 +134,19 @@ link:#_Ref397655544[Table 4: TOE Optional SFRs and Auditable Events 84]
 
 link:#_Ref397655557[Table 5: Selection-Based SFRs and Auditable Events 97]
 
-link:#_Toc456887395[Table 6: SFR Dependencies Rationale for Mandatory SFRs 168]
+link:#_Reftable6[Table 6: Algorithm and key size selection instructions for DTLS]
 
-link:#_Toc456887396[Table 7: SFR Dependencies Rationale for Optional SFRs 169]
+link:#_Reftable7[Table 7: FCS_TLSC_EXT.1.4 selection instructions]
 
-link:#_Toc27041928[Table 8: SFR Dependencies Rationale for Selection-Based SFRs 172]
+link:#_Reftable8[Table 8: FCS_TLSC_EXT.1.5 selection instructions]
+
+link:#_Reftable9[Table 9: Algorithm and key size selection instructions for TLS]
+
+link:#_Toc456887395[Table 10: SFR Dependencies Rationale for Mandatory SFRs 168]
+
+link:#_Toc456887396[Table 11: SFR Dependencies Rationale for Optional SFRs 169]
+
+link:#_Toc27041928[Table 12: SFR Dependencies Rationale for Selection-Based SFRs 172]
 
 :sectnums: all
 :sectnumlevels: 4
@@ -302,7 +310,7 @@ image:extracted-media/media/d_toe_8.png[image,width=388,height=389]
 
 [#_Ref463365882]#Figure 10: Unsupported Enterprise Management use case#
 
-Although apparently similar to Use Case 3 above, in this case a single Management Component is shared between the distributed Network Device TOE and another distinct product (Figure 8 shows an example in which the other product is a Firewall device). In this case the Management Component is considered to be an “Enterprise Manager” (a central management component for different types of devices), and this use case is not supported by this version of the cPP. A similar situation would apply if any other Network Device TOE component was shared with another product.
+Although apparently similar to Use Case 3 above, in this case a single Management Component is shared between the distributed Network Device TOE and another distinct product (Figure 10 shows an example in which the other product is a Firewall device). In this case the Management Component is considered to be an “Enterprise Manager” (a central management component for different types of devices), and this use case is not supported by this version of the cPP. A similar situation would apply if any other Network Device TOE component was shared with another product.
 
 *Case 5: cPP requirements cannot be fulfilled without multiple Management Components*
 
@@ -316,7 +324,7 @@ image:extracted-media/media/d_toe_9.png[image,width=346,height=275]
 
 When dealing with a distributed TOE, a number of separate components need to be brought together in the operational environment in order to create the TOE: this requires that trusted communications channels are set up between certain pairs of components (it is assumed that all components need to communicate with at least one other component, but not that all components need to communicate with all other components).
 
-The underlying model for creation of the TOE is to have a ‘registration process’ in which components ‘join’ the TOE. The registration process starts with two components, one of which (the ‘joiner’) is about to join an existing TOE by registering with the other (the ‘gatekeeper’). The two components will use one or more specified authentication and communication channel options so that the components authenticate each other and protect any sensitive data that is transmitted during the registration process (e.g. a key might be sent by a gatekeeper to the joiner as a result of the registration). The following figures illustrate the three supported registration models. Figure 10 illustrates a distributed TOE registration approach which uses an instance of FPT_ITT.1 or FTP_ITC.1 to protect the registration exchange.
+The underlying model for creation of the TOE is to have a ‘registration process’ in which components ‘join’ the TOE. The registration process starts with two components, one of which (the ‘joiner’) is about to join an existing TOE by registering with the other (the ‘gatekeeper’). The two components will use one or more specified authentication and communication channel options so that the components authenticate each other and protect any sensitive data that is transmitted during the registration process (e.g. a key might be sent by a gatekeeper to the joiner as a result of the registration). The following figures illustrate the three supported registration models. Figure 12 illustrates a distributed TOE registration approach which uses an instance of FPT_ITT.1 or FTP_ITC.1 to protect the registration exchange.
 
 image:extracted-media/media/d_toe_10.png[image,width=542,height=265]
 
@@ -361,6 +369,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_GEN.2 |User Identity Association |All
 |FAU_GEN_EXT.1 |Security Audit Data Generation for Distributed TOE component |All
 |FAU_STG_EXT.1 |Protected Audit Event Storage |All
+|FAU_STG_EXT.1/LocSpace | Local Audit Event Storage |Feature Dependent
 |FAU_STG.1 |Protected Audit Trail Storage |Feature Dependent
 |FAU_STG_EXT.2 |Counting Lost Audit Data |Feature Dependent
 |FAU_STG_EXT.3 |Display warning for local storage space |Feature Dependent
@@ -731,29 +740,29 @@ Figure 16, Figure 17, Figure 18, Figure 19, Figure 20, and Figure 21 give a grap
 
 In the diagrams, the SFRs from Appendix B are both described as ‘Discretionary’, meaning that their inclusion in an ST will depend on the particular properties of a product. The SFRs from Appendix B that are required by an ST are determined by the selections made in other SFRs. For example: FTP_ITC.1 and FTP_TRP.1/Admin (in sections 6.9.1.1 and 6.9.2.1 respectively) each contain selections of a protocol to be used for the type of secure channel described by the SFR. The selection of the protocol(s) here determines which of the protocol-specific SFRs in section B.3.1 are also required in the ST. SFRs in Appendix A can be included in the ST if they are provided by the TOE, but are not mandatory in order for a TOE to claim conformance to this cPP.
 
-image:extracted-media/media/arch_1_no_ssh.png[image,width=678,height=506]
+image:extracted-media/media/arch_1_no_ssh.png[image]
 
 [#_Ref399516751]#Figure 16: Protected Communications SFR Architecture#
 
-image:extracted-media/media/arch_2.png[image,width=460,height=312]
+image:extracted-media/media/arch_2.png[image,width=552,height=374]
 
 [#_Ref399517041]#Figure 17: Administrator Authentication SFR Architecture#
 
-image:extracted-media/media/arch_3.png[image,width=471,height=202]
+image:extracted-media/media/arch_3.png[image,width=612,height=262]
 
 [#_Toc27125738]#Figure 18: Correct Operation SFR Architecture#
 
-image:extracted-media/media/arch_4.png[image,width=590,height=354]
+image:extracted-media/media/arch_4.png[image,width=678,height=407]
 
-image:extracted-media/media/arch_5.png[image,width=535,height=301]
+image:extracted-media/media/arch_5.png[image,width=642,height=361]
 
 [#_Toc27125739]#Figure 19: Trusted Update and Audit SFR Architecture#
 
-image:extracted-media/media/arch_6.png[image,width=591,height=304]
+image:extracted-media/media/arch_6.png[image]
 
 [#_Ref399850426]#Figure 20: Management SFR Architecture#
 
-image:extracted-media/media/arch_7.png[image,width=686,height=339]
+image:extracted-media/media/arch_7.png[image]
 
 [#_Ref443496257]#Figure 21: Distributed TOE SFR Architecture#
 
@@ -985,7 +994,7 @@ _The option "FFC Schemes using “safe-prime” groups that meet the following: 
 
 * _For plaintext keys in volatile storage, the destruction shall be executed by a [selection: single overwrite consisting of [selection: a pseudo-random pattern using the TSF’s RBG, zeroes, ones, a new value of the key, [assignment: a static or dynamic value that does not contain any CSP]], destruction of reference to the key directly followed by a request for garbage collection];_
 * _For plaintext keys in non-volatile storage, the destruction shall be executed by the invocation of an interface provided by a part of the TSF that [selection:_
-** _logically addresses the storage location of the key and performs a_ [selection: _single, [assignment: number of passes]-pass] overwrite consisting of_ [selection: _a pseudo-random pattern using the TSF’s RBG, zeroes, ones, a new value of the key, [assignment: a static or dynamic value that does not contain any CSP_]_];_
+** _logically addresses the storage location of the key and performs a_ [selection: _single, [assignment: number of passes]-pass] overwrite consisting of_ [selection: _a pseudo-random pattern using the TSF’s RBG, zeroes, ones, a new value of the key, [assignment: a static or dynamic value that does not contain any CSP]]_;
 ** _instructs a part of the TSF to destroy the abstraction that represents the key_]
 
 that meets the following: _No Standard_.
@@ -1272,6 +1281,28 @@ This section defines requirements for the TOE to protect critical security data 
 
 _The intent of this requirement is for the device to protect keys, key material, and authentication credentials from unauthorized disclosure. This data should only be accessed for the purposes of their assigned security functionality, and there is no need for them to be displayed/accessed at any other time. This requirement does not prevent the device from providing indication that these exist, are in use, or are still valid. It does, however, restrict the reading of the values outright._ 
 
+==== Time stamps (Extended – FPT_STM_EXT))
+
+===== FPT_STM_EXT.1 Reliable Time Stamps
+
+*FPT_STM_EXT.1 Reliable Time Stamps*
+
+*FPT_STM_EXT.1.1* The TSF shall be able to provide reliable time stamps for its own use.
+
+*FPT_STM_EXT.1.2* The TSF shall [selection: _allow the Security Administrator to set the time, synchronise time with an NTP server, obtain time from the underlying virtualization system_].
+
+*_Application Note {counter:appnote_count}_*
+
+_Reliable time stamps are expected to be used with other TSF, e.g. for the generation of audit data to allow the Security Administrator to investigate incidents by checking the order of events and to determine the actual local time when events occurred. The decision about the required level of accuracy of that information is up to the Administrator._
+
+_The TOE depends on time and date information, either provided by a local real-time clock that is manually managed by the Security Administrator or through the use of one or more NTP servers. The corresponding option(s) must be chosen from the selection in FPT_STM_EXT.1.2. The use of the automatic synchronisation with an NTP server is recommended but not mandated. Note that for the communication with an NTP server, FCS_NTP_EXT.1 must be claimed. The ST author describes in the TSS how the external time and date information is received by the TOE and how this information is maintained._
+
+_For a Case 1 vND, the virtualization system can be used as an external time source. For a Case 2 vND, the virtualization system is part of the TOE, so the time must be set by a security administrator or synchronized with an NTP server._
+
+_The term ‘reliable time stamps’ refers to the strict use of the time and date information, that is provided, and the logging of all discontinuous changes to the time settings including information about the old and new time. With this information, the real time for all audit data can be determined. Note, that all discontinuous time changes, Administrator actuated or changed via an automated process, must be audited. No audit is needed when time is changed via use of kernel or system facilities – such as daytime (3) – that exhibit no discontinuities in time._
+
+_For distributed TOEs it is expected that the Security Administrator ensures synchronization between the time settings of different TOE components. All TOE components should either be in sync (e.g. through synchronisation between TOE components or through synchronisation of different TOE components with an NTP server) or the offset should be known to the Administrator for every pair of TOE components. This includes TOE components synchronized to different time zones._
+
 ==== TSF Testing (Extended – FPT_TST_EXT)
 
 In order to detect some number of failures of underlying security mechanisms used by the TSF, the TSF will perform self-tests. The extent of this self-testing is left to the product developer, but a more comprehensive set of self-tests should result in a more trustworthy platform on which to develop enterprise architecture.
@@ -1340,27 +1371,7 @@ _‘Update’ in the context of this SFR refers to the process of replacing a no
 
 _All discrete firmware and software elements (e.g. applications, drivers, and kernel) of the TSF need to be protected, i.e. they should be digitally signed by the corresponding manufacturer and subsequently verified by the mechanism performing the update._
 
-==== Time stamps (Extended – FPT_STM_EXT))
 
-===== FPT_STM_EXT.1 Reliable Time Stamps
-
-*FPT_STM_EXT.1 Reliable Time Stamps*
-
-*FPT_STM_EXT.1.1* The TSF shall be able to provide reliable time stamps for its own use.
-
-*FPT_STM_EXT.1.2* The TSF shall [selection: _allow the Security Administrator to set the time, synchronise time with an NTP server, obtain time from the underlying virtualization system_].
-
-*_Application Note {counter:appnote_count}_*
-
-_Reliable time stamps are expected to be used with other TSF, e.g. for the generation of audit data to allow the Security Administrator to investigate incidents by checking the order of events and to determine the actual local time when events occurred. The decision about the required level of accuracy of that information is up to the Administrator._
-
-_The TOE depends on time and date information, either provided by a local real-time clock that is manually managed by the Security Administrator or through the use of one or more NTP servers. The corresponding option(s) must be chosen from the selection in FPT_STM_EXT.1.2. The use of the automatic synchronisation with an NTP server is recommended but not mandated. Note that for the communication with an NTP server, FCS_NTP_EXT.1 must be claimed. The ST author describes in the TSS how the external time and date information is received by the TOE and how this information is maintained._
-
-_For a Case 1 vND, the virtualization system can be used as an external time source. For a Case 2 vND, the virtualization system is part of the TOE, so the time must be set by a security administrator or synchronized with an NTP server._
-
-_The term ‘reliable time stamps’ refers to the strict use of the time and date information, that is provided, and the logging of all discontinuous changes to the time settings including information about the old and new time. With this information, the real time for all audit data can be determined. Note, that all discontinuous time changes, Administrator actuated or changed via an automated process, must be audited. No audit is needed when time is changed via use of kernel or system facilities – such as daytime (3) – that exhibit no discontinuities in time._
-
-_For distributed TOEs it is expected that the Security Administrator ensures synchronization between the time settings of different TOE components. All TOE components should either be in sync (e.g. through synchronisation between TOE components or through synchronisation of different TOE components with an NTP server) or the offset should be known to the Administrator for every pair of TOE components. This includes TOE components synchronized to different time zones._
 
 === TOE Access (FTA)
 
@@ -2066,7 +2077,7 @@ a|
 |FPT_APW_EXT.1 |None. |None.
 |FPT_TUD_EXT.2 |Failure of update |Reason for failure (including identifier of invalid certificate)
 |FTA_SSL_EXT.1 (if “lock the session” is selected) |Any attempts at unlocking of an interactive session. |None.
-|FTA_SSL_EXT.1 (if “terminate the session” is selected) |The termination of a local session by the session lock
+|FTA_SSL_EXT.1 (if “terminate the session” is selected) |The termination of a local session by the session lock |None.
 |FMT_MOF.1/Services |None. |None.
 |FMT_MTD.1/CryptoKeys |None. |None.
 |FMT_MOF.1/AutoUpdate |None. |None.
@@ -2355,6 +2366,8 @@ DTLS 1.3 does not use RSA key establishment 2+| Shall select at least one +
 |DTLS 1.2 with support for at least one DHE ciphersuite |N/A |N/A |Shall select
 |DTLS 1.2 without support for DTLS 1.3 or any DHE ciphersuites |N/A |N/A |Shall not select
 |===
+
+[#_Reftable6]#Table 6: Algorithm and key size selection instructions for DTLS#
 
 _N/A indicates the options do not affect whether the selection is selected or not._
 
@@ -2721,6 +2734,8 @@ _The following table provides the ST author with instructions for completing the
 _This extension is not required, because older TLS implementations did not negotiate FFC parameters (e.g. Group 14)._|_May select – at least one ffdhe group shall be selected_
 |===
 
+[#_Reftable7]#Table 7: FCS_TLSC_EXT.1.4 selection instructions#
+
 _Subsequent versions of this cPP will require support for the Supported Groups extension and prohibit use of legacy DH groups for key establishment._
 
 *FCS_TLSC_EXT.1.5* The TSF shall [selection:
@@ -2777,6 +2792,8 @@ _This extension is required by TLS 1.3_|_May select_
 |_TLS 1.2 without TLS 1.3_|_May select_|_Shall not select_ +
 _This extension is not defined in TLS 1.2_
 |===
+
+[#_Reftable8]#Table 8: FCS_TLSC_EXT.1.5 selection instructions#
 
 *FCS_TLSC_EXT.1.6* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_TLSC_EXT.1.1.
 
@@ -2854,6 +2871,8 @@ TLS 1.3 does not use RSA key establishment 2+| Shall select at least one +
 |TLS 1.2 with support for at least one DHE ciphersuite |N/A |N/A |Shall select
 |TLS 1.2 without support for TLS 1.3 or any DHE ciphersuites |N/A |N/A |Shall not select
 |===
+
+[#_Reftable9]#Table 9: Algorithm and key size selection instructions for TLS#
 
 _N/A indicates the options do not affect whether the selection is selected or not._
 
@@ -3279,7 +3298,7 @@ Dependencies:
 * FAU_GEN.1 Audit data generation
 * FAU_STG_EXT.1 External Audit Trail Storage
 
-*FAU_STG_EXT.3.1* The TSF shall _generate a warning to inform the Administrator_ before the audit trail _exceeds the local audit trail storage capacity_.
+*FAU_STG_EXT.3.1* The TSF shall generate a warning to inform the Administrator before the audit trail exceeds the local audit trail storage capacity.
 
 =====  FAU_STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs
 
@@ -4485,7 +4504,7 @@ The following actions could be considered for the management functions in FMT:
 . Management of the time
 . Administrator setting of the time.
 
-*Audit: FTA_SSL_EXT.1*
+*Audit: FPT_STM_EXT.1*
 
 The following actions should be auditable if FAU_GEN Security audit data generation is included in the PP/ST:
 
@@ -4659,6 +4678,12 @@ FAU_GEN.1 included
 
 FTP_ITC.1 included
 
+|FAU_STG_EXT.1/LocSpace a|
+FAU_GEN.1
+
+FAU_STG_EXT.1
+
+|FAU_GEN.1 & FAU_STG_EXT.1 included
 |FCS_CKM.1 a|
 FCS_CKM.2 or FCS_COP.1
 
@@ -4717,10 +4742,9 @@ FCS_CKM.1 included (also FTP_ITC.1 as a secure channel that could be used for im
 FCS_CKM.4 included
 
 |FCS_RBG_EXT.1 |None |
-|FIA_AFL.1 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication
-|FIA_PMG_EXT.1 |None |
+
 |FIA_UIA_EXT.1 |FTA_TAB.1 |FTA_TAB.1 included
-|FIA_UAU.7 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication
+
 |FMT_MOF.1/ManualUpdate a|
 FMT_SMR.1
 
@@ -4744,11 +4768,9 @@ FMT_SMF.1 included
 |FMT_SMF.1 |None |
 |FMT_SMR.2 |FIA_UID.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator identification
 |FPT_SKP_EXT.1 |None |
-|FPT_APW_EXT.1 |None |
 |FPT_TST_EXT.1 |None |
 |FPT_TUD_EXT.1 |FCS_COP.1/SigGen or FCS_COP.1/Hash |FCS_COP.1/SigGen and FCS_COP.1/Hash included
 |FPT_STM_EXT.1 |None |
-|FTA_SSL_EXT.1 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication
 |FTA_SSL.3 |None |
 |FTA_SSL.4 |None |
 |FTA_TAB.1 |None |
@@ -4756,18 +4778,13 @@ FMT_SMF.1 included
 |FTP_TRP.1/Admin |None |
 |===
 
-[#_Toc456887395]#Table 6: SFR Dependencies Rationale for Mandatory SFRs#
+[#_Toc456887395]#Table 10: SFR Dependencies Rationale for Mandatory SFRs#
 
 [cols=",,",options="header",]
 |===
 |*SFR* |*Dependencies* |*Rationale Statement*
 |FAU_STG.1 |FAU_STG.3 |FAU_STG_EXT.3 included as optional SFR
-|FAU_STG_EXT.1/LocSpace a|
-FAU_GEN.1
 
-FAU_STG_EXT.1
-
-|FAU_GEN.1 & FAU_STG_EXT.1 included
 |FAU_STG_EXT.2 a|
 FAU_GEN.1
 
@@ -4779,68 +4796,6 @@ FAU_STG_EXT.1
 |FPT_ITT.1 |None |
 |FTP_TRP.1/Join |None |
 |FCO_CPC_EXT.1 |None |
-|===
-
-[#_Toc456887396]#Table 7: SFR Dependencies Rationale for Optional SFRs#
-
-[cols=",,",options="header",]
-|===
-|*SFR* |*Dependencies* |*Rationale Statement*
-|FAU_GEN_EXT.1 |None |
-|FAU_STG_EXT.4 |FAU_GEN_EXT.1, [FPT_ITT.1 or FTP_ITC.1] a|
-FAU_GEN_EXT.1 included
-
-FPT_ITT.1 (optional SFR) and FTP_ITC.1 (mandatory SFR) included.
-
-|FAU_STG_EXT.5 |FAU_GEN_EXT.1, [FPT_ITT.1 or FTP_ITC.1] a|
-FAU_GEN_EXT.1 included
-
-FPT_ITT.1 (optional SFR) and FTP_ITC.1 (mandatory SFR) included.
-
-|FIA_X509_EXT.1/Rev |FIA_X509_EXT.2 |FIA_X509_EXT.2 (selection-based SFR) included
-|FIA_X509_EXT.2 |FIA_X509_EXT.1 |FIA_X509_EXT.1 (selection-based SFR) included
-|FIA_X509_EXT.3 a|
-FCS_CKM.1
-
-FIA_X509_EXT.1
-
-a|
-FCS_CKM.1 included (mandatory SFR)
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-|FCS_DTLSC_EXT.1 a|
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-FIA_X509_EXT.1 X.509
-
-FIA_X509_EXT.2 X.509
-
-a|
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.2 (selection-based SFR) included
-
 |FCS_DTLSC_EXT.2 a|
 FCS_CKM.1
 
@@ -4876,39 +4831,6 @@ FIA_X509_EXT.1 (selection-based SFR) included
 FIA_X509_EXT.2 (selection-based SFR) included
 
 FIA_X509_EXT.3 (selection-based SFR) included
-
-|FCS_DTLSS_EXT.1 a|
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-FIA_X509_EXT.1 X.509
-
-FIA_X509_EXT.2 X.509
-
-a|
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.2 (selection-based SFR) included
-
 |FCS_DTLSS_EXT.2 a|
 FCS_CKM.1
 
@@ -4944,6 +4866,230 @@ FIA_X509_EXT.1 (selection-based SFR) included
 FIA_X509_EXT.2 (selection-based SFR) included
 
 FIA_X509_EXT.3 (selection-based SFR) included
+|FCS_TLSC_EXT.2 a|
+FCS_CKM.1
+
+FCS_CKM.2
+
+FCS_COP.1/DataEncryption
+
+FCS_COP.1/SigGen
+
+FCS_COP.1/Hash
+
+FCS_COP.1/KeyedHash
+
+FCS_RBG_EXT.1
+
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+FIA_X509_EXT.3 X.509
+
+a|
+FCS_CKM.1 included
+
+FCS_CKM.2 included
+
+FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+
+FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
+
+FIA_X509_EXT.3 (selection-based SFR) included
+
+|FCS_TLSC_EXT.3 a|
+FCS_CKM.1
+
+FCS_CKM.2
+
+FCS_COP.1/DataEncryption
+
+FCS_COP.1/SigGen
+
+FCS_COP.1/Hash
+
+FCS_COP.1/KeyedHash
+
+FCS_RBG_EXT.1
+
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+FIA_X509_EXT.3 X.509
+
+a|
+FCS_CKM.1 included
+
+FCS_CKM.2 included
+
+FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+
+FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
+
+FIA_X509_EXT.3 (selection-based SFR) included
+
+|FCS_TLSS_EXT.2 a|
+FCS_CKM.1
+
+FCS_CKM.2
+
+FCS_COP.1/DataEncryption
+
+FCS_COP.1/SigGen
+
+FCS_COP.1/Hash
+
+FCS_COP.1/KeyedHash
+
+FCS_RBG_EXT.1
+
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+FIA_X509_EXT.3 X.509
+
+a|
+FCS_CKM.1 included
+
+FCS_CKM.2 included
+
+FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+
+FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
+
+FIA_X509_EXT.3 (selection-based SFR) included
+
+|FCS_TLSS_EXT.3 a|
+FCS_CKM.1
+
+FCS_CKM.2
+
+FCS_COP.1/DataEncryption
+
+FCS_COP.1/SigGen
+
+FCS_COP.1/Hash
+
+FCS_COP.1/KeyedHash
+
+FCS_RBG_EXT.1
+
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+FIA_X509_EXT.3 X.509
+
+a|
+FCS_CKM.1 included
+
+FCS_CKM.2 included
+
+FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+
+FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
+
+FIA_X509_EXT.3 (selection-based SFR) included
+|===
+
+[#_Toc456887396]#Table 11: SFR Dependencies Rationale for Optional SFRs#
+
+[cols=",,",options="header",]
+|===
+|*SFR* |*Dependencies* |*Rationale Statement*
+|FAU_GEN_EXT.1 |None |
+|FAU_STG_EXT.4 |FAU_GEN_EXT.1, [FPT_ITT.1 or FTP_ITC.1] a|
+FAU_GEN_EXT.1 included
+
+FPT_ITT.1 (optional SFR) and FTP_ITC.1 (mandatory SFR) included.
+
+|FAU_STG_EXT.5 |FAU_GEN_EXT.1, [FPT_ITT.1 or FTP_ITC.1] a|
+FAU_GEN_EXT.1 included
+
+FPT_ITT.1 (optional SFR) and FTP_ITC.1 (mandatory SFR) included.
+
+|FCS_DTLSC_EXT.1 a|
+FCS_CKM.1
+
+FCS_CKM.2
+
+FCS_COP.1/DataEncryption
+
+FCS_COP.1/SigGen
+
+FCS_COP.1/Hash
+
+FCS_COP.1/KeyedHash
+
+FCS_RBG_EXT.1
+
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+a|
+FCS_CKM.1 included
+
+FCS_CKM.2 included
+
+FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+
+FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
+
+|FCS_DTLSS_EXT.1 a|
+FCS_CKM.1
+
+FCS_CKM.2
+
+FCS_COP.1/DataEncryption
+
+FCS_COP.1/SigGen
+
+FCS_COP.1/Hash
+
+FCS_COP.1/KeyedHash
+
+FCS_RBG_EXT.1
+
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+a|
+FCS_CKM.1 included
+
+FCS_CKM.2 included
+
+FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+
+FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
 
 |FCS_HTTPS_EXT.1 |FCS_TLSC_EXT.1 or FCS_TLSS_EXT.1 |FCS_TLSC_EXT.1 and FCS_TLSS_EXT.1 included as selection-based SFRs
 |FCS_IPSEC_EXT.1 a|
@@ -5019,41 +5165,6 @@ FIA_X509_EXT.1 (selection-based SFR) included
 
 FIA_X509_EXT.2 (selection-based SFR) included
 
-|FCS_TLSC_EXT.2 a|
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-FIA_X509_EXT.1 X.509
-
-FIA_X509_EXT.2 X.509
-
-FIA_X509_EXT.3 X.509
-
-a|
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.2 (selection-based SFR) included
-
-FIA_X509_EXT.3 (selection-based SFR) included
 
 |FCS_TLSS_EXT.1 a|
 FCS_CKM.1
@@ -5087,42 +5198,22 @@ FIA_X509_EXT.1 (selection-based SFR) included
 
 FIA_X509_EXT.2 (selection-based SFR) included
 
-|FCS_TLSS_EXT.2 a|
+|FIA_AFL.1 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication
+|FIA_UAU.7 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication
+|FIA_PMG_EXT.1 |None |
+|FIA_X509_EXT.1/Rev |FIA_X509_EXT.2 |FIA_X509_EXT.2 (selection-based SFR) included
+|FIA_X509_EXT.2 |FIA_X509_EXT.1 |FIA_X509_EXT.1 (selection-based SFR) included
+|FIA_X509_EXT.3 a|
 FCS_CKM.1
 
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-FIA_X509_EXT.1 X.509
-
-FIA_X509_EXT.2 X.509
-
-FIA_X509_EXT.3 X.509
+FIA_X509_EXT.1
 
 a|
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
+FCS_CKM.1 included (mandatory SFR)
 
 FIA_X509_EXT.1 (selection-based SFR) included
 
-FIA_X509_EXT.2 (selection-based SFR) included
-
-FIA_X509_EXT.3 (selection-based SFR) included
-
+|FPT_APW_EXT.1 |None |
 |FPT_TUD_EXT.2 |FPT_TUD_EXT.1 |FPT_TUD_EXT.1 included
 |FMT_MOF.1/AutoUpdate a|
 FMT_SMR.1
@@ -5134,7 +5225,7 @@ FMT_SMR.2 included
 
 FMT_SMF.1 included
 
-|FMT_MOF.1/Service a|
+|FMT_MOF.1/Services a|
 FMT_SMR.1
 
 FMT_SMF.1
@@ -5163,10 +5254,11 @@ a|
 FMT_SMR.2 included
 
 FMT_SMF.1 included
+|FTA_SSL_EXT.1 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication
 
 |===
 
-[#_Toc27041928]#Table 8: SFR Dependencies Rationale for Selection-Based SFRs#
+[#_Toc27041928]#Table 12: SFR Dependencies Rationale for Selection-Based SFRs#
 
 ==  Glossary
 
