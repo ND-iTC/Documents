@@ -1654,7 +1654,7 @@ _If FAU_STG_EXT.2 is added to the ST, the ST has to make clear any situations in
 
 *FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss*
 
-*FAU_STG_EXT.3.1* The TSF shall _generate a warning to inform the Administrator_ before the audit trail _exceeds the local audit trail storage capacity_.
+*FAU_STG_EXT.3.1* The TSF shall generate a warning to inform the Administrator before the audit trail exceeds the local audit trail storage capacity.
 
 *_Application Note {counter:appnote_count}_*
 
