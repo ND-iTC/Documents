@@ -1842,6 +1842,20 @@ _Replay Detection is described in section 4.5.1 of DTLS 1.3 (RFC 9147) and 4.1.2
 
 _"Silently Discard" means the TOE discards the packet without responding._
 
+*FCS_DTLSC_EXT.3 DTLS Client Support for secure renegotiation (DTLSv1.2 only)*
+
+*FCS_DTLSC_EXT.3.1* The product shall support secure renegotiation through use of the “renegotiation_info” DTLS extension in accordance with RFC 5746.
+
+*_Application Note {counter:appnote_count}_*
+
+_This component may only be claimed for DTLS 1.2 but not DTLS 1.3._
+
+_RFC 5746 defines an extension to DTLS that binds renegotiation handshakes to the cryptography in the original handshake._
+
+_When performing secure renegotiation, the ”renegotiation_info” extension must be presented by the server initiating renegotiation, so the client must support use of this extension._
+
+_When signaling support for secure renegotiation, the client may present either the ”renegotiation_info” extension or the signaling cipher suite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message. (A signaling cipher suite value (SCSV) is presented as a cipher suite, but its only purpose is to provide other information and not to advertise support for a cipher suite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling cipher suite value exists as an alternative to presenting the ”renegotation_info” extension so that DTLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it._
+
 *FCS_DTLSS_EXT.2 DTLS Server Support for Mutual Authentication*
 
 *FCS_DTLSS_EXT.2.1* The TSF shall support DTLS communication with mutual authentication of DTLS clients using X.509v3 certificates and shall [selection:
@@ -3512,6 +3526,26 @@ Dependencies:
 * DTLS records previously received;
 * DTLS records too old to fit in the sliding window.
 
+*FCS_DTLSC_EXT.3 DTLS Client Support for secure renegotiation (DTLSv1.2 only)*
+
+Hierarchical to: No other components
+
+Dependencies:
+
+* FCS_CKM.1Cryptographic Key Generation
+* FCS_CKM.2 Cryptographic Key Establishment
+* FCS_COP.1/DataEncryption Cryptographic operation (AES Data encryption/decryption)
+* FCS_COP.1/SigGen Cryptographic operation (Signature Generation and Verification)
+* FCS_COP.1/Hash Cryptographic operation (Hash Algorithm)
+* FCS_COP.1/KeyedHash Cryptographic operation (Keyed Hash Algorithm)
+* FCS_RBG_EXT.1 Random Bit Generation
+* FCS_DTLSC_EXT.1 TLS Client Protocol
+* FIA_X509_EXT.1 X.509 Certificate Validation
+* FIA_X509_EXT.2 X.509 Certificate Authentication
+* FIA_X509_EXT.3 X.509 Certificate Request
+
+*FCS_DTLSC_EXT.3.1* The product shall support secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746.
+
 =====  FCS_DTLSS_EXT DTLS Server Protocol
 
 *Family Behaviour*
@@ -4855,7 +4889,80 @@ FIA_X509_EXT.1 (selection-based SFR) included
 FIA_X509_EXT.2 (selection-based SFR) included
 
 FIA_X509_EXT.3 (selection-based SFR) included
+
+|FCS_DTLSC_EXT.3 a|
+FCS_CKM.1
+
+FCS_CKM.2
+
+FCS_COP.1/DataEncryption
+
+FCS_COP.1/SigGen
+
+FCS_COP.1/Hash
+
+FCS_COP.1/KeyedHash
+
+FCS_RBG_EXT.1
+
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+FIA_X509_EXT.3 X.509
+
+a|
+FCS_CKM.1 included
+
+FCS_CKM.2 included
+
+FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+
+FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
+
+FIA_X509_EXT.3 (selection-based SFR) included
+
 |FCS_DTLSS_EXT.2 a|
+FCS_CKM.1
+
+FCS_CKM.2
+
+FCS_COP.1/DataEncryption
+
+FCS_COP.1/SigGen
+
+FCS_COP.1/Hash
+
+FCS_COP.1/KeyedHash
+
+FCS_RBG_EXT.1
+
+FIA_X509_EXT.1 X.509
+
+FIA_X509_EXT.2 X.509
+
+FIA_X509_EXT.3 X.509
+
+a|
+FCS_CKM.1 included
+
+FCS_CKM.2 included
+
+FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+
+FCS_RBG_EXT.1 included
+
+FIA_X509_EXT.1 (selection-based SFR) included
+
+FIA_X509_EXT.2 (selection-based SFR) included
+
+FIA_X509_EXT.3 (selection-based SFR) included
+
+|FCS_DLSS_EXT.3 a|
 FCS_CKM.1
 
 FCS_CKM.2
