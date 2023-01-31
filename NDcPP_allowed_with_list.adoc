@@ -1,9 +1,9 @@
-= NDFW iTC allowed-with list for Network Device cPP
+= ND iTC allowed-with list for Network Device cPP
 
 [cols="1,2",options=,]
 |===
 
-|*Allowed-with list version*|3.0r1
+|*Allowed-with list version*|3.0
 |*Date*|TBD
 
 |===
@@ -14,15 +14,15 @@ Inclusion of an object on one of these lists does not imply endorsement of the o
  
 Conformance claims from other Protection Profiles (apart from PP-Configurations that may be defined using the PP above and the allowed objects below) are not allowed by ND cPP. 
 
-== NDcPP v2.2e
+== NDcPP v3.0
 
 [cols="1,2",options=,]
 |===
 
 |cPP to which this list applies:|collaborative Protection Profile for Network Devices
-|Latest definitive cPP version:|V2.2e, 27 March 2020
+|Latest definitive cPP version:|v3.0, Date TBD
 |Supporting Document for cPP:|Evaluation Activities for Network Device cPP
-|Latest definitive SD version:|V2.2, 4 December 2019
+|Latest definitive SD version:|v3.0, Date TBD
 
 |===
 
@@ -92,37 +92,40 @@ No objects of this type are currently allowed with the cPP.
 
 |Notes:|None
 
+.4+|8.|Object ID:|PP-Module for Session Border Controller (SBC)
+
+|Object version:|1.0 (07 December 2022)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+
+.4+|9.|Object ID:|PP-Module for SSL/TLS Inspection Proxy
+
+|Object version:|1.1 (17 November 2022)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+
+.4+|10.|Object ID:|PP-Module for Authentication Servers
+
+|Object version:|1.0 (25 January 2023)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+
+.4+|11.|Object ID:|PP-Module for MACsec Ethernet Encryption
+
+|Object version:|1.0 (22 December 2022)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
 |===
 
-
-== NDcPP v3.0
-
-[cols="1,2",options=,]
-|===
-
-|cPP to which this list applies:|collaborative Protection Profile for Network Devices
-|Latest definitive cPP version:|v3.0, Date TBD
-|Supporting Document for cPP:|Evaluation Activities for Network Device cPP
-|Latest definitive SD version:|v3.0, Date TBD
-
-|===
-
-
-*Allowed Packages:*
-
-No objects of this type are currently allowed with the cPP.
-
-*Allowed PP-Modules:*
-
-[cols="0,1,2",options=,]
-|===
-
-.4+|1.|Object ID:|TBD
-
-|Object version:|TBD
-
-|Owner:|TBD 
-
-|Notes:|TBD
-
-|===
