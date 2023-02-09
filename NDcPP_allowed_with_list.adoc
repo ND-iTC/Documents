@@ -3,8 +3,8 @@
 [cols="1,2",options=,]
 |===
 
-|*Allowed-with list version*|3.0
-|*Date*|TBD
+|*Allowed-with list version*|2.2
+|*Date*|30 January 2023
 
 |===
 
@@ -14,15 +14,15 @@ Inclusion of an object on one of these lists does not imply endorsement of the o
  
 Conformance claims from other Protection Profiles (apart from PP-Configurations that may be defined using the PP above and the allowed objects below) are not allowed by ND cPP. 
 
-== NDcPP v3.0
+== NDcPP v2.2e
 
 [cols="1,2",options=,]
 |===
 
 |cPP to which this list applies:|collaborative Protection Profile for Network Devices
-|Latest definitive cPP version:|v3.0, Date TBD
+|Latest definitive cPP version:|v2.2e, 27 March 2020
 |Supporting Document for cPP:|Evaluation Activities for Network Device cPP
-|Latest definitive SD version:|v3.0, Date TBD
+|Latest definitive SD version:|v2.2, 4 December 2019
 
 |===
 
@@ -129,3 +129,32 @@ No objects of this type are currently allowed with the cPP.
 
 |===
 
+== NDcPP v3.0
+
+[cols="1,2",options=,]
+|===
+
+|cPP to which this list applies:|collaborative Protection Profile for Network Devices
+|Latest definitive cPP version:|v3.0, Date TBD
+|Supporting Document for cPP:|Evaluation Activities for Network Device cPP
+|Latest definitive SD version:|v3.0, Date TBD
+
+|===
+
+
+*Allowed Packages:*
+
+No objects of this type are currently allowed with the cPP.
+
+*Allowed PP-Modules:*
+
+[cols="0,1,2",options=,]
+|===
+
+.4+|1.|Object ID:|TBD
+
+|Object version:|TBD
+
+|Owner:|TBD
+
+|Notes:|None
