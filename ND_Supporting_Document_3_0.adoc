@@ -2319,7 +2319,7 @@ Remark: If multiple contexts are supported for session resumption, for each of t
 *FCS_IPSEC_EXT.1.12*
 
 [arabic, start=478]
-. The evaluator simply follows the guidance to configure the TOE to perform the following tests.
+. The evaluator follows the guidance to configure the TOE to perform the following tests.
 [loweralpha]
 .. Test 1: This test shall be performed for each version of IKE supported. The evaluator shall successfully negotiate an IPsec connection using each of the supported algorithms and hash functions identified in the requirements.
 .. Test 2: This test shall be performed for each version of IKE supported. The evaluator shall attempt to establish a SA for ESP that selects an encryption algorithm with more strength than that being used for the IKE SA (i.e., symmetric algorithm with a key size larger than that being used for the IKE SA). Such attempts should fail.
