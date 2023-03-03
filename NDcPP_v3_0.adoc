@@ -959,7 +959,7 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author selects all key generation schemes used for key establishment (including generation of ephemeral keys) and device authentication. When key generation is used for key establishment, the schemes in FCS_CKM.2.1 and selected cryptographic protocols must match the selection. When key generation is used for device authentication, other than ssh-rsa (RFC 4253),  ecdsa-sha2-nistp256 (RFC 5656), ecdsa-sha2-nistp384 (RFC 5656) and ecdsa-sha2-nistp521 (RFC 5656), the public key is expected to be associated with an X.509v3 certificate._
+_The ST author selects all key generation schemes used for key establishment (including generation of ephemeral keys) and device authentication. When key generation is used for key establishment, the schemes in FCS_CKM.2.1 and selected cryptographic protocols must match the selection. When key generation is used for device authentication, other than non-X.509 SSH authentication algorithm, the public key is expected to be associated with an X.509v3 certificate._
 
 ===== FCS_CKM.2 Cryptographic Key Establishment (Refinement)
 
@@ -1618,6 +1618,8 @@ a|
 *_Application Note {counter:appnote_count}_*
 
 _The audit event “Unsuccessful attempt to validate a certificate” for FIA_X509_EXT.1/ITT requires the Additional Audit Record Contents of “Reason for failure (of certificate validation).” An error message telling the Security Administrator that ‘something is wrong with the certificate’ is not considered as presenting sufficient information about the ‘reason for failure’, because basic information to resolve the issue is missing from the audit record. The log message should inform the Security Administrator at least about the type of error (e.g. that there is a ‘Trust issue’ with the certificate, e.g. due to failed path validation, in contrast to the use of an ‘expired certificate’). The level of detail that needs to be provided to enable the Security Administrator to fix issues based on the information in audit events usually depends on the complexity of the underlying use case. In simple scenarios with only one underlying root cause, a single error message might be sufficient whereas in more complex scenarios the granularity of error messages should be higher. The NDcPP only specifies a general guidance on the subject to avoid specifying requirements which are not implementation independent._
+
+_Additionally, when the Functional Package for Secure Shell is used the audit requirements for FTP_ITC.1.1, FTP_TRP.1.1/Admin, or FPT_ITT.1.1 shall apply to each claimed interface_
 
 === Security Audit (FAU)
 
@@ -2935,7 +2937,7 @@ _The use of out-of-band provisioned pre-shared keys creates a potential security
 
 Support for X.509 certificate-based authentication is required if IPsec, TLS or DTLS communications are claimed for FPT_ITT.1, FTP_ITC.1 or FTP_TRP.1/Admin. Claiming functionality in FIA_X509_EXT.1/Rev is mandatory when using certificate-based authentication as part of establishing secure channel with a remote endpoint where the TOE performs certificate validation. These SFRs are also required if FPT_TUD_EXT.2 is claimed.
 
-Although the functionality in FIA_X509_EXT.1/Rev and FIA_X509_EXT.2 is always required when using X.509 certificate-based authentication, the TOE only needs to be able to generate a Certification Request if the TOE needs to present an X.509 certificate to another endpoint via the TSF for authentication (i.e. if at least one of the following SFRs is included in the ST: FCS_DTLSC_EXT.2, FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2, FCS_IPSEC_EXT.1, FCS_TLSC_EXT.2, FCS_TLSS_EXT.1, FCS_TLSS_EXT.2). Therefore FIA_X509_EXT.3 only needs to be added to the ST in this case. If the TOE does not need to present an X.509 certificate to another endpoint via the TSF for authentication (e.g. a client not supporting mutual authentication) the use of FIA_X509_EXT.3 is optional.
+Although the functionality in FIA_X509_EXT.1/Rev and FIA_X509_EXT.2 is always required when using X.509 certificate-based authentication, the TOE only needs to be able to generate a Certification Request if the TOE needs to present an X.509 certificate to another endpoint via the TSF for authentication (e.g. if at least one of the following SFRs is included in the ST: FCS_DTLSC_EXT.2, FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2, FCS_IPSEC_EXT.1, FCS_TLSC_EXT.2, FCS_TLSS_EXT.1, FCS_TLSS_EXT.2). Therefore FIA_X509_EXT.3 only needs to be added to the ST in this case. If the TOE does not need to present an X.509 certificate to another endpoint via the TSF for authentication (e.g. a client not supporting mutual authentication) the use of FIA_X509_EXT.3 is optional.
 
 =====  FIA_X509_EXT.1 X.509 Certificate Validation
 
@@ -2997,7 +2999,7 @@ _Often a connection must be established to check the revocation status of a cert
 
 _If the TOE is distributed and FIA_X509_EXT.1/ITT is selected, then certificate revocation checking is optional. This is due to additional authorization actions being performed in the enabling and disabling of the intra-TOE trusted channel as defined in FCO_CPC_EXT.1. In this case, a connection is not required to determine certificate validity and this SFR is trivially satisfied._
 
-_The ST author must include FIA_X509_EXT.2 in all instances except when only SSH is selected within FTP_ITC.1 or FPT_ITT.1 and ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, and/or ecdsa-sha2-nistp521 authentication is also selected. Additionally, FIA_X509_EXT.2 must also be included if FPT_TUD_EXT.2 is included in the ST._
+_The ST author must include FIA_X509_EXT.2 in all instances except when only SSH is selected (e.g. within FTP_ITC.1, FPT_ITT.1, or FTP_TRP.1/Admin) and only non-X.509 SSH authentication algorithms are used for SSH. Additionally, FIA_X509_EXT.2 must also be included if FPT_TUD_EXT.2 is included in the ST._
 
 =====  FIA_X509_EXT.3 X.509 Certificate Requests
 
