@@ -1448,7 +1448,7 @@ _If "SSH" is selected, then the TSF shall be validated against the version of th
 
 *FTP_TRP.1.1/Admin* The TSF shall *be capable of using [selection: _DTLS, IPsec, SSH, TLS, HTTPS_] to* provide a communication path between itself and *authorized* +++<u>+++remote+++</u>+++ *Administrators* +++<del>+++users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of its end points and protection of the communicated data from +++<u>+++disclosure+++</u>+++ *and provides detection of modification of the channel data.*
 
-*FTP_TRP.1.2/Admin* The TSF shall permit +++<u>+++remote *Administrators* +++<del>+++users+++<//del>+++ +++</u>+++to initiate communication via the trusted path.
+*FTP_TRP.1.2/Admin* The TSF shall permit +++<u>+++remote *Administrators* +++<del>+++users+++</del>+++ +++</u>+++to initiate communication via the trusted path.
 
 *FTP_TRP.1.3/Admin* The TSF shall require the use of the trusted path for _+++<u>+++initial Administrator authentication and all remote administration actions+++</u>+++_.
 
