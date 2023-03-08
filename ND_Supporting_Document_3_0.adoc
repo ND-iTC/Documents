@@ -811,7 +811,7 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 ===== TSS
 
 [arabic, start=177]
-. The evaluator shall examine the TSS to determine that it details how any pre-shared keys, symmetric keys, and private keys are stored and that they are unable to be viewed through an interface designed specifically for that purpose, as outlined in the application note. If these values are not stored in plaintext, the TSS shall describe how they are protected/obscured.
+. The evaluator shall examine the TSS to determine that it details how any preshared keys, symmetric keys, and private keys are stored and that they are unable to be viewed through any interface designed specifically for that purpose, by any enabled role, as outlined in the application note. If these values are not stored in plaintext, the TSS shall describe how they are protected/obscured.
 
 ==== FPT_TST_EXT.1 TSF testing
 
@@ -1803,7 +1803,7 @@ The goal of the following test is to verify that the TOE accepts only certificat
 .. Test 6: The evaluator shall perform the following 'scrambled message tests':
 [lowerroman]
 ... Modify a byte in the Server Finished handshake message and verify that the handshake is not finished successfully and no application data flows. (_Note: This modification must be performed prior to the contents of the Finished message being encrypted.)_
-... [conditional]: Perform this test only if support of DTLS 1.2 is claimed. Send a garbled message from the Server after the Server has issued the ChangeCipherSpec message and verify that the handshake is not finished successfully and no application data flows.
+... [conditional]: Perform this test only if support of DTLS 1.2 is claimed. Send a correctly sequenced datagram (i.e., DTLS message with an expected sequence number) with a garbled unfragmented payload from the Server after the Server issued the ChangeCipherSpec message and verify that the Client handshake is not finished successfully and no application data flows. _Note: The TOE is permitted to continue to retry to complete the DTLS handshake as long as no application data flows._
 +
 _(Note: DTLS 1.3 provides for a dummy ChangeCipherSpec message to aid in middlebox compatibility if such an option is enabled in the specific implementation [see section D.4 in RFC 8446].  If DTLS 1.3 middlebox compatibility mode is enabled a ChangeCipherSpec message may appear in packet traces, but it does not influence the protocol. To be clear: for DTLS 1.3, this test does not need to be performed.)_
 ... [conditional] Perform this test only if support of DTLS 1.3 is claimed . Send a plaintext EncryptedExtensions message from the server and verify that the handshake is not finished successfully and no application data flows.  _(Note: Under DTLS 1.3, the EncryptedExtensions message is the first message to be encrypted with the handshake traffic secret.)_
