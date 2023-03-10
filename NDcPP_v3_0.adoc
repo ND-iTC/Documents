@@ -1069,9 +1069,6 @@ _The hash selection should be consistent with the overall strength of the algori
 
 _The key size [k] in the assignment falls into a range between L1 and L2 (defined in ISO/IEC 10118 for the appropriate hash function). For example, for SHA-256, L1=512, L2=256, where L2<=k<=L1. Select 'implicit' in cases where keyed-hash message authentication is done implicitly (e.g. SSH using AES in GCM mode)._
 
-*FCS_COP.1/eXtendable-Output Function Operation (XOF Algorithm)*
-
-*FCS_COP.1.1/XOF* The TSF shall perform _extendable output function operation_ in accordance with a specified cryptographic algorithm [selection: _SHAKE128_, _SHAKE256_] +++<del>+++and cryptographic key sizes [_assignment:_ _cryptographic key sizes_+++</del>+++] that meet the following: _FIPS PUB 202, "SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions", Section 2.2_
 
 
 ==== Random Bit Generation (Extended – FCS_RBG_EXT)
