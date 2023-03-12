@@ -368,7 +368,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_GEN.1 |Audit Data Generation |All
 |FAU_GEN.2 |User Identity Association |All
 |FAU_GEN_EXT.1 |Security Audit Data Generation for Distributed TOE component |All
-|FAU_STG_EXT.1 |Protected Audit Event Storage |All
+|FAU_STG_EXT.1/Remote |Protected Audit Event Storage |All
 |FAU_STG_EXT.1/LocSpace | Local Audit Event Storage |Feature Dependent
 |FAU_STG.1 |Protected Audit Trail Storage |Feature Dependent
 |FAU_STG_EXT.2 |Counting Lost Audit Data |Feature Dependent
@@ -526,7 +526,7 @@ SFR Rationale:
 
 * Requirements for basic auditing capabilities are specified in FAU_GEN.1 and FAU_GEN.2, with timestamps provided according to FPT_STM_EXT.1 and if applicable, protection of NTP channels in FCS_NTP_EXT.1
 * Requirements for protecting audit records stored on the TOE are specified in FAU_STG.1
-* Requirements for secure storage and transmission of local audit records to an external IT entity via a secure channel are specified in FAU_STG_EXT.1 and FAU_STG_EXT.1/LocSpace
+* Requirements for secure storage and transmission of local audit records to an external IT entity via a secure channel are specified in FAU_STG_EXT.1/Remote and FAU_STG_EXT.1/LocSpace
 * Optional additional requirements for dealing with potential loss of locally stored audit records are specified in FAU_STG_EXT.2, and FAU_STG_EXT.3
 * If (optionally) configuration of the audit functionality is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MOF.1/Functions.
 
@@ -826,7 +826,7 @@ _The date and time information for any audit event shall be recorded as part of 
 |*Requirement* |*Auditable Events* |*Additional Audit Record Contents*
 |FAU_GEN.1 |None. |None.
 |FAU_GEN.2 |None. |None.
-|FAU_STG_EXT.1 |None. |None.
+|FAU_STG_EXT.1/Remote |None. |None.
 |FAU_STG_EXT.1/LocSpace |Configuration of local audit settings. |Identity of account making changes to the audit configuration.
 |FCS_CKM.1 |None. |None.
 |FCS_CKM.2 |None. |None.
@@ -888,11 +888,11 @@ _Where an auditable event is triggered by another component, the component that 
 
 A Network Device TOE is not expected to take responsibility for all audit storage itself. Although it is required to store data locally at the time of generation, and to take some appropriate action if this local storage capacity is exceeded, the TOE is also required to be able to establish a secure link to an external audit server to enable external audit trail storage.
 
-===== FAU_STG_EXT.1 Protected Audit Event Storage
+===== FAU_STG_EXT.1/Remote Protected Audit Event Storage
 
-*FAU_STG_EXT.1 Protected Audit Event Storage*
+*FAU_STG_EXT.1/Remote Protected Audit Event Storage*
 
-*FAU_STG_EXT.1.1* The TSF shall be able to transmit the generated audit data to an external IT entity using a trusted channel according to FTP_ITC.1.
+*FAU_STG_EXT.1.1/Remote* The TSF shall be able to transmit the generated audit data to an external IT entity using a trusted channel according to FTP_ITC.1.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -902,7 +902,7 @@ _For distributed TOEs, each component must be able to export audit data across a
 
 _An ‘external IT entity’ (physical or virtualized) is another device or computer on the network in which the TOE no longer has access to the audit records. This can be a physical or virtualized entity._
 
-*FAU_STG_EXT.1.2* The TSF shall be able to store generated audit data on the TOE itself. In addition [selection:
+*FAU_STG_EXT.1.2/Remote* The TSF shall be able to store generated audit data on the TOE itself. In addition [selection:
 
 * _The TOE shall consist of a single standalone component that stores audit data locally,_
 * _The TOE shall be a distributed TOE that stores audit data on the following TOE components: [assignment: identification of TOE components],_
@@ -1643,7 +1643,7 @@ The local storage space for audit data of a Network Device is also limited, and 
 
 *FAU_STG_EXT.2 Counting Lost Audit Data*
 
-*FAU_STG_EXT.2.1* The TSF shall provide information about the number of [selection: _dropped, overwritten, [assignment: other information]_] audit records in the case where the local storage has been filled and the TSF takes one of the actions defined in FAU_STG_EXT.1.3.
+*FAU_STG_EXT.2.1* The TSF shall provide information about the number of [selection: _dropped, overwritten, [assignment: other information]_] audit records in the case where the local storage has been filled and the TSF takes one of the actions defined in FAU_STG_EXT.1.3/LocSpace.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2150,7 +2150,7 @@ This SFR needs to be added to the ST for evaluation of distributed TOEs which co
 
 *_Application Note {counter:appnote_count}_*
 
-_If a component of a distributed TOE collects data from other components and then forwards it to another component or external IT entity (cf. FAU_STG_EXT.1.1) then the operations in this SFR must be performed in a way to cover the storage space action(s) for all of the audit data that the TOE collects (i.e. not just for the data generated by the collecting component for itself)._
+_If a component of a distributed TOE collects data from other components and then forwards it to another component or external IT entity (cf. FAU_STG_EXT.1.1/Remote) then the operations in this SFR must be performed in a way to cover the storage space action(s) for all of the audit data that the TOE collects (i.e. not just for the data generated by the collecting component for itself)._
 
 _It is acceptable for a TOE component to store audit information in multiple places (e.g. for redundancy), whether locally in the TOE component itself and in another TOE component, or in more than one other TOE component._
 
@@ -2166,7 +2166,7 @@ This SFR needs to be added to the ST for evaluation of distributed TOEs which co
 
 *_Application Note {counter:appnote_count}_*
 
-_If a component of a distributed TOE collects data from other components and then forwards it to another component or external IT entity (cf. FAU_STG_EXT.1.1) then the operations in this SFR must be performed in a way to cover the storage space action(s) for all of the audit data that the TOE collects (i.e. not just for the data generated by the collecting component for itself)._
+_If a component of a distributed TOE collects data from other components and then forwards it to another component or external IT entity (cf. FAU_STG_EXT.1.1/Remote) then the operations in this SFR must be performed in a way to cover the storage space action(s) for all of the audit data that the TOE collects (i.e. not just for the data generated by the collecting component for itself)._
 
 _It is acceptable for a TOE component to store audit information in multiple places (e.g. for redundancy), whether locally in the TOE component itself and in another TOE component, or in more than one other TOE component._
 
@@ -3147,8 +3147,8 @@ _FMT_MOF.1/AutoUpdate is only applicable and should be included if the TOE suppo
 
 _FMT_MOF.1/Functions should be chosen if one or more of the following scenarios apply:_
 
-* _If the transmission protocol for transmission of audit data to an external IT entity as defined in FAU_STG_EXT.1.1 is configurable, “transmission of audit data to an external IT entity” shall be chosen._
-* _If the handling of audit data is configurable, “handling of audit data” must be chosen. The term “handling of audit data” refers to the different options for selection and assignments in SFRs FAU_STG_EXT.1.3 and FAU_STG_EXT.2._
+* _If the transmission protocol for transmission of audit data to an external IT entity as defined in FAU_STG_EXT.1.1/Remote is configurable, “transmission of audit data to an external IT entity” shall be chosen._
+* _If the handling of audit data is configurable, “handling of audit data” must be chosen. The term “handling of audit data” refers to any administratively configurable selection or assignments in any FAU_STG_EXT.x SFR._
 * _If the behaviour of the audit functionality is configurable when Local Audit Storage Space is full, “audit functionality when Local Audit Storage Space is full” must be chosen._
 
 _The first selection for ‘determine the behaviour of’ and ‘modify the behaviour of’ should be done as appropriate. It might be necessary to have different selections for the first selection depending on the second selection (e.g. “handling of audit data” might require “determine the behaviour of” and “modify the behaviour of” for the first selection on the one hand and “audit functionality when Local Audit Storage Space is full” might require “modify the behaviour of” only). In that case_ _FMT_MOF.1/Functions should be iterated with increasing number appended (i.e. FMT_MOF.1/Functions1, FMT_MOF.1/Functions2, etc.)._
@@ -3262,9 +3262,9 @@ The following actions should be auditable if FAU_GEN Security audit data generat
 [loweralpha]
 . No audit necessary.
 
-=====  FAU_STG_EXT.1 Protected Audit Event Storage
+=====  FAU_STG_EXT.1/Remote Protected Audit Event Storage
 
-*FAU_STG_EXT.1 Protected Audit Event Storage*
+*FAU_STG_EXT.1/Remote Protected Audit Event Storage*
 
 Hierarchical to: No other components.
 
@@ -3273,15 +3273,13 @@ Dependencies:
 * FAU_GEN.1 Audit data generation
 * FTP_ITC.1 Inter-TSF Trusted Channel
 
-*FAU_STG_EXT.1.1* The TSF shall be able to transmit the generated audit data to an external IT entity using a trusted channel according to FTP_ITC.1
+*FAU_STG_EXT.1.1/Remote* The TSF shall be able to transmit the generated audit data to an external IT entity using a trusted channel according to FTP_ITC.1
 
-*FAU_STG_EXT.1.2* The TSF shall be able to store generated audit data on the TOE itself. In addition [selection:
+*FAU_STG_EXT.1.2/Remote* The TSF shall be able to store generated audit data on the TOE itself. In addition [selection:
 
 * _The TOE shall consist of a single standalone component that stores audit data locally,_
 * _The TOE shall be a distributed TOE that stores audit data on the following TOE components: [assignment: identification of TOE components],_
 * _The TOE shall be a distributed TOE with storage of audit data provided externally for the following TOE components: [assignment: list of TOE components that do not store audit data locally and the other TOE components to which they transmit their generated audit data]_.
-
-*FAU_STG_EXT.1.3* The TSF shall [selection: _drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_] when the local storage space for audit data is full.
 
 =====  FAU_STG_EXT.1/LocSpace Local Audit Event Storage
 
@@ -3292,7 +3290,7 @@ Hierarchical to: No other components.
 Dependencies:
 
 * FAU_GEN.1 Audit data generation
-* FAU_STG_EXT.1 Protected Audit Event Storage
+* FAU_STG_EXT.1/Remote Protected Audit Event Storage
 
 *FAU_STG_EXT.1.1/LocSpace* The TSF shall maintain a [_selection: log file, database, buffer, [assignment:other local logging method]_] of audit records in the event that an interruption of communication with the remote syslog server occurs.
 
@@ -3309,9 +3307,9 @@ Hierarchical to: No other components.
 Dependencies:
 
 * FAU_GEN.1 Audit data generation
-* FAU_STG_EXT.1 External Audit Trail Storage
+* FAU_STG_EXT.1/Remote External Audit Trail Storage
 
-*FAU_STG_EXT.2.1* The TSF shall provide information about the number of [selection: _dropped, overwritten, [assignment: other information]_] audit records in the case where the local storage has been filled and the TSF takes one of the actions defined in FAU_STG_EXT.1.3.
+*FAU_STG_EXT.2.1* The TSF shall provide information about the number of [selection: _dropped, overwritten, [assignment: other information]_] audit records in the case where the local storage has been filled and the TSF takes one of the actions defined in FAU_STG_EXT.1.3/LocSpace.
 
 =====  FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss
 
@@ -3322,7 +3320,7 @@ Hierarchical to: No other components.
 Dependencies:
 
 * FAU_GEN.1 Audit data generation
-* FAU_STG_EXT.1 External Audit Trail Storage
+* FAU_STG_EXT.1/Remote External Audit Trail Storage
 
 *FAU_STG_EXT.3.1* The TSF shall generate a warning to inform the Administrator before the audit trail exceeds the local audit trail storage capacity.
 
@@ -4732,7 +4730,7 @@ FAU_GEN.1 included
 
 Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator identification timing
 
-|FAU_STG_EXT.1 a|
+|FAU_STG_EXT.1/Remote a|
 FAU_GEN.1
 
 FTP_ITC.1
@@ -4745,9 +4743,9 @@ FTP_ITC.1 included
 |FAU_STG_EXT.1/LocSpace a|
 FAU_GEN.1
 
-FAU_STG_EXT.1
+FAU_STG_EXT.1/Remote
 
-|FAU_GEN.1 & FAU_STG_EXT.1 included
+|FAU_GEN.1 & FAU_STG_EXT.1/Remote included
 |FCS_CKM.1 a|
 FCS_CKM.2 or FCS_COP.1
 
@@ -4852,9 +4850,9 @@ FMT_SMF.1 included
 |FAU_STG_EXT.2 a|
 FAU_GEN.1
 
-FAU_STG_EXT.1
+FAU_STG_EXT.1/Remote
 
-|FAU_GEN.1 & FAU_STG_EXT.1 included
+|FAU_GEN.1 & FAU_STG_EXT.1/Remote included
 |FAU_STG_EXT.3 |FAU_STG.1 |FAU_STG.1 included as optional SFR
 |FIA_X509_EXT.1/ITT |FIA_X509_EXT.2 |FIA_X509_EXT.2 (selection-based SFR) included
 |FPT_ITT.1 |None |
