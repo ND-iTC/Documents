@@ -956,6 +956,7 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 
 * _RSA schemes using cryptographic key sizes of 2048-bit or greater that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.3;_
 * _ECC schemes using ‘NIST curves’ [selection: P-256, P-384, P-521] that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.4;_
+* _ECC schemes using Ed25519 that meet the following: FIPS PUB 186-5, “Digital Signature Standard (DSS)”, Appendix A.2.3;_
 * _FFC schemes using cryptographic key sizes of 2048-bit or greater that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.1_
 * _FFC Schemes using ‘safe-prime’ groups that meet the following: “NIST Special Publication 800-56A Revision 3, Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: RFC 3526, RFC 7919]._
 
@@ -1031,20 +1032,22 @@ _For the first selection of FCS_COP.1.1/DataEncryption, the ST author chooses th
 
 * _RSA Digital Signature Algorithm,_
 * _Elliptic Curve Digital Signature Algorithm_
-
+* _Edwards-Curve Digital Signature Algorithm_ 
 ]
 
 and cryptographic key sizes [selection:
 
 * _For RSA: modulus 2048 bits or greater,_
 * _For ECDSA: 256 bits or greater_
+* _For EdDSA: Ed25519_
 
 ]
 
 that meet the following: [selection:
 
 * _For RSA schemes: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Section 5.5, using PKCS #1 v2.1 Signature Schemes RSASSA-PSS and/or RSASSA-PKCS1v1_5; ISO/IEC 9796-2, Digital signature scheme 2 or Digital Signature scheme 3,_
-* _For ECDSA schemes: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Section 6 and Appendix D, Implementing “NIST curves”_ [selection: _P-256, P-384, P-521_]; _ISO/IEC 14888-3, Section 6.4_
+* _For ECDSA schemes: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Section 6 and Appendix D, Implementing “NIST curves”_ [selection: _P-256, P-384, P-521_]; _ISO/IEC 14888-3, Section 6.4,_ 
+* _For EdDSA schemes: FIPS PUB 186-5, “Digital Signature Standard (DSS)”, Section 7_
 
 ].
 
@@ -1069,6 +1072,8 @@ _The hash selection should be consistent with the overall strength of the algori
 *_Application Note {counter:appnote_count}_*
 
 _The key size [k] in the assignment falls into a range between L1 and L2 (defined in ISO/IEC 10118 for the appropriate hash function). For example, for SHA-256, L1=512, L2=256, where L2<=k<=L1. Select 'implicit' in cases where keyed-hash message authentication is done implicitly (e.g. SSH using AES in GCM mode)._
+
+
 
 ==== Random Bit Generation (Extended – FCS_RBG_EXT)
 
