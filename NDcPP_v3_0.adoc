@@ -940,6 +940,8 @@ _Persistent logging is defined as any record(s) that are retained through power 
 
 _The ST author may use the "other action" assignment to describe other measurable behavior (e.g. frequency of log file rotation based on size and/or age of log files)._
 
+*FAU_STG_EXT.1.4/LocSpace* The TSF shall provide the following mechanisms for administrative access to locally stored audit records [_selection: none, manual export, ability to view locally_].
+
 === Cryptographic Support (FCS)
 
 This section defines cryptographic requirements that underlie the other security properties of the TOE, covering key generation and random bit generation, key establishment methods, key destruction, and the various types of cryptographic operation to provide AES encryption/decryption, signature verification, hash generation, and keyed hash generation.
@@ -3297,6 +3299,8 @@ Dependencies:
 *FAU_STG_EXT.1.2/LocSpace* The TSF shall be able to store [_selection: persistent, non-persistent_] audit records locally with a minimum storage size of [_assignment: number of records, file/buffer size(s)_].
 
 *FAU_STG_EXT.1.3/LocSpace* The TSF shall [_selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_] when the local storage space for audit data is full.
+
+*FAU_STG_EXT.1.4/LocSpace* The TSF shall provide the following mechanisms for administrative access to locally stored audit records [_selection: none, manual export, ability to view locally_].
 
 =====  FAU_STG_EXT.2 Counting Lost Audit Data
 
