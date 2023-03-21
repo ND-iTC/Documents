@@ -920,7 +920,7 @@ _For pNDs, ‘on the TOE itself’ or ‘locally’ means on storage inside or d
 
 _For vNDs, local storage is any storage accessible by TOE software. In a virtualized environment, ‘local’ storage is under the control of the VS and may be physically located on the local host, but it could also be located on a network drive or storage array._
 
-*FAU_STG_EXT.1.3* The TSF shall maintain a [_selection: log file, database, buffer, [assignment:other local logging method]_] of audit records in the event that an interruption of communication with the remote syslog server occurs.
+*FAU_STG_EXT.1.3* The TSF shall maintain a [_selection: log file, database, buffer, [assignment:other local logging method]_] of audit records in the event that an interruption of communication with the remote audit server occurs.
 
 *FAU_STG_EXT.1.4* The TSF shall be able to store [_selection: persistent, non-persistent_] audit records locally with a minimum storage size of [_assignment: number of records and/or file/buffer size(s)_].
 
@@ -3279,7 +3279,7 @@ Dependencies:
 * _The TOE shall be a distributed TOE that stores audit data on the following TOE components: [assignment: identification of TOE components],_
 * _The TOE shall be a distributed TOE with storage of audit data provided externally for the following TOE components: [assignment: list of TOE components that do not store audit data locally and the other TOE components to which they transmit their generated audit data]_.
 
-*FAU_STG_EXT.1.3* The TSF shall maintain a [_selection: log file, database, buffer, [assignment:other local logging method]_] of audit records in the event that an interruption of communication with the remote syslog server occurs.
+*FAU_STG_EXT.1.3* The TSF shall maintain a [_selection: log file, database, buffer, [assignment:other local logging method]_] of audit records in the event that an interruption of communication with the remote audit server occurs.
 
 *FAU_STG_EXT.1.4* The TSF shall be able to store [_selection: persistent, non-persistent_] audit records locally with a minimum storage size of [_assignment: number of records, file/buffer size(s)_].
 
