@@ -258,6 +258,7 @@ _Additional Note for Distributed TOEs_
 ...	The TOE behaves as specified (for the option ‘other action’ in FAU_STG_EXT.1.5).
 [loweralpha, start=5]
 .. Test 5: For distributed TOEs, for the local storage according to FAU_STG_EXT.1.4, Test 1 specified above shall be applied to all TOE components that store audit data locally. For all TOE components that store audit data locally and comply with FAU_STG_EXT.2, Test 2 specified above shall be applied. The evaluator shall verify that the transfer of audit data to an external audit server is implemented.
+.. Test 6 [Conditional]: In case manual export or ability to view locally is selected in FAU_STG_EXT.1.4/LocSpace, during interruption the evaluator shall perform a TSF-mediated action and verify the event is recorded in the audit trail.
 
 === Cryptographic Support (FCS)
 

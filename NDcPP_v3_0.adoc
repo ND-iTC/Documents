@@ -936,6 +936,8 @@ _The ST author may use the "other action" assignment to describe other measurabl
 
 _For distributed TOEs each component is not required to store generated audit data locally, but the overall TOE needs to be able to store audit data locally. Each component must at least provide the ability to temporarily buffer audit information locally to ensure that audit records are preserved in case of network connectivity issues. Buffering audit information locally, does not necessarily involve non-volatile memory: audit information could be buffered in volatile memory. However, the local storage of audit information in the sense of FAU_STG_EXT.1.5 needs to be done in non-volatile memory. For every component which performs local storage of audit information, the behaviour when local storage is exhausted needs to be described. For every component which is buffering audit information instead of storing audit information locally itself, it needs to be described what happens in case the buffer space is exhausted._
 
+*FAU_STG_EXT.1.6* The TSF shall provide the following mechanisms for administrative access to locally stored audit records [_selection: none, manual export, ability to view locally_].
+
 === Cryptographic Support (FCS)
 
 This section defines cryptographic requirements that underlie the other security properties of the TOE, covering key generation and random bit generation, key establishment methods, key destruction, and the various types of cryptographic operation to provide AES encryption/decryption, signature verification, hash generation, and keyed hash generation.
@@ -3282,6 +3284,8 @@ Dependencies:
 *FAU_STG_EXT.1.4* The TSF shall be able to store [_selection: persistent, non-persistent_] audit records locally with a minimum storage size of [_assignment: number of records, file/buffer size(s)_].
 
 *FAU_STG_EXT.1.5* The TSF shall [_selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_] when the local storage space for audit data is full.
+
+*FAU_STG_EXT.1.6* The TSF shall provide the following mechanisms for administrative access to locally stored audit records [_selection: none, manual export, ability to view locally_].
 
 =====  FAU_STG_EXT.2 Counting Lost Audit Data
 
