@@ -2,6 +2,8 @@
 :toclevels: 3
 :toc-title!:
 :toc-placement!:
+:doctype: book
+:data-uri:
 :revnumber: 3.0 Draft
 :revdate: 03-10-2022
 image:extracted-media/media/image1.png[image,width=688,height=212]
@@ -320,7 +322,7 @@ _FIPS 186-5 Key Generation Test_
 
 _FIPS 186-5 Key Verification Test_
 [arabic, start=59]
-. For the Ed25519 curve, , the evaluator shall generate 10 private/public key pairs using the key generation function of a known good implementation and modify five of the public key values so that they are incorrect, leaving five values unchanged (i.e., correct). The evaluator shall obtain in response a set of 10 PASS/FAIL values.
+. For the Ed25519 curve, the evaluator shall generate 10 private/public key pairs using the key generation function of a known good implementation and modify five of the public key values so that they are incorrect, leaving five values unchanged (i.e., correct). The evaluator shall obtain in response a set of 10 PASS/FAIL values.
 
 *Key Generation for Finite-Field Cryptography (FFC)*
 
