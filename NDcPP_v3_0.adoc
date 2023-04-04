@@ -646,7 +646,7 @@ An organizational security policy is a set of rules, practices, and procedures i
 
 ==== P.ACCESS_BANNER
 
-The TOE shall display an initial banner describing restrictions of use, legal agreements, or any other appropriate information to which users consent by accessing the TOE.
+The TOE shall display an initial banner describing restrictions of use, legal agreements, or any other appropriate information to which Administrators consent by accessing the TOE.
 
 SFR Rationale:
 
@@ -817,7 +817,7 @@ _With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘servi
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST. This must also include the relevant parts of Table 4 and Table 5 for optional and selection-based SFRs included in the ST._
+_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST. This must also include the relevant parts of Table 4 and Table 5 for optional and selection-based SFRs included in the ST. All audit events defined in Table 2 have to be included in the ST as they are mandatory._
 
 _The date and time information for any audit event shall be recorded as part of each audit record to ensure the timing of the event can be unambiguously determined from the data contained in the audit record. The representation of date and time information recorded for each event needs to allow unambiguous determination of at least day, month and year information for the date and hours, minutes and second information for the time._
 
@@ -4746,49 +4746,49 @@ FCS_CKM.2 included
 FCS_CKM.4 included
 
 |FCS_CKM.2 a|
-FTP_ITC.1 or FTP_ITC.2 or FCS_CKM.1
+FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
 
 FCS_CKM.4
 
 a|
-FCS_CKM.1 included (also FTP_ITC.1 as a secure channel that could be used for import)
+FCS_CKM.1 included
 
 FCS_CKM.4 included
 
-|FCS_CKM.4 |FTP_ITC.1 or FTP_ITC.2 or FCS_CKM.1 |FCS_CKM.1 included (also FTP_ITC.1 as a secure channel that could be used for import)
+|FCS_CKM.4 |FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1 |FCS_CKM.1 included
 |FCS_COP.1/DataEncryption a|
-FTP_ITC.1 or FTP_ITC.2 or FCS_CKM.1
+FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
 
 FCS_CKM.4
 
 a|
-FCS_CKM.1 included (also FTP_ITC.1 as a secure channel that could be used for import)
+FCS_CKM.1 included
 
 FCS_CKM.4 included
 
 |FCS_COP.1/SigGen a|
-FTP_ITC.1 or FTP_ITC.2 or FCS_CKM.1
+FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
 
 FCS_CKM.4
 
 a|
-FCS_CKM.1 included (also FTP_ITC.1 as a secure channel that could be used for import)
+FCS_CKM.1 included
 
 FCS_CKM.4 included
 
 |FCS_COP.1/Hash a|
-FTP_ITC.1 or FTP_ITC.2 or FCS_CKM.1
+FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
 
 FCS_CKM.4
 
 |This SFR specifies keyless hashing operations, so initialisation and destruction of keys are not relevant
 |FCS_COP.1/KeyedHash a|
-FTP_ITC.1 or FTP_ITC.2 or FCS_CKM.1
+FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
 
 FCS_CKM.4
 
 a|
-FCS_CKM.1 included (also FTP_ITC.1 as a secure channel that could be used for import)
+FCS_CKM.1 included
 
 FCS_CKM.4 included
 
@@ -5391,11 +5391,10 @@ FMT_SMF.1 included
 |*Term* |*Meaning*
 |*Administrator* |See Security Administrator.
 |*Assurance* |Grounds for confidence that a TOE meets the SFRs [CC1].
-|*Security Administrator* |The terms “Administrator” “Security Administrator” and “User” are used interchangeably in this document at present and are used to represent a person that has authorized access to the TOE to perform configuration and management tasks. .
+|*Security Administrator* |The terms “Administrator” and “Security Administrator” are used interchangeably in this document at present and are used to represent a person that has authorized access to the TOE to perform configuration and management tasks.
 |*Target of Evaluation* |A set of software, firmware and/or hardware possibly accompanied by guidance. [CC1]
 |*TOE Security Functionality (TSF)* |A set consisting of all hardware, software, and firmware of the TOE that must be relied upon for the correct enforcement of the SFRs. [CC1]
 |*TSF Data* |Data for the operation of the TOE upon which the enforcement of the requirements relies (e.g. SFR-relevant configuration data and SFR-relevant audit data).
-|*User* |See Security Administrator
 |===
 
 See [CC1] for other Common Criteria abbreviations and terminology.
