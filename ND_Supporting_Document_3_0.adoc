@@ -3441,7 +3441,7 @@ CCMB-2017-04-004, Version 3.1, Revision 5, April 2017
 Version 2.0, May 2017
 
 [NDcPP] collaborative Protection Profile for Network Devices, +
-Version 2.2, 20 December 2019
+Version 3.0, April 2023
 
 [NIST SP800-56A] NIST Special Publication SP800-56A Revision 3: Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography, Apr 2018
 
