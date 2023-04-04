@@ -3784,6 +3784,9 @@ Dependencies:
 * FCS_COP.1/Hash Cryptographic operation (Hash Algorithm)
 * FCS_COP.1/KeyedHash Cryptographic operation (Keyed Hash Algorithm)
 * FCS_RBG_EXT.1 Random Bit Generation
+* FIA_X509_EXT.1 X.509 Certificate Validation
+* FIA_X509_EXT.2 X.509 Certificate Authentication
+* FIA_X509_EXT.3 X.509 Certificate Requests
 
 *FCS_IPSEC_EXT.1.1* The TSF shall implement the IPsec architecture as specified in RFC 4301.
 
