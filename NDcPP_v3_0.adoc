@@ -158,9 +158,9 @@ link:#_Toc27041928[Table 12: SFR Dependencies Rationale for Selection-Based SFRs
 
 PP Reference: collaborative Protection Profile for Network Devices
 
-PP Version: 3.0 Draft
+PP Version: 3.0
 
-PP Date: 03-October-2022
+PP Date: 06-April-2023
 
 === TOE Overview
 
