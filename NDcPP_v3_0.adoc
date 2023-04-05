@@ -3,8 +3,8 @@
 :toc-title!:
 :toc-placement!:
 :data-uri:
-:revnumber: 3.0 Draft
-:revdate: 03-10-2022
+:revnumber: 3.0
+:revdate: 06-04-2023
 
 = collaborative Protection Profile for Network Devices
 
@@ -64,7 +64,7 @@ CCMB-2017-04-004, Version 3.1, Revision 5, April 2017.
 [cols=",,",options="header",]
 |===
 |*Version* |*Date* |*Description*
-|3.0 | 03-Oct-2022 | Updated draft published for public review
+|3.0 | 06-Apr-2023 | Released for use
 |2.2e | 23-Mar-2020 | Updated vND description. Released for use
 |2.2 |20-Dec-2019 |Released for use
 |2.1 |24-Sep-2018 |Released for use
@@ -785,10 +785,10 @@ Loss of communication with the audit server is problematic. While there are seve
 . Start-up and shut-down of the audit functions;
 . All auditable events for the +++<u>+++not specified+++</u>+++ level of audit; and
 . _All administrative actions comprising:_
-* Administrative login and logout (name of user account shall be logged if individual user accounts are required for Administrators).
+* Administrative login and logout (name of Administrator account shall be logged if individual accounts are required for Administrators).
 * Changes to TSF data related to configuration changes (in addition to the information that a change occurred it shall be logged what has been changed).
 * Generating/import of, changing, or deleting of cryptographic keys (in addition to the action itself a unique key name or key reference shall be logged).
-* [selection: Resetting passwords (name of related user account shall be logged), no other actions, [assignment: list of other uses of privileges]];
+* [selection: Resetting passwords (name of related Administrator account shall be logged), no other actions, [assignment: list of other uses of privileges]];
 . _Specifically defined auditable events listed in_ _Table 2_.
 
 *_Application Note {counter:appnote_count}_*
@@ -1111,7 +1111,7 @@ In order to provide a trusted means for Administrators to interact with the TOE,
 
 *_Application Note {counter:appnote_count}_*
 
-_This requirement applies to users (Administrators and external IT entities) of services available from the TOE directly, and not services available by connecting through the TOE. While it should be the case that few or no services are available to external entities prior to identification and authentication, if there are some available (perhaps ICMP echo) these should be listed in the assignment statement; if automated generation of cryptographic keys is supported without administrator authentication, the option "automated generation of cryptographic keys" should be selected; otherwise, the option “no other actions” should be selected._
+_This requirement applies to Administrators and external IT entities of services available from the TOE directly, and not services available by connecting through the TOE. While it should be the case that few or no services are available to external entities prior to identification and authentication, if there are some available (perhaps ICMP echo) these should be listed in the assignment statement; if automated generation of cryptographic keys is supported without administrator authentication, the option "automated generation of cryptographic keys" should be selected; otherwise, the option “no other actions” should be selected._
 
 *FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate, [assignment: other authentication mechanism]]_ and local authentication mechanisms [selection: _none, password-based, [assignment: other authentication mechanism]]_.
 
@@ -1163,7 +1163,7 @@ _FMT_MOF.1/ManualUpdate restricts the initiation of manual updates to Security A
 
 *_Application Note {counter:appnote_count}_*
 
-_The word ‘manage’ includes but is not limited to create, initialize, view, change default, modify, delete, clear, and append. This SFR includes also the resetting of user passwords by the Security Administrator. The identifier ‘CoreData’ has been added here to separate this iteration of FMT_MTD.1 from the optional iteration of FMT_MTD.1 defined in Appendix A.4.2.1 (FMT_MTD.1/CryptoKeys)._
+_The word ‘manage’ includes but is not limited to create, initialize, view, change default, modify, delete, clear, and append. This SFR includes also the resetting of administrative passwords by the Security Administrator. The identifier ‘CoreData’ has been added here to separate this iteration of FMT_MTD.1 from the optional iteration of FMT_MTD.1 defined in Appendix A.4.2.1 (FMT_MTD.1/CryptoKeys)._
 
 ==== Specification of Management Functions (FMT_SMF)
 
@@ -1242,7 +1242,7 @@ _For distributed TOEs the interaction between TOE components will be configurabl
 
 _For distributed TOEs that implement a registration channel (as described in FCO_CPC_EXT.1.2), the ST author uses the selection “Ability to configure the cryptographic functionality” in this SFR, and its corresponding mapping in the TSS, to describe the configuration of any cryptographic aspects of the registration channel that can be modified by the operational environment in order to improve the channel security (cf. the description of the content of Preparative Procedures in [SD, 3.6.1.2])._
 
-_If the TOE offers ability for a remote authorized IT entities or authorized remote Administrators to connect via an interface secured with SSH, then the ST author must select the option “Ability to manage the trusted public keys database” to account for management of public key authentication. It is acceptable for this management function to be implemented as part of general TOE user management functionality or as a standalone management function._
+_If the TOE offers ability for a remote authorized IT entities or authorized remote Administrators to connect via an interface secured with SSH, then the ST author must select the option “Ability to manage the trusted public keys database” to account for management of public key authentication. It is acceptable for this management function to be implemented as part of general TOE management functionality or as a standalone management function._
 
 ==== Security management roles (FMT_SMR)
 
@@ -1412,7 +1412,7 @@ _An interactive session governed by this SFR is a session in which an authentica
 
 *_Application Note {counter:appnote_count}_*
 
-_This requirement is intended to apply to interactive sessions between a human user and a TOE. IT entities establishing connections or programmatic connections (e.g., remote procedure calls over a network) are not required to be covered by this requirement._
+_This requirement is intended to apply to interactive sessions between a human administrator and a TOE. IT entities establishing connections or programmatic connections (e.g., remote procedure calls over a network) are not required to be covered by this requirement._
 
 === Trusted Path/Channels (FTP)
 
@@ -1513,7 +1513,7 @@ The design information about the TOE is contained in the guidance documentation 
 
 ==== Basic Functional Specification (ADV_FSP.1)
 
-The functional specification describes the TOE Security Functions Interfaces (TSFIs). It is not necessary to have a formal or complete specification of these interfaces. Additionally, because TOEs conforming to this cPP will necessarily have interfaces to the Operational Environment that are not directly invokable by TOE users, there is little point specifying that such interfaces be described in and of themselves since only indirect testing of such interfaces may be possible. For this cPP, the Evaluation Activities for this family focus on understanding the interfaces presented in the TSS in response to the functional requirements and the interfaces presented in the AGD documentation. No dedicated “functional specification” documentation is necessary to satisfy the Evaluation Activities specified in [SD]. The Security Target, AGD documentation, supplementary information, or combination of thereof constitutes “functional specification” documentation. This documentation must contain the description of all security-relevant interfaces.
+The functional specification describes the TOE Security Functions Interfaces (TSFIs). It is not necessary to have a formal or complete specification of these interfaces. Additionally, because TOEs conforming to this cPP will necessarily have interfaces to the Operational Environment that are not directly invokable by TOE administrators, there is little point specifying that such interfaces be described in and of themselves since only indirect testing of such interfaces may be possible. For this cPP, the Evaluation Activities for this family focus on understanding the interfaces presented in the TSS in response to the functional requirements and the interfaces presented in the AGD documentation. No dedicated “functional specification” documentation is necessary to satisfy the Evaluation Activities specified in [SD]. The Security Target, AGD documentation, supplementary information, or combination of thereof constitutes “functional specification” documentation. This documentation must contain the description of all security-relevant interfaces.
 
 The Evaluation Activities in [SD] are associated with the applicable SFRs; since these are directly associated with the SFRs, the tracing in element ADV_FSP.1.2D is implicitly already done and no additional documentation is necessary.
 
@@ -1738,7 +1738,7 @@ _This requirement is only applicable to distributed TOEs and ensures that all co
 
 _This channel may also be used as the registration channel for the registration process, as described in section 3.3 and FCO_CPC_EXT.1.2._
 
-_If TLS is selected, then the requirements to have the reference identifier established by the user (FCS_TLSC_EXT.1.2) are relaxed and the identifier may also be established through a “gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component._
+_If TLS is selected, then the requirements to have the reference identifier established by the administrator (FCS_TLSC_EXT.1.2) are relaxed and the identifier may also be established through a “gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component._
 
 _If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in section 2.2._
 
@@ -2239,7 +2239,7 @@ _Finally, the client should avoid constructing reference identifiers using wildc
 
 _‘Revocation status’ refers to an OCSP or CRL response that indicates the presented certificate is invalid. Inability to make a connection to determine validity shall be handled as specified in FIA_X509_EXT.2.2. If the revocation status of a certificate received by the TOE is ambiguous (e.g. ‘unknown’), this should be treated similar to the situation where no connection could be established to the revocation server and the option ‘determine the revocation status’ could be chosen for this._
 
-_The purpose of the explicit selection in the SFR is to prevent the TOE from providing an override authorization for situations other than specified in the selection (e.g. one or more certificates in the certification path have been revoked and this status is known to the TOE).  Override may be sought or granted at any time, though this typically occurs when an invalid certificate is presented during connection setup.  Override decisions may be stored and then consulted later, to permit connections using these otherwise-invalid certificates to establish trusted channels without user or administrator action._
+_The purpose of the explicit selection in the SFR is to prevent the TOE from providing an override authorization for situations other than specified in the selection (e.g. one or more certificates in the certification path have been revoked and this status is known to the TOE).  Override may be sought or granted at any time, though this typically occurs when an invalid certificate is presented during connection setup.  Override decisions may be stored and then consulted later, to permit connections using these otherwise-invalid certificates to establish trusted channels without administrator action._
 
 _If DTLS is selected in FTP_ITC then certificate validity is tested in accordance with testing performed for FIA_X509_EXT.1/Rev._
 
@@ -2738,7 +2738,7 @@ _Finally, the client should avoid constructing reference identifiers using wildc
 
 _‘Revocation status’ refers to an OCSP or CRL response that indicates the presented certificate is invalid. Inability to make a connection to determine validity shall be handled as specified in FIA_X509_EXT.2.2. If the revocation status of a certificate received by the TOE is ambiguous (e.g. ‘unknown’), this should be treated similar to the situation where no connection could be established to the revocation server and the option ‘determine the revocation status’ could be chosen for this._
 
-_The purpose of the explicit selection in the SFR is to prevent the TOE providing an override authorization for situations other than specified in the selection (e.g. one or more certificates in the certification path have been revoked and this status is known to the TOE). Override may be sought or granted at any time, though this typically occurs when an invalid certificate is presented during connection setup.  Override decisions may be stored and then consulted later, to permit connections_ _using these otherwise-invalid certificates to establish trusted channels without user or administrator action._
+_The purpose of the explicit selection in the SFR is to prevent the TOE providing an override authorization for situations other than specified in the selection (e.g. one or more certificates in the certification path have been revoked and this status is known to the TOE). Override may be sought or granted at any time, though this typically occurs when an invalid certificate is presented during connection setup.  Override decisions may be stored and then consulted later, to permit connections_ _using these otherwise-invalid certificates to establish trusted channels without administrator action._
 
 _If TLS is selected in FTP_ITC, then certificate validity is tested in accordance with testing performed for FIA_X509_EXT.1/Rev._
 
@@ -3053,7 +3053,7 @@ If the TOE provides a password-based local authentication mechanism passwords mu
 
 *_Application Note {counter:appnote_count}_*
 
-_‘Obscured feedback’ implies the TSF does not produce a visible display of any authentication data entered by a user (such as the echoing of a password), although an obscured indication of progress may be provided (such as an asterisk for each character). It also implies that the TSF does not return any information during the authentication process to the user that may provide any indication of the authentication data._
+_‘Obscured feedback’ implies the TSF does not produce a visible display of any authentication data entered by an administrator (such as the echoing of a password), although an obscured indication of progress may be provided (such as an asterisk for each character). It also implies that the TSF does not return any information during the authentication process to the administrator that may provide any indication of the authentication data._
 
 ==== Password Management (Extended – FIA_PMG_EXT)
 If the TOE provides a password-based authentication mechanism the Administrator must have the capability to compose a strong password and have mechanisms in place so that the password must be changed regularly.
@@ -3089,7 +3089,7 @@ If the TOE provides a password-based authentication mechanism there must be no i
 
 *_Application Note {counter:appnote_count}_*
 
-_The intent of the requirement is that raw password authentication data of Security Administrators is not stored in the clear, and that no user or Administrator is able to read the plaintext password of a Security Administrator through “normal” interfaces. An all-powerful Administrator could directly read memory to capture a password but is trusted not to do so. Passwords should be obscured during entry on the local console in accordance with FIA_UAU.7._
+_The intent of the requirement is that raw password authentication data of Security Administrators is not stored in the clear, and that no Administrator is able to read the plaintext password of a Security Administrator through “normal” interfaces. An all-powerful Administrator could directly read memory to capture a password but is trusted not to do so. Passwords should be obscured during entry on the local console in accordance with FIA_UAU.7._
 
 _Although this is out-of-scope of this cPP, it is strongly advised to protect all authentication data of the device the same way and/or with similar strength as administrative passwords to reduce the risk of attacks like privilege escalation, etc._
 

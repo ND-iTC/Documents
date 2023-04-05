@@ -4,8 +4,8 @@
 :toc-placement!:
 :doctype: book
 :data-uri:
-:revnumber: 3.0 Draft
-:revdate: 03-10-2022
+:revnumber: 3.0
+:revdate: 06-04-2023
 image:extracted-media/media/image1.png[image,width=688,height=212]
 
 = Evaluation Activities for Network Device cPP
@@ -25,7 +25,7 @@ This SD has been developed by the Network Device International Technical Communi
 
 *Document history:*
 
-V3.0, 03 October 2022 (Updated draft published for public review)
+V3.0, 06 April 2023 (published version)
 
 V2.2, 20 December 2019 (published version)
 
@@ -116,7 +116,6 @@ link:#_Toc412821715[Table 3: Evaluation Equivalency Analysis]
 |*Target of Evaluation* |A set of software, firmware and/or hardware possibly accompanied by guidance. [CC1]
 |*TOE Security Functionality (TSF)* |A set consisting of all hardware, software, and firmware of the TOE that must be relied upon for the correct enforcement of the SFRs. [CC1]
 |*TSF Data* |Data for the operation of the TSF upon which the enforcement of the requirements relies.
-|*User* |See Security Administrator
 |===
 
 ==== Acronyms
@@ -696,9 +695,9 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 
 [arabic, start=153]
 . The evaluator shall examine the TSS to determine that it describes the logon process for remote authentication mechanism (e.g. SSH public key, Web GUI password, etc.) and optional local authentication mechanisms supported by the TOE. This description shall contain information pertaining to the credentials allowed/used, any protocol transactions that take place, and what constitutes a “successful logon”.
-. The evaluator shall examine the TSS to determine that it describes which actions are allowed before user identification and authentication. The description shall cover authentication and identification for local and remote TOE administration.
+. The evaluator shall examine the TSS to determine that it describes which actions are allowed before administrator identification and authentication. The description shall cover authentication and identification for local and remote TOE administration.
 . For distributed TOEs the evaluator shall examine that the TSS details how Security Administrators are authenticated and identified by all TOE components. If not, all TOE components support authentication of Security Administrators according to FIA_UIA_EXT.1, the TSS shall describe how the overall TOE functionality is split between TOE components including how it is ensured that no unauthorized access to any TOE component can occur.
-. For distributed TOEs, the evaluator shall examine the TSS to determine that it describes for each TOE component which actions are allowed before user identification and authentication. The description shall cover authentication and identification for remote TOE administration and optionally for local TOE administration if claimed by the ST author. For each TOE component that does not support authentication of Security Administrators according to FIA_UIA_EXT.1 the TSS shall describe any unauthenticated services/services that are supported by the component.
+. For distributed TOEs, the evaluator shall examine the TSS to determine that it describes for each TOE component which actions are allowed before administrator identification and authentication. The description shall cover authentication and identification for remote TOE administration and optionally for local TOE administration if claimed by the ST author. For each TOE component that does not support authentication of Security Administrators according to FIA_UIA_EXT.1 the TSS shall describe any unauthenticated services/services that are supported by the component.
 
 ===== Guidance Documentation
 
@@ -1722,7 +1721,7 @@ Note: Testing the validity of the client certificate is performed as part of X.5
 
 [arabic, start=339]
 . The evaluator shall ensure that the TSS describes the client’s method of establishing all reference identifiers from the administrator/application-configured reference identifier, including which types of reference identifiers are supported (e.g. application-specific Subject Alternative Names) and whether IP addresses and wildcards are supported.
-. Note that where a DTLS channel is being used between components of a distributed TOE for FPT_ITT.1, the requirements to have the reference identifier established by the user are relaxed and the identifier may also be established through a “Gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component. Where the secure channel is being used between components of a distributed TOE for FPT_ITT.1 and the ST author selected attributes from RFC 5280, the evaluator shall ensure the TSS describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier. The evaluator shall ensure the TSS presents an argument how the attribute type, or combination of attribute types, uniquely identify the remote TOE component; and the evaluator shall verify the attribute type, or combination of attribute types, is sufficient to support unique identification of the maximum supported number of TOE components.
+. Note that where a DTLS channel is being used between components of a distributed TOE for FPT_ITT.1, the requirements to have the reference identifier established by the administrator are relaxed and the identifier may also be established through a “Gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component. Where the secure channel is being used between components of a distributed TOE for FPT_ITT.1 and the ST author selected attributes from RFC 5280, the evaluator shall ensure the TSS describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier. The evaluator shall ensure the TSS presents an argument how the attribute type, or combination of attribute types, uniquely identify the remote TOE component; and the evaluator shall verify the attribute type, or combination of attribute types, is sufficient to support unique identification of the maximum supported number of TOE components.
 . If IP addresses are supported in the CN as reference identifiers, the evaluator shall ensure that the TSS describes the TOE’s conversion of the text representation of the IP address in the CN to a binary representation of the IP address in network byte order. The evaluator shall also ensure that the TSS describes whether canonical format (RFC 5952 for IPv6, RFC 3986 for IPv4) is enforced.
 
 *FCS_DTLSC_EXT.1.4*
@@ -2439,7 +2438,7 @@ The captured traffic is also used to verify that the appropriate message digest 
 
 [arabic, start=455]
 . The evaluator shall ensure that the TSS describes the client’s method of establishing all reference identifiers from the administrator/application-configured reference identifier, including which types of reference identifiers are supported (e.g. application-specific Subject Alternative Names) and whether IP addresses and wildcards are supported.
-. Note that where a TLS channel is being used between components of a distributed TOE for FPT_ITT.1, the requirements to have the reference identifier established by the user are relaxed and the identifier may also be established through a “Gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component. Where the secure channel is being used between components of a distributed TOE for FPT_ITT.1 and the ST author selected attributes from RFC 5280, the evaluator shall ensure the TSS describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier. The evaluator shall ensure the TSS presents an argument how the attribute type, or combination of attribute types, uniquely identify the remote TOE component; and the evaluator shall verify the attribute type, or combination of attribute types, is sufficient to support unique identification of the maximum supported number of TOE components.
+. Note that where a TLS channel is being used between components of a distributed TOE for FPT_ITT.1, the requirements to have the reference identifier established by the administrator are relaxed and the identifier may also be established through a “Gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component. Where the secure channel is being used between components of a distributed TOE for FPT_ITT.1 and the ST author selected attributes from RFC 5280, the evaluator shall ensure the TSS describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier. The evaluator shall ensure the TSS presents an argument how the attribute type, or combination of attribute types, uniquely identify the remote TOE component; and the evaluator shall verify the attribute type, or combination of attribute types, is sufficient to support unique identification of the maximum supported number of TOE components.
 . If IP addresses are supported in the CN as reference identifiers, the evaluator shall ensure that the TSS describes the TOE’s conversion of the text representation of the IP address in the CN to a binary representation of the IP address in network byte order. The evaluator shall also ensure that the TSS describes whether canonical format (RFC 5952 for IPv6, RFC 3986 for IPv4) is enforced.
 
 *FCS_TLSC_EXT.1.4*
@@ -3367,11 +3366,11 @@ AVA_VAN.1-6 The evaluator *_shall produce_* penetration test documentation for t
 
 |The CEM work unit is captured in Section A.3; there are no substantive differences.
 |AVA_VAN.1-7 The evaluator *_shall conduct_* penetration testing. a|
-The evaluator shall perform the CEM activity as specified. See Section A.2, paragraph 702 for guidance related to attack potential for confirmed flaws.
+The evaluator shall perform the CEM activity as specified.
 
 |AVA_VAN.1-8 The evaluator *_shall record_* the actual results of the penetration tests. |The evaluator shall perform the CEM activity as specified.
 |AVA_VAN.1-9 The evaluator *_shall report_* in the ETR the evaluator penetration testing effort, outlining the testing approach, configuration, depth and results. |Replace the CEM work unit with the reporting called for in Section A.3.
-|AVA_VAN.1-10 The evaluator *_shall examine_* the results of all penetration testing to determine that the TOE, in its operational environment, is resistant to an attacker possessing a Basic attack potential. |This work unit is not applicable for Type 1 and Type 2 flaws (as defined in Section A.1), as inclusion in this Supporting Document by the iTC makes any confirmed vulnerabilities stemming from these flaws subject to an attacker possessing a Basic attack potential. This work unit is replaced for Type 3 and Type 4 flaws by the activities defined in Section A.2, paragraph 702.
+|AVA_VAN.1-10 The evaluator *_shall examine_* the results of all penetration testing to determine that the TOE, in its operational environment, is resistant to an attacker possessing a Basic attack potential. |This work unit is not applicable for Type 1 and Type 2 flaws (as defined in Section A.1), as inclusion in this Supporting Document by the iTC makes any confirmed vulnerabilities stemming from these flaws subject to an attacker possessing a Basic attack potential.
 a|
 AVA_VAN.1-11 The evaluator *_shall report_* in the ETR all exploitable vulnerabilities and residual vulnerabilities, detailing for each:
 
@@ -3402,7 +3401,7 @@ AVA_VAN.1-11 The evaluator *_shall report_* in the ETR all exploitable vulnerabi
 . If the TOE is a distributed TOE then the developer shall provide:
 [loweralpha]
 .. documentation describing the allocation of requirements between distributed TOE components as in [NDcPP, 3.4]
-.. a mapping of the auditable events recorded by each distributed TOE component as in [NDcPP, 6.3.3]
+.. a mapping of the auditable events recorded by each distributed TOE component as in [NDcPP, Table 2]
 .. additional information in the Preparative Procedures as identified in the refinement of AGD_PRE.1 in additional information in the Preparative Procedures as identified in 3.4.1.2 and 3.5.1.2.
 
 ===== Evaluation Activity:
@@ -3436,9 +3435,6 @@ CCMB-2017-04-004, Version 3.1, Revision 5, April 2017
 [FIPS 140-2] FIPS PUB 140-2, Security Requirements for cryptographic modules, May 25 2001 with change notices (12-03-2002)
 
 [FIPS 186-4] FIPS PUB 186-4, Digital Signature Standard (DSS), July 2013
-
-[FWcPP] collaborative Protection Profile for Stateful Traffic Filter Firewalls, +
-Version 2.0, May 2017
 
 [NDcPP] collaborative Protection Profile for Network Devices, +
 Version 3.0, April 2023
