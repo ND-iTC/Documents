@@ -1627,7 +1627,7 @@ a|
 
 _The audit event “Unsuccessful attempt to validate a certificate” for FIA_X509_EXT.1/ITT requires the Additional Audit Record Contents of “Reason for failure (of certificate validation).” An error message telling the Security Administrator that ‘something is wrong with the certificate’ is not considered as presenting sufficient information about the ‘reason for failure’, because basic information to resolve the issue is missing from the audit record. The log message should inform the Security Administrator at least about the type of error (e.g. that there is a ‘Trust issue’ with the certificate, e.g. due to failed path validation, in contrast to the use of an ‘expired certificate’). The level of detail that needs to be provided to enable the Security Administrator to fix issues based on the information in audit events usually depends on the complexity of the underlying use case. In simple scenarios with only one underlying root cause, a single error message might be sufficient whereas in more complex scenarios the granularity of error messages should be higher. The NDcPP only specifies a general guidance on the subject to avoid specifying requirements which are not implementation independent._
 
-_Additionally, when the Functional Package for Secure Shell is used the audit requirements for FTP_ITC.1.1, FTP_TRP.1.1/Admin, or FPT_ITT.1.1 shall apply to each claimed interface_
+_Additionally, when the Functional Package for Secure Shell is used the audit requirements for FTP_ITC.1.1, FTP_TRP.1.1/Admin, or FPT_ITT.1.1 shall apply to each claimed interface._
 
 === Security Audit (FAU)
 
@@ -2063,7 +2063,7 @@ This component is targeted at the flaw remediation procedures applied by the dev
 
 This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. The evaluator performs the CEM work units associated with ALC_FLR.2.
 
-==== Systemtic flaw remediation (ALC_FLR.3) (optional)
+==== Systematic flaw remediation (ALC_FLR.3) (optional)
 
 This component is targeted at the flaw remediation procedures applied by the developer to ensure that all reported security flaws in each release of the TOE are tracked and corrected. In addition, the developer's flaw remediation guidance is analysed to ensure that users are aware how to correctly report security flaws to the developer. Flaw remediation procedures of the developer need to describe how users can register to receive flaw reports and corrections. The procedures also need to ensure timely responses to reports of security flaws and automatic distribution of security flaw reports. The evaluator performs the CEM work units associated with ALC_FLR.3.
 
@@ -2210,7 +2210,7 @@ Due to the structural differences between TLS 1.2 on the one hand and TLS 1.3 on
 
 *_Application Note {counter:appnote_count}_*
 
-_The ciphersuites to be tested in the evaluated configuration are limited by this requirement requirement and shall be selected from the ciphersuites defined in List 1 (DTLS 1.2) and List 2 (DTLS 1.3), respectively (both in chap. B.3.1.5). The ST author should select the ciphersuites that are supported. Even though RFC 5246 and RFC 6347 mandate implementation of specific ciphers, this cPP deprecates use of SHA-1. There is no requirement to implement ciphersuites the RFCs specify as mandatory in order to claim conformance to this cPP._
+_The ciphersuites to be tested in the evaluated configuration are limited by this requirement and shall be selected from the ciphersuites defined in List 1 (DTLS 1.2) and List 2 (DTLS 1.3), respectively (both in chap. B.3.1.5). The ST author should select the ciphersuites that are supported. Even though RFC 5246 and RFC 6347 mandate implementation of specific ciphers, this cPP deprecates use of SHA-1. There is no requirement to implement ciphersuites the RFCs specify as mandatory in order to claim conformance to this cPP._
 
 _These requirements will be revisited as new DTLS versions are standardized by the IETF._
 
@@ -2357,7 +2357,7 @@ _The use of out-of-band provisioned pre-shared keys creates a potential security
 
 *_Application Note {counter:appnote_count}_*
 
-_The ciphersuites to be tested in the evaluated configuration are limited by this requirement requirement and shall be selected from the ciphersuites defined in List 1 (DTLS 1.2) and List 2 (DTLS 1.3), respectively (both in chap. B.3.1.5). The ST author should select the ciphersuites that are supported. Even though RFC 5246 and RFC 6347 mandate implementation of specific ciphers, this cPP deprecates use of SHA-1. There is no requirement to implement ciphersuites the RFCs specify as mandatory in order to claim conformance to this cPP._
+_The ciphersuites to be tested in the evaluated configuration are limited by this requirement and shall be selected from the ciphersuites defined in List 1 (DTLS 1.2) and List 2 (DTLS 1.3), respectively (both in chap. B.3.1.5). The ST author should select the ciphersuites that are supported. Even though RFC 5246 and RFC 6347 mandate implementation of specific ciphers, this cPP deprecates use of SHA-1. There is no requirement to implement ciphersuites the RFCs specify as mandatory in order to claim conformance to this cPP._
 
 *FCS_DTLSS_EXT.1.2* The TSF shall not proceed with a connection handshake attempt if the DTLS server cannot successfully validate the cookie returned by the DTLS Client.
 
