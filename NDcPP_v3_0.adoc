@@ -785,10 +785,10 @@ Loss of communication with the audit server is problematic. While there are seve
 . Start-up and shut-down of the audit functions;
 . All auditable events for the +++<u>+++not specified+++</u>+++ level of audit; and
 . _All administrative actions comprising:_
-* Administrative login and logout (name of Administrator account shall be logged if individual accounts are required for Administrators).
-* Changes to TSF data related to configuration changes (in addition to the information that a change occurred it shall be logged what has been changed).
-* Generating/import of, changing, or deleting of cryptographic keys (in addition to the action itself a unique key name or key reference shall be logged).
-* [selection: Resetting passwords (name of related Administrator account shall be logged), no other actions, [assignment: list of other uses of privileges]];
+* _Administrative login and logout (name of Administrator account shall be logged if individual accounts are required for Administrators)._
+* _Changes to TSF data related to configuration changes (in addition to the information that a change occurred it shall be logged what has been changed)._
+* _Generating/import of, changing, or deleting of cryptographic keys (in addition to the action itself a unique key name or key reference shall be logged)._
+* _[selection: Resetting passwords (name of related Administrator account shall be logged), no other actions, [assignment: list of other uses of privileges]];_
 . _Specifically defined auditable events listed in_ _Table 2_.
 
 *_Application Note {counter:appnote_count}_*
@@ -971,7 +971,7 @@ _The ST author selects all key generation schemes used for key establishment (in
 
 *FCS_CKM.2.1* The TSF shall *perform* cryptographic *key establishment* in accordance with a specified cryptographic key *establishment* method: [selection:
 
-* _RSA-based key establishment schemes that meet the following: RSAES-PKCS1-v1_5 as specified in Section 7.2 of RFC +++<u>+++8017+++</u>+++, “Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography Specifications Version 2.2”;_
+* _RSA-based key establishment schemes that meet the following: RSAES-PKCS1-v1_5 as specified in Section 7.2 of RFC +++<u>+++8017, “Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography Specifications Version 2.2”;_+++</u>+++
 * _Elliptic curve-based key establishment schemes that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography”;_
 * _FFC Schemes using “FIPS 186-Type” parameter-size sets that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography”;_
 * _FFC Schemes using “safe-prime” groups that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: groups listed in RFC 3526, groups listed in RFC 7919]._
@@ -1080,7 +1080,7 @@ _The key size [k] in the assignment falls into a range between L1 and L2 (define
 
 *FCS_RBG_EXT.1 Random Bit Generation*
 
-*FCS_RBG_EXT.1.1* The TSF shall perform all deterministic random bit generation services in accordance with ISO/IEC 18031:2011 using [selection: _Hash_DRBG [selection: SHA-1, SHA-256, SHA-384, SHA-512], HMAC_DRBG [selection: SHA-1, SHA-256, SHA-384, SHA-512], CTR_DRBG (AES)_].
+*FCS_RBG_EXT.1.1* The TSF shall perform all deterministic random bit generation services in accordance with ISO/IEC 18031:2011 using [selection: _Hash_DRBG [selection: SHA-256, SHA-384, SHA-512], HMAC_DRBG [selection: SHA-256, SHA-384, SHA-512], CTR_DRBG (AES)_].
 
 *FCS_RBG_EXT.1.2* The deterministic RBG shall be seeded by at least one entropy source that accumulates entropy from [selection: _[assignment: number of software-based sources]_ software-based noise source, _[assignment: number of platform-based sources]_ platform-based noise source] with a minimum of [selection: _128 bits, 192 bits, 256 bits_] of entropy at least equal to the greatest security strength, according to ISO/IEC 18031:2011 Table C.1 “Security Strength Table for Hash Functions”, of the keys and hashes that it will generate.
 
@@ -1117,7 +1117,7 @@ _This requirement applies to Administrators and external IT entities of services
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE must support at least one remote authentication mechanism. Remote authentication mechanisms are defined as those that occur using a cryptographic protocol specified in FTP_TRP.1/Admin.   Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console.  See Application Note 22 for examples of compliant local administrative interfaces._
+_The TOE must support at least one remote authentication mechanism. Remote authentication mechanisms are defined as those that occur using a cryptographic protocol specified in FTP_TRP.1/Admin.   Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author shall select "none" from the final selection. See Application Note 23 for examples of compliant local administrative interfaces._
 
 _The ST author selects the authentication mechanisms necessary to support remote administration.  If "Web GUI password" or "SSH password" is selected for remote authentication mechanism the ST author specifies an appropriate cryptographic protocol in FTP_TRP.1/Admin (e.g., "HTTPS" or "SSH") and includes FIA_AFL.1, FIA_PMG_EXT.1, FPT_APW_EXT.1 from Appendix B._
 
@@ -1264,7 +1264,7 @@ are satisfied.
 
 *_Application Note {counter:appnote_count}_*
 
-_FMT_SMR.2.3 requires that a Security Administrator be able to administer the TOE through a remote mechanism. See Application Note 18 for the definition of remote administration._
+_FMT_SMR.2.3 requires that a Security Administrator be able to administer the TOE through a remote mechanism. See Application Note 19 for the definition of remote administration._
 
 _For distributed TOEs not every TOE component is required to implement its own user management to fulfil this SFR. At least one component has to support authentication and identification of Security Administrators according to FIA_UIA_EXT.1. For the other TOE components authentication as Security Administrator can be realized through the use of a trusted channel (either according to FTP_ITC.1 or FPT_ITT.1) from a component that supports the authentication of Security Administrators according to FIA_UIA_EXT.1. The identification of users according to FIA_UIA_EXT.1.2 and the association of users with roles according to FMT_SMR.2.2 is done through the components that support the authentication of Security Administrators according to FIA_UIA_EXT.1.4. TOE components that authenticate Security Administrators through the use of a trusted channel are not required to support local administration of the component._
 
@@ -1302,7 +1302,7 @@ _The intent of this requirement is for the device to protect keys, key material,
 
 _Reliable time stamps are expected to be used with other TSF, e.g. for the generation of audit data to allow the Security Administrator to investigate incidents by checking the order of events and to determine the actual local time when events occurred. The decision about the required level of accuracy of that information is up to the Administrator._
 
-_The TOE depends on time and date information, either provided by a local real-time clock that is manually managed by the Security Administrator or through the use of one or more NTP servers. The corresponding option(s) must be chosen from the selection in FPT_STM_EXT.1.2. The use of the automatic synchronisation with an NTP server is recommended but not mandated. Note that for the communication with an NTP server, FCS_NTP_EXT.1 must be claimed. The ST author describes in the TSS how the external time and date information is received by the TOE and how this information is maintained._
+_The TOE depends on time and date information, either provided by a local real-time clock that is manually managed by the Security Administrator or through the use of one or more NTP servers, or obtain time from the underlying virtualization system. The corresponding option(s) must be chosen from the selection in FPT_STM_EXT.1.2. The use of the automatic synchronisation with an NTP server is recommended but not mandated. Note that for the communication with an NTP server, FCS_NTP_EXT.1 must be claimed. The ST author describes in the TSS how the external time and date information is received by the TOE and how this information is maintained._
 
 _For a Case 1 vND, the virtualization system can be used as an external time source. For a Case 2 vND, the virtualization system is part of the TOE, so the time must be set by a security administrator or synchronized with an NTP server._
 
@@ -1462,9 +1462,9 @@ _If "SSH" is selected, then the TSF shall be validated against the version of th
 
 *_Application Note {counter:appnote_count}_*
 
-This requirement ensures that authorized remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection, or the protocol requirements of the packages specified in section 2.2 are included in the ST. Where X.509 certificates are used to authenticate authorized Administrators, FIA_X509_EXT.1/Rev is to be used (this requires checking certificate revocation, implementing a trust store and supporting certificate chain length of three).
+_This requirement ensures that authorized remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection, or the protocol requirements of the packages specified in section 2.2 are included in the ST. Where X.509 certificates are used to authenticate authorized Administrators, FIA_X509_EXT.1/Rev is to be used (this requires checking certificate revocation, implementing a trust store and supporting certificate chain length of three)._
 
-If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in the section 2.2.
+_If "SSH" is selected, then the TSF shall be validated against the version of the Functional Package for Secure Shell stated in the section 2.2._
 
 == Mandatory Security Assurance Requirements
 
@@ -1753,7 +1753,7 @@ This iteration of FTP_TRP.1 is defined as one of the options selectable for dist
 
 *FTP_TRP.1/Join Trusted Path*
 
-*FTP_TRP.1.1/Join* The TSF shall provide a communication path between itself and *a joining component* +++<del>+++[selection: remote, local] users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of *[selection: _the TSF endpoint, both joining component and TSF endpoint_]* +++<del>+++its end points+++</del>+++ and protection of the communicated data from +++<u>+++modification \[selection: _and disclosure, none_]+++</u>+++.
+*FTP_TRP.1.1/Join* The TSF shall provide a communication path between itself and *a joining component* +++<del>+++[selection: remote, local] users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of *[selection: _the TSF endpoint, both joining component and TSF endpoint_]* +++<del>+++its end points+++</del>+++ and protection of the communicated data from +++<u>+++modification and \[selection: _disclosure, no other mechanisms_]+++</u>+++.
 
 *FTP_TRP.1.2/Join* The TSF shall permit [selection: _the TSF, *the joining component*, +++<del>+++local users, remote users_+++</del>+++] to initiate communication via the trusted path.
 
@@ -4958,7 +4958,7 @@ FIA_X509_EXT.2 (selection-based SFR) included
 
 FIA_X509_EXT.3 (selection-based SFR) included
 
-|FCS_DLSS_EXT.3 a|
+|FCS_DTLSS_EXT.3 a|
 FCS_CKM.1
 
 FCS_CKM.2
