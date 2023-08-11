@@ -4,7 +4,7 @@
 |===
 
 |*Allowed-with list version*|3.0
-|*Date*|06 April 2023
+|*Date*|10 August 2023
 
 |===
 
@@ -139,6 +139,14 @@ Conformance claims from other Protection Profiles (apart from PP-Configurations 
 
 |Notes:|None
 
+.4+|12.|Object ID:|PP-Module for Virtual Private Network (VPN) Gateways
+
+|Object version:|1.3 (10 August 2023) 
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
 |===
 
 == NDcPP v2.2e
@@ -249,6 +257,14 @@ No objects of this type are currently allowed with this cPP.
 .4+|11.|Object ID:|PP-Module for MACsec Ethernet Encryption
 
 |Object version:|1.0 (22 December 2022)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+.4+|12.|Object ID:|PP-Module for Virtual Private Network (VPN) Gateways
+
+|Object version:|1.3 (10 August 2023) 
 
 |Owner:|NIAP (niap@niap-ccevs.org)
 
