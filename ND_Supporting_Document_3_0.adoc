@@ -569,22 +569,6 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 [arabic, start=126]
 . For each supported NIST curve (i.e., P-256, P-384 and P-521) and SHA function pair, the evaluator shall generate a set of 10 1024-bit message, public key and signature tuples and modify one of the values (message, public key or signature) in five of the 10 tuples. The evaluator shall obtain in response a set of 10 PASS/FAIL values.
 
-*EDDSA Algorithm Tests*
-
-*_EDDSA FIPS 186-5 Signature Generation Test_*
-
-[arabic, start=127]
-. The evaluator shall use the Ed25519 curve and the SHA-512 function pair to generate signatures for 10, 1024-bit long messages, and obtain for each message, a public key and the resulting signature values R and S. To determine correctness, the evaluator shall use the signature verification function of a known good implementation.
-
-. The evaluator shall use the Ed25519 curve and the SHA-512 function pair to generate signatures for 10, 1024-bit long messages. The first of these 10 messages will be unique and the subsequent 9 messages shall be derived from the first message by flipping individual bits in the original message. For each of these messages, obtain a public key and the resulting signature values R and S. The evaluator shall verify that the resulting signature values are distinct. Furthermore, to determine correctness, the evaluator shall use the signature verification function of a known good implementation.
-
-
-*_EDDSA FIPS 186-5 Signature Verification Test_*
-
-[arabic, start=129]
-. The evaluator shall use the Ed25519 curve and the SHA-512 function to generate a set of 10 1024-bit messages, public key and signature tuples and modify one of the values (message, public key or signature) in five of the 10 tuples. The evaluator shall obtain in response a set of 10 PASS/FAIL values.
-
-
 
 *RSA Signature Algorithm Tests*
 
