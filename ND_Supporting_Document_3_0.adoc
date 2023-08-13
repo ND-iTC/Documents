@@ -1463,7 +1463,7 @@ Note: Testing the validity of the client certificate is performed as part of X.5
 [arabic, start=301]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
-.. Test 1: If “present a [selection: DTLS 1.2, DTLS 1.3] Certificate Request message” is selected, the evaluator shall perform the following tests for each selected version of DTLS:
+.. Test 1: The evaluator shall perform the following tests for each selected version of DTLS:
 [lowerroman]
 ... The evaluator shall examine the Certificate Request message. The evaluator shall verify that the SignatureAndHashAlgorithms (DTLS 1.2) or the SignatureSchemes (DTLS 1.3) match the SignatureAndHashAlgorithms specified in the requirement.
 ... The evaluator shall establish a connection and authenticate the client using each selected SignatureAndHashAlgorithm. The evaluator shall verify the connection succeeds.
@@ -1634,7 +1634,7 @@ Note: Testing the validity of the client certificate is performed as part of X.5
 [arabic, start=326]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
-.. Test 1: If “present a [selection: TLS 1.2, TLS 1.3] Certificate Request message” is selected, the evaluator shall perform the following tests for each selected version of TLS:
+.. Test 1: The evaluator shall perform the following tests for each selected version of TLS:
 [lowerroman]
 ... The evaluator shall examine the Certificate Request message. The evaluator shall verify that the SignatureAndHashAlgorithms (TLS 1.2) or the SignatureSchemes (TLS 1.3) match the SignatureAndHashAlgorithms specified in the requirement.
 ... The evaluator shall establish a connection and authenticate the client using each selected SignatureAndHashAlgorithm. The evaluator shall verify the connection succeeds.
