@@ -232,7 +232,7 @@ The PP-Modules that are allowed to specify this cPP as a base-PP are specified i
 
 The packages to which conformance can be claimed in conjunction with this cPP are:
 
-- Functional Package for SSH Version 1.0.
+- Functional Package for SSH Version 1.0 conformant
 
 All cryptographic selections in the above package must comply with FCS_COP and FCS_CKM requirements of this cPP.
 
@@ -1031,14 +1031,13 @@ _For the first selection of FCS_COP.1.1/DataEncryption, the ST author chooses th
 
 * _RSA Digital Signature Algorithm,_
 * _Elliptic Curve Digital Signature Algorithm_
-* _Edwards-Curve Digital Signature Algorithm_ 
+
 ]
 
 and cryptographic key sizes [selection:
 
 * _For RSA: modulus 2048 bits or greater,_
 * _For ECDSA: 256 bits or greater_
-* _For EdDSA: Ed25519_
 
 ]
 
@@ -1046,7 +1045,6 @@ that meet the following: [selection:
 
 * _For RSA schemes: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Section 5.5, using PKCS #1 v2.1 Signature Schemes RSASSA-PSS and/or RSASSA-PKCS1v1_5; ISO/IEC 9796-2, Digital signature scheme 2 or Digital Signature scheme 3,_
 * _For ECDSA schemes: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Section 6 and Appendix D, Implementing “NIST curves”_ [selection: _P-256, P-384, P-521_]; _ISO/IEC 14888-3, Section 6.4,_ 
-* _For EdDSA schemes: FIPS PUB 186-5, “Digital Signature Standard (DSS)”, Section 7_
 
 ].
 
