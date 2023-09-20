@@ -1318,7 +1318,13 @@ In order to detect some number of failures of underlying security mechanisms use
 
 *FPT_TST_EXT.1 TSF Testing*
 
-*FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection: _during initial start-up (on power on), periodically during normal operation, at the request of the authorised user, at the conditions [assignment: conditions under which self-tests should occur]]_ to demonstrate the correct operation of the TSF: [_assignment: list of self-tests run by the TSF_].
+*FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
+
+ * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
+ * _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: describe self-test objective]._
+
+to demonstrate the correct operation of the TSF: [assignment: _list of self-tests run by the TSF_] and if failure detected [assignment: _describe resulting error state_].
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1327,6 +1333,8 @@ _It is expected that self-tests are carried out during initial start-up of the T
 _Non-distributed TOEs may internally consist of several components that contribute to enforcing SFRs. Self-testing shall cover all components that contribute to enforcing SFRs and verification of integrity shall cover all software that contributes to enforcing SFRs on all components._
 
 _For distributed TOEs all TOE components have to perform self-tests. This does not necessarily mean that each TOE component has to carry out the same self-tests: the ST describes the applicability of the selection (i.e. when self-tests are run) and the final assignment (i.e. which self-tests are carried out) to each TOE component._
+
+*FPT_TST_EXT.1.2* The TSF shall respond to [selection: _all failures, [assignment: list of failures detected by self-tests_]] by [selection: _entering a maintenance mode, rebooting, [assignment: other methods to enter a secure state_]].
 
 ==== Trusted Update (FPT_TUD_EXT)
 
@@ -4480,7 +4488,15 @@ Hierarchical to: No other components.
 
 Dependencies: No other components.
 
-*FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection: _during initial start-up (on power on), periodically during normal operation, at the request of the authorised user, at the conditions [assignment: conditions under which self-tests should occur]_] to demonstrate the correct operation of the TSF: _[assignment: list of self-tests run by the TSF_].
+*FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
+
+ * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
+ * _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: describe self-test objective]._
+
+to demonstrate the correct operation of the TSF: [assignment: _list of self-tests run by the TSF_] and if failure detected [assignment: _describe resulting error state_].
+
+*FPT_TST_EXT.1.2* The TSF shall respond to [selection: _all failures, [assignment: list of failures detected by self-tests_]] by [selection: _entering a maintenance mode, rebooting, [assignment: other methods to enter a secure state_]].
 
 ==== Trusted Update (FPT_TUD_EXT)
 
