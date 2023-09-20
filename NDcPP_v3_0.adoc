@@ -1320,7 +1320,7 @@ In order to detect some number of failures of underlying security mechanisms use
 
 *FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
 
- * _during initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
+ * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
  * _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
 * [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: describe self-test objective]._
 
@@ -4496,7 +4496,7 @@ Dependencies: No other components.
 
 to demonstrate the correct operation of the TSF: [assignment: _list of self-tests run by the TSF_] and if failure detected [assignment: _describe resulting error state_].
 
-*FPT_TST_EXT.1.2* The TSF shall respond to [selection: _all failures, [assignment: list of failures detected by self-tests]_] by [selection: _entering a maintenance mode, rebooting, [assignment: other methods to enter a secure state]_].
+*FPT_TST_EXT.1.2* The TSF shall respond to [selection: _all failures, [assignment: list of failures detected by self-tests_]] by [selection: _entering a maintenance mode, rebooting, [assignment: other methods to enter a secure state_]].
 
 ==== Trusted Update (FPT_TUD_EXT)
 
