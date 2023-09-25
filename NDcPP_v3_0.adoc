@@ -1625,10 +1625,6 @@ a|
 |FCS_DTLSS_EXT.2 |Failure to authenticate the client |Reason for failure
 |FCS_TLSC_EXT.2 |None |None
 |FCS_TLSS_EXT.2 |Failure to authenticate the client |Reason for failure
-|FCS_DTLSC_EXT.3 |None |None
-|FCS_DTLSS_EXT.3 |None |None
-|FCS_TLSC_EXT.3 |None |None
-|FCS_TLSS_EXT.3 |None |None
 |===
 
 [#_Ref397655544]#Table 4: TOE Optional SFRs and Auditable Events#
@@ -1827,15 +1823,11 @@ _Specific requirements for Preparative Procedures relating to FCO_CPC_EXT.1 are 
 
 =====  FCS_DTLSC_EXT & FCS_DTLSS_EXT DTLS Protocol
 
-Datagram TLS (DTLS) is not a required component of the NDcPP. If a TOE implements DTLS, a corresponding selection in FTP_ITC.1, FTP_TRP.1/Admin, or FPT_ITT.1 should be made to define what the DTLS protocol is implemented to protect. If a corresponding option to support DTLS has been selected in at least one of the SFRs named above, the corresponding selection-based DTLS-related SFRs should be added to the ST from chap. B.3.1.1 (i.e. FCS_DTLSC_EXT.1 and/or FCS_DTLSS_EXT.1). The SFRs therein cover only the minimum DTLS-related requirements without support for mutual authentication. The support for mutual authentication is optional when using DTLS. If a TOE implements DTLS with mutual authentication the corresponding optional SFRs should be added to the ST from chap. A.7.1.1 (i.e. FCS_DTLSC_EXT.2 and/or FCS_DTLSS_EXT.2) in addition to the corresponding SFRs from chap.B.3.1.1.
+Datagram TLS (DTLS) is not a required component of the NDcPP. If a TOE implements DTLS, a corresponding selection in FTP_ITC.1, FTP_TRP.1/Admin, or FPT_ITT.1 should be made to define what the DTLS protocol is implemented to protect. If a corresponding option to support DTLS has been selected in at least one of the SFRs named above, the corresponding selection-based DTLS-related SFRs should be added to the ST from chap. B.3.1.1 (i.e. FCS_DTLSC_EXT.1 and/or FCS_DTLSS_EXT.1). The SFRs therein cover only the minimum DTLS-related requirements without support for mutual authentication. 
+
+The support for mutual authentication is optional when using DTLS. If a TOE implements DTLS with mutual authentication the corresponding optional SFRs should be added to the ST from chap. A.7.1.1 (i.e. FCS_DTLSC_EXT.2 and/or FCS_DTLSS_EXT.2) in addition to the corresponding SFRs from chap.B.3.1.1.
 
 A TOE may act as the client, the server, or both in DTLS sessions. The requirement has been separated into DTLS Client (FCS_DTLSC_EXT) and DTLS Server (FCS_DTLSS_EXT) requirements to allow for these differences.
-
-If the TOE acts as the client during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSC_EXT requirements.
-
-To ensure audit requirements are properly met, a DTLS receiver may need to monitor the DTLS connection state at the application layer. When no data is received from a DTLS connection for a long time (where the application decides what "long" means), the receiver should send a close_notify alert message and close the connection.
-
-If the TOE acts as the server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSS_EXT requirements. In this case the TOE needs to claim at least the FCS_DTLSS_EXT.1 requirements in chap. B.3.1.1 (no support for mutual authentication). If the TOE acts as DTLS server and in addition also supports mutual authentication, the FCS_DTLSS_EXT.2 requirements in chap. A.7.1.1 also need to be claimed in addition. If the TOE acts as both a client and server during the claimed TLS sessions, the ST author should claim the corresponding FCS_TLSC_EXT and FCS_TLSS_EXT requirements.
 
 *FCS_DTLSC_EXT.2 DTLS Client Support for Mutual Authentication*
 
@@ -1861,20 +1853,6 @@ _The Message Authentication Code (MAC) is negotiated during the DTLS handshake p
 _Replay Detection is described in section 4.5.1 of DTLS 1.3 (RFC 9147) and 4.1.2.6 of DTLS 1.2 (RFC 6347). For each received record, the receiver verifies the record contains a sequence number that is within the sliding receive window and does not duplicate the sequence number of any other record received during the session._
 
 _"Silently Discard" means the TOE discards the packet without responding._
-
-*FCS_DTLSC_EXT.3 DTLS Client Support for secure renegotiation (DTLSv1.2 only)*
-
-*FCS_DTLSC_EXT.3.1* The product shall support secure renegotiation through use of the “renegotiation_info” DTLS extension in accordance with RFC 5746.
-
-*_Application Note {counter:appnote_count}_*
-
-_This component may only be claimed for DTLS 1.2 but not DTLS 1.3._
-
-_RFC 5746 defines an extension to DTLS that binds renegotiation handshakes to the cryptography in the original handshake._
-
-_When performing secure renegotiation, the ”renegotiation_info” extension must be presented by the server initiating renegotiation, so the client must support use of this extension._
-
-_When signaling support for secure renegotiation, the client may present either the ”renegotiation_info” extension or the signaling cipher suite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message. (A signaling cipher suite value (SCSV) is presented as a cipher suite, but its only purpose is to provide other information and not to advertise support for a cipher suite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling cipher suite value exists as an alternative to presenting the ”renegotation_info” extension so that DTLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it._
 
 *FCS_DTLSS_EXT.2 DTLS Server Support for Mutual Authentication*
 
@@ -1943,20 +1921,11 @@ _The DTLS 1.2 Certificate Request message includes the algorithms as a list of  
 
 _The DTLS 1.3 Certificate Request message includes the algorithms as a list of  SignatureSchemes in the signature_algorithms extension._
 
-*FCS_DTLSS_EXT.3 TLS Server Support for secure renegotiation (DTLSv1.2 only)*
-
-*FCS_DTLSS_EXT.3.1* The product shall support secure renegotiation in accordance with RFC 5746 by always including the ”renegotiation_info” extension in ServerHello messages.
-
-*_Application Note {counter:appnote_count}_*
-
-_This component may only be claimed for DTLS 1.2 but not DTLS 1.3._
-
-_RFC 5746 defines an extension to DTLS that binds renegotiation handshakes to the cryptography in the original handshake in order to prevent an attack in which the attacker forms a DTLS connection with the target server, injects content of his choice, and then splices in a new DTLS connection from a client. The server treats the client’s initial DTLS handshake as a renegotiation and thus believes that the initial data transmitted by the attacker is from the same entity as the subsequent client data._
-
-
 =====  FCS_TLSC_EXT & FCS_TLSS_EXT TLS Protocol
 
-TLS is not a required component of this cPP. If a TOE implements TLS, a corresponding selection in FPT_ITT.1, FTP_ITC.1, or FTP_TRP.1/Admin should be made to define what the TLS protocol is implemented to protect. If a corresponding option to support TLS has been selected in at least one of the SFRs named above, the corresponding selection-based TLS-related SFRs should be added to the ST from chap. B.3.1.5 (i.e. FCS_TLSC_EXT.1 and/or FCS_TLSS_EXT.1). The SFRs therein cover only the minimum TLS-related requirements without support for mutual authentication. The support for mutual authentication is optional when using TLS. If a TOE implements TLS with mutual authentication, the corresponding optional SFRs should be added to the ST from chap. A.7.1.2 (i.e. FCS_TLSC_EXT.2 and/or FCS_TLSS_EXT.2) in addition to the corresponding SFRs from chap. B.3.1.5.
+TLS is not a required component of this cPP. If a TOE implements TLS, a corresponding selection in FPT_ITT.1, FTP_ITC.1, or FTP_TRP.1/Admin should be made to define what the TLS protocol is implemented to protect. If a corresponding option to support TLS has been selected in at least one of the SFRs named above, the corresponding selection-based TLS-related SFRs should be added to the ST from chap. B.3.1.5 (i.e. FCS_TLSC_EXT.1 and/or FCS_TLSS_EXT.1). The SFRs therein cover only the minimum TLS-related requirements without support for mutual authentication.
+
+The support for mutual authentication is optional when using TLS. If a TOE implements TLS with mutual authentication, the corresponding optional SFRs should be added to the ST from chap. A.7.1.2 (i.e. FCS_TLSC_EXT.2 and/or FCS_TLSS_EXT.2) in addition to the corresponding SFRs from chap. B.3.1.5.
 
 A TOE may act as the client, the server, or both in TLS sessions. The requirement has been separated into TLS Client (FCS_TLSC_EXT) and TLS Server (FCS_TLSS_EXT) requirements to allow for these differences. If the TOE acts as the client during the claimed TLS sessions, the ST author should claim the corresponding FCS_TLSC_EXT requirements. If the TOE acts as the server during the claimed TLS sessions, the ST author should claim the corresponding FCS_TLSS_EXT requirements. If the TOE acts as both a client and server during the claimed TLS sessions, the ST author should claim the corresponding FCS_TLSC_EXT and FCS_TLSS_EXT requirements.
 
@@ -1967,20 +1936,6 @@ A TOE may act as the client, the server, or both in TLS sessions. The requiremen
 *_Application Note {counter:appnote_count}_*
 
 _The use of X.509v3 certificates for TLS is addressed in FIA_X509_EXT.2.1. This requirement adds that the client must be capable of presenting a certificate to a TLS server for TLS mutual authentication._
-
-*FCS_TLSC_EXT.3 TLS Client Support for secure renegotiation (TLSv1.2 only)*
-
-*FCS_TLSC_EXT.3.1* The product shall support secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746.
-
-*_Application Note {counter:appnote_count}_*
-
-_This component may only be claimed for TLS 1.2 but not TLS 1.3._
-
-_RFC 5746 defines an extension to TLS that binds renegotiation handshakes to the cryptography in the original handshake._
-
-_When performing secure renegotiation, the ”renegotiation_info” extension must be presented by the server initiating renegotiation, so the client must support use of this extension._
-
-_When signaling support for secure renegotiation, the client may present either the ”renegotiation_info” extension or the signaling cipher suite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message. (A signaling cipher suite value (SCSV) is presented as a cipher suite, but its only purpose is to provide other information and not to advertise support for a cipher suite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling cipher suite value exists as an alternative to presenting the ”renegotation_info” extension so that TLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it._
 
 *FCS_TLSS_EXT.2 TLS Server Support for Mutual Authentication*
 
@@ -2050,16 +2005,6 @@ _The selected ClientCertificateTypes and algorithms must be consistent with FCS_
 _The TLS 1.2 Certificate Request message includes the algorithms as a list of  SignatureAndHashAlgorithms in the supported signature algorithms list. The signature algorithm is also specified in the certificate_types list._
 
 _The TLS 1.3 Certificate Request message includes the algorithms as a list of SignatureSchemes in the signature_algorithms extension._
-
-*FCS_TLSS_EXT.3 TLS Server Support for secure renegotiation (TLSv1.2 only)*
-
-*FCS_TLSS_EXT.3.1* The product shall support secure renegotiation in accordance with RFC 5746 by always including the ”renegotiation_info” extension in ServerHello messages.
-
-*_Application Note {counter:appnote_count}_*
-
-_This component may only be claimed for TLS 1.2 but not TLS 1.3._
-
-_RFC 5746 defines an extension to TLS that binds renegotiation handshakes to the cryptography in the original handshake in order to prevent an attack in which the attacker forms a TLS connection with the target server, injects content of his choice, and then splices in a new TLS connection from a client.  The server treats the client's initial TLS handshake as a renegotiation and thus believes that the initial data transmitted by the attacker is from the same entity as the subsequent client data._
 
 === Optional Security Assurance Requirements for Flaw Remediation (ALC_FLR)
 
@@ -2353,6 +2298,18 @@ _The use of the early data extension and the post-handshake client authenticatio
 
 _The use of out-of-band provisioned pre-shared keys creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE. PSKs are used in DTLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material.  Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
 
+*FCS_DTLSC_EXT.1.9* The TSF shall [selection: _support DTLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: DTLS 1.2, DTLS 1.3] renegotiation attempts_].
+
+*_Application Note {counter:appnote_count}_*
+
+_The ST author selects the first option if the TOE supports DTLS 1.2 and secure renegotiation is supported. The ST author selects the second option and “DTLS 1.2” if the TOE supports DTLS 1.2 and secure renegotiation is not supported. The second option and “DTLS 1.3” must be selected if the TOE supports DTLS 1.3._
+
+_RFC 5746 defines an extension to DTLS that binds renegotiation handshakes to the cryptography in the original handshake._
+
+_The “renegotiation_info” extension must be presented by the server to signal support for secure renegotiation and must be presented by the client to perform secure renegotiation._
+
+_When signaling support for secure renegotiation, the client may present either the “renegotiation_info” extension or the signaling cipher suite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message. (A signaling cipher suite value (SCSV) is presented as a cipher suite, but its only purpose is to provide other information and not to advertise support for a cipher suite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling cipher suite value exists as an alternative to presenting the “renegotation_info” extension so that DTLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it._
+
 *FCS_DTLSS_EXT.1 DTLS Server Protocol*
 
 *FCS_DTLSS_EXT.1.1* The TSF shall implement [selection: _DTLS 1.3 (RFC 9147), DTLS 1.2 (RFC 6347)_] and reject all other DTLS versions. The DTLS implementation will support the following ciphersuites:
@@ -2466,6 +2423,13 @@ _The use of the early data extension is prohibited in the configured TOE._
 
 _The use of out-of-band provisioned pre-shared keys creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE.  PSKs are used in DTLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material.  Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
 
+*FCS_DTLSS_EXT.1.11* The TSF shall [selection: _support secure renegotiation in accordance with RFC 5746 by always including the “renegotiation_info” TLS extension in DTLS 1.2 ServerHello messages, reject [selection: DTLS 1.2, DTLS 1.3] renegotiation attempts_].
+
+*_Application Note {counter:appnote_count}_*
+
+_The ST author selects the first option if the TOE supports DTLS 1.2 and secure renegotiation is supported. The ST author selects the second option and “DTLS 1.2” if the TOE supports DTLS 1.2 and secure renegotiation is not supported. The second option and “DTLS 1.3” must be selected if the TOE supports DTLS 1.3._
+
+_RFC 5746 defines an extension to DTLS that binds renegotiation handshakes to the cryptography in the original handshake in order to prevent an attack in which the attacker forms a DTLS connection with the target server, injects content of his choice, and then splices in a new DTLS connection from a client. The server treats the client’s initial DTLS handshake as a renegotiation and thus believes that the initial data transmitted by the attacker is from the same entity as the subsequent client data._
 
 =====  FCS_HTTPS_EXT HTTPS Protocol
 
@@ -2856,6 +2820,18 @@ _The use of the early data extension and the post-handshake client authenticatio
 
 _The use of out-of-band provisioned pre-shared keys creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE.  PSKs are used in TLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material.  Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
 
+*FCS_TLSC_EXT.1.9* The TSF shall [selection: _support TLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
+
+*_Application Note {counter:appnote_count}_*
+
+_The ST author selects the first option if the TOE supports TLS 1.2 and secure renegotiation is supported. The ST author selects the second option and “TLS 1.2” if the TOE supports TLS 1.2 and secure renegotiation is not supported. The second option and “TLS 1.3” must be selected if the TOE supports TLS 1.3._
+
+_RFC 5746 defines an extension to TLS that binds renegotiation handshakes to the cryptography in the original handshake._
+
+_The “renegotiation_info” extension must be presented by the server to signal support for secure renegotiation and must be presented by the client to perform secure renegotiation._
+
+_When signaling support for secure renegotiation, the client may present either the “renegotiation_info” extension or the signaling cipher suite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message. (A signaling cipher suite value (SCSV) is presented as a cipher suite, but its only purpose is to provide other information and not to advertise support for a cipher suite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling cipher suite value exists as an alternative to presenting the “renegotation_info” extension so that TLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it._
+
 *FCS_TLSS_EXT.1 TLS Server Protocol*
 
 *FCS_TLSS_EXT.1.1* The TSF shall implement [selection: _TLS 1.3 (RFC 8446), TLS 1.2 (RFC 5246)_] and reject all other TLS and SSL versions. The TLS implementation will support the following ciphersuites:
@@ -2948,6 +2924,13 @@ _The use of the early data extension is prohibited in the configured TOE._
 
 _The use of out-of-band provisioned pre-shared keys creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE. PSKs are used in TLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material. Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
 
+*FCS_TLSS_EXT.1.8* The TSF shall [selection: _support secure renegotiation in accordance with RFC 5746 by always including the “renegotiation_info” TLS extension in TLS 1.2 ServerHello messages, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
+
+*_Application Note {counter:appnote_count}_*
+
+_The ST author selects the first option if the TOE supports TLS 1.2 and secure renegotiation is supported. The ST author selects the second option and “TLS 1.2” if the TOE supports TLS 1.2 and secure renegotiation is not supported. The second option and “TLS 1.3” must be selected if the TOE supports TLS 1.3._
+
+_RFC 5746 defines an extension to TLS that binds renegotiation handshakes to the cryptography in the original handshake in order to prevent an attack in which the attacker forms a TLS connection with the target server, injects content of his choice, and then splices in a new TLS connection from a client.  The server treats the client's initial TLS handshake as a renegotiation and thus believes that the initial data transmitted by the attacker is from the same entity as the subsequent client data._
 
 === Identification and Authentication (FIA)
 
@@ -3507,6 +3490,7 @@ _]._
 
 *FCS_DTLSC_EXT.1.8* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
 
+*FCS_DTLSC_EXT.1.9* The TSF shall [selection: _support DTLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: DTLS 1.2, DTLS 1.3] renegotiation attempts_].
 
 *FCS_DTLSC_EXT.2 DTLS Client Support for Mutual Authentication*
 
@@ -3534,26 +3518,6 @@ Dependencies:
 
 * DTLS records previously received;
 * DTLS records too old to fit in the sliding window.
-
-*FCS_DTLSC_EXT.3 DTLS Client Support for secure renegotiation (DTLSv1.2 only)*
-
-Hierarchical to: No other components
-
-Dependencies:
-
-* FCS_CKM.1Cryptographic Key Generation
-* FCS_CKM.2 Cryptographic Key Establishment
-* FCS_COP.1/DataEncryption Cryptographic operation (AES Data encryption/decryption)
-* FCS_COP.1/SigGen Cryptographic operation (Signature Generation and Verification)
-* FCS_COP.1/Hash Cryptographic operation (Hash Algorithm)
-* FCS_COP.1/KeyedHash Cryptographic operation (Keyed Hash Algorithm)
-* FCS_RBG_EXT.1 Random Bit Generation
-* FCS_DTLSC_EXT.1 TLS Client Protocol
-* FIA_X509_EXT.1 X.509 Certificate Validation
-* FIA_X509_EXT.2 X.509 Certificate Authentication
-* FIA_X509_EXT.3 X.509 Certificate Request
-
-*FCS_DTLSC_EXT.3.1* The product shall support secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746.
 
 =====  FCS_DTLSS_EXT DTLS Server Protocol
 
@@ -3640,6 +3604,7 @@ Dependencies:
 
 *FCS_DTLSS_EXT.1.10* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
 
+*FCS_DTLSS_EXT.1.11* The TSF shall [selection: _support secure renegotiation in accordance with RFC 5746 by always including the “renegotiation_info” TLS extension in DTLS 1.2 ServerHello messages, reject [selection: DTLS 1.2, DTLS 1.3] renegotiation attempts_].
 
 *FCS_DTLSS_EXT.2 DTLS Server Support for Mutual Authentication*
 
@@ -3693,25 +3658,6 @@ Dependencies:
 * _rsa_pss_pss with sha512(0x080b)_
 
 ] and no other algorithms.
-
-*FCS_DTLSS_EXT.3 TLS Server Support for secure renegotiation (DTLSv1.2 only)*
-
-Hierarchical to: No other components
-
-Dependencies:
-
-* FCS_CKM.1 Cryptographic Key Generation
-* FCS_CKM.2 Cryptographic Key Establishment
-* FCS_COP.1/DataEncryption Cryptographic operation (AES Data encryption/decryption)
-* FCS_COP.1/SigGen Cryptographic operation (Signature Generation and Verification)
-* FCS_COP.1/Hash Cryptographic operation (Hash Algorithm)
-* FCS_COP.1/KeyedHash Cryptographic operation (Keyed Hash Algorithm)
-* FCS_RBG_EXT.1 Random Bit Generation
-* FCS_DTLSS_EXT.1 DTLS Server Protocol
-* FIA_X509_EXT.1 X.509 Certificate Validation
-* FIA_X509_EXT.2 X.509 Certificate Authentication
-
-*FCS_DTLSS_EXT.3.1* The product shall support secure renegotiation in accordance with RFC 5746 by always including the ”renegotiation_info” extension in ServerHello messages.
 
 ===== FCS_HTTPS_EXT.1 HTTPS Protocol
 
@@ -4028,6 +3974,8 @@ _]._
 
 *FCS_TLSC_EXT.1.8* The TSF shall not permit TLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in TLS 1.3 must use (EC)DHE to provide forward secrecy.
 
+*FCS_TLSC_EXT.1.9* The TSF shall [selection: _support TLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
+
 *FCS_TLSC_EXT.2 TLS Client Support for Mutual Authentication*
 
 
@@ -4047,26 +3995,6 @@ Dependencies:
 * FIA_X509_EXT.2 X.509 Certificate Authentication
 
 *FCS_TLSC_EXT.2.1* The TSF shall support TLS communication with mutual authentication using X.509v3 certificates.
-
-*FCS_TLSC_EXT.3 TLS Client Support for secure renegotiation (TLSv1.2 only)*
-
-Hierarchical to: No other components
-
-Dependencies:
-
-* FCS_CKM.1Cryptographic Key Generation
-* FCS_CKM.2 Cryptographic Key Establishment
-* FCS_COP.1/DataEncryption Cryptographic operation (AES Data encryption/decryption)
-* FCS_COP.1/SigGen Cryptographic operation (Signature Generation and Verification)
-* FCS_COP.1/Hash Cryptographic operation (Hash Algorithm)
-* FCS_COP.1/KeyedHash Cryptographic operation (Keyed Hash Algorithm)
-* FCS_RBG_EXT.1 Random Bit Generation
-* FCS_TLSC_EXT.1 TLS Client Protocol
-* FIA_X509_EXT.1 X.509 Certificate Validation
-* FIA_X509_EXT.2 X.509 Certificate Authentication
-* FIA_X509_EXT.3 X.509 Certificate Request
-
-*FCS_TLSC_EXT.3.1* The product shall support secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746.
 
 =====  FCS_TLSS_EXT TLS Server Protocol
 
@@ -4146,6 +4074,7 @@ Dependencies:
 
 *FCS_TLSS_EXT.1.7* The TSF shall not permit TLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in TLS 1.3 must use (EC)DHE to provide forward secrecy.
 
+*FCS_TLSS_EXT.1.8* The TSF shall [selection: _support secure renegotiation in accordance with RFC 5746 by always including the “renegotiation_info” TLS extension in TLS 1.2 ServerHello messages, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
 
 *FCS_TLSS_EXT.2 TLS Server Support for Mutual Authentication*
 
@@ -4197,25 +4126,6 @@ Dependencies:
 * _rsa_pss_pss with sha512(0x080b)_
 
 ] and no other algorithms.
-
-*FCS_TLSS_EXT.3 TLS Server Support for secure renegotiation (TLSv1.2 only)*
-
-Hierarchical to: No other components
-
-Dependencies:
-
-* FCS_CKM.1 Cryptographic Key Generation
-* FCS_CKM.2 Cryptographic Key Establishment
-* FCS_COP.1/DataEncryption Cryptographic operation (AES Data encryption/decryption)
-* FCS_COP.1/SigGen Cryptographic operation (Signature Generation and Verification)
-* FCS_COP.1/Hash Cryptographic operation (Hash Algorithm)
-* FCS_COP.1/KeyedHash Cryptographic operation (Keyed Hash Algorithm)
-* FCS_RBG_EXT.1 Random Bit Generation
-* FCS_TLSS_EXT.1 TLS Server Protocol
-* FIA_X509_EXT.1 X.509 Certificate Validation
-* FIA_X509_EXT.2 X.509 Certificate Authentication
-
-*FCS_TLSS_EXT.3.1* The product shall support secure renegotiation in accordance with RFC 5746 by always including the ”renegotiation_info” extension in ServerHello messages.
 
 === Identification and Authentication (FIA)
 
@@ -4904,42 +4814,6 @@ FIA_X509_EXT.2 (selection-based SFR) included
 
 FIA_X509_EXT.3 (selection-based SFR) included
 
-|FCS_DTLSC_EXT.3 a|
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-FIA_X509_EXT.1 X.509
-
-FIA_X509_EXT.2 X.509
-
-FIA_X509_EXT.3 X.509
-
-a|
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.2 (selection-based SFR) included
-
-FIA_X509_EXT.3 (selection-based SFR) included
-
 |FCS_DTLSS_EXT.2 a|
 FCS_CKM.1
 
@@ -4976,78 +4850,7 @@ FIA_X509_EXT.2 (selection-based SFR) included
 
 FIA_X509_EXT.3 (selection-based SFR) included
 
-|FCS_DTLSS_EXT.3 a|
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-FIA_X509_EXT.1 X.509
-
-FIA_X509_EXT.2 X.509
-
-FIA_X509_EXT.3 X.509
-
-a|
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.2 (selection-based SFR) included
-
-FIA_X509_EXT.3 (selection-based SFR) included
 |FCS_TLSC_EXT.2 a|
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-FIA_X509_EXT.1 X.509
-
-FIA_X509_EXT.2 X.509
-
-FIA_X509_EXT.3 X.509
-
-a|
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.2 (selection-based SFR) included
-
-FIA_X509_EXT.3 (selection-based SFR) included
-
-|FCS_TLSC_EXT.3 a|
 FCS_CKM.1
 
 FCS_CKM.2
@@ -5119,41 +4922,6 @@ FIA_X509_EXT.2 (selection-based SFR) included
 
 FIA_X509_EXT.3 (selection-based SFR) included
 
-|FCS_TLSS_EXT.3 a|
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-FIA_X509_EXT.1 X.509
-
-FIA_X509_EXT.2 X.509
-
-FIA_X509_EXT.3 X.509
-
-a|
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.2 (selection-based SFR) included
-
-FIA_X509_EXT.3 (selection-based SFR) included
 |===
 
 [#_Toc456887396]#Table 11: SFR Dependencies Rationale for Optional SFRs#
