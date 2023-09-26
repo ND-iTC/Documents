@@ -325,7 +325,7 @@ image:extracted-media/media/d_toe_9.png[image,width=346,height=275]
 
 When dealing with a distributed TOE, a number of separate components need to be brought together in the operational environment in order to create the TOE: this requires that trusted communications channels are set up between certain pairs of components (it is assumed that all components need to communicate with at least one other component, but not that all components need to communicate with all other components).
 
-The underlying model for creation of the TOE is to have a ‘registration process’ in which components ‘join’ the TOE. The registration process starts with two components, one of which (the ‘joiner’) is about to join an existing TOE by registering with the other (the ‘gatekeeper’). The two components will use one or more specified authentication and communication channel options so that the components authenticate each other and protect any sensitive data that is transmitted during the registration process (e.g. a key might be sent by a gatekeeper to the joiner as a result of the registration). The following figures illustrate the three supported registration models. Figure 12 illustrates a distributed TOE registration approach which uses an instance of FPT_ITT.1 or FTP_ITC.1 to protect the registration exchange.
+The underlying model for creation of the TOE is to have a ‘registration process’ in which components ‘join’ the TOE. The registration process starts with two components, one of which (the ‘joiner’) is about to join an existing TOE by registering with the other (the ‘gatekeeper’). The two components will use one or more specified authentication and communication channel options so that the components authenticate each other and protect any sensitive data that is transmitted during the registration process (e.g. a key might be sent by a ‘gatekeeper’ to the ‘joiner’ as a result of the registration). The following figures illustrate the three supported registration models. Figure 12 illustrates a distributed TOE registration approach which uses an instance of FPT_ITT.1 or FTP_ITC.1 to protect the registration exchange.
 
 image:extracted-media/media/d_toe_10.png[image,width=542,height=265]
 
@@ -343,13 +343,13 @@ image:extracted-media/media/d_toe_12.png[image,width=388,height=237]
 
 [#_Ref476931325]#Figure 14: Distributed TOE registration without a registration channel#
 
-In each case, during the registration process, the Security Administrator must positively enable the joining components before it can act as part of the TSF. The following figure illustrates the approaches that this enablement step may take;
+In each case, during the registration process, the Security Administrator must positively enable the joining components before it can act as part of the TSF. The following figure illustrates the approaches that this enablement step may take.
 
 image:extracted-media/media/d_toe_13.png[image,width=517,height=292]
 
 [#_Toc456887383]#Figure 15: Joiner enablement options for Distributed TOEs#
 
-Note that in the case where no registration channel is required, that is the joiner and gatekeeper are directly configured (Figure 14), enablement is implied as part of this direct configuration process.
+Note that in the case where no registration channel is required, that is the ‘joiner’ and ‘gatekeeper’ are directly configured (Figure 14), enablement is implied as part of this direct configuration process.
 
 After registration, the components will communicate between themselves using a normal SSH/TLS/DTLS/IPsec/HTTPS channel (which is specified in an ST as an instance of FTP_ITC.1 or FPT_ITT.1 in terms of section 6 and appendix A). This channel for inter-component communications is specified at the top level with the new (extended) SFR FCO_CPC_EXT.1 (see section A.6.1) and is in addition to the other communication channels required for communication with entities outside the TOE (which are specified in an ST as instances of FTP_ITC.1 and FTP_TRP.1).
 
