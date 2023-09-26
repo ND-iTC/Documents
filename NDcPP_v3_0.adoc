@@ -164,7 +164,7 @@ PP Date: 06-April-2023
 
 === TOE Overview
 
-This is a ollaborative Protection Profile (cPP) whose Target of Evaluation (TOE) is a Network Device (ND). It provides a minimal set of security requirements expected by all Network Devices that target the mitigation of a set of defined threats. This baseline set of requirements will be built upon by future cPPs to provide an overall set of security solutions for networks up to carrier and enterprise scale. A Network Device in the context of this cPP is a device that is connected to a network and has an infrastructure role within that network. The TOE may be standalone or distributed, where a distributed TOE is one that requires multiple distinct components to operate as a logical whole in order to fulfil the requirements of this cPP (a more extensive description of distributed Network Device TOEs is given in section 3).
+This is a collaborative Protection Profile (cPP) whose Target of Evaluation (TOE) is a Network Device (ND). It provides a minimal set of security requirements expected by all Network Devices that target the mitigation of a set of defined threats. This baseline set of requirements will be built upon by future cPPs to provide an overall set of security solutions for networks up to carrier and enterprise scale. A Network Device in the context of this cPP is a device that is connected to a network and has an infrastructure role within that network. The TOE may be standalone or distributed, where a distributed TOE is one that requires multiple distinct components to operate as a logical whole in order to fulfil the requirements of this cPP (a more extensive description of distributed Network Device TOEs is given in section 3).
 
 When discussing a ND in this document, it refers to a Network Device or a component of a distributed Network Device unless it is expressly stated otherwise.
 
@@ -372,28 +372,32 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_STG_EXT.1 |Protected Audit Event Storage |All
 |FAU_STG.1 |Protected Audit Trail Storage |Feature Dependent
 |FAU_STG_EXT.2 |Counting Lost Audit Data |Feature Dependent
-|FAU_STG_EXT.3 |Display Warning for Local Storage Space |Feature Dependent
+|FAU_STG_EXT.3 |Action in Case of Possible Audit Data Loss |Feature Dependent
 |FAU_STG_EXT.4 |Protected Local Audit Event Storage for Distributed TOEs |Feature Dependent
 |FAU_STG_EXT.5 |Protected Remote Audit Event Storage for Distributed TOEs |Feature Dependent
-|FCO_CPC_EXT.1 |Communication Partner Control |All
+|FCO_CPC_EXT.1 |Component Registration Channel Definition |All
 |FCS_CKM.1 |Cryptographic Key Generation |Onefootnote:[The overall TOE is required to support on-board key generation and (if the TOE uses X.509 certificates as in Appendix B.4.1) RFC 2986 Certificate Request generation. If not all TOE components are supporting on- board key generation (and generation of certificate requests, where applicable), the TOE shall support distribution of keys to the TOE components that are not supporting key generation themselves. Depending on the life-cycle phase, either a secure registration channel shall be used for key distribution at the point where the component is joined to the TOE or an inter-component secure channel shall be used for key distribution post-registration.]
 |FCS_CKM.2 |Cryptographic Key Establishment |All
 |FCS_CKM.4 |Cryptographic Key Destruction |All
 |FCS_COP.1/DataEncryption |Cryptographic Operation (AES Data Encryption/Decryption) |All
-|FCS_COP.1/SigGen |Cryptographic Operation (Signature Verification) |All
+|FCS_COP.1/SigGen |Cryptographic Operation (Signature Generation and Verification |All
 |FCS_COP.1/Hash |Cryptographic Operation (Hash Algorithm) |All
 |FCS_COP.1/KeyedHash |Cryptographic Operation (Keyed Hash Algorithm) |All
-|FCS_DTLSC_EXT.1 |DTLS Client |Feature Dependent
-|FCS_DTLSC_EXT.2 |DTLS Client with Mutual Authentication |Feature Dependent
-|FCS_DTLSS_EXT.1 |DTLS Server |Feature Dependent
-|FCS_DTLSS_EXT.2 |DTLS Server with Mutual Authentication |Feature Dependent
-|FCS_HTTPS_EXT.1 |HTTPS Protocol |Feature Dependent
-|FCS_IPSEC_EXT.1 |IPsec Protocol |Feature Dependent
-|FCS_NTP_EXT.1 |NTP Protocol |Feature Dependent
-|FCS_TLSC_EXT.1 |TLS Client |Feature Dependent
-|FCS_TLSC_EXT.2 |TLS Client with Authentication |Feature Dependent
-|FCS_TLSS_EXT.1 |TLS Server |Feature Dependent
+|FCS_DTLSC_EXT.1 |DTLS Client Protocol|Feature Dependent
+|FCS_DTLSC_EXT.2 |DTLS Client with Mutual Authentication |Feature Dependent 
+|FCS_DTLSC_EXT.3 |DTLS Client Support for Secure Renegotiation (DTLSv1.2 only)|Feature Dependent
+|FCS_DTLSS_EXT.1 |DTLS Server Protocol |Feature Dependent
+|FCS_DTLSS_EXT.2 |DTLS Server Support for Mutual Authentication |Feature Dependent
+|FCS_DTLSS_EXT.3|DTLS Server Support for Secure Renegotiation (DTLSv1.2 only)|Feature Dependent
+|FCS_HTTPS_EXT.1|HTTPS Protocol |Feature Dependent
+|FCS_IPSEC_EXT.1|IPsec Protocol |Feature Dependent
+|FCS_NTP_EXT.1|NTP Protocol |Feature Dependent
+|FCS_TLSC_EXT.1|TLS Client Protocol|Feature Dependent
+|FCS_TLSC_EXT.2|TLS Client Support for Mutual Authentication|Feature Dependent
+|FCS_TLSC_EXT.3|TLS Client Support for Secure Renegotiation (TLSv1.2 only)|Feature Dependent
+|FCS_TLSS_EXT.1 |TLS Server Protocol|Feature Dependent
 |FCS_TLSS_EXT.2 |TLS Server with Mutual Authentication |Feature Dependent
+|FCS_TLSS_EXT.3 |TLS Server Support for Secure Renegotiation (TLSv1.2 only)|Feature Dependent
 |FCS_RBG_EXT.1 |Random Bit Generation |All
 |FIA_AFL.1 |Authentication Failure Management |One
 |FIA_PMG_EXT.1 |Password Management |One
@@ -402,9 +406,9 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FIA_X509_EXT.1/Rev |X.509 Certification Validation |Feature Dependent
 |FIA_X509_EXT.1/ITT |X.509 Certification Validation |Feature Dependent
 |FIA_X509_EXT.2 |X.509 Certificate Authentication |Feature Dependent
-|FIA_X509_EXT.3 |Certificate Requests |Feature Dependent^[4]^
+|FIA_X509_EXT.3 |X.509 Certificate Requests|Feature Dependent^[4]^
 |FMT_MOF.1/ManualUpdate |Trusted Update - Management of Security Functions Behaviour |All
-|FMT_MOF.1/Services |Trusted Update - Management of TSF Data |Feature Dependent
+|FMT_MOF.1/Services |Management of Security Functions Behavior |Feature Dependent
 |FMT_MOF.1/Functions |Management of Security Functions Behaviour |Feature Dependent
 |FMT_MTD.1/CoreData |Management of TSF Data |All
 |FMT_MTD.1/CryptoKeys |Management of TSF Data |Feature Dependent
@@ -412,7 +416,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FMT_SMR.2 |Restrictions on Security Roles |One
 |FPT_SKP_EXT.1 |Protection of TSF Data (for reading of all symmetric keys) |All
 |FPT_APW_EXT.1 |Protection of Administrator Passwords |Feature Dependent
-|FPT_TST_EXT.1 |Testing (Extended) |All
+|FPT_TST_EXT.1 |TSF Testing |All
 |FPT_ITT.1 |Basic Internal TSF Data Transfer Protection |Feature Dependentfootnote:[To protect inter-TSF data transfer, FPT_ITT.1 or FTP_ITC.1 must be fulfilled by each distributed TOE component. This is in addition to an iteration of FTP_ITC.1 to protect communications with external entities.]
 |FPT_STM_EXT.1 |Reliable Time Stamps |All
 |FPT_TUD_EXT.1 |Trusted Update |All
