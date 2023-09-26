@@ -372,7 +372,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_STG_EXT.1 |Protected Audit Event Storage |All
 |FAU_STG.1 |Protected Audit Trail Storage |Feature Dependent
 |FAU_STG_EXT.2 |Counting Lost Audit Data |Feature Dependent
-|FAU_STG_EXT.3 |Display warning for local storage space |Feature Dependent
+|FAU_STG_EXT.3 |Display Warning for Local Storage Space |Feature Dependent
 |FAU_STG_EXT.4 |Protected Local Audit Event Storage for Distributed TOEs |Feature Dependent
 |FAU_STG_EXT.5 |Protected Remote Audit Event Storage for Distributed TOEs |Feature Dependent
 |FCO_CPC_EXT.1 |Communication Partner Control |All
@@ -383,17 +383,17 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FCS_COP.1/SigGen |Cryptographic Operation (Signature Verification) |All
 |FCS_COP.1/Hash |Cryptographic Operation (Hash Algorithm) |All
 |FCS_COP.1/KeyedHash |Cryptographic Operation (Keyed Hash Algorithm) |All
-|FCS_DTLSC_EXT.1 |DTLS client |Feature Dependent
-|FCS_DTLSC_EXT.2 |DTLS client with mutual authentication |Feature Dependent
-|FCS_DTLSS_EXT.1 |DTLS server |Feature Dependent
-|FCS_DTLSS_EXT.2 |DTLS server with mutual authentication |Feature Dependent
+|FCS_DTLSC_EXT.1 |DTLS Client |Feature Dependent
+|FCS_DTLSC_EXT.2 |DTLS Client with Mutual Authentication |Feature Dependent
+|FCS_DTLSS_EXT.1 |DTLS Server |Feature Dependent
+|FCS_DTLSS_EXT.2 |DTLS Server with Mutual Authentication |Feature Dependent
 |FCS_HTTPS_EXT.1 |HTTPS Protocol |Feature Dependent
 |FCS_IPSEC_EXT.1 |IPsec Protocol |Feature Dependent
 |FCS_NTP_EXT.1 |NTP Protocol |Feature Dependent
 |FCS_TLSC_EXT.1 |TLS Client |Feature Dependent
-|FCS_TLSC_EXT.2 |TLS Client with authentication |Feature Dependent
+|FCS_TLSC_EXT.2 |TLS Client with Authentication |Feature Dependent
 |FCS_TLSS_EXT.1 |TLS Server |Feature Dependent
-|FCS_TLSS_EXT.2 |TLS Server with mutual authentication |Feature Dependent
+|FCS_TLSS_EXT.2 |TLS Server with Mutual Authentication |Feature Dependent
 |FCS_RBG_EXT.1 |Random Bit Generation |All
 |FIA_AFL.1 |Authentication Failure Management |One
 |FIA_PMG_EXT.1 |Password Management |One
@@ -403,9 +403,9 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FIA_X509_EXT.1/ITT |X.509 Certification Validation |Feature Dependent
 |FIA_X509_EXT.2 |X.509 Certificate Authentication |Feature Dependent
 |FIA_X509_EXT.3 |Certificate Requests |Feature Dependent^[4]^
-|FMT_MOF.1/ManualUpdate |Trusted Update - Management of Security Functions behaviour |All
+|FMT_MOF.1/ManualUpdate |Trusted Update - Management of Security Functions Behaviour |All
 |FMT_MOF.1/Services |Trusted Update - Management of TSF Data |Feature Dependent
-|FMT_MOF.1/Functions |Management of security functions behaviour |Feature Dependent
+|FMT_MOF.1/Functions |Management of Security Functions Behaviour |Feature Dependent
 |FMT_MTD.1/CoreData |Management of TSF Data |All
 |FMT_MTD.1/CryptoKeys |Management of TSF Data |Feature Dependent
 |FMT_SMF.1 |Specification of Management Functions |Feature Dependent
@@ -413,7 +413,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FPT_SKP_EXT.1 |Protection of TSF Data (for reading of all symmetric keys) |All
 |FPT_APW_EXT.1 |Protection of Administrator Passwords |Feature Dependent
 |FPT_TST_EXT.1 |Testing (Extended) |All
-|FPT_ITT.1 |Basic internal TSF data transfer protection |Feature Dependentfootnote:[To protect inter-TSF data transfer, FPT_ITT.1 or FTP_ITC.1 must be fulfilled by each distributed TOE component. This is in addition to an iteration of FTP_ITC.1 to protect communications with external entities.]
+|FPT_ITT.1 |Basic Internal TSF Data Transfer Protection |Feature Dependentfootnote:[To protect inter-TSF data transfer, FPT_ITT.1 or FTP_ITC.1 must be fulfilled by each distributed TOE component. This is in addition to an iteration of FTP_ITC.1 to protect communications with external entities.]
 |FPT_STM_EXT.1 |Reliable Time Stamps |All
 |FPT_TUD_EXT.1 |Trusted Update |All
 |FPT_TUD_EXT.2 |Trusted Update based on Certificates |Feature Dependent
@@ -424,8 +424,8 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FTP_ITC.1 |Inter-TSF Trusted Channel (Refinement) |One
 |FTP_TRP.1/Admin |Trusted Path (Refinement) |One
 |FTP_TRP.1/Join |Trusted Path |Feature Dependent
-|FMT_MOF.1/ManualUpdate |Management of security functions behaviour |Feature Dependent
-|FMT_MOF.1/AutoUpdate |Management of security functions behaviour |Feature Dependent
+|FMT_MOF.1/ManualUpdate |Management of Security Functions Behaviour |Feature Dependent
+|FMT_MOF.1/AutoUpdate |Management of Security Functions Behaviour |Feature Dependent
 |===
 
 [#_Ref443331358]#Table 1: Security Functional Requirements for Distributed TOEs#
