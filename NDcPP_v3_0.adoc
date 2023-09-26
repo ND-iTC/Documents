@@ -291,7 +291,7 @@ image:extracted-media/media/d_toe_6.png[image,width=349,height=276]
 
 [#_Toc456887376]#Figure 8: Distributed Network Devices plus Management Component required to fulfil cPP requirements#
 
-Where several Network Devices are managed by one Management Component, the TOE may also be considered to be distributed but the focus of the certification should be restricted to the simplest combination of Network Device and Management Component. By the use of an equivalency argument, the combination of multiple Network Devices together with one Management Component can then be regarded as certified solutionfootnote:[[SD, B.4] describes how to define the components of a distributed TOE in terms of a “minimum configuration” and allowance for iteration of equivalent components.].
+Where several Network Devices are managed by one Management Component, the TOE may also be considered to be distributed but the focus of the certification should be restricted to the simplest combination of Network Device and Management Component. By the use of an equivalency argument, the combination of multiple Network Devices together with one Management Component can then be regarded as certified solutionfootnote:[[SD, B.4] describes how to define the components of a distributed TOE in terms of a “minimum configuration” and allowance for iteration of equivalent components.
 
 image:extracted-media/media/d_toe_7.png[image,width=364,height=282]
 
