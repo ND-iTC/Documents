@@ -14,7 +14,7 @@ Date: {revdate}
 
 == Acknowledgements
 
-This collaborative Protection Profile (cPP) was developed by the Network Device international Technical Community (ND iTC) with representatives from industry, Government agencies, Common Criteria Test Laboratories, and members of academia.
+This collaborative Protection Profile (cPP) was developed by the Network Device international Technical Community (ND iTC) with representatives from industry, government agencies, Common Criteria Testing Laboratories, and members of academia.
 
 == Preface
 
