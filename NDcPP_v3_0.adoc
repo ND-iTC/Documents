@@ -1575,7 +1575,7 @@ Testing is performed to confirm the functionality described in the TSS as well a
 
 === Class AVA: Vulnerability Assessment
 
-For the first generation of this cPP, the iTC is expected to survey open sources to discover what vulnerabilities have been discovered in these types of products and provide that content into the AVA_VAN discussion. In most cases, these vulnerabilities will require sophistication beyond that of a basic attacker. This information will be used in the development of future protection profiles.
+For cPP version 3, the iTC is expected to survey open sources to discover what vulnerabilities have been discovered in these types of products and provide that content into the AVA_VAN discussion. In most cases, these vulnerabilities will require sophistication beyond that of a basic attacker. This information will be used in the development of future protection profiles.
 
 ==== Vulnerability Survey (AVA_VAN.1)
 
@@ -1598,41 +1598,34 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 |FAU_STG.1 |None. |None.
 |FAU_STG_EXT.2 |None. |None.
 |FAU_STG_EXT.3 |Low storage space for audit events. |None.
+|FCO_CPC_EXT.1 a|
+* Enabling communications between a pair of components.
+* Disabling communications between a pair of components.
+|Identities of the endpoint pairs enabled or disabled.
+|FCS_DTLSC_EXT.2 |Detected replay attacks |Source of the replay attack.
+|FCS_DTLSC_EXT.3 |None |None
+|FCS_DTLSS_EXT.2 |Failure to authenticate the client |Reason for failure
+|FCS_DTLSS_EXT.3 |None |None
+|FCS_TLSC_EXT.2 |None |None
+|FCS_TLSC_EXT.3 |None |None
+|FCS_TLSS_EXT.2 |Failure to authenticate the client |Reason for failure
+|FCS_TLSS_EXT.3 |None |None
 |FIA_X509_EXT.1/ITT a|
 * Unsuccessful attempt to validate a certificate
-
 * Any addition, replacement or removal of trust anchors in the TOE's trust store
-
 a|
 * Reason for failure of certificate validation
 * Identification of certificates added, replaced or removed as trust anchor in the TOE's trust store
-
 |FPT_ITT.1 a|
 * Initiation of the trusted channel.
 * Termination of the trusted channel.
 * Failure of the trusted channel functions.
-
 |Identification of the initiator and target of failed trusted channels establishment attempt.
 |FTP_TRP.1/Join a|
 * Initiation of the trusted path.
 * Termination of the trusted path.
 * Failure of the trusted path functions.
-
 |None.
-|FCO_CPC_EXT.1 a|
-* Enabling communications between a pair of components.
-* Disabling communications between a pair of components.
-
-
-|Identities of the endpoint pairs enabled or disabled.
-|FCS_DTLSC_EXT.2 |Detected replay attacks |Source of the replay attack.
-|FCS_DTLSS_EXT.2 |Failure to authenticate the client |Reason for failure
-|FCS_TLSC_EXT.2 |None |None
-|FCS_TLSS_EXT.2 |Failure to authenticate the client |Reason for failure
-|FCS_DTLSC_EXT.3 |None |None
-|FCS_DTLSS_EXT.3 |None |None
-|FCS_TLSC_EXT.3 |None |None
-|FCS_TLSS_EXT.3 |None |None
 |===
 
 [#_Ref397655544]#Table 4: TOE Optional SFRs and Auditable Events#
