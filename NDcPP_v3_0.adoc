@@ -399,7 +399,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FCS_TLSS_EXT.2 |TLS Server with Mutual Authentication |Feature Dependent
 |FCS_TLSS_EXT.3 |TLS Server Support for Secure Renegotiation (TLSv1.2 only)|Feature Dependent
 |FCS_RBG_EXT.1 |Random Bit Generation |All
-|FIA_AFL.1 |Authentication Failure Management |One
+|FIA_AFL.1 |Authentication Failure Handling |One
 |FIA_PMG_EXT.1 |Password Management |One
 |FIA_UIA_EXT.1 |User Identification and Authentication |One
 |FIA_UAU.7 |Protected Authentication Feedback |Feature Dependent
@@ -1282,7 +1282,7 @@ This section defines requirements for the TOE to protect critical security data 
 
 ===== FPT_SKP_EXT.1 Protection of TSF Data (for reading of all pre-shared, symmetric and private keys)
 
-*FPT_SKP_EXT.1 Protection of TSF Data (for reading of all pre-shared, symmetric and private keys)*
+*FPT_SKP_EXT.1 Protection of TSF Data (for reading of all symmetric keys)*
 
 *FPT_SKP_EXT.1.1* The TSF shall prevent reading of all pre-shared keys, symmetric keys, and private keys.
 
@@ -2757,11 +2757,11 @@ _The following table provides the ST author with instructions for completing the
 [cols="1,1,1"]
 |===
 | |_not present the Supported Groups Extension_|_present the Supported Groups Extension_
-|_TLS 1.3 with or without TLS 1.2_|_Shall not select_|_Shall select with any secp curves or any ffdhe groups – If TLS 1.2 is supported, see the following rows for additional instructions._
-|_TLS 1.2 with support for at least one ECDHE ciphersuite_|_Shall not select_|_Shall select – at least one secp curve shall be selected_
+|_TLS 1.3 with or without TLS 1.2_|_Should not select_|_Should select with any secp curves or any ffdhe groups – If TLS 1.2 is supported, see the following rows for additional instructions._
+|_TLS 1.2 with support for at least one ECDHE ciphersuite_|_Should not select_|_Should select – at least one secp curve should be selected_
 |_TLS 1.2 with support for at least one DHE ciphersuite_|_May select_ +
 
-_This extension is not required, because older TLS implementations did not negotiate FFC parameters (e.g. Group 14)._|_May select – at least one ffdhe group shall be selected_
+_This extension is not required, because older TLS implementations did not negotiate FFC parameters (e.g. Group 14)._|_May select – at least one ffdhe group should be selected_
 |===
 
 [#_Reftable7]#Table 7: FCS_TLSC_EXT.1.4 selection instructions#
@@ -2785,7 +2785,7 @@ _Subsequent versions of this cPP will require support for the Supported Groups e
 ** _rsa_pss_pss with sha256(0x0809),_
 ** _rsa_pss_pss with sha384(0x080a),_
 ** _rsa_pss_pss with sha512(0x080b)_
-** ] and no other algorithms;
+** _]_ and no other algorithms;
 
 * _present the signature_algorithms_cert extension with the following Signature Schemes:_ +
 _[selection:_
@@ -2819,9 +2819,9 @@ _The following table provides the ST author with instructions for completing the
 [cols="1,1,1"]
 |===
 | |_present the signature_algorithms extension_|_present the signature_algorithms_cert extension_
-|_TLS 1.3_|_Shall select_ +
+|_TLS 1.3_|_Should select_ +
 _This extension is required by TLS 1.3_|_May select_
-|_TLS 1.2 without TLS 1.3_|_May select_|_Shall not select_ +
+|_TLS 1.2 without TLS 1.3_|_May select_|_Should not select_ +
 _This extension is not defined in TLS 1.2_
 |===
 
@@ -2831,12 +2831,12 @@ _This extension is not defined in TLS 1.2_
 
 *_Application Note {counter:appnote_count}_*
 
-_The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_TLSC_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' shall be selected. If the 'provides' option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1._
+_The option 'provides' should be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_TLSC_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' should be selected. If the 'provides' option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1._
 
 *FCS_TLSC_EXT.1.7* The TSF shall prohibit the use of the following extensions:
 
 * Early data extension
-* post-handshake client authentication according to RFC 8446, section 4.2.6.
+* Post-handshake client authentication according to RFC 8446, section 4.2.6.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2854,9 +2854,9 @@ _The use of out-of-band provisioned pre-shared keys creates a potential security
 
 [selection:
 
-* _+++<u>+++select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
+* _+++<u>+++Select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
 
-* _+++<u>+++select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
+* _+++<u>+++Select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
 
 ] and no other ciphersuites.
 
@@ -2894,14 +2894,14 @@ _The following table provides the ST author with instructions for completing the
 |===
 | |RSA key establishment... |EC Diffie-Hellman key agreement... |Diffie-Hellman key agreement...
 |TLS 1.3 | N/A +
-TLS 1.3 does not use RSA key establishment 2+| Shall select at least one +
+TLS 1.3 does not use RSA key establishment 2+| Should select at least one +
 - If Diffie-Hellman is selected, at least one ffdhe group must be selected
-|TLS 1.2 with support for at least one TLS_RSA_WITH... ciphersuite |Shall select |N/A |N/A
-|TLS 1.2 without support for any TLS_RSA_WITH... ciphersuite |Shall not select |N/A |N/A
-|TLS 1.2 with support for at least one ECDHE ciphersuite |N/A |Shall select |N/A
-|TLS 1.2 without support for TLS 1.3 or any ECDHE ciphersuites |N/A |Shall not select |N/A
-|TLS 1.2 with support for at least one DHE ciphersuite |N/A |N/A |Shall select
-|TLS 1.2 without support for TLS 1.3 or any DHE ciphersuites |N/A |N/A |Shall not select
+|TLS 1.2 with support for at least one TLS_RSA_WITH... ciphersuite |Should select |N/A |N/A
+|TLS 1.2 without support for any TLS_RSA_WITH... ciphersuite |Should not select |N/A |N/A
+|TLS 1.2 with support for at least one ECDHE ciphersuite |N/A |Should select |N/A
+|TLS 1.2 without support for TLS 1.3 or any ECDHE ciphersuites |N/A |Should not select |N/A
+|TLS 1.2 with support for at least one DHE ciphersuite |N/A |N/A |Should select
+|TLS 1.2 without support for TLS 1.3 or any DHE ciphersuites |N/A |N/A |Should not select
 |===
 
 [#_Reftable9]#Table 9: Algorithm and key size selection instructions for TLS#
@@ -2918,13 +2918,13 @@ _Subsequent versions of this cPP will require support for the Supported Groups e
 
 _If the TOE doesn't support session resumption or session tickets, select 'no session resumption'. If the TOE supports session resumption based on session IDs according to RFC5246 (TLS1.2), select 'sessiion resumption based on session IDs according to RFC5246 (TLS1.2)'. If the TOE supports session resumption based on session tickets according to RFC5077, select 'session resumption based on session tickets according to RFC5077 (TLS1.2)'. If the TOE supports session resumption according to RFC8446 (TLS1.3), select 'session resumption according to RFC8446 (TLS1.3)'._
 
-_In case session establishment (i.e. generating a new session ID) and session resumption are always using a separate context (e.g. a control channel that always requires a full TLS handshake, and a data channel that supports session resumption), then it is acceptable for the ST author to claim 'no session resumption or session tickets' for the context that only establishes and never resumes. If one or more claimed contexts allow session resumption, the ST author selects 'session resumption based on session IDs according to RFC 4346 (TLS1.1) or RFC 5246 (TLS1.2)’, or ‘session resumption based on session tickets according to RFC 5077' (or both), depending on which methods are supported._
+_In case session establishment (i.e. generating a new session ID) and session resumption are always using a separate context (e.g. a control channel that always requires a full TLS handshake, and a data channel that supports session resumption), then it is acceptable for the ST author to claim 'no session resumption or session tickets' for the context that only establishes and never resumes. If one or more claimed contexts allow session resumption, the ST author selects 'session resumption based on session IDs according to RFC 5246 (TLS1.2),’ ‘session resumption…RFC 5077 (TLS1.2),’ ‘session resumption according to RFC 8446 (TLS1.3),’ or all three, depending on which methods are supported._
 
 *FCS_TLSS_EXT.1.5* The TSF [selection: _provides, does not provide_] the ability to configure the list of supported ciphersuites as defined in FCS_TLSS_EXT.1.1.
 
 *_Application Note {counter:appnote_count}_*
 
-_The option 'provides' shall be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_TLSS_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' shall be selected. If the 'provides' option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1._
+_The option 'provides' should be selected if the TOE provides the ability to configure the list of ciphers as defined in FCS_TLSS_EXT.1.1 (e.g. enabling/disabling of ciphers, ordering, assigning priorities). Otherwise, the option 'does not provide' shall be selected. If the 'provides' option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1._
 
 *FCS_TLSS_EXT.1.6* The TSF shall prohibit the use of the following extensions:
 
@@ -2971,7 +2971,7 @@ Although the functionality in FIA_X509_EXT.1/Rev and FIA_X509_EXT.2 is always re
 
 *_Application Note {counter:appnote_count}_*
 
-_FIA_X509_EXT.1.1/Rev lists the rules for validating certificates. The ST author selects whether revocation status is verified using OCSP or CRLs. The trusted channel/path protocols may require that certificates are used; this use may require that specific certificate extensions must be present and checked. If the TOE supports functionality that does not use any of the possible values listed in the specific certificate extension, then it is reasonable to process such certificate as the relevant part of the SFR is considered trivially satisfied. However, this does not mean that it is allowable to accept certificates with inappropriate extension values simply because a specific security function is not implemented by the TOE. For example, the TOE should not successfully authenticate a web server that presents an X.509v3 certificate that has extendedKeyUsage set to only OCSPSigning, even if the TOE does not implement OCSP revocation checking. The TOE shall be capable of supporting a minimum path length of three certificates. That is, the TOE shall support a hierarchy comprising of at least a self-signed root CA certificate, a subordinate CA certificate, and a leaf certificate. The certificate chain validation is expected to terminate with a trust anchor. This means the validation can terminate with any trusted CA certificate administratively designated as a trust anchor or default to terminate with a Root CA. If the TOE validates certificates presented by remote endpoints (i.e., external IT entities, remote administrators, or remote parts of the TOE), the CA certificates designated as trust anchors must be loaded into the trust store ('certificate store', ' trusted CA Key Store' or similar) managed by the platform. In such cases, the TOE’s trust store must support loading of multiple hierarchical CA certificates or certificate chains and must clearly indicate all certificates it considers trust anchors. If the TOE only presents its own certificate (e.g., a web server without mutual authentication), implementing the trust store is optional._
+_FIA_X509_EXT.1.1/Rev lists the rules for validating certificates. The ST author selects whether revocation status is verified using OCSP or CRLs. The trusted channel/path protocols may require that certificates are used; this use may require that specific certificate extensions must be present and checked. If the TOE supports functionality that does not use any of the possible values listed in the specific certificate extension, then it is reasonable to process such certificate as the relevant part of the SFR is considered trivially satisfied. However, this does not mean that it is allowable to accept certificates with inappropriate extension values simply because a specific security function is not implemented by the TOE. For example, the TOE should not successfully authenticate a web server that presents an X.509v3 certificate that has extendedKeyUsage set to only OCSPSigning, even if the TOE does not implement OCSP revocation checking. The TOE should be capable of supporting a minimum path length of three certificates. That is, the TOE should support a hierarchy comprising of at least a self-signed root CA certificate, a subordinate CA certificate, and a leaf certificate. The certificate chain validation is expected to terminate with a trust anchor. This means the validation can terminate with any trusted CA certificate administratively designated as a trust anchor or default to terminate with a Root CA. If the TOE validates certificates presented by remote endpoints (i.e., external IT entities, remote administrators, or remote parts of the TOE), the CA certificates designated as trust anchors must be loaded into the trust store ('certificate store', ' trusted CA Key Store' or similar) managed by the platform. In such cases, the TOE’s trust store must support loading of multiple hierarchical CA certificates or certificate chains and must clearly indicate all certificates it considers trust anchors. If the TOE only presents its own certificate (e.g., a web server without mutual authentication), implementing the trust store is optional._
 
 _The validation of X.509v3 leaf certificates comprises several steps_:
 
@@ -2980,7 +2980,7 @@ _The validation of X.509v3 leaf certificates comprises several steps_:
 
 .. _The continuity of the chain must be checked, showing that the signature on each certificate that is presented to the TOE is valid and the chain terminates at the trust anchor._
 
-.. _The presence of relevant extensions in each certificate in the chain such as the extendedKeyUsage parameters of the leaf certificate must correspond to SFR-relevant functionality. For example, a peer acting as a web server should have TLS Web Server Authentication listed as an extendedKeyUsage parameter of its X.509v3 certificate. It shall be checked that the relevant extensions in each certificate in the chain such as the extendedKeyUsage parameters of the leaf certificate correspond to_ _the SFR-relevant functionality they are used with._
+.. _The presence of relevant extensions in each certificate in the chain such as the extendedKeyUsage parameters of the leaf certificate must correspond to SFR-relevant functionality. For example, a peer acting as a web server should have TLS Web Server Authentication listed as an extendedKeyUsage parameter of its X.509v3 certificate. It should be checked that the relevant extensions in each certificate in the chain such as the extendedKeyUsage parameters of the leaf certificate correspond to_ _the SFR-relevant functionality they are used with._
 
 _It is expected that revocation checking is performed when a certificate is used in an authentication step. It is expected that revocation checking is performed on both leaf and intermediate CA certificates when a leaf certificate is presented to the TOE as part of the certificate chain during authentication. Revocation checking of any CA certificate designated a trust anchor is not required._
 
@@ -2995,7 +2995,7 @@ _The ST author must include FIA_X509_EXT.1/Rev in all instances except when only
 
 *FIA_X509_EXT.2 X.509 Certificate Authentication*
 
-*FIA_X509_EXT.2.1* The TSF shall use X.509v3 certificates as defined by RFC 5280 to support authentication for [selection: _DTLS, HTTPS, IPsec, SSH, TLS, no protocols_] and [selection: _code signing for system software updates[assignment: other uses], no additional uses_].
+*FIA_X509_EXT.2.1* The TSF shall use X.509v3 certificates as defined by RFC 5280 to support authentication for [selection: _DTLS, HTTPS, IPsec, TLS, SSH, [assignment: other protocols], and [selection: _code signing for system software updates [assignment: other uses], no additional uses_].
 
 *FIA_X509_EXT.2.2* When the TSF cannot establish a connection to determine the validity of a certificate, the TSF shall [selection: _allow the Administrator to choose whether to accept the certificate in these cases, accept the certificate, not accept the certificate_].
 
@@ -3003,7 +3003,7 @@ _The ST author must include FIA_X509_EXT.1/Rev in all instances except when only
 
 _In FIA_X509_EXT.2.1, the ST author’s selection includes IPsec, (D)TLS, or HTTPS if these protocols are included in FTP_ITC.1.1 or FPT_ITT.1. The ST author selects “code signing for system software updates” when “X.509 certificate” is selected in FPT_TUD_EXT.1.3._
 
-_SSH should be included if the TSF shall be validated against the version of the Functional Package for Secure Shell referenced in section 2.2, and authentication other than ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, and/or ecdsa-sha2-nistp521 is selected._
+_SSH should be included if the TSF should be validated against the version of the Functional Package for Secure Shell referenced in section 2.2, and authentication other than ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, and/or ecdsa-sha2-nistp521 is selected._
 
 _Often a connection must be established to check the revocation status of a certificate - either to download a CRL or to perform a lookup using OCSP. In FIA_X509_EXT.2.2 the selection is used to describe the behaviour in the event that such a connection cannot be established (for example, due to a network error). If the TOE has determined the certificate is valid according to all other rules in FIA_X509_EXT.1/Rev, the behaviour indicated in the selection determines the validity. The TOE must not accept the certificate if it fails any of the other validation rules in FIA_X509_EXT.1/Rev. If the Administrator-configured option is selected by the ST Author, the ST Author also selects the corresponding function in FMT_SMF.1. The selection should be consistent with the validation requirements for the secure communication protocols._
 
@@ -3019,7 +3019,7 @@ Although the functionality in FIA_X509_EXT.1/Rev and FIA_X509_EXT.2 is always re
 
 *FIA_X509_EXT.3 X.509 Certificate Requests*
 
-*FIA_X509_EXT.3.1* The TSF shall generate a Certificate Request as specified by RFC 2986 and be able to provide the following information in the request: public key and [selection: _device-specific information, Common Name, Organization, Organizational Unit, Country_].
+*FIA_X509_EXT.3.1* The TSF shall generate a Certificate Request as specified by RFC 2986 and be able to provide the following information in the request: public key and [selection: _device-specific information, Common Name, Organization, Organizational Unit, Country, [assignment: other information]].
 
 *_Application Note {counter:appnote_count}_*
 
@@ -3027,12 +3027,12 @@ _The public key is the public key portion of the public-private key pair generat
 
 *FIA_X509_EXT.3.2* The TSF shall validate the chain of certificates from the Root CA upon receiving the CA Certificate Response.
 
-==== Authentication Failure Management (FIA_AFL)
+==== Authentication Failure Handling (FIA_AFL)
 If the TOE provides remote administration using a password-based authentication mechanism, FIA_AFL.1 specifies actions upon reaching the number of successive unsuccessful authentication attempts.
 
-===== FIA_AFL.1 Authentication Failure Management (Refinement)
+===== FIA_AFL.1 Authentication Failure Handling (Refinement)
 
-*FIA_AFL.1 Authentication Failure Management*
+*FIA_AFL.1 Authentication Failure Handling*
 
 *FIA_AFL.1.1* The TSF shall detect when +++<u>+++an Administrator configurable positive integer within _[assignment: range of acceptable values]_+++</u>+++ unsuccessful authentication attempts occur related to _Administrators attempting to authenticate remotely using a password_.
 
@@ -3115,7 +3115,7 @@ _This component must be included in the ST if “X.509 digital signature mechani
 
 _Validity is determined in accordance with FIA_X509_EXT.1/Rev._
 
-_It is acceptable to provide a manual method for an administrator to provide revocation information (e.g. CRL upload) in addition to retrieving revocation information automatically in accordance with FIA_X509_EXT.1/Rev and FIA_X509_EXT.2. It is expected that current updates are signed using current (not expired) certificates that will be valid at least until the next expected update. However, an administrator may desire to install previous updates that are signed by expired certificates. To_ _indicate support for this practice, the author of the ST selects whether the certificate shall be accepted, rejected, or the choice is left to the Administrator to accept or reject the certificate._
+_It is acceptable to provide a manual method for an administrator to provide revocation information (e.g. CRL upload) in addition to retrieving revocation information automatically in accordance with FIA_X509_EXT.1/Rev and FIA_X509_EXT.2. It is expected that current updates are signed using current (not expired) certificates that will be valid at least until the next expected update. However, an administrator may desire to install previous updates that are signed by expired certificates. To_ _indicate support for this practice, the author of the ST selects whether the certificate will be accepted, rejected, or the choice is left to the Administrator to accept or reject the certificate._
 
 === Security Management (FMT)
 
@@ -3989,7 +3989,7 @@ Dependencies:
 ** _rsa_pss_pss with sha256(0x0809),_
 ** _rsa_pss_pss with sha384(0x080a),_
 ** _rsa_pss_pss with sha512(0x080b)_
-** ] and no other algorithms;
+** _]_ and no other algorithms;
 
 * _present the signature_algorithms_cert extension with the following Signature Schemes:_ +
 _[selection:_
@@ -4110,9 +4110,9 @@ Dependencies:
 
 [selection:
 
-* _+++<u>+++select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
+* _+++<u>+++Select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
 
-* _+++<u>+++select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
+* _+++<u>+++Select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
 
 ] and no other ciphersuites.
 
@@ -4120,7 +4120,7 @@ Dependencies:
 
 *FCS_TLSS_EXT.1.3* The TSF shall perform key exchange using: [selection:
 
-* _RSA key establishment with key size [selection: 2048 bits, 3072 bits, 4096 bits];_
+* _RSA key establishment with key size [selection: 2048, 3072 bits, 4096] bits ;_
 
 * _EC Diffie-Hellman key agreement over NIST curves [selection: secp256r1, secp384r1, secp521r1] and no other curves;_
 
@@ -4350,7 +4350,7 @@ Hierarchical to: No other components
 
 Dependencies: FIA_X509_EXT.1 X.509 Certificate Validation
 
-*FIA_X509_EXT.2.1* The TSF shall use X.509v3 certificates as defined by RFC 5280 to support authentication for [selection: _DTLS, HTTPS, IPsec, TLS, SSH, [assignment: other protocols], no protocols_], and [selection: _code signing for system software updates [assignment: other uses], no additional uses_].
+*FIA_X509_EXT.2.1* The TSF shall use X.509v3 certificates as defined by RFC 5280 to support authentication for [selection: _DTLS, HTTPS, IPsec, TLS, SSH, [assignment: other protocols], and [selection: _code signing for system software updates [assignment: other uses], no additional uses_].
 
 *FIA_X509_EXT.2.2* When the TSF cannot establish a connection to determine the validity of a certificate, the TSF shall [selection: _allow the Administrator to choose whether to accept the certificate in these cases, accept the certificate, not accept the certificate_].
 
@@ -4365,7 +4365,7 @@ Dependencies:
 * FCS_CKM.1 Cryptographic Key Generation
 * FIA_X509_EXT.1 X.509 Certificate Validation
 
-*FIA_X509_EXT.3.1* The TSF shall generate a Certificate Request as specified by RFC 2986 and be able to provide the following information in the request: public key and [selection: _device-specific information, Common Name, Organization, Organizational Unit, Country, [assignment: other information]_].
+*FIA_X509_EXT.3.1* The TSF shall generate a Certificate Request as specified by RFC 2986 and be able to provide the following information in the request: public key and [selection: _device-specific information, Common Name, Organization, Organizational Unit, Country, [assignment: other information]].
 
 *FIA_X509_EXT.3.2* The TSF shall validate the chain of certificates from the Root CA upon receiving the CA Certificate Response.
 
