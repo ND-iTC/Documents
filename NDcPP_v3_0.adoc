@@ -291,7 +291,7 @@ image:extracted-media/media/d_toe_6.png[image,width=349,height=276]
 
 [#_Toc456887376]#Figure 8: Distributed Network Devices plus Management Component required to fulfil cPP requirements#
 
-Where several Network Devices are managed by one Management Component, the TOE may also be considered to be distributed but the focus of the certification should be restricted to the simplest combination of Network Device and Management Component. By the use of an equivalency argument, the combination of multiple Network Devices together with one Management Component can then be regarded as certified solutionfootnote:[[SD, B.4] describes how to define the components of a distributed TOE in terms of a “minimum configuration” and allowance for iteration of equivalent components.
+Where several Network Devices are managed by one Management Component, the TOE may also be considered to be distributed but the focus of the certification should be restricted to the simplest combination of Network Device and Management Component. By the use of an equivalency argument, the combination of multiple Network Devices together with one Management Component can then be regarded as certified solutionfootnote:[[SD, B.4]] describes how to define the components of a distributed TOE in terms of a “minimum configuration” and allowance for iteration of equivalent components.
 
 image:extracted-media/media/d_toe_7.png[image,width=364,height=282]
 
@@ -4563,7 +4563,7 @@ Components in this family extend FPT_STM requirements by describing the source o
 
 image:extracted-media/media/FPT_STM_EXT.png[image,width=500,height=48]
 
-FPT_STM_EXT.1 Reliable Time Stamps is hierarchic to FPT_STM.1; it requires that the TSF provide reliable time stamps for TSF and identifies the source of the time used in those timestamps.
+FPT_STM_EXT.1 Reliable Time Stamps is hierarchic to FPT_STM.1: it requires that the TSF provide reliable time stamps for TSF and identifies the source of the time used in those timestamps.
 
 *Management: FPT_STM_EXT.1*
 
@@ -4690,7 +4690,7 @@ The documentation of the entropy source(s) should be detailed enough that, after
 
 Documentation shall include the design of each entropy source as a whole, including the interaction of all entropy source components. Any information that can be shared regarding the design should also be included for any third-party entropy sources that are included in the product.
 
-The documentation shall describe how unprocessed (raw) data was obtained for the analysis. This description shall be sufficiently detailed to explain at what point in the entropy source model the data was collected and what effects, if any, the process of data collection had on the overall entropy generation rate. The documentation should walk through the entropy source design indicating where the entropy comes from, where the entropy output is passed next, any post-processing of the raw outputs (hash, XOR, etc.), if/where it is stored and finally, how it is output from the entropy source. Any conditions placed on the process (e.g., blocking should also be described in the entropy source design. Diagrams and examples are encouraged.
+The documentation shall describe how unprocessed (raw) data was obtained for the analysis. This description shall be sufficiently detailed to explain at what point in the entropy source model the data was collected and what effects, if any, the process of data collection had on the overall entropy generation rate. The documentation should walk through the entropy source design indicating where the entropy comes from, where the entropy output is passed next, any post-processing of the raw outputs (hash, XOR, etc.), if/where it is stored and finally, how it is output from the entropy source. Any conditions placed on the process (e.g., blocking) should also be described in the entropy source design. Diagrams and examples are encouraged.
 
 This design must also include a description of the content of the security boundary of the entropy source and a description of how the security boundary ensures that an adversary outside the boundary cannot affect the entropy rate.
 
@@ -4731,42 +4731,27 @@ The dependencies between SFRs implemented by the TOE are addressed as follows.
 |FAU_GEN.1 |FPT_STM.1 |FPT_STM_EXT.1 included (which is hierarchic to FPT_STM.1)
 |FAU_GEN.2 a|
 FAU_GEN.1
-
 FIA_UID.1
-
 a|
 FAU_GEN.1 included
-
 Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator identification timing
-
 |FAU_STG_EXT.1 a|
 FAU_GEN.1
-
 FTP_ITC.1
-
 a|
 FAU_GEN.1 included
-
 FTP_ITC.1 included
-
 |FCS_CKM.1 a|
 FCS_CKM.2 or FCS_COP.1
-
 FCS_CKM.4
-
 a|
 FCS_CKM.2 included
-
 FCS_CKM.4 included
-
 |FCS_CKM.2 a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
-
 FCS_CKM.4
-
 a|
 FCS_CKM.1 included
-
 FCS_CKM.4 included
 
 |FCS_CKM.4 |FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1 |FCS_CKM.1 included
@@ -4848,15 +4833,13 @@ FMT_SMF.1 included
 [cols=",,",options="header",]
 |===
 |*SFR* |*Dependencies* |*Rationale Statement*
-|FAU_STG.1 |FAU_STG.3 |FAU_STG_EXT.3 included as optional SFR
-
+|FAU_STG.1 |FAU_GEN.1 per CC Part 2 |FAU_GEN.1 included
 |FAU_STG_EXT.2 a|
-FAU_GEN.1
-
-FAU_STG_EXT.1
-
+FAU_GEN.
+FAU_STG_EXT
 |FAU_GEN.1 & FAU_STG_EXT.1 included
-|FAU_STG_EXT.3 |FAU_STG.1 |FAU_STG.1 included as optional SFR
+|FAU_STG_EXT.3 |FAU_GEN.
+FAU_STG_EXT|FAU_GEN.1 & FAU_STG_EXT.1 included
 |FIA_X509_EXT.1/ITT |FIA_X509_EXT.2 |FIA_X509_EXT.2 (selection-based SFR) included
 |FPT_ITT.1 |None |
 |FTP_TRP.1/Join |None |
@@ -4874,13 +4857,15 @@ FCS_COP.1/Hash
 
 FCS_COP.1/KeyedHash
 
+FCS_DTLSC_EXT.1
+
 FCS_RBG_EXT.1
 
-FIA_X509_EXT.1 X.509
+FIA_X509_EXT.1
 
-FIA_X509_EXT.2 X.509
+FIA_X509_EXT.2
 
-FIA_X509_EXT.3 X.509
+FIA_X509_EXT.3
 
 a|
 FCS_CKM.1 included
@@ -4890,6 +4875,8 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FCS_DTLSC_EXT.1 (selection-based SFR) included
 
 FIA_X509_EXT.1 (selection-based SFR) included
 
@@ -4910,13 +4897,15 @@ FCS_COP.1/Hash
 
 FCS_COP.1/KeyedHash
 
+FCS_DTLSC_EXT.1
+
 FCS_RBG_EXT.1
 
-FIA_X509_EXT.1 X.509
+FIA_X509_EXT.1
 
-FIA_X509_EXT.2 X.509
+FIA_X509_EXT.2
 
-FIA_X509_EXT.3 X.509
+FIA_X509_EXT.3
 
 a|
 FCS_CKM.1 included
@@ -4924,6 +4913,8 @@ FCS_CKM.1 included
 FCS_CKM.2 included
 
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+
+FCS_DTLSC_EXT.1 (selection-based SFR) included
 
 FCS_RBG_EXT.1 included
 
@@ -4946,13 +4937,15 @@ FCS_COP.1/Hash
 
 FCS_COP.1/KeyedHash
 
+FCS_DTLSS_EXT.1
+
 FCS_RBG_EXT.1
 
-FIA_X509_EXT.1 X.509
+FIA_X509_EXT.1
 
-FIA_X509_EXT.2 X.509
+FIA_X509_EXT.2
 
-FIA_X509_EXT.3 X.509
+FIA_X509_EXT.3
 
 a|
 FCS_CKM.1 included
@@ -4962,6 +4955,8 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FCS_DTLSS_EXT.1 (selection-based SFR) included
 
 FIA_X509_EXT.1 (selection-based SFR) included
 
@@ -4982,13 +4977,15 @@ FCS_COP.1/Hash
 
 FCS_COP.1/KeyedHash
 
+FCS_DTLSS_EXT.1
+
 FCS_RBG_EXT.1
 
-FIA_X509_EXT.1 X.509
+FIA_X509_EXT.1
 
-FIA_X509_EXT.2 X.509
+FIA_X509_EXT.2
 
-FIA_X509_EXT.3 X.509
+FIA_X509_EXT.3
 
 a|
 FCS_CKM.1 included
@@ -4996,6 +4993,8 @@ FCS_CKM.1 included
 FCS_CKM.2 included
 
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+
+FCS_DTLSS_EXT.1 (selection-based SFR) included
 
 FCS_RBG_EXT.1 included
 
@@ -5019,11 +5018,13 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
-FIA_X509_EXT.1 X.509
+FCS_TLSC_EXT.1
 
-FIA_X509_EXT.2 X.509
+FIA_X509_EXT.1
 
-FIA_X509_EXT.3 X.509
+FIA_X509_EXT.2
+
+FIA_X509_EXT.3
 
 a|
 FCS_CKM.1 included
@@ -5033,6 +5034,8 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FCS_TLSC_EXT.1 (selection-based SFR) included
 
 FIA_X509_EXT.1 (selection-based SFR) included
 
@@ -5055,11 +5058,13 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
-FIA_X509_EXT.1 X.509
+FCS_TLSC_EXT.1
 
-FIA_X509_EXT.2 X.509
+FIA_X509_EXT.1
 
-FIA_X509_EXT.3 X.509
+FIA_X509_EXT.2
+
+FIA_X509_EXT.3
 
 a|
 FCS_CKM.1 included
@@ -5069,6 +5074,8 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FCS_TLSC_EXT.1 (selection-based SFR) included
 
 FIA_X509_EXT.1 (selection-based SFR) included
 
@@ -5091,11 +5098,13 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
-FIA_X509_EXT.1 X.509
+FCS_TLSS_EXT.1
 
-FIA_X509_EXT.2 X.509
+FIA_X509_EXT.1
 
-FIA_X509_EXT.3 X.509
+FIA_X509_EXT.2
+
+FIA_X509_EXT.3
 
 a|
 FCS_CKM.1 included
@@ -5105,6 +5114,8 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FCS_TLSS_EXT.1 (selection-based SFR) included
 
 FIA_X509_EXT.1 (selection-based SFR) included
 
@@ -5127,11 +5138,13 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
-FIA_X509_EXT.1 X.509
+FCS_TLSS_EXT.1
 
-FIA_X509_EXT.2 X.509
+FIA_X509_EXT.1
 
-FIA_X509_EXT.3 X.509
+FIA_X509_EXT.2
+
+FIA_X509_EXT.3
 
 a|
 FCS_CKM.1 included
@@ -5141,6 +5154,8 @@ FCS_CKM.2 included
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
 FCS_RBG_EXT.1 included
+
+FCS_TLSS_EXT.1 (selection-based SFR) included
 
 FIA_X509_EXT.1 (selection-based SFR) included
 
@@ -5212,9 +5227,9 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
-FIA_X509_EXT.1 X.509
+FIA_X509_EXT.1
 
-FIA_X509_EXT.2 X.509
+FIA_X509_EXT.2
 
 a|
 FCS_CKM.1 included
@@ -5257,19 +5272,8 @@ FCS_RBG_EXT.1 included
 |FCS_NTP_EXT.1 a|
 FCS_COP.1
 
-FCS_IPSEC_EXT.1
-
-FCS_DTLSC_EXT.1
-
 a|
-FCS_COP.1/DataEncryption included
-
-FCS_COP.1/Hash included
-
-FCS_IPSEC_EXT.1 included
-
-FCS_DTLSC_EXT.1 included
-
+FCS_COP.1 included
 
 |FCS_TLSC_EXT.1 a|
 FCS_CKM.1
@@ -5286,9 +5290,9 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
-FIA_X509_EXT.1 X.509
+FIA_X509_EXT.1
 
-FIA_X509_EXT.2 X.509
+FIA_X509_EXT.2
 
 a|
 FCS_CKM.1 included
@@ -5319,9 +5323,9 @@ FCS_COP.1/KeyedHash
 
 FCS_RBG_EXT.1
 
-FIA_X509_EXT.1 X.509
+FIA_X509_EXT.1
 
-FIA_X509_EXT.2 X.509
+FIA_X509_EXT.2
 
 a|
 FCS_CKM.1 included
