@@ -407,10 +407,9 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FIA_X509_EXT.1/ITT |X.509 Certification Validation |Feature Dependent
 |FIA_X509_EXT.2 |X.509 Certificate Authentication |Feature Dependent
 |FIA_X509_EXT.3 |X.509 Certificate Requests|Feature Dependent^[4]^
-|FMT_MOF.1/AutoUpdate |Management of Security Functions Behaviour |Feature Dependent
+|FMT_MOF.1/ManualUpdate |Trusted Update - Management of Security Functions Behaviour |All
+|FMT_MOF.1/Services |Management of Security Functions Behavior |Feature Dependent
 |FMT_MOF.1/Functions |Management of Security Functions Behaviour |Feature Dependent
-|FMT_MOF.1/ManualUpdate |Management of Security Functions Behaviour|Feature Dependent
-|FMT_MOF.1/Service|Management of Security Functions Behavior |Feature Dependent
 |FMT_MTD.1/CoreData |Management of TSF Data |All
 |FMT_MTD.1/CryptoKeys |Management of TSF Data |Feature Dependent
 |FMT_SMF.1 |Specification of Management Functions |Feature Dependent
@@ -428,7 +427,9 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FTA_TAB.1 |Default TOE Access Banner |One
 |FTP_ITC.1 |Inter-TSF Trusted Channel (Refinement) |One
 |FTP_TRP.1/Admin |Trusted Path (Refinement) |One
-|FTP_TRP.1/Join |Trusted Path |Feature Dependen
+|FTP_TRP.1/Join |Trusted Path |Feature Dependent
+|FMT_MOF.1/ManualUpdate |Management of Security Functions Behaviour |Feature Dependent
+|FMT_MOF.1/AutoUpdate |Management of Security Functions Behaviour |Feature Dependent
 |===
 
 [#_Ref443331358]#Table 1: Security Functional Requirements for Distributed TOEs#
