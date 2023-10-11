@@ -15,11 +15,11 @@ Date: {revdate}
 
 *Foreword*
 
-This is a Supporting Document (SD), intended to complement the Common Criteria version 3, revision 5 and the associated Common Evaluation Methodology for Information Technology Security Evaluation.
+This is a Supporting Document (SD), intended to complement the Common Criteria (CC) version 3, revision 5 and the associated Common Evaluation Methodology for Information Technology Security Evaluation (CEM).
 
-Supporting documents may be “Guidance Documents”, that highlight specific approaches and application of the standard to areas where no mutual recognition of its application is required, and as such, are not of normative nature, or “Mandatory Technical Documents”, whose application is mandatory for evaluations whose scope is covered by that of the supporting document. The usage of the latter class is not only mandatory, but certificates issued as a result of their application are recognized under the CCRA. This SD shall be considered a Mandatory Technical Document.
+Supporting documents may be “Guidance Documents”, that highlight specific approaches and application of the standard to areas where no mutual recognition of its application is required, and as such, are not of normative nature, or “Mandatory Technical Documents”, whose application is mandatory for evaluations whose scope is covered by that of the supporting document. The usage of the latter class is not only mandatory, but certificates issued as a result of their application are recognized under the Common Criteria Recognition Arrangement (CCRA). This SD shall be considered a Mandatory Technical Document.
 
-This SD has been developed by the Network Device International Technical Community (ND iTC) and is designed to be used to support the evaluations of products against the cPP identified in Section 1.1.
+This SD has been developed by the Network Device International Technical Community (ND iTC) and is designed to be used to support the evaluations of products against the collaborative Protection Profile (cPP) identified in Section 1.1.
 
 *Technical Editor:* Network Device International Technical Community (ND iTC)
 
@@ -47,11 +47,11 @@ V0.1, 5 September 2014 (Initial release for public review)
 
 *General Purpose:* See Section 1.1.
 
-*Field of special use:* This Supporting Document applies to the evaluation of TOEs claiming conformance with the collaborative Protection Profile for Network Devices [NDcPP].
+*Field of special use:* This Supporting Document applies to the Targets of Evaluation (TOE)s claiming conformance with the collaborative Protection Profile for Network Devices [NDcPP].
 
 *Acknowledgements:*
 
-This Supporting Document was developed by the ND iTC with representatives from industry, Government agencies, Common Criteria Test Laboratories, and members of academia.
+This Supporting Document was developed by the Network Device International Technical Community (ND iTC) with representatives from industry, Government agencies, Common Criteria Test Laboratories, and members of academia.
 
 *Table of Contents*
 
@@ -73,7 +73,7 @@ link:#_Toc412821715[Table 3: Evaluation Equivalency Analysis]
 === Technology Area and Scope of Supporting Document
 
 [arabic]
-. This Supporting Document (SD) defines the Evaluation Activities associated with the collaborative Protection Profile for Network Devices [NDcPP].
+. This Supporting Document (SD) defines the Evaluation Activities (EA) associated with the collaborative Protection Profile for Network Devices [NDcPP].
 . The Network Device technical area has a number of specialised aspects, such as those relating to the secure implementation and use of protocols, and to the particular ways in which remote management facilities need to be assessed across a range of different physical and logical interfaces for different types of infrastructure devices. This degree of specialisation, and the associations between individual Security Functional Requirements (SFR) in the cPP, make it important for both efficiency and effectiveness that evaluation activities are given more specific interpretations than those found in the generic CEM activities.
 . This Supporting Document is mandatory for evaluations of products that claim conformance to the following cPP:
 [loweralpha]
@@ -94,7 +94,7 @@ link:#_Toc412821715[Table 3: Evaluation Equivalency Analysis]
 === Application of this Supporting Document
 
 [arabic, start=9]
-. This Supporting Document defines three types of Evaluation Activities TOE Summary Specification, Guidance Documentation, and Tests and is designed to be used in conjunction with cPPs. cPPs that rely on this SD will explicitly identify it as a source for their EAsfootnote:[In general, a cPP may reference one or more SDs as sources for the Evaluation Activities for different sets of SFRs.]. Each security requirement (SFR or SAR) specified in the cPP could have multiple EAs associated with it. The security requirement naming convention is consistent between cPP and SD ensuring a clear one to one correspondence between security requirements and evaluation activities.
+. This Supporting Document defines three types of Evaluation Activities: TOE Summary Specification, Guidance Documentation, and Tests, and is designed to be used in conjunction with cPPs. cPPs that rely on this SD will explicitly identify it as a source for their EAsfootnote:[In general, a cPP may reference one or more SDs as sources for the Evaluation Activities for different sets of SFRs.]. Each security requirement (SFR or SAR) specified in the cPP could have multiple EAs associated with it. The security requirement naming convention is consistent between cPP and SD ensuring a clear one to one correspondence between security requirements and evaluation activities.
 . The cPP and SD are designed to be used in conjunction with each other, where the cPP lists SFRs and SARs and the SD catalogues EAs associated with each SFR and SAR. Some of the SFRs included in the cPP are optional or selection-based. Therefore, an ST claiming conformance to the cPP does not necessarily have to include all possible SFRs defined in the cPP.
 . In an ST conformant to the cPP, several operations need to be performed (mainly selections and assignments). Some EAs define separate actions for different selected or assigned values in SFRs. The evaluator shall neither carry out EAs related to SFRs that are not claimed in the ST nor EAs related to specific selected or assigned values that are not claimed in the ST.
 . EAs do not necessarily have to be executed independently from each other. A description in a guidance documentation or one test case, for example, can cover multiple EAs at a time, no matter whether the EAs are related to the same or different SFRs.
@@ -126,6 +126,7 @@ link:#_Toc412821715[Table 3: Evaluation Equivalency Analysis]
 
 *cPP* | collaborative Protection Profile |
 *CA* | Certificate Authority|
+*CCRA* | Common Criteria Recognition Arrangement|
 *CEM* | Common Methodology for Information Technology Security Evaluation |
 *CN* | Common Name |
 *CRL* | Certificate Revocation List |
