@@ -3136,7 +3136,7 @@ The evaluator shall verify the sufficiency to fulfil the related SFRs. This incl
 |===
 
 [arabic, start=562]
-. Note that additional Evaluation Activities for the TSS in the case of a distributed TOE are defined in Appendix A.9.1.1.
+. Note that additional Evaluation Activities for the TSS in the case of a distributed TOE are defined in Appendix B.4.1.1.
 
 === ADV: Development
 
@@ -3199,7 +3199,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 [arabic, start=575]
 . It is not necessary for a TOE to provide separate documentation to meet the individual requirements of AGD_OPE and AGD_PRE. Although the EAs in this section are described under the traditionally separate AGD families, the mapping between the documentation provided by the developer and AGD_OPE and AGD_PRE requirements may be many-to-many, as long as all requirements are met in documentation that is delivered to Security Administrators and users (as appropriate) as part of the TOE.
-. Note that additional Evaluation Activities for the guidance documentation in the case of a distributed TOE are defined in Appendix A.9.1.1.
+. Note that additional Evaluation Activities for the guidance documentation in the case of a distributed TOE are defined in Appendix B.4.2.1.
 
 ==== Operational User Guidance (AGD_OPE.1)
 
@@ -3311,7 +3311,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 . The focus of the testing is to confirm that the requirements specified in the SFRs are being met. Additionally, testing is performed to confirm the functionality described in the TSS, as well as the dependencies on the Operational guidance documentation is accurate.
 . The evaluator shall perform the CEM work units associated with the ATE_IND.1 SAR. Specific testing requirements and EAs are captured for each SFR in Sections 2, 3 and 4.
 . The evaluator shall consult Appendix B when determining the appropriate strategy for testing multiple variations or models of the TOE that may be under evaluation.
-. Note that additional Evaluation Activities relating to evaluator testing in the case of a distributed TOE are defined in Appendix A.9.3.1.
+. Note that additional Evaluation Activities relating to evaluator testing in the case of a distributed TOE are defined in Appendix B.4.3.1.
 
 === AVA: Vulnerability Assessment
 
@@ -3548,20 +3548,20 @@ If fuzz testing is performed, the evaluator shall focus on security-relevant par
 
 [loweralpha]
 . NIST National Vulnerabilities Database (can be used to access CVE and US-CERT databases identified below): +
-https://web.nvd.nist.gov/view/vuln/search
+https://nvd.nist.gov/vuln/search
 . Common Vulnerabilities and Exposures: +
 http://cve.mitre.org/cve/ +
 https://www.cvedetails.com/vulnerability-search.php
 . US-CERT: +
-http://www.kb.cert.org/vuls/html/search
+https://www.kb.cert.org/vuls/search/
 . Tenable Network Security +
-http://nessus.org/plugins/index.php?view=search
+https://www.tenable.com/plugins
 . Tipping Point Zero Day Initiative +
-http://www.zerodayinitiative.com/advisories
+https://www.zerodayinitiative.com/advisories/published/
 . Offensive Security Exploit Database: +
 https://www.exploit-db.com/
 . Rapid7 Vulnerability Database: +
-https://www.rapid7.com/db/vulnerabilities
+https://www.rapid7.com/db/?type=nexpose
 
 === Additional Flaw Hypotheses
 
