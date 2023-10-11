@@ -113,7 +113,7 @@ link:#_Toc412821715[Table 3: Evaluation Equivalency Analysis]
 |*Assurance* |Grounds for confidence that a TOE meets the SFRs [CC1].
 |*Security Administrator* |The terms “Administrator” “Security Administrator” and “User” are used interchangeably in this document at present and are used to represent a person that has authorized access to the TOE to perform configuration and management tasks.
 |*Supplementary Information*|Information that is not necessarily included in the Security Target or operational guidance, and that may not necessarily be public. Examples of such information could be entropy analysis, or description of a cryptographic key management architecture used in (or in support of) the TOE. The requirement for any such supplementary information will be identified in the relevant cPP or PP-Module.
-|*Target of Evaluation* |A set of software, firmware and/or hardware possibly accompanied by guidance. [CC1]
+|*Target of Evaluation (TOE)* |A set of software, firmware and/or hardware possibly accompanied by guidance. [CC1]
 |*TOE Security Functionality (TSF)* |A set consisting of all hardware, software, and firmware of the TOE that must be relied upon for the correct enforcement of the SFRs. [CC1]
 |*TSF Data* |Data for the operation of the TSF upon which the enforcement of the requirements relies.
 |===
@@ -125,7 +125,8 @@ link:#_Toc412821715[Table 3: Evaluation Equivalency Analysis]
 |*Acronym* | *Meaning* |
 
 *cPP* | collaborative Protection Profile |
-*CA* | Certificate Authority |
+*CA* | Certificate Authority|
+*CEM* | Common Methodology for Information Technology Security Evaluation |
 *CN* | Common Name |
 *CRL* | Certificate Revocation List |
 *CVE* | Common Vulnerabilities and Exposures (database) |
