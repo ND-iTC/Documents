@@ -3110,7 +3110,7 @@ The evaluator does not necessarily have to test all possible values for the beha
 == Evaluation Activities for SARs
 
 [arabic, start=558]
-. The sections below specify EAs for the Security Assurance Requirements (SARs) included in the related cPPs (see Section 1.1 above). The EAs in Section 2 (Evaluation Activities for SFRs), Section 3 (link:#_Evaluation_Activities_for_1[Evaluation Activities for Optional Requirements]), and Section 4 (Evaluation Activities for Selection-Based Requirements) are an interpretation of the more general CEM assurance requirements as they apply to the specific technology area of the TOE.
+. The sections below specify EAs for the Security Assurance Requirements (SARs) included in the related cPPs (see Section 1.1). The EAs in Section 2 (Evaluation Activities for SFRs), Section 3 (Evaluation Activities for Optional Requirements), and Section 4 (Evaluation Activities for Selection-Based Requirements) are an interpretation of the more general CEM assurance requirements as they apply to the specific technology area of the TOE.
 . In this section, each SAR that is contained in the cPP is listed, and the EAs that are not associated with an SFR are captured here, or a reference is made to the CEM, and the evaluator is expected to perform the CEM work units.
 
 === ASE: Security Target Evaluation
