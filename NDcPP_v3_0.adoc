@@ -4000,6 +4000,7 @@ _]._
 
 *FCS_TLSC_EXT.1.9* The TSF shall [selection: _support TLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
 
+
 *FCS_TLSC_EXT.2 TLS Client Support for Mutual Authentication*
 
 
