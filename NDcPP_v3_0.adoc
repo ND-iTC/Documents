@@ -1837,6 +1837,7 @@ A TOE may act as the client, the server, or both in DTLS sessions. The requireme
 
 _The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This requirement adds that the client must be capable of presenting a certificate to a DTLS server for DTLS mutual authentication._
 
+
 *FCS_DTLSS_EXT.2 DTLS Server Support for Mutual Authentication*
 
 *FCS_DTLSS_EXT.2.1* The TSF shall support DTLS communication with mutual authentication of DTLS clients using X.509v3 certificates and shall [selection:
