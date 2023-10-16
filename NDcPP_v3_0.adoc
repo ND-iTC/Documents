@@ -1837,7 +1837,6 @@ A TOE may act as the client, the server, or both in DTLS sessions. The requireme
 
 _The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This requirement adds that the client must be capable of presenting a certificate to a DTLS server for DTLS mutual authentication._
 
-
 *FCS_DTLSS_EXT.2 DTLS Server Support for Mutual Authentication*
 
 *FCS_DTLSS_EXT.2.1* The TSF shall support DTLS communication with mutual authentication of DTLS clients using X.509v3 certificates and shall [selection:
@@ -2288,11 +2287,40 @@ _The use of the early data extension is prohibited in the configured TOE. The ea
 
 _The use of the post-handshake client authentication is prohibited in the configured TOE. Prohibiting post-handshake client authentication might be dropped in a future version of NDcPP._
 
-*FCS_DTLSC_EXT.1.8* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
+*FCS_DTLSC_EXT.1.8* The TSF shall [selection: _not use PSKs, only use PSKs in DTLS1.3 session resumption with forward secrecy_].
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of out-of-band provisioned pre-shared keys creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE. PSKs are used in DTLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material.  Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
+_The use of out-of-band provisioned pre-shared keys is not allowed, because it creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE. PSKs are used in DTLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material.  Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
+
+*FCS_DTLSC_EXT.1.9* The TSF shall [selection: _support DTLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: DTLS 1.2, DTLS 1.3] renegotiation attempts_].
+
+*_Application Note {counter:appnote_count}_*
+
+_The ST author selects the first option if the TOE supports DTLS 1.2 and secure renegotiation is supported. The ST author selects the second option and “DTLS 1.2” if the TOE supports DTLS 1.2 and secure renegotiation is not supported. The second option and “DTLS 1.3” must be selected if the TOE supports DTLS 1.3._
+
+_RFC 5746 defines an extension to DTLS that binds renegotiation handshakes to the cryptography in the original handshake._
+
+_The “renegotiation_info” extension must be presented by the server to signal support for secure renegotiation and must be presented by the client to perform secure renegotiation._
+
+_When signaling support for secure renegotiation, the client may present either the “renegotiation_info” extension or the signaling cipher suite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message. (A signaling cipher suite value (SCSV) is presented as a cipher suite, but its only purpose is to provide other information and not to advertise support for a cipher suite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling cipher suite value exists as an alternative to presenting the “renegotation_info” extension so that DTLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it._
+
+*FCS_DTLSC_EXT.1.10* The TSF shall [selection: _terminate the DTLS session, silently discard the record_] if a message received contains an invalid MAC.
+
+*_Application Note {counter:appnote_count}_*
+
+_The Message Authentication Code (MAC) is negotiated during the DTLS handshake phase and is used to protect the integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC 9147 (DTLS 1.3), section 4.5.2 and RFC 6347 (DTLS 1.2), section 4.1.2.7). If MAC verification fails, the session must be terminated, or the record must be silently discarded._
+
+*FCS_DTLSC_EXT.1.11* The TSF shall detect and silently discard replayed messages for:
+
+* DTLS records previously received.
+* DTLS records too old to fit in the sliding window.
+
+*_Application Note {counter:appnote_count}_*
+
+_Replay Detection is described in section 4.5.1 of DTLS 1.3 (RFC 9147) and 4.1.2.6 of DTLS 1.2 (RFC 6347). For each received record, the receiver verifies the record contains a sequence number that is within the sliding receive window and does not duplicate the sequence number of any other record received during the session._
+
+_"Silently Discard" means the TOE discards the packet without responding._
 
 *FCS_DTLSC_EXT.1.9* The TSF shall [selection: _support DTLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: DTLS 1.2, DTLS 1.3] renegotiation attempts_].
 
@@ -2430,11 +2458,11 @@ _The option 'provides' shall be selected if the TOE provides the ability to conf
 
 _The use of the early data extension is prohibited in the configured TOE. The early data extension is a DTLS 1.3 extension. A TOE that only implments DTLS 1.2 vacuously meets the early data extension prohibition._
 
-*FCS_DTLSS_EXT.1.10* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
+*FCS_DTLSS_EXT.1.10* The TSF shall [selection: _not use PSKs, only use PSKs in DTLS1.3 session resumption with forward secrecy_].
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of out-of-band provisioned pre-shared keys creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE.  PSKs are used in DTLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material.  Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
+_The use of out-of-band provisioned pre-shared keys is not allowed, because it creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE.  PSKs are used in DTLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material.  Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
 
 *FCS_DTLSS_EXT.1.11* The TSF shall [selection: _support secure renegotiation in accordance with RFC 5746 by always including the “renegotiation_info” TLS extension in DTLS 1.2 ServerHello messages, reject [selection: DTLS 1.2, DTLS 1.3] renegotiation attempts_].
 
@@ -2839,11 +2867,23 @@ _The use of the early data extension is prohibited in the configured TOE. The ea
 
 _The use of the post-handshake client authentication is prohibited in the configured TOE. Prohibiting post-handshake client authentication might be dropped in a future version of NDcPP._
 
-*FCS_TLSC_EXT.1.8* The TSF shall not permit TLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in TLS 1.3 must use (EC)DHE to provide forward secrecy.
+*FCS_TLSC_EXT.1.8* The TSF shall [selection: _not use PSKs, only use PSKs in TLS1.3 session resumption with forward secrecy_].
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of out-of-band provisioned pre-shared keys creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE.  PSKs are used in TLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material.  Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
+_The use of out-of-band provisioned pre-shared keys is not allowed, because it creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE.  PSKs are used in TLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material.  Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
+
+*FCS_TLSC_EXT.1.9* The TSF shall [selection: _support TLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
+
+*_Application Note {counter:appnote_count}_*
+
+_The ST author selects the first option if the TOE supports TLS 1.2 and secure renegotiation is supported. The ST author selects the second option and “TLS 1.2” if the TOE supports TLS 1.2 and secure renegotiation is not supported. The second option and “TLS 1.3” must be selected if the TOE supports TLS 1.3._
+
+_RFC 5746 defines an extension to TLS that binds renegotiation handshakes to the cryptography in the original handshake._
+
+_The “renegotiation_info” extension must be presented by the server to signal support for secure renegotiation and must be presented by the client to perform secure renegotiation._
+
+_When signaling support for secure renegotiation, the client may present either the “renegotiation_info” extension or the signaling cipher suite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message. (A signaling cipher suite value (SCSV) is presented as a cipher suite, but its only purpose is to provide other information and not to advertise support for a cipher suite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling cipher suite value exists as an alternative to presenting the “renegotation_info” extension so that TLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it._
 
 *FCS_TLSC_EXT.1.9* The TSF shall [selection: _support TLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
 
@@ -2943,17 +2983,19 @@ _The option 'provides' shall be selected if the TOE provides the ability to conf
 
 _The use of the early data extension is prohibited in the configured TOE. The early data extension is a TLS 1.3 extension. A TOE that only implments TLS 1.2 vacuously meets the early data extension prohibition._
 
-*FCS_TLSS_EXT.1.7* The TSF shall not permit TLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK). Any use of PSKs in TLS 1.3 must use (EC)DHE to provide forward secrecy.
+*FCS_TLSS_EXT.1.7* The TSF shall [selection: _not use PSKs, only use PSKs in TLS1.3 session resumption with forward secrecy_].
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of out-of-band provisioned pre-shared keys creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE. PSKs are used in TLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material. Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
+_The use of out-of-band provisioned pre-shared keys is not allowed, because it creates a potential security concern since the entropy used to generate the PSK is outside of the control of the TOE. PSKs are used in TLS 1.3 to provide session resumption; however, in this case, the TSF is responsible for generating appropriately strong keying material. Use of (EC)DHE further enhances security when using PSKs by providing forward secrecy._
 
 *FCS_TLSS_EXT.1.8* The TSF shall [selection: _support secure renegotiation in accordance with RFC 5746 by always including the “renegotiation_info” TLS extension in TLS 1.2 ServerHello messages, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
 
 *_Application Note {counter:appnote_count}_*
 
 _The ST author selects the first option if the TOE supports TLS 1.2 and secure renegotiation is supported. The ST author selects the second option and “TLS 1.2” if the TOE supports TLS 1.2 and secure renegotiation is not supported. The second option and “TLS 1.3” must be selected if the TOE supports TLS 1.3._
+
+*FCS_TLSS_EXT.1.8* The TSF shall [selection: _support secure renegotiation in accordance with RFC 5746 by always including the “renegotiation_info” TLS extension in TLS 1.2 ServerHello messages, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
 
 _RFC 5746 defines an extension to TLS that binds renegotiation handshakes to the cryptography in the original handshake in order to prevent an attack in which the attacker forms a TLS connection with the target server, injects content of his choice, and then splices in a new TLS connection from a client.  The server treats the client's initial TLS handshake as a renegotiation and thus believes that the initial data transmitted by the attacker is from the same entity as the subsequent client data._
 
@@ -3513,7 +3555,7 @@ _]._
 * Early data extension
 * post-handshake client authentication according to RFC 9147, section 5.8.4.
 
-*FCS_DTLSC_EXT.1.8* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
+*FCS_DTLSC_EXT.1.8* The TSF shall [selection: _not use PSKs, only use PSKs in TLS1.3 session resumption with forward secrecy_].
 
 *FCS_DTLSC_EXT.1.9* The TSF shall [selection: _support DTLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: DTLS 1.2, DTLS 1.3] renegotiation attempts_].
 
@@ -3627,7 +3669,7 @@ Dependencies:
 
 * Early data extension
 
-*FCS_DTLSS_EXT.1.10* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
+*FCS_DTLSS_EXT.1.10* The TSF shall [selection: _not use PSKs, only use PSKs in TLS1.3 session resumption with forward secrecy_].
 
 *FCS_DTLSS_EXT.1.11* The TSF shall [selection: _support secure renegotiation in accordance with RFC 5746 by always including the “renegotiation_info” TLS extension in DTLS 1.2 ServerHello messages, reject [selection: DTLS 1.2, DTLS 1.3] renegotiation attempts_].
 
@@ -3997,7 +4039,9 @@ _]._
 * Early data extension
 * post-handshake client authentication according to RFC 8446, section 4.2.6.
 
-*FCS_TLSC_EXT.1.8* The TSF shall not permit TLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in TLS 1.3 must use (EC)DHE to provide forward secrecy.
+*FCS_TLSC_EXT.1.8* The TSF shall [selection: _not use PSKs, only use PSKs in TLS1.3 session resumption with forward secrecy_].
+
+*FCS_TLSC_EXT.1.9* The TSF shall [selection: _support TLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
 
 *FCS_TLSC_EXT.1.9* The TSF shall [selection: _support TLS 1.2 secure renegotiation through use of the “renegotiation_info” TLS extension in accordance with RFC 5746, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
 
@@ -4097,7 +4141,7 @@ Dependencies:
 
 * Early data extension
 
-*FCS_TLSS_EXT.1.7* The TSF shall not permit TLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in TLS 1.3 must use (EC)DHE to provide forward secrecy.
+*FCS_TLSS_EXT.1.7* The TSF shall [selection: _not use PSKs, only use PSKs in TLS1.3 session resumption with forward secrecy_].
 
 *FCS_TLSS_EXT.1.8* The TSF shall [selection: _support secure renegotiation in accordance with RFC 5746 by always including the “renegotiation_info” TLS extension in TLS 1.2 ServerHello messages, reject [selection: TLS 1.2, TLS 1.3] renegotiation attempts_].
 
