@@ -1838,24 +1838,6 @@ A TOE may act as the client, the server, or both in DTLS sessions. The requireme
 _The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This requirement adds that the client must be capable of presenting a certificate to a DTLS server for DTLS mutual authentication._
 
 
-*FCS_DTLSC_EXT.2.2* The TSF shall [selection: _terminate the DTLS session, silently discard the record_] if a message received contains an invalid MAC.
-
-*_Application Note {counter:appnote_count}_*
-
-_The Message Authentication Code (MAC) is negotiated during the DTLS handshake phase and is used to protect the integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC 9147 (DTLS 1.3), section 4.5.2 and RFC 6347 (DTLS 1.2), section 4.1.2.7). If MAC verification fails, the session must be terminated, or the record must be silently discarded._
-
-*FCS_DTLSC_EXT.2.3* The TSF shall detect and silently discard replayed messages for:
-
-* DTLS records previously received.
-* DTLS records too old to fit in the sliding window.
-
-*_Application Note {counter:appnote_count}_*
-
-_Replay Detection is described in section 4.5.1 of DTLS 1.3 (RFC 9147) and 4.1.2.6 of DTLS 1.2 (RFC 6347). For each received record, the receiver verifies the record contains a sequence number that is within the sliding receive window and does not duplicate the sequence number of any other record received during the session._
-
-_"Silently Discard" means the TOE discards the packet without responding._
-
-
 *FCS_DTLSS_EXT.2 DTLS Server Support for Mutual Authentication*
 
 *FCS_DTLSS_EXT.2.1* The TSF shall support DTLS communication with mutual authentication of DTLS clients using X.509v3 certificates and shall [selection:
@@ -2175,11 +2157,21 @@ _These requirements will be revisited as new DTLS versions are standardized by t
 
 *_Application Note {counter:appnote_count}_*
 
-_Where DTLS is used for connections to or from non-TOE entities (relevant to FTP_ITC and FTP_TRP) the ST author shall select RFC 6125. For distributed TOEs (DTLS connections relevant to FPT_ITT), the ST author may select either RFC 6125 or RFC 5280. If RFC 5280 is selected, the selection is completed by listing the AttributeType (e.g. ‘id-at-serialNumber’) as defined in RFC 5280 Appendix A. The selection should only list those attributes that are significant (i.e. those which are used by the client for reference identifier matching), though the Subject field (DN) may contain other attribute types that are not significant for the purpose of reference identifier matching. In the TSS, the ST author describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier. The ST author selects “the reference identifier per RFC 6125 section 6” for TOEs that support FQDN, SRV, and URI identifiers._
+_Where DTLS is used for connections to or from non-TOE entities (relevant to FTP_ITC and FTP_TRP) the ST author shall select RFC 6125 and may select "IPv4 address..." or "IPv6 address...". The ST author shall not select RFC 5280._
 
-_The ST author selects “IPv4…” and/or “IPv6…” based on the IP versions the TOE supports. The ST author selects “CN or SAN” when IP addresses are supported in the “CN” or “SAN” when the TOE mandates the presence of the SAN. When “CN or SAN” is selected, the TOE only checks the CN when the certificate does not contain the SAN extension._
+_For distributed TOEs (DTLS connections relevant to FPT_ITT), the ST author may select any of the options. If RFC 5280 is selected, the selection is completed by listing the AttributeType (e.g. ‘id-at-serialNumber’) as defined in RFC 5280 Appendix A. The selection should only list those attributes that are significant (i.e. those which are used by the client for reference identifier matching), though the Subject field (DN) may contain other attribute types that are not significant for the purpose of reference identifier matching._
 
-_The rules for verification of identity are described in Section 6 of RFC 6125. Additionally, IP address identifiers may be supported in the SAN or CN. The reference identifier is established by the Administrator (e.g. entering a URL into a web browser or clicking a link), by configuration (e.g. configuring the name of a mail server or authentication server), or by an application (e.g. a parameter of an API) depending on the application service. Based on a singular reference identifier’s source domain or IP address and application service type (e.g. HTTP, SIP, LDAP), the client establishes all reference identifiers which are acceptable, such as a Common Name for the Subject Name field of the certificate and a (case-insensitive) DNS name, URI name, and Service Name for the Subject Alternative Name field. The client then compares this list of all acceptable reference identifiers to the presented identifiers in the TLS server’s certificate._
+_If IP address identifiers are supported, the ST author selects “IPv4…” and/or “IPv6…” based on the IP versions the TOE supports. The ST author selects “CN or SAN” when IP addresses are supported in the “CN” or “SAN” when the TOE mandates the presence of the SAN. When “CN or SAN” is selected, the TOE only checks the CN when the certificate does not contain the SAN extension._
+
+*_Application Note {counter:appnote_count}_*
+
+_The reference identifier is established by the Administrator (e.g. entering a URL into a web browser or clicking a link), by configuration (e.g. configuring the name of a mail server or authentication server), or by an application (e.g. a parameter of an API) depending on the application service. Based on a singular reference identifier’s source domain or IP address and application service type (e.g. HTTP, SIP, LDAP), the client establishes all reference identifiers which are acceptable, such as a Common Name for the Subject Name field of the certificate and a (case-insensitive) DNS name, URI name, and Service Name for the Subject Alternative Name field. The client then compares this list of all acceptable reference identifiers to the presented identifiers in the DTLS server’s certificate._
+
+_The rules for verification of DNS, URI, and Service identities are described in Section 6 of RFC 6125._
+
+_IP address identifiers may be supported in the SAN or CN. At this time, the cPP does not mandate a specific method of comparison; however, it is highly recommended that the IP addresses are convered to a binary representation in network byte order and a binary comprision is perfomred._
+
+_RFC 5280 identifiers are matched according to the TSS where the ST author describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier._
 
 _The preferred method for verification is the Subject Alternative Name using DNS names, URI names, or Service Names. Verification using the Common Name may be supported for the purposes of backwards compatibility. When the SAN extension is present in a certificate, the CN must be ignored._
 
@@ -2292,7 +2284,9 @@ _The option 'provides' shall be selected if the TOE provides the ability to conf
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of the early data extension and the post-handshake client authentication is prohibited in the configured TOE. Prohibiting post-handshake client authentication might be dropped in a future version of NDcPP_
+_The use of the early data extension is prohibited in the configured TOE. The early data extension is a DTLS 1.3 extension. A TOE that only implments DTLS 1.2 vacuously meets the early data extension prohibition._
+
+_The use of the post-handshake client authentication is prohibited in the configured TOE. Prohibiting post-handshake client authentication might be dropped in a future version of NDcPP._
 
 *FCS_DTLSC_EXT.1.8* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
 
@@ -2434,7 +2428,7 @@ _The option 'provides' shall be selected if the TOE provides the ability to conf
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of the early data extension is prohibited in the configured TOE._
+_The use of the early data extension is prohibited in the configured TOE. The early data extension is a DTLS 1.3 extension. A TOE that only implments DTLS 1.2 vacuously meets the early data extension prohibition._
 
 *FCS_DTLSS_EXT.1.10* The TSF shall not permit DTLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in DTLS 1.3 must use (EC)DHE to provide forward secrecy.
 
@@ -2710,15 +2704,25 @@ _These requirements will be revisited as new TLS versions are standardized by th
 
 *_Application Note {counter:appnote_count}_*
 
-_Where TLS is used for connections to/from non-TOE entities (relevant to FTP_ITC and FTP_TRP), the ST author shall select RFC 6125. For distributed TOEs (TLS connections relevant to FPT_ITT), the ST author may select either RFC 6125 or RFC 5280. If RFC 5280 is selected, the selection is completed by listing the AttributeType (e.g. ‘id-at-serialNumber’) as defined in RFC 5280 Appendix A. The selection should only list those attributes that are significant (i.e. those which are used by the client for reference identifier matching), though the Subject field (DN) may contain other attribute types that are not significant for the purpose of reference identifier matching. In the TSS the ST author describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier. The ST author selects “the reference identifier per RFC 6125 section 6” for TOEs that support FQDN, SRV, and URI identifiers._
+_Where TLS is used for connections to or from non-TOE entities (relevant to FTP_ITC and FTP_TRP) the ST author shall select RFC 6125 and may select "IPv4 address..." or "IPv6 address...". The ST author shall not select RFC 5280._
 
-_The ST author selects “IPv4…” and/or “IPv6…” based on the IP versions the TOE supports. The ST author selects “CN or SAN” when IP addresses are supported in the “CN” or “SAN” when the TOE mandates the presence of the SAN. When “CN or SAN” is selected, the TOE only checks the CN when the certificate does not contain the SAN extension._
+_For distributed TOEs (TLS connections relevant to FPT_ITT), the ST author may select any of the options. If RFC 5280 is selected, the selection is completed by listing the AttributeType (e.g. ‘id-at-serialNumber’) as defined in RFC 5280 Appendix A. The selection should only list those attributes that are significant (i.e. those which are used by the client for reference identifier matching), though the Subject field (DN) may contain other attribute types that are not significant for the purpose of reference identifier matching._
 
-_The rules for verification of identity are described in Section 6 of RFC 6125. Additionally, IP address identifiers may be supported in the SAN or CN. The reference identifier is established by the Administrator (e.g. entering a URL into a web browser or clicking a link), by configuration (e.g. configuring the name of a mail server or authentication server), or by an application (e.g. a parameter of an API) depending on the application service. Based on a singular reference identifier’s source domain or IP address and application service type (e.g. HTTP, SIP, LDAP), the client establishes all reference identifiers which are acceptable, such as a Common Name for the Subject Name field of the certificate and a (case-insensitive) DNS name, URI name, and Service Name for the Subject Alternative Name field. The client then compares this list of all acceptable reference identifiers to the presented identifiers in the TLS server’s certificate._
+_If IP address identifiers are supported, the ST author selects “IPv4…” and/or “IPv6…” based on the IP versions the TOE supports. The ST author selects “CN or SAN” when IP addresses are supported in the “CN” or “SAN” when the TOE mandates the presence of the SAN. When “CN or SAN” is selected, the TOE only checks the CN when the certificate does not contain the SAN extension._
+
+*_Application Note {counter:appnote_count}_*
+
+_The reference identifier is established by the Administrator (e.g. entering a URL into a web browser or clicking a link), by configuration (e.g. configuring the name of a mail server or authentication server), or by an application (e.g. a parameter of an API) depending on the application service. Based on a singular reference identifier’s source domain or IP address and application service type (e.g. HTTP, SIP, LDAP), the client establishes all reference identifiers which are acceptable, such as a Common Name for the Subject Name field of the certificate and a (case-insensitive) DNS name, URI name, and Service Name for the Subject Alternative Name field. The client then compares this list of all acceptable reference identifiers to the presented identifiers in the TLS server’s certificate._
+
+_The rules for verification of DNS, URI, and Service identities are described in Section 6 of RFC 6125._
+
+_IP address identifiers may be supported in the SAN or CN. At this time, the cPP does not mandate a specific method of comparison; however, it is highly recommended that the IP addresses are convered to a binary representation in network byte order and a binary comprision is perfomred._
+
+_RFC 5280 identifiers are matched according to the TSS where the ST author describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier._
 
 _The preferred method for verification is the Subject Alternative Name using DNS names, URI names, or Service Names. Verification using the Common Name may be supported for the purposes of backwards compatibility. When the SAN extension is present in a certificate, the CN must be ignored._
 
-_Finally, the client should avoid constructing reference identifiers using wildcards. However, if the presented identifiers include wildcards and the TOE supports wildcard, the client must follow the best practices regarding matching; these best practices are captured in the evaluation activity. The exception being, the use of wildcards is not supported when using IP address as the reference identifier_
+_Finally, the client should avoid constructing reference identifiers using wildcards. However, if the presented identifiers include wildcards and the TOE supports wildcard, the client must follow the best practices regarding matching; these best practices are captured in the evaluation activity. The exception being, the use of wildcards is not supported when using IP address as the reference identifier._
 
 *FCS_TLSC_EXT.1.3* The TSF shall not establish a trusted channel if the server certificate is invalid [selection:
 
@@ -2831,7 +2835,9 @@ _The option 'provides' shall be selected if the TOE provides the ability to conf
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of the early data extension and the post-handshake client authentication is prohibited in the configured TOE. Prohibiting post-handshake client authentication might be dropped in a future version of NDcPP._
+_The use of the early data extension is prohibited in the configured TOE. The early data extension is a TLS 1.3 extension. A TOE that only implments TLS 1.2 vacuously meets the early data extension prohibition._
+
+_The use of the post-handshake client authentication is prohibited in the configured TOE. Prohibiting post-handshake client authentication might be dropped in a future version of NDcPP._
 
 *FCS_TLSC_EXT.1.8* The TSF shall not permit TLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK).  Any use of PSKs in TLS 1.3 must use (EC)DHE to provide forward secrecy.
 
@@ -2935,7 +2941,7 @@ _The option 'provides' shall be selected if the TOE provides the ability to conf
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of the early data extension is prohibited in the configured TOE._
+_The use of the early data extension is prohibited in the configured TOE. The early data extension is a TLS 1.3 extension. A TOE that only implments TLS 1.2 vacuously meets the early data extension prohibition._
 
 *FCS_TLSS_EXT.1.7* The TSF shall not permit TLS 1.3 connections using an out-of-band provisioned pre-shared key (PSK). Any use of PSKs in TLS 1.3 must use (EC)DHE to provide forward secrecy.
 
