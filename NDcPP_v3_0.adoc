@@ -1837,6 +1837,25 @@ A TOE may act as the client, the server, or both in DTLS sessions. The requireme
 
 _The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This requirement adds that the client must be capable of presenting a certificate to a DTLS server for DTLS mutual authentication._
 
+
+*FCS_DTLSC_EXT.2.2* The TSF shall [selection: _terminate the DTLS session, silently discard the record_] if a message received contains an invalid MAC.
+
+*_Application Note {counter:appnote_count}_*
+
+_The Message Authentication Code (MAC) is negotiated during the DTLS handshake phase and is used to protect the integrity of messages received from the sender during DTLS data exchange (see 'Handling Invalid Records' in RFC 9147 (DTLS 1.3), section 4.5.2 and RFC 6347 (DTLS 1.2), section 4.1.2.7). If MAC verification fails, the session must be terminated, or the record must be silently discarded._
+
+*FCS_DTLSC_EXT.2.3* The TSF shall detect and silently discard replayed messages for:
+
+* DTLS records previously received.
+* DTLS records too old to fit in the sliding window.
+
+*_Application Note {counter:appnote_count}_*
+
+_Replay Detection is described in section 4.5.1 of DTLS 1.3 (RFC 9147) and 4.1.2.6 of DTLS 1.2 (RFC 6347). For each received record, the receiver verifies the record contains a sequence number that is within the sliding receive window and does not duplicate the sequence number of any other record received during the session._
+
+_"Silently Discard" means the TOE discards the packet without responding._
+
+
 *FCS_DTLSS_EXT.2 DTLS Server Support for Mutual Authentication*
 
 *FCS_DTLSS_EXT.2.1* The TSF shall support DTLS communication with mutual authentication of DTLS clients using X.509v3 certificates and shall [selection:
