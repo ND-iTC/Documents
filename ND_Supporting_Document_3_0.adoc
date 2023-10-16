@@ -1304,16 +1304,6 @@ Some TOEs may set up the registration channel before the enablement step is carr
 [arabic, start=279]
 . The evaluator shall ensure that the TSS description required per FIA_X509_EXT.2.1 includes the use of client-side certificates for DTLS mutual authentication.
 
-*FCS_DTLSC_EXT.2.2*
-
-[arabic, start=280]
-. The evaluator shall verify that the TSS describes the actions that take place if a message received from the DTLS Server fails the MAC integrity check.
-
-*FCS_DTLSC_EXT.2.3*
-
-[arabic, start=281]
-. The evaluator shall verify that TSS describes how replay is detected and silently discarded for DTLS records that have previously been received and too old to fit in the sliding window.
-
 ===== Guidance Documentation
 
 *FCS_DTLSC_EXT.2.1*
@@ -1334,16 +1324,6 @@ Some TOEs may set up the registration channel before the enablement step is carr
 +
 In addition, all other testing in FCS_DTLSC_EXT.1 and FIA_X509_EXT.* must be performed as per the requirements.
 
-
-*FCS_DTLSC_EXT.2.2*
-
-[arabic, start=285]
-. Test 1: The evaluator shall establish a DTLS connection. The evaluator will then modify at least one byte in a record message and verify that the Client discards the record or terminates the DTLS session.
-
-*FCS_DTLSC_EXT.2.3*
-
-[arabic, start=286]
-. Test 1: The evaluator shall set up a DTLS connection with a DTLS Server. The evaluator shall then capture traffic sent from the DTLS Server to the TOE. The evaluator shall retransmit copies of this traffic to the TOE in order to impersonate the DTLS Server. The evaluator shall observe that the TSF does not take action in response to receiving these packets and that the audit log indicates that the replayed traffic was discarded.
 
 ==== FCS_DTLSS_EXT.2 Extended: DTLS Server support for mutual authentication
 
@@ -1618,6 +1598,16 @@ Note: Testing the validity of the client certificate is performed as part of X.5
 [arabic, start=347]
 . The evaluator shall verify in the TSS that, for DTLS 1.3, the TOE shall not permit out-of-band provisioning of pre-shared keys (PSKs) in the evaluated configuration.
 
+*FCS_DTLSC_EXT.1.10*
+
+[arabic, start=348]
+. The evaluator shall verify that the TSS describes the actions that take place if a message received from the DTLS Server fails the MAC integrity check.
+
+*FCS_DTLSC_EXT.1.11*
+
+[arabic, start=349]
+. The evaluator shall verify that TSS describes how replay is detected and silently discarded for DTLS records that have previously been received and too old to fit in the sliding window.
+
 ===== Guidance Documentation
 
 *FCS_DTLSC_EXT.1.1*
@@ -1784,8 +1774,19 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 .. Test 1 [conditional]: If "support DTLS 1.2 secure renegotiation..." is selected, the evaluator shall use a network packet analyzer/sniffer to capture a DTLS 1.2 handshake between the two DTLS endpoints. The evaluator shall verify that either the “renegotiation_info” field or the SCSV cipher suite is included in the ClientHello message during the initial handshake.
 .. Test 2 [conditional]: If "support DTLS 1.2 secure renegotiation..." is selected, the evaluator shall perform a DTLS 1.2 handshake and verify the TOE DTLS Client’s handling of ServerHello messages received during the initial handshake that include the “renegotiation_info” extension. The evaluator shall modify the length portion of this field in the ServerHello message to be non-zero and verify that the TOE DTLS client sends a failure and terminates the connection. The evaluator shall verify that a properly formatted field results in a successful DTLS connection.
 .. Test 3 [conditional]: If "support DTLS 1.2 secure renegotiation..." is selected, the evaluator shall perform a DTLS 1.2 handshake and verify that ServerHello messages received during secure renegotiation contain the “renegotiation_info” extension. The evaluator shall modify either the “client_verify_data” or “server_verify_data” value and verify that the TOE DTLS client terminates the connection.
-.. Test 4 [conditional]: If "reject...renegotiation attemps" is selected, then for each selected DTLS version, the evaluator shall initiate a DTLS session between the so-configured TSF and a test server that is configured to perform a compliant handshake, followed by a Hello Request. The evaluator shall confirm that the TSF completes the initial handshake successfully but renegotiation does not occur after receiving the Hello Request. 
-Note: It is preferred that the TSF sends a fatal error alert message (e.g., unexpected message) in response to this, but it is acceptable that the TSF terminates the connection silently (i.e., without sending a fatal error alert) or ignore the Hello Request.
+
+.. Test 4 [conditional]: If "reject...renegotiation attemps" is selected, then for each selected DTLS version, the evaluator shall initiate a DTLS session between the so-configured TSF and a test server that is configured to perform a compliant handshake, followed by a hello reset request. The evaluator shall confirm that the TSF completes the initial handshake successfully but terminates the DTLS session after receiving the hello reset request. 
+Note: It is preferred that the TSF sends a fatal error alert message (e.g., unexpected message) in response to this, but it is acceptable that the TSF terminates the connection silently (i.e., without sending a fatal error alert).
+
+*FCS_DTLSC_EXT.1.10*
+
+[arabic, start=265]
+. Test 1: The evaluator shall establish a DTLS connection. The evaluator will then modify at least one byte in a record message and verify that the Client discards the record or terminates the DTLS session.
+
+*FCS_DTLSC_EXT.1.11*
+
+[arabic, start=266]
+. Test 1: The evaluator shall set up a DTLS connection with a DTLS Server. The evaluator shall then capture traffic sent from the DTLS Server to the TOE. The evaluator shall retransmit copies of this traffic to the TOE in order to impersonate the DTLS Server. The evaluator shall observe that the TSF does not take action in response to receiving these packets and that the audit log indicates that the replayed traffic was discarded.
 
 ==== FCS_DTLSS_EXT.1 Extended: DTLS Server Protocol
 
@@ -1993,7 +1994,9 @@ Remark: If multiple contexts are supported for session resumption, for each of t
 [loweralpha, start=1]
 .. Test 1 [conditional]: If "support secure renegotiation..." is selected, the evaluator shall use a network packet analyzer/sniffer to capture a DTLS 1.2 handshake between the two DTLS endpoints. The evaluator shall verify that the “renegotiation_info” extension is included in the ServerHello message.
 .. Test 2 [conditional]: If "support secure renegotiation..." is selected, the evaluator shall perform a DTLS 1.2 handshake and modify the length portion of the field in the ClientHello message in the initial handshake to be non-zero. The evaluator shall verify that the TOE DTLS server sends a failure and terminates the connection. The evaluator shall verify that a properly formatted field results in a successful DTLS connection.
-.. Test 3 [conditional]: If "support secure renegotiation..." is selected, the evaluator shall perform a DTLS 1.2 handshake and modify the "client_verify_data" value in the ClientHello message received during secure renegotiation. The evaluator shall verify that the TOE DTLS server terminates the connection.
+
+.. Test 3 [conditional]: If "support secure renegotiation..." is selected, the evaluator shall perform a DTLS 1.2 handshake and modify the "client_verify_data" or "server_verify_data" value in the ClientHello message received during secure renegotiation. The evaluator shall verify that the TOE DTLS server terminates the connection.
+
 .. Test 4 [conditional]: If "reject...renegotiation attemps" is selected, then for each selected DTLS version, the evaluator shall follow the operational guidance as necessary to configure the TSF to negotiate the version and reject renegotiation. The evaluator shall initiate a valid initial session for the specified version, send a valid ClientHello on the non-renegotiable DTLS channel, and observe that the TSF terminates the session.
 Note: It is preferred that the TSF sends a fatal error alert message (e.g., unexpected message) in response to this, but it is acceptable that the TSF terminates the connection silently (i.e., without sending a fatal error alert).
 
@@ -2524,8 +2527,8 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 .. Test 1 [conditional]: If "support TLS 1.2 secure renegotiation..." is selected, the evaluator shall use a network packet analyzer/sniffer to capture a TLS 1.2 handshake between the two TLS endpoints. The evaluator shall verify that either the “renegotiation_info” field or the SCSV cipher suite is included in the ClientHello message during the initial handshake.
 .. Test 2 [conditional]: If "support TLS 1.2 secure renegotiation..." is selected, the evaluator shall perform a TLS 1.2 handshake and verify the TOE TLS Client’s handling of ServerHello messages received during the initial handshake that include the “renegotiation_info” extension. The evaluator shall modify the length portion of this field in the ServerHello message to be non-zero and verify that the TOE TLS client sends a failure and terminates the connection. The evaluator shall verify that a properly formatted field results in a successful TLS connection.
 .. Test 3 [conditional]: If "support TLS 1.2 secure renegotiation..." is selected, the evaluator shall perform a TLS 1.2 handshake and verify that ServerHello messages received during secure renegotiation contain the “renegotiation_info” extension. The evaluator shall modify either the “client_verify_data” or “server_verify_data” value and verify that the TOE TLS client terminates the connection.
-.. Test 4 [conditional]: If "reject...renegotiation attemps" is selected, then for each selected TLS version, the evaluator shall initiate a TLS session between the so-configured TSF and a test server that is configured to perform a compliant handshake, followed by a hello reset request. The evaluator shall confirm that the TSF completes the initial handshake successfully but renegotiation does not occur after receiving the Hello Request. 
-Note: It is preferred that the TSF sends a fatal error alert message (e.g., unexpected message) in response to this, but it is acceptable that the TSF terminates the connection silently (i.e., without sending a fatal error alert) or ignore the Hello Request.
+.. Test 4 [conditional]: If "reject...renegotiation attemps" is selected, then for each selected TLS version, the evaluator shall initiate a TLS session between the so-configured TSF and a test server that is configured to perform a compliant handshake, followed by a hello reset request. The evaluator shall confirm that the TSF completes the initial handshake successfully but terminates the TLS session after receiving the hello reset request. 
+Note: It is preferred that the TSF sends a fatal error alert message (e.g., unexpected message) in response to this, but it is acceptable that the TSF terminates the connection silently (i.e., without sending a fatal error alert).
 
 ==== FCS_TLSS_EXT.1 Extended: TLS Server Protocol
 
@@ -2705,7 +2708,7 @@ Remark: If multiple contexts are supported for session resumption, for each of t
 [loweralpha, start=1]
 .. Test 1 [conditional]: If "support secure renegotiation..." is selected, the evaluator shall use a network packet analyzer/sniffer to capture a TLS 1.2 handshake between the two TLS endpoints. The evaluator shall verify that the “renegotiation_info” extension is included in the ServerHello message.
 .. Test 2 [conditional]: If "support secure renegotiation..." is selected, the evaluator shall perform a TLS 1.2 handshake and modify the length portion of the field in the ClientHello message in the initial handshake to be non-zero. The evaluator shall verify that the TOE TLS server sends a failure and terminates the connection. The evaluator shall verify that a properly formatted field results in a successful TLS connection.
-.. Test 3 [conditional]: If "support secure renegotiation..." is selected, the evaluator shall perform a TLS 1.2 handshake and modify the "client_verify_data" value in the ClientHello message received during secure renegotiation. The evaluator shall verify that the TOE TLS server terminates the connection.
+.. Test 3 [conditional]: If "support secure renegotiation..." is selected, the evaluator shall perform a TLS 1.2 handshake and modify the "client_verify_data" or "server_verify_data" value in the ClientHello message received during secure renegotiation. The evaluator shall verify that the TOE TLS server terminates the connection.
 .. Test 4 [conditional]: If "reject...renegotiation attemps" is selected, then for each selected TLS version, the evaluator shall follow the operational guidance as necessary to configure the TSF to negotiate the version and reject renegotiation. The evaluator shall initiate a valid initial session for the specified version, send a valid ClientHello on the non-renegotiable TLS channel, and observe that the TSF terminates the session.
 Note: It is preferred that the TSF sends a fatal error alert message (e.g., unexpected message) in response to this, but it is acceptable that the TSF terminates the connection silently (i.e., without sending a fatal error alert).
 
