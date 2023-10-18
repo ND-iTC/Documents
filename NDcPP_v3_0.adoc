@@ -1023,7 +1023,7 @@ _For the avoidance of doubt: the “cryptographic keys” in this SFR include se
 
 *_Application Note {counter:appnote_count}_*
 
-_For the first selection of FCS_COP.1.1/DataEncryption, the ST author chooses the mode or modes in which AES operates. For the second selection, the ST author chooses the key sizes that are supported by this functionality. The modes and key sizes selected here correspond to the cipher suite selections made in the trusted channel requirements._
+_For the first selection of FCS_COP.1.1/DataEncryption, the ST author chooses the mode or modes in which AES operates. For the second selection, the ST author chooses the key sizes that are supported by this functionality. The modes and key sizes selected here correspond to the ciphersuite selections made in the trusted channel requirements._
 
 *FCS_COP.1/SigGen Cryptographic Operation (Signature Generation and Verification)*
 
@@ -1050,7 +1050,7 @@ that meet the following: [selection:
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST Author chooses the algorithm(s) implemented to perform digital signatures. For the algorithm(s) chosen, the ST author makes the appropriate assignments/selections to specify the parameters that are implemented for that algorithm. The ST author ensures that the assignments and selections for this SFR include all the parameter values necessary for the cipher suites selected for the protocol SFRs (see Appendix_ _B.3.1) that are included in the ST. The ST Author checks for consistency of selections with other FCS requirements, especially when supporting elliptic curves._
+_The ST Author chooses the algorithm(s) implemented to perform digital signatures. For the algorithm(s) chosen, the ST author makes the appropriate assignments/selections to specify the parameters that are implemented for that algorithm. The ST author ensures that the assignments and selections for this SFR include all the parameter values necessary for the ciphersuites selected for the protocol SFRs (see Appendix_ _B.3.1) that are included in the ST. The ST Author checks for consistency of selections with other FCS requirements, especially when supporting elliptic curves._
 
 *FCS_COP.1/Hash Cryptographic Operation (Hash Algorithm)*
 
@@ -2303,7 +2303,7 @@ _RFC 5746 defines an extension to DTLS that binds renegotiation handshakes to th
 
 _The “renegotiation_info” extension must be presented by the server to signal support for secure renegotiation and must be presented by the client to perform secure renegotiation._
 
-_When signaling support for secure renegotiation, the client may present either the “renegotiation_info” extension or the signaling cipher suite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message. (A signaling cipher suite value (SCSV) is presented as a cipher suite, but its only purpose is to provide other information and not to advertise support for a cipher suite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling cipher suite value exists as an alternative to presenting the “renegotation_info” extension so that DTLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it._
+_When signaling support for secure renegotiation, the client may present either the “renegotiation_info” extension or the signaling ciphersuite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message. (A signaling ciphersuite value (SCSV) is presented as a ciphersuite, but its only purpose is to provide other information and not to advertise support for a ciphersuite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling ciphersuite value exists as an alternative to presenting the “renegotation_info” extension so that DTLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it._
 
 *FCS_DTLSC_EXT.1.10* The TSF shall [selection: _terminate the DTLS session, silently discard the record_] if a message received contains an invalid MAC.
 
@@ -2854,7 +2854,7 @@ _RFC 5746 defines an extension to TLS that binds renegotiation handshakes to the
 
 _The “renegotiation_info” extension must be presented by the server to signal support for secure renegotiation and must be presented by the client to perform secure renegotiation._
 
-_When signaling support for secure renegotiation, the client may present either the “renegotiation_info” extension or the signaling cipher suite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message. (A signaling cipher suite value (SCSV) is presented as a cipher suite, but its only purpose is to provide other information and not to advertise support for a cipher suite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling cipher suite value exists as an alternative to presenting the “renegotation_info” extension so that TLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it._
+_When signaling support for secure renegotiation, the client may present either the “renegotiation_info” extension or the signaling ciphersuite value TLS_EMPTY_RENEGOTIATION_INFO_SCSV in the initial ClientHello message. (A signaling ciphersuite value (SCSV) is presented as a ciphersuite, but its only purpose is to provide other information and not to advertise support for a ciphersuite.) The TLS_EMPTY_RENEGOTIATION_INFO_SCSV signaling ciphersuite value exists as an alternative to presenting the “renegotation_info” extension so that TLS server implementations that immediately terminate the connection when they encounter any extension they do not understand can still proceed with a connection. The client may still choose to reject the connection later, if it insists upon renegotiation support and the server does not support it._
 
 *FCS_TLSS_EXT.1 TLS Server Protocol*
 
