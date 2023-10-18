@@ -3541,7 +3541,7 @@ Dependencies:
 * FIA_X509_EXT.2 X.509 Certificate Authentication
 * FIA_X509_EXT.3 X.509 Certificate Request
 
-*FCS_DTLSC_EXT.2.1* The TSF shall support mutual authentication using X.509v3 certificates.
+*FCS_DTLSC_EXT.2.1* The TSF shall support DTLS communication with mutual authentication of DTLS Clients using X.509v3 certificates.
 
 =====  FCS_DTLSS_EXT DTLS Server Protocol
 
