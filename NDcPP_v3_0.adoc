@@ -1855,7 +1855,7 @@ _There are different behaviours of the TOE possible for the 'soft fail' option d
 
 *FCS_DTLSS_EXT.2.2* When establishing a trusted channel, by default the TSF shall not establish a trusted channel if the client certificate is invalid. The TSF shall also [selection:
 
-* _Not implement any administrator override mechanism_
+* _not implement any administrator override mechanism_
 * _require administrator authorization to establish the connection if the TSF fails to determine the revocation status of the presented client certificate_
 
 ].
@@ -1937,7 +1937,7 @@ _There are different behaviours of the TOE possible for the 'soft fail' option d
 
 *FCS_TLSS_EXT.2.2* When establishing a trusted channel, by default the TSF shall not establish a trusted channel if the client certificate is invalid. The TSF shall also [selection:
 
-* _Not implement any administrator override mechanism_
+* _not implement any administrator override mechanism_
 * _require administrator authorization to establish the connection if the TSF fails to determine the revocation status of the presented client certificate_
 
 ].
@@ -2740,7 +2740,7 @@ _If TLS is selected in FTP_ITC, then certificate validity is tested in accordanc
 
 _If TLS is selected in FPT_ITT, then certificate validity is tested in accordance with testing performed for FIA_X509_EXT.1/ITT._
 
-*FCS_TLSC_EXT.1.4* The TSF shall [selection: _not present the Supported Groups Extension, present the Supported Groups Extension with the following curves/groups:[selection: secp256r1, secp384r1, secp521r1, ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192] and no other curves/groups_] in the Client Hello.
+*FCS_TLSC_EXT.1.4* The TSF shall [selection: _not present the Supported Groups Extension, present the Supported Groups Extension with the following curves/groups: [selection: secp256r1, secp384r1, secp521r1, ffdhe2048, ffdhe3072, ffdhe4096, ffdhe6144, ffdhe8192] and no other curves/groups_] in the Client Hello.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -3601,7 +3601,7 @@ Dependencies:
 
 *FCS_DTLSS_EXT.1.2* The TSF shall not proceed with a connection handshake attempt if the DTLS server cannot successfully validate the cookie returned by the DTLS Client.
 
-*FCS_DTLSS_EXT.1.3* The TSF shall authenticate itself using X.509 certificate(s) using [selection: _RSA with key size [selection: 2048 bits, 3072 bits, 4096 bits]; ECDSA over NIST curves [selection: secp256r1, secp384r1, secp521r1] and no other curves_].
+*FCS_DTLSS_EXT.1.3* The TSF shall authenticate itself using X.509 certificate(s) using [selection: _RSA with key size [selection: 2048, 3072, 4096] bits; ECDSA over NIST curves [selection: secp256r1, secp384r1, secp521r1] and no other curves_].
 
 *FCS_DTLSS_EXT.1.4* The TSF shall perform key exchange using: [selection:
 
@@ -3658,7 +3658,7 @@ Dependencies:
 
 *FCS_DTLSS_EXT.2.2* When establishing a trusted channel, by default the TSF shall not establish a trusted channel if the client certificate is invalid. The TSF shall also [selection:
 
-* _Not implement any administrator override mechanism_
+* _not implement any administrator override mechanism_
 
 * _require administrator authorization to establish the connection if the TSF fails to determine the revocation status of the presented client certificate_
 
@@ -4128,7 +4128,7 @@ Dependencies:
 
 *FCS_TLSS_EXT.2.2* When establishing a trusted channel, by default the TSF shall not establish a trusted channel if the client certificate is invalid. The TSF shall also [selection:
 
-* _Not implement any administrator override mechanism_
+* _not implement any administrator override mechanism_
 * _require administrator authorization to establish the connection if the TSF fails to determine the revocation status of the presented client certificate_
 
 ].
