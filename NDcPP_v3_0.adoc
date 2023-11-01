@@ -1320,8 +1320,8 @@ In order to detect some number of failures of underlying security mechanisms use
 
 *FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
 
- * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
- * _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
+* _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
 * [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: describe self-test objective]._
 
 to demonstrate the correct operation of the TSF: [assignment: _list of self-tests run by the TSF_] and if failure detected [assignment: _describe resulting error state_].
@@ -4490,8 +4490,8 @@ Dependencies: No other components.
 
 *FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
 
- * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
- * _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
+* _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
 * [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: describe self-test objective]._
 
 to demonstrate the correct operation of the TSF: [assignment: _list of self-tests run by the TSF_] and if failure detected [assignment: _describe resulting error state_].
