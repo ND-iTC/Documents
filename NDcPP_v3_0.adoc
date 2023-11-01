@@ -2687,9 +2687,9 @@ _List 2: List of supported TLS-related ciphersuites for TLS 1.3_
 
 [selection:
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
+* _Select supported ciphersuites for TLS 1.2 from List 1_
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
+* _Select supported ciphersuites for TLS 1.3 from List 2_
 
 ] and no other ciphersuites.
 
@@ -2862,9 +2862,9 @@ _When signaling support for secure renegotiation, the client may present either 
 
 [selection:
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
+* _Select supported ciphersuites for TLS 1.2 from List 1_
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
+* _Select supported ciphersuites for TLS 1.3 from List 2_
 
 ] and no other ciphersuites.
 
@@ -3448,9 +3448,9 @@ Dependencies:
 
 [selection:
 
-* _+++<u>+++Select supported ciphersuites for DTLS 1.2 from List 1+++</u>+++_
+* _Select supported ciphersuites for DTLS 1.2 from List 1_
 
-* _+++<u>+++Select supported ciphersuites for DTLS 1.3 from List 2+++</u>+++_
+* _Select supported ciphersuites for DTLS 1.3 from List 2_
 
 ] and no other ciphersuites.
 
@@ -3593,9 +3593,9 @@ Dependencies:
 
 [selection:
 
-* _+++<u>+++Select supported ciphersuites for DTLS 1.2 from List 1+++</u>+++_
+* _Select supported ciphersuites for DTLS 1.2 from List 1_
 
-* _+++<u>+++Select supported ciphersuites for DTLS 1.3 from List 2+++</u>+++_
+* _Select supported ciphersuites for DTLS 1.3 from List 2_
 
 ] and no other ciphersuites.
 
@@ -3934,9 +3934,9 @@ Dependencies:
 
 [selection:
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
+* _Select supported ciphersuites for TLS 1.2 from List 1_
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
+* _Select supported ciphersuites for TLS 1.3 from List 2_
 
 ] and no other ciphersuites.
 
@@ -4071,9 +4071,9 @@ Dependencies:
 
 [selection:
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
+* _Select supported ciphersuites for TLS 1.2 from List 1_
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
+* _Select supported ciphersuites for TLS 1.3 from List 2_
 
 ] and no other ciphersuites.
 
