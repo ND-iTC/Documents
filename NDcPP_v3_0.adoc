@@ -1323,8 +1323,8 @@ In order to detect some number of failures of underlying security mechanisms use
 
 *FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
 
- * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
- * _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
+* _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
 * [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: describe self-test objective]._
 
 to demonstrate the correct operation of the TSF: [assignment: _list of self-tests run by the TSF_] and if failure detected [assignment: _describe resulting error state_].
@@ -2501,7 +2501,7 @@ _While there must be a means to order the rules, a general approach to ordering 
 
 _The ST author selects the supported modes of operation for IPsec._
 
-*FCS_IPSEC_EXT.1.4* The TSF shall implement the IPsec protocol ESP as defined by RFC 4303 using the cryptographic algorithms [selection: _AES-CBC-128 (RFC 3602), AES-CBC-192 (RFC 3602), AES-CBC-256 (RFC 3602), AES-GCM-128 (RFC 4106), AES-GCM-192 (RFC 4106), AES-GCM-256 (RFC 4106)_] together with a Secure Hash Algorithm (SHA)-based HMAC [selection: _HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-384, HMAC-SHA-512, no HMAC algorithm]_.
+*FCS_IPSEC_EXT.1.4* The TSF shall implement the IPsec protocol ESP as defined by RFC 4303 using the cryptographic algorithms [selection: _AES-CBC-128 (RFC 3602), AES-CBC-192 (RFC 3602), AES-CBC-256 (RFC 3602), AES-GCM-128 (RFC 4106), AES-GCM-192 (RFC 4106), AES-GCM-256 (RFC 4106)_] together with a Secure Hash Algorithm (SHA)-based HMAC [selection: _HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-384, HMAC-SHA-512, no HMAC algorithm_].
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2632,8 +2632,8 @@ This SFR is not applicable if the TOE cannot be configured to operate as an NTP 
 
 *FCS_NTP_EXT.1.2* The TSF shall update its system time using [selection:
 
-* Authentication using [selection: _+++<u>+++SHA1, SHA256, SHA384, SHA512, AES-CBC-128, AES-CBC-256+++</u>+++_] as the message digest algorithm(s);
-* [selection: _+++<u>+++IPsec, DTLS+++</u>+++_] to provide trusted communication between itself and an NTP time source.
+* Authentication using [selection: _SHA1, SHA256, SHA384, SHA512, AES-CBC-128, AES-CBC-256_] as the message digest algorithm(s);
+* [selection: _IPsec, DTLS_] to provide trusted communication between itself and an NTP time source.
 
 ].
 
@@ -2702,9 +2702,9 @@ _List 2: List of supported TLS-related ciphersuites for TLS 1.3_
 
 [selection:
 
-* _+++<u>+++select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
+* _select supported ciphersuites for TLS 1.2 from List 1_
 
-* _+++<u>+++select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
+* _select supported ciphersuites for TLS 1.3 from List 2_
 
 ] and no other ciphersuites.
 
@@ -2853,9 +2853,9 @@ _The use of out-of-band provisioned pre-shared keys creates a potential security
 
 [selection:
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
+* _Select supported ciphersuites for TLS 1.2 from List 1_
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
+* _Select supported ciphersuites for TLS 1.3 from List 2_
 
 ] and no other ciphersuites.
 
@@ -3772,7 +3772,7 @@ Dependencies:
 
 *FCS_IPSEC_EXT.1.3* The TSF shall implement [selection: _tunnel mode, transport mode_].
 
-*FCS_IPSEC_EXT.1.4* The TSF shall implement the IPsec protocol ESP as defined by RFC 4303 using the cryptographic algorithms [selection: _AES-CBC-128 (RFC 3602), AES-CBC-192 (RFC 3602), AES-CBC-256 (RFC 3602), AES-GCM-128 (RFC 4106), AES-GCM-192 (RFC 4106), AES-GCM-256 (RFC 4106),_] together with a Secure Hash Algorithm (SHA)-based HMAC [selection: _HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-384, HMAC-SHA-512, no HMAC algorithm_].
+*FCS_IPSEC_EXT.1.4* The TSF shall implement the IPsec protocol ESP as defined by RFC 4303 using the cryptographic algorithms [selection: _AES-CBC-128 (RFC 3602), AES-CBC-192 (RFC 3602), AES-CBC-256 (RFC 3602), AES-GCM-128 (RFC 4106), AES-GCM-192 (RFC 4106), AES-GCM-256 (RFC 4106)_] together with a Secure Hash Algorithm (SHA)-based HMAC [selection: _HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-384, HMAC-SHA-512, no HMAC algorithm_].
 
 *FCS_IPSEC_EXT.1.5* The TSF shall implement the protocol: [selection:
 
@@ -3870,8 +3870,8 @@ Dependencies: FCS_COP.1 Cryptographic operation
 
 *FCS_NTP_EXT.1.2* The TSF shall update its system time using [selection:
 
-* Authentication using [selection: _+++<u>+++SHA1, SHA256, SHA384, SHA512, AES-CBC-128, AES-CBC-256+++</u>+++_] as the message digest algorithm(s);
-* [selection: _+++<u>+++IPsec, DTLS+++</u>+++_] to provide trusted communication between itself and an NTP time source.
+* Authentication using [selection: _SHA1, SHA256, SHA384, SHA512, AES-CBC-128, AES-CBC-256_] as the message digest algorithm(s);
+* [selection: _IPsec, DTLS_] to provide trusted communication between itself and an NTP time source.
 
 ].
 
@@ -3928,9 +3928,9 @@ Dependencies:
 
 [selection:
 
-* _+++<u>+++select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
+* _select supported ciphersuites for TLS 1.2 from List 1_
 
-* _+++<u>+++select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
+* _select supported ciphersuites for TLS 1.3 from List 2_
 
 ] and no other ciphersuites.
 
@@ -4079,9 +4079,9 @@ Dependencies:
 
 [selection:
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.2 from List 1+++</u>+++_
+* _Select supported ciphersuites for TLS 1.2 from List 1_
 
-* _+++<u>+++Select supported ciphersuites for TLS 1.3 from List 2+++</u>+++_
+* _Select supported ciphersuites for TLS 1.3 from List 2_
 
 ] and no other ciphersuites.
 
@@ -4433,8 +4433,8 @@ Dependencies: No other components.
 
 *FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
 
- * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
- * _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
+* _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
 * [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: describe self-test objective]._
 
 to demonstrate the correct operation of the TSF: [assignment: _list of self-tests run by the TSF_] and if failure detected [assignment: _describe resulting error state_].
