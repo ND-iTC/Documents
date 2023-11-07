@@ -47,7 +47,7 @@ V0.1, 5 September 2014 (Initial release for public review)
 
 *General Purpose:* See Section 1.1.
 
-*Field of special use:* This Supporting Document applies to the Targets of Evaluation (TOE)s claiming conformance with the collaborative Protection Profile for Network Devices [NDcPP].
+*Field of special use:* This Supporting Document applies to the evaluation of the Target of Evaluation (TOE)s claiming conformance with the collaborative Protection Profile for Network Devices [NDcPP].
 
 *Acknowledgements:*
 
