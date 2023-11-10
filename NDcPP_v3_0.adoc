@@ -4849,7 +4849,6 @@ FIA_X509_EXT.2
 FIA_X509_EXT.3
 
 a|
-FCS_TLSC_EXT.1 (selection-based SFR) included
 
 FCS_CKM.1 included
 
