@@ -385,19 +385,15 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FCS_COP.1/KeyedHash |Cryptographic Operation (Keyed Hash Algorithm) |All
 |FCS_DTLSC_EXT.1 |DTLS Client Protocol|Feature Dependent
 |FCS_DTLSC_EXT.2 |DTLS Client with Mutual Authentication |Feature Dependent 
-|FCS_DTLSC_EXT.3 |DTLS Client Support for Secure Renegotiation (DTLS 1.2 only)|Feature Dependent
 |FCS_DTLSS_EXT.1 |DTLS Server Protocol |Feature Dependent
 |FCS_DTLSS_EXT.2 |DTLS Server Support for Mutual Authentication |Feature Dependent
-|FCS_DTLSS_EXT.3|DTLS Server Support for Secure Renegotiation (DTLS 1.2 only)|Feature Dependent
 |FCS_HTTPS_EXT.1|HTTPS Protocol |Feature Dependent
 |FCS_IPSEC_EXT.1|IPsec Protocol |Feature Dependent
 |FCS_NTP_EXT.1|NTP Protocol |Feature Dependent
 |FCS_TLSC_EXT.1|TLS Client Protocol|Feature Dependent
 |FCS_TLSC_EXT.2|TLS Client Support for Mutual Authentication|Feature Dependent
-|FCS_TLSC_EXT.3|TLS Client Support for Secure Renegotiation (TLS 1.2 only)|Feature Dependent
 |FCS_TLSS_EXT.1 |TLS Server Protocol|Feature Dependent
 |FCS_TLSS_EXT.2 |TLS Server with Mutual Authentication |Feature Dependent
-|FCS_TLSS_EXT.3 |TLS Server Support for Secure Renegotiation (TLS 1.2 only)|Feature Dependent
 |FCS_RBG_EXT.1 |Random Bit Generation |All
 |FIA_AFL.1 |Authentication Failure Handling |One
 |FIA_PMG_EXT.1 |Password Management |One
@@ -1602,13 +1598,9 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 * Disabling communications between a pair of components.
 |Identities of the endpoint pairs enabled or disabled.
 |FCS_DTLSC_EXT.2 |Detected replay attacks |Source of the replay attack.
-|FCS_DTLSC_EXT.3 |None |None
 |FCS_DTLSS_EXT.2 |Failure to authenticate the client |Reason for failure
-|FCS_DTLSS_EXT.3 |None |None
 |FCS_TLSC_EXT.2 |None |None
-|FCS_TLSC_EXT.3 |None |None
 |FCS_TLSS_EXT.2 |Failure to authenticate the client |Reason for failure
-|FCS_TLSS_EXT.3 |None |None
 |FIA_X509_EXT.1/ITT a|
 * Unsuccessful attempt to validate a certificate
 * Any addition, replacement or removal of trust anchors in the TOE's trust store
@@ -3397,11 +3389,11 @@ FCS_DTLSC_EXT.1 DTLS Client Protocol requires that the client side of DTLS be im
 
 FCS_DTLSC_EXT.2 DTLS Client Support for Mutual Authentication requires that the client side of the DTLS implementation include mutual authentication.
 
-*Management: FCS_DTLSC_EXT.1, FCS_DTLSC_EXT.2, FCS_DTLSC_EXT.3*
+*Management: FCS_DTLSC_EXT.1, FCS_DTLSC_EXT.2*
 
 There are no management activities foreseen.
 
-*Audit: FCS_DTLSC_EXT.1, FCS_DTLSC_EXT.2, FCS_DTLSC_EXT.3*
+*Audit: FCS_DTLSC_EXT.1, FCS_DTLSC_EXT.2*
 
 The following actions should be considered for audit if FAU_GEN Security audit data generation is included in the PP/ST:
 
@@ -3539,12 +3531,12 @@ FCS_DTLSS_EXT.1 DTLS Server Protocol requires that the server side of TLS be imp
 
 FCS_DTLSS_EXT.2: DTLS Server Support for Mutual Authentication requires that mutual authentication be included in the DTLS implementation.
 
-*Management: FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2,FCS_DTLSS_EXT.3*
+*Management: FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2*
 The following actions could be considered for the management functions in FMT:
 
 There are no management activities foreseen.
 
-*Audit: FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2,FCS_DTLSS_EXT.3*
+*Audit: FCS_DTLSS_EXT.1, FCS_DTLSS_EXT.2*
 
 The following actions should be considered for audit if FAU_GEN Security audit data generation is included in the PP/ST:
 
@@ -3573,7 +3565,6 @@ Dependencies:
 
 [selection:
 
-=======
 * _Select supported ciphersuites for DTLS 1.2 from List 1_
 
 * _Select supported ciphersuites for DTLS 1.3 from List 2_
@@ -3664,7 +3655,7 @@ Dependencies:
 
 ] and no other algorithms.
 
-===== FCS_HTTPS_EXT.1 HTTPS Protocol
+=====  FCS_HTTPS_EXT.1 HTTPS Protocol
 
 *Family Behaviour*
 
@@ -3871,12 +3862,12 @@ FCS_TLSC_EXT.1 TLS Client Protocol requires that the client side of TLS be imple
 
 FCS_TLSC_EXT.2 TLS Client Support for Mutual Authentication requires that the client side of the TLS implementation include mutual authentication.
 
-*Management: FCS_TLSC_EXT.1, FCS_TLSC_EXT.2, FCS_TLSC_EXT.3*
+*Management: FCS_TLSC_EXT.1, FCS_TLSC_EXT.2*
 
 The following actions could be considered for the management functions in FMT:
 There are no management activities foreseen.
 
-*Audit: FCS_TLSC_EXT.1, FCS_TLSC_EXT.2, FCS_TLSC_EXT.3*
+*Audit: FCS_TLSC_EXT.1, FCS_TLSC_EXT.2*
 
 The following actions should be considered for audit if FAU_GEN Security audit data generation is included in the PP/ST:
 
@@ -4008,11 +3999,11 @@ FCS_TLSS_EXT.1 TLS Server Protocol requires that the server side of TLS be imple
 
 FCS_TLSS_EXT.2: TLS Server Support for Mutual Authentication requires the mutual authentication be included in the TLS implementation.
 
-*Management: FCS_TLSS_EXT.1, FCS_TLSS_EXT.2, FCS_TLSS_EXT.3*
+*Management: FCS_TLSS_EXT.1, FCS_TLSS_EXT.2*
 
 There are no management activities foreseen.
 
-*Audit: FCS_TLSS_EXT.1, FCS_TLSS_EXT.2, FCS_TLSS_EXT.3*
+*Audit: FCS_TLSS_EXT.1, FCS_TLSS_EXT.2*
 
 The following actions should be considered for audit if FAU_GEN Security audit data generation is included in the PP/ST:
 
@@ -4742,10 +4733,10 @@ which specifies the relevant Administrator identification
 |*SFR* |*Dependencies* |*Rationale Statement*
 |FAU_STG.1 |FAU_GEN.1 per CC Part 2 |FAU_GEN.1 included
 |FAU_STG_EXT.2 a|
-FAU_GEN.
+FAU_GEN +
 FAU_STG_EXT
 |FAU_GEN.1 & FAU_STG_EXT.1 included
-|FAU_STG_EXT.3 |FAU_GEN.
+|FAU_STG_EXT.3 |FAU_GEN +
 FAU_STG_EXT|FAU_GEN.1 & FAU_STG_EXT.1 included
 |FIA_X509_EXT.1/ITT |FIA_X509_EXT.2 |FIA_X509_EXT.2 (selection-based SFR) included
 |FPT_ITT.1 |None |
@@ -4776,47 +4767,6 @@ FIA_X509_EXT.2
 FIA_X509_EXT.3
 
 a|
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
-
-FCS_DTLSC_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.2 (selection-based SFR) included
-
-FIA_X509_EXT.3 (selection-based SFR) included
-
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_DTLSC_EXT.1
-
-FCS_RBG_EXT.1
-
-FIA_X509_EXT.1
-
-FIA_X509_EXT.2
-
-FIA_X509_EXT.3
-
-a|
-FCS_DTLSC_EXT.1 (selection-based SFR) included
-
 FCS_CKM.1 included
 
 FCS_CKM.2 included
@@ -4864,48 +4814,6 @@ FCS_CKM.2 included
 
 FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
-FCS_RBG_EXT.1 included
-
-FCS_DTLSS_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.2 (selection-based SFR) included
-
-FIA_X509_EXT.3 (selection-based SFR) included
-
-|FCS_DTLSS_EXT.3 a|
-
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_DTLSS_EXT.1
-
-FCS_RBG_EXT.1
-
-FIA_X509_EXT.1
-
-FIA_X509_EXT.2
-
-FIA_X509_EXT.3
-
-a|
-
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
 FCS_DTLSS_EXT.1 (selection-based SFR) included
 
 FCS_RBG_EXT.1 included
@@ -4915,49 +4823,8 @@ FIA_X509_EXT.1 (selection-based SFR) included
 FIA_X509_EXT.2 (selection-based SFR) included
 
 FIA_X509_EXT.3 (selection-based SFR) included
-|FCS_TLSC_EXT.2 a|
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-FCS_TLSC_EXT.1
-
-FIA_X509_EXT.1
-
-FIA_X509_EXT.2
-
-FIA_X509_EXT.3
-
-a|
-
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
-
-FCS_TLSC_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.2 (selection-based SFR) included
-
-FIA_X509_EXT.3 (selection-based SFR) included
 
 |FCS_TLSC_EXT.2 a|
-FCS_TLSC_EXT.1
 
 FCS_CKM.1
 
@@ -5001,7 +4868,6 @@ FIA_X509_EXT.2 (selection-based SFR) included
 FIA_X509_EXT.3 (selection-based SFR) included
 
 |FCS_TLSS_EXT.2 a|
-FCS_TLSS_EXT.1
 
 FCS_CKM.2
 
@@ -5040,48 +4906,6 @@ FIA_X509_EXT.2 (selection-based SFR) included
 
 FIA_X509_EXT.3 (selection-based SFR) included
 
-|FCS_TLSS_EXT.3 a|
-
-FCS_CKM.1
-
-FCS_CKM.2
-
-FCS_COP.1/DataEncryption
-
-FCS_COP.1/SigGen
-
-FCS_COP.1/Hash
-
-FCS_COP.1/KeyedHash
-
-FCS_RBG_EXT.1
-
-FCS_TLSS_EXT.1
-
-FIA_X509_EXT.1
-
-FIA_X509_EXT.2
-
-FIA_X509_EXT.3
-
-a|
-FCS_TLSS_EXT.1 (selection-based SFR) included
-
-FCS_CKM.1 included
-
-FCS_CKM.2 included
-
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
-
-FCS_RBG_EXT.1 included
-
-FCS_TLSS_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.1 (selection-based SFR) included
-
-FIA_X509_EXT.2 (selection-based SFR) included
-
-FIA_X509_EXT.3 (selection-based SFR) included
 
 |===
 
