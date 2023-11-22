@@ -1197,6 +1197,7 @@ _The word ‘manage’ includes but is not limited to create, initialize, view, 
 ** _Ability to configure the local session inactivity time before session termination or locking;_
 ** _Ability to configure the authentication failure parameters for FIA_AFL.1;_
 ** _Ability to manage the trusted public keys database;_
+** _Ability to manage the public key or certificate used to validate the digital update;_
 ** _No other capabilities_].
 
 *_Application Note {counter:appnote_count}_*
@@ -1240,6 +1241,8 @@ _For distributed TOEs the interaction between TOE components will be configurabl
 _For distributed TOEs that implement a registration channel (as described in FCO_CPC_EXT.1.2), the ST author uses the selection “Ability to configure the cryptographic functionality” in this SFR, and its corresponding mapping in the TSS, to describe the configuration of any cryptographic aspects of the registration channel that can be modified by the operational environment in order to improve the channel security (cf. the description of the content of Preparative Procedures in [SD, 3.6.1.2])._
 
 _If the TOE offers ability for a remote authorized IT entities or authorized remote Administrators to connect via an interface secured with SSH, then the ST author must select the option “Ability to manage the trusted public keys database” to account for management of public key authentication. It is acceptable for this management function to be implemented as part of general TOE management functionality or as a standalone management function._
+
+_If the TOE offers ability to modify the public key used to validate the digital update, then the ST author must select the option “Ability to manage the public key or certificate used to validate the digital update”. There is no requirement to implement this as a standalone management function, it is acceptable for this management function to be implemented as part of the trusted update (FPT_TUD_EXT.1) functionality._
 
 ==== Security management roles (FMT_SMR)
 
@@ -1631,7 +1634,7 @@ _Additionally, when the Functional Package for Secure Shell is used the audit re
 
 ==== Security Audit Event Storage (FAU_STG.1 & Extended – FAU_STG_EXT)
 
-The local storage space for audit data of a Network Device is also limited, and if the local storage space is exceeded then audit data might be lost. A security Administrator might be interested in the number of dropped, overwritten, etc. audit records. This number might serve as an indication if a severe problem has occurred after the storage space was exceeded that continuously generated audit data. Therefore, FAU_STG_EXT.2 and FAU_STG_EXT.3 are defined to express these optional capabilities of a Network Device.
+The local storage space for audit data of a Network Device is limited, and if the local storage space is exceeded then audit data might be lost. A security Administrator might be interested in the number of dropped, overwritten, etc. audit records. This number might serve as an indication if a severe problem has occurred after the storage space was exceeded that continuously generated audit data. Therefore, FAU_STG_EXT.2 and FAU_STG_EXT.3 are defined to express these optional capabilities of a Network Device.
 
 =====  FAU_STG.1 Protected Audit Trail Storage
 
