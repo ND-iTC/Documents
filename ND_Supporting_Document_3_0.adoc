@@ -1381,7 +1381,7 @@ In addition, all other testing in FCS_DTLSC_EXT.1 and FIA_X509_EXT.* must be per
 ===== Tests
 
 [arabic, start=290]
-. For all tests in this chapter the DTLS client used for testing of the TOE shall support mutual authentication. For all tests that require a successful connection, the evaluator shall ensure the mutual authentication succeeds. As noted in Test 1b, seeing a TLS channel established and application data flowing, does not necessarily indicate successful DTLS client authentication.
+. For all tests in this section the DTLS client used for testing of the TOE shall support mutual authentication. For all tests that require a successful connection, the evaluator shall ensure the mutual authentication succeeds. As noted in Test 1b, seeing a TLS channel established and application data flowing, does not necessarily indicate successful DTLS client authentication.
 
 *FCS_DTLSS_EXT.2.1 and FCS_DTLSS_EXT.2.2*
 
@@ -1505,7 +1505,7 @@ In addition, all other testing in FCS_TLSC_EXT.1 and FIA_X509_EXT.* must be perf
 ===== Tests
 
 [arabic, start=308]
-. For all tests in this chapter the TLS client used for testing of the TOE shall support mutual authentication. For all tests that require a successful connection, the evaluator shall ensure the mutual authentication succeeds. As noted in Test 1b, seeing a TLS channel established and application data flowing, does not necessarily indicate successful TLS client authentication.
+. For all tests in this section the TLS client used for testing of the TOE shall support mutual authentication. For all tests that require a successful connection, the evaluator shall ensure the mutual authentication succeeds. As noted in Test 1b, seeing a TLS channel established and application data flowing, does not necessarily indicate successful TLS client authentication.
 
 *FCS_TLSS_EXT.2.1 and FCS_TLSS_EXT.2.2*
 
