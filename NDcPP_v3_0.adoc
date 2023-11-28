@@ -1844,7 +1844,7 @@ _The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This requirement adds that the TSF must include support for DTLS mutual authentication._
+_The use of X.509v3 certificates for DTLS is addressed in FIA_X509_EXT.2.1. This requirement adds that this use must include support for client-side certificates for DTLS mutual authentication. Missing certificates are addressed by this requirement. Invalid certificates are addressed in FCS_DTLSS_EXT.2.2 and FCS_DTLSS_EXT.2.3._
 
 _There are different behaviours of the TOE possible for the 'soft fail' option depending on the type of product, use case and actual implementation. It is quite common that in case the server requests the client certificate but the client does not present a certificate, the establishment of the DTLS connection continues (up to the point where the connection is fully established) but fall-back authentication using one of the other authentication mechanisms defined in this cPP is enforced before any other TSF-mediated action can be performed (e.g. transfer of TSF data other than data needed for fall-back authentication; administration of the TOE). It is acceptable to establish the channel without fall-back authentication in case no TSF-mediated action is possible through this channel. For any channel that allows TSF-mediated actions, either successful client authentication through successful validation of the client's X.509 certificate or successful fall-back authentication using one of the other authentication mechanisms defined in this cPP is required._
 
@@ -1897,7 +1897,7 @@ _The selected ClientCertificateTypes and algorithms must be consistent with FCS_
 
 _The DTLS 1.2 Certificate Request message includes the algorithms as a list of  SignatureAndHashAlgorithms in the supported signature algorithms list. The signature algorithm is also specified in the certificate_types list._
 
-_The DTLS 1.3 Certificate Request message includes the algorithms as a list of  SignatureSchemes in the signature_algorithms extension._
+_The DTLS 1.3 Certificate Request message includes the algorithms as a list of SignatureSchemes in the signature_algorithms or signature_algorithm_cert extension._
 
 =====  FCS_TLSC_EXT & FCS_TLSS_EXT TLS Protocol
 
@@ -1926,7 +1926,7 @@ _The use of X.509v3 certificates for TLS is addressed in FIA_X509_EXT.2.1. This 
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of X.509v3 certificates for TLS is addressed in FIA_X509_EXT.2.1. This requirement adds that the TSF must include support for TLS mutual authentication._
+_The use of X.509v3 certificates for TLS is addressed in FIA_X509_EXT.2.1. This requirement adds that this use must include support for client-side certificates for TLS mutual authentication. Missing certificates are addressed by this requirement. Invalid certificates are addressed in FCS_TLSS_EXT.2.2 and FCS_TLSS_EXT.2.3._
 
 _There are different behaviours of the TOE possible for the 'soft fail' option depending on the type of product, use case and actual implementation. It is quite common that in case the server requests the client certificate but the client does not present a certificate, the establishment of the TLS connection continues (up to the point where the connection is fully established) but fall-back authentication using one of the other authentication mechanisms defined in this cPP is enforced before any other TSF-mediated action can be performed (e.g. transfer of TSF data other than data needed for fall-back authentication; administration of the TOE). It is acceptable to establish the channel without fall-back authentication in case no TSF-mediated action is possible through this channel. For any channel that allows TSF-mediated actions, either successful client authentication through successful validation of the client's X.509 certificate or successful fall-back authentication using one of the other authentication mechanisms defined in this cPP is required._
 
@@ -1982,7 +1982,7 @@ _The selected ClientCertificateTypes and algorithms must be consistent with FCS_
 
 _The TLS 1.2 Certificate Request message includes the algorithms as a list of  SignatureAndHashAlgorithms in the supported signature algorithms list. The signature algorithm is also specified in the certificate_types list._
 
-_The TLS 1.3 Certificate Request message includes the algorithms as a list of SignatureSchemes in the signature_algorithms extension._
+_The TLS 1.3 Certificate Request message includes the algorithms as a list of SignatureSchemes in the signature_algorithms or signature_algorithm_cert extension._
 
 === Optional Security Assurance Requirements for Flaw Remediation (ALC_FLR)
 
@@ -2198,10 +2198,8 @@ _The following table provides the ST author with instructions for completing the
 |===
 | |_not present the Supported Groups Extension_|_present the Supported Groups Extension_
 |_DTLS 1.3 with or without DTLS 1.2_|_Should not select_|_Should select with any secp curves or any ffdhe groups – If DTLS 1.2 is supported, see the following rows for additional instructions._
-|_DTLS 1.2 with support for at least one ECDHE ciphersuite_|_Should not select_|_Should select – at least one secp curve should be selected_
-|_DTLS 1.2 with support for at least one DHE ciphersuite_|_May select_ +
-
-_This extension is not required, because older TLS implementations did not negotiate FFC parameters (e.g. Group 14)._|_May select – at least one ffdhe group should be selected_
+|_DTLS 1.2 with support for at least one ECDHE ciphersuite_|_Should not select_|_Should select – at least one secp curve should be selected._
+|_DTLS 1.2 with support for at least one DHE ciphersuite_|_May select - This extension is not required if DHE is the only supported ciphersuite, because older DTLS implementations did not negotiate FFC parameters (e.g. Group 14)._|_May select – at least one ffdhe group should be selected if the TOE negotiates FFC parameters, otherwise no ffdhe groups are required._
 |===
 
 Subsequent versions of this cPP will require support for the Supported Groups extension and prohibit use of legacy DH groups for key establishment.
@@ -2240,9 +2238,7 @@ _[selection:_
 ** _rsa_pss_pss with sha256(0x0809),_
 ** _rsa_pss_pss with sha384(0x080a),_
 ** _rsa_pss_pss with sha512(0x080b)_
-** _] and no other SignatureSchemes;_
-
-* _not present the signature_algorithms extension_
+** _] and no other SignatureSchemes_
 
 _]._
 
@@ -2258,7 +2254,7 @@ _The following table provides the ST author with instructions for completing the
 |===
 | |_present the signature_algorithms extension_|_present the signature_algorithms_cert extension_
 |_DTLS 1.3_|_Should select_|_May select_
-|_DTLS 1.2 without DTLS 1.3_|_May select_|_Should not select_
+|_DTLS 1.2 without DTLS 1.3_|_Should select_|_Should not select_
 |===
 
 
@@ -2741,10 +2737,8 @@ _The following table provides the ST author with instructions for completing the
 |===
 | |_not present the Supported Groups Extension_|_present the Supported Groups Extension_
 |_TLS 1.3 with or without TLS 1.2_|_Should not select_|_Should select with any secp curves or any ffdhe groups – If TLS 1.2 is supported, see the following rows for additional instructions._
-|_TLS 1.2 with support for at least one ECDHE ciphersuite_|_Should not select_|_Should select – at least one secp curve should be selected_
-|_TLS 1.2 with support for at least one DHE ciphersuite_|_May select_ +
-
-_This extension is not required, because older TLS implementations did not negotiate FFC parameters (e.g. Group 14)._|_May select – at least one ffdhe group shall be selected_
+|_TLS 1.2 with support for at least one ECDHE ciphersuite_|_Should not select_|_Should select – at least one secp curve should be selected._
+|_TLS 1.2 with support for at least one DHE ciphersuite_|_May select - This extension is not required if DHE is the only supported ciphersuite, because older TLS implementations did not negotiate FFC parameters (e.g. Group 14)._|_May select – at least one ffdhe group should be selected if the TOE negotiates FFC parameters, otherwise no ffdhe groups are required._
 |===
 
 [#_Reftable7]#Table 7: FCS_TLSC_EXT.1.4 selection instructions#
@@ -2785,9 +2779,7 @@ _[selection:_
 ** _rsa_pss_pss with sha256(0x0809),_
 ** _rsa_pss_pss with sha384(0x080a),_
 ** _rsa_pss_pss with sha512(0x080b)_
-** _] and no other SignatureSchemes;_
-
-* _not present the signature_algorithms extension_
+** _] and no other SignatureSchemes_
 
 _]._
 
@@ -2804,7 +2796,7 @@ _The following table provides the ST author with instructions for completing the
 | |_present the signature_algorithms extension_|_present the signature_algorithms_cert extension_
 |_TLS 1.3_|_Shall select_ +
 _This extension is required by TLS 1.3_|_May select_
-|_TLS 1.2 without TLS 1.3_|_May select_|_Shall not select_ +
+|_TLS 1.2 without TLS 1.3_|_Should select_|_Shall not select_ +
 _This extension is not defined in TLS 1.2_
 |===
 
@@ -3494,9 +3486,7 @@ _[selection:_
 ** _rsa_pss_pss with sha256(0x0809),_
 ** _rsa_pss_pss with sha384(0x080a),_
 ** _rsa_pss_pss with sha512(0x080b)_
-** _] and no other SignatureSchemes;_
-
-* _not present the signature_algorithms extension_
+** _] and no other SignatureSchemes_
 
 _]._
 
@@ -3979,9 +3969,7 @@ _[selection:_
 ** _rsa_pss_pss with sha256(0x0809),_
 ** _rsa_pss_pss with sha384(0x080a),_
 ** _rsa_pss_pss with sha512(0x080b)_
-** _] and no other SignatureSchemes;_
-
-* _not present the signature_algorithms extension_
+** _] and no other SignatureSchemes_
 
 _]._
 
