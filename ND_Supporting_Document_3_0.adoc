@@ -4,8 +4,8 @@
 :toc-placement!:
 :doctype: book
 :data-uri:
-:revnumber: 3.0
-:revdate: 06-04-2023
+:revnumber: 3.0e
+:revdate: 30-November-2023
 image:extracted-media/media/image1.png[image,width=688,height=212]
 
 = Evaluation Activities for Network Device cPP
@@ -25,7 +25,9 @@ This SD has been developed by the Network Device International Technical Communi
 
 *Document history:*
 
-V3.0, 06 April 2023 (published version)
+V3.0e, 30 November 2023 (published version)
+
+V3.0, 06 April 2023 (Incorporated comments received, published version)
 
 V2.2, 20 December 2019 (published version)
 
@@ -3575,7 +3577,7 @@ CCMB-2017-04-004, Version 3.1, Revision 5, April 2017
 [FIPS 186-4] FIPS PUB 186-4, Digital Signature Standard (DSS), July 2013
 
 [NDcPP] collaborative Protection Profile for Network Devices, +
-Version 3.0, April 2023
+Version 3.0e, 30 November 2023
 
 [NIST SP800-56A] NIST Special Publication SP800-56A Revision 3: Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography, Apr 2018
 
