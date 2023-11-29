@@ -1621,96 +1621,96 @@ Note: Testing the validity of the client certificate is performed as part of X.5
 
 *FCS_DTLSC_EXT.1.6*
 
-[arabic, start=328]
+[arabic, start=327]
 . The evaluator shall verify that TSS describes whether the list of supported ciphersuites can be configured or not.
 
 *FCS_DTLSC_EXT.1.7*
 
-[arabic, start=329]
+[arabic, start=328]
 
 . None
 
 *FCS_DTLSC_EXT.1.8*
 
-[arabic, start=330]
+[arabic, start=329]
 . The evaluator shall verify in the TSS that, for DTLS 1.3, the TOE shall not permit out-of-band provisioning of pre-shared keys (PSKs) in the evaluated configuration.
 
 *FCS_DTLSC_EXT.1.9*
 
-[arabic, start=331]
+[arabic, start=330]
 
 . None
 
 *FCS_DTLSC_EXT.1.10*
 
-[arabic, start=332]
+[arabic, start=331]
 . The evaluator shall verify that the TSS describes the actions that take place if a message received from the DTLS Server fails the MAC integrity check.
 
 *FCS_DTLSC_EXT.1.11*
 
-[arabic, start=333]
+[arabic, start=332]
 . The evaluator shall verify that TSS describes how replay is detected and silently discarded for DTLS records that have previously been received and too old to fit in the sliding window.
 
 ===== Guidance Documentation
 
 *FCS_DTLSC_EXT.1.1*
 
-[arabic, start=334]
+[arabic, start=333]
 . The evaluator shall also check the guidance documentation to ensure that it contains instructions on configuring the TOE so that DTLS conforms to the description in the TSS.
 
 *FCS_DTLSC_EXT.1.2*
 
-[arabic, start=335]
+[arabic, start=334]
 . The evaluator shall ensure that the operational guidance describes all supported identifiers, explicitly states whether the TOE supports the SAN extension or not and includes detailed instructions on how to configure the reference identifier(s) used to check the identity of peer(s). If the identifier scheme implemented by the TOE includes support for IP addresses, the evaluator shall ensure that the operational guidance provides a set of warnings and/or CA policy recommendations that would result in secure TOE use.
 . Where the secure channel is being used between components of a distributed TOE for FPT_ITT.1, the SFR selects attributes from RFC 5280, and FCO_CPC_EXT.1.2 selects “no channel”; the evaluator shall verify the guidance provides instructions for establishing unique reference identifiers based on RFC5280 attributes.
 
 *FCS_DTLSC_EXT.1.3*
 
-[arabic, start=337]
+[arabic, start=336]
 
 . None
 
 *FCS_DTLSC_EXT.1.4*
 
-[arabic, start=338]
+[arabic, start=337]
 . If the TSS indicates that the Supported Groups Extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the Supported Groups Extension.
 
 *FCS_DTLSC_EXT.1.5*
 
-[arabic, start=339]
+[arabic, start=338]
 . If the TSS indicates that the signature_algorithms extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the signature_algorithms extension.
 
 *FCS_DTLSC_EXT.1.6*
 
-[arabic, start=340]
+[arabic, start=339]
 . If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall verify that AGD guidance includes configuration of the list of supported ciphersuites.
 
 *FCS_DTLSC_EXT.1.7*
 
-[arabic, start=341]
+[arabic, start=340]
 
 . None
 
 *FCS_DTLSC_EXT.1.8*
 
-[arabic, start=342]
+[arabic, start=341]
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 *FCS_DTLSC_EXT.1.9*
 
-[arabic, start=343]
+[arabic, start=342]
 
 . None
 
 ===== Tests
 
-[arabic, start=344]
+[arabic, start=343]
 
 . For clarification: DTLS communication packets might be received in a different order than sent due to the use of the UDP protocol. All tests requiring a specific order of test steps ("before", "after") are therefore referring to the sequence numbering of DTLS packets.
 
 *FCS_DTLSC_EXT.1.1*
 
-[arabic, start=345]
+[arabic, start=344]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 
@@ -1741,7 +1741,7 @@ _(Note: DTLS 1.3 provides for a dummy ChangeCipherSpec message to aid in middleb
 
 *FCS_DTLSC_EXT.1.2*
 
-[arabic, start=346]
+[arabic, start=345]
 . Note that tests 1-6 are only applicable to:
 [loweralpha]
 .. DTLS-based trusted channel communications according to FTP_ITC.1 and trusted path communications according to FTP_TRP.1
@@ -1782,7 +1782,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 *FCS_DTLSC_EXT.1.3*
 
-[arabic, start=349]
+[arabic, start=348]
 . The evaluator shall demonstrate that using an invalid certificate results in the function failing as follows:
 [loweralpha, start=1]
 .. Test 1: Using the administrative guidance, the evaluator shall load a CA certificate or certificates needed to validate the presented certificate used to authenticate an external entity and demonstrate that the function succeeds and a trusted channel can be established.
@@ -1791,7 +1791,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 *FCS_DTLSC_EXT.1.4*
 
-[arabic, start=350]
+[arabic, start=349]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1 [conditional]: If “not present the Supported Groups Extension” is selected, the evaluator shall examine the Client Hello message and verify it does not contain the Supported Groups extension.
@@ -1802,7 +1802,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 *FCS_DTLSC_EXT.1.5*
 
-[arabic, start=351]
+[arabic, start=350]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1 [conditional]: The evaluator shall perform the following tests if “present the signature_algorithms extension” is selected:
@@ -1816,23 +1816,23 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 *FCS_DTLSC_EXT.1.6*
 
-[arabic, start=352]
+[arabic, start=351]
 . [conditional]: If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a DTLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported DTLS versions. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
 
 *FCS_DTLSC_EXT.1.7*
 
-[arabic, start=353]
+[arabic, start=352]
 . The evaluator shall establish a DTLS connection with a server and observe that the early data extension and the post-handshake client authentication extension according to RFC 9147, Section 5.8.4 are not advertised in the Client Hello Message. This test shall be executed for all DTLS versions supported by the TOE.
 
 *FCS_DTLSC_EXT.1.8*
 
-[arabic, start=354]
+[arabic, start=353]
 
 . None
 
 *FCS_DTLSC_EXT.1.9*
 
-[arabic, start=355]
+[arabic, start=354]
 . The evaluator shall perform the following tests:
 
 [loweralpha, start=1]
@@ -1844,12 +1844,12 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_DTLSC_EXT.1.10*
 
-[arabic, start=356]
+[arabic, start=355]
 . Test 1: The evaluator shall establish a DTLS connection. The evaluator shall then modify at least one byte in a record message and verify that the Client discards the record or terminates the DTLS session.
 
 *FCS_DTLSC_EXT.1.11*
 
-[arabic, start=357]
+[arabic, start=356]
 . Test 1: The evaluator shall set up a DTLS connection with a DTLS Server. The evaluator shall then capture traffic sent from the DTLS Server to the TOE. The evaluator shall retransmit copies of this traffic to the TOE in order to impersonate the DTLS Server. The evaluator shall observe that the TSF does not take action in response to receiving these packets and that the audit log indicates that the replayed traffic was discarded.
 
 ==== FCS_DTLSS_EXT.1 DTLS Server Protocol
@@ -1858,39 +1858,39 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_DTLSS_EXT.1.1*
 
-[arabic, start=358]
+[arabic, start=357]
 . The evaluator shall check the description of the implementation of this protocol in the TSS to ensure that the ciphersuites supported are specified. The evaluator shall check the TSS to ensure that the ciphersuites specified are identical to those listed for this component.
 
 . The evaluator shall verify that the TSS contains a description of how the TOE technically prevents the use of unsupported and undefined DTLS versions.
 
 *FCS_DTLSS_EXT.1.2*
 
-[arabic, start=360]
+[arabic, start=359]
 . The evaluator shall verify that the TSS describes how the DTLS Client IP address is validated prior to issuing a ServerHello message. The evaluator shall confirm that the TSS describes how the server presents a HelloVerify message (DTLS 1.2)/HelloRetry message (DTLS 1.3) containing a cookie and how the cookie is validated when the server receives the subsequent Client Hello message.
 
 *FCS_DTLSS_EXT.1.3*
 
-[arabic, start=361]
+[arabic, start=360]
 . The evaluator shall verify that the TSS describes the algorithms and key sizes the TSF supports for authenticating itself to DTLS clients. The evaluator shall ensure these algorithms are consistent with the selected ciphersuites.
 
 *FCS_DTLSS_EXT.1.4*
 
-[arabic, start=362]
+[arabic, start=361]
 . The evaluator shall verify that the TSS lists all EC Diffie-Hellman curves and/or Diffie-Hellman groups used in the key establishment by the TOE when acting as a DTLS Server. The evaluator shall ensure these algorithms are consistent with the selected ciphersuites.
 
 *FCS_DTLSS_EXT.1.5*
 
-[arabic, start=363]
+[arabic, start=362]
 . The evaluator shall verify that the TSS describes the actions that take place if a message received from the DTLS Client fails the MAC integrity check.
 
 *FCS_DTLSS_EXT.1.6*
 
-[arabic, start=364]
+[arabic, start=363]
 . The evaluator shall verify that TSS describes how replay is detected and silently discarded for DTLS records that have previously been received and too old to fit in the sliding window.
 
 *FCS_DTLSS_EXT.1.7*
 
-[arabic, start=365]
+[arabic, start=364]
 . The evaluator shall verify that the TSS describes if session resumption based on session IDs is supported (RFC 4346 and/or RFC 5246) and/or if session resumption based on session tickets is supported (RFC 5077) and/or if session resumption according to RFC8446 is supported.
 . If session tickets are supported, the evaluator shall verify that the TSS describes that the session tickets are encrypted using symmetric algorithms consistent with FCS_COP.1/DataEncryption. The evaluator shall verify that the TSS identifies the key lengths and algorithms used to protect session tickets.
 . If session tickets are supported, the evaluator shall verify that the TSS describes that session tickets adhere to the structural format provided in Section 4 of RFC 5077 and if not, a justification shall be given of the actual session ticket format.
@@ -1899,89 +1899,89 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_DTLSS_EXT.1.8*
 
-[arabic, start=369]
+[arabic, start=368]
 . The evaluator shall verify that TSS describes whether the list of supported ciphersuites can be configured or not.
 
 *FCS_DTLSS_EXT.1.9*
 
-[arabic, start=370]
+[arabic, start=369]
 . None
 
 *FCS_DTLSS_EXT.1.10*
 
-[arabic, start=371]
+[arabic, start=370]
 . The evaluator shall verify in the TSS that, for DTLS 1.3, the TOE shall not permit out-of-band provisioning of pre-shared keys (PSKs) in the evaluated configuration.
 
 *FCS_DTLSS_EXT.1.11*
 
-[arabic, start=372]
+[arabic, start=371]
 . None
 
 ===== Guidance Documentation
 
 *FCS_DTLSS_EXT.1.1*
 
-[arabic, start=373]
+[arabic, start=372]
 . The evaluator shall also check the guidance documentation to ensure that it contains instructions on configuring the TOE so that DTLS conforms to the description in the TSS (for instance, the set of ciphersuites advertised by the TOE or DTLS versions supported by the TOE may have to be restricted to meet the requirements).
 
 *FCS_DTLSS_EXT.1.2*
 
-[arabic, start=374]
+[arabic, start=373]
 . None
 
 *FCS_DTLSS_EXT.1.3*
 
-[arabic, start=375]
+[arabic, start=374]
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 *FCS_DTLSS_EXT.1.4*
 
-[arabic, start=376]
+[arabic, start=375]
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 *FCS_DTLSS_EXT.1.5*
 
-[arabic, start=377]
+[arabic, start=376]
 . None
 
 *FCS_DTLSS_EXT.1.6*
 
-[arabic, start=378]
+[arabic, start=377]
 . None
 
 *FCS_DTLSS_EXT.1.7*
 
-[arabic, start=379]
+[arabic, start=378]
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 *FCS_DTLSS_EXT.1.8*
 
-[arabic, start=380]
+[arabic, start=379]
 . If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall verify that AGD guidance includes configuration of the list of supported ciphersuites.
 
 *FCS_DTLSS_EXT.1.9*
 
-[arabic, start=381]
+[arabic, start=380]
 . None
 
 *FCS_DTLSS_EXT.1.10*
 
-[arabic, start=382]
+[arabic, start=381]
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 *FCS_DTLSS_EXT.1.11*
 
-[arabic, start=383]
+[arabic, start=382]
 . None
 
 ===== Tests
 
-[arabic, start=384]
+[arabic, start=383]
 . For clarification: For DTLS communication packets might be received in a different order than sent due to the use of the UDP protocol. All tests requiring a specific order of test steps ("before", "after") are therefore referring to the sequence numbering of DTLS packets.
 
 *FCS_DTLSS_EXT.1.1*
 
-[arabic, start=385]
+[arabic, start=384]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1: The evaluator shall establish a DTLS connection using each of the ciphersuites specified by the requirement. This connection may be established as part of the establishment of a higher-level application protocol, e.g., as part of a syslog session. It is sufficient to observe the successful negotiation of a ciphersuite to satisfy the intent of the test; it is not necessary to examine the characteristics of the encrypted traffic in an attempt to discern the ciphersuite being used (for example, that the cryptographic algorithm is 128-bit AES and not 256-bit AES).
@@ -2004,12 +2004,12 @@ The evaluator shall verify that the Finished message (Content type hexadecimal 1
 
 *FCS_DTLSS_EXT.1.2*
 
-[arabic, start=386]
+[arabic, start=385]
 . The DTLS server shall present a HelloRetryRequest message (DTLS 1.3)/ HelloVerify message (DTLS 1.2) containing a cookie. In the subsequent client hello message sent by the client to the server, the evaluator shall modify at least one byte in the cookie message and verify that the Server rejects the Client’s handshake message.
 
 *FCS_DTLSS_EXT.1.3 and FCS_DTLSS_EXT.1.4*
 
-[arabic, start=387]
+[arabic, start=386]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1 [conditional]: If ECDHE ciphersuites/groups are supported:
@@ -2026,19 +2026,19 @@ For DTLS 1.3, the evaluator shall verify (through a packet capture or instrument
 
 *FCS_DTLSS_EXT.1.5*
 
-[arabic, start=388]
+[arabic, start=387]
 . The evaluator shall establish a connection using a client.  The evaluator shall then modify at least one byte in a record message, and verify that the Server discards the record or terminates the DTLS session.
 
 *FCS_DTLSS_EXT.1.6*
 
-[arabic, start=389]
+[arabic, start=388]
 . The evaluator shall set up a DTLS connection. The evaluator shall then capture traffic sent from the DTLS Client to the TOE. The evaluator shall retransmit copies of this traffic to the TOE in order to impersonate the DTLS Client. The evaluator shall observe that the TSF does not take action in response to receiving these packets and that the audit log indicates that the replayed traffic was discarded.
 
 *FCS_DTLSS_EXT.1.7*
 
 _Test Objective: To demonstrate that the TOE will not resume a session for which the client failed to complete the handshake (independent of TOE support for session resumption)_
 
-[arabic, start=390]
+[arabic, start=389]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1 [conditional]: If the TOE does not support session resumption based on session IDs according to  RFC5246 (DTLS 1.2), or session tickets according to RFC5077 (DTLS 1.2) or session resumption according to RFC8446 (DTLS 1.3), the evaluator shall perform the following test:
@@ -2077,22 +2077,22 @@ Remark: If multiple contexts are supported for session resumption, for each of t
 
 *FCS_DTLSS_EXT.1.8*
 
-[arabic, start=391]
+[arabic, start=390]
 . If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a DTLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported DTLS versions. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
 
 *FCS_DTLSS_EXT.1.9*
 
-[arabic, start=392]
+[arabic, start=391]
 . According to RFC8446 Section 4.2.10, a PSK is required to use the early data extension. As NDcPP only allows the use of PSK in conjunction with session resumption, a NDcPP conformant TOE which acts as DTLS Server cannot use the early data extension if session resumption is not supported. For TOEs that do not support session resumption, execution of test FCS_DTLSS_EXT.1.7 Test 1 is regarded as sufficient that the TOE does not support the early data extension. For TOEs that support session resumption, FCS_DTLSS_EXT.1.7 Test 2(i), 3(i) or 4(i) (depending on the supported DTLS versions and the way session resumption is implemented) ensure that the TOE does not support the early data extension.
 
 *FCS_DTLSS_EXT.1.10*
 
-[arabic, start=393]
+[arabic, start=392]
 . None
 
 *FCS_DTLSS_EXT.1.11*
 
-[arabic, start=394]
+[arabic, start=393]
 . The evaluator shall perform the following tests:
 
 [loweralpha, start=1]
@@ -2106,17 +2106,17 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 ===== TSS
 
-[arabic, start=395]
+[arabic, start=394]
 . The evaluator shall examine the TSS and determine that enough detail is provided to explain how the implementation complies with RFC 2818.
 
 ===== Guidance Documentation
 
-[arabic, start=396]
+[arabic, start=395]
 . The evaluator shall examine the guidance documentation to verify it instructs the Administrator how to configure TOE for use as an HTTPS client or HTTPS server.
 
 ===== Tests
 
-[arabic, start=397]
+[arabic, start=396]
 . This test is now performed as part of FIA_X509_EXT.1/Rev testing.
 . Tests are performed in conjunction with the TLS evaluation activities.
 . If the TOE is an HTTPS client or an HTTPS server utilizing X.509 client authentication, then the certificate validity shall be tested in accordance with testing performed for FIA_X509_EXT.1.
@@ -2127,153 +2127,153 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_IPSEC_EXT.1.1*
 
-[arabic, start=400]
+[arabic, start=399]
 . The evaluator shall examine the TSS and determine that it describes what takes place when a packet is processed by the TOE, e.g., the algorithm used to process the packet. The TSS describes how the SPD is implemented and the rules for processing both inbound and outbound packets in terms of the IPsec policy. The TSS describes the rules that are available and the resulting actions available after matching a rule. The TSS describes how those rules and actions form the SPD in terms of the BYPASS (e.g., no encryption), DISCARD (e.g., drop the packet), and PROTECT (e.g., encrypt the packet) actions defined in RFC 4301.
 . As noted in Section 4.4.1 of RFC 4301, the processing of entries in the SPD is non-trivial and the evaluator shall determine that the description in the TSS is sufficient to determine which rules will be applied given the rule structure implemented by the TOE. For example, if the TOE allows specification of ranges, conditional rules, etc., the evaluator shall determine that the description of rule processing (for both inbound and outbound packets) is sufficient to determine the action that will be applied, especially in the case where two different rules may apply. This description shall cover both the initial packets (that is, no SA is established on the interface or for that particular packet) as well as packets that are part of an established SA.
 
 *FCS_IPSEC_EXT.1.2*
 
-[arabic, start=402]
+[arabic, start=401]
 . None.
 
 *FCS_IPSEC_EXT.1.3*
 
-[arabic, start=403]
+[arabic, start=402]
 . The evaluator shall check the TSS to ensure it states that the VPN can be established to operate in transport mode and/or tunnel mode (as identified in FCS_IPSEC_EXT.1.3).
 
 *FCS_IPSEC_EXT.1.4*
 
-[arabic, start=404]
+[arabic, start=403]
 . The evaluator shall examine the TSS to verify that the selected algorithms are implemented. In addition, the evaluator shall ensure that the SHA-based HMAC algorithm conforms to the algorithms specified in FCS_COP.1/KeyedHash Cryptographic Operations (for keyed-hash message authentication) and if the SHA-based HMAC function truncated output is utilized it must also be described.
 
 *FCS_IPSEC_EXT.1.5*
 
-[arabic, start=405]
+[arabic, start=404]
 . The evaluator shall examine the TSS to verify that IKEv1 and/or IKEv2 are implemented.
 . For IKEv1 implementations, the evaluator shall examine the TSS to ensure that, in the description of the IPsec protocol, it states that aggressive mode is not used for IKEv1 Phase 1 exchanges, and that only main mode is used. It may be that this is a configurable option.
 
 *FCS_IPSEC_EXT.1.6*
 
-[arabic, start=407]
+[arabic, start=406]
 . The evaluator shall ensure the TSS identifies the algorithms used for encrypting the IKEv1 and/or IKEv2 payload, and that the algorithms chosen in the selection of the requirement are included in the TSS discussion.
 
 *FCS_IPSEC_EXT.1.7*
 
-[arabic, start=408]
+[arabic, start=407]
 . The evaluator shall ensure the TSS identifies the lifetime configuration method used for limiting the IKEv1 Phase 1 SA lifetime and/or the IKEv2 SA lifetime. The evaluator shall verify that the selection made here corresponds to the selection in FCS_IPSEC_EXT.1.5.
 
 *FCS_IPSEC_EXT.1.8*
 
-[arabic, start=409]
+[arabic, start=408]
 . The evaluator shall ensure the TSS identifies the lifetime configuration method used for limiting the IKEv1 Phase 2 SA lifetime and/or the IKEv2 Child SA lifetime. The evaluator shall verify that the selection made here corresponds to the selection in FCS_IPSEC_EXT.1.5.
 
 *FCS_IPSEC_EXT.1.9*
 
-[arabic, start=410]
+[arabic, start=409]
 . The evaluator shall check to ensure that, for each DH group supported, the TSS describes the process for generating "x". The evaluator shall verify that the TSS indicates that the random number generated that meets the requirements in this PP is used, and that the length of "x" meets the stipulations in the requirement.
 
 *FCS_IPSEC_EXT.1.10*
 
-[arabic, start=411]
+[arabic, start=410]
 . If the first selection is chosen, the evaluator shall check to ensure that, for each DH group supported, the TSS describes the process for generating each nonce. The evaluator shall verify that the TSS indicates that the random number generated that meets the requirements in this PP is used, and that the length of the nonces meet the stipulations in the requirement.
 . If the second selection is chosen, the evaluator shall check to ensure that, for each PRF hash supported, the TSS describes the process for generating each nonce. The evaluator shall verify that the TSS indicates that the random number generated that meets the requirements in this PP is used, and that the length of the nonces meet the stipulations in the requirement.
 
 *FCS_IPSEC_EXT.1.11*
 
-[arabic, start=413]
+[arabic, start=412]
 . The evaluator shall check to ensure that the DH groups specified in the requirement are listed as being supported in the TSS. If there is more than one DH group supported, the evaluator shall check to ensure the TSS describes how a particular DH group is specified/negotiated with a peer.
 
 *FCS_IPSEC_EXT.1.12*
 
-[arabic, start=414]
+[arabic, start=413]
 . The evaluator shall check that the TSS describes the potential strengths (in terms of the number of bits in the symmetric key) of the algorithms that are allowed for the IKE and ESP exchanges. The TSS shall also describe the checks that are done when negotiating IKEv1 Phase 2 and/or IKEv2 CHILD_SA suites to ensure that the strength (in terms of the number of bits of key in the symmetric algorithm) of the negotiated algorithm is less than or equal to that of the IKE SA this is protecting the negotiation.
 
 *FCS_IPSEC_EXT.1.13*
 
-[arabic, start=415]
+[arabic, start=414]
 . The evaluator shall ensure that the TSS identifies RSA and/or ECDSA as being used to perform peer authentication. The description must be consistent with the algorithms as specified in FCS_COP.1/SigGen Cryptographic Operations (for cryptographic signature).
 . If pre-shared keys are chosen in the selection, the evaluator shall check to ensure that the TSS describes how pre-shared keys are established and used in authentication of IPsec connections. The description in the TSS shall also indicate how pre-shared key establishment is accomplished for TOEs that can generate a pre-shared key as well as TOEs that simply use a pre-shared key.
 
 *FCS_IPSEC_EXT.1.14*
 
-[arabic, start=417]
+[arabic, start=416]
 . The evaluator shall ensure that the TSS describes how the TOE compares the peer’s presented identifier to the reference identifier. This description shall include which field(s) of the certificate are used as the presented identifier (DN, Common Name, or SAN). If the TOE simultaneously supports the same identifier type in the CN and SAN, the TSS shall describe how the TOE prioritizes the comparisons (e.g. the result of comparison if CN matches but SAN does not). If the location (e.g. CN or SAN) of non-DN identifier types must explicitly be configured as part of the reference identifier, the TSS shall state this. If the ST author assigned an additional identifier type, the TSS description shall also include a description of that type and the method by which that type is compared to the peer’s presented certificate, including what field(s) are compared and which fields take precedence in the comparison.
 
 ===== Guidance Documentation
 
 *FCS_IPSEC_EXT.1.1*
 
-[arabic, start=418]
+[arabic, start=417]
 . The evaluator shall examine the guidance documentation to verify it instructs the Administrator how to construct entries into the SPD that specify a rule for processing a packet. The description includes all three cases – a rule that ensures packets are encrypted/decrypted, dropped, and flow through the TOE without being encrypted. The evaluator shall determine that the description in the guidance documentation is consistent with the description in the TSS, and that the level of detail in the guidance documentation is sufficient to allow the administrator to set up the SPD in an unambiguous fashion. This includes a discussion of how ordering of rules impacts the processing of an IP packet.
 
 *FCS_IPSEC_EXT.1.2*
 
-[arabic, start=419]
+[arabic, start=418]
 . None.
 
 *FCS_IPSEC_EXT.1.3*
 
-[arabic, start=420]
+[arabic, start=419]
 . The evaluator shall confirm that the guidance documentation contains instructions on how to configure the connection in each mode selected.
 
 *FCS_IPSEC_EXT.1.4*
 
-[arabic, start=421]
+[arabic, start=420]
 . The evaluator shall check the guidance documentation to ensure it provides instructions on how to configure the TOE to use the algorithms selected.
 
 *FCS_IPSEC_EXT.1.5*
 
-[arabic, start=422]
+[arabic, start=421]
 . The evaluator shall check the guidance documentation to ensure it instructs the administrator how to configure the TOE to use IKEv1 and/or IKEv2 (as selected), and how to configure the TOE to perform NAT traversal (if selected).
 . If the IKEv1 Phase 1 mode requires configuration of the TOE prior to its operation, the evaluator shall check the guidance documentation to ensure that instructions for this configuration are contained within that guidance.
 
 *FCS_IPSEC_EXT.1.6*
 
-[arabic, start=424]
+[arabic, start=423]
 . The evaluator shall ensure that the guidance documentation describes the configuration of all selected algorithms in the requirement.
 
 *FCS_IPSEC_EXT.1.7*
 
-[arabic, start=425]
+[arabic, start=424]
 . The evaluator shall verify that the values for SA lifetimes can be configured and that the instructions for doing so are located in the guidance documentation. If time-based limits are supported, configuring the limit may lead to a rekey no later than the specified limit. For some implementations, it may be necessary, though, to configure the TOE with a lower time value to ensure a rekey is performed before the maximum SA lifetime of 24 hours is exceeded (e.g. configure a time value of 23h 45min to ensure the actual rekey is performed no later than 24h). The evaluator shall verify that the guidance documentation allows the Administrator to configure the Phase 1 SA value of 24 hours or provides sufficient instruction about the time value to configure to ensure the rekey is performed no later than the maximum SA lifetime of 24 hours. It is not permitted to configure a value of 24 hours if that leads to an actual rekey after more than 24hours. Currently there are no values mandated for the number of bytes, the evaluator just ensures that this can be configured if selected in the requirement.
 
 *FCS_IPSEC_EXT.1.8*
 
-[arabic, start=426]
+[arabic, start=425]
 . The evaluator shall verify that the values for SA lifetimes can be configured and that the instructions for doing so are located in the guidance documentation. If time-based limits are supported, configuring the limit may lead to a rekey no later than the specified limit. For some implementations, it may be necessary, though, to configure the TOE with a lower time value to ensure a rekey is performed before the maximum SA lifetime of 8 hours is exceeded (e.g. configure a time value of 7h 45min to ensure the actual rekey is performed no later than 8h). The evaluator shall verify that the guidance documentation allows the Administrator to configure the Phase 2 SA value of 8 hours or provides sufficient instruction about the time value to configure to ensure the rekey is performed no later than the maximum SA lifetime of 8 hours. It is not permitted to configure a value of 8 hours if that leads to an actual rekey after more than 8 hours. Currently there are no values mandated for the number of bytes, the evaluator just ensures that this can be configured if selected in the requirement.
 
 *FCS_IPSEC_EXT.1.9 and FCS_IPSEC_EXT.1.10*
 
-[arabic, start=427]
+[arabic, start=426]
 . None.
 
 *FCS_IPSEC_EXT.1.11*
 
-[arabic, start=428]
+[arabic, start=427]
 . The evaluator shall ensure that the guidance documentation describes the configuration of all algorithms selected in the requirement.
 
 *FCS_IPSEC_EXT.1.12*
 
-[arabic, start=429]
+[arabic, start=428]
 . None.
 
 *FCS_IPSEC_EXT.1.13*
 
-[arabic, start=430]
+[arabic, start=429]
 . The evaluator shall ensure the guidance documentation describes how to set up the TOE to use certificates with RSA and/or ECDSA signatures and public keys.
 . The evaluator shall check that the guidance documentation describes how pre-shared keys are to be generated and established. The description in the guidance documentation shall also indicate how pre-shared key establishment is accomplished for TOEs that can generate a pre-shared key as well as TOEs that simply use a pre-shared key.
 . The evaluator shall ensure that the guidance documentation describes how to configure the TOE to connect to a trusted CA and ensure a valid certificate for that CA is loaded into the TOE and marked “trusted”.
 
 *FCS_IPSEC_EXT.1.14*
 
-[arabic, start=433]
+[arabic, start=432]
 . The evaluator shall ensure that the operational guidance describes all supported identifiers, explicitly states whether the TOE supports the SAN extension or not and includes detailed instructions on how to configure the reference identifier(s) used to check the identity of peer(s). If the identifier scheme implemented by the TOE does not guarantee unique identifiers, the evaluator shall ensure that the operational guidance provides a set of warnings and/or CA policy recommendations that would result in secure TOE use.
 
 ===== Tests
 
 *FCS_IPSEC_EXT.1.1*
 
-[arabic, start=434]
+[arabic, start=433]
 . The evaluator shall use the guidance documentation to configure the TOE to perform the following tests:
 [loweralpha]
 .. Test 1: The evaluator shall configure the SPD such that there is a rule for dropping a packet, encrypting a packet, and allowing a packet to flow in plaintext. The selectors used in the construction of the rule shall be different such that the evaluator can generate a packet and send packets to the gateway with the appropriate fields (fields that are used by the rule - e.g., the IP addresses, TCP/UDP ports) in the packet header. The evaluator shall perform both positive and negative test cases for each type of rule (e.g. a packet that matches the rule and another that does not match the rule). The evaluator shall observe via the audit trail, and packet captures that the TOE exhibited the expected behaviour: appropriate packets were dropped, allowed to flow without modification, encrypted by the IPsec implementation.
@@ -2281,7 +2281,7 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_IPSEC_EXT.1.2*
 
-[arabic, start=435]
+[arabic, start=434]
 . The assurance activity for this element is performed in conjunction with the activities for FCS_IPSEC_EXT.1.1.
 . The evaluator shall use the guidance documentation to configure the TOE to perform the following tests:
 [loweralpha, start=1]
@@ -2289,7 +2289,7 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_IPSEC_EXT.1.3*
 
-[arabic, start=437]
+[arabic, start=436]
 . The evaluator shall perform the following test(s) based on the selections chosen:
 [loweralpha]
 .. Test 1: If tunnel mode is selected, the evaluator shall use the guidance documentation to configure the TOE to operate in tunnel mode and also configures a VPN peer to operate in tunnel mode. The evaluator shall configure the TOE and the VPN peer to use any of the allowable cryptographic algorithms, authentication methods, etc. to ensure an allowable SA can be negotiated. The evaluator shall then initiate a connection from the TOE to connect to the VPN peer. The evaluator shall observe (for example, in the audit trail and the captured packets) that a successful connection was established using the tunnel mode.
@@ -2297,12 +2297,12 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_IPSEC_EXT.1.4*
 
-[arabic, start=438]
+[arabic, start=437]
 . The evaluator shall configure the TOE as indicated in the guidance documentation configuring the TOE to use each of the supported algorithms, attempt to establish a connection using ESP, and verify that the attempt succeeds.
 
 *FCS_IPSEC_EXT.1.5*
 
-[arabic, start=439]
+[arabic, start=438]
 . Tests are performed in conjunction with the other IPsec evaluation activities.
 [loweralpha]
 .. Test 1: If IKEv1 is selected, the evaluator shall configure the TOE as indicated in the guidance documentation and attempt to establish a connection using an IKEv1 Phase 1 connection in aggressive mode. This attempt should fail. The evaluator shall then show that main mode exchanges are supported.
@@ -2310,12 +2310,12 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_IPSEC_EXT.1.6*
 
-[arabic, start=440]
+[arabic, start=439]
 . The evaluator shall configure the TOE to use the ciphersuite under test to encrypt the IKEv1 and/or IKEv2 payload and establish a connection with a peer device, which is configured to only accept the payload encrypted using the indicated ciphersuite. The evaluator shall confirm the algorithm was that used in the negotiation.
 
 *FCS_IPSEC_EXT.1.7*
 
-[arabic, start=441]
+[arabic, start=440]
 . When testing this functionality, the evaluator shall ensure that both sides are configured appropriately. From the RFC “A difference between IKEv1 and IKEv2 is that in IKEv1 SA lifetimes were negotiated. In IKEv2, each end of the SA is responsible for enforcing its own lifetime policy on the SA and rekeying the SA when necessary. If the two ends have different lifetime policies, the end with the shorter lifetime will end up always being the one to request the rekeying. If the two ends have the same lifetime policies, it is possible that both will initiate a rekeying at the same time (which will result in redundant SAs). To reduce the probability of this happening, the timing of rekeying requests SHOULD be jittered.”
 . Each of the following tests shall be performed for each version of IKE selected in the FCS_IPSEC_EXT.1.5 protocol selection:
 [loweralpha]
@@ -2324,7 +2324,7 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_IPSEC_EXT.1.8*
 
-[arabic, start=443]
+[arabic, start=442]
 . When testing this functionality, the evaluator shall ensure that both sides are configured appropriately. From the RFC “A difference between IKEv1 and IKEv2 is that in IKEv1 SA lifetimes were negotiated. In IKEv2, each end of the SA is responsible for enforcing its own lifetime policy on the SA and rekeying the SA when necessary. If the two ends have different lifetime policies, the end with the shorter lifetime will end up always being the one to request the rekeying. If the two ends have the same lifetime policies, it is possible that both will initiate a rekeying at the same time (which will result in redundant SAs). To reduce the probability of this happening, the timing of rekeying requests SHOULD be jittered.”
 . Each of the following tests shall be performed for each version of IKE selected in the FCS_IPSEC_EXT.1.5 protocol selection:
 [loweralpha]
@@ -2333,12 +2333,12 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_IPSEC_EXT.1.9*
 
-[arabic, start=445]
+[arabic, start=444]
 . None.
 
 *FCS_IPSEC_EXT.1.10*
 
-[arabic, start=446]
+[arabic, start=445]
 . Each of the following tests shall be performed for each version of IKE selected in the FCS_IPSEC_EXT.1.5 protocol selection:
 [loweralpha]
 .. Test 1: If the first selection is chosen, the evaluator shall check to ensure that, for each DH group supported, the TSS describes the process for generating each nonce. The evaluator shall verify that the TSS indicates that the random number generated that meets the requirements in this PP is used, and that the length of the nonces meet the stipulations in the requirement.
@@ -2346,12 +2346,12 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_IPSEC_EXT.1.11*
 
-[arabic, start=447]
+[arabic, start=446]
 . For each supported DH group, the evaluator shall test to ensure that all supported IKE protocols can be successfully completed using that particular DH group.
 
 *FCS_IPSEC_EXT.1.12*
 
-[arabic, start=448]
+[arabic, start=447]
 . The evaluator shall follow the guidance to configure the TOE to perform the following tests.
 [loweralpha]
 .. Test 1: This test shall be performed for each version of IKE supported. The evaluator shall successfully negotiate an IPsec connection using each of the supported algorithms and hash functions identified in the requirements.
@@ -2361,12 +2361,12 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_IPSEC_EXT.1.13*
 
-[arabic, start=449]
+[arabic, start=448]
 . For efficiency sake, the testing is combined with the testing for FIA_X509_EXT.1, FIA_X509_EXT.2 (for IPsec connections), and FCS_IPSEC_EXT.1.1.
 
 *FCS_IPSEC_EXT.1.14*
 
-[arabic, start=450]
+[arabic, start=449]
 . In the context of the tests below, a valid certificate is a certificate that passes FIA_X509_EXT.1 validation checks but does not necessarily contain an authorized subject.
 . The evaluator shall perform the following tests:
 [loweralpha]
@@ -2394,25 +2394,25 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_NTP_EXT.1.1*
 
-[arabic, start=452]
+[arabic, start=451]
 . The evaluator shall examine the TSS to ensure it identifies the version of NTP supported, how it is implemented and what approach the TOE uses to ensure the timestamp it receives from an NTP timeserver (or NTP peer) is from an authenticated source and the integrity of the time has been maintained.
 +
 . The TOE must support at least one of the methods or may use multiple methods, as specified in the SFR element 1.2. The evaluator shall ensure that each method selected in the ST is described in the TSS, including the version of NTP supported in element 1.1, the message digest algorithms used to verify the authenticity of the timestamp and/or the protocols used to ensure integrity of the timestamp.
 
 *FCS_NTP_EXT.1.2, FCS_NTP_EXT.1.3, and FCS_NTP_EXT.1.4*
 
-[arabic, start=454]
+[arabic, start=453]
 . None.
 
 ===== Guidance Documentation
 
 *FCS_NTP_EXT.1.1*
 
-[arabic, start=455]
+[arabic, start=454]
 . The evaluator shall examine the guidance documentation to ensure it provides the Security Administrator instructions as how to configure the version of NTP supported, how to configure multiple NTP servers for the TOE’s time source and how to configure the TOE to use the method(s) that are selected in the ST.
 
 *FCS_NTP_EXT.1.2*
-[arabic, start=456]
+[arabic, start=455]
 . For each of the secondary selections made in the ST, the evaluator shall examine the guidance document to ensure it instructs the Security Administrator how to configure the TOE to use the algorithms that support the authenticity of the timestamp and/or how to configure the TOE to use the protocols that ensure the integrity of the timestamp.
 +
 _Assurance Activity Note:_
@@ -2420,24 +2420,24 @@ _Assurance Activity Note:_
 Each primary selection in the SFR contains selections that specify a cryptographic algorithm or cryptographic protocol. For each of these secondary selections made in the ST, the evaluator shall examine the guidance documentation to ensure that the documentation instructs the Security Administrator how to configure the TOE to use the chosen option(s).
 
 *FCS_NTP_EXT.1.3*
-[arabic, start=457]
+[arabic, start=456]
 . The evaluator shall examine the guidance documentation to ensure it provides the Security Administrator instructions as how to configure the TOE to not accept broadcast and multicast NTP packets that would result in the timestamp being updated.
 
 *FCS_NTP_EXT.1.4*
 
-[arabic, start=458]
+[arabic, start=457]
 . None.
 
 ===== Tests
 
 *FCS_NTP_EXT.1.1*
 
-[arabic, start=459]
+[arabic, start=458]
 . The version of NTP selected in element 1.1 and specified in the ST shall be verified by observing establishment of a connection to an external NTP server known to be using the specified version(s) of NTP. This may be combined with tests of other aspects of FCS_NTP_EXT.1 as described below.
 
 *FCS_NTP_EXT.1.2*
 
-[arabic, start=460]
+[arabic, start=459]
 . The cryptographic algorithms selected in element 1.2 and specified in the ST will have been specified in an FCS_COP SFR and tested in the accompanying Evaluation Activity for that SFR. Likewise, the cryptographic protocol selected in in element 1.2 and specified in the ST will have been specified in an FCS SFR and tested in the accompanying Evaluation Activity for that SFR.
 +
 [conditional] If the message digest algorithm is claimed in element 1.2, the evaluator shall change the message digest algorithm used by the NTP server in such a way that the new value does not match the configuration on the TOE and confirms that the TOE does not synchronize to this time source.
@@ -2448,11 +2448,11 @@ The captured traffic is also used to verify that the appropriate message digest 
 
 *FCS_NTP_EXT.1.3*
 
-[arabic, start=461]
+[arabic, start=460]
 . The evaluator shall configure NTP server(s) to support periodic time updates to broadcast and multicast addresses. The evaluator shall confirm the TOE is configured to not accept broadcast and multicast NTP packets that would result in the timestamp being updated. The evaluator shall check that the time stamp is not updated after receipt of the broadcast and multicast packets.
 
 *FCS_NTP_EXT.1.4*
-[arabic, start=462]
+[arabic, start=461]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1: The evaluator shall confirm the TOE supports configuration of at least three (3) NTP time sources. The evaluator shall configure at least three NTP servers to support periodic time updates to the TOE. The evaluator shall confirm the TOE is configured to accept NTP packets that would result in the timestamp being updated from each of the NTP servers. The evaluator shall check that the time stamp is updated after receipt of the NTP packets. The purpose of this test to verify that the TOE can be configured to synchronize with multiple NTP servers. It is up to the evaluator to determine that the multi- source update of the time information is appropriate and consistent with the behaviour prescribed by the RFC 1305 for NTPv3 and RFC 5905 for NTPv4.
@@ -2465,96 +2465,96 @@ The captured traffic is also used to verify that the appropriate message digest 
 
 *FCS_TLSC_EXT.1.1*
 
-[arabic, start=463]
+[arabic, start=462]
 . The evaluator shall check the description of the implementation of this protocol in the TSS to ensure that the ciphersuites supported are specified. The evaluator shall check the TSS to ensure that the ciphersuites specified include those listed for this component.
 
 *FCS_TLSC_EXT.1.2*
 
-[arabic, start=464]
+[arabic, start=463]
 . The evaluator shall ensure that the TSS describes the client’s method of establishing all reference identifiers from the administrator/application-configured reference identifier, including which types of reference identifiers are supported (e.g. application-specific Subject Alternative Names) and whether IP addresses and wildcards are supported.
 . Note that where a TLS channel is being used between components of a distributed TOE for FPT_ITT.1, the requirements to have the reference identifier established by the administrator are relaxed and the identifier may also be established through a “Gatekeeper” discovery process. The TSS shall describe the discovery process and highlight how the reference identifier is supplied to the “joining” component. Where the secure channel is being used between components of a distributed TOE for FPT_ITT.1 and the ST author selected attributes from RFC 5280, the evaluator shall ensure the TSS describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier. The evaluator shall ensure the TSS presents an argument how the attribute type, or combination of attribute types, uniquely identify the remote TOE component; and the evaluator shall verify the attribute type, or combination of attribute types, is sufficient to support unique identification of the maximum supported number of TOE components.
 . If IP addresses are supported in the CN as reference identifiers, the evaluator shall ensure that the TSS describes the TOE’s conversion of the text representation of the IP address in the CN to a binary representation of the IP address in network byte order. The evaluator shall also ensure that the TSS describes whether canonical format (RFC 5952 for IPv6, RFC 3986 for IPv4) is enforced.
 
 *FCS_TLSC_EXT.1.3*
 
-[arabic, start=467]
+[arabic, start=466]
 . None
 
 *FCS_TLSC_EXT.1.4*
 
-[arabic, start=468]
+[arabic, start=467]
 . If “present the Supported Groups Extension” is selected, the evaluator shall verify that TSS describes the Supported Groups Extension and whether the required behaviour is performed by default or may be configured. If TLS 1.2 is claimed and DHE ciphers are claimed, then the TSS must also specify whether the TOE is capable of negotiating DHE ciphers and whether the TOE client will terminate if an unsupported DHE parameter set is returned in the Server Key Exchange or whether all valid server-generated DHE parameters are accepted.
 
 *FCS_TLSC_EXT.1.5*
-[arabic, start=469]
+[arabic, start=468]
 . [Conditional]: The evaluator shall verify that TSS describes the signature_algorithms extension and whether the required behavior is performed by default or may be configured.
 . [Conditional]: The evaluator shall verify that TSS describes the signature_algorithms_cert extension and whether the required behavior is performed by default or may be configured.
 
 *FCS_TLSC_EXT.1.6*
-[arabic, start=472]
+[arabic, start=470]
 .	The evaluator shall verify that TSS describes whether the list of supported ciphersuites can be configured or not.
 
 *FCS_TLSC_EXT.1.7*
 
-[arabic, start=473]
+[arabic, start=471]
 . None
 
 *FCS_TLSC_EXT.1.8*
-[arabic, start=474]
+[arabic, start=472]
 . The evaluator shall verify in the TSS that, for TLS 1.3, the TOE shall not permit out-of-band provisioning of pre-shared keys (PSKs) in the evaluated configuration.
 
 *FCS_TLSC_EXT.1.9*
 
-[arabic, start=475]
+[arabic, start=473]
 . None
 
 ===== Guidance Documentation
 
 *FCS_TLSC_EXT.1.1*
 
-[arabic, start=476]
+[arabic, start=474]
 . The evaluator shall check the guidance documentation to ensure that it contains instructions on configuring the TOE so that TLS conforms to the description in the TSS.
 
 *FCS_TLSC_EXT.1.2*
 
-[arabic, start=477]
+[arabic, start=475]
 . The evaluator shall ensure that the operational guidance describes all supported identifiers, explicitly states whether the TOE supports the SAN extension or not and includes detailed instructions on how to configure the reference identifier(s) used to check the identity of peer(s). If the identifier scheme implemented by the TOE includes support for IP addresses, the evaluator shall ensure that the operational guidance provides a set of warnings and/or CA policy recommendations that would result in secure TOE use.
 
 . Where the secure channel is being used between components of a distributed TOE for FPT_ITT.1, the SFR selects attributes from RFC 5280, and FCO_CPC_EXT.1.2 selects “no channel”; the evaluator shall verify the guidance provides instructions for establishing unique reference identifiers based on RFC5280 attributes.
 
 *FCS_TLSC_EXT.1.3*
 
-[arabic, start=479]
+[arabic, start=477]
 . None
 
 *FCS_TLSC_EXT.1.4*
 
-[arabic, start=480]
+[arabic, start=478]
 . If the TSS indicates that the Supported Groups Extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the Supported Groups Extension.
 
 *FCS_TLSC_EXT.1.5*
 
-[arabic, start=481]
+[arabic, start=479]
 .	If the TSS indicates that the signature_algorithms extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the signature_algorithms extension.
 
 *FCS_TLSC_EXT.1.6*
-[arabic, start=482]
+[arabic, start=480]
 
 .	If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall verify that AGD guidance includes configuration of the list of supported ciphersuites.
 
 *FCS_TLSC_EXT.1.7*
 
-[arabic, start=483]
+[arabic, start=481]
 . None
 
 *FCS_TLSC_EXT.1.8*
 
-[arabic, start=484]
+[arabic, start=482]
 .	The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 *FCS_TLSC_EXT.1.9*
 
-[arabic, start=485]
+[arabic, start=483]
 . None
 
 ===== Tests
@@ -2562,7 +2562,7 @@ The captured traffic is also used to verify that the appropriate message digest 
 
 *FCS_TLSC_EXT.1.1*
 
-[arabic, start=486]
+[arabic, start=484]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1: The evaluator shall establish a TLS connection using each of the ciphersuites specified by the requirement. This connection may be established as part of the establishment of a higher-level protocol, e.g., as part of an HTTPS session. It is sufficient to observe the successful negotiation of a ciphersuite to satisfy the intent of the test; it is not necessary to examine the characteristics of the encrypted traffic to discern the ciphersuite being used (for example, that the cryptographic algorithm is 128-bit AES and not 256-bit AES).
@@ -2581,7 +2581,7 @@ The goal of the following test is to verify that the TOE accepts only certificat
 [lowerroman]
 ... [conditional]: Perform this test only if support of TLS 1.2 is claimed. If using DHE or ECDH ciphersuites, modify the signature block in the Server’s Key Exchange handshake message, and verify that the client denies the connection and no application data flows. The handshake shall be valid (e.g. the Finished message is calculated using the modified signature), with the exception of the invalid signature. This test does not apply to ciphersuites using RSA key exchange. If a TOE only supports RSA key exchange in conjunction with TLS, then this test shall be omitted.
 ... [conditional]: Perform this test only if support of TLS 1.3 is claimed. Modify the signature block in the Server’s Certificate Verify handshake message, and verify that the client denies the connection and no application data flows. The handshake shall be valid (e.g. the Finished message is calculated using the modified signature), with the exception of the invalid signature.
-[arabic, start=471]
+
 .. Test 6: The evaluator shall perform the following 'scrambled message tests':
 [lowerroman]
 ... Modify a byte in the Server Finished handshake message and verify that the handshake does not finish successfully and no application data flows. (Note: This modification must be performed prior to the contents of the Finished message being encrypted.)
@@ -2591,7 +2591,7 @@ The goal of the following test is to verify that the TOE accepts only certificat
 
 *FCS_TLSC_EXT.1.2*
 
-[arabic, start=487]
+[arabic, start=485]
 . Note that the following tests are marked conditional and are applicable under the following conditions:
 [loweralpha]
 .. For TLS-based trusted channel communications according to FTP_ITC.1 where RFC 6125 is selected, tests 1-6 are applicable.
@@ -2637,7 +2637,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 *FCS_TLSC_EXT.1.3*
 
-[arabic, start=490]
+[arabic, start=488]
 . The evaluator shall demonstrate that using an invalid certificate results in the function failing as follows:
 [loweralpha, start=1]
 .. Test 1: Using the administrative guidance, the evaluator shall load a CA certificate or certificates needed to validate the presented certificate used to authenticate an external entity and demonstrate that the function succeeds, and a trusted channel can be established.
@@ -2646,7 +2646,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 
 *FCS_TLSC_EXT.1.4*
 
-[arabic, start=491]
+[arabic, start=489]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1 [conditional]: If “not present the Supported Groups Extension” is selected, the evaluator shall examine the Client Hello message and verify it does not contain the Supported Groups extension.
@@ -2656,7 +2656,7 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 .. Test 4b [conditional, for TLS 1.2 only]: If ffdhe curves are selected, the evaluator shall configure the server to return DHE parameters in the Server Key Exchange in the TLS connection that do not meet the construction for any claimed ffdhe group. The evaluator shall verify that the connection fails and no application data flows. If the TOE client supports any server-returned DHE parameter set, then this test is not applicable.
 
 *FCS_TLSC_EXT.1.5*
-[arabic, start=492]
+[arabic, start=490]
 
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
@@ -2670,21 +2670,21 @@ Remark: Some systems might require the presence of the SAN extension. In this ca
 ... The evaluator shall establish a TLS connection using a certificate chain using each of the SignatureSchemes specified by the requirement. The evaluator shall ensure the signatures used in the certificate chain are consistent with the SignatureScheme being tested.
 
 *FCS_TLSC_EXT.1.6*
-[arabic, start=493]
+[arabic, start=491]
 . [conditional]: If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a TLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported TLS versions. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
 
 *FCS_TLSC_EXT.1.7*
-[arabic, start=494]
+[arabic, start=492]
 . The evaluator shall establish a TLS connection with a server and observe that the early data extension and the post-handshake client authentication extension according to RFC8446 Section 4.2 are not advertised in the Client Hello Message. This test shall be executed for all TLS versions supported by the TOE.
 
 *FCS_TLSC_EXT.1.8*
 
-[arabic, start=495]
+[arabic, start=493]
 . None
 
 *FCS_TLSC_EXT.1.9*
 
-[arabic, start=496]
+[arabic, start=494]
 . The evaluator shall perform the following tests:
 
 [loweralpha, start=1]
@@ -2700,7 +2700,7 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_TLSS_EXT.1.1*
 
-[arabic, start=497]
+[arabic, start=495]
 . The evaluator shall check the description of the implementation of this protocol in the TSS to ensure that the ciphersuites supported are specified. The evaluator shall check the TSS to ensure that the ciphersuites specified are identical to those listed for this component.
 
 . The evaluator shall verify that the TSS contains a description of how the TOE technically prevents the use of unsupported and undefined SSL and TLS versions.
@@ -2708,17 +2708,17 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 *FCS_TLSS_EXT.1.2*
 
 
-[arabic, start=499]
+[arabic, start=497]
 . The evaluator shall verify that the TSS describes the algorithms and key sizes the TSF supports for authenticating itself to TLS clients. The evaluator shall ensure these algorithms are consistent with the selected ciphersuites.
 
 *FCS_TLSS_EXT.1.3*
 
-[arabic, start=500]
+[arabic, start=498]
 . The evaluator shall verify that the TSS lists all EC Diffie-Hellman curves and/or Diffie-Hellman groups used in the key establishment by the TOE when acting as a TLS Server.  The evaluator shall ensure these algorithms are consistent with the selected ciphersuites.
 
 *FCS_TLSS_EXT.1.4*
 
-[arabic, start=501]
+[arabic, start=499]
 . The evaluator shall verify that the TSS describes if session resumption based on session IDs is supported (RFC 4346 and/or RFC 5246), if session resumption based on session tickets is supported (RFC 5077) and/or if session resumption according to RFC8446 is supported.
 
 . If session tickets are supported, the evaluator shall verify that the TSS describes that the session tickets are encrypted using symmetric algorithms consistent with FCS_COP.1/DataEncryption. The evaluator shall verify that the TSS identifies the key lengths and algorithms used to protect session tickets.
@@ -2729,72 +2729,72 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 *FCS_TLSS_EXT.1.5*
 
-[arabic, start=505]
+[arabic, start=503]
 . The evaluator shall verify that TSS describes whether the list of supported ciphersuites can be configured or not.
 
 *FCS_TLSS_EXT.1.6*
 
-[arabic, start=506]
+[arabic, start=504]
 . None
 
 *FCS_TLSS_EXT.1.7*
 
-[arabic, start=507]
+[arabic, start=505]
 . The evaluator shall verify in the TSS that, for TLS 1.3, the TOE shall not permit out-of-band provisioning of pre-shared keys (PSKs) in the evaluated configuration.
 
 *FCS_TLSS_EXT.1.8*
 
-[arabic, start=508]
+[arabic, start=506]
 . None
 
 ===== Guidance Documentation
 
 *FCS_TLSS_EXT.1.1*
 
-[arabic, start=509]
+[arabic, start=507]
 . The evaluator shall check the guidance documentation to ensure that it contains instructions on configuring the TOE so that TLS conforms to the description in the TSS (for instance, the set of ciphersuites advertised by the TOE or TLS version supported by the TOE may have to be restricted to meet the requirements).
 
 *FCS_TLSS_EXT.1.2*
 
-[arabic, start=510]
+[arabic, start=508]
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 *FCS_TLSS_EXT.1.3*
 
-[arabic, start=511]
+[arabic, start=509]
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 *FCS_TLSS_EXT.1.4*
 
-[arabic, start=512]
+[arabic, start=510]
 
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 *FCS_TLSS_EXT.1.5*
 
-[arabic, start=513]
+[arabic, start=511]
 . If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall verify that AGD guidance includes configuration of the list of supported ciphersuites.
 
 *FCS_TLSS_EXT.1.6*
 
-[arabic, start=514]
+[arabic, start=512]
 . None
 
 *FCS_TLSS_EXT.1.7*
 
-[arabic, start=515]
+[arabic, start=513]
 . The evaluator shall verify that any configuration necessary to meet the requirement must be contained in the AGD guidance.
 
 *FCS_TLSS_EXT.1.8*
 
-[arabic, start=516]
+[arabic, start=514]
 . None
 
 ===== Tests
 
 *FCS_TLSS_EXT.1.1*
 
-[arabic, start=517]
+[arabic, start=515]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1: The evaluator shall establish a TLS connection using each of the ciphersuites specified by the requirement. This connection may be established as part of the establishment of a higher-level protocol, e.g., as part of an HTTPS session. It is sufficient to observe the successful negotiation of a ciphersuite to satisfy the intent of the test; it is not necessary to examine the characteristics of the encrypted traffic to discern the ciphersuite being used (for example, that the cryptographic algorithm is 128-bit AES and not 256-bit AES).
@@ -2819,7 +2819,7 @@ The evaluator shall verify that the Finished message (Content type hexadecimal 1
 
 *FCS_TLSS_EXT.1.2 and FCS_TLSS_EXT.1.3*
 
-[arabic, start=518]
+[arabic, start=516]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1 [conditional]: If ECDHE ciphersuites/group are supported:
@@ -2840,7 +2840,7 @@ For TLS 1.3, the evaluator shall verify (through a packet capture or instrumente
 
 _Test Objective: To demonstrate that the TOE will not resume a session for which the client failed to complete the handshake (independent of TOE support for session resumption)._
 
-[arabic, start=519]
+[arabic, start=517]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1 [conditional]: If the TOE does not support session resumption based on session IDs according to  RFC5246 (TLS 1.2) or session tickets according to RFC5077 (TLS 1.2) or session resumption according to RFC8446 (TLS 1.3), the evaluator shall perform the following test:
@@ -2879,22 +2879,22 @@ Remark: If multiple contexts are supported for session resumption, for each of t
 
 *FCS_TLSS_EXT.1.5*
 
-[arabic, start=520]
+[arabic, start=518]
 . Test 1[conditional]: If the TSF provides the ability of configuring the list of supported ciphersuites, the evaluator shall establish a TLS connection using one of the possible configurations of the list of supported ciphersuites. The evaluator shall then change the configuration and repeat the test. The evaluator shall verify that the behavior of the TOE has changed according to the modification of the list of ciphers. This test shall be repeated for all supported TLS versions. If the TSF does not provide the ability of configuring the list of supported ciphersuites, this test shall be omitted.
 
 *FCS_TLSS_EXT.1.6*
 
-[arabic, start=521]
+[arabic, start=519]
 . According to RFC8446 Section 4.2.10, a PSK is required to use the early data extension. As NDcPP only allows the use of PSK in conjunction with session resumption, a NDcPP conformant TOE which acts as TLS Server cannot use the early data extension if session resumption is not supported. For TOEs that do not support session resumption, execution of test FCS_TLSS_EXT.1.4 Test 1 is regarded as sufficient that the TOE does not support the early data extension. For TOEs that support session resumption, FCS_TLSS_EXT.1.4 Test 2(i), 3(i) or 4(i) (depending on the supported TLS versions and the way session resumption is implemented) ensure that the TOE does not support the early data extension.
 
 *FCS_TLSS_EXT.1.7*
 
-[arabic, start=522]
+[arabic, start=520]
 . None
 
 *FCS_TLSS_EXT.1.8*
 
-[arabic, start=523]
+[arabic, start=521]
 . The evaluator shall perform the following tests:
 
 [loweralpha, start=1]
@@ -2910,18 +2910,18 @@ Note: It is preferred that the TSF sends a fatal error alert message (e.g., unex
 
 ===== TSS
 
-[arabic, start=524]
+[arabic, start=522]
 . The evaluator shall ensure the TSS describes where the check of validity of the certificates takes place, and that the TSS identifies any of the rules for extendedKeyUsage fields (in FIA_X509_EXT.1.1) that are not supported by the TOE (i.e. where the ST is therefore claiming that they are trivially satisfied). It is expected that revocation checking is performed when a certificate is used in an authentication step and when performing trusted updates (if selected).
 . The TSS shall describe when revocation checking is performed and on what certificates. If the revocation checking during authentication is handled differently depending on whether a full certificate chain or only a leaf certificate is being presented, any differences must be summarized in the TSS section and explained in the Guidance.
 
 ===== Guidance Documentation
 
-[arabic, start=526]
+[arabic, start=524]
 . The evaluator shall also ensure that the guidance documentation describes where the check of validity of the certificates takes place, describes any of the rules for extendedKeyUsage fields (in FIA_X509_EXT.1.1) that are not supported by the TOE (i.e. where the ST is therefore claiming that they are trivially satisfied) and describes how certificate revocation checking is performed and on which certificate.
 
 ===== Tests
 *FIA_X509_EXT1.1/Rev*
-[arabic, start=527]
+[arabic, start=525]
 . The evaluator shall demonstrate that checking the validity of a certificate is performed when a certificate is used in an authentication step or when performing trusted updates (if FPT_TUD_EXT.2 is selected). It is expected that either OCSP or CRL revocation checking is performed when a certificate is presented to the TOE (e.g. during authentication). The evaluator shall perform the following tests for FIA_X509_EXT.1/Rev. These tests must be repeated for each distinct security function that utilizes X.509v3 certificates. For example, if the TOE implements certificate-based authentication with IPSEC and TLS, then it shall be tested with each of these protocols:
 [loweralpha]
 .. Test 1a: The evaluator shall present the TOE with a valid chain of certificates (terminating in a trusted CA certificate) as needed to validate the leaf certificate to be used in the function and shall use this chain to demonstrate that the function succeeds. Test 1a shall be designed in a way that the chain can be 'broken' in Test 1b by either being able to remove the trust anchor from the TOEs trust store, or by setting up the trust store in a way that at least one intermediate CA certificate needs to be provided, together with the leaf certificate from outside the TOE, to complete the chain (e.g. by storing only the root CA certificate in the trust store).
@@ -2947,7 +2947,7 @@ Note: Per RFC 6960 Section 4.2.2.2, the OCSP signature authority is delegated wh
 
 *FIA_X509_EXT1.2/Rev*
 
-[arabic, start=528]
+[arabic, start=526]
 . The evaluator shall perform the following tests for FIA_X509_EXT.1.2/Rev. The tests described must be performed in conjunction with the other certificate services assurance activities, including the functions in FIA_X509_EXT.2.1/Rev. The tests for the extendedKeyUsage rules are performed in conjunction with the uses that require those rules. Where the TSS identifies any of the rules for extendedKeyUsage fields (in FIA_X509_EXT.1.1) that are not supported by the TOE (i.e. where the ST is therefore claiming that they are trivially satisfied) then the associated extendedKeyUsage rule testing may be omitted.
 . The goal of the following tests is to verify that the TOE accepts a certificate as a CA certificate only if it has been marked as a CA certificate by using basicConstraints with the CA flag set to True (and implicitly tests that the TOE correctly parses the basicConstraints extension as part of X509v3 certificate chain validation).
 . For each of the following tests the evaluator shall create a chain of at least three certificates: a self-signed root CA certificate, an intermediate CA certificate and a leaf (node) certificate. The properties of the certificates in the chain are adjusted as described in each individual test below (and this modification shall be the only invalid aspect of the relevant certificate chain).
@@ -2962,18 +2962,18 @@ Note: Per RFC 6960 Section 4.2.2.2, the OCSP signature authority is delegated wh
 
 ===== TSS
 
-[arabic, start=532]
+[arabic, start=530]
 . The evaluator shall check the TSS to ensure that it describes how the TOE chooses which certificates to use, and any necessary instructions in the administrative guidance for configuring the operating environment so that the TOE can use the certificates.
 . The evaluator shall examine the TSS to confirm that it describes the behaviour of the TOE when a connection cannot be established during the validity check of a certificate used in establishing a trusted channel. The evaluator shall verify that any distinctions between trusted channels are described. If the requirement that the administrator is able to specify the default action, then the evaluator shall ensure that the guidance documentation contains instructions on how this configuration action is performed.
 
 ===== Guidance Documentation
 
-[arabic, start=534]
+[arabic, start=532]
 . The evaluator shall also ensure that the guidance documentation describes the configuration required in the operating environment so the TOE can use the certificates. The guidance documentation shall also include any required configuration on the TOE to use the certificates. The guidance document shall also describe the steps for the Security Administrator to follow if the connection cannot be established during the validity check of a certificate used in establishing a trusted channel.
 
 ===== Tests
 
-[arabic, start=535]
+[arabic, start=533]
 . The evaluator shall perform the following test for each trusted channel:
 [loweralpha, start=1]
 .. Test 1: The evaluator shall demonstrate that using a valid certificate that requires certificate validation checking to be performed in at least some part by communicating with a non-TOE IT entity. The evaluator shall then manipulate the environment so that the TOE is unable to verify the validity of the certificate and observe that the action selected in FIA_X509_EXT.2.2 is performed. If the selected action is administrator-configurable, then the evaluator shall follow the guidance documentation to determine that all supported administrator-configurable options behave in their documented manner.
@@ -2982,17 +2982,17 @@ Note: Per RFC 6960 Section 4.2.2.2, the OCSP signature authority is delegated wh
 
 ===== TSS
 
-[arabic, start=536]
+[arabic, start=534]
 . If the ST author selects "device-specific information", the evaluator shall verify that the TSS contains a description of the device-specific fields used in certificate requests.
 
 ===== Guidance Documentation
 
-[arabic, start=537]
+[arabic, start=535]
 . The evaluator shall check to ensure that the guidance documentation contains instructions on requesting certificates from a CA, including generation of a Certificate Request. If the ST author selects "Common Name", "Organization", "Organizational Unit", or "Country", the evaluator shall ensure that this guidance includes instructions for establishing these fields before creating the Certification Request.
 
 ===== Tests
 
-[arabic, start=538]
+[arabic, start=536]
 . The evaluator shall perform the following tests:
 [loweralpha]
 .. Test 1: The evaluator shall use the guidance documentation to cause the TOE to generate a Certification Request. The evaluator shall capture the generated message and ensure that it conforms to the format specified. The evaluator shall confirm that the Certification Request provides the public key and other required information, including any necessary user-input information.
@@ -3002,19 +3002,19 @@ Note: Per RFC 6960 Section 4.2.2.2, the OCSP signature authority is delegated wh
 
 ===== TSS
 
-[arabic, start=539]
+[arabic, start=537]
 . The evaluator shall examine the TSS to determine that it contains a description, for each supported method for remote administrative actions, of how successive unsuccessful authentication attempts are detected and tracked. The TSS shall also describe the method by which the remote administrator is prevented from successfully logging on to the TOE, and the actions necessary to restore this ability.
 . The evaluator shall examine the TSS to confirm that the TOE ensures that authentication failures by remote administrators cannot lead to a situation where no administrator access is available, either permanently or temporarily (e.g. by providing local logon which is not subject to blocking).
 
 ===== Guidance Documentation
 
-[arabic, start=541]
+[arabic, start=539]
 . The evaluator shall examine the guidance documentation to ensure that instructions for configuring the number of successive unsuccessful authentication attempts and time period (if implemented) are provided, and that the process of allowing the remote administrator to once again successfully log on is described for each “action” specified (if that option is chosen). If different actions or mechanisms are implemented depending on the secure protocol employed (e.g., TLS vs. SSH), all must be described.
 . The evaluator shall examine the guidance documentation to confirm that it describes, and identifies the importance of, any actions that are required in order to ensure that administrator access will always be maintained, even if remote administration is made permanently or temporarily unavailable due to blocking of accounts as a result of FIA_AFL.1.
 
 ===== Tests
 
-[arabic, start=543]
+[arabic, start=541]
 . The evaluator shall perform the following tests for each method by which remote administrators access the TOE (e.g. any passwords entered as part of establishing the connection protocol or the remote administrator application):
 [loweralpha]
 .. Test 1: The evaluator shall use the operational guidance to configure the number of successive unsuccessful authentication attempts allowed by the TOE (and, if the time period selection in FIA_AFL.1.2 is included in the ST, then the evaluator shall also use the operational guidance to configure the time period after which access is re-enabled). The evaluator shall test that once the authentication attempts limit is reached, authentication attempts with valid credentials are no longer successful.
@@ -3029,17 +3029,17 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=544]
+[arabic, start=542]
 . None
 
 ===== Guidance Documentation
 
-[arabic, start=545]
+[arabic, start=543]
 . The evaluator shall examine the guidance documentation to determine that any necessary preparatory steps to ensure authentication data is not revealed while entering for each local login allowed.
 
 ===== Tests
 
-[arabic, start=546]
+[arabic, start=544]
 . The evaluator shall perform the following test for each method of local login allowed:
 [loweralpha]
 .. Test 1: The evaluator shall locally authenticate to the TOE. While making this attempt, the evaluator shall verify that at most obscured feedback is provided while entering the authentication information.
@@ -3048,7 +3048,7 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=547]
+[arabic, start=545]
 . The evaluator shall check that the TSS:
 
 .. lists the supported special character(s) for the composition of administrator passwords. 
@@ -3059,7 +3059,7 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== Guidance Documentation
 
-[arabic, start=548]
+[arabic, start=546]
 . The evaluator shall examine the guidance documentation to determine that it:
 [loweralpha]
 .. identifies the characters that may be used in passwords and provides guidance to security administrators on the composition of strong passwords, and
@@ -3067,7 +3067,7 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== Tests
 
-[arabic, start=549]
+[arabic, start=547]
 . The evaluator shall perform the following tests.
 [loweralpha]
 .. Test 1: The evaluator shall compose passwords that meet the requirements in some way. For each password, the evaluator shall verify that the TOE supports the password. While the evaluator is not required (nor is it feasible) to test all possible compositions of passwords, the evaluator shall ensure that all characters, and a minimum length listed in the requirement are supported and justify the subset of those characters chosen for testing.
@@ -3079,36 +3079,36 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=550]
+[arabic, start=548]
 . The evaluator shall examine the TSS to determine that it details all authentication data that are subject to this requirement, and the method used to obscure the plaintext password data when stored. The TSS shall also detail passwords are stored in such a way that they are unable to be viewed through an interface designed specifically for that purpose, as outlined in the application note.
 
 ===== Guidance Documentation
 
-[arabic, start=551]
+[arabic, start=549]
 . None
 
 ===== Tests
 
-[arabic, start=552]
+[arabic, start=550]
 . None
 
 ==== FPT_TUD_EXT.2 Trusted Update Based on Certificates
 
 ===== TSS
 
-[arabic, start=553]
+[arabic, start=551]
 . The evaluator shall verify that the TSS contains a description of how the certificates are contained on the device. The evaluator also ensures that the TSS (or guidance documentation) describes how the certificates are installed/updated/selected, if necessary.
 . The evaluator shall verify that the TSS describes how the TOE reacts if X.509 certificates are used for trusted updates and the Security Administrator attempts to perform the trusted update using an expired certificate.
 . The TSS shall describe the point at which revocation checking is performed and describe whether the Security Administrator can manually provide revocation information. It is expected that revocation checking is performed when a certificate is used when performing trusted updates. It is not sufficient to verify the status of a X.509 certificate only when it is loaded onto the device.
 
 ===== Guidance Documentation
 
-[arabic, start=556]
+[arabic, start=554]
 . The evaluator shall verify that the guidance documentation describes how the TOE reacts if X.509 certificates are used for trusted updates and the administrator attempts to perform the trusted update using an expired certificate. The evaluator shall verify any Security Administrator actions related to revocation checking, both accepting or rejecting certificates and manually providing revocation information. The description shall correspond to the description in the TSS.
 
 ===== Tests
 
-[arabic, start=557]
+[arabic, start=555]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1: The evaluator shall verify that the update mechanism includes a certificate validation according to FIA_X509_EXT.1 and a check for the Code Signing purpose in the extendedKeyUsage.
@@ -3121,19 +3121,19 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=558]
+[arabic, start=556]
 . For distributed TOEs see Section 2.4.1.1.
 . For non-distributed TOEs, the evaluator shall ensure the TSS lists the services the Security Administrator is able to start and stop and how that operation is performed.
 
 ===== Guidance Documentation
 
-[arabic, start=560]
+[arabic, start=558]
 . For distributed TOEs see Section 2.4.1.2.
 . For non-distributed TOEs, the evaluator shall also ensure the Guidance Documentation describes how the TSS lists the services the Security Administrator is able to start and stop and how that operation is performed.
 
 ===== Tests
 
-[arabic, start=562]
+[arabic, start=560]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1: The evaluator shall try to enable and disable at least one of the services as defined in the Application Notes for FAU_GEN.1.1 (whichever is supported by the TOE) without prior authentication as Security Administrator (either by authenticating as a user with no administrator privileges, if possible, or without prior authentication at all). The attempt to enable/disable this service/these services should fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt to enable/disable this service/these services can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator.
@@ -3144,19 +3144,19 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=563]
+[arabic, start=561]
 . For distributed TOEs see Section 2.4.1.1.
 . For non-distributed TOEs, the evaluator shall ensure the TSS describes how checking for automatic updates or automated updates (whichever is supported by the TOE) are performed to include required configuration settings to enable and disable automated checking or automated updates.
 
 ===== Guidance Documentation
 
-[arabic, start=565]
+[arabic, start=563]
 . For distributed TOEs see Section 2.4.1.2.
 . For non-distributed TOEs, the evaluator shall also ensure the TSS describes how checking for automatic updates or automated updates (whichever is supported by the TOE) are performed to include required configuration settings to enable and disable automated checking or automated updates (whichever is supported by the TOE).
 
 ===== Tests
 
-[arabic, start=567]
+[arabic, start=565]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1: The evaluator shall try to enable and disable automatic checking for updates or automatic updates (whichever is supported by the TOE) without prior authentication as Security Administrator (by authenticating as a user with no administrator privileges or without user authentication). The attempt to enable/disable automatic checking for updates should fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt to enable/disable automatic checking for updates can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator.
@@ -3166,19 +3166,19 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 
 ===== TSS
 
-[arabic, start=568]
+[arabic, start=566]
 . For distributed TOEs see Section 2.4.1.1.
 . For non-distributed TOEs, the evaluator shall ensure the TSS for each administrative function identified the TSS details how the Security Administrator determines or modifies the behaviour of (whichever is supported by the TOE) transmitting audit data to an external IT entity, handling of audit data, audit functionality when Local Audit Storage Space is full (whichever is supported by the TOE).
 
 ===== Guidance Documentation
 
-[arabic, start=570]
+[arabic, start=568]
 . For distributed TOEs see Section 2.4.1.2.
 . For non-distributed TOEs, the evaluator shall also ensure the Guidance Documentation describes how the Security Administrator determines or modifies the behaviour of (whichever is supported by the TOE) transmitting audit data to an external IT entity, handling of audit data, audit functionality when Local Audit Storage Space is full (whichever is supported by the TOE) are performed to include required configuration settings.
 
 ===== Tests
 *If ‘transmission of audit data to external IT entity’ is selected from the second selection together with 'modify the behaviour of' in the first selection*
-[arabic, start=572]
+[arabic, start=570]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1: The evaluator shall try to modify all security related parameters for configuration of the transmission protocol for transmission of audit data to an external IT entity without prior authentication as Security Administrator (by authentication as a user with no administrator privileges or without user authentication at all). Attempts to modify parameters without prior authentication should fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt to modify the security related parameters can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator.
@@ -3188,7 +3188,7 @@ The evaluator does not have to test all possible values of the security related 
 
 *If 'handling of audit data' is selected from the second selection together with 'modify the behaviour of' in the first selection*
 
-[arabic, start=573]
+[arabic, start=571]
 . The evaluator shall perform the following tests:
 
 .. Test 1: The evaluator shall try to modify all security related parameters for configuration of the handling of audit data without prior authentication as Security Administrator (by authentication as a user with no administrator privileges or without user authentication at all). Attempts to modify parameters without prior authentication should fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator. The term ‘handling of audit data’ refers to the different options for selection and assignments in SFRs FAU_STG_EXT.1.4, FAU_STG_EXT.1.5 and FAU_STG_EXT.2.
@@ -3198,7 +3198,7 @@ The evaluator does not necessarily have to test all possible values of the secur
 
 *If 'audit functionality when Local Audit Storage Space is full' is selected from the second selection together with 'modify the behaviour of' in the first selection*
 
-[arabic, start=574]
+[arabic, start=572]
 . The evaluator shall perform the following tests:
 .. Test 1: The evaluator shall try to modify the behaviour when Local Audit Storage Space is full without prior authentication as Security Administrator (by authentication as a user with no administrator privileges or without user authentication at all). This attempt should fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator.
 .. Test 2: The evaluator shall try to modify the behaviour when Local Audit Storage Space is full with prior authentication as Security Administrator. This attempt should be successful. The effect of the change shall be verified.
@@ -3207,7 +3207,7 @@ The evaluator does not necessarily have to test all possible values for the beha
 
 *If in the first selection 'determine the behaviour of' has been chosen together with for any of the options in the second selection*
 
-[arabic, start=575]
+[arabic, start=573]
 . The evaluator shall perform the following tests:
 
 .. Test 1: The evaluator shall try to determine the behaviour of all options chosen from the second selection without prior authentication as Security Administrator (by authentication as a user with no administrator privileges or without user authentication at all). This can be done in one test or in separate tests. The attempt(s) to determine the behaviour of the selected functions without administrator authentication shall fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator.
@@ -3218,19 +3218,19 @@ The evaluator does not necessarily have to test all possible values for the beha
 
 ===== TSS
 
-[arabic, start=576]
+[arabic, start=574]
 . For distributed TOEs see Section 2.4.1.1.
 . For non-distributed TOEs, the evaluator shall ensure the TSS lists the keys the Security Administrator is able to manage to include the options available (e.g. generating keys, importing keys, modifying keys or deleting keys) and names the  operations that are performed.
 
 ===== Guidance Documentation
 
-[arabic, start=578]
+[arabic, start=576]
 . For distributed TOEs see Section 2.4.1.2.
 . For non-distributed TOEs, the evaluator shall also ensure the Guidance Documentation describes how the operations are performed on the keys the Security Administrator is able to manage.
 
 ===== Tests
 
-[arabic, start=580]
+[arabic, start=578]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
 .. Test 1: The evaluator shall try to perform at least one of the related actions (modify, delete, generate/import) without prior authentication as Security Administrator (either by authentication as a non-administrative user, if supported, or without authentication at all). Attempts to perform related actions without prior authentication should fail. According to the implementation no other users than the Security Administrator might be defined and without any user authentication the user might not be able to get to the point where the attempt to manage cryptographic keys can be executed. In that case it shall be demonstrated that access control mechanisms prevent execution up to the step that can be reached without authentication as Security Administrator.
@@ -3242,24 +3242,24 @@ The evaluator does not necessarily have to test all possible values for the beha
 
 ===== TSS
 
-[arabic, start=581]
+[arabic, start=579]
 . The evaluator shall examine the TSS to determine that it details whether local administrative session locking or termination is supported and the related inactivity time period settings.
 
 ===== Guidance Documentation
 
-[arabic, start=582]
+[arabic, start=580]
 . The evaluator shall confirm that the guidance documentation states whether local administrative session locking or termination is supported and instructions for configuring the inactivity time period.
 
 ===== Tests
 
-[arabic, start=583]
+[arabic, start=581]
 . The evaluator shall perform the following test:
 [loweralpha]
 .. Test 1: The evaluator shall follow the guidance documentation to configure several different values for the inactivity time period referenced in the component. For each period configured, the evaluator shall establish a local interactive session with the TOE. The evaluator shall then observe that the session is either locked or terminated after the configured time period. If locking was selected from the component, the evaluator shall then ensure that re-authentication is needed when trying to unlock the session.
 
 == Evaluation Activities for SARs
 
-[arabic, start=584]
+[arabic, start=582]
 . The sections below specify EAs for the Security Assurance Requirements (SARs) included in the related cPPs (see Section 1.1). The EAs in Section 2 (Evaluation Activities for SFRs), Section 3 (Evaluation Activities for Optional Requirements), and Section 4 (Evaluation Activities for Selection-Based Requirements) are an interpretation of the more general CEM assurance requirements as they apply to the specific technology area of the TOE.
 . In this section, each SAR that is contained in the cPP is listed, and the EAs that are not associated with an SFR are captured here, or a reference is made to the CEM, and the evaluator is expected to perform the CEM work units.
 
@@ -3267,12 +3267,12 @@ The evaluator does not necessarily have to test all possible values for the beha
 
 ==== General Evaluation Activities for TOE Summary Specification (ASE_TSS.1) for All TOEs
 
-[arabic, start=586]
+[arabic, start=584]
 . When evaluating a Security Target, the evaluator performs the work units as presented in the CEM. In addition, the evaluator shall ensure the content of the TSS in the ST satisfies the EAs specified in Section 2 (Evaluation Activities for SFRs).
 
 ==== Additional Evaluation Activities for TOE Summary Specification (ASE_TSS.1) for Distributed TOEs
 
-[arabic, start=587]
+[arabic, start=585]
 . For distributed TOEs only the SFRs classified as ‘all’ have to be fulfilled by all TOE parts. The SFRs classified as ‘One’ or ‘Feature Dependent’ only have to be fulfilled by either one or some TOE parts, respectively. To make sure that the distributed TOE as a whole fulfills all the SFRs the following actions for ASE_TSS.1 have to be performed as part of ASE_TSS.1.1E.
 
 [cols=",",options="header",]
@@ -3285,14 +3285,14 @@ The evaluator shall verify the sufficiency to fulfil the related SFRs. This incl
 
 |===
 
-[arabic, start=588]
+[arabic, start=586]
 . Note that additional Evaluation Activities for the TSS in the case of a distributed TOE are defined in Appendix B.4.1.1.
 
 === ADV: Development
 
 ==== Basic Functional Specification (ADV_FSP.1)
 
-[arabic, start=589]
+[arabic, start=587]
 . The EAs for this assurance component focus on understanding the interfaces (e.g., application programming interfaces, command line interfaces, graphical user interfaces, network interfaces) described in the AGD documentation, and possibly identified in the TOE Summary Specification (TSS) in response to the SFRs. Specific evaluator actions to be performed against this documentation are identified (where relevant) for each SFR in Section 2, and in EAs for AGD, ATE and AVA SARs in other parts of Section 5.
 . The EAs presented in this section address the CEM work units ADV_FSP.1-1, ADV_FSP.1-2, ADV_FSP.1-3, and ADV_FSP.1-5.
 . The EAs are reworded for clarity and interpret the CEM work units such that they will result in more objective and repeatable actions by the evaluator. The EAs in this SD are intended to ensure the evaluators are consistently performing equivalent actions.
@@ -3327,19 +3327,19 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 ===== Evaluation Activity
 
-[arabic, start=593]
+[arabic, start=591]
 . _The evaluator shall examine the interface documentation to ensure it describes the purpose and method of use for each TSFI that is identified as being security relevant._
 . In this context, TSFI are deemed security relevant if they are used by the administrator to configure the TOE, or to perform other administrative functions (e.g. audit review or performing updates). Explicitly labeling TSFI as security relevant or non-security relevant is not necessary. A TSFI is implicitly security relevant if is is used to satisfy an evaluation activity, or if it is identified in the ST or guidance documentation as adhering to the security policies (as presented in the SFRs). The intent is that these interfaces will be adequately tested and having an understanding of how these interfaces are used in the TOE is necessary to ensure proper test coverage is applied. According to the description above 'security relevant' corresponds to the combination of 'SFR-enforcing' and 'SFR-supporting' as defined in CC Part 3, paragraph 224 and 225.
 . The set of TSFI that are provided as evaluation evidence are contained in the Security Target and the guidance documentation.
 
 ===== Evaluation Activity
 
-[arabic, start=596]
+[arabic, start=594]
 . _The evaluator shall check the interface documentation to ensure it identifies and describes the parameters for each TSFI that is identified as being security relevant._
 
 ===== Evaluation Activity
 
-[arabic, start=597]
+[arabic, start=595]
 . _The evaluator shall examine the interface documentation to develop a mapping of the interfaces to SFRs._
 . The evaluator shall use the provided documentation and first identifies, and then examines a representative set of interfaces to perform the EAs presented in Section 2, including the EAs associated with testing of the interfaces.
 . It should be noted that there may be some SFRs that do not have a TSFI that is explicitly “mapped” to invoke the desired functionality. For example, generating a random bit string or destroying a cryptographic key that is no longer needed are capabilities that may be specified in SFRs, but are not invoked by an interface.
@@ -3347,39 +3347,39 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 === AGD: Guidance Documents
 
-[arabic, start=601]
+[arabic, start=599]
 . It is not necessary for a TOE to provide separate documentation to meet the individual requirements of AGD_OPE and AGD_PRE. Although the EAs in this section are described under the traditionally separate AGD families, the mapping between the documentation provided by the developer and AGD_OPE and AGD_PRE requirements may be many-to-many, as long as all requirements are met in documentation that is delivered to Security Administrators and users (as appropriate) as part of the TOE.
 . Note that additional Evaluation Activities for the guidance documentation in the case of a distributed TOE are defined in Appendix B.4.2.1.
 
 ==== Operational User Guidance (AGD_OPE.1)
 
-[arabic, start=603]
+[arabic, start=601]
 . The evaluator performs the CEM work units associated with the AGD_OPE.1 SAR. Specific requirements and EAs on the guidance documentation are identified (where relevant) in the individual EAs for each SFR. For the related evaluation activities, the evaluation evidence documents Security Target, AGD documentation (user guidance) and functional specification documentation (if provided) shall be used as input documents. Each input document is subject to ALC_CMS.1-2 requirements.
 . In addition, the evaluator performs the EAs specified below.
 
 ===== Evaluation Activity
 
-[arabic, start=605]
+[arabic, start=603]
 . _The evaluator shall ensure the Operational guidance documentation is distributed to Security Administrators and users (as appropriate) as part of the TOE, so that there is a reasonable guarantee that Security Administrators and users are aware of the existence and role of the documentation in establishing and maintaining the evaluated configuration._
 
 ===== Evaluation Activity
 
-[arabic, start=606]
+[arabic, start=604]
 . _The evaluator shall ensure that the Operational guidance is provided for every Operational Environment that the product supports as claimed in the Security Target and shall adequately address all platforms claimed for the TOE in the Security Target._
 
 ===== Evaluation Activity
 
-[arabic, start=607]
+[arabic, start=605]
 . _The evaluator shall ensure that the Operational guidance contains instructions for configuring any cryptographic implementation associated with the evaluated configuration of the TOE. It shall provide a warning to the administrator that use of other cryptographic implementations was not evaluated nor tested during the CC evaluation of the TOE._
 
 ===== Evaluation Activity
 
-[arabic, start=608]
+[arabic, start=606]
 . _The evaluator shall ensure the Operational guidance makes it clear to an administrator which security functionality and interfaces have been assessed and tested by the EAs._
 
 ===== Evaluation Activity
 
-[arabic, start=609]
+[arabic, start=607]
 . In addition, the evaluator shall ensure that the following requirements are also met.
 [loweralpha]
 .. The guidance documentation shall contain instructions for configuring any cryptographic implementation associated with the evaluated configuration of the TOE. It shall provide a warning to the administrator that use of other cryptographic implementations was not evaluated nor tested during the CC evaluation of the TOE.
@@ -3389,37 +3389,37 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 ==== Preparative Procedures (AGD_PRE.1)
 
-[arabic, start=610]
+[arabic, start=608]
 . The evaluator performs the CEM work units associated with the AGD_PRE.1 SAR. Specific requirements and EAs on the preparative documentation are identified (and where relevant are captured in the Guidance Documentation portions of the EAs) in the individual EAs for each SFR.
 . Preparative procedures are distributed to Security Administrators and users (as appropriate) as part of the TOE, so that there is a reasonable guarantee that Security Administrators and users are aware of the existence and role of the documentation in establishing and maintaining the evaluated configuration.
 . In addition, the evaluator performs the EAs specified below.
 
 ===== Evaluation Activity:
 
-[arabic, start=613]
+[arabic, start=611]
 . _The evaluator shall examine the Preparative procedures to ensure they include a description of how the Security Administrator verifies that the operational environment can fulfil its role to support the security functionality (including the requirements of the Security Objectives for the Operational Environment specified in the Security Target)._
 . The documentation should be in an informal style and should be written with sufficient detail and explanation that they can be understood and used by the target audience (which will typically include IT staff who have general IT experience but not necessarily experience with the TOE product itself).
 
 ===== Evaluation Activity
 
-[arabic, start=615]
+[arabic, start=613]
 . _The evaluator shall examine the preparative procedures to ensure they are provided for every Operational Environment that the product supports as claimed in the Security Target and shall adequately address all platforms claimed for the TOE in the Security Target._
 
 ===== Evaluation Activity
 
-[arabic, start=616]
+[arabic, start=614]
 . _The evaluator shall examine the preparative procedures to ensure they include instructions to successfully install the TSF in each Operational Environment._
 
 ===== Evaluation Activity
 
-[arabic, start=617]
+[arabic, start=615]
 . _The evaluator shall examine the preparative procedures to ensure they include instructions on how to manage the TSF as a product and as a component of the larger Operational Environment in a manner that allows to preserve integrity of the TSF._
 
 . _The intent of this requirement is to ensure there exists adequate preparative procedures (guidance in most cases) to put the TSF in a secure state (i.e., evaluated configuration). AGD_PRE.1 lists general requirements, the specific assurance activities implementing it are performed as part of FMT_SMF.1, FMT_MTD.1 and FMT_MOF.1 series of SFRs._
 
 ===== Evaluation Activity
 
-[arabic, start=619]
+[arabic, start=617]
 . In addition, the evaluator shall ensure that the following requirements are also met.
 . The preparative procedures must
 [loweralpha]
@@ -3430,34 +3430,34 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 ==== Labelling of the TOE (ALC_CMC.1)
 
-[arabic, start=621]
+[arabic, start=619]
 . When evaluating that the TOE has been provided and is labelled with a unique reference, the evaluator performs the work units as presented in the CEM.
 
 ==== TOE CM Coverage (ALC_CMS.1)
 
-[arabic, start=622]
+[arabic, start=620]
 . When evaluating the developer’s coverage of the TOE in their CM system, the evaluator performs the work units as presented in the CEM.
 
 ==== Basic Flaw Remediation (ALC_FLR.1) (optional)
 
-[arabic, start=623]
+[arabic, start=621]
 . When evaluating the developer’s procedures regarding basic flaw remediation, the evaluator performs the work units as presented in the CEM.
 
 ==== Flaw Reporting Procedures (ALC_FLR.2) (optional)
 
-[arabic, start=624]
+[arabic, start=622]
 . When evaluating the developer’s flaw reporting procedures, the evaluator performs the work units as presented in the CEM.
 
 ==== Systematic Flaw Remediation (ALC_FLR.3) (optional)
 
-[arabic, start=625]
+[arabic, start=623]
 . When evaluating the developer’s procedures regarding systematic flaw remediation, the evaluator performs the work units as presented in the CEM.
 
 === ATE: Tests
 
 ==== Independent Testing – Conformance (ATE_IND.1)
 
-[arabic, start=626]
+[arabic, start=624]
 . The focus of the testing is to confirm that the requirements specified in the SFRs are being met. Additionally, testing is performed to confirm the functionality described in the TSS, as well as the dependencies on the Operational guidance documentation is accurate.
 . The evaluator performs the CEM work units associated with the ATE_IND.1 SAR. Specific testing requirements and EAs are captured for each SFR in Sections 2, 3 and 4.
 . The evaluator shall consult Appendix B when determining the appropriate strategy for testing multiple variations or models of the TOE that may be under evaluation.
@@ -3467,7 +3467,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 
 ==== Vulnerability Survey (AVA_VAN.1)
 
-[arabic, start=630]
+[arabic, start=628]
 . While vulnerability analysis is inherently a subjective activity, a minimum level of analysis can be defined and some measure of objectivity and repeatability (or at least comparability) can be imposed on the vulnerability analysis process. In order to achieve such objectivity and repeatability it is important that the evaluator shall follow a set of well-defined activities and documents their findings so others can follow their arguments and come to the same conclusions as the evaluator. While this does not guarantee that different evaluation facilities will identify exactly the same type of vulnerabilities or come to exactly the same conclusions, the approach defines the minimum level of analysis and the scope of that analysis and provides Certification Bodies a measure of assurance that the minimum level of analysis is being performed by the evaluation facilities.
 . In order to meet these goals some refinement of the AVA_VAN.1 CEM work units is needed. The following table indicates, for each work unit in AVA_VAN.1, whether the CEM work unit is to be performed as written, or if it has been clarified by an Evaluation Activity. If clarification has been provided, a reference to this clarification is provided in the table.
 
@@ -3527,12 +3527,12 @@ AVA_VAN.1-11 The evaluator *_shall report_* in the ETR all exploitable vulnerabi
 
 [#_Ref453153408]#Table 2: Mapping of AVA_VAN.1 CEM Work Units to Evaluation Activities#
 
-[arabic, start=632]
+[arabic, start=630]
 . Because of the level of detail required for the evaluation activities, the bulk of the instructions are contained in Appendix A, while an “outline” of the assurance activity is provided below.
 
 ===== Evaluation Activity (Documentation):
 
-[arabic, start=633]
+[arabic, start=631]
 . In addition to the activities specified by the CEM in accordance with Table 2, the evaluator shall perform the following activities.
 . _The evaluator shall examine the documentation outlined below provided by the developer to confirm that it contains all required information. This documentation is in addition to the documentation already required to be supplied in response to the EAs listed previously._
 . The developer shall provide documentation identifying the list of software and hardware componentsfootnote:[In this sub-section the term “components” refers to parts that make up the TOE. It is therefore distinguished from the term “distributed TOE components”, which refers to the parts of a TOE that are present in one physical part of a distributed TOE. Each distributed TOE component will therefore generally include a number of the hardware and software components that are referred to in this sub-section: for example, each distributed TOE component will generally include hardware components such as processors and software components such as an operating system and libraries.] that compose the TOE. Hardware components should identify compute-capable hardware components, at a minimum that must include the processor, and where applicable, discrete crypto ASICs, TPMs, etc. used by the TOE. Software components include applications, the operating system and other major components that are independently identifiable and reusable (outside of the TOE), for example a web server, protocol or cryptographic implementations, (independently identifiable and reusable components are not limited to the list provided in the example). This additional documentation is merely a list of the name and version number of the components and will be used by the evaluators in formulating vulnerability hypotheses during their analysis.
@@ -3544,12 +3544,12 @@ AVA_VAN.1-11 The evaluator *_shall report_* in the ETR all exploitable vulnerabi
 
 ===== Evaluation Activity:
 
-[arabic, start=637]
+[arabic, start=635]
 . The evaluator shall formulate hypotheses in accordance with process defined in Appendix A. The evaluator shall document the flaw hypotheses generated for the TOE in the report in accordance with the guidelines in Appendix A.3. The evaluator shall perform vulnerability analysis in accordance with Appendix A.2. The results of the analysis shall be documented in the report according to Appendix A.3.
 
 == Required Supplementary Information
 
-[arabic, start=638]
+[arabic, start=636]
 . This Supporting Document refers in various places to the possibility that ‘required supplementary information’ may need to be supplied as part of the deliverables for an evaluation. This term is intended to describe information that is not necessarily included in the Security Target or operational guidance, and that may not necessarily be public. Examples of such information could be entropy analysis, or description of a cryptographic key management architecture used in (or in support of) the TOE. The requirement for any such supplementary information will be identified in the relevant cPP.
 . The cPPs associated with this SD require an entropy analysis as described in [NDcPP, Appendix D].
 
@@ -3591,7 +3591,7 @@ Version 3.0, April 2023
 
 === Sources of Vulnerability Information
 
-[arabic, start=640]
+[arabic, start=638]
 . CEM Work Unit AVA_VAN.1-3 has been supplemented in this Supporting Document to provide a better-defined set of flaws to investigate and procedures to follow based on this particular technology. Terminology used is based on the flaw hypotheses methodology, where the evaluation team hypothesizes flaws and then either proves or disproves those flaws (a flaw is equivalent to a “potential vulnerability” as used in the CEM). Flaws are categorized into four “types” depending on how they are formulated:
 [arabic]
 .. A list of flaw hypotheses applicable to the technology described by the cPP (in this case, a network device) derived from public sources as documented in Appendix A.1.1 – this fixed set has been agreed by the iTC. Additionally, this will be supplemented with entries for a set of public sources (as indicated below) that are directly applicable to the TOE or its identified components (as defined by the process in Appendix A.1.1 below); this is to ensure that the evaluators include in their assessment applicable entries that have been discovered since the cPP was published;
@@ -3601,7 +3601,7 @@ Version 3.0, April 2023
 
 ==== Type 1 Hypotheses – Public-Vulnerability-Based
 
-[arabic, start=641]
+[arabic, start=639]
 . The list of public sources of vulnerability information selected by the iTC is given in Appendix A.4.
 . The evaluators shall perform a search on the sources listed in Appendix A.4 to determine a list of potential flaw hypotheses that are specific to the TOE and its components as specified by the additional documentation mentioned above. Any duplicates – either in a specific entry, or in the flaw hypothesis that is generated from an entry from the same or a different source – can be noted and removed from consideration by the evaluation team.
 . According to Section 5.6.1.1, the developer shall provide documentation identifying the list of software and hardware components that compose the TOE. The evaluator shall independently verify this list for completeness by comparing it to the security functionality defined in the TSS of the ST and ensuring that all expected components are accounted for.
@@ -3612,24 +3612,24 @@ The search criteria to be used when searching the sources shall include:
 +
 As the search terms can contain proprietary information and there is a possibility that this information could be used by attackers to identify potential attack surfaces, there is no expectation that search terms containing proprietary information are published in any public-facing document.
 
-[arabic, start=644]
+[arabic, start=642]
 . As part of type 1 flaw hypothesis generation for the specific components of the TOE, the evaluator shall also search the component manufacturer’s websites to determine if flaw hypotheses can be generated on this basis (for instance, if security patches have been released for the version of the component being evaluated, the subject of those patches may form the basis for a flaw hypothesis).
 
 ==== Type 2 Hypotheses – iTC-Sourced
 
-[arabic, start=645]
+[arabic, start=643]
 . Appendix A.5 contains the list of flaw hypothesis generated by the iTC for this technology that must be considered by the evaluation team as flaw hypotheses in performing the vulnerability assessment.
 . If the evaluators discover a Type 3 or Type 4 flaw that they believe should be considered as a Type 2 flaw in future versions of this cPP, they should work with their Certification Body to determine the appropriate means of submitting the flaw for consideration by the iTC.
 
 ==== Type 3 Hypotheses – Evaluation-Team-Generated
 
-[arabic, start=647]
+[arabic, start=645]
 . Type 3 flaws are formulated by the evaluator based on information presented by the product (through on-line help, product documentation and user guides, etc.) and product behaviour during the (functional) testing activities. The evaluator is also free to formulate flaws that are based on material that is not part of the baseline evidence (e.g., information gleaned from an Internet mailing list, or reading interface documentation on interfaces not included in the set provided by the developer), although such activities have the potential to vary significantly based upon the product and evaluation facility performing the analysis.
 . If the evaluators discover a Type 3 flaw that they believe should be considered as a Type 2 flaw in future versions of this cPP, they should work with their Certification Body to determine the appropriate means of submitting the flaw for consideration by the iTC.
 
 ==== Type 4 Hypotheses – Tool-Generated
 
-[arabic, start=649]
+[arabic, start=647]
 . The evaluator is recommended but not mandated to perform Fuzz Testing to generate type 4 flaw hypotheses. Fuzz testing is a method where a set of randomly generated inputs is used to induce an observable fault. If this approach is selected, the evaluator shall e.g. identify a protocol implementing one or more SFR-enforcing TSFI(s) and conduct fuzz testing by varying selected fields in that protocol. For example, if the TOE’s remote administrative interface is secured with TLS, fuzz testing of the SSL record header or the TLS handshake message would be appropriate. Any results that are unexpected (e.g., core dumps, inappropriate errors, or unplanned reboots) should be investigated and resolved.
 If fuzz testing is performed, the evaluator shall focus on security-relevant parts of the TOE that have not been subjected to Fuzz Testing multiple times (like publicly available libraries), but instead focus on custom parts of the TOE (if such information is available to the evaluator).
 
@@ -3638,7 +3638,7 @@ If fuzz testing is performed, the evaluator shall focus on security-relevant par
 
 === Process for Evaluator Vulnerability Analysis
 
-[arabic, start=652]
+[arabic, start=650]
 . As flaw hypotheses are generated from the activities described above, the evaluation team will disposition them; that is, attempt to prove, disprove, or determine the non-applicability of the hypotheses. This process is as follows.
 . The evaluator shall refine each flaw hypothesis for the TOE and attempt to disprove it using the information provided by the developer or through penetration testing. During this process, the evaluator is free to interact with the developer to determine if the flaw exists, including requests to the developer for additional evidence (e.g., detailed design information, consultation with engineering staff). In case of a confirmed flaw, the CB should be informed. Should the developer object to the information being requested as being not compatible with the overall level of the evaluation activity/cPP and cannot provide evidence otherwise that the flaw is disproved, the evaluator prepares an appropriate set of materials as follows:
 [arabic]
@@ -3659,7 +3659,7 @@ If fuzz testing is performed, the evaluator shall focus on security-relevant par
 
 === Reporting
 
-[arabic, start=663]
+[arabic, start=661]
 . The evaluators shall produce two reports on the testing effort; one that is public-facing (that is, included in the non-proprietary evaluation report, which is a subset of the Evaluation Technical Report (ETR)) and the complete ETR that is delivered to the overseeing CB.
 . The public-facing report contains:
 
@@ -3691,7 +3691,7 @@ If fuzz testing is performed, the evaluator shall focus on security-relevant par
 
 === Public Vulnerability Sources
 
-[arabic, start=668]
+[arabic, start=666]
 . The following sources of public vulnerabilities are sources for the iTC to consider in both formulating the specific list of flaws to be investigated by the evaluators, as well as to reference in directing the evaluators to perform key-word searches during the evaluation of a specific TOE.
 
 [loweralpha]
@@ -3713,7 +3713,7 @@ https://www.rapid7.com/db/?type=nexpose
 
 === Additional Flaw Hypotheses
 
-[arabic, start=669]
+[arabic, start=667]
 . The following additional tests shall be performed:
 [loweralpha]
 .. [conditional]: If the TOE is a TLS server and supports ciphersuites that use RSA transport (e.g. supporting TLS_RSA_WITH_* ciphers) the following test shall be performed. Where RSA Key Establishment schemes are claimed and especially when PKCS#1 v1.5* padding is used, the evaluators shall test for implementation flaws allowing Bleichenbacher and Klima et al. style attacks, including Bock et al's ROBOT attacks of 2017 in the flaw analysis. Even though Bleichenbacher's original paper is two decades old, Bock et al. found these attacks to still be effective in weakening the security of RSA key establishment in current products. Bleichenbacher and Klima et al. style attacks are complex and may be difficult to detect, but a number of software testing tools have been created to assist in that process. The iTC strongly recommends that at least one of the tools mentioned in Bock et al's ROBOT attacks of 2017 webpage or paper, as effective to detect padding oracle attacks, be used to test TOE communications channels using RSA based Key Establishment (related sources: http://archiv.infsec.ethz.ch/education/fs08/secsem/bleichenbacher98.pdf, https://eprint.iacr.org/2003/052, https://robotattack.org/).
@@ -3722,7 +3722,7 @@ https://www.rapid7.com/db/?type=nexpose
 == Network Device Equivalency Considerations
 === Introduction
 
-[arabic, start=670]
+[arabic, start=668]
 . This appendix provides a foundation for evaluators to determine whether a developer’s request for equivalency of products for different models wishing to claim conformance to the NDcPP is allowed.
 . For the purpose of evaluation, equivalency can be broken into two categories:
 * *Variations in models*: Separate TOE models/variations may include differences that could necessitate separate testing across each model. If there are no variations in any of the categories listed below, the models may be considered equivalent.
@@ -3738,7 +3738,7 @@ https://www.rapid7.com/db/?type=nexpose
 
 ====  Strategy
 
-[arabic, start=676]
+[arabic, start=674]
 . When performing the equivalency analysis, the evaluator shall consider each factor independently. A factor may be any number of things at various levels of abstraction, ranging from the processor a device uses, to the underlying operating system and hardware platform a software application relies upon. Examples may be the various chip sets employed by the product, the type of network interface (different device drivers), storage media (solid state drive, spinning disk, EEPROM). It is important to consider how the difference in these factors may influence the TOE’s ability to enforce the SFRs. Each analysis of an individual factor will result in one of two outcomes,
 * For the particular factor, all variations of the TOE on all supported platforms are equivalent. In this case, testing may be performed on a single model in a single test environment and cover all supported models and environments.
 * For the particular factor, a subset of the product has been identified to require separate testing to ensure that it operates identically to all other equivalent TOE. The analysis would identify the specific combinations of models/testing environments that needed to be tested.
@@ -3747,7 +3747,7 @@ https://www.rapid7.com/db/?type=nexpose
 
 ====  Guidance for Network Devices
 
-[arabic, start=678]
+[arabic, start=676]
 . The following table provides a description of how an evaluator shall consider each of the factors that affect equivalency between TOE model variations and across operating environments. Additionally, the table also identifies scenarios that will result in additional separate testing across models.
 
 [cols=",,",options="header",]
@@ -3773,12 +3773,12 @@ If there are specified differences between platforms/hardware, the evaluator mus
 
 === Test Presentation/Truth in Advertising
 
-[arabic, start=679]
+[arabic, start=677]
 . In addition to determining what to test, the evaluation results and resulting Certification Report, must identify the actual module and environment combinations that have been tested. The analysis used to determine the testing subset may be considered proprietary and will only optionally be publicly included.
 
 === Evaluating Additional Components for a Distributed TOE
 
-[arabic, start=680]
+[arabic, start=678]
 . In the case of a distributed TOE the Security Target will identify an evaluated configuration that consists of a number of separate components chosen by the ST author, which collectively satisfy the requirements of the cPP. This evaluated configuration need not be the minimum set of components that could _possibly_ meet the cPP (e.g. if the TOE is intended for large enterprise deployments then the evaluated configuration might include some redundancy in components in order to support expected connectivity and loads), but because this is the main configuration referred to in the ST and the evaluation, it is treated in this section as the minimum configuration of interest and is referred to here as the ‘minimum configuration’ as well as the ‘evaluated configuration’.
 . In addition to the minimum configuration above, the ST may also identify (at the author’s discretion, and subject to verification as described in this section) which TOE components can have instances added to an operational configuration without affecting the validity of the CC certification. The ST description may include constraints on how such components are added, including required and/or prohibited configurations of the components.
 . Extra instances of a TOE component must have the same hardware and software as the original component included in the evaluated configuration.
@@ -3788,14 +3788,14 @@ If there are specified differences between platforms/hardware, the evaluator mus
 
 =====  TSS
 
-[arabic, start=684]
+[arabic, start=682]
 . The evaluator shall examine the TSS to confirm it identifies any extra instances of TOE components allowed in the ST and what effects will occur when extra instances of distributed TOE components are added. The information in the TSS shall allow the evaluator to understand how a system with one component behaves in comparison to a system with multiple components.  The TSS also shall describe how the additional components maintain the SFRs to determine it is consistent with the role the component plays in the evaluated configuration and cannot be used in a way that the security functionality would be corrupted or bypassed. In general, any additional TOE-component shouldn't have a negative impact on other components that are already part of the TOE.
 
 ==== Evaluator Actions for Assessing the Guidance Documentation
 
 =====  Guidance Documentation
 
-[arabic, start=685]
+[arabic, start=683]
 . The evaluator shall examine the description of the extra instances of TOE components in the guidance documentation to confirm that they are consistent with those identified as allowed in the ST. This includes confirmation that the result of applying the guidance documentation to configure the extra component will leave the TOE in a state such that the claims for SFR support in each component are as described in the ST and therefore that all SFRs continue to be met when the extra components are present.
 . The evaluator shall examine the secure communications described for the extra components to confirm that they are the same as described for the components in the minimum configuration (additional connections between allowed extra components and the components in the minimum configuration are allowed of course).
 
@@ -3803,7 +3803,7 @@ If there are specified differences between platforms/hardware, the evaluator mus
 
 =====  Tests
 
-[arabic, start=687]
+[arabic, start=685]
 . The evaluator shall test the TOE in the minimum configuration as defined in the ST (and the guidance documentation).
 . If the description of the use of extra components in the ST and guidance documentation identifies any difference in the SFRs allocated to a component, or the scope of the SFRs involved (e.g. if different selections apply to different instances of the component) then the evaluator shall test these additional SFR cases that were not included in the minimum configuration.
 . In addition, the evaluator shall test the following aspects for each extra component that is identified as allowed in the distributed TOE:
