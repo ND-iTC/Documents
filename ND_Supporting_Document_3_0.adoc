@@ -1358,7 +1358,7 @@ In addition, all other testing in FCS_DTLSC_EXT.1 and FIA_X509_EXT.* must be per
 *FCS_DTLSS_EXT.2.4*
 
 [arabic, start=285]
-. The evaluator shall verify that TSS describes the signature_algorithms extension and whether the required behavior is performed by default or may be configured.
+. The evaluator shall verify that TSS describes the use of the signature_algorithms extension and optionally the signature_algorithms_cert extension and whether the required behavior is performed by default or may be configured.
 
 ===== Guidance Documentation
 
@@ -1376,7 +1376,7 @@ In addition, all other testing in FCS_DTLSC_EXT.1 and FIA_X509_EXT.* must be per
 *FCS_DTLSS_EXT.2.4*
 
 [arabic, start=289]
-. If the TSS indicates that the signature_algorithms extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the signature_algorithms extension.
+. If the TSS indicates that the signature_algorithms extension (and/or the signature_algorithms_cert extension) must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the extension(s).
 
 ===== Tests
 
@@ -1419,11 +1419,11 @@ Note: Testing the validity of the client certificate is performed as part of X.5
 [arabic, start=293]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
-.. Test 1: The evaluator shall initiate a DTLS session from a test DTLS client and examine the Certificate Request message sent by the TSF. The evaluator shall verify the Certificate Request message contains the signature_algorithms or signature_algorithm_cert extension. To view the Certificate Request message in DTLS 1.3, the message will need to be decrypted.
+.. Test 1a [conditional]: For DTLS 1.3, the evaluator shall initiate a DTLS session from a test DTLS client and examine the Certificate Request message sent by the TSF. The evaluator shall verify the Certificate Request message contains the signature_algorithms extension and optionally the signature_algorithm_cert extension. If the signature_algorithms_cert extension exists, then the evaluator shall verify the SignatureScheme values within the signature_algorithms_cert extensions match the selections specified in the requirement.  If only the signature_algorithms extension exists, then the evaluator shall verify the SignatureScheme values within the signature_algorithms extensions match the selections specified in the requirement. To view the Certificate Request message in DTLS 1.3, the message will need to be decrypted.
 +
-For DTLS 1.2, the evaluator shall verify the SignatureAndHashAlgorithms values match the selections specified in the requirement.
+.. Test 2 [conditional]: For DTLS 1.2, the evaluator shall initiate a DTLS session from a test DTLS client and examine the Certificate Request message sent by the TSF. The evaluator shall verify the Certificate Request message contains a list of supported_signature_algorithms. The evaluator shall verify the SignatureAndHashAlgorithm values within the supported_signature_algorithms list match the selections specified in the requirement.
 +
-For DTLS 1.3, the evaluator shall verify the SignatureSchemes values match the selections specified in the requirement.
+.. Test 3: The evaluator shall establish a DTLS connection and perform client authentication with a certificate chain using each of the SignatureSchemes (DTLS 1.3) or SignatureAndHashAlgorithm (DTLS 1.2) specified by the requirement. The evaluator shall ensure the signature used in the certificate is consistent with the value being tested.
 
 ==== FCS_TLSC_EXT.2 TLS Client Support for Mutual Authentication
 
@@ -1477,7 +1477,7 @@ In addition, all other testing in FCS_TLSC_EXT.1 and FIA_X509_EXT.* must be perf
 *FCS_TLSS_EXT.2.4*
 
 [arabic, start=302]
-. The evaluator shall verify that TSS describes the signature_algorithms extension and whether the required behavior is performed by default or may be configured.
+. The evaluator shall verify that TSS describes the use of the signature_algorithms extension and optionally the signature_algorithms_cert extension and whether the required behavior is performed by default or may be configured.
 
 ===== Guidance Documentation
 
@@ -1500,7 +1500,7 @@ In addition, all other testing in FCS_TLSC_EXT.1 and FIA_X509_EXT.* must be perf
 *FCS_TLSS_EXT.2.4*
 
 [arabic, start=307]
-. If the TSS indicates that the signature_algorithms extension must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the signature_algorithms extension.
+. If the TSS indicates that the signature_algorithms extension (and/or the signature_algorithms_cert extension) must be configured to meet the requirement, the evaluator shall verify that AGD guidance includes configuration of the extension(s).
 
 ===== Tests
 
@@ -1544,11 +1544,11 @@ Note: Testing the validity of the client certificate is performed as part of X.5
 [arabic, start=311]
 . The evaluator shall perform the following tests:
 [loweralpha, start=1]
-.. Test 1: The evaluator shall initiate a TLS session from a test TLS client and examine the Certificate Request message sent by the TSF. The evaluator shall verify the Certificate Request message contains the signature_algorithms or signature_algorithm_cert extension. To view the Certificate Request message in TLS 1.3, the message will need to be decrypted.
+.. Test 1a [conditional]: For TLS 1.3, the evaluator shall initiate a TLS session from a test TLS client and examine the Certificate Request message sent by the TSF. The evaluator shall verify the Certificate Request message contains the signature_algorithms extension and optionally the signature_algorithm_cert extension. If the signature_algorithms_cert extension exists, then the evaluator shall verify the SignatureScheme values within the signature_algorithms_cert extensions match the selections specified in the requirement.  If only the signature_algorithms extension exists, then the evaluator shall verify the SignatureScheme values within the signature_algorithms extensions match the selections specified in the requirement. To view the Certificate Request message in TLS 1.3, the message will need to be decrypted.
 +
-For TLS 1.2, the evaluator shall verify the SignatureAndHashAlgorithms values match the selections specified in the requirement.
+.. Test 2 [conditional]: For TLS 1.2, the evaluator shall initiate a TLS session from a test TLS client and examine the Certificate Request message sent by the TSF. The evaluator shall verify the Certificate Request message contains a list of supported_signature_algorithms. The evaluator shall verify the SignatureAndHashAlgorithm values within the supported_signature_algorithms list match the selections specified in the requirement.
 +
-For TLS 1.3, the evaluator shall verify the SignatureSchemes values match the selections specified in the requirement.
+.. Test 3: The evaluator shall establish a TLS connection and perform client authentication with a certificate chain using each of the SignatureSchemes (TLS 1.3) or SignatureAndHashAlgorithm (TLS 1.2) specified by the requirement. The evaluator shall ensure the signature used in the certificate is consistent with the value being tested.
 
 == Evaluation Activities for Selection-Based Requirements
 
