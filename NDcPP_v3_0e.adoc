@@ -65,7 +65,7 @@ CCMB-2017-04-004, Version 3.1, Revision 5, April 2017.
 |===
 |*Version* |*Date* |*Description*
 |3.0e | 30-Nov-2023 | Released for use
-|3.0 | 06-Apr-2023 | Incorporated comments received Released for use
+|3.0 | 06-Apr-2023 | Incorporated comments received. Released for use
 |2.2e | 23-Mar-2020 | Updated vND description. Released for use
 |2.2 |20-Dec-2019 |Released for use
 |2.1 |24-Sep-2018 |Released for use
