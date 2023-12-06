@@ -4,7 +4,7 @@
 :toc-placement!:
 :data-uri:
 :revnumber: 3.0e
-:revdate: 30-November-2023
+:revdate: 06-December-2023
 
 = collaborative Protection Profile for Network Devices
 
@@ -64,7 +64,7 @@ CCMB-2017-04-004, Version 3.1, Revision 5, April 2017.
 [cols=",,",options="header",]
 |===
 |*Version* |*Date* |*Description*
-|3.0e | 30-Nov-2023 | Released for use
+|3.0e | 06-Dec-2023 | Released for use
 |3.0 | 06-Apr-2023 | Incorporated comments received. Released for use
 |2.2e | 23-Mar-2020 | Updated vND description. Released for use
 |2.2 |20-Dec-2019 |Released for use
@@ -161,7 +161,7 @@ PP Reference: collaborative Protection Profile for Network Devices
 
 PP Version: 3.0e
 
-PP Date: 30-November-2023
+PP Date: 06-December-2023
 
 === TOE Overview
 
@@ -955,7 +955,6 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 
 * _RSA schemes using cryptographic key sizes of [assignment: 2048 bits or greater] that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.3;_
 * _ECC schemes using ‘NIST curves’ [selection: P-256, P-384, P-521] that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.4;_
-* _ECC schemes using Ed25519 that meet the following: FIPS PUB 186-5, “Digital Signature Standard (DSS)”, Appendix A.2.3;_
 * _FFC schemes using cryptographic key sizes of 2048-bit or greater that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.1_
 * _FFC Schemes using ‘safe-prime’ groups that meet the following: “NIST Special Publication 800-56A Revision 3, Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: RFC 3526, RFC 7919]._
 
@@ -2161,7 +2160,7 @@ _The reference identifier is established by the Administrator (e.g. entering a U
 
 _The rules for verification of DNS, URI, and Service identities are described in Section 6 of RFC 6125._
 
-_IP address identifiers may be supported in the SAN or CN. At this time, the cPP does not mandate a specific method of comparison; however, it is highly recommended that the IP addresses are convered to a binary representation in network byte order and a binary comprision is perfomred._
+_IP address identifiers may be supported in the SAN or CN. At this time, the cPP does not mandate a specific method of comparison; however, it is highly recommended that the IP addresses are converted to a binary representation in network byte order and a binary comparison is performed._
 
 _RFC 5280 identifiers are matched according to the TSS where the ST author describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier._
 
@@ -2272,7 +2271,7 @@ _The option 'provides' should be selected if the TOE provides the ability to con
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of the early data extension is prohibited in the configured TOE. The early data extension is a DTLS 1.3 extension. A TOE that only implments DTLS 1.2 vacuously meets the early data extension prohibition._
+_The use of the early data extension is prohibited in the configured TOE. The early data extension is a DTLS 1.3 extension. A TOE that only implements DTLS 1.2 vacuously meets the early data extension prohibition._
 
 _The use of the post-handshake client authentication is prohibited in the configured TOE. Prohibiting post-handshake client authentication might be dropped in a future version of NDcPP._
 
@@ -2416,7 +2415,7 @@ _The option 'provides' should be selected if the TOE provides the ability to con
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of the early data extension is prohibited in the configured TOE. The early data extension is a DTLS 1.3 extension. A TOE that only implments DTLS 1.2 vacuously meets the early data extension prohibition._
+_The use of the early data extension is prohibited in the configured TOE. The early data extension is a DTLS 1.3 extension. A TOE that only implements DTLS 1.2 vacuously meets the early data extension prohibition._
 
 *FCS_DTLSS_EXT.1.10* The TSF shall [selection: _not use PSKs, only use PSKs in DTLS 1.3 session resumption with forward secrecy_].
 
@@ -2701,7 +2700,7 @@ _The reference identifier is established by the Administrator (e.g. entering a U
 
 _The rules for verification of DNS, URI, and Service identities are described in Section 6 of RFC 6125._
 
-_IP address identifiers may be supported in the SAN or CN. At this time, the cPP does not mandate a specific method of comparison; however, it is highly recommended that the IP addresses are convered to a binary representation in network byte order and a binary comprision is perfomred._
+_IP address identifiers may be supported in the SAN or CN. At this time, the cPP does not mandate a specific method of comparison; however, it is highly recommended that the IP addresses are converted to a binary representation in network byte order and a binary comparison is performed._
 
 _RFC 5280 identifiers are matched according to the TSS where the ST author describes which attribute type, or combination of attributes types, are used by the client to match the presented identifier with the configured identifier._
 
@@ -2816,7 +2815,7 @@ _The option 'provides' should be selected if the TOE provides the ability to con
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of the early data extension is prohibited in the configured TOE. The early data extension is a TLS 1.3 extension. A TOE that only implments TLS 1.2 vacuously meets the early data extension prohibition._
+_The use of the early data extension is prohibited in the configured TOE. The early data extension is a TLS 1.3 extension. A TOE that only implements TLS 1.2 vacuously meets the early data extension prohibition._
 
 _The use of the post-handshake client authentication is prohibited in the configured TOE. Prohibiting post-handshake client authentication might be dropped in a future version of NDcPP._
 
@@ -2906,7 +2905,7 @@ _Subsequent versions of this cPP will require support for the Supported Groups e
 
 *_Application Note {counter:appnote_count}_*
 
-_If the TOE doesn't support session resumption or session tickets, select 'no session resumption'. If the TOE supports session resumption based on session IDs according to RFC 5246 (TLS 1.2), select 'sessiion resumption based on session IDs according to RFC 5246 (TLS 1.2)'. If the TOE supports session resumption based on session tickets according to RFC 5077, select 'session resumption based on session tickets according to RFC 5077 (TLS 1.2)'. If the TOE supports session resumption according to RFC 8446 (TLS 1.3), select 'session resumption according to RFC 8446 (TLS 1.3)'._
+_If the TOE doesn't support session resumption or session tickets, select 'no session resumption'. If the TOE supports session resumption based on session IDs according to RFC 5246 (TLS 1.2), select 'session resumption based on session IDs according to RFC 5246 (TLS 1.2)'. If the TOE supports session resumption based on session tickets according to RFC 5077, select 'session resumption based on session tickets according to RFC 5077 (TLS 1.2)'. If the TOE supports session resumption according to RFC 8446 (TLS 1.3), select 'session resumption according to RFC 8446 (TLS 1.3)'._
 
 _In case session establishment (i.e. generating a new session ID) and session resumption are always using a separate context (e.g. a control channel that always requires a full TLS handshake, and a data channel that supports session resumption), then it is acceptable for the ST author to claim 'no session resumption or session tickets' for the context that only establishes and never resumes. If one or more claimed contexts allow session resumption, the ST author selects 'session resumption based on session IDs according to RFC 5246 (TLS 1.2)’, ‘session resumption based on session tickets according to RFC 5077', 'session resumption according to RFC 8446 (TLS 1.3)', or all three, depending on which methods are supported._
 
@@ -2922,7 +2921,7 @@ _The option 'provides' should be selected if the TOE provides the ability to con
 
 *_Application Note {counter:appnote_count}_*
 
-_The use of the early data extension is prohibited in the configured TOE. The early data extension is a TLS 1.3 extension. A TOE that only implments TLS 1.2 vacuously meets the early data extension prohibition._
+_The use of the early data extension is prohibited in the configured TOE. The early data extension is a TLS 1.3 extension. A TOE that only implements TLS 1.2 vacuously meets the early data extension prohibition._
 
 *FCS_TLSS_EXT.1.7* The TSF shall [selection: _not use PSKs, only use PSKs in TLS 1.3 session resumption with forward secrecy_].
 
@@ -4153,11 +4152,11 @@ FIA_PMG_EXT.1 Password management requires the TSF to support passwords with var
 
 *Management: FIA_PMG_EXT.1*
 
-There are no management functions forseen.
+There are no management functions foreseen.
 
 *Audit: FIA_PMG_EXT.1*
 
-There are no auditable events forseen.
+There are no auditable events foreseen.
 
 =====  FIA_PMG_EXT.1 Password Management
 
