@@ -4,7 +4,7 @@
 |===
 
 |*Allowed-with list version*|3.0
-|*Date*|30 November 2023
+|*Date*|06 December 2023
 
 |===
 
@@ -20,9 +20,9 @@ Conformance claims from other Protection Profiles (apart from PP-Configurations 
 |===
 
 |cPP to which this list applies:|collaborative Protection Profile for Network Devices
-|Latest definitive cPP version:|v3.0e, 30 November 2023
+|Latest definitive cPP version:|v3.0e, 06 December 2023
 |Supporting Document for cPP:|Evaluation Activities for Network Device cPP
-|Latest definitive SD version:|v3.0e, 30 November 2023
+|Latest definitive SD version:|v3.0e, 06 December 2023
 
 |===
 
