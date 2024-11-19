@@ -416,6 +416,10 @@ The ST for a distributed TOE must include a mapping of SFRs to each of the compo
 
 If an SSH channel is used for communication between the components, then the TSF shall be validated against the version of the Functional Package for Secure Shell referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
+If a TLS channel is used for communication between the components, then the TSF shall be validated against the version of the Functional Package for TLS referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
+
+If communications between components relies on X.509 validation, then the TSF shall be validated against the version of the Functional Package for X.509 referenced in section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE. 
+
 == Security Problem Definition
 
 A Network Device has a network infrastructure role that it is designed to provide. In doing so, the Network Device communicates with other Network Devices and other network entities (i.e. entities not defined as Network Devices because they do not have an infrastructure role) over the network. At the same time, it must provide a minimal set of common security functionality expected by all Network Devices. The security problem to be addressed by a compliant Network Device is defined as this set of common security functionality that addresses the threats that are common to Network Devices, as opposed to those that might be targeting the specific functionality of a specific type of Network Device. The set of common security functionality addresses communication with the Network Device, both authorized and unauthorized, the ability to perform valid and secure updates, the ability to audit device activity, the ability to securely store and utilize device and Administrator credentials and data, and the ability to self-test critical device components for failures.
@@ -491,7 +495,7 @@ Threat agents may attempt to provide a compromised update of the software or fir
 SFR Rationale:
 
 * Requirements for protection of updates are set in FPT_TUD_EXT.1
-* Additional optional use of certificate-based protection of signatures can be specified using FPT_TUD_EXT.2, supported by the X.509 certificate processing requirements in the Functional Package for TLS
+* Additional optional use of certificate-based protection of signatures can be specified using FPT_TUD_EXT.2, supported by the X.509 certificate processing requirements in the Functional Package for X.509
 * Requirements for management of updates are defined in FMT_SMF.1 and (for manual updates) in FMT_MOF.1/ManualUpdate, with optional requirements for automatic updates in FMT_MOF.1/AutoUpdate
 
 ==== Audited Activity
@@ -1206,17 +1210,19 @@ _The selection "Ability to configure the list of TOE-provided services available
 
 _The selection “Ability to configure lifetime for IPsec SAs” must be included in the ST if the TOE supports secure communication via IPsec and the FCS_IPSEC_EXT.1 requirements are included in the ST. The configuration of the lifetime for IPsec SAs needs to be in line with the selection in FCS_IPSEC_EXT.1.7._
 
+_The selection "Ability to configure the list of supported (D)TLS ciphers" must be included in the ST if the TOE implements TLS or DTLS and the supported ciphersuites are configurable. This only applies if the TOE claims conformance to the Functional Package for TLS, and only if such a configuration option exists. 
+
 _The selection “Ability to set the time which is used for time-stamps” should be included in the ST if the TOE allows the Administrator to set the time of the device which is then used in time stamps. This option should not be selected if the TOE does not allow manual time setting but only relies on synchronization with external time sources like NTP servers._
 
 _The selection “Ability to configure NTP” should be included in the ST if the TOE uses NTP for timestamp configuration. If selected, FCS_NTP_EXT.1 must be included in the ST as well._
 
 _The selection “Ability to configure the reference identifier for the peer” should be included in the ST if the TOE supports secure communications via the IPsec protocol and the FCS_IPSEC_EXT.1 requirements are included in the ST. _For TOEs that support only IP address and FQDN identifier types, configuration of the reference identifier may be the same as configuration of the peer’s name for the purposes of connection._
 
-_The selection “Ability to manage the TOE's trust store and designate X509.v3 certificates as trust anchors" should be included in the ST if the TOE supports management and configuration of the TOE's trust store. This means the TOE supports X.509v3 certificates for some security functions._
+_The selection “Ability to manage the TOE's trust store and designate X509.v3 certificates as trust anchors" should be included in the ST if the TOE supports management and configuration of the TOE's trust store. This means the TOE supports X.509v3 certificates for some security functions. This only applies if the TOE claims conformance to the Functional Package for X.509._
 
-_The selection "Ability to generate Certificate Signing Request (CSR) and process CA certificate response" must be included in the ST if the TOE implements Certificate Request or Enrollment Request processes._
+_The selection "Ability to generate Certificate Signing Request (CSR) and process CA certificate response" must be included in the ST if the TOE implements Certificate Request or Enrollment Request processes. This only applies if the TOE claims conformance to the Functional Package for X.509, and only when FIA_X509_EXT.3 from this functional package is claimed._
 
-_The selection "Ability to configure thresholds for SSH rekeying" may only be selected if SSH is selected within FTP_ITC.1, FTP_TRP.1 or FPT_ITT.1._
+_The selection "Ability to configure thresholds for SSH rekeying" may only be selected if SSH is selected within FTP_ITC.1, FTP_TRP.1 or FPT_ITT.1. This only applies if the TOE claims conformance to the Functional Package for SSH and the rekey threshold is configurable._
 
 _For distributed TOEs the interaction between TOE components will be configurable (see FCO_CPC_EXT.1). Therefore, the ST author includes the selection "Ability to configure the interaction between TOE components" for distributed TOEs. A simple example would be the change of communication protocol according to FPT_ITT.1. Another example would be changing the management of a TOE component from direct remote administration to remote administration through another TOE component. A more complex use case would be if the realization of an SFR is achieved through two or more TOE components and the responsibilities between the two or more components could be modified._
 
@@ -1754,19 +1760,6 @@ _Specific requirements for Preparative Procedures relating to FCO_CPC_EXT.1 are 
 
 === Cryptographic Support (FCS)
 
-==== Cryptographic Protocols (Extended - FCS_DTLSC_EXT, FCS_DTLSS_EXT
-
-=====  FCS_DTLSC_EXT & FCS_DTLSS_EXT DTLS Protocol
-
-Datagram TLS (DTLS) is not a required component of the NDcPP. If a TOE implements DTLS, a corresponding selection in FTP_ITC.1, FTP_TRP.1/Admin, or FPT_ITT.1 should be made to define what the DTLS protocol is implemented to protect. If a corresponding option to support DTLS has been selected in at least one of the SFRs named above, the corresponding SFRs in the Functional Package for TLS should be added to the ST.
-
-A TOE may act as the client, the server, or both in DTLS sessions. The Functional Package for TLS has been separated into DTLS Client (FCS_DTLSC_EXT) and DTLS Server (FCS_DTLSS_EXT) requirements to allow for these differences. This PP does not mandate support for mutual authentication or any other selectable claim from the Functional Package for TLS.
-
-=====  FCS_TLSC_EXT & FCS_TLSS_EXT DTLS Protocol
-
-TLS is not a required component of the NDcPP. If a TOE implements TLS, a corresponding selection in FTP_ITC.1, FTP_TRP.1/Admin, or FPT_ITT.1 should be made to define what the TLS protocol is implemented to protect. If a corresponding option to support TLS has been selected in at least one of the SFRs named above, the corresponding SFRs in the Functional Package for TLS should be added to the ST.
-
-A TOE may act as the client, the server, or both in TLS sessions. The Functional Package for TLS has been separated into TLS Client (FCS_TLSC_EXT) and TLS Server (FCS_TLSS_EXT) requirements to allow for these differences. This PP does not mandate support for mutual authentication or any other selectable claim from the Functional Package for TLS.
 
 === Optional Security Assurance Requirements for Flaw Remediation (ALC_FLR)
 
