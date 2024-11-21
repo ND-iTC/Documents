@@ -1210,7 +1210,7 @@ _The selection "Ability to configure the list of TOE-provided services available
 
 _The selection “Ability to configure lifetime for IPsec SAs” must be included in the ST if the TOE supports secure communication via IPsec and the FCS_IPSEC_EXT.1 requirements are included in the ST. The configuration of the lifetime for IPsec SAs needs to be in line with the selection in FCS_IPSEC_EXT.1.7._
 
-_The selection "Ability to configure the list of supported (D)TLS ciphers" must be included in the ST if the TOE implements TLS or DTLS and the supported ciphersuites are configurable. This only applies if the TOE claims conformance to the Functional Package for TLS, and only if such a configuration option exists. 
+_The selection "Ability to configure the list of supported (D)TLS ciphers" must be included in the ST if the TOE implements TLS or DTLS and the supported ciphersuites are configurable. This only applies if the TOE claims conformance to the Functional Package for TLS, and only if such a configuration option exists._ 
 
 _The selection “Ability to set the time which is used for time-stamps” should be included in the ST if the TOE allows the Administrator to set the time of the device which is then used in time stamps. This option should not be selected if the TOE does not allow manual time setting but only relies on synchronization with external time sources like NTP servers._
 
@@ -1220,7 +1220,7 @@ _The selection “Ability to configure the reference identifier for the peer” 
 
 _The selection “Ability to manage the TOE's trust store and designate X509.v3 certificates as trust anchors" should be included in the ST if the TOE supports management and configuration of the TOE's trust store. This means the TOE supports X.509v3 certificates for some security functions. This only applies if the TOE claims conformance to the Functional Package for X.509._
 
-_The selection "Ability to generate Certificate Signing Request (CSR) and process CA certificate response" must be included in the ST if the TOE implements Certificate Request or Enrollment Request processes. This only applies if the TOE claims conformance to the Functional Package for X.509, and only when FIA_X509_EXT.3 from this functional package is claimed._
+_The selection "Ability to generate Certificate Signing Request (CSR) and process CA certificate response" must be included in the ST if the TOE implements Certificate Request or Enrollment Request processes. This only applies if the TOE claims conformance to the Functional Package for X.509, and only when FIA_X509_EXT.3 from the functional package is claimed._
 
 _The selection "Ability to configure thresholds for SSH rekeying" may only be selected if SSH is selected within FTP_ITC.1, FTP_TRP.1 or FPT_ITT.1. This only applies if the TOE claims conformance to the Functional Package for SSH and the rekey threshold is configurable._
 
@@ -2088,15 +2088,15 @@ A TOE may act as the client, the server, or both in TLS sessions. The requiremen
 
 ==== Authentication using X.509 certificates (Extended)
 
-Support for X.509 certificates is required if the TSF implements IPsec, TLS, or DTLS communications in FTP_ITC.1 or FTP_TRP.1/Admin (FPT_ITT.1 is a special case covered in Appendix A.3.1.1), or if the TSF implements SSH in a manner where X.509 certificates are used for authentication. X.509 support is also required if the TSF uses X.509 certificates as an integrity mechanism for software updates (i.e. when FPT_TUD_EXT.2 is claimed).
+Support for X.509 certificates is required if the TSF implements IPsec, TLS, or DTLS communications in FTP_ITC.1 or FTP_TRP.1/Admin (FPT_ITT.1 is a special case covered in Appendix A.4.1.1), or if the TSF implements SSH in a manner where X.509 certificates are used for authentication. X.509 support is also required if the TSF uses X.509 certificates as an integrity mechanism for software updates (i.e., when FPT_TUD_EXT.2 is claimed).
 
-The Functional Package for X.509 defines the capability to assert identities and the capability to verify identities in its mandatory SFR, FIA_XCU_EXT.1. The ST author selects "verify" in cases where the TOE is presented a certificate from an external entity that is using it to validate its identity (e.g. if the TOE is a TLS client, the TOE is a TLS server that requires mutual authentication, the TOE implements IPsec, the TOE uses code signing certificates to validate software/firmware updates). The ST author selects "assert" in cases where the TOE presents a certificate to an external entity (e.g. if the TOE is a TLS server, the TOE is a TLS client where the server requires mutual authentication, the TOE implements IPsec, the TOE implements SSH and uses X.509 to validate the server). 
+The Functional Package for X.509 defines selections for the capability to assert identities and to verify identities in its mandatory SFR, FIA_XCU_EXT.1. The ST author selects "verify" in cases where the TOE is presented a certificate from an external entity that is using it to validate its identity (e.g., if the TOE is a TLS client, the TOE is a TLS server that requires mutual authentication, the TOE implements IPsec, the TOE uses code signing certificates to validate software or firmware updates). The ST author selects "assert" in cases where the TOE presents a certificate to an external entity (e.g., if the TOE is a TLS server, the TOE is a TLS client where the server requires mutual authentication, the TOE implements IPsec, or the TOE implements SSH and uses X.509 to validate the server). 
 
 In all cases, the relevant SFR dependencies in the Functional Package for X.509 are claimed. For certificate verification, this includes FIA_X509_EXT.1 and FIA_X509_EXT.2. For certificate assertion, this includes FIA_XCU_EXT.2 (and FIA_X509_EXT.3 in cases where the TOE's certificate is obtained from an external CA rather than acting as its own CA). 
 
 When certificate validation is claimed for communication with external entities, the following restrictions are applied to the Functional Package for TLS: 
-- FIA_X509_EXT.1.1: either an unlimited maximum path length must be selected, or a maximum path length of 3 or greater must be claimed, UNLESS the certificate is used for FPT_ITT.1 communications, in which case a path length of 2 is permissible. 
-- FIA_X509_EXT.1.3: at least one of CRL or OCSP must be supported for revocation checking. 
+* FIA_X509_EXT.1.1: Either an unlimited maximum path length must be selected or a maximum path length of three or greater must be claimed, unless the certificate is used for FPT_ITT.1 communications, in which case a path length of two is permissible (i.e., certificates used between components of a distributed TOE do not require support for intermediate CAs). 
+* FIA_X509_EXT.1.3: At least one of CRL or OCSP must be supported for revocation checking. 
 
 ==== Authentication Failure Handling (FIA_AFL)
 If the TOE provides remote administration using a password-based authentication mechanism, FIA_AFL.1 specifies actions upon reaching the number of successive unsuccessful authentication attempts.
@@ -2182,11 +2182,11 @@ _Although this is out-of-scope of this cPP, it is strongly advised to protect al
 
 *_Application Note {counter:appnote_count}_*
 
-_This component must be included in the ST if “X.509 digital signature mechanism” is selected in FPT_TUD_EXT.1.3_
+_This component must be included in the ST if “X.509 digital signature mechanism” is selected in FPT_TUD_EXT.1.3._
 
-_Validity is determined in accordance with FIA_X509_EXT.1/Rev._
+_Validity is determined in accordance with FIA_X509_EXT.1. in the Functional Package for X.509_
 
-_It is acceptable to provide a manual method for an administrator to provide revocation information (e.g. CRL upload) in addition to retrieving revocation information automatically in accordance with FIA_X509_EXT.1/Rev and FIA_X509_EXT.2. It is expected that current updates are signed using current (not expired) certificates that will be valid at least until the next expected update. However, an administrator may desire to install previous updates that are signed by expired certificates. To_ _indicate support for this practice, the author of the ST selects whether the certificate will be accepted, rejected, or the choice is left to the Administrator to accept or reject the certificate._
+_It is acceptable to provide a manual method for an administrator to provide revocation information (e.g. CRL upload) in addition to retrieving revocation information automatically in accordance with FIA_X509_EXT.1 and FIA_X509_EXT.2 in the Functional Package for X.509. It is expected that current updates are signed using current (not expired) certificates that will be valid at least until the next expected update. However, an administrator may desire to install previous updates that are signed by expired certificates. To_ _indicate support for this practice, the author of the ST selects whether the certificate will be accepted, rejected, or the choice is left to the Administrator to accept or reject the certificate._
 
 === Security Management (FMT)
 
