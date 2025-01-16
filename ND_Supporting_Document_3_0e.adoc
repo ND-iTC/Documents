@@ -1284,24 +1284,6 @@ Some TOEs may set up the registration channel before the enablement step is carr
 
 === Cryptographic Support (FCS)
 
-==== FCS_HTTPS_EXT.1 HTTPS Protocol
-
-===== TSS
-
-[arabic, start=394]
-. The evaluator shall examine the TSS and determine that enough detail is provided to explain how the implementation complies with RFC 2818.
-
-===== Guidance Documentation
-
-[arabic, start=395]
-. The evaluator shall examine the guidance documentation to verify it instructs the Administrator how to configure TOE for use as an HTTPS client or HTTPS server.
-
-===== Tests
-
-[arabic, start=396]
-. The TLS protocol implementation shall be tested in accordance with testing performed for FCS_TLSC_EXT or FCS_TLSS_EXT requirements from the Functional Package for TLS as necessary (i.e., depending on whether the TOE is an HTTPS client, an HTTPS server, or both).
-. If the TOE is an HTTPS client or an HTTPS server utilizing X.509 client authentication, then the certificate validity shall be tested in accordance with testing performed for FIA_X509_EXT.1 from the Functional Package for X.509.
-
 ==== FCS_IPSEC_EXT.1 IPsec Protocol
 
 ===== TSS

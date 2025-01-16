@@ -225,9 +225,9 @@ The PP-Modules that are allowed to specify this cPP as a base-PP are specified i
 
 The packages to which conformance can be claimed in conjunction with this cPP are:
 
-- Functional Package for SSH Version 1.0 conformant
-- Functional Package for Transport Layer Security (TLS) Version 2.1 conformant
-- Functional Package for X.509 Version 1.0 conformant
+- NIAP Functional Package for SSH Version 1.0 conformant
+- NIAP Functional Package for Transport Layer Security (TLS) Version 2.1 conformant
+- NIAP Functional Package for X.509 Version 1.0 conformant
 
 All cryptographic selections in the above packages must comply with FCS_COP and FCS_CKM requirements of this cPP.
 
@@ -378,8 +378,6 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FCS_COP.1/SigGen |Cryptographic Operation (Signature Generation and Verification) |All
 |FCS_COP.1/Hash |Cryptographic Operation (Hash Algorithm) |All
 |FCS_COP.1/KeyedHash |Cryptographic Operation (Keyed Hash Algorithm) |All
-|FCS_HTTPS_EXT.1 |HTTPS Protocol |Feature Dependent
-|FCS_IPSEC_EXT.1 |IPsec Protocol |Feature Dependent
 |FCS_NTP_EXT.1 |NTP Protocol |Feature Dependent
 |FCS_RBG_EXT.1 |Random Bit Generation |All
 |FIA_AFL.1 |Authentication Failure Handling |One
@@ -414,11 +412,11 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 
 The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE. (Note that this deliverable is examined as part of the ASE_TSS.1 and AVA_VAN.1 Evaluation Activities as described in [SD, 5.1.2] and [SD, 5.6.1.1] respectively.) The ST for a distributed TOE may also introduce a ‘minimum configuration’ and identify components that may have instances added to an operational configuration without affecting the validity of the CC certification. [SD, B.4] describes Evaluation Activities relating to these equivalency aspects of a distributed TOE (and hence what is expected in the ST).
 
-If an SSH channel is used for communication between the components, then the TSF shall be validated against the version of the Functional Package for Secure Shell referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
+If an SSH channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for Secure Shell referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
-If a TLS channel is used for communication between the components, then the TSF shall be validated against the version of the Functional Package for TLS referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
+If a TLS channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for TLS referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
-If communications between components relies on X.509 validation, then the TSF shall be validated against the version of the Functional Package for X.509 referenced in section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE. 
+If communications between components relies on X.509 validation, then the TSF shall be evaluated against the version of the Functional Package for X.509 referenced in section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE. 
 
 == Security Problem Definition
 
@@ -468,7 +466,7 @@ Threat agents may attempt to target Network Devices that do not use standardized
 SFR Rationale:
 
 * The general use of secure protocols for identified communication channels is described at the top level in FTP_ITC.1 and FTP_TRP.1/Admin; for distributed TOEs the requirements for inter-component communications are addressed by the requirements in FPT_ITT.1.
-* Requirements for the use of secure communication protocols are set for allowed protocols in FCS_HTTPS_EXT.1, FCS_IPSEC_EXT.1, the Functional Package for SSH, and the Functional Package for TLS.
+* Requirements for the use of secure communication protocols are set for allowed protocols in FCS_IPSEC_EXT.1, the Functional Package for SSH, and the Functional Package for TLS.
 * Requirements for the use of secure communication protocols implemented by the packages specified in Section 2.2 may be found in the respective package's document.
 * Optional and selection-based requirements for use of public key certificates to support secure protocols are defined in the Functional Package for X.509.
 
@@ -973,7 +971,7 @@ _The elliptic curves used for the key establishment scheme correlate with the cu
 
 _The domain parameters used for the finite field-based key establishment scheme are specified by the key generation according to FCS_CKM.1.1._
 
-_The option "FFC Schemes using “safe-prime” groups that meet the following: ‘NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: groups listed in RFC 3526, groups listed in RFC 7919]." shall be read as 'the TOE performs Key Agreement as specified in SP800-56Ar3', but not necessarily adhering to the protocol restrictions for these groups, as indicated in Appendix D, tables 25 and 26._ _Instead, the use of those methods for particular protocols is in accordance with the SFR for the specific protocols. 
+_The option "FFC Schemes using “safe-prime” groups that meet the following: ‘NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: groups listed in RFC 3526, groups listed in RFC 7919]." shall be read as 'the TSF performs Key Agreement as specified in SP800-56Ar3', but not necessarily adhering to the protocol restrictions for these groups, as indicated in Appendix D, tables 25 and 26._ _Instead, the use of those methods for particular protocols is in accordance with the SFR for the specific protocols. 
 
 ===== FCS_CKM.4 Cryptographic Key Destruction
 
@@ -1664,7 +1662,7 @@ _If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in
 
 ==== Authentication using X.509 certificates (Extended)
 
-Support for X.509 certificates is strictly optional in the context of FPT_ITT.1 (FTP_ITC.1 and FTP_TRP.1/Admin are discussed elsewhere). This is because the use of FPT_ITT.1 itself as a registration channel is optional, so it's further optional to implement that using a mechanism that relies on X.509 validation. 
+Support for X.509 certificates is optional in the context of FPT_ITT.1 (FTP_ITC.1 and FTP_TRP.1/Admin are discussed elsewhere). This is because the use of FPT_ITT.1 itself as a registration channel is optional, so it's further optional to implement that using a mechanism that relies on X.509 validation. 
 
 When X.509 is used for this channel, it is only necessary to support a minimum path length of two for the certificate chain. All other requirements apply as-is.
 
@@ -1791,7 +1789,6 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |FAU_GEN_EXT.1 |None |None
 |FAU_STG_EXT.4 |None |None
 |FAU_STG_EXT.5 |None |None
-|FCS_HTTPS_EXT.1 |Failure to establish a HTTPS Session. |Reason for failure
 |FCS_IPSEC_EXT.1 |Failure to establish an IPsec SA. |Reason for failure
 |FCS_NTP_EXT.1 a|
 * Configuration of a new time server
@@ -1876,7 +1873,7 @@ _TOE components are not required to monitor or audit connectivity or network out
 
 === Cryptographic Support (FCS)
 
-==== Cryptographic Protocols (Extended – FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_HTTPS_EXT, FCS_IPSEC_EXT, FCS_NTP_EXT,  FCS_TLSC_EXT, FCS_TLSS_EXT)
+==== Cryptographic Protocols (Extended – FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_IPSEC_EXT, FCS_NTP_EXT, FCS_TLSC_EXT, FCS_TLSS_EXT)
 
 ===== FCS_DTLSC_EXT & FCS_DTLSS_EXT DTLS Protocol
 
@@ -1889,21 +1886,6 @@ A TOE may act as the client, the server, or both in DTLS sessions. The requireme
 To ensure audit requirements are properly met, a DTLS receiver may need to monitor the DTLS connection state at the application layer. When no data is received from a DTLS connection for a long time (where the application decides what ‘long’ means), the receiver should send a close_notify alert message and close the connection.
 
 If the TOE acts as the server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSS_EXT requirements. In this case the TOE needs to claim at least the FCS_DTLSS_EXT.1 requirements in Section B.3.1.1 (no support for mutual authentication). If the TOE acts as DTLS server and in addition also supports mutual authentication, the FCS_DTLSS_EXT.2 requirements in Section A.7.1.1 need to be claimed in addition. If the TOE acts as both a client and server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSC_EXT and FCS_DTLSS_EXT requirements.
-
-
-=====  FCS_HTTPS_EXT HTTPS Protocol
-
-HTTPS is not a required component of this cPP. If a TOE implements HTTPS, a corresponding selection in FTP_ITC.1, FPT_ITT.1 and/or FTP_TRP.1/Admin should have been made that defines what the HTTPS protocol is implemented to protect. If HTTPS is claimed, corresponding TLS client or server claims from the Functional Package for TLS must be included in the ST.
-
-*FCS_HTTPS_EXT.1 HTTPS Protocol*
-
-*FCS_HTTPS_EXT.1.1* The TSF shall implement the HTTPS protocol that complies with RFC 2818.
-
-*_Application Note {counter:appnote_count}_*
-
-_The ST author must provide enough detail to determine how the implementation is complying with the standard(s) identified; this can be done by additional detail in the TSS._
-
-*FCS_HTTPS_EXT.1.2* The TSF shall implement HTTPS +++<del>+++protocol+++</del>+++ using TLS.
 
 =====  FCS_IPSEC_EXT.1 IPsec Protocol
 
@@ -2459,44 +2441,7 @@ Dependencies: No other components
 
 *FCS_RBG_EXT.1.2* The deterministic RBG shall be seeded by at least one entropy source that accumulates entropy from [selection: _[assignment: number of software-based sources] software-based noise source, [assignment: number of platform-based sources] platform-based noise source_] with a minimum of [selection: _128 bits, 192 bits, 256 bits_] of entropy at least equal to the greatest security strength, according to ISO/IEC 18031:2011 Table C.1 “Security Strength Table for Hash Functions”, of the keys and hashes that it will generate.
 
-==== Cryptographic Protocols (FCS_HTTPS_EXT, FCS_IPSEC_EXT, FCS_NTP_EXT)
-
-===== FCS_HTTPS_EXT.1 HTTPS Protocol
-
-*Family Behaviour*
-
-Components in this family define the requirements for protecting remote management sessions between the TOE and a Security Administrator. This family describes how HTTPS will be implemented. This is a new family defined for the FCS Class.
-
-*Component Levelling*
-
-image:extracted-media/media/FCS_HTTPS_EXT.png[image,width=500,height=48]
-
-FCS_HTTPS_EXT.1 HTTPS Protocol requires that HTTPS be implemented according to RFC 2818 and supports TLS.
-
-*Management: FCS_HTTPS_EXT.1*
-
-The following actions could be considered for the management functions in FMT:
-
-[loweralpha]
-. There are no management activities foreseen.
-
-*Audit: FCS_HTTPS_EXT.1*
-
-The following actions should be auditable if FAU_GEN Security audit data generation is included in the PP/ST:
-
-[loweralpha]
-. There are no auditable events foreseen.
-
-*FCS_HTTPS_EXT.1 HTTPS Protocol*
-
-Hierarchical to: No other components
-
-Dependencies: [FCS_TLSC_EXT.1 TLS Client Protocol, or FCS_TLSS_EXT.1 TLS Server Protocol]
-
-*FCS_HTTPS_EXT.1.1* The TSF shall implement the HTTPS protocol that complies with RFC 2818.
-
-*FCS_HTTPS_EXT.1.2* The TSF shall implement HTTPS +++<del>+++protocol+++</del>+++ using TLS.
-
+==== Cryptographic Protocols (FCS_IPSEC_EXT, FCS_NTP_EXT)
 
 =====  FCS_IPSEC_EXT.1 IPsec Protocol
 
@@ -3255,7 +3200,6 @@ FAU_GEN_EXT.1 included
 
 FPT_ITT.1 (optional SFR) and FTP_ITC.1 (mandatory SFR) included.
 
-|FCS_HTTPS_EXT.1 |FCS_TLSC_EXT.1 or FCS_TLSS_EXT.1 |FCS_TLSC_EXT.1 and FCS_TLSS_EXT.1 defined in Functional Package for TLS
 |FCS_IPSEC_EXT.1 a|
 FCS_CKM.1
 
@@ -3264,7 +3208,7 @@ FCS_CKM.2
 FCS_COP.1/DataEncryption
 
 FCS_COP.1/SigGen
-
+  
 FCS_COP.1/Hash
 
 FCS_COP.1/KeyedHash
@@ -3544,6 +3488,15 @@ a|
 a|
 
 Network Device
+
+a|
+
+*NIAP*
+
+
+a|
+
+National Information Assurance Partnership
 
 
 a|
