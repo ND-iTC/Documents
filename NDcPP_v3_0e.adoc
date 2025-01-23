@@ -225,9 +225,9 @@ The PP-Modules that are allowed to specify this cPP as a base-PP are specified i
 
 The packages to which conformance can be claimed in conjunction with this cPP are:
 
-- NIAP Functional Package for SSH Version 1.0 conformant
-- NIAP Functional Package for Transport Layer Security (TLS) Version 2.1 conformant
-- NIAP Functional Package for X.509 Version 1.0 conformant
+- Functional Package for SSH Version 1.0 conformant
+- Functional Package for Transport Layer Security (TLS) Version 2.1 conformant
+- Functional Package for X.509 Version 1.0 conformant
 
 All cryptographic selections in the above packages must comply with FCS_COP and FCS_CKM requirements of this cPP.
 
