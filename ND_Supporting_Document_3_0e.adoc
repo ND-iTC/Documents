@@ -578,6 +578,43 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 . For each modulus size/hash algorithm selected, the evaluator shall generate a modulus and three associated key pairs, (_d_, _e_). Each private key _d_ is used to sign six pseudorandom messages each of 1024 bits using a trusted reference implementation of the signature generation algorithm. Some of the public keys, _e_, messages, or signatures are altered so that signature verification should fail. For both the set of original messages and the set of altered messages: the modulus, hash algorithm, public key _e_ values, messages, and signatures are forwarded to the TOE, which then attempts to verify the signatures and returns the verification results.
 . The evaluator shall verify that the TOE confirms correct signatures on the original messages and detects the errors introduced in the altered messages.
 
+==== FCS_COP.1/CMAC Cryptographic Operation - CMAC
+
+===== TSS
+
+[arabic, start=131]
+. The evaluator shall examine the TSS to determine that it specifies the cryptographic algorithm and 128 bit key size supported by the TOE for CMAC.
+
+===== Guidance Documentation
+
+[arabic, start=132]
+. None.
+
+===== Tests
+
+*CMAC Generation Test*
+
+[arabic, start=133]
+. To test the generation capability of AES-CMAC, the evaluator shall provide to the TSF, for each key length-message length-CMAC length tuple (in bytes), a set of eight arbitrary key-plaintext tuples that will result in the generation of a known MAC value when encrypted. The evaluator shall then verify that the correct MAC was generated in each case.
+
+*CMAC Verification Test*
+
+[arabic, start=133]
+. To test the verification capability of AES-CMAC, the evaluator shall provide to the TSF, for each key length-message length-CMAC length tuple (in bytes), a set of 20 arbitrary key-MAC tuples that will result in the generation of known messages when verified. The evaluator shall then verify that the correct message was generated in each case.
+. The following information should be used by the evaluator to determine the key length-message length-CMAC length tuples that should be tested:
+
+ Key length: Values will include the following:
+      16
+ Message length: Values will include the following:
+      0 (optional)
+      Largest value supported by the implementation (no greater than 65536)
+      Two values divisible by 16
+      Two values not divisible by 16
+ CMAC length:
+      Smallest value supported by the implementation (no less than 1)
+      16
+      Any supported CMAC length between the minimum and maximum values
+
 ==== FCS_COP.1/Hash Cryptographic Operation (Hash Algorithm)
 
 ===== TSS

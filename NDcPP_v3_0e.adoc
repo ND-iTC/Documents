@@ -376,6 +376,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FCS_CKM.4 |Cryptographic Key Destruction |All
 |FCS_COP.1/DataEncryption |Cryptographic Operation (AES Data Encryption/Decryption) |All
 |FCS_COP.1/SigGen |Cryptographic Operation (Signature Generation and Verification) |All
+|FCS_COP.1/CMAC |Cryptographic Operation (CMAC) |Feature Dependent
 |FCS_COP.1/Hash |Cryptographic Operation (Hash Algorithm) |All
 |FCS_COP.1/KeyedHash |Cryptographic Operation (Keyed Hash Algorithm) |All
 |FCS_NTP_EXT.1 |NTP Protocol |Feature Dependent
@@ -455,7 +456,7 @@ Threat agents may exploit weak cryptographic algorithms or perform a cryptograph
 SFR Rationale:
 
 * Requirements for key generation and key distribution are set in FCS_CKM.1 and FCS_CKM.2 respectively
-* Requirements for use of cryptographic schemes are set in FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, and FCS_COP.1/KeyedHash
+* Requirements for use of cryptographic schemes are set in FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/CMAC, FCS_COP.1/Hash, and FCS_COP.1/KeyedHash
 * Requirements for random bit generation to support key generation and secure protocols (see SFRs resulting from T.UNTRUSTED_COMMUNICATION_CHANNELS) are set in FCS_RBG_EXT.1
 * Management of cryptographic functions is specified in FMT_SMF.1
 
@@ -1873,6 +1874,14 @@ _TOE components are not required to monitor or audit connectivity or network out
 
 === Cryptographic Support (FCS)
 
+==== FCS_COP.1/CMAC Cryptographic Operation - CMAC
+
+This is a selection-based SFR, to be included in the ST if “AES-CMAC-128 (RFC 8573)” is selected for authenticating NTP packets in FCS_NTP_EXT.1.2.
+
+*FCS_COP.1/CMAC Cryptographic Operation - CMAC*
+
+*FCS_COP.1.1/CMAC* The TSF shall perform [_CMAC_] in accordance with a specified cryptographic algorithm [_AES using CMAC mode_] and cryptographic key sizes [_128 bits_] that meet the following: [selection: _ISO/IEC 9797-1:2011 subclause 7.6 (CMAC) and ISO/IEC 18033-3:2010 subclause 5.2 (AES), NIST SP 800-38B (CMAC) and NIST FIPS 197 (AES)_].
+
 ==== Cryptographic Protocols (Extended – FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_IPSEC_EXT, FCS_NTP_EXT, FCS_TLSC_EXT, FCS_TLSS_EXT)
 
 ===== FCS_DTLSC_EXT & FCS_DTLSS_EXT DTLS Protocol
@@ -2044,7 +2053,7 @@ This SFR is not applicable if the TOE cannot be configured to operate as an NTP 
 
 *FCS_NTP_EXT.1.2* The TSF shall update its system time using [selection:
 
-* Authentication using [selection: _SHA1, SHA256, SHA384, SHA512, AES-CBC-128, AES-CBC-256_] as the message digest algorithm(s);
+* Authentication using [selection: _SHA1, SHA256, SHA384, SHA512, AES-CMAC-128 (RFC 8573), AES-CBC-128, AES-CBC-256_] as the message digest algorithm(s);
 * [selection: _IPsec, DTLS_] to provide trusted communication between itself and an NTP time source.
 
 ].
