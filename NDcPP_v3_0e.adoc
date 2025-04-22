@@ -371,16 +371,17 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_STG_EXT.4 |Protected Local Audit Event Storage for Distributed TOEs |Feature Dependent
 |FAU_STG_EXT.5 |Protected Remote Audit Event Storage for Distributed TOEs |Feature Dependent
 |FCO_CPC_EXT.1 |Component Registration Channel Definition |All
-|FCS_CKM.1 |Cryptographic Key Generation |Onefootnote:[The overall TOE is required to support on-board key generation and (if the TOE uses X.509 certificates as in Appendix B.4.1) RFC 2986 Certificate Request generation. If not all TOE components are supporting on- board key generation (and generation of certificate requests, where applicable), the TOE shall support distribution of keys to the TOE components that are not supporting key generation themselves. Depending on the life-cycle phase, either a secure registration channel shall be used for key distribution at the point where the component is joined to the TOE or an inter-component secure channel shall be used for key distribution post-registration.]
+|FCS_CKM.1 |Cryptographic Key Generation – Asymmetric Key |Onefootnote:[The overall TOE is required to support on-board key generation and (if the TOE uses X.509 certificates as in Appendix B.4.1) RFC 2986 Certificate Request generation. If not all TOE components are supporting on- board key generation (and generation of certificate requests, where applicable), the TOE shall support distribution of keys to the TOE components that are not supporting key generation themselves. Depending on the life-cycle phase, either a secure registration channel shall be used for key distribution at the point where the component is joined to the TOE or an inter-component secure channel shall be used for key distribution post-registration.]
 |FCS_CKM.2 |Cryptographic Key Establishment |All
-|FCS_CKM.4 |Cryptographic Key Destruction |All
+|FCS_CKM.6 |Timing and Event of Cryptographic Key Destruction |All
 |FCS_COP.1/DataEncryption |Cryptographic Operation (AES Data Encryption/Decryption) |All
-|FCS_COP.1/SigGen |Cryptographic Operation (Signature Generation and Verification) |All
+|FCS_COP.1/SigGen |Cryptographic Operation - Signature Generation |One
+|FCS_COP.1/SigVer |Cryptographic Operation - Signature Verification |All
 |FCS_COP.1/CMAC |Cryptographic Operation (CMAC) |Feature Dependent
-|FCS_COP.1/Hash |Cryptographic Operation (Hash Algorithm) |All
-|FCS_COP.1/KeyedHash |Cryptographic Operation (Keyed Hash Algorithm) |All
+|FCS_COP.1/Hash |Cryptographic Operation - Hashing |All
+|FCS_COP.1/KeyedHash |Cryptographic Operation - Keyed Hash |All
 |FCS_NTP_EXT.1 |NTP Protocol |Feature Dependent
-|FCS_RBG_EXT.1 |Random Bit Generation |All
+|FCS_RBG.1 |Random Bit Generation (RBG) |All
 |FIA_AFL.1 |Authentication Failure Handling |One
 |FIA_PMG_EXT.1 |Password Management |One
 |FIA_UIA_EXT.1 |User Identification and Authentication |One
@@ -456,8 +457,8 @@ Threat agents may exploit weak cryptographic algorithms or perform a cryptograph
 SFR Rationale:
 
 * Requirements for key generation and key distribution are set in FCS_CKM.1 and FCS_CKM.2 respectively
-* Requirements for use of cryptographic schemes are set in FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/CMAC, FCS_COP.1/Hash, and FCS_COP.1/KeyedHash
-* Requirements for random bit generation to support key generation and secure protocols (see SFRs resulting from T.UNTRUSTED_COMMUNICATION_CHANNELS) are set in FCS_RBG_EXT.1
+* Requirements for use of cryptographic schemes are set in FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/SigVer, FCS_COP.1/CMAC, FCS_COP.1/Hash, and FCS_COP.1/KeyedHash
+* Requirements for random bit generation to support key generation and secure protocols (see SFRs resulting from T.UNTRUSTED_COMMUNICATION_CHANNELS) are set in FCS_RBG.1
 * Management of cryptographic functions is specified in FMT_SMF.1
 
 ===== T.UNTRUSTED_COMMUNICATION_CHANNELS
@@ -528,7 +529,7 @@ Threat agents may compromise credentials and device data enabling continued acce
 SFR Rationale:
 
 * Protection of secret/private keys against compromise is specified in FPT_SKP_EXT.1
-* Secure destruction of keys is specified in FCS_CKM.4
+* Secure destruction of keys is specified in FCS_CKM.6
 * If (optionally) management of keys is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MTD.1/CryptoKeys
 * If optional local administration using a password-based authentication mechanism is provided by the TOE, FIA_UAU.7 provides protection of password entry by providing only obscured feedback at the local console.
 * If the TOE provides password-based authentication mechanisms, requirements for password lengths and available characters are set in FIA_PMG_EXT.1.  Requirements for secure storage of passwords are set in FPT_APW_EXT.1
@@ -814,12 +815,13 @@ _The date and time information for any audit event should be recorded as part of
 |FAU_STG_EXT.1 |Configuration of local audit settings. |Identity of account making changes to the audit configuration.
 |FCS_CKM.1 |None. |None.
 |FCS_CKM.2 |None. |None.
-|FCS_CKM.4 |None. |None.
+|FCS_CKM.6 |None. |None.
 |FCS_COP.1/DataEncryption |None. |None.
 |FCS_COP.1/SigGen |None. |None.
+|FCS_COP.1/SigVer |None. |None.
 |FCS_COP.1/Hash |None. |None.
 |FCS_COP.1/KeyedHash |None. |None.
-|FCS_RBG_EXT.1 |None. |None.
+|FCS_RBG.1 |None. |None.
 |FIA_UIA_EXT.1 |All use of identification and authentication mechanisms. |Origin of the attempt (e.g., IP address).
 |FMT_MOF.1/ManualUpdate |Any attempt to initiate a manual update |None.
 |FMT_MTD.1/CoreData |None. |None.
@@ -926,28 +928,40 @@ _For distributed TOEs each component is not required to store generated audit da
 
 === Cryptographic Support (FCS)
 
-This section defines cryptographic requirements that underlie the other security properties of the TOE, covering key generation and random bit generation, key establishment methods, key destruction, and the various types of cryptographic operation to provide AES encryption/decryption, signature verification, hash generation, and keyed hash generation.
+This section defines cryptographic requirements that underlie the other security properties of the TOE, covering key generation and random bit generation, key establishment methods, key destruction, and the various types of cryptographic operation to provide AES encryption/decryption, signature generation and verification, hash generation, and keyed hash generation.
 
 These SFRs support the implementation of the selection-based protocol-level SFRs in Appendix B.
 
 ==== Cryptographic Key Management (FCS_CKM)
 
-===== FCS_CKM.1 Cryptographic Key Generation (Refinement)
+===== FCS_CKM.1 Cryptographic Key Generation – Asymmetric Key
 
-*FCS_CKM.1 Cryptographic Key Generation*
+*FCS_CKM.1 Cryptographic Key Generation – Asymmetric Key*
 
-*FCS_CKM.1.1* The TSF shall generate *asymmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm: [selection:
+*FCS_CKM.1.1* The TSF shall generate *asymmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm: [selection: _cryptographic key generation algorithm_] and specified cryptographic *algorithm parameters* +++<del>+++key sizes+++</del>+++ [selection: _cryptographic algorithm parameters_] that meet the following: [selection: _list of standards_].
 
-* _RSA schemes using cryptographic key sizes of [assignment: 2048 bits or greater] that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.3;_
-* _ECC schemes using ‘NIST curves’ [selection: P-256, P-384, P-521] that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.4;_
-* _FFC schemes using cryptographic key sizes of 2048-bit or greater that meet the following: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Appendix B.1_
-* _FFC Schemes using ‘safe-prime’ groups that meet the following: “NIST Special Publication 800-56A Revision 3, Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: RFC 3526, RFC 7919]._
+#Table 3: Asymmetric Cryptographic Key Generation#
 
-] +++<del>+++and specified cryptographic key sizes [assignment: _cryptographic key sizes_] that meet the following: \[assignment: _list of standards_]+++</del>+++.
+[cols=",,",options="header",]
+|===
+|*Cryptographic Key Generation Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
+|RSA|Modulus of size [selection: 2048, 3072, 4096] bits |NIST FIPS PUB 186-5 (Section A.1.1)
+|ECC|Elliptic Curve [selection: P-256, P-384, P-521] |NIST FIPS PUB 186-5 (Section A.2.1)
+|FFC|“safe-prime” groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192, ffdhe-2048, ffdhe-3072, ffdhe-4096, ffdhe-6144, ffdhe-8192] |NIST SP 800-56A Revision 3 [selection: RFC 3526 [IKE groups], RFC 7919 [TLS groups]]
+
+|LMS |[selection: LMS_SHAKE_M24_H5, LMS_SHAKE_M24_H10, LMS_SHAKE_M24_H15, LMS_SHAKE_M24_H25, LMS_SHAKE_M32_H5, LMS_SHAKE_M32_H10, LMS_SHAKE_M32_H15, LMS_SHAKE_M32_H25, LMS_SHA256_M24_H5, LMS_SHA256_M24_H10, LMS_SHA256_M24_H15, LMS_SHA256_M24_H25, LMS_SHA256_M32_H5, LMS_SHA256_M32_H10, LMS_SHA256_M32_H15, LMS_SHA256_M32_H25]
+|NIST SP 800-208
+
+|XMS|[selection: XMSS-SHA2_10_192, XMSS-SHA2_16_192, XMSS-SHA2_20_192, XMSS-SHA2_10_256, XMSS-SHA2_16_256, XMSS-SHA2_20_256, XMSS-SHAKE_10_192, XMSS-SHAKE_16_192, XMSS-SHAKE_20_192, XMSS-SHAKE_10_256, XMSS-SHAKE_16_256, XMSS-SHAKE_20_256] bits
+|NIST SP 800-208
+
+|Module-Lattice-Based Key-Encapsulation Mechanism|ML-KEM-1024|NIST FIPS PUB 203
+|Module-Lattice-Based Digital Signature Algorithm|ML-DSA-87|NIST FIPS PUB 204
+|===
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author selects all key generation schemes used for key establishment (including generation of ephemeral keys) and device authentication. When key generation is used for key establishment, the schemes in FCS_CKM.2.1 and selected cryptographic protocols must match the selection. When key generation is used for device authentication, other than non-X.509 SSH authentication algorithm, the public key is expected to be associated with an X.509v3 certificate._
+_The ST author selects all key generation algorithms used for key establishment (including generation of ephemeral keys) and device authentication. When key generation is used for key establishment, the schemes in FCS_CKM.2.1 and selected cryptographic protocols must match the selection. When key generation is used for device authentication, other than non-X.509 SSH authentication algorithm, the public key is expected to be associated with an X.509v3 certificate._
 
 ===== FCS_CKM.2 Cryptographic Key Establishment (Refinement)
 
@@ -955,10 +969,10 @@ _The ST author selects all key generation schemes used for key establishment (in
 
 *FCS_CKM.2.1* The TSF shall *perform* cryptographic *key establishment* in accordance with a specified cryptographic key *establishment* method: [selection:
 
-* _RSA-based key establishment schemes that meet the following: RSAES-PKCS1-v1_5 as specified in Section 7.2 of RFC +++<u>+++8017, “Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography Specifications Version 2.2”;_+++</u>+++
-* _Elliptic curve-based key establishment schemes that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography”;_
-* _FFC Schemes using “FIPS 186-Type” parameter-size sets that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography”;_
-* _FFC Schemes using “safe-prime” groups that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: groups listed in RFC 3526, groups listed in RFC 7919]._
+* _RSA-based key establishment schemes that meet the following: NIST Special Publication 800-56B Revision 2, “Recommendation for Pair-Wise Key Establishment Schemes Using Integer Factorization Cryptography”;_
+* _Elliptic curve-based key establishment schemes that meet the following NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography”;_
+* _FFC Schemes using “safe-prime” groups that meet the following: NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: groups listed in RFC 3526, groups listed in RFC 7919];_
+* _Module-Lattice-Based Key-Encapsulation Mechanism using the parameter set ML-KEM-1024 that meet the following: [NIST FIPS PUB 203]._
 
 ] +++<del>+++that meets the following: \[assignment: _list of standards_]+++</del>+++.
 
@@ -974,28 +988,54 @@ _The domain parameters used for the finite field-based key establishment scheme 
 
 _The option "FFC Schemes using “safe-prime” groups that meet the following: ‘NIST Special Publication 800-56A Revision 3, “Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography” and [selection: groups listed in RFC 3526, groups listed in RFC 7919]." shall be read as 'the TSF performs Key Agreement as specified in SP800-56Ar3', but not necessarily adhering to the protocol restrictions for these groups, as indicated in Appendix D, tables 25 and 26._ _Instead, the use of those methods for particular protocols is in accordance with the SFR for the specific protocols. 
 
-===== FCS_CKM.4 Cryptographic Key Destruction
+===== FCS_CKM.6 Timing and Event of Cryptographic Key Destruction
 
-*FCS_CKM.4 Cryptographic Key Destruction*
+*FCS_CKM.6 Timing and Event of Cryptographic Key Destruction*
 
-*FCS_CKM.4.1* The TSF shall destroy cryptographic keys in accordance with a specified cryptographic key destruction method
-
-* _For plaintext keys in volatile storage, the destruction shall be executed by a [selection: single overwrite consisting of [selection: a pseudo-random pattern using the TSF’s RBG, zeroes, ones, a new value of the key, [assignment: a static or dynamic value that does not contain any CSP]], destruction of reference to the key directly followed by a request for garbage collection];_
-* _For plaintext keys in non-volatile storage, the destruction shall be executed by the invocation of an interface provided by a part of the TSF that [selection:_
-** _logically addresses the storage location of the key and performs a_ [selection: _single, [assignment: number of passes]-pass] overwrite consisting of_ [selection: _a pseudo-random pattern using the TSF’s RBG, zeroes, ones, a new value of the key, [assignment: a static or dynamic value that does not contain any CSP]]_;
-** _instructs a part of the TSF to destroy the abstraction that represents the key_]
-
-that meets the following: _No Standard_.
+*FCS_CKM.6.1* The TSF shall destroy [_plaintext cryptographic keys (including keying material)_] when [selection: _no longer needed, [assignment: other circumstances for key or keying material destruction_]].
 
 *_Application Note {counter:appnote_count}_*
+
+_The TOE will have mechanisms to destroy keys, including intermediate keys and key material, by using an approved method as specified in FCS_CKM.6.2. Examples of keys include intermediate keys, leaf keys, encryption keys, and signing keys. Key material includes seeds, authentication secrets, passwords, PINs, and other secret values used to derive keys._
+
+_This SFR does not apply to the public component of asymmetric key pairs or to keys that are permitted to remain stored, such as device identification keys._
+
+*FCS_CKM.6.2* The TSF shall destroy *plaintext* cryptographic keys and keying material specified by FCS_CKM.6.1 in accordance with a specified cryptographic key destruction method [selection:
+
+. _For volatile storage, the destruction shall be executed by a [selection:_
+.. _single overwrite consisting of [selection:_
+... _a pseudo-random pattern using the TSF’s RBG (as specified in FCS_RBG.1),_
+... _zeros,_
+... _ones,_
+... _a new value of a key,_
+... [assignment: _some value that does not contain any CSP]],_
+.. _removal of power to the memory,_
+.. _removal of all references to the key directly followed by a request for garbage collection];_
+. _For non-volatile storage [selection:_
+.. _that consists of an invocation of an interface provided by a part of the TSF, the destruction shall be executed by: [selection:_
+... _logically addressing the storage location of the key and performing a [selection: single, [assignment: number of passes]-pass] overwrite consisting of [selection: a pseudo-random pattern using the TSF’s RBG (as specified in FCS_RBG.1), zeroes, ones, a new value of the key, [assignment: a static or dynamic value that does not contain any CSP]];_
+... _instructing a part of the TSF to destroy the abstraction that represents the key]_
+.. _that employs a wear-leveling algorithm, the destruction shall be executed by a [selection:_
+... _single overwrite consisting of [selection: zeroes, ones, pseudo-random pattern, a new value of a key of the same size, [assignment: some value that does not contain any CSP]],_
+... _block erase];_
+.. _that does not employ a wear-leveling algorithm, the destruction shall be executed by a [selection:_
+... _[selection: single, [assignment: ST author defined multi-pass]] overwrite consisting of [selection: zeros, ones, pseudo-random pattern, a_ _new value of a key of the same size, [assignment: some value that does not contain any CSP]] followed by a read-verify. If the read-verification_ _of the overwritten data fails, the process shall be repeated up to [assignment: number of times to attempt overwrite] times, whereupon an error_
+_is returned._
+... _block erase]_
+
+] that meets the following: [_no standard_].
+
+*_Application Note {counter:appnote_count}_*
+
+_In the case of volatile memory, the selection “removal of all references to the key directly followed by a request for garbage collection” is used in a situation where the TSF cannot address the specific physical memory locations holding the data to be erased and therefore relies on addressing logical addresses (which frees the relevant physical addresses holding the old data) and then requesting the platform to ensure that the data in the physical addresses is no longer available for reading (i.e. the “garbage collection” referred to in the SFR text)._
 
 _In parts of the selections where keys are identified as being destroyed by “a part of the TSF”, the TSS identifies the relevant part and the interface involved. The interface referenced in the requirement could take different forms for different TOEs, the most likely of which is an application programming interface to an OS kernel. There may be various levels of abstraction visible. For instance, in a given implementation the application may have access to the file system details and may be able to logically address specific memory locations. In another implementation the application may simply have a handle to a resource and can only ask another part of the TSF such as the interpreter or OS to delete the resource._
 
 _Where different key destruction methods are used for different keys and/or different destruction situations then the different methods and the keys/situations they apply to are described in the TSS (and the ST may use separate iterations of the SFR to aid clarity). The TSS describes all relevant keys used in the implementation of SFRs, including cases where the keys are stored in a non-plaintext form. In the case of non-plaintext storage, the encryption method and relevant key-encrypting-key are identified in the TSS._
 
-_Some selections allow assignment of “a value that does not contain any CSP”. This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG_EXT requirements, and not being any of the particular values listed as other selection options. The point of the phrase “does not contain any CSP” is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain current or residual data that itself requires confidentiality protection._
+_The selection for destruction of data in non-volatile memory includes block erase as an option, and this option applies only to flash memory. A block erase does not require a read verify, since the mappings of logical addresses to the erased memory locations are erased, as well as the data itself._
 
-_For the avoidance of doubt: the “cryptographic keys” in this SFR include session keys. Key destruction does not apply to the public component of asymmetric key pairs._
+_Some selections allow the assignment of “some value that does not contain any CSP.” This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG requirements, and not being any of the values listed as other selection options. The point of the phrase “does not contain any CSP” is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain data that itself requires confidentiality protection._
 
 ==== Cryptographic Operation (FCS_COP)
 
@@ -1003,76 +1043,146 @@ _For the avoidance of doubt: the “cryptographic keys” in this SFR include se
 
 *FCS_COP.1/DataEncryption Cryptographic Operation (AES Data Encryption/ Decryption)*
 
-*FCS_COP.1.1/DataEncryption* The TSF shall perform _encryption/decryption_ in accordance with a specified cryptographic algorithm _AES used in_ [selection: _CBC, CTR, GCM_] _mode_ and cryptographic key sizes [selection: _128 bits, 192 bits, 256 bits_] that meet the following: _AES as specified in ISO 18033-3,_ [selection: _CBC as specified in ISO 10116, CTR as specified in ISO 10116, GCM as specified in ISO 19772_].
+*FCS_COP.1.1/DataEncryption* The TSF shall perform _encryption/decryption_ in accordance with a specified cryptographic algorithm _AES used in_ [selection: _CBC, CTR, GCM, CCM_] _mode_ and cryptographic key sizes [selection: _128 bits, 192 bits, 256 bits_] that meet the following: _AES as specified in_ [selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] and
 
-*_Application Note {counter:appnote_count}_*
+[selection:  
 
-_For the first selection of FCS_COP.1.1/DataEncryption, the ST author chooses the mode or modes in which AES operates. For the second selection, the ST author chooses the key sizes that are supported by this functionality. The modes and key sizes selected here correspond to the ciphersuite selections made in the trusted channel requirements._
+* _CBC as specified in_ [selection: _ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A_]
 
-*FCS_COP.1/SigGen Cryptographic Operation (Signature Generation and Verification)*
+* _CTR as specified in_ [selection: _ISO/IEC 10116:2017 (Clause 10), NIST SP 800-38A_]
 
-*FCS_COP.1.1/SigGen* The TSF shall perform _cryptographic signature services (generation and verification)_ in accordance with a specified cryptographic algorithm [selection:
+* _GCM as specified in_ [selection: _ISO/IEC 19772:2020 (Clause 10), NIST SP 800-38D_]
 
-* _RSA Digital Signature Algorithm,_
-* _Elliptic Curve Digital Signature Algorithm_
-
-]
-
-and cryptographic key sizes [selection:
-
-* _For RSA: modulus 2048 bits or greater,_
-* _For ECDSA: 256 bits or greater_
-
-]
-
-that meet the following: [selection:
-
-* _For RSA schemes: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Section 5.5, using PKCS #1 v2.1 Signature Schemes RSASSA-PSS and/or RSASSA-PKCS1v1_5; ISO/IEC 9796-2, Digital signature scheme 2 or Digital Signature scheme 3,_
-* _For ECDSA schemes: FIPS PUB 186-4, “Digital Signature Standard (DSS)”, Section 6 and Appendix D, Implementing “NIST curves”_ [selection: _P-256, P-384, P-521_]; _ISO/IEC 14888-3, Section 6.4,_
+* _CCM as specified in_ [selection: _ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C_]
 
 ].
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST Author chooses the algorithm(s) implemented to perform digital signatures. For the algorithm(s) chosen, the ST author makes the appropriate assignments/selections to specify the parameters that are implemented for that algorithm. The ST author ensures that the assignments and selections for this SFR include all the parameter values necessary for the ciphersuites selected for the protocol SFRs (see Appendix_ _B.3.1) that are included in the ST. The ST Author checks for consistency of selections with other FCS requirements, especially when supporting elliptic curves._
-
-*FCS_COP.1/Hash Cryptographic Operation (Hash Algorithm)*
-
-*FCS_COP.1.1/Hash* The TSF shall perform _cryptographic hashing services_ in accordance with a specified cryptographic algorithm [selection: _SHA-1, SHA-256, SHA-384, SHA-512_] +++<del>+++and cryptographic key sizes [_assignment:_ _cryptographic key sizes_+++</del>+++] and *message digest sizes [selection: _160, 256, 384, 512_] bits* that meet the following: _ISO/IEC 10118-3:2004._
-
-*_Application Note {counter:appnote_count}_*
-
-_Developers are strongly encouraged to implement updated protocols that support the SHA-2 family; until updated protocols are supported, this cPP allows support for SHA-1 implementations in compliance with SP 800-131A. In a future version of this cPP, SHA-256 will be the minimum requirement for all TOEs._
-
-_The hash selection should be consistent with the overall strength of the algorithm used for FCS_COP.1/DataEncryption and FCS_COP.1/SigGen (for example, SHA 256 for 128-bit keys)._
-
-*FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash Algorithm)*
-
-*FCS_COP.1.1/KeyedHash* The TSF shall perform _keyed-hash message authentication_ in accordance with a specified cryptographic algorithm [selection: _HMAC-SHA-1, HMAC-SHA-256, HMAC-SHA-384, HMAC-SHA-512, implicit_] and cryptographic key sizes _[assignment: key size (in bits) used in HMAC]_ *and message digest sizes [selection: _160, 256, 384, 512] bits_* that meet the following: _ISO/IEC 9797-2:2011, Section 7 “MAC Algorithm 2”_.
-
-*_Application Note {counter:appnote_count}_*
-
-_The key size [k] in the assignment falls into a range between L1 and L2 (defined in ISO/IEC 10118 for the appropriate hash function). For example, for SHA-256, L1=512, L2=256, where L2<=k<=L1. Select 'implicit' in cases where keyed-hash message authentication is done implicitly (e.g. SSH using AES in GCM mode)._
+_For the first selection of FCS_COP.1.1/DataEncryption, the ST author chooses the mode or modes in which AES operates. For the second selection, the ST author chooses the key sizes that are supported by this functionality. The modes and key sizes selected here correspond to the ciphersuite selections made in the trusted channel requirements._
 
 
+*FCS_COP.1/SigGen Cryptographic Operation - Signature Generation* 
 
-==== Random Bit Generation (Extended – FCS_RBG_EXT)
+*FCS_COP.1.1/SigGen* The TSF shall perform _cryptographic signature services (generation)_ in accordance with a specified cryptographic algorithm [selection: cryptographic algorithm] and cryptographic +++<del>+++key sizes+++</del>+++ algorithm parameter [selection: cryptographic algorithm parameters] that meet the following: [selection: list of standards].
 
-===== FCS_RBG_EXT.1 Random Bit Generation
+#Table 4: Signature Generation#
 
-*FCS_RBG_EXT.1 Random Bit Generation*
+[cols=",,",options="header",]
+|===
+|*Cryptographic Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
+|RSASSA-PKCS1-v1_5|Modulus of size [selection: 2048, 3072, 4096] bits |RFC 8017 (Section 8.2) [PKCS #1v2.2] 
 
-*FCS_RBG_EXT.1.1* The TSF shall perform all deterministic random bit generation services in accordance with ISO/IEC 18031:2011 using [selection: _Hash_DRBG [selection: SHA-256, SHA-384, SHA-512], HMAC_DRBG [selection: SHA-256, SHA-384, SHA-512], CTR_DRBG (AES)_].
+FIPS PUB 186-5 (Section 5.4) [RSASSA-PKCS1-v1_5]
+|RSASSA-PSS|Modulus of size [selection: 2048, 3072, 4096] bits |RFC 8017 (Section 8.1) [PKCS#1 v2.2] 
 
-*FCS_RBG_EXT.1.2* The deterministic RBG shall be seeded by at least one entropy source that accumulates entropy from [selection: _[assignment: number of software-based sources]_ software-based noise source, _[assignment: number of platform-based sources]_ platform-based noise source] with a minimum of [selection: _128 bits, 192 bits, 256 bits_] of entropy at least equal to the greatest security strength, according to ISO/IEC 18031:2011 Table C.1 “Security Strength Table for Hash Functions”, of the keys and hashes that it will generate.
+FIPS PUB 186-5 (Section 5.4) [RSASSA-PSS]
+|ECDSA|Elliptic Curve [selection: P-256, P-384, P-521] |[selection: NIST FIPS PUB 186-5 (Section 6) [ECDSA] and NIST SP-800
+186 (Section 3.2.1) [NIST Curves], ISO/IEC 14888-3 Section 6.6]
+|Module-Lattice-Based Digital Signature Algorithm|ML-DSA-87|NIST FIPS PUB 204
+|===
 
 *_Application Note {counter:appnote_count}_*
 
-_For the first selection in FCS_RBG_EXT.1.2, the ST author selects at least one of the types of noise sources. If the TOE contains multiple noise sources of the same type, the ST author fills the assignment with the appropriate number for each type of source (e.g., 2 software-based noise sources, 1 platform-based noise source). The documentation and tests required in the Evaluation Activity for this element should be repeated to cover each source indicated in the ST. Platform-based means the hardware-based or within the VS resources._
+_The ST Author chooses the algorithm(s) implemented to perform digital signature generation. For the algorithm(s) chosen, the ST author makes the appropriate assignments/selections to specify the parameters that are implemented for that algorithm. The ST author ensures that the assignments and selections for this SFR include all the parameter values necessary for the ciphersuites selected for the protocol SFRs (see Appendix_ _B.3.2) that are included in the ST. The ST Author checks for consistency of selections with other FCS requirements, especially when supporting elliptic curves._
 
-_ISO/IEC 18031:2011 contains three different methods of generating random numbers; each of these, in turn, depends on underlying cryptographic primitives (hash functions/ciphers). The ST author will select the function used and include the specific underlying cryptographic primitives used in the requirement._
+*FCS_COP.1/SigVer Cryptographic Operation - Signature Verification* 
 
-_If the key length for the AES implementation used here is different than that used to encrypt the user data, then FCS_COP.1 may have to be adjusted or iterated to reflect the different key length. For the selection in FCS_RBG_EXT.1.2, the ST author selects the minimum number of bits of entropy that is used to seed the RBG, which must be equal or greater than the security strength of any key generated by the TOE._
+*FCS_COP.1.1/SigVer* The TSF shall perform _cryptographic signature services (verification)_ in accordance with a specified cryptographic algorithm [selection: cryptographic algorithm] and cryptographic +++<del>+++key sizes+++</del>+++ algorithm parameter [selection: cryptographic algorithm parameters] that meet the following: [selection: list of standards].
+
+#Table 5: Signature Verification#
+
+[cols=",,",options="header",]
+|===
+|*Cryptographic Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
+|RSASSA-PKCS1-v1_5|Modulus of size [selection: 2048, 3072, 4096] bits |RFC 8017 (Section 8.2) [PKCS #1v2.2] 
+
+FIPS PUB 186-5 (Section 5.4) [RSASSA-PKCS1-v1_5]
+|RSASSA-PSS|Modulus of size [selection: 2048, 3072, 4096] bits |RFC 8017 (Section 8.1) [PKCS#1 v2.2] 
+
+FIPS PUB 186-5 (Section 5.4) [RSASSA-PSS]
+|ECDSA|Elliptic Curve [selection: P-256, P-384, P-521] |NIST FIPS PUB 186-5 (Section 6.4.2)
+|LMS |key size [selection: 192, 256] bits|NIST SP 800-208
+|XMS |key size [selection: 192, 256] bits|NIST SP 800-208
+|Module-Lattice-Based Digital Signature Algorithm|ML-DSA-87|NIST FIPS PUB 204
+|===
+
+*_Application Note {counter:appnote_count}_*
+
+_The ST Author chooses the algorithm(s) implemented to perform digital signature verification. For the algorithm(s) chosen, the ST author makes the appropriate assignments/selections to specify the parameters that are implemented for that algorithm. The ST author ensures that the assignments and selections for this SFR include all the parameter values necessary for the ciphersuites selected for the protocol SFRs (see Appendix_ _B.3.2) that are included in the ST. The ST Author checks for consistency of selections with other FCS requirements, especially when supporting elliptic curves._
+
+*FCS_COP.1/Hash Cryptographic Operation - Hashing*
+
+*FCS_COP.1.1/Hash* The TSF shall perform [cryptographic hashing] in accordance with a specified cryptographic algorithm [selection: _SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256, SHA3-224, SHA3-256, SHA3-384, SHA3-512_] that meets the following: [selection: _ISO/IEC 10118-3:2018, FIPS PUB 180-4, FIPS PUB 202_].
+
+*_Application Note {counter:appnote_count}_*
+
+_The hash selection should be consistent with the overall strength of the algorithm used for signature generation. For example, the TOE should choose SHA-256 for 2048-bit RSA or ECC with P-256; SHA-384 for 3072-bit RSA, 4096-bit RSA, or ECC with P-384; and SHA-512 for ECC with P-521. The ST author selects the standard based on the algorithms selected. SHA-1 may be used as a general hash function and for the following applications: generating and verifying hash-based message authentication codes (HMACs), key derivation functions (KDFs), and random bit/number generation._ 
+
+_SHA-1 may also be used for verifying old digital signatures and time stamps, if this is explicitly allowed by the application domain. SHA-1 should not be used in applications in which collision resistance is needed._
+
+*FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash*
+
+*FCS_COP.1.1/KeyedHash* The TSF shall perform [keyed hash message authentication] in accordance with a specified cryptographic algorithm [selection: keyed hash algorithm] and cryptographic key sizes [selection: cryptographic key size] that meet the following: [selection: list of standards].
+
+#Table 6: Keyed Hash#
+
+[cols=",,",options="header",]
+|===
+|*Keyed Hash Algorithm* |*Cryptographic Key Sizes* |*List of Standards*
+|HMAC-SHA-1|[selection: (ISO, FIPS) 160, (FIPS) 128]] bits |[selection: ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”); FIPS PUB 198-1]
+|HMAC-SHA-224|[selection: (ISO, FIPS) 224, (FIPS) 192, 128] bits |[selection: ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”); FIPS PUB 198-1]
+|HMAC-SHA-256|[selection: (ISO, FIPS) 256, (FIPS) 192, 128] bits |[selection: ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”); FIPS PUB 198-1]
+|HMAC-SHA-384|[selection: (ISO, FIPS) 384, (FIPS) 256, 192, 128] bits |[selection: ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”); FIPS PUB 198-1]
+|HMAC-SHA-512|[selection: (ISO, FIPS) 512, (FIPS) 384, 256, 192, 128] bits |[selection: ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”); FIPS PUB 198-1]
+|===
+
+*_Application Note {counter:appnote_count}_*
+
+_The HMAC minimum key sizes in the table are specified in ISO/IEC 9797-2:2021, which requires that the minimum key size be equal to the digest size. The FIPS standard specifies no minimum or maximum key sizes, so if FIPS PUB 198-1 is selected, larger or smaller key sizes may be used. This is indicted by the parenthesized annotations in the Cryptographic Key Sizes column._
+
+==== Random Bit Generation (RBG)
+
+===== FCS_RBG.1 Random Bit Generation (RBG)
+
+*FCS_RBG.1 Random Bit Generation (RBG)*
+
+*FCS_RBG.1.1* The TSF shall perform deterministic random bit generation services using [selection: _DRBG algorithm_] in accordance with [selection: _list of standards_] after initialization.
+
+#Table 7: Random Bit Generation#
+
+[cols=",",options="header",]
+|===
+|*DRBG Algorithm* |*List of Standards*
+|Hash_DRBG with [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512] |[selection: ISO/IEC 18031: 2025 (Section C.2.2), NIST SP 800-90A Revision 1 Section 10.1.1]
+|HMAC_DRBG with [selection: SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512] |[selection: ISO/IEC 18031: 2025 (Section C.2.3), NIST SP800-90A Revision 1 Section 10.1.2]
+|CTR_DRBG with [selection: AES-128, AES-192, AES-256] |[selection: ISO/IEC 18031: 2025 (Section C.3.2), NIST SP800-90A Revision 1 Section 10.2.1]
+|===
+
+*FCS_RBG.1.2* The TSF shall use a [selection: TSF entropy source [assignment: _name of entropy source_], TSF interface for obtaining entropy] for initialization and reseeding.
+
+*FCS_RBG.1.3* The TSF shall update the DRBG state by [selection: reseeding, uninstantiating and re-instantiating] using a [selection: TSF entropy source [assignment: _name of entropy source_], TSF interface for obtaining entropy [assignment: _name of the interface_]] in the following situations: [selection:
+
+* never,
+* on demand,
+* on the condition: [assignment: _condition_],
+* after [assignment: _time_]]
+in accordance with [assignment: _list of standards_].
+
+*_Application Note {counter:appnote_count}_*
+
+_If "TSF noise source" is selected in FCS_RBG.1.2, FCS_RBG.3 must be claimed from Appendix A._
+
+_If "multiple TSF noise sources" is selected in FCS_RBG.1.2, FCS_RBG.4 and FCS_RBG.5 must be claimed from Appendix A._
+
+_If "TSF interface for seeding" is selected in FCS_RBG.1.2, FCS_RBG.2 must be claimed from Appendix A._
+
+_No rationale is acceptable for not satisfying one of these dependencies._
+
+_If a reseeding is selected in the first selection of FCS_RBG.1.2 and something other than “never” is selected in the third selection of FCS_RBG.1.3, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding. The remaining selection allows the PP Author to require application-specific conditions for reseeding._
+ 
+_“Uninstantiate” means that the internal state of the DRBG is no longer available for use. In the second selection of FCS_RBG.1.3, “on demand” means that a TOE presents an interface to reseed as a TSFI (e.g., an API call). The interface causes the DRBG to reseed at the request of an authorized user, either with an internal source, an external source, or from input provided through the TSFI (e.g., the API call)._
+
 
 === Identification and Authentication (FIA)
 
@@ -1353,9 +1463,9 @@ _The selection in FPT_TUD_EXT.1.2 distinguishes the support of automatic checkin
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author selects “X.509 certificate” when the TOE uses X.509 certificates in a manner compliant with the certificate validation requirements in the Functional Package for X.509. The digital signature algorithm must be one of the algorithms specified in FCS_COP.1/SigGen._
+_The ST author selects “X.509 certificate” when the TOE uses X.509 certificates in a manner compliant with the certificate validation requirements in the Functional Package for X.509. The digital signature algorithm must be one of the algorithms specified in FCS_COP.1/SigVer._
 
-_The ST author selects ‘digital signature’ for all other digital mechanisms (e.g. X.509 certificates that do not meet the certificate validation requirements in the Functional Package for X.509, GPG, raw public key). The digital algorithm must be one of the algorithms specified in FCS_COP.1/SigGen._
+_The ST author selects ‘digital signature’ for all other digital mechanisms (e.g. X.509 certificates that do not meet the certificate validation requirements in the Functional Package for X.509, GPG, raw public key). The digital algorithm must be one of the algorithms specified in FCS_COP.1/SigVer._
 
 _The verification of the signature must be performed by the TOE itself._
 
@@ -1474,7 +1584,7 @@ This section lists the set of SARs from CC part 3 that are required in evaluatio
 
 The general model for evaluation of TOEs against STs written to conform to this cPP is as follows: after the ST has been approved for evaluation, the ITSEF will obtain the TOE, supporting environmental IT (if required), and the guidance documentation for the TOE. The ITSEF is expected to perform actions mandated by the Common Evaluation Methodology (CEM) for the ASE and ALC SARs. The ITSEF also performs the Evaluation Activities contained within the SD, which are intended to be an interpretation of the other CEM assurance requirements as they apply to the specific technology instantiated in the TOE. The Evaluation Activities that are captured in [SD] also provide clarification as to what the developer needs to provide to demonstrate the TOE is compliant with the cPP.
 
-The TOE security assurance requirements are identified in Table 3.
+The TOE security assurance requirements are identified in Table 8.
 
 [cols=",",]
 |===
@@ -1495,7 +1605,7 @@ The TOE security assurance requirements are identified in Table 3.
 |Vulnerability Assessment (AVA) |Vulnerability survey (AVA_VAN.1)
 |===
 
-[#_Ref237676489]#Table 3: Security Assurance Requirements#
+[#_Ref237676489]#Table 8: Security Assurance Requirements#
 
 === ASE: Security Target
 
@@ -1592,6 +1702,7 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 * Enabling communications between a pair of components.
 * Disabling communications between a pair of components.
 |Identities of the endpoint pairs enabled or disabled.
+|FCS_CKM.1 |None. |None.
 
 |FPT_ITT.1 a|
 * Initiation of the trusted channel.
@@ -1605,7 +1716,7 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 |None.
 |===
 
-[#_Ref397655544]#Table 4: TOE Optional SFRs and Auditable Events#
+[#_Ref397655544]#Table 9: TOE Optional SFRs and Auditable Events#
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1743,9 +1854,9 @@ for at least _TSF data_.
 
 *FCO_CPC_EXT.1.3* The TSF shall enable a Security Administrator to disable communications between any pair of TOE components.
 
-*_Application Note {counter:appnote_count}_*
+_Application Note {counter:appnote_count}_*
 
-_This SFR is only applicable if the TOE is distributed and therefore has multiple components that need to communicate via an internal TSF channel. When creating the TSF from the initial pair of components, either of these components may be identified as the TSF for the purposes of satisfying the meaning of ‘TSF’ in this SFR._
+_This SFR is on*ly applicable if the TOE is distributed and therefore has multiple components that need to communicate via an internal TSF channel. When creating the TSF from the initial pair of components, either of these components may be identified as the TSF for the purposes of satisfying the meaning of ‘TSF’ in this SFR._
 
 _The intention of this requirement is to ensure that there is a registration process that includes a positive enablement step by an Administrator before components joining a distributed TOE can communicate with the other components of the TOE and before the new component can act as part of the TSF. The registration process may itself involve communication with the joining component: many Network Devices use a bespoke process for this, and the security requirements for the ‘registration communication’ are then defined in FCO_CPC_EXT.1.2. Use of this ‘registration communication’ channel is not deemed inconsistent with the requirement of FCO_CPC_EXT.1.1 (i.e. the registration channel can be used before the enablement step, but only in order to complete the registration process)._
 
@@ -1758,9 +1869,6 @@ _If the ST author selects the FTP_ITC.1/FPT_ITT.1 channel type in the main selec
 _Note that the channel set up and used for registration may be adopted as a continuing internal communication channel (i.e. between different TOE components) provided that the channel meets the requirements of FTP_ITC.1 or FPT_ITT.1. Otherwise, the registration channel is closed after use and a separate channel is used for the internal communications._
 
 _Specific requirements for Preparative Procedures relating to FCO_CPC_EXT.1 are defined in the Evaluation Activities in [SD]._
-
-=== Cryptographic Support (FCS)
-
 
 === Optional Security Assurance Requirements for Flaw Remediation (ALC_FLR)
 
@@ -1792,6 +1900,10 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |FAU_GEN_EXT.1 |None |None
 |FAU_STG_EXT.4 |None |None
 |FAU_STG_EXT.5 |None |None
+|FCS_RBG.2 |None |None
+|FCS_RBG.3 |None |None
+|FCS_RBG.4 |None |None
+|FCS_RBG.5 |None |None
 |FCS_IPSEC_EXT.1 |Failure to establish an IPsec SA. |Reason for failure
 |FCS_NTP_EXT.1 a|
 * Configuration of a new time server
@@ -1810,7 +1922,7 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |FTA_SSL_EXT.1 (if “terminate the session” is selected) |The termination of a local session by the session lock |None.
 |===
 
-[#_Ref397655557]#Table 5: Selection-Based SFRs and Auditable Events#
+[#_Ref397655557]#Table 10: Selection-Based SFRs and Auditable Events#
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1874,15 +1986,57 @@ _It is acceptable for a TOE component to store audit information in multiple pla
 
 _TOE components are not required to monitor or audit connectivity or network outages between TOE components. This aspect is covered by the assumption A.COMPONENTS_RUNNING._
 
-=== Cryptographic Support (FCS)
+==== Cryptographic Support (FCS)
 
-==== FCS_COP.1/CMAC Cryptographic Operation - CMAC
+===== FCS_RBG.2 Random Bit Generation (External Seeding)
 
-This is a selection-based SFR, to be included in the ST if “AES-CMAC-128 (RFC 8573)” is selected for authenticating NTP packets in FCS_NTP_EXT.1.2.
+This component is included if "TSF interface for seeding" is selected in FCS_RBG.1.2
 
-*FCS_COP.1/CMAC Cryptographic Operation - CMAC*
+*FCS_RBG.2 Random Bit Generation (External Seeding)*
 
-*FCS_COP.1.1/CMAC* The TSF shall perform [_CMAC_] in accordance with a specified cryptographic algorithm [_AES using CMAC mode_] and cryptographic key sizes [_128 bits_] that meet the following: [selection: _ISO/IEC 9797-1:2011 subclause 7.6 (CMAC) and ISO/IEC 18033-3:2010 subclause 5.2 (AES), NIST SP 800-38B (CMAC) and NIST FIPS 197 (AES)_].
+*FCS_RBG.2.1* The TSF shall be able to accept a minimum input of [assignment: _minimum input length greater than zero_] from a TSF interface for the purpose of obtaining entropy.
+
+*_Application Note {counter:appnote_count}_*
+
+_This requirement is claimed when a DRBG is seeded with entropy from one or more noise source that is outside the TOE boundary. In the case of a network device this would likely only occur when the entropy source is a Dedicated Security Component that is integrated with the TOE. Typically the entropy produced by an environmental noise source is conditioned such that the input length has full entropy and is therefore usable as the seed. However, if this is not the case, it should be noted what the minimum entropy rate of the noise source is so that the TSF can collect a sufficiently large sample of noise data to be conditioned into a seed value._
+
+_The TSF interface for the purpose of seeding here is the interface used to gather entropy for initializing the seed._
+
+===== FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
+
+This component is included if "TSF noise source" is selected in FCS_RBG.1.2
+
+*FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)*
+
+*FCS_RBG.3.1* The TSF shall be able to seed the DRBG using a [selection, choose one of: TSF software-based entropy source, TSF hardware-based entropy source] [assignment: _name of entropy source_] with [assignment: _number of bits_] bits of min-entropy.
+
+*_Application Note {counter:appnote_count}_*
+
+_This requirement is claimed when a DRBG is seeded with entropy from a single noise source that is within the TOE boundary. Min-entropy should be expressed as a ratio of entropy bits to sampled bits so that the total amount of data needed to ensure full entropy is known, as well as the conditioning function by which that data is reduced in size to the seed._
+
+===== FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
+
+This component is included if "multiple TSF noise sources" is selected in FCS_RBG.1.2
+
+*FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)*
+
+*FCS_RBG.4.1* The TSF shall be able to seed the DRBG using [selection: [_assignment: number_] TSF software-based entropy source(s), [assignment: _number_] TSF hardware-based entropy source(s)].
+
+*_Application Note {counter:appnote_count}_*
+
+_This requirement is claimed when a DRBG is seeded with entropy from multiple noise sources that are within the TOE boundary. FCS_RBG.5 defines the mechanism by which these sources are combined to ensure sufficient minimum entropy._ 
+
+===== FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)
+
+This component is included if "multiple TSF noise sources" is selected in FCS_RBG.1.2
+
+*FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)*
+
+*FCS_RBG.5.1* The TSF shall [assignment: _combining operation_] [selection: _output from TSF noise source(s), input from TSF interface(s) for seeding_] to create the entropy input into the derivation function as defined in [assignment: _list of standards_], resulting in a minimum of [assignment: _number of bits_] bits of min-entropy. 
+
+*_Application Note {counter:appnote_count}_*
+
+_Examples of typical combining operations include, but are not limited to, XORing or hashing._
 
 ==== Cryptographic Protocols (Extended – FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_IPSEC_EXT, FCS_NTP_EXT, FCS_TLSC_EXT, FCS_TLSS_EXT)
 
@@ -1987,7 +2141,7 @@ _The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or b
 
 _The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). This requirement must be accomplished by providing Security Administrator-configurable lifetimes (with appropriate instructions in documents mandated by AGD_OPE). Hardcoded limits do not meet this requirement. In general, instructions for setting the parameters of the implementation, including lifetime of the SAs, should be included in the guidance documentation generated for AGD_OPE._
 
-*FCS_IPSEC_EXT.1.9* The TSF shall generate the secret value x used in the IKE Diffie-Hellman key exchange (“x” in g^x mod p) using the random bit generator specified in FCS_RBG_EXT.1, and having a length of at least [assignment: _(one or more) number(s) of bits that is at least twice the security strength of the negotiated Diffie-Hellman group_] bits.
+*FCS_IPSEC_EXT.1.9* The TSF shall generate the secret value x used in the IKE Diffie-Hellman key exchange (“x” in g^x mod p) using the random bit generator specified in FCS_RBG.1, and having a length of at least [assignment: _(one or more) number(s) of bits that is at least twice the security strength of the negotiated Diffie-Hellman group_] bits.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2027,11 +2181,13 @@ _The selections are used to specify additional DH groups supported. This applies
 
 _The ST author chooses either or both of the IKE selections based on what is implemented by the TOE. Obviously, the IKE version(s) chosen should be consistent not only in this element, but with other choices for other elements in this component. While it is acceptable for this capability to be configurable, the default configuration in the evaluated configuration (either ‘out of the box’ or by configuration guidance in the AGD documentation) must enable this functionality._
 
-*FCS_IPSEC_EXT.1.13* The TSF shall ensure that all IKE protocols perform peer authentication using [selection: _RSA, ECDSA_] that use X.509v3 certificates that conform to RFC 4945 and [selection: _Pre-shared Keys, no other method_].
+*FCS_IPSEC_EXT.1.13* The TSF shall ensure that all IKE protocols perform peer authentication using [selection: _RSA, ECDSA_] that use X.509v3 certificates that conform to RFC 4945 and [selection: _Pre-shared Keys that conform to RFC 8784, no other method_].
 
 *_Application Note {counter:appnote_count}_*
 
 _At least one public-key-based Peer Authentication method is required in order to conform to this cPP; one or more of the public key schemes is chosen by the ST author to reflect what is implemented. The ST author also ensures that appropriate FCS requirements reflecting the algorithms used (and key generation capabilities, if provided) are listed to support those methods. Note that the TSS will elaborate on the way in which these algorithms are to be used (for example, RFC 2409 specifies three authentication methods using public keys; each one supported will be described in the TSS)._
+
+_If the selection “Pre-shared Keys that conform to RFC 8784” is chosen, the selection-based requirement FIA_PSK_EXT.1 in Appendix B must be claimed._
 
 *FCS_IPSEC_EXT.1.14* The TSF shall only establish a trusted channel if the presented identifier in the received certificate matches the configured reference identifier, where the presented and reference identifiers are of the following fields and types: [selection: _SAN: IP address, SAN: Fully Qualified Domain Name (FQDN), SAN: user FQDN, CN: IP address, CN: Fully Qualified Domain Name (FQDN), CN: user FQDN, Distinguished Name (DN)]_ and [selection: _no other reference identifier type, [assignment: other supported reference identifier types]_].
 
@@ -2144,6 +2300,20 @@ If the TOE provides a password-based authentication mechanism the Administrator 
 _The ST author selects the special characters that are supported by the TOE. They may optionally list additional special characters supported using the assignment. "Administrative passwords" refers to passwords used by Administrators at the local console, over protocols that support passwords, such as SSH and HTTPS, or to grant configuration data that supports other SFRs in the Security Target._
 
 _The second assignment should be configured with the largest minimum password length the Security Administrator can configure._
+
+===== FIA_PSK_EXT.1 Pre-Shared Key Composition
+
+The TOE may support pre-shared keys for use in the IPsec protocol that conform to RFC 8784.
+
+*FIA_PSK_EXT.1 Pre-Shared Key Composition*
+
+*FIA_PSK_EXT.1.1*  The TSF shall be able to use pre-shared keys that conform to RFC 8784 for IPsec.
+
+*FIA_PSK_EXT.1.2* The TSF shall be able to [selection: _accept externally generated pre-shared keys, generate 256 bit-based pre-shared keys via the random number generator used by the TSF._]
+
+*_Application Note {counter:appnote_count}_*
+
+_Generated PSKs are expected to be shared between components via an out-of-band mechanism._
 
 === Protection of the TSF (FPT)
 If the TOE provides a password-based authentication mechanism there must be no interface provided for specifically reading the password or password file such that the passwords are displayed in plain text.
@@ -2418,44 +2588,6 @@ Dependencies:
 
 === Cryptographic Support (FCS)
 
-==== Random Bit Generation (FCS_RBG_EXT)
-
-=====  FCS_RBG_EXT.1 Random Bit Generation
-
-*Family Behaviour*
-
-Components in this family address the requirements for random bit/number generation. This is a new family defined for the FCS class.
-
-*Component Levelling*
-
-image:extracted-media/media/FCS_RBG_EXT.png[image,width=500,height=48]
-
-FCS_RBG_EXT.1 Random Bit Generation requires random bit generation to be performed in accordance with selected standards and seeded by an entropy source.
-
-*Management: FCS_RBG_EXT.1*
-
-The following actions could be considered for the management functions in FMT:
-
-[loweralpha]
-. There are no management activities foreseen.
-
-*Audit: FCS_RBG_EXT.1*
-
-The following actions should be auditable if FAU_GEN Security audit data generation is included in the PP/ST:
-
-[loweralpha]
-. There are no auditable events foreseen.
-
-*FCS_RBG_EXT.1 Random Bit Generation*
-
-Hierarchical to: No other components
-
-Dependencies: No other components
-
-*FCS_RBG_EXT.1.1* The TSF shall perform all deterministic random bit generation services in accordance with ISO/IEC 18031:2011 using [selection: _Hash_DRBG [selection: SHA-256, SHA-384, SHA-512], HMAC_DRBG [selection: SHA-256, SHA-384, SHA-512], CTR_DRBG (AES)_].
-
-*FCS_RBG_EXT.1.2* The deterministic RBG shall be seeded by at least one entropy source that accumulates entropy from [selection: _[assignment: number of software-based sources] software-based noise source, [assignment: number of platform-based sources] platform-based noise source_] with a minimum of [selection: _128 bits, 192 bits, 256 bits_] of entropy at least equal to the greatest security strength, according to ISO/IEC 18031:2011 Table C.1 “Security Strength Table for Hash Functions”, of the keys and hashes that it will generate.
-
 ==== Cryptographic Protocols (FCS_IPSEC_EXT, FCS_NTP_EXT)
 
 =====  FCS_IPSEC_EXT.1 IPsec Protocol
@@ -2494,13 +2626,14 @@ Hierarchical to: No other components
 
 Dependencies:
 
-* FCS_CKM.1 Cryptographic Key Generation
+* FCS_CKM.1 Cryptographic Key Generation - Asymmetric Key
 * FCS_CKM.2 Cryptographic Key Establishment
 * FCS_COP.1/DataEncryption Cryptographic operation (AES Data encryption/decryption)
-* FCS_COP.1/SigGen Cryptographic operation (Signature Generation and Verification)
-* FCS_COP.1/Hash Cryptographic operation (Hash Algorithm)
-* FCS_COP.1/KeyedHash Cryptographic operation (Keyed Hash Algorithm)
-* FCS_RBG_EXT.1 Random Bit Generation
+* FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
+* FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
+* FCS_COP.1/Hash Cryptographic Operation - Hashing
+* FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash
+* FCS_RBG.1 Random Bit Generation (RBG)
 * FIA_X509_EXT.1 X.509 Certificate Validation
 * FIA_X509_EXT.2 X.509 Certificate Authentication
 * FIA_X509_EXT.3 X.509 Certificate Requests
@@ -2552,7 +2685,7 @@ _];_
 
 ].
 
-*FCS_IPSEC_EXT.1.9* The TSF shall generate the secret value x used in the IKE Diffie-Hellman key exchange (“x” in g^x^ mod p) using the random bit generator specified in FCS_RBG_EXT.1, and having a length of at least _[assignment: (one or more) number(s) of bits that is at least twice the security strength of the negotiated Diffie-Hellman group_] bits.
+*FCS_IPSEC_EXT.1.9* The TSF shall generate the secret value x used in the IKE Diffie-Hellman key exchange (“x” in g^x^ mod p) using the random bit generator specified in FCS_RBG.1, and having a length of at least _[assignment: (one or more) number(s) of bits that is at least twice the security strength of the negotiated Diffie-Hellman group_] bits.
 
 *FCS_IPSEC_EXT.1.10* The TSF shall generate nonces used in [selection: _IKEv1, IKEv2_] exchanges of length [selection:
 
@@ -2570,7 +2703,7 @@ _]._
 
 *FCS_IPSEC_EXT.1.12* The TSF shall be able to ensure by default that the strength of the symmetric algorithm (in terms of the number of bits in the key) negotiated to protect the [selection: _IKEv1 Phase 1, IKEv2 IKE_SA_] connection is greater than or equal to the strength of the symmetric algorithm (in terms of the number of bits in the key) negotiated to protect the [selection: _IKEv1 Phase 2, IKEv2 CHILD_SA_] connection.
 
-*FCS_IPSEC_EXT.1.13* The TSF shall ensure that all IKE protocols perform peer authentication using [selection: _RSA, ECDSA_] that use X.509v3 certificates that conform to RFC 4945 and [selection: _Pre-shared Keys, no other method_].
+*FCS_IPSEC_EXT.1.13* The TSF shall ensure that all IKE protocols perform peer authentication using [selection: _RSA, ECDSA_] that use X.509v3 certificates that conform to RFC 4945 and [selection: _Pre-shared Keys that conform to RFC 8784, no other method_].
 
 *FCS_IPSEC_EXT.1.14* The TSF shall only establish a trusted channel if the presented identifier in the received certificate matches the configured reference identifier, where the presented and reference identifiers are of the following fields and types: [selection: _SAN: IP address, SAN: Fully Qualified Domain Name (FQDN), SAN: user FQDN, CN: IP address, CN: Fully Qualified Domain Name (FQDN), CN: user FQDN, Distinguished Name (DN)]_ and [selection: _no other reference identifier type, [assignment: other supported reference identifier types_]].
 
@@ -2654,6 +2787,38 @@ Dependencies: No other components
 [loweralpha]
 . Passwords shall be able to be composed of any combination of upper and lower case letters, numbers, and the following special characters: [selection: _“!”, “@”, “#”, “$”, “%”, “^”, “&”, “*”, “(“, “)”, [assignment: other characters]_];
 . Minimum password length shall _be configurable to between [assignment: minimum number of characters supported by the TOE] and [assignment: number of characters greater than or equal to 15] characters._
+
+==== Pre-Shared Key Composition (FIA_PSK_EXT)
+
+*Family Behaviour*
+
+Components in this family describe the requirements for pre-shared keys when implementing IPsec. 
+
+*Component Levelling*
+
+image:extracted-media/media/FIA_PSK_EXT.png[image,width=500,height=48]
+
+FIA_PSK_EXT.1 defines the use and composition of pre-shared keys used for IPsec. 
+
+*Management: FIA_PSK_EXT.1*
+
+There are no management functions foreseen.
+
+*Audit: FIA_PSK_EXT.1*
+
+There are no auditable events foreseen.
+
+=====  FIA_PSK_EXT.1 Pre-Shared Key Composition
+
+*FIA_PSK_EXT.1 Pre-Shared Key Composition*
+
+Hierarchical to: No other components
+
+Dependencies: No other components
+
+*FIA_PSK_EXT.1.1* The TSF shall be able to use pre-shared keys that conform to RFC 8784 for IPsec.
+
+*FIA_PSK_EXT.1.2* The TSF shall be able to [selection: _accept externally generated pre-shared keys, generate 256 bit-based pre-shared keys via the random number generator used by the TSF._]
 
 ==== User Identification and Authentication (FIA_UIA_EXT)
 
@@ -2845,7 +3010,7 @@ The following actions could be considered for the management functions in FMT:
 
 [loweralpha]
 . Ability to update the TOE and to verify the updates
-. Ability to update the TOE and to verify the updates using the digital signature capability (FCS_COP.1/SigGen) and [selection: _no other functions, [assignment: other cryptographic functions (or other functions) used to support the update capability]_]
+. Ability to update the TOE and to verify the updates using the digital signature capability (FCS_COP.1/SigVer) and [selection: _no other functions, [assignment: other cryptographic functions (or other functions) used to support the update capability]_]
 . Ability to update the TOE, and to verify the updates using [selection: _digital signature, no other mechanism_] capability prior to installing those updates
 
 *Audit: FPT_TUD_EXT.1, FPT_TUD_EXT.2*
@@ -2863,7 +3028,7 @@ The following actions should be auditable if FAU_GEN Security audit data generat
 
 Hierarchical to: No other components
 
-Dependencies: FCS_COP.1/SigGen Cryptographic operation (for Cryptographic Signature and Verification), or FCS_COP.1/Hash Cryptographic operation (for cryptographic hashing)
+Dependencies: FCS_COP.1/SigVer Cryptographic operation (for Cryptographic Signature and Verification), or FCS_COP.1/Hash Cryptographic operation (for cryptographic hashing)
 
 *FPT_TUD_EXT.1.1* The TSF shall provide [assignment: _Administrators_] the ability to query the currently executing version of the TOE firmware/software and [selection: _the most recently installed version of the TOE firmware/software; no other TOE firmware/software version_].
 
@@ -3086,61 +3251,65 @@ FTP_ITC.1 included
 |FCS_CKM.1 a|
 FCS_CKM.2 or FCS_COP.1
 
-FCS_CKM.4
+FCS_RBG.1 or FCS_CKM.6
 
 a|
 FCS_CKM.2 included
 
-FCS_CKM.4 included
+FCS_CKM.6 included
+
+FCS_RBG.1 included
 
 |FCS_CKM.2 a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
 
-FCS_CKM.4
+FCS_CKM.6
 
 a|
 FCS_CKM.1 included
 
-FCS_CKM.4 included
+FCS_CKM.6 included
 
-|FCS_CKM.4 |FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1 |FCS_CKM.1 included
+|FCS_CKM.6 |FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1 |FCS_CKM.1 included
 |FCS_COP.1/DataEncryption a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
 
-FCS_CKM.4
+FCS_CKM.6
 
 a|
 FCS_CKM.1 included
 
-FCS_CKM.4 included
+FCS_CKM.6 included
 
 |FCS_COP.1/SigGen a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
 
-FCS_CKM.4
+a|
+FCS_CKM.1 included
+
+|FCS_COP.1/SigVer a|
+FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
 
 a|
 FCS_CKM.1 included
 
-FCS_CKM.4 included
-
 |FCS_COP.1/Hash a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
 
-FCS_CKM.4
+FCS_CKM.6
 
 |This SFR specifies keyless hashing operations, so initialisation and destruction of keys are not relevant
 |FCS_COP.1/KeyedHash a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
 
-FCS_CKM.4
+FCS_CKM.6
 
 a|
 FCS_CKM.1 included
 
-FCS_CKM.4 included
+FCS_CKM.6 included
 
-|FCS_RBG_EXT.1 |None |
+|FCS_RBG.1 |None |
 
 |FIA_UIA_EXT.1 |FTA_TAB.1 |FTA_TAB.1 included
 
@@ -3168,7 +3337,7 @@ FMT_SMF.1 included
 |FMT_SMR.2 |FIA_UID.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator identification
 |FPT_SKP_EXT.1 |None |
 |FPT_TST_EXT.1 |None |
-|FPT_TUD_EXT.1 |FCS_COP.1/SigGen or FCS_COP.1/Hash |FCS_COP.1/SigGen and FCS_COP.1/Hash included
+|FPT_TUD_EXT.1 |FCS_COP.1/SigVer or FCS_COP.1/Hash |FCS_COP.1/SigVer and FCS_COP.1/Hash included
 |FPT_STM_EXT.1 |None |
 |FTA_SSL.3 |None |
 |FTA_SSL.4 |None |
@@ -3223,27 +3392,40 @@ FCS_CKM.2
 FCS_COP.1/DataEncryption
 
 FCS_COP.1/SigGen
+
+FCS_COP.1/SigVer
   
 FCS_COP.1/Hash
 
 FCS_COP.1/KeyedHash
 
-FCS_RBG_EXT.1
+FCS_RBG.1
 
 a|
 FCS_CKM.1 included
 
 FCS_CKM.2 included
 
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/SigVer, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
 
-FCS_RBG_EXT.1 included
+FCS_RBG.1 included
 
 |FCS_NTP_EXT.1 a|
 FCS_COP.1
 
 a|
 FCS_COP.1 included
+
+|FCS_COP.1/CMAC a|
+
+FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1
+
+FCS_CKM.6
+
+a|
+FCS_CKM.1 included
+
+FCS_CKM.6 included
 
 |FIA_AFL.1 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication
 |FIA_UAU.7 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication

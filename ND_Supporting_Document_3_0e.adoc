@@ -269,7 +269,7 @@ _Additional Note for Distributed TOEs_
 
 === Cryptographic Support (FCS)
 
-==== FCS_CKM.1 Cryptographic Key Generation
+==== FCS_CKM.1 Cryptographic Key Generation – Asymmetric Key
 
 ===== TSS
 
@@ -286,7 +286,7 @@ _Additional Note for Distributed TOEs_
 [arabic, start=52]
 . Note: The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products. Generation of long-term cryptographic keys (i.e. keys that are not ephemeral keys/session keys) might be performed automatically (e.g. during initial start-up). Testing of key generation must cover not only administrator invoked key generation but also automated key generation (if supported).
 
-*Key Generation for FIPS PUB 186-4 RSA Schemes*
+*Key Generation for FIPS PUB 186-5 RSA*
 
 [arabic, start=53]
 . The evaluator shall verify the implementation of RSA Key Generation by the TOE using the Key Generation test. This test verifies the ability of the TSF to correctly produce values for the key components including the public verification exponent _e_, the private prime factors _p_ and _q_, the public modulus _n_ and the calculation of the private signature exponent _d_.
@@ -308,12 +308,12 @@ _Additional Note for Distributed TOEs_
 
 *Key Generation for Elliptic Curve Cryptography (ECC)*
 
-_FIPS 186-4 ECC Key Generation Test_
+_FIPS 186-5 ECC Key Generation Test_
 
 [arabic, start=56]
 . For each supported NIST curve, i.e., P-256, P-384 and P-521, the evaluator shall require the implementation under test (IUT) to generate 10 private/public key pairs. The private key shall be generated using an approved random bit generator (RBG). To determine correctness, the evaluator shall submit the generated key pairs to the public key verification (PKV) function of a known good implementation.
 
-_FIPS 186-4 Public Key Verification (PKV) Test_
+_FIPS 186-5 Public Key Verification (PKV) Test_
 
 [arabic, start=57]
 . For each supported NIST curve, i.e., P-256, P-384 and P-521, the evaluator shall generate 10 private/public key pairs using the key generation function of a known good implementation and modify five of the public key values so that they are incorrect, leaving five values unchanged (i.e., correct). The evaluator shall obtain in response a set of 10 PASS/FAIL values.
@@ -333,13 +333,11 @@ _FIPS 186-4 Public Key Verification (PKV) Test_
 * Generator g constructed through a verifiable process
 * Generator g constructed through an unverifiable process.
 
-
 [arabic, start=63]
 . The Key generation specifies 2 ways to generate the private key x:
 
 * len(q) bit output of RBG where 1 <=x <= q-1 
 * len(q) + 64 bit output of RBG, followed by a mod q-1 operation and a +1 operation, where 1<= x<=q-1.
-
 
 [arabic, start=64]
 . The security strength of the RBG must be at least that of the security offered by the FFC parameter set.
@@ -357,7 +355,11 @@ _FIPS 186-4 Public Key Verification (PKV) Test_
 *FFC Schemes using “safe-prime” groups*
 
 [arabic, start=68]
-. Testing for FFC Schemes using safe-prime groups is done as part of testing in CKM.2.1.
+. Testing for FFC Schemes using safe-prime groups is done as part of testing in FCS_CKM.2.1.
+
+*Key Generation for LMS/XMSS*
+[arabic, start=70]
+. For each supported LMS/LMSOTS pair, the evaluator will provide 1, 2, 3, 4, 5 seeds for H = 25, 20, 15, 10, 5 respectively where H = the height of the LMS tree. For each seed, the TOE will generate the corresponding public key which is to be verified by the evaluator using a known good implementation.
 
 ==== FCS_CKM.2 Cryptographic Key Establishment
 
@@ -387,7 +389,7 @@ _FIPS 186-4 Public Key Verification (PKV) Test_
 [arabic, start=72]
 . The evaluator shall verify the implementation of the key establishment schemes of the supported by the TOE using the applicable tests below.
 
-*_ECC and FIPS 186-type FFC SP800-56A Key Establishment Schemes_*
+*_SP800-56A Key Establishment Schemes_*
 
 [arabic, start=73]
 . The evaluator shall verify a TOE's implementation of SP800-56A key agreement schemes using the following Function and Validity tests for ECC and FIPS186-type. These validation tests for each key agreement scheme verify that a TOE has implemented the components of the key agreement scheme according to the specifications in the Recommendation. These components include the calculation of the DLC primitives (the shared secret value Z) and the calculation of the derived keying material (DKM) via the Key Derivation Function (KDF). If key confirmation is supported, the evaluator shall also verify that the components of key confirmation have been implemented correctly, using the test procedures described below. This includes the parsing of the DKM, the generation of MACdata and the calculation of MACtag.
@@ -408,17 +410,36 @@ _Validity Test_
 . The evaluator shall inject an error in some of the test vectors to test that the TOE recognizes invalid key agreement results caused by the following fields being incorrect: the shared secret value Z, the DKM, the other information field OI, the data to be MACed, or the generated MACTag. If the TOE contains the full or partial (only ECC) public key validation, the evaluator shall also individually inject errors in both parties’ static public keys, both parties’ ephemeral public keys and the TOE’s static private key to assure the TOE detects errors in the public key validation function and/or the partial key validation function (in ECC only). At least two of the test vectors shall remain unmodified and therefore should result in valid key agreement results (they should pass).
 . The TOE shall use these modified test vectors to emulate the key agreement scheme using the corresponding parameters. The evaluator shall compare the TOE’s results with the results using a known good implementation verifying that the TOE detects these errors.
 
-*_RSA-based key establishment_*
+*_SP800-56B Key Establishment Schemes_*
 
-[arabic, start=82]
-. The evaluator shall verify the correctness of the TSF’s implementation of RSAES-PKCS1-v1_5 by using a known good implementation for each protocol selected in FTP_TRP.1/Admin, FTP_TRP.1/Join, FTP_ITC.1 and FPT_ITT.1 that uses RSAES-PKCS1-v1_5.
+[arabic, start=72]
+. The evaluator shall verify that the TSS describes whether the TOE acts as a sender, a recipient, or both for RSA-based key establishment schemes.
+
+[arabic, start=72]
+. If the TOE acts as a sender, the following evaluation activity shall be performed to ensure the proper operation of every TOE supported combination of RSA-based key establishment scheme:
+
+.. To conduct this test the evaluator shall generate or obtain test vectors from a known good implementation of the TOE supported schemes. For each combination of supported key establishment scheme and its options (with or without key confirmation if supported, for each supported key confirmation MAC function if key confirmation is supported, and for each supported mask generation function if KTS-OAEP is supported), the tester shall generate 10 sets of test vectors. Each test vector shall include the RSA public key, the plaintext keying material, any additional input parameters if applicable, the MacKey and MacTag if key confirmation is incorporated, and the outputted ciphertext. For each test vector, the evaluator shall perform a key establishment encryption operation on the TOE with the same inputs (in cases where key confirmation is incorporated, the test shall use the MacKey from the test vector instead of the randomly generated MacKey used in normal operation) and ensure that the outputted ciphertext is equivalent to the ciphertext in the test vector.
+
+[arabic, start=72]
+. If the TOE acts as a receiver, the following evaluation activities shall be performed to ensure the proper operation of every TOE supported combination of RSA-based key establishment scheme:
+
+.. To conduct this test the evaluator shall generate or obtain test vectors from a known good implementation of the TOE supported schemes. For each combination of supported key establishment scheme and its options (with or without key confirmation if supported, for each supported key confirmation MAC function if key confirmation is supported, and for each supported mask generation function if KTS-OAEP is supported), the tester shall generate 10 sets of test vectors. Each test vector shall include the RSA private key, the plaintext keying material (KeyData), any additional input parameters if applicable, the MacTag in cases where key confirmation is incorporated, and the outputted ciphertext. For each test vector, the evaluator shall perform the key establishment decryption operation on the TOE and ensure that the outputted plaintext keying material (KeyData) is equivalent to the plaintext keying material in the test vector. In cases where key confirmation is incorporated, the evaluator shall perform the key confirmation steps and ensure that the outputted MacTag is equivalent to the MacTag in the test vector.
+
+. The evaluator shall ensure that the TSS describes how the TOE handles decryption errors. In accordance with NIST Special Publication 800-56B, the TOE must not reveal the particular error that occurred, either through the contents of any outputted or logged error message or through timing variations. If KTS-OAEP is supported, the evaluator shall create separate contrived ciphertext values that trigger each of the three decryption error checks described in NIST Special Publication 800-56B section 7.2.2.3, ensure that each decryption attempt results in an error, and ensure that any outputted or logged error message is identical for each. If KTS-KEM-KWS is supported, the evaluator shall create separate contrived ciphertext values that trigger each of the three decryption error checks described in NIST Special Publication 800-56B section 7.2.3.3, ensure that each decryption attempt results in an error, and ensure that any outputted or logged error message is identical for each. 
 
 *_FFC Schemes using “safe-prime” groups_*
 
 [arabic, start=83]
 . The evaluator shall verify the correctness of the TSF’s implementation of safe-prime groups by using a known good implementation for each protocol selected in FTP_TRP.1/Admin, FTP_TRP.1/Join, FTP_ITC.1 and FPT_ITT.1 that uses safe-prime groups. This test must be performed for each safe-prime group that each protocol uses.
 
-==== FCS_CKM.4 Cryptographic Key Destruction
+*ML-KEM Key Establishment Schemes*
+
+[arabic, start=86]
+. To test encapsulation the evaluator shall 10x input to the internal Encaps function a random 32-byte string and an encapsulation key. Verify the returned cipher text and shared secret is correct using a known good implementation. Here internal refers to the TOE’s implementation of the function ML-KEM.Encaps_internal(-,-) as described in FIPS.203.
+
+. To test decapsulation the evaluator shall 10x input to the internal Decaps function a cipher text and decapsulation key. Verify the returned shared secret is correct using a known good implementation. The tests should include a mix of valid and invalid/garbled cipher texts. Here internal refers to the TOE’s implementation of the function ML-KEM.Decaps_internal(-,-) as described in FIPS.203. 
+
+==== FCS_CKM.6 Timing and Event of Cryptographic Key Destruction
 
 ===== TSS
 
@@ -426,9 +447,9 @@ _Validity Test_
 . The evaluator shall examine the TSS to ensure it lists all relevant keys (describing the origin and storage location of each), all relevant key destruction situations (e.g. factory reset or device wipe function, disconnection of trusted channels, key change as part of a secure channel protocol), and the destruction method used in each case. For the purpose of this Evaluation Activity the relevant keys are those keys that are relied upon to support any of the SFRs in the Security Target. The evaluator shall confirm that the description of keys and storage locations is consistent with the functions carried out by the TOE (e.g. that all keys for the TOE-specific secure channels and protocols, or that support FPT_APW.EXT.1 and FPT_SKP_EXT.1, are accounted forfootnote:[Where keys are stored encrypted or wrapped under another key then this may need to be explained in order to allow the evaluator to confirm the consistency of the description of keys with the TOE functions.]). In particular, if a TOE claims not to store plaintext keys in non-volatile memory then the evaluator shall check that this is consistent with the operation of the TOE.
 . The evaluator shall check to ensure the TSS identifies how the TOE destroys keys stored as plaintext in non-volatile memory, and that the description includes identification and description of the interfaces that the TOE uses to destroy keys (e.g., file system APIs, key store APIs).
 . Note that where selections involve ‘destruction of reference’ (for volatile memory) or ‘invocation of an interface’ (for non-volatile memory) then the relevant interface definition is examined by the evaluator to ensure that the interface supports the selection(s) and description in the TSS. In the case of non-volatile memory, the evaluator includes in their examination the relevant interface description for each media type on which plaintext keys are stored. The presence of OS-level and storage device-level swap and cache files is not examined in the current version of the Evaluation Activity.
-. Where the TSS identifies keys that are stored in a non-plaintext form, the evaluator shall check that the TSS identifies the encryption method and the key-encrypting-key used, and that the key-encrypting-key is either itself stored in an encrypted form or that it is destroyed by a method included under FCS_CKM.4.
+. Where the TSS identifies keys that are stored in a non-plaintext form, the evaluator shall check that the TSS identifies the encryption method and the key-encrypting-key used, and that the key-encrypting-key is either itself stored in an encrypted form or that it is destroyed by a method included under FCS_CKM.6.
 . The evaluator shall check that the TSS identifies any configurations or circumstances that may not conform to the key destruction requirement (see further discussion in the Guidance Documentation section below). Note that reference may be made to the Guidance Documentation for description of the detail of such cases where destruction may be prevented or delayed.
-. Where the ST specifies the use of “a value that does not contain any CSP” to overwrite keys, the evaluator shall examine the TSS to ensure that it describes how that pattern is obtained and used, and that this justifies the claim that the pattern does not contain any CSPs.
+. Where the ST specifies the use of “a static or dynamic value that does not contain any CSP” to overwrite keys, the evaluator shall examine the TSS to ensure that it describes how that pattern is obtained and used, and that this justifies the claim that the pattern does not contain any CSPs.
 
 ===== Guidance Documentation
 
@@ -537,46 +558,120 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 . The ciphertext computed in the 1000th iteration is the result for that trial. This result shall be compared to the result of running 1000 iterations with the same values using a known good implementation. The evaluator shall perform this test using each selected keysize.
 . There is no need to test the decryption engine.
 
-==== FCS_COP.1/SigGen Cryptographic Operation (Signature Generation and Verification
+*AES-CCM Test*
+
+[arabic, start=121]
+
+. It is not recommended that evaluators use values obtained from static sources such as http://csrc.nist.gov/groups/STM/cavp/documents/mac/ccmtestvectors.zip or use values not generated expressly to exercise the AES-CCM implementation.
+
+. The evaluator shall test the generation-encryption and decryption-verification functionality of AES-CCM for the following input parameter and tag lengths:
+
+* Keys: All supported and selected key sizes (e.g., 256 bits).
+* Associated Data: Two or three values for associated data length: The minimum (≥ 0 bytes) and maximum (≤ 32 bytes) supported associated data lengths, and 2^16 (65536) bytes, if supported.
+* Payload: Two values for payload length: The minimum (≥ 0 bytes) and maximum (≤ 32 bytes) supported payload lengths.
+* Nonces: All supported nonce lengths (7, 8, 9, 10, 11, 12, 13) in bytes
+* Tag: All supported tag lengths (4, 6, 8, 10, 12, 14, 16) in bytes.
+
+. The testing for CCM consists of five tests. To determine correctness in each of the below tests, the evaluator shall compare the ciphertext with the result of encryption of the same inputs with a known good implementation.
+
+*Variable Associated Data Test*
+
+[arabic, start=122]
+
+. For each supported key size and associated data length, and any supported payload length, nonce length, and tag length, the evaluator shall supply one key value, one nonce value, and 10 pairs of associated data and payload values, and obtain the resulting ciphertext.
+
+*Variable Payload Test*
+
+[arabic, start=123]
+
+. For each supported key size and payload length, and any supported associated data length, nonce length, and tag length, the evaluator shall supply one key value, one nonce value, and 10 pairs of associated data and payload values, and obtain the resulting ciphertext.
+
+*Variable Nonce Test*
+
+[arabic, start=124]
+
+. For each supported key size and nonce length, and any supported associated data length, payload length, and tag length, the evaluator shall supply one key value, one nonce value, and 10 pairs of associated data and payload values, and obtain the resulting ciphertext.
+
+*Variable Tag Test*
+
+[arabic, start=125]
+. For each supported key size and tag length, and any supported associated data length, payload length, and nonce length, the evaluator shall supply one key value, one nonce value, and 10 pairs of associated data and payload values, and obtain the resulting ciphertext.
+
+*Decryption-Verification Process Test*
+
+[arabic, start=124]
+
+. To test the decryption-verification functionality of AES-CCM, for each combination of supported associated data length, payload length, nonce length, and tag length, the evaluator shall supply a key value and 15 sets of input plus ciphertext, and obtain the decrypted payload. Ten of the 15 input sets supplied should fail verification and five should pass.
+
+==== FCS_COP.1/SigGen Cryptographic Operation - Signature Generation
 
 ===== TSS
 
 [arabic, start=123]
-. The evaluator shall examine the TSS to determine that it specifies the cryptographic algorithm and key size supported by the TOE for signature services.
+. The evaluator shall examine the TSS to determine that it specifies the cryptographic algorithm and key size supported by the TOE for signature generation services.
 
 ===== Guidance Documentation
 
 [arabic, start=124]
-. The evaluator shall verify that the AGD guidance instructs the administrator how to configure the TOE to use the selected cryptographic algorithm and key size defined in the Security Target supported by the TOE for signature services.
+. The evaluator shall verify that the AGD guidance instructs the administrator how to configure the TOE to use the selected cryptographic algorithm and key size defined in the Security Target supported by the TOE for signature generation services.
 
 ===== Tests
 
 *ECDSA Algorithm Tests*
 
-*_ECDSA FIPS 186-4 Signature Generation Test_*
+*_ECDSA FIPS 186-5 Signature Generation Test_*
 
 [arabic, start=125]
 . For each supported NIST curve (i.e., P-256, P-384 and P-521) and SHA function pair, the evaluator shall generate 10 1024-bit long messages and obtain for each message a public key and the resulting signature values R and S. To determine correctness, the evaluator shall use the signature verification function of a known good implementation.
 
-*_ECDSA FIPS 186-4 Signature Verification Test_*
-
-[arabic, start=126]
-. For each supported NIST curve (i.e., P-256, P-384 and P-521) and SHA function pair, the evaluator shall generate a set of 10 1024-bit message, public key and signature tuples and modify one of the values (message, public key or signature) in five of the 10 tuples. The evaluator shall obtain in response a set of 10 PASS/FAIL values.
-
-
-*RSA Signature Algorithm Tests*
+*RSASSA-PKCS1-v1_5 or RSASSA-PSS*
 
 *_Signature Generation Test_*
 
 [arabic, start=127]
-. The evaluator generates or obtains 10 messages for each modulus size/SHA combination supported by the TOE. The TOE generates and returns the corresponding signatures.
-. The evaluator shall verify the correctness of the TOE’s signature using a trusted reference implementation of the signature verification algorithm and the associated public keys to verify the signatures.
+. The evaluator shall verify the implementation of RSA Signature Generation by the TOE using the Signature Generation Test. To conduct this test the evaluator must generate or obtain 10 messages from a trusted reference implementation for each modulus size/SHA combination supported by the TSF. The evaluator shall have the TOE use their private key and modulus value to sign these messages. The evaluator shall verify the correctness of the TSF’s signature using a known good implementation and the associated public keys to verify the signatures.
+
+*ML-DSA Test* 
+
+[arabic, start=128]
+. The evaluator shall 10x input to the internal Sign function a 32-byte random string, private key, and a randomly generated message. Check and confirm the value of the returned signature using a known good implementation. Here internal Sign refers to the TOE’s implementation of the function ML-DSA.Sign_internal(-,-,-) as described in FIPS.204.
+
+
+==== FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
+
+===== TSS
+
+[arabic, start=123]
+. The evaluator shall examine the TSS to determine that it specifies the cryptographic algorithm and key size supported by the TOE for signature verification services.
+
+===== Guidance Documentation
+
+[arabic, start=124]
+. The evaluator shall verify that the AGD guidance instructs the administrator how to configure the TOE to use the selected cryptographic algorithm and key size defined in the Security Target supported by the TOE for signature verification services.
+
+===== Tests
+
+*_ECDSA FIPS 186-5 Signature Verification Test_*
+
+[arabic, start=126]
+. For each supported NIST curve (i.e., P-256, P-384 and P-521) and SHA function pair, the evaluator shall generate a set of 10 1024-bit message, public key and signature tuples and modify one of the values (message, public key or signature) in five of the 10 tuples. The evaluator shall obtain in response a set of 10 PASS/FAIL values.
+
+*RSASSA-PKCS1-v1_5 or RSASSA-PSS*
 
 *_Signature Verification Test_*
 
 [arabic, start=129]
-. For each modulus size/hash algorithm selected, the evaluator shall generate a modulus and three associated key pairs, (_d_, _e_). Each private key _d_ is used to sign six pseudorandom messages each of 1024 bits using a trusted reference implementation of the signature generation algorithm. Some of the public keys, _e_, messages, or signatures are altered so that signature verification should fail. For both the set of original messages and the set of altered messages: the modulus, hash algorithm, public key _e_ values, messages, and signatures are forwarded to the TOE, which then attempts to verify the signatures and returns the verification results.
-. The evaluator shall verify that the TOE confirms correct signatures on the original messages and detects the errors introduced in the altered messages.
+. The evaluator shall perform the Signature Verification test to verify the ability of the TOE to recognize another party’s valid and invalid signatures. The evaluator shall inject errors into the test vectors produced during the Signature Verification Test by introducing errors in some of the public keys, e, messages, IR format, and/or signatures. The TOE attempts to verify the signatures and returns success or failure. 
+
+*LMS/XMSS Signature Algorithm Test*
+
+[arabic, start=130]
+. For each supported LMS/LMSOTS pair, the evaluator generates a private/public key pair. With the private key, the evaluator generates 4 messages of length 1024 bits. The messages and public key are provided to the TOE. The signature for each message is generated with the following error types "none", “modify message”, “modify signature”, “modify header”. For "none" the message is unmodified and the signature is correct. For "modify message" the signature is for a modified message where a single bit is flipped. For "modify signature", one bit of the signature is flipped. For "modify header" the signature uses a different LMS/LMSOTS pair. Each error type is represented. For each message, signature pair the TOE returns "true" or "false" depending on whether the signature verifies or not. 
+
+*ML-DSA Test*
+
+[arabic, start=131]
+. The evaluator shall 10x input to the internal SigVer function, a public key, message and signature. Verify the signature. Tests should involve a mix of good and bad signatures generated using different messages, keys, etc. Here internal SigVer refers to the TOE’s implementation of the function ML-DSA.Verify_internal(-,-,-) as described in FIPS.204.
 
 ==== FCS_COP.1/CMAC Cryptographic Operation - CMAC
 
@@ -615,7 +710,7 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
       16
       Any supported CMAC length between the minimum and maximum values
 
-==== FCS_COP.1/Hash Cryptographic Operation (Hash Algorithm)
+==== FCS_COP.1/Hash Cryptographic Operation - Hashing
 
 ===== TSS
 
@@ -628,6 +723,8 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 . The evaluator shall check the AGD documents to determine that any configuration that is required to configure the required hash sizes is present.
 
 ===== Tests
+
+*[conditional: for SHA-1 and SHA-2]*
 
 [arabic, start=133]
 . The TSF hashing functions can be implemented in one of two modes. The first mode is the byte­oriented mode. In this mode the TSF only hashes messages that are an integral number of bytes in length; i.e., the length (in bits) of the message to be hashed is divisible by 8. The second mode is the bit­oriented mode. In this mode the TSF hashes messages of arbitrary length. As there are different tests for each mode, an indication is given in the following sections for the bit­oriented vs. the byte­oriented testmacs.
@@ -658,7 +755,44 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 [arabic, start=139]
 . This test is for byte­oriented implementations only. The evaluator shall randomly generate a seed that is n bits long, where n is the length of the message digest produced by the hash function to be tested. The evaluators then formulate a set of 100 messages and associated digests by following the algorithm provided in Figure 1 of [SHAVS]. The evaluator shall then ensure that the correct result is produced when the messages are provided to the TSF.
 
-==== FCS_COP.1/KeyedHash Cryptographic Operation (Keyed Hash Algorithm)
+*[conditional: for SHA3 only]*
+[arabic, start=140]
+
+. The TSF hashing functions can be implemented with one of two orientations. The first is a bit-oriented mode that hashes messages of arbitrary length. The second is a byte-oriented mode that hashes messages that are an integral number of bytes in length (i.e., the length (in bits) of the message to be hashed is divisible by 8). Separate tests for each orientation are given below.
+
+. The evaluator shall perform all of the following tests for each hash algorithm and implemented by the TSF and used to satisfy the requirements of this PP. 
+
+*Short Messages Test, Bit-oriented Mode*
+
+[arabic, start=141]
+. The evaluators devise an input set consisting of m+1 messages, where m is the _rate_ of the hash algorithm. The length of the messages range sequentially from 0 to m bits (or 1 to m bits, if zero-length is not supported by the hash function). The message text shall be pseudorandomly generated. The evaluators compute the message digest for each of the messages and ensure that the correct result is produced when the messages are provided to the TSF.
+
+*Short Messages Test, Byte-oriented Mode*
+
+[arabic, start=142]
+. The evaluators devise an input set consisting of m/8+1 messages, where m is the _rate_ of the hash algorithm. The length of the messages range sequentially from 0 to m/8 bytes (or 1 to m/8 bytes, if zero-length is not supported by the hash function), with each message being an integral number of bytes. The message text shall be pseudorandomly generated. The evaluators compute the message digest for each of the messages and ensure that the correct result is produced when the messages are provided to the TSF.
+
+*Selected Long Messages Test, Bit-oriented Mode*
+
+[arabic, start=143]
+. The evaluators devise an input set consisting of 100 messages. Each message ranges in _Len_ size from _rate_+(_rate_+1) <= _Len_ <= _rate_+(100*(_rate_+1) ) incrementing by _rate_+1. The evaluators compute the message digest for each of the messages and ensure that the correct result is produced when the messages are provided to the TSF.
+
+*Selected Long Messages Test, Byte-oriented Mode*
+
+[arabic, start=144]
+. The evaluators devise an input set consisting of 100 messages. Each message ranges in _Len_ size from _rate_+(_rate_+8) <= _Len_ <= _rate_+(100*(_rate_+8) ) incrementing by _rate_+8. The evaluators compute the message digest for each of the messages and ensure that the correct result is produced when the messages are provided to the TSF.
+
+*Pseudo-randomly Generated Messages (Monte Carlo) Test, Byte-oriented Mode*
+
+[arabic, start=145]
+. The evaluator supplies a seed of d bits (where d is the length of the message digest produced by the hash function to be tested. This seed is used by a pseudorandom function to generate 100,000 message digests. One hundred of the digests (every 1000th digest) are recorded as checkpoints. The TOE then uses the same procedure to generate the same 100,000 message digests and 100 checkpoint values. The evaluator then compares the results generated ensure that the correct result is produced when the messages are generated by the TSF.
+
+*Large Data Test*
+
+[arabic, start=146]
+. The evaluators devise an input set consisting of messages which are equal to or larger than 2^33 bits. The message text can be generated psuedorandomly or use a repeating bit pattern. The evaluators then ensure that the correct result is produced when the messages are provided to the TSF.
+
+==== FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash
 
 ===== TSS
 
@@ -675,22 +809,50 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 [arabic, start=142]
 . For each of the supported parameter sets, the evaluator shall compose 15 sets of test data. Each set shall consist of a key and message data. The evaluator shall have the TSF generate HMAC tags for these sets of test data. The resulting MAC tags shall be compared to the result of generating HMAC tags with the same key and message data using a known good implementation.
 
-==== FCS_RBG_EXT.1 Cryptographic Operation (Random Bit Generation)
+==== FCS_RBG.1 Random Bit Generation (RBG)
 
 [arabic, start=143]
 . Documentation shall be produced—and the evaluator shall perform the activities—in accordance with Appendix D of [NDcPP].
 
 ===== TSS
 
+*FCS_RBG.1.1*
+
 [arabic, start=144]
-. The evaluator shall examine the TSS to determine that it specifies the DRBG type, identifies the entropy source(s) seeding the DRBG, and state the assumed or calculated min-entropy supplied either separately by each source or the min-entropy contained in the combined seed value.
+. The evaluator shall examine the TSS to determine it identifies the DRBGs used by the TOE.
+
+*FCS_RBG.1.2*
+
+[arabic, start=144]
+. There are no additional TSS evaluation activities for this element.
+
+*FCS_RBG.1.3*
+
+[arabic, start=144]
+
+. The evaluator shall verify that the TSS identifies how the DRBG state is updated, and the situations under which this may occur. 
 
 ===== Guidance Documentation
 
+*FCS_RBG.1.1*
+
 [arabic, start=145]
-. The evaluator shall confirm that the guidance documentation contains appropriate instructions for configuring the RNG functionality.
+. If the DRBG functionality is configurable, the evaluator shall verify that the operational guidance includes instructions on how to configure this behavior.
+
+*FCS_RBG.1.2*
+
+[arabic, start=145]
+. There are no additional Guidance evaluation activities for this element.
+
+*FCS_RBG.1.3*
+
+[arabic, start=145]
+
+. If the ST claims that the DRBG state can be updated on demand, the evaluator shall verify that the operational guidance has instructions for how to perform this operation.
 
 ===== Tests
+
+*FCS_RBG.1.1*
 
 [arabic, start=146]
 . The evaluator shall perform 15 trials for the RNG implementation. If the RNG is configurable, the evaluator shall perform 15 trials for each configuration.
@@ -702,6 +864,16 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 * *Nonce:* If a nonce is supported (CTR_DRBG with no Derivation Function does not use a nonce), the nonce bit length is one-half the seed length.
 * *Personalization string:* The length of the personalization string must be <= seed length. If the implementation only supports one personalization string length, then the same length can be used for both values. If more than one string length is support, the evaluator shall use personalization strings of two different lengths. If the implementation does not use a personalization string, no value needs to be supplied.
 * *Additional input:* the additional input bit lengths have the same defaults and restrictions as the personalization string lengths.
+
+*FCS_RBG.1.2*
+
+[arabic, start=146]
+. There are no test activities for this element.
+
+*FCS_RBG.1.3*
+
+[arabic, start=146]
+. There are no test activities for this element.
 
 === Identification and Authentication (FIA)
 
@@ -1321,6 +1493,110 @@ Some TOEs may set up the registration channel before the enablement step is carr
 
 === Cryptographic Support (FCS)
 
+==== FCS_RBG.2 Random Bit Generation (External Seeding)
+
+[arabic, start=399]
+. The evaluator shall examine the entropy documentation required by FCS_RBG.1.2 to verify that it identifies, for each DRBG function implemented by the TOE, the TSF external interface used to seed the TOE's DRBG. The evaluator shall verify that this includes the amount of sampled data and the min-entropy rate of the sampled data such that it can be determined that sufficient entropy can be made available for the highest strength keys that the TSF can generate (e.g., 256 bits). If the seed data cannot be assumed to have full entropy (e.g., the min-entropy of the sampled bits is less than 1), the evaluator shall ensure that the entropy documentation describes the method by which the TOE estimates the amount of entropy that has been accumulated to ensure that sufficient data is collected and any conditioning that the TSF applies to the output data to create a seed of sufficient size with full entropy. 
+
+===== TSS
+
+*FCS_RBG.2.1*
+
+[arabic, start=399]
+. There are no additional TSS evaluation activities for this component.
+
+===== Guidance Documentation
+
+*FCS_RBG.2.1*
+
+[arabic, start=399]
+. There are no additional Guidance evaluation activities for this component.
+
+===== Tests
+
+*FCS_RBG.2.1*
+
+[arabic, start=399]
+. There are no test activities for this component.
+
+==== FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
+
+[arabic, start=399]
+. The evaluator shall examine the entropy documentation required by FCS_RBG.1.2 to verify that it identifies, for each DRBG function implemented by the TOE, the TSF noise source used to seed the TOE's DRBG. The evaluator shall verify that this includes the amount of sampled data and the min-entropy rate of the sampled data such that it can be determined that sufficient entropy can be made available for the highest strength keys that the TSF can generate (e.g., 256 bits). If the seed data cannot be assumed to have full entropy (e.g., the min-entropy of the sampled bits is less than 1), the evaluator shall ensure that the entropy documentation describes the method by which the TOE estimates the amount of entropy that has been accumulated to ensure that sufficient data is collected and any conditioning that the TSF applies to the output data to create a seed of sufficient size with full entropy. 
+
+===== TSS
+
+*FCS_RBG.3.1*
+
+[arabic, start=399]
+. There are no additional TSS evaluation activities for this component.
+
+===== Guidance Documentation
+
+*FCS_RBG.3.1*
+
+[arabic, start=399]
+. There are no additional Guidance evaluation activities for this component.
+
+===== Tests
+
+*FCS_RBG.3.1*
+
+[arabic, start=399]
+. There are no test activities for this component.
+
+==== FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
+
+[arabic, start=399]
+. The evaluator shall examine the entropy documentation required by FCS_RBG.1.2 to verify that it identifies, for each DRBG function implemented by the TOE, each TSF noise source used to seed the TOE's DRBG. The evaluator shall verify that this includes the amount of sampled data and the min-entropy rate of the sampled data from each data source.
+
+===== TSS
+
+*FCS_RBG.4.1*
+
+[arabic, start=399]
+. There are no additional TSS evaluation activities for this component.
+
+===== Guidance Documentation
+
+*FCS_RBG.4.1*
+
+[arabic, start=399]
+. There are no additional Guidance evaluation activities for this component.
+
+===== Tests
+
+*FCS_RBG.4.1*
+
+[arabic, start=399]
+. There are no test activities for this component.
+
+==== FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)
+
+[arabic, start=399]
+. Using the entropy sources specified in FCS_RBG.4, the evaluator shall examine the entropy documentation required by FCS_RBG.1.2 to verify that it describes the method by which the various entropy sources are combined into a single seed. This should include an estimation of the rate at which each noise source outputs data and whether this is dependent on any system-specific factors so that each source's relative contribution to the overall entropy is understood. The evaluator shall verify that the resulting combination of sampled data and the min-entropy rate of the sampled data is described in sufficient detail to determine that sufficient entropy can be made available for the highest strength keys that the TSF can generate (e.g., 256 bits). If the seed data cannot be assumed to have full entropy (e.g., the min-entropy of the sampled bits is less than 1), the evaluator shall ensure that the entropy documentation describes the method by which the TOE estimates the amount of entropy that has been accumulated to ensure that sufficient data is collected and any conditioning that the TSF applies to the output data to create a seed of sufficient size with full entropy. 
+
+===== TSS
+
+*FCS_RBG.5.1*
+
+[arabic, start=399]
+. There are no additional TSS evaluation activities for this component.
+
+===== Guidance Documentation
+
+*FCS_RBG.5.1*
+
+[arabic, start=399]
+. There are no additional Guidance evaluation activities for this component.
+
+===== Tests
+
+*FCS_RBG.5.1*
+
+[arabic, start=399]
+. There are no test activities for this component.
+
 ==== FCS_IPSEC_EXT.1 IPsec Protocol
 
 ===== TSS
@@ -1391,7 +1667,7 @@ Some TOEs may set up the registration channel before the enablement step is carr
 *FCS_IPSEC_EXT.1.13*
 
 [arabic, start=414]
-. The evaluator shall ensure that the TSS identifies RSA and/or ECDSA as being used to perform peer authentication. The description must be consistent with the algorithms as specified in FCS_COP.1/SigGen Cryptographic Operations (for cryptographic signature).
+. The evaluator shall ensure that the TSS identifies RSA and/or ECDSA as being used to perform peer authentication. The description must be consistent with the algorithms as specified in FCS_COP.1/SigVer Cryptographic Operation - Signature Verification.
 . If pre-shared keys are chosen in the selection, the evaluator shall check to ensure that the TSS describes how pre-shared keys are established and used in authentication of IPsec connections. The description in the TSS shall also indicate how pre-shared key establishment is accomplished for TOEs that can generate a pre-shared key as well as TOEs that simply use a pre-shared key.
 
 *FCS_IPSEC_EXT.1.14*
@@ -1734,6 +2010,23 @@ If the time period selection in FIA_AFL.1.2 is included in the ST, then the eval
 [loweralpha]
 .. Test 1: The evaluator shall compose passwords that meet the requirements in some way. For each password, the evaluator shall verify that the TOE supports the password. While the evaluator is not required (nor is it feasible) to test all possible compositions of passwords, the evaluator shall ensure that all characters, and a minimum length listed in the requirement are supported and justify the subset of those characters chosen for testing.
 .. Test 2: The evaluator shall compose passwords that do not meet the requirements in some way. For each password, the evaluator shall verify that the TOE does not support the password. While the evaluator is not required (nor is it feasible) to test all possible compositions of passwords, the evaluator shall ensure that the TOE enforces the allowed characters and the minimum length listed in the requirement and justify the subset of those characters chosen for testing.
+
+==== FIA_PSK_EXT.1 Pre-Shared Key Composition
+
+===== TSS
+
+[arabic, start=545]
+. If "generate" is selected, the evaluator shall confirm that this process uses the RBG specified in FCS_RBG.1 and the output matches the size required in FIA_PSK_EXT.1.2.
+
+===== Guidance Documentation
+
+[arabic, start=546]
+. The evaluator shall examine the operational guidance to determine that it provides guidance to administrators on how to configure the mandatory_or_not flag per RFC 8784.
+
+===== Tests
+
+[arabic, start=547]
+. The evaluator shall attempt to establish a connection and confirm that the connection requires the selected factors in the PSK to establish the connection in alignment with table 1 from RFC 8784.
 
 === Protection of the TSF (FPT)
 
