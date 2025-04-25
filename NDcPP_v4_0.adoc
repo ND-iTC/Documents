@@ -1629,7 +1629,7 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 |*Requirement* |*Auditable Events* |*Additional Audit Record Contents*
 |FAU_STG.1 |None. |None.
 |FAU_STG_EXT.2 |None. |None.
-|FAU_STG_EXT.3 |Low storage space for audit events. |None.
+|FAU_STG_EXT.3 |Low storage space for audit data. |None.
 |FCO_CPC_EXT.1 a|
 * Enabling communications between a pair of components.
 * Disabling communications between a pair of components.
@@ -2415,15 +2415,13 @@ Dependencies:
 
 *FAU_STG_EXT.2.1* The TSF shall be able to transmit the generated audit data to an external IT entity using a trusted channel according to FTP_ITC.1
 
-*FAU_STG_EXT.2.2* See FAU_STG_EXT.1.1
+*FAU_STG_EXT.2.2* The TSF shall maintain a [selection: log file, database, buffer, [assignment:other local logging method]] of audit records in the event that an interruption of communication with the remote audit server occurs.
 
-*FAU_STG_EXT.2.3* The TSF shall maintain a [selection: log file, database, buffer, [assignment:other local logging method]] of audit records in the event that an interruption of communication with the remote audit server occurs.
+*FAU_STG_EXT.2.3* The TSF shall be able to store [selection: persistent, non- persistent] audit records locally with a minimum storage size of [assignment: number of records, file/buffer size(s)].
 
-*FAU_STG_EXT.2.4* The TSF shall be able to store [selection: persistent, non- persistent] audit records locally with a minimum storage size of [assignment: number of records, file/buffer size(s)].
+*FAU_STG_EXT.2.4* The TSF shall [selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]] when the local storage space for audit data is full.
 
-*FAU_STG_EXT.2.5* The TSF shall [selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]] when the local storage space for audit data is full.
-
-*FAU_STG_EXT.2.6* The TSF shall provide the following mechanisms for administrative access to locally stored audit records [selection: none, manual export, ability to view locally].
+*FAU_STG_EXT.2.5* The TSF shall provide the following mechanisms for administrative access to locally stored audit records [selection: none, manual export, ability to view locally].
 
 =====  FAU_STG_EXT.3 Counting lost audit data
 
@@ -2434,7 +2432,7 @@ Dependencies:
 * FAU_GEN.1 Audit data generation
 // Should this be FAU_GEN_EXT.1? //
 
-* FAU_STG_EXT.2 Protected audit data stora
+* FAU_STG_EXT.2 Protected audit data storage
 
 
 *FAU_STG_EXT.3.1* The TSF shall provide information about the number of [selection: dropped, overwritten, [assignment: other information]] audit records in the case where the local storage has been filled and the TSF takes one of the
