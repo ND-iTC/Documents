@@ -586,7 +586,9 @@ If a virtual TOE evaluated as a pND, following Case 2 vNDs as specified in Secti
 
 ==== A.NO_THRU_TRAFFIC_PROTECTION
 
-A standard/generic Network Device does not provide any assurance regarding the protection of traffic that traverses it. The intent is for the Network Device to protect data that originates on or is destined to the device itself, to include administrative data and audit data. Traffic that is traversing the Network Device, destined for another network entity, is not covered by the ND cPP. It is assumed that this protection will be covered by cPPs and PP-Modules for particular types of Network Devices (e.g., firewall).
+A standard/generic Network Device does not provide any assurance regarding the protection of traffic that traverses it. The intent is for the Network Device to protect data that originates on or is destined to the device itself, to include administrative data and audit data. 
+
+NOTE: Traffic that is traversing the Network Device, destined for another network entity, is not covered by the ND cPP. Additional protection will be covered by cPPs and PP-Modules for particular types of Network Devices (e.g., firewall).
 
 {empty}[OE.NO_THRU_TRAFFIC_PROTECTION]
 
@@ -2947,6 +2949,9 @@ Dependencies: FPT_TUD_EXT.1
 *FPT_TUD_EXT.2.4* If the certificate is deemed invalid for reasons other than expiration or revocation information being unavailable, the TSF shall not install the update.
 
 ==== Time stamps (FPT_STM_EXT)
+// Adding a comment per issue 405 https://github.com/ND-iTC/Documents/issues/405 //
+// An extended component for FPT_STM is neededin NDcPP because:  ???? //
+
 
 *Family Behaviour*
 
@@ -2956,7 +2961,7 @@ Components in this family extend FPT_STM requirements by describing the source o
 
 image:extracted-media/media/FPT_STM_EXT.png[image,width=500,height=48]
 
-FPT_STM_EXT.1 Reliable time stamps is hierarchic to FPT_STM.1: it requires that the TSF provide reliable time stamps for TSF and identifies the source of the time used in those timestamps.
+FPT_STM_EXT.1 Reliable time stamps requires that the TSF provide reliable time stamps for TSF and identifies the source of the time used in those timestamps.
 
 *Management: FPT_STM_EXT.1*
 
