@@ -1159,9 +1159,9 @@ _The HMAC minimum key sizes in the table are specified in ISO/IEC 9797-2:2021, w
 |CTR_DRBG with [selection: AES-128, AES-192, AES-256] |[selection: ISO/IEC 18031: 2025 (Section C.3.2), NIST SP800-90A Revision 1 Section 10.2.1]
 |===
 
-*FCS_RBG.1.2* The TSF shall use a [selection: TSF entropy source [assignment: _name of entropy source_], TSF interface for obtaining entropy] for initialization and reseeding.
+*FCS_RBG.1.2* The TSF shall use a [selection: TSF entropy source [assignment: _name of entropy source_],multiple TSF noise sources [assignment: _name of each entropy source_]] for initialization and reseeding.
 
-*FCS_RBG.1.3* The TSF shall update the DRBG state by [selection: reseeding, uninstantiating and re-instantiating] using a [selection: TSF entropy source [assignment: _name of entropy source_], TSF interface for obtaining entropy [assignment: _name of the interface_]] in the following situations: [selection:
+*FCS_RBG.1.3* The TSF shall update the DRBG state by [selection: reseeding, uninstantiating and re-instantiating] using a [selection: TSF entropy source [assignment: _name of entropy source_], multiple TSF noise sources [assignment: _name of each entropy source_]] in the following situations: [selection:
 
 * never,
 * on demand,
@@ -1174,8 +1174,6 @@ in accordance with [assignment: _list of standards_].
 _If "TSF noise source" is selected in FCS_RBG.1.2, FCS_RBG.3 must be claimed from Appendix A._
 
 _If "multiple TSF noise sources" is selected in FCS_RBG.1.2, FCS_RBG.4 and FCS_RBG.5 must be claimed from Appendix A._
-
-_If "TSF interface for seeding" is selected in FCS_RBG.1.2, FCS_RBG.2 must be claimed from Appendix A._
 
 _No rationale is acceptable for not satisfying one of these dependencies._
 
@@ -1900,7 +1898,6 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |FAU_GEN_EXT.1 |None |None
 |FAU_STG_EXT.4 |None |None
 |FAU_STG_EXT.5 |None |None
-|FCS_RBG.2 |None |None
 |FCS_RBG.3 |None |None
 |FCS_RBG.4 |None |None
 |FCS_RBG.5 |None |None
@@ -1988,23 +1985,9 @@ _TOE components are not required to monitor or audit connectivity or network out
 
 ==== Cryptographic Support (FCS)
 
-===== FCS_RBG.2 Random Bit Generation (External Seeding)
-
-This component is included if "TSF interface for seeding" is selected in FCS_RBG.1.2
-
-*FCS_RBG.2 Random Bit Generation (External Seeding)*
-
-*FCS_RBG.2.1* The TSF shall be able to accept a minimum input of [assignment: _minimum input length greater than zero_] from a TSF interface for the purpose of obtaining entropy.
-
-*_Application Note {counter:appnote_count}_*
-
-_This requirement is claimed when a DRBG is seeded with entropy from one or more noise source that is outside the TOE boundary. In the case of a network device this would likely only occur when the entropy source is a Dedicated Security Component that is integrated with the TOE. Typically the entropy produced by an environmental noise source is conditioned such that the input length has full entropy and is therefore usable as the seed. However, if this is not the case, it should be noted what the minimum entropy rate of the noise source is so that the TSF can collect a sufficiently large sample of noise data to be conditioned into a seed value._
-
-_The TSF interface for the purpose of seeding here is the interface used to gather entropy for initializing the seed._
-
 ===== FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
 
-This component is included if "TSF noise source" is selected in FCS_RBG.1.2
+This component corresponds to "TSF noise source" in FCS_RBG.1.2
 
 *FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)*
 
