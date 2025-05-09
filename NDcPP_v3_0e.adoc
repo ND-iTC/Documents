@@ -1159,9 +1159,19 @@ _The HMAC minimum key sizes in the table are specified in ISO/IEC 9797-2:2021, w
 |CTR_DRBG with [selection: AES-128, AES-192, AES-256] |[selection: ISO/IEC 18031: 2025 (Section C.3.2), NIST SP800-90A Revision 1 Section 10.2.1]
 |===
 
-*FCS_RBG.1.2* The TSF shall use a [selection: TSF entropy source [assignment: _name of entropy source_],multiple TSF noise sources [assignment: _name of each entropy source_]] for initialization and reseeding.
+*FCS_RBG.1.2* The TSF shall use a [selection: TSF noise source [assignment: _name of noise source_], *multiple TSF noise sources [assignment: _name of noise sources_]*, TSF interface for seeding] for initialized seeding.
 
-*FCS_RBG.1.3* The TSF shall update the DRBG state by [selection: reseeding, uninstantiating and re-instantiating] using a [selection: TSF entropy source [assignment: _name of entropy source_], multiple TSF noise sources [assignment: _name of each entropy source_]] in the following situations: [selection:
+*_Application Note {counter:appnote_count}_*
+
+_For the selection in this requirement, the ST author selects "TSF noise source" if a single noise source is used as input to the DRBG. The ST author selects "multiple TSF noise sources" if a seed is formed from a combination of two or more noise sources within the TOE boundary. If the TSF implements two or more separate DRBGs that are seeded in separate manners, this SFR should be iterated for each DRBG. If multiple distinct noise sources exist such that each DRBG only uses one of them, then each iteration would select "TSF noise source"; "multiple TSF noise sources" is only selected if a single DRBG uses multiple noise sources for its seed. The ST author selects "TSF interface for seeding" if noise source data is generated outside the TOE boundary._ 
+
+_If "TSF noise source" is selected in FCS_RBG.1.2, FCS_RBG.3 must be claimed from Appendix A._
+
+_If "multiple TSF noise sources" is selected in FCS_RBG.1.2, FCS_RBG.4 and FCS_RBG.5 must be claimed from Appendix A._
+
+_If "TSF interface for seeding" is selected in FCS_RBG.1.2, FCS_RBG.2 must be claimed from Appendix A._
+
+*FCS_RBG.1.3* The TSF shall update the DRBG state by [selection: reseeding, uninstantiating and re-instantiating] using a [selection: TSF noise source [assignment: _name of noise source_], *multiple TSF noise sources [assignment: _name of noise sources_]*, TSF interface for seeding] in the following situations: [selection:
 
 * never,
 * on demand,
@@ -1171,16 +1181,11 @@ in accordance with [assignment: _list of standards_].
 
 *_Application Note {counter:appnote_count}_*
 
-_If "TSF noise source" is selected in FCS_RBG.1.2, FCS_RBG.3 must be claimed from Appendix A._
-
-_If "multiple TSF noise sources" is selected in FCS_RBG.1.2, FCS_RBG.4 and FCS_RBG.5 must be claimed from Appendix A._
-
 _No rationale is acceptable for not satisfying one of these dependencies._
 
 _If a reseeding is selected in the first selection of FCS_RBG.1.2 and something other than “never” is selected in the third selection of FCS_RBG.1.3, but reseeding is not feasible, the TSF will uninstantiate RBGs, rather than produce output that is of insufficient quality. The listed standards should specify the reseed interval and procedure for uninstantiating and reseeding. The remaining selection allows the PP Author to require application-specific conditions for reseeding._
  
 _“Uninstantiate” means that the internal state of the DRBG is no longer available for use. In the second selection of FCS_RBG.1.3, “on demand” means that a TOE presents an interface to reseed as a TSFI (e.g., an API call). The interface causes the DRBG to reseed at the request of an authorized user, either with an internal source, an external source, or from input provided through the TSFI (e.g., the API call)._
-
 
 === Identification and Authentication (FIA)
 
@@ -1898,6 +1903,7 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |FAU_GEN_EXT.1 |None |None
 |FAU_STG_EXT.4 |None |None
 |FAU_STG_EXT.5 |None |None
+|FCS_RBG.2 |None |None
 |FCS_RBG.3 |None |None
 |FCS_RBG.4 |None |None
 |FCS_RBG.5 |None |None
@@ -1985,9 +1991,25 @@ _TOE components are not required to monitor or audit connectivity or network out
 
 ==== Cryptographic Support (FCS)
 
+*FCS_RBG.2 Random Bit Generation (External Seeding)*
+
+===== FCS_RBG.2 Random Bit Generation (External Seeding)
+
+This component is included if "TSF interface for seeding" is selected in FCS_RBG.1.2
+
+*FCS_RBG.2 Random Bit Generation (External Seeding)*
+
+*FCS_RBG.2.1* The TSF shall be able to accept a minimum input of [assignment: _minimum input length greater than zero_] from a TSF interface for the purpose of obtaining entropy.
+
+*_Application Note {counter:appnote_count}_*
+
+_This requirement is claimed when a DRBG is seeded with entropy from one or more noise source that is outside the TOE boundary. In the case of a network device this would only occur with a vND where the entropy source is provided by the underlying Virtualisation System (VS) platform.  Typically the entropy produced by an environmental noise source is conditioned such that the input length has full entropy and is therefore usable as the seed. However, if this is not the case, it should be noted what the minimum entropy rate of the noise source is so that the TSF can collect a sufficiently large sample of noise data to be conditioned into a seed value._
+
+_The TSF interface for the purpose of seeding here is the interface used to gather entropy for initializing the seed._
+
 ===== FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
 
-This component corresponds to "TSF noise source" in FCS_RBG.1.2
+This component is included if "TSF noise source" is selected in FCS_RBG.1.2
 
 *FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)*
 
@@ -2015,7 +2037,7 @@ This component is included if "multiple TSF noise sources" is selected in FCS_RB
 
 *FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)*
 
-*FCS_RBG.5.1* The TSF shall [assignment: _combining operation_] [selection: _output from TSF noise source(s), input from TSF interface(s) for seeding_] to create the entropy input into the derivation function as defined in [assignment: _list of standards_], resulting in a minimum of [assignment: _number of bits_] bits of min-entropy. 
+*FCS_RBG.5.1* The TSF shall [assignment: _combining operation_] [selection: _output from TSF noise source(s), input from TSF interface(s) for seeding_] resulting in a minimum of [assignment: _number of bits_] bits of min-entropy to create the entropy input into the derivation function as defined in [selection: _ISO/IEC 18031:2025, NIST SP 800-90A Revision 1_]. 
 
 *_Application Note {counter:appnote_count}_*
 
