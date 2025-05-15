@@ -1991,13 +1991,13 @@ _TOE components are not required to monitor or audit connectivity or network out
 
 ==== Cryptographic Support (FCS)
 
-*FCS_RBG.2 Random Bit Generation (External Seeding)*
+*FCS_RBG.2 Random Bit Generation (External Seeding - VS platform)*
 
-===== FCS_RBG.2 Random Bit Generation (External Seeding)
+===== FCS_RBG.2 Random Bit Generation (External Seeding - VS platform)
 
 This component is included if "TSF interface for seeding" is selected in FCS_RBG.1.2
 
-*FCS_RBG.2 Random Bit Generation (External Seeding)*
+*FCS_RBG.2 Random Bit Generation (External Seeding - VS platform)*
 
 *FCS_RBG.2.1* The TSF shall be able to accept a minimum input of [assignment: _minimum input length greater than zero_] from a TSF interface for the purpose of obtaining entropy.
 
