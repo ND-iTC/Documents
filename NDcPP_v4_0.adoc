@@ -249,7 +249,7 @@ The PP-Modules that are allowed to specify this cPP as a base-PP are specified i
 
 === Evaluation Methods
 The supporting document, "Evaluation Activies for Network Device cPP" must be used in conjunction with [CEM] when performing evaluations of an ST specifying this Network Device cPP.
-The supporting document defines the evaluation methods and activities for this cPP and has been developed in accordance [CC4]which can be found at https://github.com/ND-iTC/Documents.
+The supporting document defines the evaluation methods and activities for this cPP and has been developed in accordance [CC4]The suporting document can be found at https://github.com/ND-iTC/Documents.
 
 == Introduction to Distributed TOEs
 
