@@ -47,9 +47,9 @@ CCMB-2022-11-002, CC:2022 Revision 1, November 2022.
 |[CC-SFRC] |Common Criteria for Information Technology Security Evaluation, +
 Specification of Functional Requirements for Cryptography, +
 CCDB-018, Version 1, 31 January, 2025.
-|[CC3] |Common Criteria for Information Technology Security Evaluation, +
-Part 3: Security assurance requirements, +
-CCCMB-2022-11-003, CC:2022 Revision 1, November 2022.
+|[CC4] |Common Criteria for Information Technology Security Evaluation, +
+Part 4: Framework for the specification of evaluation methods and activities, +
+CCCMB-2022-11-004, CC:2022 Revision 1, November 2022.
 |[CCE] |Common Criteria for Information Technology Security Evaluation, +
 Errata and interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1)
 CCCMB-002, Version 1.1, July 22, 2024.
@@ -249,7 +249,7 @@ The PP-Modules that are allowed to specify this cPP as a base-PP are specified i
 
 === Evaluation Methods
 The supporting document, "Evaluation Activies for Network Device cPP" must be used in conjunction with [CEM] when performing evaluations of an ST specifying this Network Device cPP.
-The supporting document can be found at https://github.com/ND-iTC/Documents.
+The supporting document defines the evaluation methods and activities for this cPP and has been developed in accordance [CC4]which can be found at https://github.com/ND-iTC/Documents.
 
 == Introduction to Distributed TOEs
 
