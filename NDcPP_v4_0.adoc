@@ -788,7 +788,7 @@ Loss of communication with the audit server is problematic. While there are seve
 
 *FAU_GEN.1 Audit data generation*
 
-*FAU_GEN.1.1* The TSF shall be able to generate an audit record of the following auditable events:
+*FAU_GEN.1.1* The TSF shall be able to generate audit data of the following auditable events:
 [loweralpha]
 . Start-up and shut-down of the audit functions;
 . All auditable events for the +++<u>+++not specified+++</u>+++ level of audit; and
@@ -817,11 +817,11 @@ _The audit events that correspond to defined management functions are highly dep
 
 _With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘services’ refers to trusted path and trusted channel communications, on demand self-tests, trusted update and Administrator sessions (that exist under the trusted path) (e.g. netconf)._
 
-*FAU_GEN.1.2* The TSF shall record within each audit record at least the following information:
+*FAU_GEN.1.2* The TSF shall record within the audit data at least the following information:
 
 [loweralpha]
-. Date and time of the event, type of event, subject identity +++<del>+++(if applicable)+++</del>+++, and the outcome (success or failure) of the event; and
-. For each audit event type, based on the auditable event definitions of the functional components included in the **c**PP/ST, _information specified in column three of_ _Table 2_.
+. Date and time of the audit event, type of event, subject identity +++<del>+++(if applicable)+++</del>+++, and the outcome (success or failure) of the event; and
+. For each auditavle event type, based on the auditable event definitions of the functional components included in the **c**PP, PP-Module, functional package or ST, _information specified in column three of_ _Table 2_.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1428,11 +1428,11 @@ This section specifies requirements associated with security of administrative s
 
 _An interactive session governed by this SFR is a session in which an authenticated state is achieved and then preserved across multiple commands. By contrast, if authentication accompanies each individual command (without preservation of the same authenticated state) then this is not considered an interactive session._
 
-===== FTA_SSL.4 User-initiated Termination (Refinement)
+===== FTA_SSL.4 User-initiated Termination 
 
 *FTA_SSL.4 User-initiated termination*
 
-*FTA_SSL.4.1:* The TSF shall allow +++<del>+++user+++</del>+++ *Administrator*-initiated termination of the +++<del>+++user's+++</del>+++ *Administrator’s* own interactive session.
+*FTA_SSL.4.1:* The TSF shall allow Administrator-initiated termination of the Administrator’s own interactive session.
 
 ==== TOE access banners (FTA_TAB)
 
@@ -1440,7 +1440,7 @@ _An interactive session governed by this SFR is a session in which an authentica
 
 *FTA_TAB.1 Default TOE access banners*
 
-*FTA_TAB.1.1:* Before establishing +++<del>+++a+++</del>+++ *an administrative* user session the TSF shall display *a* *Security Administrator-specified* advisory *notice and consent* warning message regarding +++<del>+++unauthorised+++</del>+++ use of the TOE.
+*FTA_TAB.1.1:* Before establishing a *administrative* user session the _TSF_ shall display *a* *Security Administrator-specified advisory notice and consent warning regarding use of the TOE*  message.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1500,7 +1500,7 @@ _If "SSH" is selected, then the TSF is be validated against the applicable requi
 
 *FTP_TRP.1.2/Admin* The TSF shall permit +++<u>+++remote *Administrators* +++<del>+++users+++</del>+++ +++</u>+++to initiate communication via the trusted path.
 
-*FTP_TRP.1.3/Admin* The TSF shall require the use of the trusted path for _+++<u>+++initial Administrator authentication and all remote administration actions+++</u>+++_.
+*FTP_TRP.1.3/Admin* The TSF shall require the use of the trusted path for _+++<u>+++initial *Administrator* authentication and all remote administration actions+++</u>+++_.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1747,7 +1747,7 @@ This iteration of FTP_TRP.1 is defined as one of the options selectable for dist
 
 *FTP_TRP.1/Join Trusted path*
 
-*FTP_TRP.1.1/Join* The TSF shall provide a communication path between itself and *a joining component* +++<del>+++[selection: remote, local] users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of *[selection: _the TSF endpoint, both joining component and TSF endpoint_]* +++<del>+++its end points+++</del>+++ and protection of the communicated data from +++<u>+++modification and \[selection: _disclosure, no other mechanisms_]+++</u>+++.
+*FTP_TRP.1.1/Join* The TSF shall provide a communication path between itself and *a joining component* +++<del>+++[selection: remote, local] users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of *[selection: _the TSF endpoint, both joining component and TSF endpoint_]* +++<del>+++its end points+++</del>+++ and protection of the communicated data from +++<u>+++modification *and* \[selection: _disclosure, no other mechanisms_]+++</u>+++.
 
 *FTP_TRP.1.2/Join* The TSF shall permit [selection: _the TSF, *the joining component*, +++<del>+++local users, remote users_+++</del>+++] to initiate communication via the trusted path.
 
