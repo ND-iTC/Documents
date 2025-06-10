@@ -3615,6 +3615,10 @@ FMT_SMF.1 included
 |*Target of Evaluation* |A set of software, firmware and/or hardware possibly accompanied by guidance. [CC1]
 |*TOE Security Functionality (TSF)* |A set consisting of all hardware, software, and firmware of the TOE that must be relied upon for the correct enforcement of the SFRs. [CC1]
 |*TSF Data* |Data for the operation of the TOE upon which the enforcement of the requirements relies (e.g. SFR-relevant configuration data and SFR-relevant audit data).
+|*Virtual Machine (VM)* | A virtualized hardware environment in which an operating system may execute.
+|*Virtual Machine Manager (VMM)* |A collection of software components responsible for enabling VMs to function as expected by the software executing within them. Generally, the VMM consists of a Hypervisor, Service VMs, and other components of the VS, such as virtual devices, binary translation systems, and physical device drivers. It manages concurrent execution of all VMs and virtualizes platform resources as needed.
+|*Virtualization System (VS)* |A software product that enables multiple independent computing systems to execute on the same physical hardware platform without interference from one another. For the purposes of this document, the VS consists of a Virtual Machine Manager (VMM), Virtual Machine abstractions, a management subsystem, and other components.
+
 |===
 
 See [CC1] for other Common Criteria abbreviations and terminology.
