@@ -3,8 +3,9 @@
 :toc-title!:
 :toc-placement!:
 :data-uri:
-:revnumber: 3.0e
-:revdate: 06-December-2023
+:revnumber: 4.0 draft
+:revdate: 30-June-2025
+image:extracted-media/media/image1.png[image,width=688,height=212]
 
 = collaborative Protection Profile for Network Devices
 
@@ -62,7 +63,7 @@ CCMB-2022-11-006, CEM:2022, Revision 1, November 2022.
 
 [cols=",",]
 |===
-|[SD] |Evaluation Activities for Network Device cPP, Version 4.0e
+|[SD] |Evaluation Activities for Network Device cPP, Version 4.0
 |===
 
 === Revision History
@@ -70,7 +71,7 @@ CCMB-2022-11-006, CEM:2022, Revision 1, November 2022.
 [cols=",,",options="header",]
 |===
 |*Version* |*Date* |*Description*
-|4.0-draft | 31-Mar-2025 | Incorporated comments received
+|4.0 draft | 30-Jun-2025 | Incorporated comments received
 |3.0e | 06-Dec-2023 | Released for use
 |3.0 | 06-Apr-2023 | Incorporated comments received. Released for use
 |2.2e | 23-Mar-2020 | Updated vND description. Released for use
@@ -158,9 +159,9 @@ link:#_Toc27041928[Table 8: SFR Dependencies Rationale for Selection-Based SFRs 
 
 PP Reference: collaborative Protection Profile for Network Devices
 
-PP Version: #4.0e#
+PP Version: 4.0 draft
 
-PP Date: #DD-Month-2025#
+PP Date: 30-June-2025
 
 === TOE Overview
 
