@@ -3359,7 +3359,7 @@ The dependencies between SFRs implemented by the TOE are addressed as follows.
 [cols=",,",options="header",]
 |===
 |*SFR* |*Dependencies* |*Rationale Statement*
-|FAU_GEN.1 |FPT_STM.1 |FPT_STM_EXT.1 included (which is hierarchic to FPT_STM.1)
+|FAU_GEN.1 |FPT_STM.1 |Satisfied by FPT_STM_EXT.1 which includes the requirement for reliable timestamps 
 |FAU_GEN.2 a|
 FAU_GEN.1
 
