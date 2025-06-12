@@ -3,8 +3,8 @@
 [cols="1,2",options=,]
 |===
 
-|*Allowed-with list version*|3.0
-|*Date*|06 December 2023
+|*Allowed-with list version*|3.1
+|*Date*|1 July 2025
 
 |===
 
@@ -13,6 +13,115 @@ This document contains the lists of allowed packages and PP-Modules to which exa
 Inclusion of an object on one of these lists does not imply endorsement of the object by the NDFW iTC, nor does it imply that the relevant object has been checked for compliance with the assurance requirements applicable to a PP-Configuration or ST that uses the cPP in conjunction with the relevant object. 
  
 Conformance claims from other Protection Profiles (apart from PP-Configurations that may be defined using the PP above and the allowed objects below) are not allowed by ND cPP. 
+
+== NDcPP v4.0 (draft)
+
+
+[cols="1,2",options=,]
+|===
+
+|cPP to which this list applies:|collaborative Protection Profile for Network Devices
+|Latest definitive cPP version:|v4.0 (draft), 1 July 2025
+|Supporting Document for cPP:|Evaluation Activities for Network Device cPP
+|Latest definitive SD version:|v4.0 (draft), 06 December 2023
+
+|===
+
+
+*Allowed PP-Modules:*
+
+[cols="0,1,2",options=,]
+|===
+
+.4+|1.|Object ID:|PP-Module for Stateful Traffic Filter Firewalls
+
+|Object version:|1.4 +Errata 20200625 (25 June 2020)
+
+|Owner:|NDFW iTC (ndfw-itc@ccdbinfo.org)
+
+|Notes:|CC v3.1
+
+.4+|2.|Object ID:|PP-Module for Voice/Video over IP (VVoIP) Endpoints
+
+|Object version:|1.0 (28 October 2020)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|CC v3.1
+
+.4+|3.|Object ID:|PP-Module for Wireless Intrusion Detection/Prevention Systems (WIDS/WIPS)
+
+|Object version:|1.0 (30 September 2020)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|CC v3.1
+
+.4+|4.|Object ID:|PP-Module for Enterprise Session Controller (ESC)
+
+|Object version:|1.0 (19 November 2020)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|CC v3.1
+
+.4+|5.|Object ID:|PP-Module for Intrusion Prevention Systems (IPS)
+
+|Object version:|1.0 (11 May 2021)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|CC v3.1
+
+.4+|6.|Object ID:|PP-Module for Wireless Local Area Network (WLAN) Access System
+
+|Object version:|1.0 (31 March 2022)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|CC v3.1
+
+.4+|7.|Object ID:|PP-Module for Session Border Controller (SBC)
+
+|Object version:|1.0 (07 December 2022)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|CC v3.1
+
+.4+|8.|Object ID:|PP-Module for SSL/TLS Inspection Proxy
+
+|Object version:|1.1 (17 November 2022)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|CC v3.1
+
+.4+|9.|Object ID:|PP-Module for Authentication Servers
+
+|Object version:|1.0 (25 January 2023)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|CC v3.1
+
+.4+|10.|Object ID:|PP-Module for MACsec Ethernet Encryption
+
+|Object version:|1.0 (22 December 2022)
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+.4+|11.|Object ID:|PP-Module for Virtual Private Network (VPN) Gateways
+
+|Object version:|1.3 (10 August 2023) 
+
+|Owner:|NIAP (niap@niap-ccevs.org)
+
+|Notes:|None
+
+|===
 
 == NDcPP v3.0e
 
