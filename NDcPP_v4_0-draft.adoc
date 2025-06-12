@@ -5,7 +5,6 @@
 :data-uri:
 :revnumber: 4.0 draft
 :revdate: 30-June-2025
-image:extracted-media/media/image1.png[image,width=688,height=212]
 
 = collaborative Protection Profile for Network Devices
 
