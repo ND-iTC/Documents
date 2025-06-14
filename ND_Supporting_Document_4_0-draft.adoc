@@ -964,11 +964,9 @@ then all three methods of administration must be exercised during the evaluation
 .. [FIPS 140-2], Section 4.9.1, Software/firmware integrity test for the verification of the integrity of the firmware and executable software. Note that the testing is not restricted to the cryptographic functions of the TOE.
 .. [FIPS 140-2], Section 4.9.1, Cryptographic algorithm test for the verification of the correct operation of cryptographic functions. Alternatively, national requirements of any CCRA member state for the security evaluation of cryptographic functions should be considered as appropriate.
 
-.. [FIPS 140-3], Section 7.5.1, Software/firmware integrity test for the verification of the integrity of the firmware and executable software. Note that the testing is not restricted to the cryptographic functions of the TOE.
-.. [FIPS 140-3], Section 7.5.1, Cryptographic algorithm test for the verification of the correct operation of cryptographic functions. Alternatively, national requirements of any CCRA member state for the security evaluation of cryptographic functions should be considered as appropriate.
+.. [FIPS 140-3] ([ISO/IEC 19790:2015]), Section 7.10.2.2, Software/firmware integrity test for the verification of the integrity of the firmware and executable software. Note that the testing is not restricted to the cryptographic functions of the TOE.
 
-
-= NEED TO CONFIRM THE SECOND FIPS 140-3 REFERENCE FOR CAVP
+.. [ISO/IEC 19790:2025], Section 7.10.3.2, Pre-operational software/firmware integrity test. Verification using an approved integrity technique.Note that the testing is not restricted to the cryptographic functions of the TOE.
 
 
 [arabic, start=193]
@@ -2292,6 +2290,10 @@ CCMB-2022-11-006, Version CC:2022, Revision 1, November 2022
 [FIPS 140-2] FIPS PUB 140-2, Security Requirements for cryptographic modules, May 25, 2001
 
 [FIPS 140-3] FIPS PUB 140-3, Security Requirements for cryptographic modules, March 22 2019
+
+[ISO/IEC 19790:2015]ISO/IEC 19790:2012/Cor 1:2015 Security requirements for cryptographic Modules, August 2012
+
+[ISO/IEC 19790:2025] ISO/IEC 19790:2025 Security requirements for cryptographic Modules, February 2025
 
 [FIPS 186-4] FIPS PUB 186-4, Digital Signature Standard (DSS), July 2013
 
