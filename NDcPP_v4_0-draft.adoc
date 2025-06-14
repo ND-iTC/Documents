@@ -2,16 +2,13 @@
 :toclevels: 3
 :toc-title!:
 :toc-placement!:
+:doctype: book
 :data-uri:
-:revnumber: 4.0 draft
-:revdate: 30-June-2025
-image:extracted-media/media/image1.png[image,width=688,height=212]
 
 = collaborative Protection Profile for Network Devices
 
-Version: {revnumber}
-
-Date: {revdate}
+Version: 4.0 draft +
+Date: 30-June-2025
 
 == Acknowledgements
 
@@ -169,7 +166,7 @@ This is a collaborative Protection Profile (cPP) whose Target of Evaluation (TOE
 
 When discussing a ND in this document, it refers to a Network Device or a component of a distributed Network Device unless it is expressly stated otherwise.
 
-Under this cPP, NDs may be physical or virtualized. A physical Network Device (pND) consists of network device functionality implemented inside a physical chassis with physical network connections. The network device functionality may be implemented in either hardware or software or both. For pNDs, the TOE encompasses the entire device—including both the network device functionality and the physical chassis.   There is no distinction between TOE and TOE Platform.
+Under this cPP, NDs may be physical or virtualized. A physical Network Device (pND) consists of network device functionality implemented inside a physical chassis with physical network connections. The network device functionality may be implemented in either hardware or software or both. For pNDs, the TOE encompasses the entire device—including both the network device functionality and the physical chassis. There is no distinction between TOE and TOE Platform.
 
 A virtual Network Device (vND) is a software implementation of network device functionality that runs inside a virtual machine (VM) on either general purpose or purpose-built hardware.  The TOE consists of all software within the VM—in particular, the network device functionality and the operating system on which it runs. 
 

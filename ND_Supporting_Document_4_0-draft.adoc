@@ -4,16 +4,17 @@
 :toc-placement!:
 :doctype: book
 :data-uri:
-:revnumber: 4.0 draft
-:revdate: 30-June-2025
-image:extracted-media/media/image1.png[image,width=688,height=212]
 
-= Evaluation Activities for Network Device cPP
-Version: {revnumber}
+= Supporting Document - Evaluation Activities for Network Device cPP
 
-Date: {revdate}
+Version: 4.0 draft +
+Date: 30 June 2025
 
-*Foreword*
+== Acknowledgements
+
+This collaborative Protection Profile (cPP) was developed by the Network Device international Technical Community (ND iTC) with representatives from industry, government agencies, Common Criteria Test Laboratories, and members of academia.
+
+== Preface
 
 This is a Supporting Document (SD), intended to complement the Common Criteria (CC) Version CC:2022, Revision 1 and the associated Common Evaluation Methodology for Information Technology Security Evaluation (CEM).
 
@@ -23,39 +24,28 @@ This SD has been developed by the Network Device International Technical Communi
 
 *Technical Editor:* Network Device International Technical Community (ND iTC)
 
-*Document history:*
+*Revision History:*
 
-V4.0 draft, 30 June 2025
-
-V3.0e, 06 December 2023 (published version)
-
-V3.0, 06 April 2023 (Incorporated comments received, published version)
-
-V2.2, 20 December 2019 (published version)
-
-V2.1, 17 August 2018 (published version)
-
-V2.0, 5 May 2017 (published version)
-
-V1.1, 21 July 2016 (Updated draft published for public review)
-
-V1.0, 27 February 2015 (published version)
-
-V0.4, 26 January 2015 (incorporates changes due to comments received from CCDB review)
-
-V0.3, 17 October 2014 (released version following public review, submitted for CCDB review)
-
-V0.2, 13 October 2014 (internal draft in response to public review comments, for iTC review)
-
-V0.1, 5 September 2014 (Initial release for public review)
+[cols=",,",options="header",]
+|===
+|*Version* |*Date* |*Description*
+|4.0 draft |30-Jun-2025 |Incorporated comments received
+|3.0e |06-Dec-2023 |Released for use
+|3.0 |06-Apr-2023 |Incorporated comments received. Released for use
+|2.2 |20-Dec-2019 |Released for use
+|2.1 |17-Aug-2018 |Released for use
+|2.0 |5-May-2017 |Released for use
+|1.1 |21-Jul-2016 |Updated draft published for public review
+|1.0 |27-Feb-2015 |Released for use
+|0.4 |26-Jan-2015 |Incorporated comments received from the CCDB review
+|0.3 |17-Oct-2014 |Draft version released to accompany CCDB review of Supporting Document.
+|0.2 |13-Oct-2014 |Internal draft in response to public review comments, for iTC review
+|0.1 |05-Sep-2014 |Draft published for Public review
+|===
 
 *General Purpose:* See Section 1.1.
 
 *Field of special use:* This Supporting Document applies to the evaluation of TOEs claiming conformance with the collaborative Protection Profile for Network Devices [NDcPP].
-
-*Acknowledgements:*
-
-This Supporting Document was developed by the Network Device International Technical Community (ND iTC) with representatives from industry, government agencies, Common Criteria Test Laboratories, and members of academia.
 
 *Table of Contents*
 
@@ -72,7 +62,6 @@ link:#_Toc412821715[Table 3: Evaluation Equivalency Analysis]
 :sectnums: all
 :sectnumlevels: 4
 == Introduction
-
 
 === Technology Area and Scope of Supporting Document
 [arabic]
