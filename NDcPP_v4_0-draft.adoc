@@ -2555,7 +2555,7 @@ The following actions could be considered for the management functions in FMT:
 
 *Audit: FAU_STG_EXT.1, FAU_STG_EXT.2, FAU_STG_EXT.3, FAU_STG_EXT.4. FAU_STG_EXT.5*
 
-The following actions should be auditable if FAU_GEN Security audit data generation is included in the PP/ST:
+The following actions should be auditable for FAU_GEN Security audit data generation and if FAU_GEN_EXT is included in the PP/ST:
 
 [loweralpha]
 . There are no auditable events foreseen.
