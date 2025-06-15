@@ -954,6 +954,7 @@ _The ST author may use the "other action" assignment to describe other measurabl
 _For distributed TOEs each component is not required to store generated audit data locally, but the overall TOE needs to be able to store audit data locally. Each component must at least provide the ability to temporarily buffer audit information locally to ensure that audit records are preserved in case of network connectivity issues. Buffering audit information locally, does not necessarily involve non-volatile memory: audit information could be buffered in volatile memory. However, the local storage of audit information in the sense of FAU_STG_EXT.1.5 needs to be done in non-volatile memory. For every component which performs local storage of audit information, the behaviour when local storage is exhausted needs to be described. For every component which is buffering audit information instead of storing audit information locally itself, it needs to be described what happens in case the buffer space is exhausted._
 
 *FAU_STG_EXT.1.6* The TSF shall provide the following mechanisms for administrative access to locally stored audit records [_selection: none, manual export, ability to view locally_].
+
 === Cryptographic Support (FCS)
 
 This section defines cryptographic requirements that underlie the other security properties of the TOE, covering key generation and random bit generation, key establishment methods, key destruction, and the various types of cryptographic operation to provide AES encryption/decryption, signature generation and verification, hash generation, and keyed hash generation.
@@ -968,7 +969,7 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 
 *FCS_CKM.1.1* The TSF shall generate *asymmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm: [selection: _cryptographic key generation algorithm_] and specified cryptographic *algorithm parameters* +++<del>+++key sizes+++</del>+++ [selection: _cryptographic algorithm parameters_] that meet the following: [selection: _list of standards_].
 
-#Table 3: Asymmetric Cryptographic Key Generation#
+Table 3: Asymmetric Cryptographic Key Generation
 
 [cols=",,",options="header",]
 |===
@@ -1907,12 +1908,9 @@ _Note that the channel set up and used for registration may be adopted as a cont
 
 _Specific requirements for Preparative Procedures relating to FCO_CPC_EXT.1 are defined in the Evaluation Activities in [SD]._
 
-=== Cryptographic support (FCS)
-
-
 === Optional Security Assurance Requirements for Flaw Remediation (ALC_FLR)
 
-The following SARs for ALC_FLR are purely optional and are not required to be added to any ST conformant to this collaborative Protection Profile. If the ST author decides to add ALC_FLR to the ST, only one out of the following SAR components shall be selected.
+If the ST author decides to add ALC_FLR to the ST, only one out of the following SAR components shall be selected.
 
 ==== Basic flaw remediation (ALC_FLR.1) (optional)
 
@@ -2639,7 +2637,6 @@ Dependencies:
 
 *FAU_STG_EXT.5.1* Each TOE component which does not store security audit data locally shall be able to buffer security audit data locally until it has been transferred to another TOE component that stores or forwards it. All transfer of audit records between TOE components shall use a protected channel according to _[selection: FPT_ITT.1, FTP_ITC.1]_.
 
-=== Cryptographic Support (FCS)
 === Cryptographic support (FCS)
 
 ==== Random Bit Generation (FCS_RBG_EXT)
