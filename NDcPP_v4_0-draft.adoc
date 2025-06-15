@@ -1544,7 +1544,7 @@ _An interactive session governed by this SFR is a session in which an authentica
 
 *FTA_TAB.1 Default TOE access banners*
 
-*FTA_TAB.1.1:* Before establishing a *administrative* user session the _TSF_ shall display *a* *Security Administrator-specified advisory notice and consent warning regarding use of the TOE* message.
+*FTA_TAB.1.1:* Before establishing an *Administrative* user session the _TSF_ shall display *a* *Security Administrator-specified advisory notice and consent warning regarding use of the TOE* message.
 
 *_Application Note {counter:appnote_count}_*
 
