@@ -196,8 +196,7 @@ This cPP supports two evaluated configuration options.
 Case 1, illustrated in Figure 1, is where the TOE is represented by the vND alone. The evaluated configuration includes the vND and the virtualization System (VS) where the VS encompasses the virtual hardware abstraction, the hypervisor or virtual machine manager (VMM), all supporting software and the physical chassis.
 
 [.text-center]
-image:extracted-media/media/vnd_case_1.png[image,width=166,height=277]
-[.text-center]
+image:extracted-media/media/vnd_case_1.png[image,width=166,height=277] +
 [#_Ref567439821]_Figure 1: vND evaluated configuration Case 1_
 
 ==== vND as a pND Evaluation Configuration Option
