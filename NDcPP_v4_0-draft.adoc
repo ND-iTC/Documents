@@ -37,7 +37,7 @@ Although the cPP and associated supporting document (SD) may contain minor edito
 [cols=",",]
 |===
 |[CC1] |Common Criteria for Information Technology Security Evaluation, +
-Part 1: Introduction and general Mmodel, +
+Part 1: Introduction and general model, +
 CCMB-2022-11-001, CC:2022 Revision 1, November 2022.
 |[CC2] |Common Criteria for Information Technology Security Evaluation, +
 Part 2: Security functional requirements, +
@@ -168,7 +168,7 @@ When discussing a ND in this document, it refers to a Network Device or a compon
 
 Under this cPP, NDs may be physical or virtualized. A physical Network Device (pND) consists of network device functionality implemented inside a physical chassis with physical network connections. The network device functionality may be implemented in either hardware or software or both. For pNDs, the TOE encompasses the entire device—including both the network device functionality and the physical chassis. There is no distinction between TOE and TOE Platform.
 
-A virtual Network Device (vND) is a software implementation of network device functionality that runs inside a virtual machine (VM) on either general purpose or purpose-built hardware.  The TOE consists of all software within the VM—in particular, the network device functionality and the operating system on which it runs. 
+A virtual Network Device (vND) is a software implementation of network device functionality that runs inside a virtual machine (VM) on either general purpose or purpose-built hardware. The TOE consists of all software within the VM—in particular, the network device functionality and the operating system on which it runs. 
 
 This cPP does not cover software-only NDs. We define software-only NDs as network device functionality implemented as an application or service running on an operating system. A software-only ND that runs on an operating system inside a VM does not qualify as a vND unless the operating system is considered part of the TOE.
 
@@ -180,7 +180,7 @@ Additional security functionality that a Network Device may employ is outside th
 
 This cPP supports two evaluated configuration options.
 
-==== vND only  Evaluation Configuration Option
+==== vND only Evaluation Configuration Option
 
 Case 1, illustrated in Figure 1, is where the TOE is represented by the vND alone. The evaluated configuration includes the vND and the virtualization System (VS) where the VS encompasses the virtual hardware abstraction, the hypervisor or virtual machine manager (VMM), all supporting software and the physical chassis.
 
@@ -201,7 +201,7 @@ To evaluate a vND as a pND means that:
 * The VS is considered part of the ND's software stack, and thus is part of the TOE and must satisfy the relevant SFRs (e.g. by treating hypervisor Administrators as Security Administrators).
 * vNDs that can run on multiple VSs must be tested on each claimed VS unless the developer can successfully argue equivalence.
 * The physical hardware is likewise included in the TOE (as in the example included above). Therefore, vNDs must also be tested for each claimed hardware platform unless the developer can successfully argue equivalence.
-* There is only one vND instance for each physical hardware platform.  The exception being a where components of the distributed TOE run inside more than one virtual machine (VM) on a single VS.
+* There is only one vND instance for each physical hardware platform. The exception being a where components of the distributed TOE run inside more than one virtual machine (VM) on a single VS.
 * There are no other guest VMs on the physical platform providing non-network device functionality.
 
 
@@ -217,7 +217,7 @@ Examples of devices that connect to a network but are not included to be evaluat
 
 As defined by the references [CC1], [CC2], [CC-SFRC], [CC3] and [CCE], this cPP:
 
-* Conforms to the requirements of Common Criteria 2002, Revision 1
+* Conforms to the requirements of Common Criteria 2022, Revision 1
 * Is Part 2 extended, Part 3 conformant
 * Does not claim conformance to any other PP.
 
@@ -229,7 +229,7 @@ The packages to which conformance can be claimed in conjunction with this cPP ar
 
 - Functional Package for SSH Version 2.0 (PKG_SSH_V2.0) conformant
 - Functional Package for Transport Layer Security (TLS) Version 2.1 (PKG_TLS_v2.0) conformant
-//Why v2.1? NIAP only have 2.0 on their web site //
+
 - Functional Package for X.509 Version 1.0 (PKG_X509_v1.0) conformant
 
 All cryptographic selections in the above packages must comply with the FCS_COP and FCS_CKM requirements of this cPP.
@@ -253,7 +253,7 @@ The PP-Modules that are allowed to specify this cPP as a base-PP are specified i
 
 === Evaluation Methods
 The supporting document, "Evaluation Activies for Network Device cPP" must be used in conjunction with [CEM] when performing evaluations of an ST specifying this Network Device cPP.
-The supporting document defines the evaluation methods and activities for this cPP and has been developed in accordance [CC4]The suporting document can be found at https://github.com/ND-iTC/Documents.
+The supporting document defines the evaluation methods and activities for this cPP and has been developed in accordance [CC4]The supporting document can be found at https://github.com/ND-iTC/Documents.
 
 == Introduction to Distributed TOEs
 
@@ -548,7 +548,7 @@ Lack of secure storage and improper handling of credentials and data, such as un
 
 ===== T.SECURITY_FUNCTIONALITY_COMPROMISE
 
-Threat agents may compromise credentials and device data enabling continued access to the Network Device and its critical data. The compromise of credentials includes replacing existing credentials with an attacker’s credentials, modifying existing credentials, or obtaining the Administrator or device credentials for use by the attacker.  Threat agents may also be able to take advantage of weak administrative passwords to gain privileged access to the device.
+Threat agents may compromise credentials and device data enabling continued access to the Network Device and its critical data. The compromise of credentials includes replacing existing credentials with an attacker’s credentials, modifying existing credentials, or obtaining the Administrator or device credentials for use by the attacker. Threat agents may also be able to take advantage of weak administrative passwords to gain privileged access to the device.
 
 SFR Rationale:
 
@@ -556,7 +556,7 @@ SFR Rationale:
 * Secure destruction of keys is specified in FCS_CKM.6
 * If (optionally) management of keys is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MTD.1/CryptoKeys
 * If optional local administration using a password-based authentication mechanism is provided by the TOE, FIA_UAU.7 provides protection of password entry by providing only obscured feedback at the local console.
-* If the TOE provides password-based authentication mechanisms, requirements for password lengths and available characters are set in FIA_PMG_EXT.1.  Requirements for secure storage of passwords are set in FPT_APW_EXT.1
+* If the TOE provides password-based authentication mechanisms, requirements for password lengths and available characters are set in FIA_PMG_EXT.1. Requirements for secure storage of passwords are set in FPT_APW_EXT.1
 
 ==== Device Failure
 
@@ -825,7 +825,7 @@ _With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘servi
 
 [loweralpha]
 . Date and time of the audit event, type of event, subject identity +++<del>+++(if applicable)+++</del>+++, and the outcome (success or failure) of the event; and
-. For each auditavle event type, based on the auditable event definitions of the functional components included in the **c**PP, PP-Module, functional package or ST, _information specified in column three of_ _Table 2_.
+. For each auditable event type, based on the auditable event definitions of the functional components included in the **c**PP, PP-Module, functional package or ST, _information specified in column three of_ _Table 2_.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -961,7 +961,6 @@ This section defines cryptographic requirements that underlie the other security
 These SFRs support the implementation of the selection-based protocol-level SFRs in Appendix B.
 
 ==== Cryptographic Key Management (FCS_CKM)
-// The FCS_SFRs will be edited by RW //
 
 ===== FCS_CKM.1 Cryptographic Key Generation – Asymmetric Key
 
@@ -1074,7 +1073,7 @@ _Some selections allow the assignment of “some value that does not contain any
 
 *FCS_COP.1.1/DataEncryption* The TSF shall perform _encryption/decryption_ in accordance with a specified cryptographic algorithm _AES used in_ [selection: _CBC, CTR, GCM, CCM_] _mode_ and cryptographic key sizes [selection: _128 bits, 192 bits, 256 bits_] that meet the following: _AES as specified in_ [selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] and
 
-[selection:  
+[selection: 
 
 * _CBC as specified in_ [selection: _ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A_]
 
@@ -1241,13 +1240,13 @@ _This requirement applies to Administrators and external IT entities of services
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE must support at least one remote authentication mechanism. Remote authentication mechanisms are defined as those that occur using a cryptographic protocol specified in FTP_TRP.1/Admin.   Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author shall select "none" from the final selection. See Application Note 23 for examples of compliant local administrative interfaces._
+_The TOE must support at least one remote authentication mechanism. Remote authentication mechanisms are defined as those that occur using a cryptographic protocol specified in FTP_TRP.1/Admin. Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author shall select "none" from the final selection. See Application Note 23 for examples of compliant local administrative interfaces._
 
-_The ST author selects the authentication mechanisms necessary to support remote administration.  If "Web GUI password" or "SSH password" is selected for remote authentication mechanism the ST author specifies an appropriate cryptographic protocol in FTP_TRP.1/Admin (e.g., "HTTPS" or "SSH") and includes FIA_AFL.1, FIA_PMG_EXT.1, FPT_APW_EXT.1 from Appendix B._
+_The ST author selects the authentication mechanisms necessary to support remote administration. If "Web GUI password" or "SSH password" is selected for remote authentication mechanism the ST author specifies an appropriate cryptographic protocol in FTP_TRP.1/Admin (e.g., "HTTPS" or "SSH") and includes FIA_AFL.1, FIA_PMG_EXT.1, FPT_APW_EXT.1 from Appendix B._
 
-_The ST author selects "X.509 certificate" if the TOE supports X.509 certificate authentication of the remote endpoint and an appropriate cryptographic protocol is specified in FTP_TRP.1/Admin and included from Appendix B.  For example, if "X.509 certificate" is selected, the ST author specifies "HTTPS" in FTP_TRP.1/Admin and includes FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication) from the Functional Package for TLS._
+_The ST author selects "X.509 certificate" if the TOE supports X.509 certificate authentication of the remote endpoint and an appropriate cryptographic protocol is specified in FTP_TRP.1/Admin and included from Appendix B. For example, if "X.509 certificate" is selected, the ST author specifies "HTTPS" in FTP_TRP.1/Admin and includes FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication) from the Functional Package for TLS._
 
-_If the optional selection of "Ability to administer the TOE locally" is specified in FMT_SMF.1 the ST author selects "password-based" local authentication mechanism and includes FIA_PMG_EXT.1, FPT_APW_EXT.1 and FIA_UAU.7 from Appendix B.  Alternatively, the ST author may complete the assignment operation to specify a local authentication mechanism that is non-password based._
+_If the optional selection of "Ability to administer the TOE locally" is specified in FMT_SMF.1 the ST author selects "password-based" local authentication mechanism and includes FIA_PMG_EXT.1, FPT_APW_EXT.1 and FIA_UAU.7 from Appendix B. Alternatively, the ST author may complete the assignment operation to specify a local authentication mechanism that is non-password based._
 
 _For communications with external IT entities (an audit server, for instance), such connections must be performed in accordance with FTP_ITC.1, whose protocols perform identification and authentication. This means that such communications (e.g., establishing the IPsec connection to the authentication server) would not have to be specified in the assignment, since establishing the connection ‘counts’ as initiating the identification and authentication process._
 
@@ -1329,7 +1328,7 @@ _The word ‘manage’ includes but is not limited to create, initialize, view, 
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE must provide functionality for remote administration. Local administration is optional.  This cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Remote administrative sessions are specified in FTP_TRP.1/Admin.  Local administration is defined as administration using a dedicated physical interface that (from the TOE’s point of view) is directly connected to the device(s) the administrator interacts with and therefore falls under the physical protection (OE.PHYSICAL). Any administrator choice to extend a local console so it is remotely accessible (e.g. console server or remote KVM) is outside the scope of the NDcPP. The following are examples of compliant local administrative interfaces:_
+_The TOE must provide functionality for remote administration. Local administration is optional.This cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Remote administrative sessions are specified in FTP_TRP.1/Admin. Local administration is defined as administration using a dedicated physical interface that (from the TOE’s point of view) is directly connected to the device(s) the administrator interacts with and therefore falls under the physical protection (OE.PHYSICAL). Any administrator choice to extend a local console so it is remotely accessible (e.g. console server or remote KVM) is outside the scope of the NDcPP. The following are examples of compliant local administrative interfaces:_
 
 [loweralpha]
 . _RS-232 terminal._
@@ -1519,7 +1518,7 @@ _All discrete firmware and software elements (e.g. applications, drivers, and ke
 
 === TOE access (FTA)
 
-This section specifies requirements associated with security of administrative sessions carried out on the TOE. In particular, remote sessions are monitored for inactivity and either locked or terminated when a threshold time period is reached.  If the TOE supports local administration the ST author includes FTA_SSL_EXT.1 from Appendix B and local sessionsfootnote:[Refer to Application Note 22 for the definition of local and remote sessions.] must also monitored for inactivity and either locked or terminated when a threshold time period is reached. Administrators must also be able to positively terminate their own interactive sessions and must have an advisory notice displayed at the start of each session.
+This section specifies requirements associated with security of administrative sessions carried out on the TOE. In particular, remote sessions are monitored for inactivity and either locked or terminated when a threshold time period is reached. If the TOE supports local administration the ST author includes FTA_SSL_EXT.1 from Appendix B and local sessionsfootnote:[Refer to Application Note 22 for the definition of local and remote sessions.] must also monitored for inactivity and either locked or terminated when a threshold time period is reached. Administrators must also be able to positively terminate their own interactive sessions and must have an advisory notice displayed at the start of each session.
 
 ==== Session locking and termination (FTA_SSL)
 
@@ -1545,7 +1544,7 @@ _An interactive session governed by this SFR is a session in which an authentica
 
 *FTA_TAB.1 Default TOE access banners*
 
-*FTA_TAB.1.1:* Before establishing a *administrative* user session the _TSF_ shall display *a* *Security Administrator-specified advisory notice and consent warning regarding use of the TOE*  message.
+*FTA_TAB.1.1:* Before establishing a *administrative* user session the _TSF_ shall display *a* *Security Administrator-specified advisory notice and consent warning regarding use of the TOE* message.
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1721,13 +1720,13 @@ The iTC is expected to survey open sources to discover what vulnerabilities have
 [SD, Appendix A] provides a guide to the evaluator in performing a vulnerability survey.
 
 [appendix]
-==  Optional Security Requirements
+== Optional Security Requirements
 
 As indicated in the introduction to this cPP, the baseline requirements (those that must be performed by the TOE) are contained in the body of this cPP. Additionally, there are two other types of requirements specified in Appendices A and B.
 
 The first type (in this Appendix) comprises requirements that can be included in the ST but are not mandatory for a TOE to claim conformance to this cPP. The second type (in Appendix B) comprises requirements based on selections in other SFRs from the cPP: if certain selections are made, then additional requirements in that appendix will need to be included in the body of the ST (e.g., cryptographic protocols selected in a trusted channel requirement).
 
-If a TOE fulfils any of the optional requirements, the developer is encouraged to add the related functionality to the ST. Therefore, in the application notes of this section the wording "This option should be chosen..." is repeatedly used. But it also is used to emphasize that this option should only be chosen if the TOE provides the related functionality and that it is not necessary to implement the related functionality to be compliant to the cPP. ST authors are free to choose none, some or all SFRs defined in this section. Just the fact that a product supports a certain functionality does not mandate to add any SFR  or SAR defined in this section.
+If a TOE fulfils any of the optional requirements, the developer is encouraged to add the related functionality to the ST. Therefore, in the application notes of this section the wording "This option should be chosen..." is repeatedly used. But it also is used to emphasize that this option should only be chosen if the TOE provides the related functionality and that it is not necessary to implement the related functionality to be compliant to the cPP. ST authors are free to choose none, some or all SFRs defined in this section. Just the fact that a product supports a certain functionality does not mandate to add any SFR or SAR defined in this section.
 
 === Audit Events for Optional SFRs
 
@@ -1767,7 +1766,7 @@ _Audit events related to failures of certain functions should include sufficient
 
 The local storage space for audit data of a Network Device is limited, and if the local storage space is exceeded then audit data might be lost. A security Administrator might be interested in the number of dropped, overwritten, etc. audit records. This number might serve as an indication if a severe problem has occurred after the storage space was exceeded that continuously generated audit data. Therefore, FAU_STG_EXT.2 and FAU_STG_EXT.3 are defined to express these optional capabilities of a Network Device.
 
-=====  FAU_STG.1 Protected Audit Trail Storage
+===== FAU_STG.1 Protected Audit Trail Storage
 
 *FAU_STG.1 Protected Audit Trail Storage*
 
@@ -1775,7 +1774,7 @@ The local storage space for audit data of a Network Device is limited, and if th
 
 *FAU_STG.1.2* The TSF shall be able to +++<u>+++prevent+++</u>+++ unauthorised modifications to the stored audit records in the audit trail.
 
-=====  FAU_STG_EXT.2 Counting Lost Audit Data
+===== FAU_STG_EXT.2 Counting Lost Audit Data
 
 *FAU_STG_EXT.2 Counting Lost Audit Data*
 
@@ -1791,7 +1790,7 @@ _For distributed TOEs each component that implements counting of lost audit data
 
 _If FAU_STG_EXT.2 is added to the ST, the ST has to make clear any situations in which lost audit data is not counted._
 
-=====  FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss
+===== FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss
 
 *FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss*
 
@@ -1823,7 +1822,7 @@ When X.509 is used for this channel, it is only necessary to support a minimum p
 
 ==== Internal TOE TSF data transfer (FPT_ITT)
 
-=====  FPT_ITT.1 Basic internal TSF data transfer protection (Refinement)
+===== FPT_ITT.1 Basic internal TSF data transfer protection (Refinement)
 
 *FPT_ITT.1 Basic internal TSF data transfer protection*
 
@@ -1844,7 +1843,7 @@ _If "SSH" is selected, then the TSF is be validated against the applicable requi
 
 ==== Trusted path (FTP_TRP)
 
-=====  FTP_TRP.1/Join Trusted path (Refinement)
+===== FTP_TRP.1/Join Trusted path (Refinement)
 
 This iteration of FTP_TRP.1 is defined as one of the options selectable for distributed TOE component registration in FCO_CPC_EXT.1 (Section A.6.1).
 
@@ -1876,7 +1875,7 @@ _Specific requirements for Preparative Procedures relating to FTP_TRP.1/Join are
 
 The SFR in this section defines the top-level requirement for control over the way in which components are joined together under the control of a Security Administrator to create the distributed TOE (cf. Section 3.3). The SFR makes use of references to other SFRs to define the lower-level characteristics of the types of channel that may be used in the registration process.
 
-=====  *FCO_CPC_EXT.1 Component registration channel definition*
+===== *FCO_CPC_EXT.1 Component registration channel definition*
 
 *FCO_CPC_EXT.1 Component registration channel definition*
 
@@ -1994,10 +1993,8 @@ The TSF, understood here as the entire distributed system, has to satisfy all ma
 _The TOE must be able to generate audit records for each TOE component. Some TOE components of a distributed TOE might not implement the complete TSF of the overall TOE but only a subset of the TSF. The audit records for each TOE component need to cover all security relevant audit events according to the subset of the TSF implemented by this particular TOE component but not necessarily all security relevant audit events according to the TSF of the overall TOE. If a security-relevant event can occur on multiple TOE components, it needs to cause generation of an audit record uniquely identifying the component associated with the event. The ST author shall identify for each TOE component which of the overall required audit events defined in FAU_GEN.1.1 are logged. The ST author may decide to do this by providing a corresponding table. The information provided needs to be in agreement with Table 1. The overall TOE needs to cover all auditable events listed in Table 2 (and Tables 4 and 5 as applicable to the overall TOE)._
 
 ==== Security audit event storage (Extended - FAU_STG_EXT)
-//See https://github.com/ND-iTC/Documents/issues/353//
 
-
-=====  FAU_STG.1 Protected Audit Trail Storage
+===== FAU_STG.1 Protected Audit Trail Storage
 
 *FAU_STG.1 Protected Audit Trail Storage*
 
@@ -2005,7 +2002,7 @@ _The TOE must be able to generate audit records for each TOE component. Some TOE
 
 *FAU_STG.1.2* The TSF shall be able to +++<u>+++prevent+++</u>+++ unauthorised modifications to the stored audit records in the audit trail.
 
-=====  FAU_STG_EXT.2 Counting Lost Audit Data
+===== FAU_STG_EXT.2 Counting Lost Audit Data
 
 *FAU_STG_EXT.2 Counting Lost Audit Data*
 
@@ -2021,7 +2018,7 @@ _For distributed TOEs each component that implements counting of lost audit data
 
 _If FAU_STG_EXT.2 is added to the ST, the ST has to make clear any situations in which lost audit data is not counted._
 
-=====  FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss
+===== FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss
 
 *FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss*
 
@@ -2053,7 +2050,7 @@ This component is included if "TSF interface for seeding" is selected in FCS_RBG
 
 *_Application Note {counter:appnote_count}_*
 
-_This requirement is claimed when a DRBG is seeded with entropy from one or more noise source that is outside the TOE boundary. In the case of a network device this would only occur with a vND where the entropy source is provided by the underlying virtualization System (VS) platform.  Typically the entropy produced by an environmental noise source is conditioned such that the input length has full entropy and is therefore usable as the seed. However, if this is not the case, it should be noted what the minimum entropy rate of the noise source is so that the TSF can collect a sufficiently large sample of noise data to be conditioned into a seed value._
+_This requirement is claimed when a DRBG is seeded with entropy from one or more noise source that is outside the TOE boundary. In the case of a network device this would only occur with a vND where the entropy source is provided by the underlying virtualization System (VS) platform. Typically the entropy produced by an environmental noise source is conditioned such that the input length has full entropy and is therefore usable as the seed. However, if this is not the case, it should be noted what the minimum entropy rate of the noise source is so that the TSF can collect a sufficiently large sample of noise data to be conditioned into a seed value._
 
 _The TSF interface for the purpose of seeding here is the interface used to gather entropy for initializing the seed._
 
@@ -2107,7 +2104,7 @@ To ensure audit requirements are properly met, a DTLS receiver may need to monit
 
 If the TOE acts as the server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSS_EXT requirements. In this case the TOE needs to claim at least the FCS_DTLSS_EXT.1 requirements in Section B.3.1.1 (no support for mutual authentication). If the TOE acts as DTLS server and in addition also supports mutual authentication, the FCS_DTLSS_EXT.2 requirements in Section A.7.1.1 need to be claimed in addition. If the TOE acts as both a client and server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSC_EXT and FCS_DTLSS_EXT requirements.
 
-=====  FCS_IPSEC_EXT.1 IPsec Protocol
+===== FCS_IPSEC_EXT.1 IPsec Protocol
 
 The endpoints of Network Device communication can be geographically and logically distant and may pass through a variety of other potentially untrusted systems. The security functionality of the Network Device must be able to protect any critical network traffic (administration traffic, authentication traffic, audit traffic, etc.). One way to provide a mutually authenticated communication channel between the Network Device and an external IT entity is to implement IPsec.
 
@@ -2254,7 +2251,7 @@ _The critical requirement of X.509 identifiers is the ability to bind the public
 
 _Supported peer certificate algorithms are the same as FCS_IPSEC_EXT.1.13_
 
-=====  FCS_NTP_EXT NTP Protocol
+===== FCS_NTP_EXT NTP Protocol
 
 This is a selection-based SFR, to be included in the ST if “synchronise time with an NTP Server” is selected within FPT_STM_EXT.1.2.
 
@@ -2280,7 +2277,7 @@ This SFR is not applicable if the TOE cannot be configured to operate as an NTP 
 _The TOE has to support configuration of at least 3 time sources though it is not mandated that the TOE is configured to always use at least 3 time sources._
 
 
-=====  FCS_TLSC_EXT & FCS_TLSS_EXT TLS Protocol
+===== FCS_TLSC_EXT & FCS_TLSS_EXT TLS Protocol
 
 TLS is not a required component of this cPP. If a TOE implements TLS, a corresponding selection in FPT_ITT.1, FTP_ITC.1, or FTP_TRP.1/Admin should be made to define what the TLS protocol is implemented to protect. If a corresponding option to support TLS has been selected in at least one of the SFRs named above, the corresponding selection-based TLS-related SFRs should be added to the ST from the Functional Package for TLS. 
 
@@ -2362,7 +2359,7 @@ The TOE may support pre-shared keys for use in the IPsec protocol that conform t
 
 *FIA_PSK_EXT.1 Pre-Shared Key Composition*
 
-*FIA_PSK_EXT.1.1*  The TSF shall be able to use pre-shared keys that conform to RFC 8784 for IPsec.
+*FIA_PSK_EXT.1.1* The TSF shall be able to use pre-shared keys that conform to RFC 8784 for IPsec.
 
 *FIA_PSK_EXT.1.2* The TSF shall be able to [selection: _accept externally generated pre-shared keys, generate 256 bit-based pre-shared keys via the random number generator used by the TSF._]
 
@@ -2415,7 +2412,7 @@ _It is acceptable to provide a manual method for an administrator to provide rev
 
 ==== Management of functions in TSF (FMT_MOF)
 
-=====  FMT_MOF.1/Services Management of security functions behaviour
+===== FMT_MOF.1/Services Management of security functions behaviour
 
 *FMT_MOF.1/Services Management of security functions behaviour* (Refined)
 
@@ -2427,7 +2424,7 @@ _FMT_MOF.1/Services should only be chosen if the Security Administrator has the 
 
 _In FMT_MOF.1.1/Services 'enable and disable' have been refined to 'start and stop' and 'the functions: [assignment: list of functions]' has been refined to 'services'._
 
-=====  FMT_MOF.1/AutoUpdate Management of security functions behaviour
+===== FMT_MOF.1/AutoUpdate Management of security functions behaviour
 
 *FMT_MOF.1/AutoUpdate Management of security functions behaviour*
 
@@ -2437,7 +2434,7 @@ _In FMT_MOF.1.1/Services 'enable and disable' have been refined to 'start and st
 
 _FMT_MOF.1/AutoUpdate is only applicable and should be included if the TOE supports automatic checking for updates and/or automatic updates and allows them to be enabled and disabled. Enable and disable of automatic checking for updates and/or automatic updates is restricted to Security Administrators. The option “automatic update” may only be selected if digital signatures are used to validate the trusted update._
 
-=====  FMT_MOF.1/Functions Management of security functions behaviour
+===== FMT_MOF.1/Functions Management of security functions behaviour
 
 *FMT_MOF.1/Functions Management of security functions behaviour*
 
@@ -2448,7 +2445,7 @@ _FMT_MOF.1/AutoUpdate is only applicable and should be included if the TOE suppo
 _FMT_MOF.1/Functions should be chosen if one or more of the following scenarios apply:_
 
 * _If the transmission protocol for transmission of audit data to an external IT entity as defined in FAU_STG_EXT.1.1 is configurable, “transmission of audit data to an external IT entity” shall be chosen._
-// I think this FAU_STG_EXT1.1 stays the same //
+
 * _If the handling of audit data is configurable, “handling of audit data” must be chosen. The term “handling of audit data” refers to any administratively configurable selection or assignments in any FAU_STG_EXT.x SFR._
 * _If the behaviour of the audit functionality is configurable when Local Audit Storage Space is full, “audit functionality when Local Audit Storage Space is full” must be chosen._
 
@@ -2456,7 +2453,7 @@ _The first selection for ‘determine the behaviour of’ and ‘modify the beha
 
 ==== Management of TSF data (FMT_MTD)
 
-=====  FMT_MTD.1/CryptoKeys Management of TSF data
+===== FMT_MTD.1/CryptoKeys Management of TSF data
 
 *FMT_MTD.1/CryptoKeys Management of TSF data*
 
@@ -2485,7 +2482,7 @@ after a Security Administrator-specified time period of inactivity.
 _An interactive session governed by this SFR is a session in which an authenticated state is achieved and then preserved across multiple commands. By contrast, if authentication accompanies each individual command (without preservation of the same authenticated state) then this is not considered an interactive session._
 
 [appendix]
-==  Extended Component Definitions
+== Extended Component Definitions
 
 This appendix contains the definitions for the extended requirements that are used in the cPP, including those used in Appendices A and B.
 
@@ -2519,7 +2516,7 @@ The following actions should be auditable if FAU_GEN Security audit generation i
 [loweralpha]
 . There are no auditable events foreseen.
 
-=====  FAU_GEN_EXT.1 Security audit generation for Distributed TOE Components
+===== FAU_GEN_EXT.1 Security audit generation for Distributed TOE Components
 
 *FAU_GEN_EXT.1 Security audit generation*
 
@@ -2563,7 +2560,7 @@ The following actions should be auditable if FAU_GEN Security audit data generat
 [loweralpha]
 . There are no auditable events foreseen.
 
-=====  FAU_STG_EXT.1 Protected Audit Event Storage
+===== FAU_STG_EXT.1 Protected Audit Event Storage
 
 *FAU_STG_EXT.1 Protected Audit Event Storage*
 
@@ -2590,7 +2587,7 @@ Dependencies:
 
 *FAU_STG_EXT.1.6* The TSF shall provide the following mechanisms for administrative access to locally stored audit records [_selection: none, manual export, ability to view locally_].
 
-=====  FAU_STG_EXT.2 Counting Lost Audit Data
+===== FAU_STG_EXT.2 Counting Lost Audit Data
 
 *FAU_STG_EXT.2 Counting Lost Audit Data*
 
@@ -2603,7 +2600,7 @@ Dependencies:
 
 *FAU_STG_EXT.2.1* The TSF shall provide information about the number of [selection: _dropped, overwritten, [assignment: other information]_] audit records in the case where the local storage has been filled and the TSF takes one of the actions defined in FAU_STG_EXT.1.5.
 
-=====  FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss
+===== FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss
 
 *FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss*
 
@@ -2616,7 +2613,7 @@ Dependencies:
 
 *FAU_STG_EXT.3.1* The TSF shall generate a warning to inform the Administrator before the audit trail exceeds the local audit trail storage capacity.
 
-=====  FAU_STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs
+===== FAU_STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs
 
 *FAU_STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs*
 
@@ -2629,7 +2626,7 @@ Dependencies:
 
 *FAU_STG_EXT.4.1* The TSF of each TOE component which stores security audit data locally shall perform the following actions when the local storage space for audit data is full: _[assignment:_ _table of components and for each component its action chosen according to the following:_ [selection: _drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_]_]_.
 
-=====  FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
+===== FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
 
 *FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs*
 
@@ -2647,7 +2644,7 @@ Dependencies:
 
 ==== Random Bit Generation (FCS_RBG_EXT)
 
-=====  FCS_RBG_EXT.1 Random Bit Generation
+===== FCS_RBG_EXT.1 Random Bit Generation
 
 *Family Behaviour*
 
@@ -2685,7 +2682,7 @@ Dependencies: No other components
 
 ==== Cryptographic protocols (FCS_IPSEC_EXT, FCS_NTP_EXT)
 
-=====  FCS_IPSEC_EXT.1 IPsec Protocol
+===== FCS_IPSEC_EXT.1 IPsec Protocol
 
 *Family Behaviour*
 
@@ -2802,7 +2799,7 @@ _]._
 
 *FCS_IPSEC_EXT.1.14* The TSF shall only establish a trusted channel if the presented identifier in the received certificate matches the configured reference identifier, where the presented and reference identifiers are of the following fields and types: [selection: _SAN: IP address, SAN: Fully Qualified Domain Name (FQDN), SAN: user FQDN, CN: IP address, CN: Fully Qualified Domain Name (FQDN), CN: user FQDN, Distinguished Name (DN)]_ and [selection: _no other reference identifier type, [assignment: other supported reference identifier types_]].
 
-=====  FCS_NTP_EXT.1 NTP Protocol
+===== FCS_NTP_EXT.1 NTP Protocol
 
 *Family Behaviour*
 
@@ -2869,7 +2866,7 @@ There are no management functions foreseen.
 
 There are no auditable events foreseen.
 
-=====  FIA_PMG_EXT.1 Password management
+===== FIA_PMG_EXT.1 Password management
 
 *FIA_PMG_EXT.1 Password management*
 
@@ -2903,7 +2900,7 @@ There are no management functions foreseen.
 
 There are no auditable events foreseen.
 
-=====  FIA_PSK_EXT.1 Pre-Shared Key Composition
+===== FIA_PSK_EXT.1 Pre-Shared Key Composition
 
 *FIA_PSK_EXT.1 Pre-Shared Key Composition*
 
@@ -2935,7 +2932,7 @@ There are no management functions foreseen.
 
 There are no auditable events foreseen.
 
-=====  FIA_PSK_EXT.1 Pre-Shared Key Composition
+===== FIA_PSK_EXT.1 Pre-Shared Key Composition
 
 *FIA_PSK_EXT.1 Pre-Shared Key Composition*
 
@@ -2974,7 +2971,7 @@ The following actions should be auditable if FAU_GEN Security audit generation i
 . All use of the identification and authentication mechanism
 . Provided user identity, origin of the attempt (e.g. IP address)
 
-=====  FIA_UIA_EXT.1 User identification and authentication
+===== FIA_UIA_EXT.1 User identification and authentication
 
 *FIA_UIA_EXT.1 User identification and authentication*
 
@@ -3023,7 +3020,7 @@ The following actions should be auditable if FAU_GEN Security audit generation i
 [loweralpha]
 . There are no auditable events foreseen.
 
-=====  FPT_SKP_EXT.1 Protection of TSF data (for reading of all symmetric keys)
+===== FPT_SKP_EXT.1 Protection of TSF data (for reading of all symmetric keys)
 
 *FPT_SKP_EXT.1 Protection of TSF data (for reading of all symmetric keys)*
 
@@ -3035,7 +3032,7 @@ Dependencies: No other components
 
 ==== Protection of Administrator passwords (FPT_APW_EXT)
 
-=====  FPT_APW_EXT.1 Protection of Administrator passwords
+===== FPT_APW_EXT.1 Protection of Administrator passwords
 
 *Family Behaviour*
 
@@ -3073,7 +3070,7 @@ Dependencies: No other components
 
 ==== TSF Self-test (FPT_TST_EXT)
 
-=====  FPT_TST_EXT.1 TSF testing
+===== FPT_TST_EXT.1 TSF testing
 
 *Family Behaviour*
 
@@ -3148,7 +3145,7 @@ The following actions should be auditable if FAU_GEN Security audit generation i
 . Initiation of the update process
 . Any failure to verify the integrity of the update
 
-=====  FPT_TUD_EXT.1 Trusted update
+===== FPT_TUD_EXT.1 Trusted update
 
 *FPT_TUD_EXT.1 Trusted update*
 
@@ -3163,7 +3160,7 @@ Dependencies: FCS_COP.1/SigVer Cryptographic operation (for Cryptographic Signat
 
 *FPT_TUD_EXT.1.3* The TSF shall provide means to authenticate firmware/software updates to the TOE using a [selection: _X.509 certificate, digital signature_] prior to installing those updates.
 
-=====  FPT_TUD_EXT.2 Trusted update based on certificates
+===== FPT_TUD_EXT.2 Trusted update based on certificates
 
 *FPT_TUD_EXT.2 Trusted update based on certificates*
 
@@ -3180,9 +3177,6 @@ Dependencies: FPT_TUD_EXT.1
 *FPT_TUD_EXT.2.4* If the certificate is deemed invalid for reasons other than expiration or revocation information being unavailable, the TSF shall not install the update.
 
 ==== Time stamps (FPT_STM_EXT)
-// Adding a comment per issue 405 https://github.com/ND-iTC/Documents/issues/405 //
-// An extended component for FPT_STM is neededin NDcPP because:  ???? //
-
 
 *Family Behaviour*
 
@@ -3249,7 +3243,7 @@ The following actions should be auditable if FAU_GEN Security audit generation i
 [loweralpha]
 . Any attempts at unlocking an interactive session.
 
-=====  *FTA_SSL_EXT.1* TSF-initiated session locking
+===== *FTA_SSL_EXT.1* TSF-initiated session locking
 
 *FTA_SSL_EXT.1 TSF-initiated session locking*
 
@@ -3309,7 +3303,7 @@ Dependencies: No other components
 *FCO_CPC_EXT.1.3* The TSF shall enable a Security Administrator to disable communications between any pair of TOE components.
 
 [appendix]
-==  Entropy Documentation and Assessment
+== Entropy Documentation and Assessment
 
 This appendix describes the required supplementary information for each entropy source used by the TOE.
 
@@ -3524,7 +3518,7 @@ FCS_COP.1/DataEncryption
 FCS_COP.1/SigGen
 
 FCS_COP.1/SigVer
-  
+
 FCS_COP.1/Hash
 
 FCS_COP.1/KeyedHash
