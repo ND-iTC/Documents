@@ -483,7 +483,7 @@ authorised communication includes network traffic allowable by policy destined t
 
 The primary threats to Network Device communications addressed in this cPP focus on an external, unauthorised entity attempting to access, modify, or otherwise disclose the critical network traffic. A poor choice of cryptographic algorithms or the use of non-standardized tunnelling protocols along with weak Administrator credentials, such as an easily guessable password or use of a default password, will allow a threat agent unauthorised access to the device. Weak or no cryptography provides little to no protection of the traffic allowing a threat agent to read, manipulate and/or control the critical data with little effort. Non-standardized tunnelling protocols not only limit the interoperability of the device but lack the assurance and confidence standardization provides through peer review.
 
-===== T.UNauthoriseD_ADMINISTRATOR_ACCESS
+===== T.UNAUTHORISED_ADMINISTRATOR_ACCESS
 
 Threat agents may attempt to gain Administrator access to the Network Device by nefarious means such as masquerading as an Administrator to the device, masquerading as the device to an Administrator, replaying an administrative session (in its entirety, or selected portions), or performing man-in-the-middle attacks, which would provide access to the administrative session, or sessions between Network Devices. Successfully gaining Administrator access allows malicious actions that compromise the security functionality of the device and the network on which it resides.
 
@@ -560,7 +560,7 @@ SFR Rationale:
 * Requirements for basic auditing capabilities are specified in FAU_GEN.1 and FAU_GEN.2, with timestamps provided according to FPT_STM_EXT.1 and if applicable, protection of NTP channels in FCS_NTP_EXT.1.
 * Requirements for protecting audit records stored on the TOE are specified in FAU_STG.2.
 * Requirements for secure storage and transmission of local audit records to an external IT entity via a secure channel are specified in FAU_STG_EXT.1 and FAU_STG_EXT.4.
-// The above double of FAU_STGEXT.1 must be an error.//
+// The above double of FAU_STG_EXT.1 must be an error.//
 * Optional additional requirements for dealing with potential loss of locally stored audit records are specified in FAU_STG_EXT.3, and FAU_STG_EXT.4.
 * If (optionally) configuration of the audit functionality is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MOF.1/Functions.
 
