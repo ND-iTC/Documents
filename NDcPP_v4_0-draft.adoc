@@ -42,9 +42,9 @@ CCMB-2022-11-001, CC:2022 Revision 1, November 2022.
 |[CC2] |Common Criteria for Information Technology Security Evaluation, +
 Part 2: Security functional requirements, +
 CCMB-2022-11-002, CC:2022 Revision 1, November 2022.
-|[CC-SFRC] |Common Criteria for Information Technology Security Evaluation, +
-Specification of Functional Requirements for Cryptography, +
-CCDB-018, Version 1, 31 January, 2025.
+|[CC3] |Common Criteria for Information Technology Security Evaluation, +
+Part 3: Security assurance requirements, +
+CCMB-2022-11-003, CC:2022 Revision 1, November 2022.
 |[CC4] |Common Criteria for Information Technology Security Evaluation, +
 Part 4: Framework for the specification of evaluation methods and activities, +
 CCCMB-2022-11-004, CC:2022 Revision 1, November 2022.
@@ -54,6 +54,9 @@ CCCMB-002, Version 1.1, July 22, 2024.
 |[CEM] |Common Methodology for Information Technology Security Evaluation, +
 Evaluation methodology, +
 CCMB-2022-11-006, CEM:2022, Revision 1, November 2022.
+|[CC-SFRC] |Common Criteria for Information Technology Security Evaluation, +
+Specification of Functional Requirements for Cryptography, +
+CCDB-018, Version 1, 31 January, 2025.
 |===
 
 *Other Documents*
@@ -226,7 +229,7 @@ Examples of devices that connect to a network but are not included to be evaluat
 
 == CC Conformance
 
-As defined by the references [CC1], [CC2], [CC-SFRC], [CC3] and [CCE], this cPP:
+As defined by the references [CC1], [CC2], [CC3], [CC4], [CCE] and [CC-SFRC], this cPP:
 
 * Conforms to the requirements of Common Criteria 2022, Revision 1
 * Is Part 2 extended, Part 3 conformant
@@ -264,7 +267,7 @@ The PP-Modules that are allowed to specify this cPP as a base-PP are specified i
 
 === Evaluation Methods
 The supporting document, "Evaluation Activies for Network Device cPP" must be used in conjunction with [CEM] when performing evaluations of an ST specifying this Network Device cPP.
-The supporting document defines the evaluation methods and activities for this cPP and has been developed in accordance [CC4]The supporting document can be found at https://github.com/ND-iTC/Documents.
+The supporting document defines the evaluation methods and activities for this cPP and has been developed in accordance with [CC4]. The supporting document can be found at https://github.com/ND-iTC/Documents.
 
 == Introduction to Distributed TOEs
 
@@ -741,7 +744,11 @@ If possible, the VS should be configured to make use of features that leverage t
 
 == Mandatory Security Functional Requirements
 
-The individual security functional requirements are specified in the sections below. SFRs in this section the mandatory SFRs that any conformant TOE must meet are presented. Based on selections made in these SFRs it will also be necessary to include some of the selection-based SFRs in Appendix B. Additional optional SFRs may also be adopted from those listed in Appendix A.
+The individual security functional requirements are specified in the sections below. 
+
+In this section the mandatory SFRs that any conformant TOE must meet are presented. Based on selections made in these SFRs it will also be necessary to include some of the selection-based SFRs in Appendix B. 
+
+Additional optional SFRs may also be adopted from those listed in Appendix A.
 
 For a distributed TOE, the ST author should reference Table 1 for guidance on how each SFR should be met. The table details whether SFRs should be met by all TOE components, by at least one TOE component or whether they are dependent upon the feature being implemented by the TOE component. The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE. (Note that this deliverable is examined as part of the ASE_TSS.1 and AVA_VAN.1 Evaluation Activities as described in [SD, 5.1.2] and [SD, 5.6.1.1] respectively.
 
@@ -810,7 +817,7 @@ image:extracted-media/media/arch_7.png[image]
 
 === Security Audit (FAU)
 
-==== Security audit generation (FAU_GEN)
+==== Security audit data generation (FAU_GEN)
 
 In order to assure that information exists that allows Security Administrators to discover intentional and unintentional issues with the configuration and/or operation of the system, compliant TOEs have the capability of generating audit data targeted at detecting such activity. Auditing of administrative activities provides information that may be used to hasten corrective action should the system be configured incorrectly. Audit of select system events can provide an indication of failure of critical portions of the TOE (e.g. a cryptographic provider process not running) or anomalous activity (e.g. establishment of an administrative session at a suspicious time, repeated failures to establish sessions or authenticate to the system) of a suspicious nature.
 
@@ -854,7 +861,7 @@ _With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘servi
 *FAU_GEN.1.2* The TSF shall record within the audit data at least the following information:
 
 [loweralpha]
-. Date and time of the audit event, type of event, subject identity +++<del>+++(if applicable)+++</del>+++, and the outcome (success or failure) of the event; and
+. Date and time of the auditable event, type of event, subject identity +++<del>+++(if applicable)+++</del>+++, and the outcome (success or failure) of the event; and
 . For each auditable event type, based on the auditable event definitions of the functional components included in the **c**PP, PP-Module, functional package or ST, _information specified in column three of_ _Table 2_.
 
 *_Application Note {counter:appnote_count}_*
@@ -1631,7 +1638,7 @@ _If "SSH" is selected, then the TSF is be validated against the applicable requi
 
 *FTP_TRP.1/Admin Trusted path*
 
-*FTP_TRP.1.1/Admin* The TSF shall *be capable of using [selection: _IPsec, SSH as defined in the Functional Package for SSH as defined in the Functional Package for SSH, TLS as defined in the Functional Package for TLS, DTLS as defined in the Functional Package for TLS, HTTPS_] to* provide a communication path between itself and *authorised* +++<u>+++remote+++</u>+++ *Administrators* +++<del>+++users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of its end points and protection of the communicated data from +++<u>+++disclosure+++</u>+++ *and provides detection of modification of the channel data.*
+*FTP_TRP.1.1/Admin* The TSF shall *be capable of using [selection: _IPsec, SSH as defined in the Functional Package for SSH, TLS as defined in the Functional Package for TLS, DTLS as defined in the Functional Package for TLS, HTTPS_] to* provide a communication path between itself and *authorised* +++<u>+++remote+++</u>+++ *Administrators* +++<del>+++users+++</del>+++ that is logically distinct from other communication paths and provides assured identification of its end points and protection of the communicated data from +++<u>+++disclosure+++</u>+++ *and provides detection of modification of the channel data.*
 
 *FTP_TRP.1.2/Admin* The TSF shall permit +++<u>+++remote *Administrators* +++<del>+++users+++</del>+++ +++</u>+++to initiate communication via the trusted path.
 
