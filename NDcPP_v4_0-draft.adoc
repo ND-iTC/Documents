@@ -938,7 +938,7 @@ _Where an auditable event is triggered by another component, the component that 
 A Network Device TOE is not expected to take responsibility for all audit storage itself. Although it is required to store data locally at the time of generation, and to take some appropriate action if this local storage capacity is exceeded, the TOE is also required to be able to establish a secure link to an external audit server to enable external audit trail storage.
 
 ===== FAU_STG_EXT.1 Protected Audit Event Storage
-// commentCC2022 change: FAU_STG.1.4 -> FAU_STG.2.5 and FAU_STG.1 is "new" to specify the location where the audit data is stored. 
+
 // See https://github.com/ND-iTC/Documents/issues/352 //
 // Also extended definition will need to be changed. //
 
@@ -2946,37 +2946,7 @@ Dependencies: No other components
 
 *FIA_PSK_EXT.1.2* The TSF shall be able to [selection: _accept externally generated pre-shared keys, generate 256 bit-based pre-shared keys via the random number generator used by the TSF._]
 
-==== Pre-Shared Key Composition (FIA_PSK_EXT)
 
-*Family Behaviour*
-
-Components in this family describe the requirements for pre-shared keys when implementing IPsec. 
-
-*Component Levelling*
-
-image:extracted-media/media/FIA_PSK_EXT.png[image,width=500,height=48]
-
-FIA_PSK_EXT.1 defines the use and composition of pre-shared keys used for IPsec. 
-
-*Management: FIA_PSK_EXT.1*
-
-There are no management functions foreseen.
-
-*Audit: FIA_PSK_EXT.1*
-
-There are no auditable events foreseen.
-
-===== FIA_PSK_EXT.1 Pre-Shared Key Composition
-
-*FIA_PSK_EXT.1 Pre-Shared Key Composition*
-
-Hierarchical to: No other components
-
-Dependencies: No other components
-
-*FIA_PSK_EXT.1.1* The TSF shall be able to use pre-shared keys that conform to RFC 8784 for IPsec.
-
-*FIA_PSK_EXT.1.2* The TSF shall be able to [selection: _accept externally generated pre-shared keys, generate 256 bit-based pre-shared keys via the random number generator used by the TSF._]
 
 ==== User identification and authentication (FIA_UIA_EXT)
 
