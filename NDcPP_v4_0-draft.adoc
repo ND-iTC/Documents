@@ -866,7 +866,7 @@ _With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘servi
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST. This must also include the relevant parts of Table 4 and Table 5 for optional and selection-based SFRs included in the ST. All audit events defined in Table 2 have to be included in the ST as they are mandatory._
+_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST. This must also include the relevant parts of Table 4 and Table 5 for optional and selection-based SFRs included in the ST. All audit events defined in Table 2 have to be included in the ST as they are mandatory. If the TOE does not implement functionality that enables the administrator to configure local audit settings, then item FAU_STG_EXT.1 in Table 2 shall be considered ‘trivially satisfied’ and the ST author shall include an explanation that the local audit is not configurable in the TSS._
 
 _The date and time information for any audit event should be recorded as part of each audit record to ensure the timing of the event can be unambiguously determined from the data contained in the audit record. The representation of date and time information recorded for each event needs to allow unambiguous determination of at least day, month and year information for the date and hours, minutes and second information for the time._
 
