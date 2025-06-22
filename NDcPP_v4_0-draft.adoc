@@ -2511,6 +2511,8 @@ _The first selection for ‘determine the behaviour of’ and ‘modify the beha
 
 _FMT_MTD.1.1/CryptoKeys restricts management of cryptographic keys to Security Administrators. It should be included if cryptographic keys can be managed (e.g. modified, deleted or generated/imported) by the Security Administrator. The identifier ‘CryptoKeys’ has been added here to separate this iteration of FMT_MTD.1 from the mandatory iteration of FMT_MTD.1 defined in Section 6.6.2.1 (FMT_MTD.1/CoreData)._
 
+=== TOE Access (FTA)
+
 ==== TSF-initiated Session Locking (Extended – FTA_SSL_EXT)
 If the TOE provides the Security Administrator the ability to administer the TOE locally, session locking or termination must be implemented to mitigate the risk of an account being used illegitimately.
 
