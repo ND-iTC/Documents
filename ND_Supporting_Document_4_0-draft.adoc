@@ -1629,10 +1629,15 @@ Some TOEs may set up the registration channel before the enablement step is carr
 
 *FCS_IPSEC_EXT.1.10*
 [arabic, start=445]
-. Each of the following tests shall be performed for each version of IKE selected in the FCS_IPSEC_EXT.1.5 protocol selection:
+. The following tests shall be performed.
 [loweralpha]
-.. Test 1: If the first selection is chosen, the evaluator shall check to ensure that, for each DH group supported, the TSS describes the process for generating each nonce. The evaluator shall verify that the TSS indicates that the random number generated that meets the requirements in this PP is used, and that the length of the nonces meet the stipulations in the requirement.
-.. Test 2: If the second selection is chosen, the evaluator shall check to ensure that, for each PRF hash supported, the TSS describes the process for generating each nonce. The evaluator shall verify that the TSS indicates that the random number generated that meets the requirements in this PP is used, and that the length of the nonces meet the stipulations in the requirement.
+.. Test 1: If IKEv1 is supported, Configure the TOE to use IKEv1:
+* Test 1.a: If “according to the security strength associated with the negotiated Diffie-
+Hellman group” has been selected, for each supported authentication methods and DH groups, demonstrate the TOE uses phase 1 and phase 2 nonces meeting the strength requirement defined in NIST SP 800-57 for the appropriate DH group.
+* Test 1.b: If “at least 128 bits in size and at least half the output size of the negotiated
+pseudorandom function (PRF) hash” has been selected, for each supported authentication method and PRF hash, demonstrate the TOE uses phase 1 and phase 2 nonces suitable for the selected PRF.
+.. Test 2: If IKEv2 is supported, configure the TOE to use IKEv2:
+* For each supported DH group, demonstrate the TOE uses IKE_SA_INIT and CREATE_CHILD_SA nonces suitable for the selected PRF.
 
 *FCS_IPSEC_EXT.1.11*
 [arabic, start=446]

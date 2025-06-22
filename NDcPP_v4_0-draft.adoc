@@ -2245,9 +2245,12 @@ _Since the implementation may allow different Diffie-Hellman groups to be negoti
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author must select the second option for nonce lengths if IKEv2 is also selected (as this is mandated in RFC 7296). The ST author may select either option for IKEv1._
+_This SFR is for the IKEv1 (phase 1 and phase 2) and IKEv2 (IKE_AUTH and CREATE_CHILD_SA) protocol
+exchanges._
 
-_For the first option for nonce lengths, since the implementation may allow different Diffie-Hellman groups to be negotiated for use in forming the SAs, the assignment in FCS_IPSEC_EXT.1.10 may contain multiple values. For each DH group supported, the ST author consults Table 2 in NIST SP 800-57 “Recommendation for Key Management – Part 1: General” to determine the security strength (“bits of security”) associated with the DH group. Each unique value is then used to fill in the assignment for this element. For example, suppose the implementation supports DH group 14 (2048-bit MODP) and group 20 (ECDH using NIST curve P-384). From Table 2, the bits of security value for group 14 is 112, and for group 20 it is 192._
+_The ST author must select the second option for nonce lengths if IKEv2 is selected (as this is mandated in RFC 7296). The ST author may select either option for IKEv1._
+
+_The security strengths of DH groups are defined in NIST SP 800-57._
 
 _Because nonces may be exchanged before the DH group is negotiated, the nonce used should be large enough to support all TOE-chosen proposals in the exchange._
 
