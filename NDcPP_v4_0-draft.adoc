@@ -2192,41 +2192,51 @@ _AES-GCM-128, AES-GCM-192 and AES-GCM-256 may only be selected if IKEv2 is also 
 
 * _IKEv1 Phase 1 SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 24] hours;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time_];
 
 ];
 
-* _IKEv2 SA lifetimes can be configured by a Security Administrator based on_
+* _IKEv2 SA lifetimes can be configured by a Security Administrator based on_ [selection:
 
-[selection:
+** _number of bytes;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time_]
 
-* _number of bytes;_
-* _length of time, where the time values can be configured within [assignment: integer range including 24] hours_
-_]_
+]
 
 ].
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). This requirement must be accomplished by providing Security Administrator-configurable lifetimes (with appropriate instructions in documents mandated by AGD_OPE). Hardcoded limits do not meet this requirement. In general, instructions for setting the parameters of the implementation, including lifetime of the SAs, should be included in the guidance documentation generated for AGD_OPE._
+_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must be include a rekey time that causes a rekey to occur at or slightly before 24 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 23h 59min to ensure the actual rekey is performed no later than 24h, while other TOEs might automatically ensure rekeying is performed prior to the configured time._
+
+_This requirement must be accomplished by providing Security Administrator-configurable lifetimes. Hardcoded limits do not meet this requirement._
 
 *FCS_IPSEC_EXT.1.8* The TSF shall ensure that [selection:
 
 * _IKEv1 Phase 2 SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 8] hours;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time];_
 
 ];
 
 * _IKEv2 Child SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 8] hours;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time];_
+
+]
 
 ].
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). This requirement must be accomplished by providing Security Administrator-configurable lifetimes (with appropriate instructions in documents mandated by AGD_OPE). Hardcoded limits do not meet this requirement. In general, instructions for setting the parameters of the implementation, including lifetime of the SAs, should be included in the guidance documentation generated for AGD_OPE._
+_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must be include a rekey time that causes a rekey to occur at or slightly before 8 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 7h 59min to ensure the actual rekey is performed no later than 8h, while other TOEs might automatically ensure rekeying is performed
+prior to the configured time._
+
+_This requirement must be accomplished by providing Security Administrator-configurable lifetimes. Hardcoded limits do not meet this requirement._
 
 *FCS_IPSEC_EXT.1.9* The TSF shall generate the secret value x used in the IKE Diffie-Hellman key exchange (“x” in g^x mod p) using the random bit generator specified in FCS_RBG.1, and having a length of at least [assignment: _(one or more) number(s) of bits that is at least twice the security strength of the negotiated Diffie-Hellman group_] bits.
 
@@ -2785,32 +2795,38 @@ Dependencies:
 
 *FCS_IPSEC_EXT.1.7* The TSF shall ensure that [selection:
 
-* _IKEv1 Phase 1 SA lifetimes can be configured by a Security Administrator based on [selection:_
+* _IKEv1 Phase 1 SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 24] hours;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time_];
 
-_];_
+];
 
-* _IKEv2 SA lifetimes can be configured by a Security Administrator based on [selection:_
+* _IKEv2 SA lifetimes can be configured by a Security Administrator based on_ [selection:
+
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 24] hours_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time_]
 
 ]
+
 ].
 
 *FCS_IPSEC_EXT.1.8* The TSF shall ensure that [selection:
 
 * _IKEv1 Phase 2 SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 8] hours;_
-
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time];_
 
 ];
 
-
 * _IKEv2 Child SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 8] hours;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time];_
+
+]
 
 ].
 
