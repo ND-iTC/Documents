@@ -1274,19 +1274,19 @@ In order to provide a trusted means for Administrators to interact with the TOE,
 
 _This requirement applies to Administrators and external IT entities of services available from the TOE directly, and not services available by connecting through the TOE. While it should be the case that few or no services are available to external entities prior to identification and authentication, if there are some available (perhaps ICMP echo) these should be listed in the assignment statement; if automated generation of cryptographic keys is supported without administrator authentication, the option "automated generation of cryptographic keys" should be selected; otherwise, the option “no other actions” should be selected._
 
-*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate, [assignment: other authentication mechanism]]_ and local authentication mechanisms [selection: _none, password-based, [assignment: other authentication mechanism]]_.
+*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate[selection: no other mechanism, external authentication server]. The TSF shall provide the following local authentication mechanisms:[selection: none, password-based, [assignment: other authentication mechanism]]_.
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE must support at least one remote authentication mechanism. Remote authentication mechanisms are defined as those that occur using a cryptographic protocol specified in FTP_TRP.1/Admin. Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author shall select "none" from the final selection. See Application Note 23 for examples of compliant local administrative interfaces._
+_An authentication process consists of two basic steps: identification step (presenting the claimed attribute value (e.g., a user identifier) to the authentication subsystem); verification step (presenting or generating authentication information (e.g., a value signed with a private key) that acts as evidence to prove the binding between the attribute and that for which it is claimed)._
+
+_Remote authentication is when a user associated with the Security Administrator role remotely communicates with the TOE for the purpose of security management over a cryptographic protocol specified in FTP_TRP.1/Admin. Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author shall select "none" from the final selection. See Application Note 23 for examples of compliant local administrative interfaces._
+
+_The TOE must support at least one authentication mechanism where the verification step is processed locally, as such “external authentication server” should not be the only available authentication method._
 
 _The ST author selects the authentication mechanisms necessary to support remote administration. If "Web GUI password" or "SSH password" is selected for remote authentication mechanism the ST author specifies an appropriate cryptographic protocol in FTP_TRP.1/Admin (e.g., "HTTPS" or "SSH") and includes FIA_AFL.1, FIA_PMG_EXT.1, FPT_APW_EXT.1 from Appendix B._
 
-_The ST author selects "X.509 certificate" if the TOE supports X.509 certificate authentication of the remote endpoint and an appropriate cryptographic protocol is specified in FTP_TRP.1/Admin and included from Appendix B. For example, if "X.509 certificate" is selected, the ST author specifies "HTTPS" in FTP_TRP.1/Admin and includes FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication) from the Functional Package for TLS._
-
-_If the optional selection of "Ability to administer the TOE locally" is specified in FMT_SMF.1 the ST author selects "password-based" local authentication mechanism and includes FIA_PMG_EXT.1, FPT_APW_EXT.1 and FIA_UAU.7 from Appendix B. Alternatively, the ST author may complete the assignment operation to specify a local authentication mechanism that is non-password based._
-
-_For communications with external IT entities (an audit server, for instance), such connections must be performed in accordance with FTP_ITC.1, whose protocols perform identification and authentication. This means that such communications (e.g., establishing the IPsec connection to the authentication server) would not have to be specified in the assignment, since establishing the connection ‘counts’ as initiating the identification and authentication process._
+_If integration with an external X.500 Directory is supported and enabled, the "external authentication server" must be selected and an appropriate cryptographic protocol with each "authentication server" must be selected in FTP_ITC.1. Since the identity verification step is performed remotely, FIA_AFL.1, FIA_PMG_EXT.1, FPT_APW_EXT.1 requirements are not enforced by the TOE and therefore are not applicable to the “external authentication server” selection._
 
 *FIA_UIA_EXT.1.4* The TSF shall authenticate any administrative user's claimed identity according to each authentication mechanism specified in FIA_UIA_EXT.1.3.
 
@@ -3012,7 +3012,7 @@ Dependencies: FTA_TAB.1 Default TOE access banners
 
 *FIA_UIA_EXT.1.2* The TSF shall require each administrative user to be successfully identified and authenticated before allowing any other TSF-mediated actions on behalf of that administrative user.
 
-*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate, [assignment: other authentication mechanism]]_ and local authentication mechanisms [selection: _none, password-based, [assignment: other authentication mechanism]]_.
+*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate [selection: no other mechanism, external authentication server]. The TSF shall provide the following local authentication mechanisms:[selection: none, password-based, [assignment: other authentication mechanism]]_.
 
 *FIA_UIA_EXT.1.4* The TSF shall authenticate any administrative user's claimed identity according to each authentication mechanism specified in FIA_UIA_EXT.1.3.
 
