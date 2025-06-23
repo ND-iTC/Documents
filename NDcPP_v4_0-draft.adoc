@@ -2028,48 +2028,6 @@ _The TOE must be able to generate audit records for each TOE component. Some TOE
 
 ==== Security audit event storage (Extended - FAU_STG_EXT)
 
-===== FAU_STG.1 Protected Audit Trail Storage
-
-*FAU_STG.1 Protected Audit Trail Storage*
-
-*FAU_STG.1.1* The TSF shall protect the stored audit records in the audit trail from unauthorised deletion.
-
-*FAU_STG.1.2* The TSF shall be able to +++<u>+++prevent+++</u>+++ unauthorised modifications to the stored audit records in the audit trail.
-
-===== FAU_STG_EXT.2 Counting Lost Audit Data
-
-*FAU_STG_EXT.2 Counting Lost Audit Data*
-
-*FAU_STG_EXT.2.1* The TSF shall provide information about the number of [selection: _dropped, overwritten, [assignment: other information]_] audit records in the case where the local storage has been filled and the TSF takes one of the actions defined in FAU_STG_EXT.1.5.
-
-*_Application Note {counter:appnote_count}_*
-
-_This option should be chosen if the TOE supports this functionality._
-
-_In case the local storage for audit records is cleared by the Administrator, the counters associated with the selection in the SFR should be reset to their initial value (most likely to 0). The guidance documentation should contain a warning for the Administrator about the loss of audit data when he clears the local storage for audit records._
-
-_For distributed TOEs each component that implements counting of lost audit data has to provide a mechanism for Administrator access to, and management of, this information._
-
-_If FAU_STG_EXT.2 is added to the ST, the ST has to make clear any situations in which lost audit data is not counted._
-
-===== FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss
-
-*FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss*
-
-*FAU_STG_EXT.3.1* The TSF shall generate a warning to inform the Administrator before the audit trail exceeds the local audit trail storage capacity.
-
-*_Application Note {counter:appnote_count}_*
-
-_This option should be chosen if the TOE generates a warning to inform the Administrator before the local storage space for audit data is used up. This SFR only applies to local storage of audit information._
-
-_It has to be ensured that the warning message required by FAU_STG_EXT.3.1 can be communicated to the Administrator. The communication should be done via the audit log itself because it cannot be guaranteed that an administrative session is active at the time the event occurs._
-
-_The warning should inform the Administrator when the local space to store audit data is used up and/or the TOE will lose audit data due to insufficient local space._
-
-_For distributed TOEs that implement displaying a warning when local storage space for audit data is exhausted, it has to be described which TOE components support this feature (not necessarily all TOE components have to support this feature if selected for the overall TOE). Each component that supports this feature must either generate a warning itself or through another component._
-
-_If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in which audit records might be “invisibly lost”._
-
 ==== Cryptographic Support (FCS)
 
 *FCS_RBG.2 Random Bit Generation (External Seeding - VS platform)*
