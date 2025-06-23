@@ -562,7 +562,7 @@ SFR Rationale:
 * Requirements for basic auditing capabilities are specified in FAU_GEN.1 and FAU_GEN.2, with timestamps provided according to FPT_STM_EXT.1 and if applicable, protection of NTP channels in FCS_NTP_EXT.1.
 * Requirements for protecting audit records stored on the TOE are specified in FAU_STG.2.
 * Requirements for secure storage and transmission of local audit records to an external IT entity via a secure channel are specified in FAU_STG_EXT.1 and FAU_STG_EXT.4.
-// The above double of FAU_STG_EXT.1 must be an error.//
+
 * Optional additional requirements for dealing with potential loss of locally stored audit records are specified in FAU_STG_EXT.3, and FAU_STG_EXT.4.
 * If (optionally) configuration of the audit functionality is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MOF.1/Functions.
 
@@ -937,9 +937,6 @@ _Where an auditable event is triggered by another component, the component that 
 A Network Device TOE is not expected to take responsibility for all audit storage itself. Although it is required to store data locally at the time of generation, and to take some appropriate action if this local storage capacity is exceeded, the TOE is also required to be able to establish a secure link to an external audit server to enable external audit trail storage.
 
 ===== FAU_STG_EXT.1 Protected Audit Event Storage
-
-// See https://github.com/ND-iTC/Documents/issues/352 //
-// Also extended definition will need to be changed. //
 
 *FAU_STG_EXT.1 Protected Audit Event Storage*
 
@@ -1599,14 +1596,8 @@ In addition to providing protection from disclosure (and detection of modificati
 
 *FTP_ITC.1 Inter-TSF trusted channel*
 
-// FTP_ITC.1.1 has been rewritten in CC2022.//
-
-*FTP_ITC.1.1* The TSF shall provide a communication channel between itself and another trusted IT
-product that is logically distinct from other communication channels and provides assured
-identification of its end points and protection of the channel data from modification or
+*FTP_ITC.1.1* The TSF shall provide a communication channel between itself and another trusted IT product that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from modification or
 disclosure.
-
-//*FTP_ITC.1.1* The TSF shall *be capable of using [selection: _IPsec, SSH as defined in the Functional Package for SSH, TLS as defined in the Functional Package for TLS, DTLS as defined in the Functional Package for TLS, HTTPS_] to* provide a *trusted* communication channel between itself and +++<del>+++another trusted IT product+++</del>+++ *authorised IT entities supporting the following capabilities: audit server, [selection: _authentication server, [assignment: other capabilities], no other capabilities_]* that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from +++<del>+++modification or+++</del>+++ disclosure *and detection of modification of the channel data*.//
 
 *FTP_ITC.1.2* The TSF shall permit [selection: _the TSF, +++<del>+++another trusted IT product,+++</del>+++ *the authorised IT entities_*] to initiate communication via the trusted channel.
 
