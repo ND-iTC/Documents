@@ -415,7 +415,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_GEN.2 |User Identity Association |All
 |FAU_GEN_EXT.1 |Security Audit Data Generation for Distributed TOE component |All
 |FAU_STG_EXT.1 |Protected Audit Event Storage |All
-|FAU_STG.1 |Protected Audit Trail Storage |Feature Dependent
+|FAU_STG.2 |Protected audit data storage |Feature Dependent
 |FAU_STG_EXT.2 |Counting Lost Audit Data |Feature Dependent
 |FAU_STG_EXT.3 |Action in Case of Possible Audit Data Loss |Feature Dependent
 |FAU_STG_EXT.4 |Protected Local Audit Event Storage for Distributed TOEs |Feature Dependent
@@ -1013,7 +1013,7 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 |ECC|Elliptic Curve [selection: P-256, P-384, P-521] |NIST FIPS PUB 186-5 (Section A.2.1)
 |FFC|“safe-prime” groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192, ffdhe-2048, ffdhe-3072, ffdhe-4096, ffdhe-6144, ffdhe-8192] |NIST SP 800-56A Revision 3 [selection: RFC 3526 [IKE groups], RFC 7919 [TLS groups]]
 
-|LMS |[selection: LMS_SHAKE_M24_H5, LMS_SHAKE_M24_H10, LMS_SHAKE_M24_H15, LMS_SHAKE_M24_H25, LMS_SHAKE_M32_H5, LMS_SHAKE_M32_H10, LMS_SHAKE_M32_H15, LMS_SHAKE_M32_H25, LMS_SHA256_M24_H5, LMS_SHA256_M24_H10, LMS_SHA256_M24_H15, LMS_SHA256_M24_H25, LMS_SHA256_M32_H5, LMS_SHA256_M32_H10, LMS_SHA256_M32_H15, LMS_SHA256_M32_H25]
+|LMS |[selection: LMS_SHAKE_M24_H5, LMS_SHAKE_M24_H10, LMS_SHAKE_M24_H15, LMS_SHAKE_M24_H25, LMS_SHAKE_M32_H5, LMS_SHAKE_M32_H10, LMS_SHAKE_M32_H15, LMS_SHAKE_M32_H25, LMS_SHA256_M24_H5, LMS_SHA256_M24_H10, LMS_SHA256_M24_H15, LMS_SHA256_M24_H25, LMS_SHA256_M32_H5, LMS_SHA256_M32_H10, LMS_SHA256_M32_H15, LMS_SHA256_M32_H25] bits
 |NIST SP 800-208
 
 |XMS|[selection: XMSS-SHA2_10_192, XMSS-SHA2_16_192, XMSS-SHA2_20_192, XMSS-SHA2_10_256, XMSS-SHA2_16_256, XMSS-SHA2_20_256, XMSS-SHAKE_10_192, XMSS-SHAKE_16_192, XMSS-SHAKE_20_192, XMSS-SHAKE_10_256, XMSS-SHAKE_16_256, XMSS-SHAKE_20_256] bits
@@ -1771,14 +1771,13 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 [cols=",,",options="header",]
 |===
 |*Requirement* |*Auditable Events* |*Additional Audit Record Contents*
-|FAU_STG.1 |None. |None.
+|FAU_STG.2 |None. |None.
 |FAU_STG_EXT.2 |None. |None.
 |FAU_STG_EXT.3 |Low storage space for audit data. |None.
 |FCO_CPC_EXT.1 a|
 * Enabling communications between a pair of components.
 * Disabling communications between a pair of components.
 |Identities of the endpoint pairs enabled or disabled.
-|FCS_CKM.1 |None. |None.
 
 |FPT_ITT.1 a|
 * Initiation of the trusted channel.
@@ -1800,17 +1799,17 @@ _Audit events related to failures of certain functions should include sufficient
 
 === Security audit (FAU)
 
-==== Security audit data storage (FAU_STG.1 & Extended – FAU_STG_EXT)
+==== Protected audit data storage (FAU_STG.2 & Extended – FAU_STG_EXT)
 
 The local storage space for audit data of a Network Device is limited, and if the local storage space is exceeded then audit data might be lost. A security Administrator might be interested in the number of dropped, overwritten, etc. audit records. This number might serve as an indication if a severe problem has occurred after the storage space was exceeded that continuously generated audit data. Therefore, FAU_STG_EXT.2 and FAU_STG_EXT.3 are defined to express these optional capabilities of a Network Device.
 
-===== FAU_STG.1 Protected Audit Trail Storage
+===== FAU_STG.2 Protected audit data storage
 
-*FAU_STG.1 Protected Audit Trail Storage*
+*FAU_STG.2 Protected audit data storage*
 
-*FAU_STG.1.1* The TSF shall protect the stored audit records in the audit trail from unauthorised deletion.
+*FAU_STG.2.1* The TSF shall protect the stored audit data in the audit trail from unauthorised deletion.
 
-*FAU_STG.1.2* The TSF shall be able to +++<u>+++prevent+++</u>+++ unauthorised modifications to the stored audit records in the audit trail.
+*FAU_STG.2.2* The TSF shall be able to +++<u>+++prevent+++</u>+++ unauthorised modifications to the stored audit data in the audit trail.
 
 ===== FAU_STG_EXT.2 Counting Lost Audit Data
 
@@ -2029,47 +2028,37 @@ _The TOE must be able to generate audit records for each TOE component. Some TOE
 
 ==== Security audit event storage (Extended - FAU_STG_EXT)
 
-===== FAU_STG.1 Protected Audit Trail Storage
+===== FAU_STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs
 
-*FAU_STG.1 Protected Audit Trail Storage*
+This SFR needs to be added to the ST for evaluation of distributed TOEs which contain TOE components that are storing audit data locally. This SFR needs to be fulfilled in addition to the general SFRs on Protected Audit Event Storage for all types of TOEs (distributed, non-distributed).
 
-*FAU_STG.1.1* The TSF shall protect the stored audit records in the audit trail from unauthorised deletion.
+*FAU_STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs*
 
-*FAU_STG.1.2* The TSF shall be able to +++<u>+++prevent+++</u>+++ unauthorised modifications to the stored audit records in the audit trail.
-
-===== FAU_STG_EXT.2 Counting Lost Audit Data
-
-*FAU_STG_EXT.2 Counting Lost Audit Data*
-
-*FAU_STG_EXT.2.1* The TSF shall provide information about the number of [selection: _dropped, overwritten, [assignment: other information]_] audit records in the case where the local storage has been filled and the TSF takes one of the actions defined in FAU_STG_EXT.1.5.
+*FAU_STG_EXT.4.1* The TSF of each TOE component which stores security audit data locally shall perform the following actions when the local storage space for audit data is full: [_assignment: table of components and for each component its action chosen according to the following: [selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]]_].
 
 *_Application Note {counter:appnote_count}_*
 
-_This option should be chosen if the TOE supports this functionality._
+_If a component of a distributed TOE collects data from other components and then forwards it to another component or external IT entity (cf. FAU_STG_EXT.1.1) then the operations in this SFR must be performed in a way to cover the storage space action(s) for all of the audit data that the TOE collects (i.e. not just for the data generated by the collecting component for itself)._
 
-_In case the local storage for audit records is cleared by the Administrator, the counters associated with the selection in the SFR should be reset to their initial value (most likely to 0). The guidance documentation should contain a warning for the Administrator about the loss of audit data when he clears the local storage for audit records._
+_It is acceptable for a TOE component to store audit information in multiple places (e.g. for redundancy), whether locally in the TOE component itself and in another TOE component, or in more than one other TOE component._
 
-_For distributed TOEs each component that implements counting of lost audit data has to provide a mechanism for Administrator access to, and management of, this information._
+_TOE components are not required to monitor or audit connectivity or network outages between TOE components. This aspect is covered by the assumption A.COMPONENTS_RUNNING_
 
-_If FAU_STG_EXT.2 is added to the ST, the ST has to make clear any situations in which lost audit data is not counted._
+===== FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
 
-===== FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss
+This SFR needs to be added to the ST for evaluation of distributed TOEs which contain TOE components that aren’t storing audit data locally but sending it to another TOE component for storage. This SFR needs to be fulfilled in addition to the general SFRs on Protected Audit Event Storage for all types of TOEs (distributed, non-distributed).
 
-*FAU_STG_EXT.3 Action in Case of Possible Audit Data Loss*
+*FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs*
 
-*FAU_STG_EXT.3.1* The TSF shall generate a warning to inform the Administrator before the audit trail exceeds the local audit trail storage capacity.
+*FAU_STG_EXT.5.1* Each TOE component which does not store security audit data locally shall be able to buffer security audit data locally until it has been transferred to another TOE component that stores or forwards it. All transfer of audit records between TOE components shall use a protected channel according to [selection: _FPT_ITT.1, FTP_ITC.1_].
 
 *_Application Note {counter:appnote_count}_*
 
-_This option should be chosen if the TOE generates a warning to inform the Administrator before the local storage space for audit data is used up. This SFR only applies to local storage of audit information._
+_If a component of a distributed TOE collects data from other components and then forwards it to another component or external IT entity (cf. FAU_STG_EXT.1.1) then the operations in this SFR must be performed in a way to cover the storage space action(s) for all of the audit data that the TOE collects (i.e. not just for the data generated by the collecting component for itself)_.
 
-_It has to be ensured that the warning message required by FAU_STG_EXT.3.1 can be communicated to the Administrator. The communication should be done via the audit log itself because it cannot be guaranteed that an administrative session is active at the time the event occurs._
+_It is acceptable for a TOE component to store audit information in multiple places (e.g. for redundancy), whether locally in the TOE component itself and in another TOE component, or in more than one other TOE component_.
 
-_The warning should inform the Administrator when the local space to store audit data is used up and/or the TOE will lose audit data due to insufficient local space._
-
-_For distributed TOEs that implement displaying a warning when local storage space for audit data is exhausted, it has to be described which TOE components support this feature (not necessarily all TOE components have to support this feature if selected for the overall TOE). Each component that supports this feature must either generate a warning itself or through another component._
-
-_If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in which audit records might be “invisibly lost”._
+_TOE components are not required to monitor or audit connectivity or network outages between TOE components. This aspect is covered by the assumption A.COMPONENTS_RUNNING_.
 
 ==== Cryptographic Support (FCS)
 
@@ -2254,7 +2243,7 @@ _Because nonces may be exchanged before the DH group is negotiated, the nonce us
 *FCS_IPSEC_EXT.1.11* The TSF shall ensure that IKE protocols implement DH Group(s) [selection:
 
 * [selection: _14 (2048-bit MODP), 15 (3072-bit MODP), 16 (4096-bit MODP), 17 (6144-bit MODP), 18 (8192-bit MODP)] according to RFC 3526,_
-* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),_ _21 (521-bit Random ECP), 24 (2048-bit MODP with 256-bit POS)] according to RFC 5114._
+* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),_ _21 (521-bit Random ECP)] according to RFC 5114._
 
 ].
 
@@ -2823,7 +2812,7 @@ _];_
 *FCS_IPSEC_EXT.1.11* The TSF shall ensure that IKE protocols implement DH Group(s) [selection:
 
 * _[selection: 14 (2048-bit MODP), 15 (3072-bit MODP), 16 (4096-bit MODP), 17 (6144-bit MODP), 18 (8192-bit MODP)] according to RFC 3526,_
-* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),21 (521-bit Random ECP), 24 (2048-bit MODP with 256-bit POS)] according to RFC 5114._
+* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),21 (521-bit Random ECP)] according to RFC 5114._
 
 _]._
 
@@ -3479,7 +3468,7 @@ FMT_SMF.1 included
 [cols=",,",options="header",]
 |===
 |*SFR* |*Dependencies* |*Rationale Statement*
-|FAU_STG.1 |FAU_GEN.1 |FAU_GEN.1 included
+|FAU_STG.2 |FAU_GEN.1 |FAU_GEN.1 included
 
 |FAU_STG_EXT.2 a|
 FAU_GEN.1
