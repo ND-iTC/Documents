@@ -63,7 +63,7 @@ CCDB-018, Version 1, 31 January, 2025.
 
 [cols=",",]
 |===
-|[SD] |Evaluation Activities for Network Device cPP, Version 4.0
+|[SD] |Supporting Document - Evaluation Activities for Network Device cPP, Version 4.0 draft
 |===
 
 === Revision History
@@ -170,8 +170,7 @@ link:#_Toc27041932[Table 13: SFR Dependencies Rationale for Selection-Based SFRs
 
 PP Reference: collaborative Protection Profile for Network Devices
 
-PP Version: 4.0 draft
-
+PP Version: 4.0 draft +
 PP Date: 30-June-2025
 
 === TOE Overview
@@ -784,34 +783,34 @@ Figure 16, Figure 17, Figure 18, Figure 19, Figure 20, and Figure 21 give a grap
 In the diagrams, the SFRs from Appendix B are both described as ‘Discretionary’, meaning that their inclusion in an ST will depend on the particular properties of a product. The SFRs from Appendix B that are required by an ST are determined by the selections made in other SFRs. For example: FTP_ITC.1 and FTP_TRP.1/Admin (in Sections 6.9.1.1 and 6.9.2.1 respectively) each contain selections of a protocol to be used for the type of secure channel described by the SFR. The selection of the protocol(s) here determines which of the protocol-specific SFRs in Section B.3.1 are also required in the ST. SFRs in Appendix A can be included in the ST if they are provided by the TOE, but are not mandatory in order for a TOE to claim conformance to this cPP.
 
 [.text-center]
-image:extracted-media/media/arch_1_no_ssh.png[image]
+image:extracted-media/media/arch_1_v4.png[image]
 [.text-center]
 [#_Ref399516751]_Figure 16: Protected Communications SFR Architecture_
 
 [.text-center]
-image:extracted-media/media/arch_2.png[image,width=552,height=374]
+image:extracted-media/media/arch_2_v4.png[image,width=552,height=374]
 [.text-center]
 [#_Ref399517041]_Figure 17: Administrator Authentication SFR Architecture_
 
 [.text-center]
-image:extracted-media/media/arch_3.png[image,width=612,height=262]
+image:extracted-media/media/arch_3_v4.png[image,width=612,height=262]
 [.text-center]
 [#_Toc27125738]_Figure 18: Correct Operation SFR Architecture_
 
 [.text-center]
-image:extracted-media/media/arch_4.png[image,width=678,height=407]
+image:extracted-media/media/arch_4_v4.png[image,width=678,height=407]
 [.text-center]
-image:extracted-media/media/arch_5.png[image,width=642,height=361]
+image:extracted-media/media/arch_5_v4.png[image,width=642,height=361]
 
 [.text-center]
 [#_Toc27125739]_Figure 19: Trusted Update and Audit SFR Architecture_
 [.text-center]
-image:extracted-media/media/arch_6.png[image]
+image:extracted-media/media/arch_6_v4.png[image]
 [.text-center]
 [#_Ref399850426]_Figure 20: Management SFR Architecture_
 
 [.text-center]
-image:extracted-media/media/arch_7.png[image]
+image:extracted-media/media/arch_7_v4.png[image]
 [.text-center]
 [#_Ref443496257]_Figure 21: Distributed TOE SFR Architecture_
 
