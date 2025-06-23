@@ -2622,7 +2622,7 @@ Dependencies:
 
 *FAU_STG_EXT.5.1* Each TOE component which does not store security audit data locally shall be able to buffer security audit data locally until it has been transferred to another TOE component that stores or forwards it. All transfer of audit records between TOE components shall use a protected channel according to _[selection: FPT_ITT.1, FTP_ITC.1]_.
 
-=== Cryptographic support (FCS)
+=== Cryptographic Support (FCS)
 
 ==== Random Bit Generation (FCS_RBG_EXT)
 

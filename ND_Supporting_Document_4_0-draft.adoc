@@ -1221,12 +1221,6 @@ For a non-virtualized TOE, the interruption shall not be performed at the virtua
 .. Highlight any situation in which a secret value/key may be transmitted over a channel that uses a key of lower comparable strength than the transmitted value/key. Comparable strength is defined as the amount of work required to compromise the algorithm or key and is typically expressed as ‘bits’ of security. The ST author and evaluator shall consult NIST 800-57 Table 2 for further guidance on comparable algorithm strength.
 +
 
-
-= HOW WEAK IS THE LOWER-STRENGTH KEY ALLOWED TO BE? THIS IS NORMALLY A BAD THING.
-
-
-
-
 ===== Tests
 [arabic, start=263]
 . The evaluator shall perform the following tests:
@@ -2053,7 +2047,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 |EAs that are associated with the SFRs in Section 2, and, if applicable, Sections 3 and 4, are performed to ensure that all the SFRs where the security functionality is externally visible (i.e. at the TSFI) are addressed, and that the description of the interfaces is accurate with respect to the specification captured in the SFRs. Therefore, the intent of this work unit is covered.
 |===
 
-[#_Toc473308377]#*Table 1: Mapping of ADV_FSP.1 CEM Work Units to Evaluation Activities*#
+[#_Toc473308377]_Table 1: Mapping of ADV_FSP.1 CEM Work Units to Evaluation Activities_
 
 ===== Evaluation Activity
 [arabic, start=591]
@@ -2225,7 +2219,7 @@ The calibration of test resources specified in the last paragraph of the work un
 |Replace the CEM work unit with the reporting called for in Appendix A.3.
 |===
 
-[#_Ref453153408]#Table 2: Mapping of AVA_VAN.1 CEM Work Units to Evaluation Activities#
+[#_Ref453153408]_Table 2: Mapping of AVA_VAN.1 CEM Work Units to Evaluation Activities_
 
 [arabic, start=630]
 . Because of the level of detail required for the evaluation activities, the bulk of the instructions are contained in Appendix A, while an “outline” of the assurance activity is provided below.
@@ -2399,7 +2393,6 @@ If Fuzz Testing is performed, the evaluator shall focus on security-relevant par
 https://nvd.nist.gov/vuln/search
 . Common Vulnerabilities and Exposures: +
 https://www.cve.org/ +
-https://www.cvedetails.com/vulnerability-search.php
 . US-CERT (Carnegie Mellon University): +
 https://www.kb.cert.org/vuls/html/search
 . Tenable Network Security +
@@ -2467,7 +2460,7 @@ Where RSA Key Establishment schemes are claimed and especially when PKCS#1 v1.5*
 | |Different |If the functionality provided by different TOE model variations differ, a determination must be made if the functional differences affect cPP-specified functionality. If cPP-specific functionality differs between models, the models are not considered equivalent and must be tested separately. In these cases, the evaluator has the option of only retesting the functionality that differs model-to-model. If the functional differences only affect non-cPP specified functionality, the model variations may still be considered equivalent. For each difference the evaluator must provide an explanation of why the difference does or does not affect cPP specified functionality.
 |===
 
-[#_Toc412821715]#Table 3: Evaluation Equivalency Analysis#
+[#_Toc412821715]_Table 3: Evaluation Equivalency Analysis_
 
 === Test Presentation/Truth in Advertising
 [arabic, start=677]
