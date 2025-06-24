@@ -588,7 +588,7 @@ SFR Rationale:
 
 ==== Device Failure
 
-Security mechanisms of the Network Device generally build up from roots of trust to more complex sets of mechanisms. Failures could result in a compromise to the security functionality of the device. A Network Device self-testing its security critical components at both start-up and during run-time ensures the reliability of the device’s security functionality.
+Security mechanisms of the Network Device generally build up from roots of trust to more complex sets of mechanisms. Failures could result in a compromise to the security functionality of the device. A Network Device self-testing its security critical components ensures the reliability of the device’s security functionality.
 
 ===== T.SECURITY_FUNCTIONALITY_FAILURE
 
@@ -872,7 +872,7 @@ _With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘servi
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST. This must also include the relevant parts of Table 4 and Table 5 for optional and selection-based SFRs included in the ST. All audit events defined in Table 2 have to be included in the ST as they are mandatory._
+_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST. This must also include the relevant parts of Table 4 and Table 5 for optional and selection-based SFRs included in the ST. All audit events defined in Table 2 have to be included in the ST as they are mandatory. If the TOE does not implement functionality that enables the administrator to configure local audit settings, then item FAU_STG_EXT.1 in Table 2 shall be considered ‘trivially satisfied’ and the ST author shall include an explanation that the local audit is not configurable in the TSS._
 
 _The date and time information for any audit event should be recorded as part of each audit record to ensure the timing of the event can be unambiguously determined from the data contained in the audit record. The representation of date and time information recorded for each event needs to allow unambiguous determination of at least day, month and year information for the date and hours, minutes and second information for the time._
 
@@ -1278,19 +1278,19 @@ In order to provide a trusted means for Administrators to interact with the TOE,
 
 _This requirement applies to Administrators and external IT entities of services available from the TOE directly, and not services available by connecting through the TOE. While it should be the case that few or no services are available to external entities prior to identification and authentication, if there are some available (perhaps ICMP echo) these should be listed in the assignment statement; if automated generation of cryptographic keys is supported without administrator authentication, the option "automated generation of cryptographic keys" should be selected; otherwise, the option “no other actions” should be selected._
 
-*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate, [assignment: other authentication mechanism]]_ and local authentication mechanisms [selection: _none, password-based, [assignment: other authentication mechanism]]_.
+*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate[selection: no other mechanism, external authentication server]. The TSF shall provide the following local authentication mechanisms:[selection: none, password-based, [assignment: other authentication mechanism]]_.
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE must support at least one remote authentication mechanism. Remote authentication mechanisms are defined as those that occur using a cryptographic protocol specified in FTP_TRP.1/Admin. Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author shall select "none" from the final selection. See Application Note 23 for examples of compliant local administrative interfaces._
+_An authentication process consists of two basic steps: identification step (presenting the claimed attribute value (e.g., a user identifier) to the authentication subsystem); verification step (presenting or generating authentication information (e.g., a value signed with a private key) that acts as evidence to prove the binding between the attribute and that for which it is claimed)._
+
+_Remote authentication is when a user associated with the Security Administrator role remotely communicates with the TOE for the purpose of security management over a cryptographic protocol specified in FTP_TRP.1/Admin. Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author shall select "none" from the final selection. See Application Note 23 for examples of compliant local administrative interfaces._
+
+_The TOE must support at least one authentication mechanism where the verification step is processed locally, as such “external authentication server” should not be the only available authentication method._
 
 _The ST author selects the authentication mechanisms necessary to support remote administration. If "Web GUI password" or "SSH password" is selected for remote authentication mechanism the ST author specifies an appropriate cryptographic protocol in FTP_TRP.1/Admin (e.g., "HTTPS" or "SSH") and includes FIA_AFL.1, FIA_PMG_EXT.1, FPT_APW_EXT.1 from Appendix B._
 
-_The ST author selects "X.509 certificate" if the TOE supports X.509 certificate authentication of the remote endpoint and an appropriate cryptographic protocol is specified in FTP_TRP.1/Admin and included from Appendix B. For example, if "X.509 certificate" is selected, the ST author specifies "HTTPS" in FTP_TRP.1/Admin and includes FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication) from the Functional Package for TLS._
-
-_If the optional selection of "Ability to administer the TOE locally" is specified in FMT_SMF.1 the ST author selects "password-based" local authentication mechanism and includes FIA_PMG_EXT.1, FPT_APW_EXT.1 and FIA_UAU.7 from Appendix B. Alternatively, the ST author may complete the assignment operation to specify a local authentication mechanism that is non-password based._
-
-_For communications with external IT entities (an audit server, for instance), such connections must be performed in accordance with FTP_ITC.1, whose protocols perform identification and authentication. This means that such communications (e.g., establishing the IPsec connection to the authentication server) would not have to be specified in the assignment, since establishing the connection ‘counts’ as initiating the identification and authentication process._
+_If integration with an external X.500 Directory is supported and enabled, the "external authentication server" must be selected and an appropriate cryptographic protocol with each "authentication server" must be selected in FTP_ITC.1. Since the identity verification step is performed remotely, FIA_AFL.1, FIA_PMG_EXT.1, FPT_APW_EXT.1 requirements are not enforced by the TOE and therefore are not applicable to the “external authentication server” selection._
 
 *FIA_UIA_EXT.1.4* The TSF shall authenticate any administrative user's claimed identity according to each authentication mechanism specified in FIA_UIA_EXT.1.3.
 
@@ -1344,10 +1344,10 @@ _The word ‘manage’ includes but is not limited to create, initialize, view, 
 * _Ability to update the TOE, and to verify the updates using_ +++<u>+++digital signature+++</u>+++ _capability prior to installing those updates;_
 * [selection:
 ** _Ability to start and stop services;_
-** _Ability to configure audit behaviour (e.g. changes to storage locations for audit; changes to behaviour when local audit storage space is full);_
-** _Ability to modify the behaviour of the transmission of audit data to an external IT entity;_
-** _Ability to configure the list of TOE-provided services available before an entity is identified and authenticated, as specified in FIA_UIA_EXT.1;_
-** _Ability to configure local audit behaviour (e.g. changes to storage locations for audit; changes to behaviour when local audit storage space is full, changes to local audit storage size);_
+** _Ability to configure local audit behaviour (e.g. changes to storage locations for audit; changes to behaviour when local audit storage space is full; changes to local audit storage
+size)_;
+** _Ability to modify the behaviour of the transmission of audit data to an external IT entity_;
+** _Ability to configure the list of TOE-provided services available before an entity is identified and authenticated, as specified in FIA_UIA_EXT.1_;
 ** _Ability to manage the cryptographic keys;_
 ** _Ability to configure the cryptographic functionality;_
 ** _Ability to configure thresholds for SSH rekeying;_
@@ -1378,7 +1378,9 @@ _The TOE must provide functionality for remote administration. Local administrat
 
 _The TOE must provide functionality to configure the access banner for FTA_TAB.1 and the session inactivity time(s) for FTA_SSL.3 and (if included) FTA_SSL_EXT.1, though an access banner is only required for each interactive (human-computer) interface (HCI), not for any programmatic interface [application programming interface (API), e.g. REST API]._
 
-_The option “Ability to update the TOE, and to verify the updates using digital signature capability prior to installing those updates” includes the relevant management functions from FMT_MOF.1/ManualUpdate and FPT_TUD_EXT.1. Based on selections in FPT_TUD_EXT.1.2, FMT_MOF.1/AutoUpdate must be included if the option “Ability to enable or disable automatic checking for updates or automatic updates” is included in the ST. Similarly, the selection “Ability to configure audit behaviour” includes the relevant management functions from FMT_MOF.1/Services and FMT_MOF.1/Functions, (for all of these SFRs that are included in the ST) and is intended to cover security relevant configuration options (if any) to the audit behaviour (like changes to the behaviour when the local audit storage space is full). The option "Ability to modify the behaviour of the transmission of audit data to an external IT entity" is intended to cover the management functionalities related to the transmission of local audit information to an external IT entity._
+_The option “Ability to update the TOE, and to verify the updates using digital signature capability prior to installing those updates” includes the relevant management functions from FMT_MOF.1/ManualUpdate and FPT_TUD_EXT.1. Based on selections in FPT_TUD_EXT.1.2, FMT_MOF.1/AutoUpdate must be included if the option “Ability to enable or disable automatic checking for updates or automatic updates” is included in the ST._
+
+_The selection “Ability to configure local audit behaviour” includes the relevant management functions from FMT_MOF.1/Services and FMT_MOF.1/Functions, (for all of these SFRs that are included in the ST) and is intended to cover security relevant configuration options (if any) to the audit behaviour (like changes to the behaviour when the local audit storage space is full). The option "Ability to modify the behaviour of the transmission of audit data to an external IT entity" is intended to cover the management functionalities related to the transmission of local audit information to an external IT entity._
 
 _If the TOE offers the ability for a remote Administrator account to be disabled in line with FIA_AFL.1 then the ST author must select the option “Ability to re-enable an Administrator account” to allow the account to be re-enabled by a local Administrator._
 
@@ -1493,20 +1495,24 @@ In order to detect some number of failures of underlying security mechanisms use
 *FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
 
 * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
-* _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
-* [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: describe self-test objective]._
+* _Prior to providing any cryptographic service and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: ‘list an identifier for each self-test that is additional to those identified in the first two bullet points’]._
 
-to demonstrate the correct operation of the TSF: [assignment: _list of self-tests run by the TSF_] and if failure detected [assignment: _describe resulting error state_].
+to demonstrate the correct operation of the TSF.
 
 *_Application Note {counter:appnote_count}_*
 
-_It is expected that self-tests are carried out during initial start-up of the TOE (physical or virtual power on). Other options should only be used if the developer can justify why they are not carried out during initial start-up. It is expected that at least self-tests for verification of the integrity of the TOE firmware and software as well as for the correct operation of cryptographic functions necessary to fulfil the SFRs will be performed. If not, all self-tests are performed during start-up multiple iterations of this SFR are used with the appropriate options selected. In future versions of this cPP the suite of self-tests will be required to contain at least mechanisms for measured boot including self-tests of the components which perform the measurement._
+_For the third bullet point, the following restriction applies: If, and only if 'no other' is selected in the selection, 'none' may be used in the second assignment._
 
 _Non-distributed TOEs may internally consist of several components that contribute to enforcing SFRs. Self-testing shall cover all components that contribute to enforcing SFRs and verification of integrity shall cover all software that contributes to enforcing SFRs on all components._
 
-_For distributed TOEs all TOE components have to perform self-tests. This does not necessarily mean that each TOE component has to carry out the same self-tests: the ST describes the applicability of the selection (i.e. when self-tests are run) and the final assignment (i.e. which self-tests are carried out) to each TOE component._
+_For distributed TOEs all TOE components have to perform self-tests. This does not necessarily mean that each TOE component has to carry out the same self-tests._
 
 *FPT_TST_EXT.1.2* The TSF shall respond to [selection: _all failures, [assignment: list of failures detected by self-tests_]] by [selection: _entering a maintenance mode, rebooting, [assignment: other methods to enter a secure state_]].
+
+*_Application Note {counter:appnote_count}_*
+
+_For all failed self-tests related to enforcing SFRs as defined in FPT_TST_EXT1.1 the reaction of the TOE to the failure needs to be specified. On the one hand, FPT_TST_EXT.1.2 allows to model TOEs that react to all failures of self-tests related to enforcing SFRs the same way be selecting 'all failures' in the first selection and selection of the corresponding reaction of the two in the second selection. On the other hand, it allows to model TOEs that react differently to different failures of self-tests to enforcing SFRs by specifying the list of failures in the first selection and the corresponding reaction of the TOE in the second selection. In the latter case, it shall be clear which failure of a self-test causes which behavior of the TOE._
 
 ==== Trusted update (FPT_TUD_EXT)
 
@@ -2164,41 +2170,51 @@ _AES-GCM-128, AES-GCM-192 and AES-GCM-256 may only be selected if IKEv2 is also 
 
 * _IKEv1 Phase 1 SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 24] hours;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time_];
 
 ];
 
-* _IKEv2 SA lifetimes can be configured by a Security Administrator based on_
+* _IKEv2 SA lifetimes can be configured by a Security Administrator based on_ [selection:
 
-[selection:
+** _number of bytes;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time_]
 
-* _number of bytes;_
-* _length of time, where the time values can be configured within [assignment: integer range including 24] hours_
-_]_
+]
 
 ].
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). This requirement must be accomplished by providing Security Administrator-configurable lifetimes (with appropriate instructions in documents mandated by AGD_OPE). Hardcoded limits do not meet this requirement. In general, instructions for setting the parameters of the implementation, including lifetime of the SAs, should be included in the guidance documentation generated for AGD_OPE._
+_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must be include a rekey time that causes a rekey to occur at or slightly before 24 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 23h 59min to ensure the actual rekey is performed no later than 24h, while other TOEs might automatically ensure rekeying is performed prior to the configured time._
+
+_This requirement must be accomplished by providing Security Administrator-configurable lifetimes. Hardcoded limits do not meet this requirement._
 
 *FCS_IPSEC_EXT.1.8* The TSF shall ensure that [selection:
 
 * _IKEv1 Phase 2 SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 8] hours;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time];_
 
 ];
 
 * _IKEv2 Child SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 8] hours;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time];_
+
+]
 
 ].
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). This requirement must be accomplished by providing Security Administrator-configurable lifetimes (with appropriate instructions in documents mandated by AGD_OPE). Hardcoded limits do not meet this requirement. In general, instructions for setting the parameters of the implementation, including lifetime of the SAs, should be included in the guidance documentation generated for AGD_OPE._
+_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must be include a rekey time that causes a rekey to occur at or slightly before 8 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 7h 59min to ensure the actual rekey is performed no later than 8h, while other TOEs might automatically ensure rekeying is performed
+prior to the configured time._
+
+_This requirement must be accomplished by providing Security Administrator-configurable lifetimes. Hardcoded limits do not meet this requirement._
 
 *FCS_IPSEC_EXT.1.9* The TSF shall generate the secret value x used in the IKE Diffie-Hellman key exchange (“x” in g^x mod p) using the random bit generator specified in FCS_RBG.1, and having a length of at least [assignment: _(one or more) number(s) of bits that is at least twice the security strength of the negotiated Diffie-Hellman group_] bits.
 
@@ -2217,9 +2233,12 @@ _Since the implementation may allow different Diffie-Hellman groups to be negoti
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author must select the second option for nonce lengths if IKEv2 is also selected (as this is mandated in RFC 7296). The ST author may select either option for IKEv1._
+_This SFR is for the IKEv1 (phase 1 and phase 2) and IKEv2 (IKE_AUTH and CREATE_CHILD_SA) protocol
+exchanges._
 
-_For the first option for nonce lengths, since the implementation may allow different Diffie-Hellman groups to be negotiated for use in forming the SAs, the assignment in FCS_IPSEC_EXT.1.10 may contain multiple values. For each DH group supported, the ST author consults Table 2 in NIST SP 800-57 “Recommendation for Key Management – Part 1: General” to determine the security strength (“bits of security”) associated with the DH group. Each unique value is then used to fill in the assignment for this element. For example, suppose the implementation supports DH group 14 (2048-bit MODP) and group 20 (ECDH using NIST curve P-384). From Table 2, the bits of security value for group 14 is 112, and for group 20 it is 192._
+_The ST author must select the second option for nonce lengths if IKEv2 is selected (as this is mandated in RFC 7296). The ST author may select either option for IKEv1._
+
+_The security strengths of DH groups are defined in NIST SP 800-57._
 
 _Because nonces may be exchanged before the DH group is negotiated, the nonce used should be large enough to support all TOE-chosen proposals in the exchange._
 
@@ -2471,6 +2490,8 @@ _The first selection for ‘determine the behaviour of’ and ‘modify the beha
 *_Application Note {counter:appnote_count}_*
 
 _FMT_MTD.1.1/CryptoKeys restricts management of cryptographic keys to Security Administrators. It should be included if cryptographic keys can be managed (e.g. modified, deleted or generated/imported) by the Security Administrator. The identifier ‘CryptoKeys’ has been added here to separate this iteration of FMT_MTD.1 from the mandatory iteration of FMT_MTD.1 defined in Section 6.6.2.1 (FMT_MTD.1/CoreData)._
+
+=== TOE Access (FTA)
 
 ==== TSF-initiated Session Locking (Extended – FTA_SSL_EXT)
 If the TOE provides the Security Administrator the ability to administer the TOE locally, session locking or termination must be implemented to mitigate the risk of an account being used illegitimately.
@@ -2757,32 +2778,38 @@ Dependencies:
 
 *FCS_IPSEC_EXT.1.7* The TSF shall ensure that [selection:
 
-* _IKEv1 Phase 1 SA lifetimes can be configured by a Security Administrator based on [selection:_
+* _IKEv1 Phase 1 SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 24] hours;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time_];
 
-_];_
+];
 
-* _IKEv2 SA lifetimes can be configured by a Security Administrator based on [selection:_
+* _IKEv2 SA lifetimes can be configured by a Security Administrator based on_ [selection:
+
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 24] hours_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time_]
 
 ]
+
 ].
 
 *FCS_IPSEC_EXT.1.8* The TSF shall ensure that [selection:
 
 * _IKEv1 Phase 2 SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 8] hours;_
-
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time];_
 
 ];
 
-
 * _IKEv2 Child SA lifetimes can be configured by a Security Administrator based on_ [selection:
 ** _number of bytes;_
-** _length of time, where the time values can be configured within [assignment: integer range including 8] hours;_
+** _length of time, where the time values can be configured between [assignment: minimum
+configurable rekey time] and [assignment: maximum configurable rekey time];_
+
+]
 
 ].
 
@@ -2966,7 +2993,7 @@ Dependencies: FTA_TAB.1 Default TOE access banners
 
 *FIA_UIA_EXT.1.2* The TSF shall require each administrative user to be successfully identified and authenticated before allowing any other TSF-mediated actions on behalf of that administrative user.
 
-*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate, [assignment: other authentication mechanism]]_ and local authentication mechanisms [selection: _none, password-based, [assignment: other authentication mechanism]]_.
+*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate [selection: no other mechanism, external authentication server]. The TSF shall provide the following local authentication mechanisms:[selection: none, password-based, [assignment: other authentication mechanism]]_.
 
 *FIA_UIA_EXT.1.4* The TSF shall authenticate any administrative user's claimed identity according to each authentication mechanism specified in FIA_UIA_EXT.1.3.
 
