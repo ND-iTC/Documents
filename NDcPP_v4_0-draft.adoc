@@ -63,7 +63,9 @@ CCDB-018, Version 1, 31 January, 2025.
 
 [cols=",",]
 |===
+
 |[SD] |Supporting Document - Evaluation Activities for Network Device cPP, Version 4.0 draft
+
 |===
 
 === Revision History
@@ -169,6 +171,7 @@ link:#_Toc27041932[Table 13: SFR Dependencies Rationale for Selection-Based SFRs
 === PP Reference Identification
 
 PP Reference: collaborative Protection Profile for Network Devices
+
 
 PP Version: 4.0 draft +
 PP Date: 30-June-2025
@@ -414,7 +417,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_GEN.2 |User Identity Association |All
 |FAU_GEN_EXT.1 |Security Audit Data Generation for Distributed TOE component |All
 |FAU_STG_EXT.1 |Protected Audit Event Storage |All
-|FAU_STG.1 |Protected Audit Trail Storage |Feature Dependent
+|FAU_STG.2 |Protected audit data storage |Feature Dependent
 |FAU_STG_EXT.2 |Counting Lost Audit Data |Feature Dependent
 |FAU_STG_EXT.3 |Action in Case of Possible Audit Data Loss |Feature Dependent
 |FAU_STG_EXT.4 |Protected Local Audit Event Storage for Distributed TOEs |Feature Dependent
@@ -562,7 +565,6 @@ SFR Rationale:
 * Requirements for basic auditing capabilities are specified in FAU_GEN.1 and FAU_GEN.2, with timestamps provided according to FPT_STM_EXT.1 and if applicable, protection of NTP channels in FCS_NTP_EXT.1.
 * Requirements for protecting audit records stored on the TOE are specified in FAU_STG.2.
 * Requirements for secure storage and transmission of local audit records to an external IT entity via a secure channel are specified in FAU_STG_EXT.1 and FAU_STG_EXT.4.
-
 * Optional additional requirements for dealing with potential loss of locally stored audit records are specified in FAU_STG_EXT.3, and FAU_STG_EXT.4.
 * If (optionally) configuration of the audit functionality is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MOF.1/Functions.
 
@@ -784,16 +786,19 @@ In the diagrams, the SFRs from Appendix B are both described as ‘Discretionary
 
 [.text-center]
 image:extracted-media/media/arch_1_v4.png[image]
+
 [.text-center]
 [#_Ref399516751]_Figure 16: Protected Communications SFR Architecture_
 
 [.text-center]
 image:extracted-media/media/arch_2_v4.png[image,width=552,height=374]
+
 [.text-center]
 [#_Ref399517041]_Figure 17: Administrator Authentication SFR Architecture_
 
 [.text-center]
 image:extracted-media/media/arch_3_v4.png[image,width=612,height=262]
+
 [.text-center]
 [#_Toc27125738]_Figure 18: Correct Operation SFR Architecture_
 
@@ -805,12 +810,14 @@ image:extracted-media/media/arch_5_v4.png[image,width=642,height=361]
 [.text-center]
 [#_Toc27125739]_Figure 19: Trusted Update and Audit SFR Architecture_
 [.text-center]
+
 image:extracted-media/media/arch_6_v4.png[image]
 [.text-center]
 [#_Ref399850426]_Figure 20: Management SFR Architecture_
 
 [.text-center]
 image:extracted-media/media/arch_7_v4.png[image]
+
 [.text-center]
 [#_Ref443496257]_Figure 21: Distributed TOE SFR Architecture_
 
@@ -1009,7 +1016,8 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 |ECC|Elliptic Curve [selection: P-256, P-384, P-521] |NIST FIPS PUB 186-5 (Section A.2.1)
 |FFC|“safe-prime” groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192, ffdhe-2048, ffdhe-3072, ffdhe-4096, ffdhe-6144, ffdhe-8192] |NIST SP 800-56A Revision 3 [selection: RFC 3526 [IKE groups], RFC 7919 [TLS groups]]
 
-|LMS |[selection: LMS_SHAKE_M24_H5, LMS_SHAKE_M24_H10, LMS_SHAKE_M24_H15, LMS_SHAKE_M24_H25, LMS_SHAKE_M32_H5, LMS_SHAKE_M32_H10, LMS_SHAKE_M32_H15, LMS_SHAKE_M32_H25, LMS_SHA256_M24_H5, LMS_SHA256_M24_H10, LMS_SHA256_M24_H15, LMS_SHA256_M24_H25, LMS_SHA256_M32_H5, LMS_SHA256_M32_H10, LMS_SHA256_M32_H15, LMS_SHA256_M32_H25]
+|LMS |[selection: LMS_SHAKE_M24_H5, LMS_SHAKE_M24_H10, LMS_SHAKE_M24_H15, LMS_SHAKE_M24_H25, LMS_SHAKE_M32_H5, LMS_SHAKE_M32_H10, LMS_SHAKE_M32_H15, LMS_SHAKE_M32_H25, LMS_SHA256_M24_H5, LMS_SHA256_M24_H10, LMS_SHA256_M24_H15, LMS_SHA256_M24_H25, LMS_SHA256_M32_H5, LMS_SHA256_M32_H10, LMS_SHA256_M32_H15, LMS_SHA256_M32_H25] bits
+
 |NIST SP 800-208
 
 |XMS|[selection: XMSS-SHA2_10_192, XMSS-SHA2_16_192, XMSS-SHA2_20_192, XMSS-SHA2_10_256, XMSS-SHA2_16_256, XMSS-SHA2_20_256, XMSS-SHAKE_10_192, XMSS-SHAKE_16_192, XMSS-SHAKE_20_192, XMSS-SHAKE_10_256, XMSS-SHAKE_16_256, XMSS-SHAKE_20_256] bits
@@ -1596,6 +1604,7 @@ In addition to providing protection from disclosure (and detection of modificati
 
 *FTP_ITC.1 Inter-TSF trusted channel*
 
+
 *FTP_ITC.1.1* The TSF shall provide a communication channel between itself and another trusted IT product that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from modification or
 disclosure.
 
@@ -1761,14 +1770,13 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 [cols=",,",options="header",]
 |===
 |*Requirement* |*Auditable Events* |*Additional Audit Record Contents*
-|FAU_STG.1 |None. |None.
+|FAU_STG.2 |None. |None.
 |FAU_STG_EXT.2 |None. |None.
 |FAU_STG_EXT.3 |Low storage space for audit data. |None.
 |FCO_CPC_EXT.1 a|
 * Enabling communications between a pair of components.
 * Disabling communications between a pair of components.
 |Identities of the endpoint pairs enabled or disabled.
-|FCS_CKM.1 |None. |None.
 
 |FPT_ITT.1 a|
 * Initiation of the trusted channel.
@@ -1790,17 +1798,17 @@ _Audit events related to failures of certain functions should include sufficient
 
 === Security audit (FAU)
 
-==== Security audit data storage (FAU_STG.1 & Extended – FAU_STG_EXT)
+==== Protected audit data storage (FAU_STG.2 & Extended – FAU_STG_EXT)
 
 The local storage space for audit data of a Network Device is limited, and if the local storage space is exceeded then audit data might be lost. A security Administrator might be interested in the number of dropped, overwritten, etc. audit records. This number might serve as an indication if a severe problem has occurred after the storage space was exceeded that continuously generated audit data. Therefore, FAU_STG_EXT.2 and FAU_STG_EXT.3 are defined to express these optional capabilities of a Network Device.
 
-===== FAU_STG.1 Protected Audit Trail Storage
+===== FAU_STG.2 Protected audit data storage
 
-*FAU_STG.1 Protected Audit Trail Storage*
+*FAU_STG.2 Protected audit data storage*
 
-*FAU_STG.1.1* The TSF shall protect the stored audit records in the audit trail from unauthorised deletion.
+*FAU_STG.2.1* The TSF shall protect the stored audit data in the audit trail from unauthorised deletion.
 
-*FAU_STG.1.2* The TSF shall be able to +++<u>+++prevent+++</u>+++ unauthorised modifications to the stored audit records in the audit trail.
+*FAU_STG.2.2* The TSF shall be able to +++<u>+++prevent+++</u>+++ unauthorised modifications to the stored audit data in the audit trail.
 
 ===== FAU_STG_EXT.2 Counting Lost Audit Data
 
@@ -2019,6 +2027,22 @@ _The TOE must be able to generate audit records for each TOE component. Some TOE
 
 ==== Security audit event storage (Extended - FAU_STG_EXT)
 
+===== FAU_STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs
+
+This SFR needs to be added to the ST for evaluation of distributed TOEs which contain TOE components that are storing audit data locally. This SFR needs to be fulfilled in addition to the general SFRs on Protected Audit Event Storage for all types of TOEs (distributed, non-distributed).
+
+*FAU_STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs*
+
+*FAU_STG_EXT.4.1* The TSF of each TOE component which stores security audit data locally shall perform the following actions when the local storage space for audit data is full: [_assignment: table of components and for each component its action chosen according to the following: [selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]]_].
+
+*_Application Note {counter:appnote_count}_*
+
+_If a component of a distributed TOE collects data from other components and then forwards it to another component or external IT entity (cf. FAU_STG_EXT.1.1) then the operations in this SFR must be performed in a way to cover the storage space action(s) for all of the audit data that the TOE collects (i.e. not just for the data generated by the collecting component for itself)._
+
+_It is acceptable for a TOE component to store audit information in multiple places (e.g. for redundancy), whether locally in the TOE component itself and in another TOE component, or in more than one other TOE component._
+
+_TOE components are not required to monitor or audit connectivity or network outages between TOE components. This aspect is covered by the assumption A.COMPONENTS_RUNNING_
+
 ==== Cryptographic Support (FCS)
 
 *FCS_RBG.2 Random Bit Generation (External Seeding - VS platform)*
@@ -2202,7 +2226,8 @@ _Because nonces may be exchanged before the DH group is negotiated, the nonce us
 *FCS_IPSEC_EXT.1.11* The TSF shall ensure that IKE protocols implement DH Group(s) [selection:
 
 * [selection: _14 (2048-bit MODP), 15 (3072-bit MODP), 16 (4096-bit MODP), 17 (6144-bit MODP), 18 (8192-bit MODP)] according to RFC 3526,_
-* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),_ _21 (521-bit Random ECP), 24 (2048-bit MODP with 256-bit POS)] according to RFC 5114._
+
+* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),_ _21 (521-bit Random ECP)] according to RFC 5114._
 
 ].
 
@@ -2275,6 +2300,7 @@ A TOE may act as the client, the server, or both in TLS sessions. The requiremen
 Support for X.509 certificates is required if the TSF implements IPsec, TLS, or DTLS communications in FTP_ITC.1 or FTP_TRP.1/Admin (FPT_ITT.1 is a special case covered in Appendix A.4.1.1), or if the TSF implements SSH in a manner where X.509 certificates are used for authentication. X.509 support is also required if the TSF uses X.509 certificates as an integrity mechanism for software updates (i.e., when FPT_TUD_EXT.2 is claimed).
 
 The Functional Package for X.509 defines selections for the capability to assert identities and to verify identities in its mandatory SFR, FIA_XCU_EXT.1. The ST author selects "verify" in cases where the TOE is presented a certificate from an external entity that is using it to validate its identity (e.g., if the TOE is a TLS client, the TOE is a TLS server that requires mutual authentication, the TOE implements IPsec, the TOE uses code signing certificates to validate software or firmware updates). The ST author selects "assert" in cases where the TOE presents a certificate to an external entity (e.g., if the TOE is a TLS server, the TOE is a TLS client where the server requires mutual authentication, the TOE implements IPsec, or the TOE implements SSH and uses X.509 to validate the server). 
+
 
 In all cases, the relevant SFR dependencies in the Functional Package for X.509 are claimed. For certificate verification, this includes FIA_X509_EXT.1 and FIA_X509_EXT.2. For certificate assertion, this includes FIA_XCU_EXT.2 (and FIA_X509_EXT.3 in cases where the TOE's certificate is obtained from an external CA rather than acting as its own CA). TLS requirements are addressed through the NIAP Functional Package for TLS.
 
@@ -2622,6 +2648,7 @@ Dependencies:
 
 *FAU_STG_EXT.5.1* Each TOE component which does not store security audit data locally shall be able to buffer security audit data locally until it has been transferred to another TOE component that stores or forwards it. All transfer of audit records between TOE components shall use a protected channel according to _[selection: FPT_ITT.1, FTP_ITC.1]_.
 
+
 === Cryptographic Support (FCS)
 
 ==== Random Bit Generation (FCS_RBG_EXT)
@@ -2771,7 +2798,7 @@ _];_
 *FCS_IPSEC_EXT.1.11* The TSF shall ensure that IKE protocols implement DH Group(s) [selection:
 
 * _[selection: 14 (2048-bit MODP), 15 (3072-bit MODP), 16 (4096-bit MODP), 17 (6144-bit MODP), 18 (8192-bit MODP)] according to RFC 3526,_
-* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),21 (521-bit Random ECP), 24 (2048-bit MODP with 256-bit POS)] according to RFC 5114._
+* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),21 (521-bit Random ECP)] according to RFC 5114._
 
 _]._
 
@@ -3427,8 +3454,7 @@ FMT_SMF.1 included
 [cols=",,",options="header",]
 |===
 |*SFR* |*Dependencies* |*Rationale Statement*
-|FAU_STG.1 |FAU_GEN.1 |FAU_GEN.1 included
-
+|FAU_STG.2 |FAU_GEN.1 |FAU_GEN.1 included
 |FAU_STG_EXT.2 a|
 FAU_GEN.1
 
