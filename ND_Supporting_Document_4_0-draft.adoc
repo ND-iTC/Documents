@@ -257,7 +257,8 @@ Note: The intent of the test is to ensure that the local audit TSF (as specified
 [arabic, start=52]
 . Note: The following tests require the developer to provide access to a test platform that provides the evaluator with tools that are typically not found on factory products. Generation of long-term cryptographic keys (i.e. keys that are not ephemeral keys/session keys) might be performed automatically (e.g. during initial start-up). Testing of key generation must cover not only administrator-invoked key generation but also automated key generation (if supported).
 
-*Key Generation for FIPS PUB 186-4 RSA Schemes*
+*Key Generation for FIPS PUB 186-5 RSA Schemes*
+
 [arabic, start=53]
 . The evaluator shall verify the implementation of RSA Key Generation by the TOE using the Key Generation test. This test verifies the ability of the TSF to correctly produce values for the key components including the public verification exponent _e_, the private prime factors _p_ and _q_, the public modulus _n_ and the calculation of the private signature exponent _d_.
 . Key Pair generation specifies 5 ways (or methods) to generate the primes _p_ and _q_. These include:
@@ -564,22 +565,38 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 [arabic, start=125]
 . For each supported NIST curve (i.e., P-256, P-384 and P-521) and SHA function pair, the evaluator shall generate 10 1024-bit long messages and obtain for each message a public key and the resulting signature values R and S. To determine correctness, the evaluator shall use the signature verification function of a known good implementation.
 
-*_ECDSA FIPS 186-4 Signature Verification Test_*
-[arabic, start=126]
-. For each supported NIST curve (i.e., P-256, P-384 and P-521) and SHA function pair, the evaluator shall generate a set of 10 1024-bit message, public key and signature tuples and modify one of the values (message, public key or signature) in five of the 10 tuples. The evaluator shall obtain in response a set of 10 PASS/FAIL values.
-
-*RSA Signature Algorithm Tests*
+*RSASSA-PKCS1-v1_5 or RSASSA-PSS*
 
 *_Signature Generation Test_*
 [arabic, start=127]
-. The evaluator generates or obtains 10 messages for each modulus size/SHA combination supported by the TOE. The TOE generates and returns the corresponding signatures.
-. The evaluator shall verify the correctness of the TOE’s signature using a trusted reference implementation of the signature verification algorithm and the associated public keys to verify the signatures.
+. The evaluator shall verify the implementation of RSA Signature Generation by the TOE using the Signature Generation Test. To conduct this test the evaluator must generate or obtain 10 messages from a trusted reference implementation for each modulus size/SHA combination supported by the TSF. The evaluator shall have the TOE use their private key and modulus value to sign these messages. The evaluator shall verify the correctness of the TSF’s signature using a known good implementation and the associated public keys to verify the signatures.
+
+*ML-DSA Test*
+
+[arabic, start=131]
+. The evaluator shall 10x input to the internal Sign function a 32-byte random string, private key, and a randomly generated message. Check and confirm the value of the returned signature using a known good implementation. Here internal Sign refers to the TOE’s implementation of the function ML-DSA.Sign_internal(-,-,-) as described in FIPS.204.
+
+==== FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
+
+===== TSS
+[arabic, start=123]
+. The evaluator shall examine the TSS to determine that it specifies the cryptographic algorithm and key size supported by the TOE for signature verification services.
+
+===== Guidance Documentation
+[arabic, start=124]
+. The evaluator shall verify that the AGD guidance instructs the administrator how to configure the TOE to use the selected cryptographic algorithm and key size defined in the Security Target supported by the TOE for signature verification services.
+
+===== Tests
+
+*_ECDSA FIPS 186-5 Signature Verification Test_*
+[arabic, start=126]
+. For each supported NIST curve (i.e., P-256, P-384 and P-521) and SHA function pair, the evaluator shall generate a set of 10 1024-bit message, public key and signature tuples and modify one of the values (message, public key or signature) in five of the 10 tuples. The evaluator shall obtain in response a set of 10 PASS/FAIL values.
+
+*RSASSA-PKCS1-v1_5 or RSASSA-PSS*
 
 *_Signature Verification Test_*
-[arabic, start=129]
-. For each modulus size/hash algorithm selected, the evaluator shall generate a modulus and three associated key pairs, (_d_, _e_). Each private key _d_ is used to sign six pseudorandom messages each of 1024 bits using a trusted reference implementation of the signature generation algorithm. Some of the public keys (_e_), messages, or signatures are altered so that signature verification should fail. For both the set of original messages and the set of altered messages: the modulus, hash algorithm, public key _e_ values, messages, and signatures are forwarded to the TOE, which then attempts to verify the signatures and returns the verification results.
-. The evaluator shall verify that the TOE confirms correct signatures on the original messages and detects the errors introduced in the altered messages.
-. The evaluator shall perform the Signature Verification test to verify the ability of the TOE to recognize another party’s valid and invalid signatures. The evaluator shall inject errors into the test vectors produced during the Signature Verification Test by introducing errors in some of the public keys, e, messages, IR format, and/or signatures. The TOE attempts to verify the signatures and returns success or failure. 
+[arabic, start=127]
+. The evaluator shall perform the Signature Verification test to verify the ability of the TOE to recognize another party’s valid and invalid signatures. The evaluator shall inject errors into the test vectors produced during the Signature Verification Test by introducing errors in some of the public keys, e, messages, IR format, and/or signatures. The TOE attempts to verify the signatures and returns success or failure.
 
 *LMS/XMSS Signature Algorithm Test*
 
@@ -1109,7 +1126,7 @@ In the case where the TOE is able to detect TOE external interruption (such as a
 
 === Security Audit (FAU)
 
-==== FAU_STG.1 Protected Audit Trail Storage
+==== FAU_STG.2 Protected audit data storage
 
 ===== TSS
 [arabic, start=228]
@@ -2287,7 +2304,7 @@ CCMB-2022-11-006, Version CC:2022, Revision 1, November 2022
 
 [ISO/IEC 19790:2025] ISO/IEC 19790:2025 Security requirements for cryptographic Modules, February 2025
 
-[FIPS 186-4] FIPS PUB 186-4, Digital Signature Standard (DSS), July 2013
+[FIPS 186-5] FIPS PUB 186-5, Digital Signature Standard (DSS), February 2023
 
 [NDcPP] collaborative Protection Profile for Network Devices, +
 Version 4.0e, 31 December 2025
