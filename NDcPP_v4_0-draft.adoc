@@ -588,7 +588,7 @@ SFR Rationale:
 
 ==== Device Failure
 
-Security mechanisms of the Network Device generally build up from roots of trust to more complex sets of mechanisms. Failures could result in a compromise to the security functionality of the device. A Network Device self-testing its security critical components at both start-up and during run-time ensures the reliability of the device’s security functionality.
+Security mechanisms of the Network Device generally build up from roots of trust to more complex sets of mechanisms. Failures could result in a compromise to the security functionality of the device. A Network Device self-testing its security critical components ensures the reliability of the device’s security functionality.
 
 ===== T.SECURITY_FUNCTIONALITY_FAILURE
 
@@ -1495,20 +1495,24 @@ In order to detect some number of failures of underlying security mechanisms use
 *FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
 
 * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
-* _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
-* [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: describe self-test objective]._
+* _Prior to providing any cryptographic service and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: ‘list an identifier for each self-test that is additional to those identified in the first two bullet points’]._
 
-to demonstrate the correct operation of the TSF: [assignment: _list of self-tests run by the TSF_] and if failure detected [assignment: _describe resulting error state_].
+to demonstrate the correct operation of the TSF.
 
 *_Application Note {counter:appnote_count}_*
 
-_It is expected that self-tests are carried out during initial start-up of the TOE (physical or virtual power on). Other options should only be used if the developer can justify why they are not carried out during initial start-up. It is expected that at least self-tests for verification of the integrity of the TOE firmware and software as well as for the correct operation of cryptographic functions necessary to fulfil the SFRs will be performed. If not, all self-tests are performed during start-up multiple iterations of this SFR are used with the appropriate options selected. In future versions of this cPP the suite of self-tests will be required to contain at least mechanisms for measured boot including self-tests of the components which perform the measurement._
+_For the third bullet point, the following restriction applies: If, and only if 'no other' is selected in the selection, 'none' may be used in the second assignment._
 
 _Non-distributed TOEs may internally consist of several components that contribute to enforcing SFRs. Self-testing shall cover all components that contribute to enforcing SFRs and verification of integrity shall cover all software that contributes to enforcing SFRs on all components._
 
-_For distributed TOEs all TOE components have to perform self-tests. This does not necessarily mean that each TOE component has to carry out the same self-tests: the ST describes the applicability of the selection (i.e. when self-tests are run) and the final assignment (i.e. which self-tests are carried out) to each TOE component._
+_For distributed TOEs all TOE components have to perform self-tests. This does not necessarily mean that each TOE component has to carry out the same self-tests._
 
 *FPT_TST_EXT.1.2* The TSF shall respond to [selection: _all failures, [assignment: list of failures detected by self-tests_]] by [selection: _entering a maintenance mode, rebooting, [assignment: other methods to enter a secure state_]].
+
+*_Application Note {counter:appnote_count}_*
+
+_For all failed self-tests related to enforcing SFRs as defined in FPT_TST_EXT1.1 the reaction of the TOE to the failure needs to be specified. On the one hand, FPT_TST_EXT.1.2 allows to model TOEs that react to all failures of self-tests related to enforcing SFRs the same way be selecting 'all failures' in the first selection and selection of the corresponding reaction of the two in the second selection. On the other hand, it allows to model TOEs that react differently to different failures of self-tests to enforcing SFRs by specifying the list of failures in the first selection and the corresponding reaction of the TOE in the second selection. In the latter case, it shall be clear which failure of a self-test causes which behavior of the TOE._
 
 ==== Trusted update (FPT_TUD_EXT)
 
