@@ -63,7 +63,9 @@ CCDB-018, Version 1, 31 January, 2025.
 
 [cols=",",]
 |===
-|[SD] |Evaluation Activities for Network Device cPP, Version 4.0
+
+|[SD] |Supporting Document - Evaluation Activities for Network Device cPP, Version 4.0 draft
+
 |===
 
 === Revision History
@@ -170,8 +172,8 @@ link:#_Toc27041932[Table 13: SFR Dependencies Rationale for Selection-Based SFRs
 
 PP Reference: collaborative Protection Profile for Network Devices
 
-PP Version: 4.0 draft
 
+PP Version: 4.0 draft +
 PP Date: 30-June-2025
 
 === TOE Overview
@@ -563,7 +565,6 @@ SFR Rationale:
 * Requirements for basic auditing capabilities are specified in FAU_GEN.1 and FAU_GEN.2, with timestamps provided according to FPT_STM_EXT.1 and if applicable, protection of NTP channels in FCS_NTP_EXT.1.
 * Requirements for protecting audit records stored on the TOE are specified in FAU_STG.2.
 * Requirements for secure storage and transmission of local audit records to an external IT entity via a secure channel are specified in FAU_STG_EXT.1 and FAU_STG_EXT.4.
-// The above double of FAU_STG_EXT.1 must be an error.//
 * Optional additional requirements for dealing with potential loss of locally stored audit records are specified in FAU_STG_EXT.3, and FAU_STG_EXT.4.
 * If (optionally) configuration of the audit functionality is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MOF.1/Functions.
 
@@ -784,34 +785,39 @@ Figure 16, Figure 17, Figure 18, Figure 19, Figure 20, and Figure 21 give a grap
 In the diagrams, the SFRs from Appendix B are both described as ‘Discretionary’, meaning that their inclusion in an ST will depend on the particular properties of a product. The SFRs from Appendix B that are required by an ST are determined by the selections made in other SFRs. For example: FTP_ITC.1 and FTP_TRP.1/Admin (in Sections 6.9.1.1 and 6.9.2.1 respectively) each contain selections of a protocol to be used for the type of secure channel described by the SFR. The selection of the protocol(s) here determines which of the protocol-specific SFRs in Section B.3.1 are also required in the ST. SFRs in Appendix A can be included in the ST if they are provided by the TOE, but are not mandatory in order for a TOE to claim conformance to this cPP.
 
 [.text-center]
-image:extracted-media/media/arch_1_no_ssh.png[image]
+image:extracted-media/media/arch_1_v4.png[image]
+
 [.text-center]
 [#_Ref399516751]_Figure 16: Protected Communications SFR Architecture_
 
 [.text-center]
-image:extracted-media/media/arch_2.png[image,width=552,height=374]
+image:extracted-media/media/arch_2_v4.png[image,width=552,height=374]
+
 [.text-center]
 [#_Ref399517041]_Figure 17: Administrator Authentication SFR Architecture_
 
 [.text-center]
-image:extracted-media/media/arch_3.png[image,width=612,height=262]
+image:extracted-media/media/arch_3_v4.png[image,width=612,height=262]
+
 [.text-center]
 [#_Toc27125738]_Figure 18: Correct Operation SFR Architecture_
 
 [.text-center]
-image:extracted-media/media/arch_4.png[image,width=678,height=407]
+image:extracted-media/media/arch_4_v4.png[image,width=678,height=407]
 [.text-center]
-image:extracted-media/media/arch_5.png[image,width=642,height=361]
+image:extracted-media/media/arch_5_v4.png[image,width=642,height=361]
 
 [.text-center]
 [#_Toc27125739]_Figure 19: Trusted Update and Audit SFR Architecture_
 [.text-center]
-image:extracted-media/media/arch_6.png[image]
+
+image:extracted-media/media/arch_6_v4.png[image]
 [.text-center]
 [#_Ref399850426]_Figure 20: Management SFR Architecture_
 
 [.text-center]
-image:extracted-media/media/arch_7.png[image]
+image:extracted-media/media/arch_7_v4.png[image]
+
 [.text-center]
 [#_Ref443496257]_Figure 21: Distributed TOE SFR Architecture_
 
@@ -939,9 +945,6 @@ A Network Device TOE is not expected to take responsibility for all audit storag
 
 ===== FAU_STG_EXT.1 Protected Audit Event Storage
 
-// See https://github.com/ND-iTC/Documents/issues/352 //
-// Also extended definition will need to be changed. //
-
 *FAU_STG_EXT.1 Protected Audit Event Storage*
 
 *FAU_STG_EXT.1.1* The TSF shall be able to transmit the generated audit data to an external IT entity using a trusted channel according to FTP_ITC.1.
@@ -1014,6 +1017,7 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 |FFC|“safe-prime” groups [selection: MODP-2048, MODP-3072, MODP-4096, MODP-6144, MODP-8192, ffdhe-2048, ffdhe-3072, ffdhe-4096, ffdhe-6144, ffdhe-8192] |NIST SP 800-56A Revision 3 [selection: RFC 3526 [IKE groups], RFC 7919 [TLS groups]]
 
 |LMS |[selection: LMS_SHAKE_M24_H5, LMS_SHAKE_M24_H10, LMS_SHAKE_M24_H15, LMS_SHAKE_M24_H25, LMS_SHAKE_M32_H5, LMS_SHAKE_M32_H10, LMS_SHAKE_M32_H15, LMS_SHAKE_M32_H25, LMS_SHA256_M24_H5, LMS_SHA256_M24_H10, LMS_SHA256_M24_H15, LMS_SHA256_M24_H25, LMS_SHA256_M32_H5, LMS_SHA256_M32_H10, LMS_SHA256_M32_H15, LMS_SHA256_M32_H25] bits
+
 |NIST SP 800-208
 
 |XMS|[selection: XMSS-SHA2_10_192, XMSS-SHA2_16_192, XMSS-SHA2_20_192, XMSS-SHA2_10_256, XMSS-SHA2_16_256, XMSS-SHA2_20_256, XMSS-SHAKE_10_192, XMSS-SHAKE_16_192, XMSS-SHAKE_20_192, XMSS-SHAKE_10_256, XMSS-SHAKE_16_256, XMSS-SHAKE_20_256] bits
@@ -1600,14 +1604,9 @@ In addition to providing protection from disclosure (and detection of modificati
 
 *FTP_ITC.1 Inter-TSF trusted channel*
 
-// FTP_ITC.1.1 has been rewritten in CC2022.//
 
-*FTP_ITC.1.1* The TSF shall provide a communication channel between itself and another trusted IT
-product that is logically distinct from other communication channels and provides assured
-identification of its end points and protection of the channel data from modification or
+*FTP_ITC.1.1* The TSF shall provide a communication channel between itself and another trusted IT product that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from modification or
 disclosure.
-
-//*FTP_ITC.1.1* The TSF shall *be capable of using [selection: _IPsec, SSH as defined in the Functional Package for SSH, TLS as defined in the Functional Package for TLS, DTLS as defined in the Functional Package for TLS, HTTPS_] to* provide a *trusted* communication channel between itself and +++<del>+++another trusted IT product+++</del>+++ *authorised IT entities supporting the following capabilities: audit server, [selection: _authentication server, [assignment: other capabilities], no other capabilities_]* that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from +++<del>+++modification or+++</del>+++ disclosure *and detection of modification of the channel data*.//
 
 *FTP_ITC.1.2* The TSF shall permit [selection: _the TSF, +++<del>+++another trusted IT product,+++</del>+++ *the authorised IT entities_*] to initiate communication via the trusted channel.
 
@@ -2044,22 +2043,6 @@ _It is acceptable for a TOE component to store audit information in multiple pla
 
 _TOE components are not required to monitor or audit connectivity or network outages between TOE components. This aspect is covered by the assumption A.COMPONENTS_RUNNING_
 
-===== FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
-
-This SFR needs to be added to the ST for evaluation of distributed TOEs which contain TOE components that aren’t storing audit data locally but sending it to another TOE component for storage. This SFR needs to be fulfilled in addition to the general SFRs on Protected Audit Event Storage for all types of TOEs (distributed, non-distributed).
-
-*FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs*
-
-*FAU_STG_EXT.5.1* Each TOE component which does not store security audit data locally shall be able to buffer security audit data locally until it has been transferred to another TOE component that stores or forwards it. All transfer of audit records between TOE components shall use a protected channel according to [selection: _FPT_ITT.1, FTP_ITC.1_].
-
-*_Application Note {counter:appnote_count}_*
-
-_If a component of a distributed TOE collects data from other components and then forwards it to another component or external IT entity (cf. FAU_STG_EXT.1.1) then the operations in this SFR must be performed in a way to cover the storage space action(s) for all of the audit data that the TOE collects (i.e. not just for the data generated by the collecting component for itself)_.
-
-_It is acceptable for a TOE component to store audit information in multiple places (e.g. for redundancy), whether locally in the TOE component itself and in another TOE component, or in more than one other TOE component_.
-
-_TOE components are not required to monitor or audit connectivity or network outages between TOE components. This aspect is covered by the assumption A.COMPONENTS_RUNNING_.
-
 ==== Cryptographic Support (FCS)
 
 *FCS_RBG.2 Random Bit Generation (External Seeding - VS platform)*
@@ -2243,6 +2226,7 @@ _Because nonces may be exchanged before the DH group is negotiated, the nonce us
 *FCS_IPSEC_EXT.1.11* The TSF shall ensure that IKE protocols implement DH Group(s) [selection:
 
 * [selection: _14 (2048-bit MODP), 15 (3072-bit MODP), 16 (4096-bit MODP), 17 (6144-bit MODP), 18 (8192-bit MODP)] according to RFC 3526,_
+
 * [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),_ _21 (521-bit Random ECP)] according to RFC 5114._
 
 ].
@@ -2317,7 +2301,8 @@ Support for X.509 certificates is required if the TSF implements IPsec, TLS, or 
 
 The Functional Package for X.509 defines selections for the capability to assert identities and to verify identities in its mandatory SFR, FIA_XCU_EXT.1. The ST author selects "verify" in cases where the TOE is presented a certificate from an external entity that is using it to validate its identity (e.g., if the TOE is a TLS client, the TOE is a TLS server that requires mutual authentication, the TOE implements IPsec, the TOE uses code signing certificates to validate software or firmware updates). The ST author selects "assert" in cases where the TOE presents a certificate to an external entity (e.g., if the TOE is a TLS server, the TOE is a TLS client where the server requires mutual authentication, the TOE implements IPsec, or the TOE implements SSH and uses X.509 to validate the server). 
 
-In all cases except FCS_HTTPS_EXT.1, the relevant SFR dependencies in the Functional Package for X.509 are claimed. For certificate verification, this includes FIA_X509_EXT.1 and FIA_X509_EXT.2. For certificate assertion, this includes FIA_XCU_EXT.2 (and FIA_X509_EXT.3 in cases where the TOE's certificate is obtained from an external CA rather than acting as its own CA). FCS_TLSC_EXT.1 from the Functional Package for Transport Layer Security satisfies the Functional Package for X.509 dependency on FCS_HTTPS_EXT.1.
+
+In all cases, the relevant SFR dependencies in the Functional Package for X.509 are claimed. For certificate verification, this includes FIA_X509_EXT.1 and FIA_X509_EXT.2. For certificate assertion, this includes FIA_XCU_EXT.2 (and FIA_X509_EXT.3 in cases where the TOE's certificate is obtained from an external CA rather than acting as its own CA). TLS requirements are addressed through the NIAP Functional Package for TLS.
 
 When certificate validation is claimed for communication with external entities, the following restrictions are applied to the Functional Package for X.509: 
 
@@ -2663,7 +2648,8 @@ Dependencies:
 
 *FAU_STG_EXT.5.1* Each TOE component which does not store security audit data locally shall be able to buffer security audit data locally until it has been transferred to another TOE component that stores or forwards it. All transfer of audit records between TOE components shall use a protected channel according to _[selection: FPT_ITT.1, FTP_ITC.1]_.
 
-=== Cryptographic support (FCS)
+
+=== Cryptographic Support (FCS)
 
 ==== Random Bit Generation (FCS_RBG_EXT)
 
@@ -3469,7 +3455,6 @@ FMT_SMF.1 included
 |===
 |*SFR* |*Dependencies* |*Rationale Statement*
 |FAU_STG.2 |FAU_GEN.1 |FAU_GEN.1 included
-
 |FAU_STG_EXT.2 a|
 FAU_GEN.1
 
@@ -3593,7 +3578,7 @@ FMT_SMF.1 included
 
 |===
 
-[#_Toc27041932]#Table 13: SFR Dependencies Rationale for Selection-Based SFRs#
+[#_Toc27041932]_Table 13: SFR Dependencies Rationale for Selection-Based SFRs_
 
 ==  Glossary
 
