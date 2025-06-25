@@ -1,9 +1,9 @@
-= ND iTC allowed-with list for Network Device cPP
+= ND iTC Allowed-with List for Network Device cPP
 
 [cols="1,2",options=,]
 |===
 
-|*Allowed-with list version*|4.0
+|*Allowed-with list version*|4.0 draft
 |*Date*|30 June 2025
 
 |===
