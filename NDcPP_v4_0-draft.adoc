@@ -92,7 +92,7 @@ CCDB-018, Version 1, 31 January, 2025.
 
 toc::[]
 
-Figures / Tables
+*Figures and Tables*
 
 link:#_Ref567439821[Figure 1: vND evaluated configuration Case 1]
 
@@ -1213,9 +1213,9 @@ _The HMAC minimum key sizes in the table are specified in ISO/IEC 9797-2:2021, w
 
 ==== Random Bit Generation (RBG)
 
-===== FCS_RBG.1 Random Bit Generation (RBG)
+===== FCS_RBG.1 Random Bit Generation
 
-*FCS_RBG.1 Random Bit Generation (RBG)*
+*FCS_RBG.1 Random Bit Generation*
 
 *FCS_RBG.1.1* The TSF shall perform deterministic random bit generation services using [selection: _DRBG algorithm_] in accordance with [selection: _list of standards_] after initialization.
 
