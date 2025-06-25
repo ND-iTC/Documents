@@ -8,7 +8,7 @@
 = Supporting Document - Evaluation Activities for Network Device cPP
 
 Version: 4.0 draft +
-Date: 30 June 2025
+Date: 25 June 2025
 
 == Acknowledgements
 
@@ -29,7 +29,7 @@ This SD has been developed by the ND iTC, in accordance with part 4 of [CC]. The
 [cols=",,",options="header",]
 |===
 |*Version* |*Date* |*Description*
-|4.0 draft |30-Jun-2025 |Incorporated comments received
+|4.0 draft |25-Jun-2025 |Incorporated comments received
 |3.0e |06-Dec-2023 |Released for use
 |3.0 |06-Apr-2023 |Incorporated comments received. Released for use
 |2.2 |20-Dec-2019 |Released for use
