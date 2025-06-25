@@ -1,4 +1,4 @@
-= ND iTC allowed-with list for Network Device cPP
+= ND iTC Allowed-with List for Network Device cPP
 
 [cols="1,2",options=,]
 |===
