@@ -92,7 +92,7 @@ CCDB-018, Version 1, 31 January, 2025.
 
 toc::[]
 
-*Figures and Tables*
+*List of Figures and Tables*
 
 link:#_Ref567439821[Figure 1: vND evaluated configuration Case 1]
 
