@@ -205,6 +205,11 @@ Case 1, illustrated in Figure 1, is where the TOE is represented by the vND alon
 image:extracted-media/media/vnd_case_1.png[image,width=166,height=277] +
 [#_Ref567439821]_Figure 1: vND evaluated configuration Case 1_
 
+To evaluate a vND-only TOE means:
+
+The VS(s), which are considered part of the Operational Environment, must be specified, including compatible version(s).
+The physical hardware, which is likewise considered part of the Operational Environment, must be described in terms of minimum requirements to run one instance of the TOE (e.g., CPU cores, RAM, disk space, NIC requirements).
+
 ==== vND as a pND Evaluation Configuration Option
 
 Case 2, illustrated in Figure 2, is where the vND is evaluated as a pND.
@@ -671,7 +676,7 @@ The VS software is assumed to be updated by the VS Administrator on a regular ba
 
 ==== A.VS_ISOLATION (applies to vNDs only)
 
-For vNDs, it is assumed that the VS provides, and is configured to provide sufficient isolation between software running in VMs on the same physical platform. Furthermore, it is assumed that the VS adequately protects itself from software running inside VMs on the same physical platform.
+For vNDs, it is assumed that the VS implements and is configured to provide the necessary mechanisms to isolate resources of all VMs running on the same platform. Both virtual and physical resources require access control. It is assumed the VS enforces access control to all physical and virtual resources in support of isolation. In particular, it is assumed the VS implements mechanisms to isolate all resources associated with virtual networks and to limit a VM's access to only those virtual networks for which it has been configured. Furthermore, it is assumed that the VS adequately protects itself from software running inside VMs on the same platform.
 
 {empty}[OE.VM_CONFIGURATION]
 
