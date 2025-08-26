@@ -7,8 +7,8 @@
 
 = collaborative Protection Profile for Network Devices
 
-Version: 4.0 draft +
-Date: 25-June-2025
+Version: 4.0 +
+Date: TBD-December-2025
 
 == Acknowledgements
 
@@ -73,6 +73,7 @@ CCDB-018, Version 1, 31 January, 2025.
 [cols=",,",options="header",]
 |===
 |*Version* |*Date* |*Description*
+|4.0 | TBD-Dec-2025 | Released for use
 |4.0 draft | 25-Jun-2025 | Incorporated comments received
 |3.0e | 06-Dec-2023 | Released for use
 |3.0 | 06-Apr-2023 | Incorporated comments received. Released for use
@@ -173,8 +174,8 @@ link:#_Toc27041932[Table 13: SFR Dependencies Rationale for Selection-Based SFRs
 PP Reference: collaborative Protection Profile for Network Devices
 
 
-PP Version: 4.0 draft +
-PP Date: 25-June-2025
+PP Version: 4.0 +
+PP Date: TBD-December-2025
 
 === TOE Overview
 
