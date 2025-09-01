@@ -274,14 +274,14 @@ The use of mandatory, optional and selection-based SFRs allows some customizatio
 The PP-Modules that are allowed to specify this cPP as a base-PP are specified in the 'Allowed-with' PP-Modules list at https://github.com/ND-iTC/Documents/blob/main/NDcPP_allowed_with_list.adoc.
 
 === Evaluation Methods
-The supporting document, "Evaluation Activies for Network Device cPP" must be used in conjunction with [CEM] when performing evaluations of an ST specifying this Network Device cPP.
+The supporting document, "Evaluation Activities for Network Device cPP" must be used in conjunction with [CEM] when performing evaluations of an ST specifying this Network Device cPP.
 The supporting document defines the evaluation methods and activities for this cPP and has been developed in accordance with [CC4]. The supporting document can be found at https://github.com/ND-iTC/Documents.
 
 == Introduction to Distributed TOEs
 
 This cPP includes support for distributed Network Device TOEs. Network Devices can sometimes be composed of multiple components operating as a logical whole. Oftentimes we see this architecture when dealing with products where a centralized management console is used to provide administration to dispersed components.
 
-Distributed TOEs might consist of combinations of different and similar/same types TOE components where 'type' is referring to the intended use of a component inside the overall TOE. TOE component types could for example be sensors (e.g. for IDS components) or TOE component acting as central nodes managing other nodes.
+Distributed TOEs might consist of combinations of different and similar/same types of TOE components where 'type' refers to the intended use of a component inside the overall TOE. TOE component types could for example be sensors (e.g. for IDS components) or TOE component acting as central nodes managing other nodes.
 
 There are a number of different architectures; but fundamentally, they are variations of the following model where the SFRs of this cPP can only be fulfilled if the two components are deployed and operate together.
 
@@ -290,7 +290,7 @@ image:extracted-media/media/d_toe_1.png[image,width=376,height=143]
 [.text-center]
 [#_Toc456887371]_Figure 3: Generalized Distributed TOE Model_
 
-Some Network Devices are designed to operate alongside a Management Component. A Network Device that operates in this manner, but still satisfies all SFRs in the cPP without the Management Component will not be considered a distributed TOE. It will be certified according to this cPP without the Management Component.
+Some Network Devices are designed to operate alongside a Management Component. A Network Device that operates in this manner but still satisfies all SFRs in the cPP without the Management Component will not be considered a distributed TOE. It will be certified according to this cPP without the Management Component.
 
 [.text-center]
 image:extracted-media/media/d_toe_2.png[image,width=352,height=136]
@@ -337,7 +337,7 @@ image:extracted-media/media/d_toe_6.png[image,width=349,height=276]
 [.text-center]
 [#_Toc456887376]_Figure 8: Distributed Network Devices plus Management Component required to fulfil cPP requirements_
 
-Where several Network Devices are managed by one Management Component, the TOE may also be considered to be distributed but the focus of the certification should be restricted to the simplest combination of Network Device and Management Component. By the use of an equivalency argument, the combination of multiple Network Devices together with one Management Component can then be regarded as certified solutionfootnote:[SD, B.4] describes how to define the components of a distributed TOE in terms of a “minimum configuration” and allowance for iteration of equivalent components.
+Where several Network Devices are managed by one Management Component, the TOE may also be considered to be distributed but the focus of the certification should be restricted to the simplest combination of Network Device and Management Component. By the use of an equivalency argument, the combination of multiple Network Devices together with one Management Component can then be regarded as certified solution. The Supporting Document footnote:[SD, B.4] describes how to define the components of a distributed TOE in terms of a “minimum configuration” and allowance for iteration of equivalent components.
 
 [.text-center]
 image:extracted-media/media/d_toe_7.png[image,width=364,height=282]
@@ -404,7 +404,7 @@ image:extracted-media/media/d_toe_13.png[image,width=517,height=292]
 
 Note that in the case where no registration channel is required, that is the 'joiner' and 'gatekeeper' are directly configured (Figure 14), enablement is implied as part of this direct configuration process.
 
-After registration, the components will communicate between themselves using a normal SSH/TLS/DTLS/IPsec/HTTPS channel (which is specified in an ST as an instance of FTP_ITC.1 or FPT_ITT.1 in terms of Section 6 and Appendix A). This channel for inter-component communications is specified at the top level with the new (extended) SFR FCO_CPC_EXT.1 (see Section A.6.1) and is in addition to the other communication channels required for communication with entities outside the TOE (which are specified in an ST as instances of FTP_ITC.1 and FTP_TRP.1).
+After registration, the components will communicate between themselves using a normal SSH/TLS/DTLS/IPsec/HTTPS channel (which is specified in an ST as an instance of FTP_ITC.1 or FPT_ITT.1 in terms of Section 6 and Appendix A). This channel for inter-component communications is specified at the top level with the (extended) SFR FCO_CPC_EXT.1 (see Section A.6.1) and is in addition to the other communication channels required for communication with entities outside the TOE (which are specified in an ST as instances of FTP_ITC.1 and FTP_TRP.1).
 
 === Allocation of Requirements in Distributed TOEs
 
@@ -490,7 +490,7 @@ The threats for the Network Device are grouped according to functional areas of 
 
 A Network Device communicates with other Network Devices and other network entities. The endpoints of this communication can be geographically and logically distant and may pass through a variety of other systems. The intermediate systems may be untrusted providing an opportunity for unauthorised communication with the Network Device or for authorised communication to be compromised. The security functionality of the Network Device must be able to protect any critical network traffic (administration traffic, authentication traffic, audit traffic, etc.). The communication with the Network Device falls into two categories: authorised communication and unauthorised communication.
 
-authorised communication includes network traffic allowable by policy destined to and originating from the Network Device as it was designed and intended. This includes critical network traffic, such as Network Device administration and communication with an authentication or audit logging server, which requires a secure channel to protect the communication. The security functionality of the Network Device includes the capability to ensure that only authorised communications are allowed and the capability to provide a secure channel for critical network traffic. Any other communication with the Network Device is considered unauthorised communication. (Network traffic traversing the Network Device but not ultimately destined for the device, e.g. packets that are being routed, are not considered to be ‘communications with the Network Device’ – reference A.NO_THRU_TRAFFIC_PROTECTION in Section 4.2.3.)
+Authorised communication includes network traffic allowable by policy destined to and originating from the Network Device as it was designed and intended. This includes critical network traffic, such as Network Device administration and communication with an authentication or audit logging server, which requires a secure channel to protect the communication. The security functionality of the Network Device includes the capability to ensure that only authorised communications are allowed and the capability to provide a secure channel for critical network traffic. Any other communication with the Network Device is considered unauthorised communication. (Network traffic traversing the Network Device but not ultimately destined for the device, e.g. packets that are being routed, are not considered to be ‘communications with the Network Device’ – reference A.NO_THRU_TRAFFIC_PROTECTION in Section 4.2.3.)
 
 The primary threats to Network Device communications addressed in this cPP focus on an external, unauthorised entity attempting to access, modify, or otherwise disclose the critical network traffic. A poor choice of cryptographic algorithms or the use of non-standardized tunnelling protocols along with weak Administrator credentials, such as an easily guessable password or use of a default password, will allow a threat agent unauthorised access to the device. Weak or no cryptography provides little to no protection of the traffic allowing a threat agent to read, manipulate and/or control the critical data with little effort. Non-standardized tunnelling protocols not only limit the interoperability of the device but lack the assurance and confidence standardization provides through peer review.
 
@@ -1013,7 +1013,7 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 
 *FCS_CKM.1 Cryptographic Key Generation – Asymmetric Key*
 
-*FCS_CKM.1.1* The TSF shall generate *asymmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm: [selection: _cryptographic key generation algorithm_] and specified cryptographic *algorithm parameters* +++<del>+++key sizes+++</del>+++ [selection: _cryptographic algorithm parameters_] that meet the following: [selection: _list of standards_].
+*FCS_CKM.1.1* The TSF shall generate *asymmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm: [selection: _cryptographic key generation algorithm in Table 3_] and specified cryptographic *algorithm parameters* +++<del>+++key sizes+++</del>+++ [selection: _cryptographic algorithm parameters in Table 3_] that meet the following: [selection: _list of standards in Table 3_].
 
 [cols=",,",options="header",]
 |===
@@ -1029,8 +1029,8 @@ These SFRs support the implementation of the selection-based protocol-level SFRs
 |XMS|[selection: XMSS-SHA2_10_192, XMSS-SHA2_16_192, XMSS-SHA2_20_192, XMSS-SHA2_10_256, XMSS-SHA2_16_256, XMSS-SHA2_20_256, XMSS-SHAKE_10_192, XMSS-SHAKE_16_192, XMSS-SHAKE_20_192, XMSS-SHAKE_10_256, XMSS-SHAKE_16_256, XMSS-SHAKE_20_256] bits
 |NIST SP 800-208
 
-|Module-Lattice-Based Key-Encapsulation Mechanism|ML-KEM-1024|NIST FIPS PUB 203
-|Module-Lattice-Based Digital Signature Algorithm|ML-DSA-87|NIST FIPS PUB 204
+|ML-KEM|ML-KEM-1024|NIST FIPS PUB 203
+|ML-DSA|ML-DSA-87|NIST FIPS PUB 204
 |===
 
 [#_Ref237676489]_Table 3: Asymmetric Cryptographic Key Generation_
@@ -1241,11 +1241,11 @@ _The HMAC minimum key sizes in the table are specified in ISO/IEC 9797-2:2021, w
 
 _For the selection in this requirement, the ST author selects "TSF noise source" if a single noise source is used as input to the DRBG. The ST author selects "multiple TSF noise sources" if a seed is formed from a combination of two or more noise sources within the TOE boundary. If the TSF implements two or more separate DRBGs that are seeded in separate manners, this SFR should be iterated for each DRBG. If multiple distinct noise sources exist such that each DRBG only uses one of them, then each iteration would select "TSF noise source"; "multiple TSF noise sources" is only selected if a single DRBG uses multiple noise sources for its seed. The ST author selects "TSF interface for seeding" if noise source data is generated outside the TOE boundary._ 
 
-_If "TSF noise source" is selected in FCS_RBG.1.2, FCS_RBG.3 must be claimed from Appendix A._
+_If "TSF noise source" is selected in FCS_RBG.1.2, FCS_RBG.3 must be claimed from Appendix B._
 
-_If "multiple TSF noise sources" is selected in FCS_RBG.1.2, FCS_RBG.4 and FCS_RBG.5 must be claimed from Appendix A._
+_If "multiple TSF noise sources" is selected in FCS_RBG.1.2, FCS_RBG.4 and FCS_RBG.5 must be claimed from Appendix B._
 
-_If "TSF interface for seeding" is selected in FCS_RBG.1.2, FCS_RBG.2 must be claimed from Appendix A._
+_If "TSF interface for seeding" is selected in FCS_RBG.1.2, FCS_RBG.2 must be claimed from Appendix B._
 
 *FCS_RBG.1.3* The TSF shall update the DRBG state by [selection: reseeding, uninstantiating and re-instantiating] using a [selection: TSF noise source [assignment: _name of noise source_], *multiple TSF noise sources [assignment: _name of noise sources_]*, TSF interface for seeding] in the following situations: [selection:
 
@@ -1857,7 +1857,7 @@ _If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in
 
 ==== Authentication using X.509 certificates (Extended)
 
-Please see Appendix B.4.1 for a comprehensive description of the applicablity and usage of the X.509 Functional Package.
+Please see Appendix B.3.1 for a comprehensive description of the applicablity and usage of the X.509 Functional Package.
 
 Support for X.509 certificates is optional in the context of FPT_ITT.1 (FTP_ITC.1 and FTP_TRP.1/Admin are discussed elsewhere). This is because the use of FPT_ITT.1 itself as a registration channel is optional, so it's further optional to implement that using a mechanism that relies on X.509 validation. 
 
@@ -1936,9 +1936,9 @@ for at least _TSF data_.
 
 *FCO_CPC_EXT.1.3* The TSF shall enable a Security Administrator to disable communications between any pair of TOE components.
 
-_Application Note {counter:appnote_count}_*
+*_Application Note {counter:appnote_count}_*
 
-_This SFR is on*ly applicable if the TOE is distributed and therefore has multiple components that need to communicate via an internal TSF channel. When creating the TSF from the initial pair of components, either of these components may be identified as the TSF for the purposes of satisfying the meaning of ‘TSF’ in this SFR._
+_This SFR is only applicable if the TOE is distributed and therefore has multiple components that need to communicate via an internal TSF channel. When creating the TSF from the initial pair of components, either of these components may be identified as the TSF for the purposes of satisfying the meaning of ‘TSF’ in this SFR._
 
 _The intention of this requirement is to ensure that there is a registration process that includes a positive enablement step by an Administrator before components joining a distributed TOE can communicate with the other components of the TOE and before the new component can act as part of the TSF. The registration process may itself involve communication with the joining component: many Network Devices use a bespoke process for this, and the security requirements for the ‘registration communication’ are then defined in FCO_CPC_EXT.1.2. Use of this ‘registration communication’ channel is not deemed inconsistent with the requirement of FCO_CPC_EXT.1.1 (i.e., the registration channel can be used before the enablement step, but only in order to complete the registration process)._
 
@@ -2126,7 +2126,7 @@ The endpoints of Network Device communication can be geographically and logicall
 
 IPsec is not a required component of this cPP. If a TOE implements IPsec, a corresponding selection in FTP_ITC.1, FPT_ITT.1 and/or FTP_TRP.1/Admin should have been made that defines what the IPsec protocol is implemented to protect.
 
-IPsec is a peer to peer protocol and as such does not need to be separated into client and server requirements.
+IPsec is a peer-to-peer protocol and as such does not need to be separated into client and server requirements.
 
 *FCS_IPSEC_EXT.1 IPsec Protocol*
 
@@ -2190,7 +2190,7 @@ _]_
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must be include a rekey time that causes a rekey to occur at or slightly before 24 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 23h 59min to ensure the actual rekey is performed no later than 24h, while other TOEs might automatically ensure rekeying is performed prior to the configured time._
+_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must include a rekey time that causes a rekey to occur at or slightly before 24 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 23h 59min to ensure the actual rekey is performed no later than 24h, while other TOEs might automatically ensure rekeying is performed prior to the configured time._
 
 _This requirement must be accomplished by providing Security Administrator-configurable lifetimes. Hardcoded limits do not meet this requirement._
 
@@ -2214,7 +2214,7 @@ _]_
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must be include a rekey time that causes a rekey to occur at or slightly before 8 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 7h 59min to ensure the actual rekey is performed no later than 8h, while other TOEs might automatically ensure rekeying is performed
+_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must include a rekey time that causes a rekey to occur at or slightly before 8 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 7h 59min to ensure the actual rekey is performed no later than 8h, while other TOEs might automatically ensure rekeying is performed
 prior to the configured time._
 
 _This requirement must be accomplished by providing Security Administrator-configurable lifetimes. Hardcoded limits do not meet this requirement._
@@ -2331,9 +2331,9 @@ When certificate validation is claimed for communication with external entities,
 * Iteration naming: For consistency, use the iteration "/Rev" for SFR claims related to validating X.509 certificates presented by the operational environment, and use "/ITT" for SFR claims related to validating X.509 certificates presented by another component of a distributed TOE. Both the validation of X.509 certificates requested from an external CA and verification of external entities using X.509 certificates should be included in the appropriate FIA_X509_EXT.1 iteration. If both "assert" and "verify" related behavior are included in an FIA_X509_EXT.1 iteration, the behavior should be disambiguated in the TSS.
 * FIA_X509_EXT.1.1: Either an unlimited maximum path length must be selected or a maximum path length of three or greater must be claimed, unless the certificate is used for FPT_ITT.1 communications, in which case a path length of two is permissible (i.e., certificates used between components of a distributed TOE do not require support for intermediate CAs). 
 * Revocation Checking related to validating X.509 certificates presented by the operational environment: At least one of CRL or OCSP (except local OCSP responder; the selection of "local OCSP responder" is not allowed) must be supported for revocation checking. If "cached CRL" is selected, the TOE must refresh the CRL cache from a network source without administrator interaction.
-* Revocation Checking related to validating X.509 certificates presented by another component of a distributed TOE: At least one of CRL, OCSP, Based on validity period, or Direct association with Certificate Authority must be supported for revocation checking. The TOE must perform revocation checking without administrator interaction.
+* Revocation Checking related to validating X.509 certificates presented by another component of a distributed TOE: At least one of CRL, OCSP, based on validity period, or direct association with Certificate Authority must be supported for revocation checking. The TOE must perform revocation checking without administrator interaction.
 * Revocation Checking of the X.509 certificate the TOE presents to an external entity: Any method of revocation checking may be selected, including the selection of "Administrative notification of revocation."
-* FIA_XCU_EXT.2.1: "Request certificates from an external CA" must be selected unless the certificate is used for FPT_ITT.1 communications, in which case a the use of an embedded CA is allowed.
+* FIA_XCU_EXT.2.1: "Request certificates from an external CA" must be selected unless the certificate is used for FPT_ITT.1 communications, in which case the use of an embedded CA is allowed.
 
 ==== Authentication Failure Handling (FIA_AFL)
 If the TOE provides remote administration using a password-based authentication mechanism, FIA_AFL.1 specifies actions upon reaching the number of successive unsuccessful authentication attempts.
