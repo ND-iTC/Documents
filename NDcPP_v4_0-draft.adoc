@@ -250,7 +250,7 @@ This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_I
 The packages to which conformance can be claimed in conjunction with this cPP are:
 
 - Functional Package for SSH Version 2.0 (PKG_SSH_V2.0) conformant
-- Functional Package for Transport Layer Security (TLS) Version 2.1 (PKG_TLS_v2.0) conformant
+- Functional Package for Transport Layer Security (TLS) Version 2.1 (PKG_TLS_v2.1) conformant
 
 - Functional Package for X.509 Version 1.0 (PKG_X509_v1.0) conformant
 
