@@ -240,7 +240,7 @@ Examples of devices that connect to a network but are not included to be evaluat
 As defined by the references [CC1], [CC2], [CC3], [CC4], [CCE] and [CC-SFRC], this cPP:
 
 * Conforms to the requirements of Common Criteria 2022, Revision 1
-* Is Part 2 extended, Part 3 conformant
+* Is CC Part 2 extended, CC Part 3 conformant
 * Does not claim conformance to any other PP.
 
 This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.1, APE_REQ.1 and APE_SPD.1.
@@ -1284,13 +1284,13 @@ In order to provide a trusted means for Administrators to interact with the TOE,
 
 _This requirement applies to Administrators and external IT entities of services available from the TOE directly, and not services available by connecting through the TOE. While it should be the case that few or no services are available to external entities prior to identification and authentication, if there are some available (perhaps ICMP echo) these should be listed in the assignment statement; if automated generation of cryptographic keys is supported without administrator authentication, the option "automated generation of cryptographic keys" should be selected; otherwise, the option “no other actions” should be selected._
 
-*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate[selection: no other mechanism, external authentication server]. The TSF shall provide the following local authentication mechanisms:[selection: none, password-based, [assignment: other authentication mechanism]]_.
+*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate_] and [selection: _no other mechanism, external authentication server_]. The TSF shall provide the following local authentication mechanisms:[selection: _none, password-based, [assignment: other authentication mechanism]_].
 
 *_Application Note {counter:appnote_count}_*
 
 _An authentication process consists of two basic steps: identification step (presenting the claimed attribute value (e.g., a user identifier) to the authentication subsystem); verification step (presenting or generating authentication information (e.g., a value signed with a private key) that acts as evidence to prove the binding between the attribute and that for which it is claimed)._
 
-_Remote authentication is when a user associated with the Security Administrator role remotely communicates with the TOE for the purpose of security management over a cryptographic protocol specified in FTP_TRP.1/Admin. Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author should select "none" from the final selection. See Application Note 23 for examples of compliant local administrative interfaces._
+_Remote authentication is when a user associated with the Security Administrator role remotely communicates with the TOE for the purpose of security management over a cryptographic protocol specified in FTP_TRP.1/Admin. Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author should select "none" from the final selection. See Application Note 26 for examples of compliant local administrative interfaces._
 
 _The TOE must support at least one authentication mechanism where the verification step is processed locally, as such “external authentication server” should not be the only available authentication method._
 
@@ -1376,7 +1376,7 @@ size)_;
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE must provide functionality for remote administration. Local administration is optional.This cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Remote administrative sessions are specified in FTP_TRP.1/Admin. Local administration is defined as administration using a dedicated physical interface that (from the TOE’s point of view) is directly connected to the device(s) the administrator interacts with and therefore falls under the physical protection (OE.PHYSICAL). Any administrator choice to extend a local console so it is remotely accessible (e.g. console server or remote KVM) is outside the scope of the NDcPP. The following are examples of compliant local administrative interfaces:_
+_The TOE must provide functionality for remote administration. Local administration is optional. This cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Remote administrative sessions are specified in FTP_TRP.1/Admin. Local administration is defined as administration using a dedicated physical interface that (from the TOE’s point of view) is directly connected to the device(s) the administrator interacts with and therefore falls under the physical protection (OE.PHYSICAL). Any administrator choice to extend a local console so it is remotely accessible (e.g. console server or remote KVM) is outside the scope of the NDcPP. The following are examples of compliant local administrative interfaces:_
 
 [loweralpha]
 . _RS-232 terminal._
@@ -1406,7 +1406,7 @@ _The selection “Ability to set the time which is used for time-stamps” shoul
 
 _The selection “Ability to configure NTP” should be included in the ST if the TOE uses NTP for timestamp configuration. If selected, FCS_NTP_EXT.1 must be included in the ST as well._
 
-_The selection “Ability to configure the reference identifier for the peer” should be included in the ST if the TOE allows the Administrator to specify the expected identity of a remote peer when establishing secure communications using a protocol included in the ST. _For TOEs that support only IP address and FQDN identifier types, configuration of the reference identifier may be the same as configuration of the peer’s name for the purposes of connection._
+_The selection “Ability to configure the reference identifier for the peer” should be included in the ST if the TOE allows the Administrator to specify the expected identity of a remote peer when establishing secure communications using a protocol included in the ST. For TOEs that support only IP address and FQDN identifier types, configuration of the reference identifier may be the same as configuration of the peer’s name for the purposes of connection._
 
 _The selection “Ability to manage the TOE's trust store and designate X509.v3 certificates as trust anchors" should be included in the ST if the TOE supports management and configuration of the TOE's trust store. This means the TOE supports X.509v3 certificates for some security functions. This only applies if the TOE claims conformance to the Functional Package for X.509._
 
@@ -1416,7 +1416,7 @@ _The selection "Ability to configure thresholds for SSH rekeying" may only be se
 
 _For distributed TOEs, the interaction between TOE components will be configurable (see FCO_CPC_EXT.1). Therefore, the ST author includes the selection "Ability to configure the interaction between TOE components" for distributed TOEs. A simple example would be the change of communication protocol according to FPT_ITT.1. Another example would be changing the management of a TOE component from direct remote administration to remote administration through another TOE component. A more complex use case would be if the realization of an SFR is achieved through two or more TOE components and the responsibilities between the two or more components could be modified._
 
-_For distributed TOEs, that implement a registration channel (as described in FCO_CPC_EXT.1.2), the ST author uses the selection “Ability to configure the cryptographic functionality” in this SFR, and its corresponding mapping in the TSS, to describe the configuration of any cryptographic aspects of the registration channel that can be modified by the operational environment in order to improve the channel security (reference the description of the content of Preparative Procedures in [SD, 3.6.1.2])._
+_For distributed TOEs, that implement a registration channel (as described in FCO_CPC_EXT.1.2), the ST author uses the selection “Ability to configure the cryptographic functionality” in this SFR, and its corresponding mapping in the TSS, to describe the configuration of any cryptographic aspects of the registration channel that can be modified by the operational environment in order to improve the channel security (reference the description of the content of Preparative Procedures in [SD, 3.4.1])._
 
 _If the TOE offers ability for a remote authorised IT entities or authorised remote Administrators to connect via an interface secured with SSH, then the ST author must select the option “Ability to manage the trusted public keys database” to account for management of public key authentication. It is acceptable for this management function to be implemented as part of general TOE management functionality or as a standalone management function._
 
@@ -1442,7 +1442,7 @@ are satisfied.
 
 *_Application Note {counter:appnote_count}_*
 
-_FMT_SMR.2.3 requires that a Security Administrator be able to administer the TOE through a remote mechanism. See Application Note 19 for the definition of remote administration._
+_FMT_SMR.2.3 requires that a Security Administrator be able to administer the TOE through a remote mechanism. See Application Note 22 for the definition of remote administration._
 
 _For distributed TOEs, not every TOE component is required to implement its own user management to fulfil this SFR. At least one component has to support authentication and identification of Security Administrators according to FIA_UIA_EXT.1. For the other TOE components authentication as Security Administrator can be realized through the use of a trusted channel (either according to FTP_ITC.1 or FPT_ITT.1) from a component that supports the authentication of Security Administrators according to FIA_UIA_EXT.1. The identification of users according to FIA_UIA_EXT.1.2 and the association of users with roles according to FMT_SMR.2.2 is done through the components that support the authentication of Security Administrators according to FIA_UIA_EXT.1.4. TOE components that authenticate Security Administrators through the use of a trusted channel are not required to support local administration of the component._
 
@@ -1549,7 +1549,7 @@ _The ST author selects “X.509 certificate” when the TOE uses X.509 certifica
 
 _The ST author selects ‘digital signature’ for all other digital mechanisms (e.g. X.509 certificates that do not meet the certificate validation requirements in the Functional Package for X.509, GPG, raw public key). The digital algorithm must be one of the algorithms specified in FCS_COP.1/SigVer._
 
-_The verification of the signature must be performed by the TOE itself._
+_The TOE itself must perform the verification of the update signature, regardless of whether the update is authenticated using an X.509 certificate or another digital signature mechanism._
 
 _For distributed TOEs, all TOE components must support Trusted Update. The verification of the signature on the update should be done by each TOE component itself (signature verification)._
 
@@ -1635,8 +1635,7 @@ _If the TOE claims FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication)
 
 _If "TLS" or "DTLS" is selected, then the TSF is validated against the applicable requirements of the Functional Package for TLS._
 
-_If "SSH" is selected, then the TSF is be validated against the applicable requirements of the Functional Package for SSH._
-
+_If "SSH" is selected, then the TSF is validated against the applicable requirements of the Functional Package for SSH._
 
 
 
@@ -1857,7 +1856,7 @@ _If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in
 
 ==== Authentication using X.509 certificates (Extended)
 
-Please see Appendix B.3.1 for a comprehensive description of the applicablity and usage of the X.509 Functional Package.
+Please see Appendix B.3.1 for a comprehensive description of the applicability and usage of the X.509 Functional Package.
 
 Support for X.509 certificates is optional in the context of FPT_ITT.1 (FTP_ITC.1 and FTP_TRP.1/Admin are discussed elsewhere). This is because the use of FPT_ITT.1 itself as a registration channel is optional, so it's further optional to implement that using a mechanism that relies on X.509 validation. 
 
@@ -1881,7 +1880,7 @@ _This channel may also be used as the registration channel for the registration 
 
 _If "TLS" or "DTLS" is selected, then the TSF is validated against the applicable requirements of the Functional Package for TLS. Additionally, the reference identifier established for the server (FCS_DTLSC_EXT.1.5 or FCS_TLSC_EXT.1.5 in the Functional Package for TLS) may be established through a “gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component._
 
-_If "SSH" is selected, then the TSF is be validated against the applicable requirements of the Functional Package for SSH._
+_If "SSH" is selected, then the TSF is validated against the applicable requirements of the Functional Package for SSH._
 
 
 === Trusted path/channels (FTP)
@@ -2353,7 +2352,7 @@ _This requirement applies to a defined number of successive unsuccessful remote 
 _The TSS describes how the TOE ensures that authentication failures by remote Administrators cannot lead to a situation where no Administrator access is available, either permanently or temporarily (e.g. by providing local logon which is not subject to blocking). The Operational Guidance describes, and identifies the importance of, any actions that are required in order to ensure that Administrator access will always be maintained, even if remote administration is made permanently or temporarily unavailable due to blocking of accounts as a result of FIA_AFL.1._
 
 ==== Protected authentication feedback (FIA_UAU)
-If the TOE provides a password-based local authentication mechanism passwords must be obscured during logon at the local console to avoid attacks where an attacker might observe a password being typed by an Administrator.
+If the TOE provides a password-based local authentication mechanism, passwords must be obscured during logon at the local console to avoid attacks where an attacker might observe a password being typed by an Administrator.
 
 ===== FIA_UAU.7 Protected authentication feedback
 
@@ -2674,41 +2673,6 @@ Dependencies:
 
 
 === Cryptographic Support (FCS)
-
-==== Random Bit Generation (FCS_RBG_EXT)
-
-===== FCS_RBG_EXT.1 Random Bit Generation
-
-*Family Behaviour*
-
-Components in this family address the requirements for random bit/number generation. This is a new family defined for the FCS class.
-
-*Component Levelling*
-
-image:extracted-media/media/FCS_RBG_EXT.png[image,width=500,height=48]
-
-FCS_RBG_EXT.1 Random Bit Generation requires random bit generation to be performed in accordance with selected standards and seeded by an entropy source.
-
-*Management: FCS_RBG_EXT.1*
-
-There are no management activities foreseen.
-
-*Audit: FCS_RBG_EXT.1*
-
-The following actions should be auditable if FAU_GEN Security audit generation is included in the PP/ST:
-
-[loweralpha]
-. There are no auditable events foreseen.
-
-*FCS_RBG_EXT.1 Random Bit Generation*
-
-Hierarchical to: No other components
-
-Dependencies: No other components
-
-*FCS_RBG_EXT.1.1* The TSF shall perform all deterministic random bit generation services in accordance with ISO/IEC 18031:2011 using [selection: _Hash_DRBG [selection: SHA-256, SHA-384, SHA-512], HMAC_DRBG [selection: SHA-256, SHA-384, SHA-512], CTR_DRBG (AES)_].
-
-*FCS_RBG_EXT.1.2* The deterministic RBG shall be seeded by at least one entropy source that accumulates entropy from [selection: _[assignment: number of software-based sources] software-based noise source, [assignment: number of platform-based sources] platform-based noise source_] with a minimum of [selection: _128 bits, 192 bits, 256 bits_] of entropy at least equal to the greatest security strength, according to ISO/IEC 18031:2011 Table C.1 “Security Strength Table for Hash Functions”, of the keys and hashes that it will generate.
 
 ==== Cryptographic protocols (FCS_IPSEC_EXT, FCS_NTP_EXT)
 
