@@ -2430,18 +2430,6 @@ https://www.exploit-db.com/
 . Rapid7 Vulnerability & Exploit Database: +
 https://www.rapid7.com/db/?type=nexpose
 
-=== Additional Flaw Hypotheses
-[arabic, start=499]
-. The following additional tests shall be performed:
-[loweralpha]
-.. [conditional]: If the TOE is a TLS server and supports ciphersuites that use RSA transport (e.g. supporting TLS_RSA_WITH_* ciphers) the following test shall be performed.
-+
-Where RSA Key Establishment schemes are claimed and especially when PKCS#1 v1.5* padding is used, the evaluators shall test for implementation flaws allowing Bleichenbacher and Klima et al. style attacks, including Bock et al's ROBOT attacks of 2017 in the flaw analysis. Even though Bleichenbacher's original paper is two decades old, Bock et al. found these attacks to still be effective in weakening the security of RSA key establishment in current products. Bleichenbacher and Klima et al. style attacks are complex and may be difficult to detect, but a number of software testing tools have been created to assist in that process. The iTC strongly recommends that at least one of the tools mentioned in Bock et al's ROBOT attacks, as effective to detect padding oracle attacks, be used to test TOE communications channels using RSA based Key Establishment. See the following related sources: 
-
-* http://archiv.infsec.ethz.ch/education/fs08/secsem/bleichenbacher98.pdf
-* https://eprint.iacr.org/2003/052
-* https://robotattack.org
-
 [appendix]
 == Network Device Equivalency Considerations
 === Introduction
