@@ -1627,11 +1627,11 @@ _Where X.509 certificates are used to authenticate remote endpoints in support o
 
 _If the TOE claims FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication) from the Functional Package for TLS and the TOE passes presented identifiers of clients used for client authentication to a directory server for comparison, then the connection to the directory server used to verify presented identifiers of TLS clients need to be protected by a trusted channel (i.e., FTP_ITC.1). If a trusted channel is used for the integrity protection for communication between the TOE and a directory server, then the directory server must be added to the assignment for other capabilities in FTP_ITC.1. Note that the directory server is only expected to handle the comparison of the presented identifier but not to perform full X.509 certificate validation on behalf of the TOE._
 
+_See Section B.3.1 for additional requirements._
+
 _If "TLS" or "DTLS" is selected, then the TSF is validated against the applicable requirements of the Functional Package for TLS._
 
 _If "SSH" is selected, then the TSF is be validated against the applicable requirements of the Functional Package for SSH._
-
-
 
 
 ==== Trusted path (FTP_TRP)
@@ -1649,6 +1649,8 @@ _If "SSH" is selected, then the TSF is be validated against the applicable requi
 *_Application Note {counter:appnote_count}_*
 
 _This requirement ensures that authorised remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection, or the protocol requirements of the packages specified in Section 2.2 are included in the ST. Where X.509 certificates are used to authenticate authorised Administrators, FIA_X509_EXT.1 in the Functional Package for X.509 is to be used (which requires checking certificate revocation, implementing a trust store, and supporting a certificate chain)._
+
+_See Section B.3.1 for additional requirements._
 
 _If "TLS" or "DTLS" is selected, then the TSF is validated against the applicable requirements of the Functional Package for TLS._
 
@@ -1877,6 +1879,7 @@ _If "TLS" or "DTLS" is selected, then the TSF is validated against the applicabl
 
 _If "SSH" is selected, then the TSF is be validated against the applicable requirements of the Functional Package for SSH._
 
+_See Section B.3.1 for additional requirements._
 
 === Trusted path/channels (FTP)
 
@@ -1905,6 +1908,8 @@ _The selection at the end of FTP_TRP.1.1/Join recognises that in some cases conf
 _The assignment in FTP_TRP.1.3/Join ensures that the ST highlights any specific details needed to protect the registration environment._
 
 _Note that when the ST uses FTP_TRP.1/Join for the registration channel then this channel cannot be reused as the normal inter-component communication channel (the latter channel must meet FTP_ITC.1 or FPT_ITT.1)._
+
+_See Section B.3.1 for additional requirements._
 
 _Specific requirements for Preparative Procedures relating to FTP_TRP.1/Join are defined in the Evaluation Activities in [SD]._
 
