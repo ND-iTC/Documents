@@ -466,11 +466,11 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 
 The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE. (Note that this deliverable is examined as part of the ASE_TSS.1 and AVA_VAN.1 Evaluation Activities as described in [SD, 5.1.2] and [SD, 5.6.1.1] respectively.) The ST for a distributed TOE may also introduce a ‘minimum configuration’ and identify components that may have instances added to an operational configuration without affecting the validity of the CC certification. [SD, B.4] describes Evaluation Activities relating to these equivalency aspects of a distributed TOE (and hence what is expected in the ST).
 
-If an SSH channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for Secure Shell referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
+If an SSH channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for Secure Shell referenced in Section 2.1. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
-If a TLS channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for TLS referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
+If a TLS channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for TLS referenced in Section 2.1. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
-If communications between components relies on X.509 validation, then the TSF shall be evaluated against the version of the Functional Package for X.509 referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE. 
+If communications between components relies on X.509 validation, then the TSF shall be evaluated against the version of the Functional Package for X.509 referenced in Section 2.1. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE. 
 
 == Security Problem Definition
 
@@ -521,7 +521,7 @@ SFR Rationale:
 
 * The general use of secure protocols for identified communication channels is described at the top level in FTP_ITC.1 and FTP_TRP.1/Admin; for distributed TOEs the requirements for inter-component communications are addressed by the requirements in FPT_ITT.1.
 * Requirements for the use of secure communication protocols are set for allowed protocols in FCS_IPSEC_EXT.1, the Functional Package for SSH, and the Functional Package for TLS.
-* Requirements for the use of secure communication protocols implemented by the packages specified in Section 2.2 may be found in the respective package's document.
+* Requirements for the use of secure communication protocols implemented by the packages specified in Section 2.1 may be found in the respective package's document.
 * Optional and selection-based requirements for use of public key certificates to support secure protocols are defined in the Functional Package for X.509.
 
 
@@ -1648,7 +1648,7 @@ _If "SSH" is selected, then the TSF is be validated against the applicable requi
 
 *_Application Note {counter:appnote_count}_*
 
-_This requirement ensures that authorised remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection, or the protocol requirements of the packages specified in Section 2.2 are included in the ST. Where X.509 certificates are used to authenticate authorised Administrators, FIA_X509_EXT.1 in the Functional Package for X.509 is to be used (which requires checking certificate revocation, implementing a trust store, and supporting a certificate chain)._
+_This requirement ensures that authorised remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection, or the protocol requirements of the packages specified in Section 2.1 are included in the ST. Where X.509 certificates are used to authenticate authorised Administrators, FIA_X509_EXT.1 in the Functional Package for X.509 is to be used (which requires checking certificate revocation, implementing a trust store, and supporting a certificate chain)._
 
 _See Section B.3.1 for additional requirements._
 
