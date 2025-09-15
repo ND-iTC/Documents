@@ -392,9 +392,9 @@ _Validity Test_
 *ML-KEM Key Establishment Schemes*
 
 [arabic, start=85]
-. To test encapsulation the evaluator shall 10x input to the internal Encaps function a random 32-byte string and an encapsulation key. Verify the returned cipher text and shared secret is correct using a known good implementation. Here internal refers to the TOE’s implementation of the function ML-KEM.Encaps_internal(-,-) as described in FIPS.203.
+. To test encapsulation the evaluator shall generate a set of 10 inputs to the internal Encaps function a random 32-byte string and an encapsulation key. Verify the returned cipher text and shared secret is correct using a known good implementation. Here internal refers to the TOE’s implementation of the function ML-KEM.Encaps_internal(-,-) as described in FIPS.203.
 
-. To test decapsulation the evaluator shall 10x input to the internal Decaps function a cipher text and decapsulation key. Verify the returned shared secret is correct using a known good implementation. The tests should include a mix of valid and invalid/garbled cipher texts. Here internal refers to the TOE’s implementation of the function ML-KEM.Decaps_internal(-,-) as described in FIPS.203. 
+. To test decapsulation the evaluator shall generate a set of 10 inputs to the internal Decaps function a cipher text and decapsulation key. Verify the returned shared secret is correct using a known good implementation. The tests should include a mix of valid and invalid/garbled cipher texts. Here internal refers to the TOE’s implementation of the function ML-KEM.Decaps_internal(-,-) as described in FIPS.203. 
 
 ==== FCS_CKM.6 Timing and Event of Cryptographic Key Destruction
 
@@ -574,7 +574,7 @@ CT[i] = AES-ECB-Encrypt(Key, PT) PT = CT[i]
 *ML-DSA Test*
 
 [arabic, start=130]
-. The evaluator shall 10x input to the internal Sign function a 32-byte random string, private key, and a randomly generated message. Check and confirm the value of the returned signature using a known good implementation. Here internal Sign refers to the TOE’s implementation of the function ML-DSA.Sign_internal(-,-,-) as described in FIPS.204.
+. The evaluator shall generate a set of 10 inputs to the internal Sign function a 32-byte random string, private key, and a randomly generated message. Check and confirm the value of the returned signature using a known good implementation. Here internal Sign refers to the TOE’s implementation of the function ML-DSA.Sign_internal(-,-,-) as described in FIPS.204.
 
 ==== FCS_COP.1/SigVer Cryptographic Operation - Signature Verification
 
