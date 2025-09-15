@@ -1853,7 +1853,7 @@ _If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in
 
 ==== Authentication using X.509 certificates (Extended)
 
-Please see Appendix B.4.1 for a comprehensive description of the applicablity and usage of the X.509 Functional Package.
+Please see Appendix B.3.1 for a comprehensive description of the applicablity and usage of the X.509 Functional Package.
 
 Support for X.509 certificates is optional in the context of FPT_ITT.1 (FTP_ITC.1 and FTP_TRP.1/Admin are discussed elsewhere). This is because the use of FPT_ITT.1 itself as a registration channel is optional, so it's further optional to implement that using a mechanism that relies on X.509 validation. 
 
@@ -2318,21 +2318,31 @@ A TOE may act as the client, the server, or both in TLS sessions. The requiremen
 
 ==== Authentication using X.509 certificates (Extended)
 
-Support for X.509 certificates is required if the TSF implements IPsec, TLS, or DTLS communications in FTP_ITC.1 or FTP_TRP.1/Admin (FPT_ITT.1 is a special case covered in Appendix A.4.1.1), or if the TSF implements SSH in a manner where X.509 certificates are used for authentication. X.509 support is also required if the TSF uses X.509 certificates as an integrity mechanism for software updates (i.e., when FPT_TUD_EXT.2 is claimed).
+Support for X.509 certificates is required if the TSF implements IPsec, TLS, or DTLS communications in FTP_ITC.1 or FTP_TRP.1/Admin (FPT_ITT.1 is a special case covered in Appendix A.4.1), or if the TSF implements SSH in a manner where X.509 certificates are used for authentication. X.509 support is also required if the TSF uses X.509 certificates as an integrity mechanism for software updates (i.e., when FPT_TUD_EXT.2 is claimed).
 
 The Functional Package for X.509 defines selections for the capability to assert identities and to verify identities in its mandatory SFR, FIA_XCU_EXT.1. The ST author selects "verify" in cases where the TOE is presented a certificate from an external entity that is using it to validate its identity (e.g., if the TOE is a TLS client, the TOE is a TLS server that requires mutual authentication, the TOE implements IPsec, the TOE uses code signing certificates to validate software or firmware updates). The ST author selects "assert" in cases where the TOE presents a certificate to an external entity (e.g., if the TOE is a TLS server, the TOE is a TLS client where the server requires mutual authentication, the TOE implements IPsec, or the TOE implements SSH and uses X.509 to validate the server). 
 
-
 In all cases, the relevant SFR dependencies in the Functional Package for X.509 are claimed. For certificate verification, this includes FIA_X509_EXT.1 and FIA_X509_EXT.2. For certificate assertion, this includes FIA_XCU_EXT.2 (and FIA_X509_EXT.3 in cases where the TOE's certificate is obtained from an external CA rather than acting as its own CA). TLS requirements are addressed through the NIAP Functional Package for TLS.
+
+Generally, the validation of a X.509v3 leaf certificate comprises of several steps:
+
+* A certificate Revocation Check refers to the process of determining the current revocation status of an otherwise structurally valid certificate. This must be performed every time a certificate is used for authentication. This check must be performed for each certificate in the chain up to, but not including the trust anchor. This means that intermediate CA certificates that are not trust anchors, and the leaf certificate must be checked. It is not mandatory to check the revocation status of any CA certificate designated a trust anchor, however if such check is performed it must be handled consistently with how other certificates are checked.
+* An expiration check must be performed. This check must be conducted for each certificate in the chain, up to and including the trust anchor.
+* The continuity of the chain must be checked, showing that the signature on each certificate that is presented to the TOE is valid and the chain terminates at the trust anchor.
+* The presence of relevant extensions in each certificate in the chain such as the extendedKeyUsage parameters of the leaf certificate must correspond to SFR-relevant functionality. For example, a peer acting as a web server should have TLS Web Server Authentication listed as an extendedKeyUsage parameter of its X.509v3 certificate. It should be checked that the relevant extensions in each certificate in the chain, such as the extendedKeyUsage parameters of the leaf certificate, correspond to the SFR-relevant functionality they are used with."
 
 When certificate validation is claimed for communication with external entities, the following restrictions are applied to the Functional Package for X.509: 
 
 * Iteration naming: For consistency, use the iteration "/Rev" for SFR claims related to validating X.509 certificates presented by the operational environment, and use "/ITT" for SFR claims related to validating X.509 certificates presented by another component of a distributed TOE. Both the validation of X.509 certificates requested from an external CA and verification of external entities using X.509 certificates should be included in the appropriate FIA_X509_EXT.1 iteration. If both "assert" and "verify" related behavior are included in an FIA_X509_EXT.1 iteration, the behavior should be disambiguated in the TSS.
+* All FIA_X509_EXT requirements: In [selection: invoke platform-provided functionality, implement], must select "implement".
 * FIA_X509_EXT.1.1: Either an unlimited maximum path length must be selected or a maximum path length of three or greater must be claimed, unless the certificate is used for FPT_ITT.1 communications, in which case a path length of two is permissible (i.e., certificates used between components of a distributed TOE do not require support for intermediate CAs). 
-* Revocation Checking related to validating X.509 certificates presented by the operational environment: At least one of CRL or OCSP (except local OCSP responder; the selection of "local OCSP responder" is not allowed) must be supported for revocation checking. If "cached CRL" is selected, the TOE must refresh the CRL cache from a network source without administrator interaction.
-* Revocation Checking related to validating X.509 certificates presented by another component of a distributed TOE: At least one of CRL, OCSP, Based on validity period, or Direct association with Certificate Authority must be supported for revocation checking. The TOE must perform revocation checking without administrator interaction.
-* Revocation Checking of the X.509 certificate the TOE presents to an external entity: Any method of revocation checking may be selected, including the selection of "Administrative notification of revocation."
+* FIA_X509_EXT.1.1: Revocation Checking related to validating X.509 certificates presented by the operational environment: At least one of CRL or OCSP (except local OCSP responder; the selection of "local OCSP responder" is not allowed) must be supported for revocation checking. If "cached CRL" is selected, the TOE must refresh the CRL cache from a network source without administrator interaction.
+* FIA_X509_EXT.1.1: Revocation Checking related to validating X.509 certificates presented by another component of a distributed TOE: At least one of CRL, OCSP, Based on validity period, or Direct association with Certificate Authority must be supported for revocation checking. The TOE must perform revocation checking without administrator interaction.
+* FIA_X509_EXT.1.1: Revocation Checking of the X.509 certificate the TOE presents to an external entity: Any method of revocation checking may be selected, including the selection of "Administrative notification of revocation."
+* FIA_X509_EXT.1.2: When specifying processing of the extensions, must select "basicConstraints" and "extendedKeyUsage".
 * FIA_XCU_EXT.2.1: "Request certificates from an external CA" must be selected unless the certificate is used for FPT_ITT.1 communications, in which case a the use of an embedded CA is allowed.
+
+If the TOE implements mutual authentication or acts as a server, there is no expectation of performing any checks on TOE’s own leaf certificate during authentication.
 
 ==== Authentication Failure Handling (FIA_AFL)
 If the TOE provides remote administration using a password-based authentication mechanism, FIA_AFL.1 specifies actions upon reaching the number of successive unsuccessful authentication attempts.
