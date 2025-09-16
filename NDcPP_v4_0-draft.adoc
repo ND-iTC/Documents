@@ -2958,7 +2958,7 @@ Dependencies: FTA_TAB.1 Default TOE access banners
 
 *FIA_UIA_EXT.1.2* The TSF shall require each administrative user to be successfully identified and authenticated before allowing any other TSF-mediated actions on behalf of that administrative user.
 
-*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate [selection: no other mechanism, external authentication server]. The TSF shall provide the following local authentication mechanisms:[selection: none, password-based, [assignment: other authentication mechanism]]_.
+*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate_] and [selection: _no other mechanism, external authentication server_]. The TSF shall provide the following local authentication mechanisms:[selection: _none, password-based, [assignment: other authentication mechanism]_].
 
 *FIA_UIA_EXT.1.4* The TSF shall authenticate any administrative user's claimed identity according to each authentication mechanism specified in FIA_UIA_EXT.1.3.
 
