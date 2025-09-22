@@ -2351,7 +2351,10 @@ When certificate validation is claimed for communication with external entities,
 * FIA_X509_EXT.1.1: Revocation Checking related to validating X.509 certificates presented by another component of a distributed TOE and issued by an embedded CA: At least one of CRL, OCSP, Based on validity period, or Direct association with Certificate Authority must be supported for revocation checking. The TOE must perform revocation checking without administrator interaction.
 * FIA_X509_EXT.1.1: Revocation Checking of the X.509 certificate the TOE presents to an external entity: Any method of revocation checking may be selected, including the selection of "Administrative notification of revocation."
 * FIA_X509_EXT.1.2: When specifying processing of the extensions, must select "basicConstraints" and "extendedKeyUsage".
-* FIA_XCU_EXT.2.1: "Request certificates from an external CA" must be selected unless the certificate is used for FPT_ITT.1 communications, in which case a the use of an embedded CA is allowed.
+* FIA_XCU_EXT.2.1:
+** When the TOE verifies X.509 certificates (“verify” case), the TOE is not required to generate CSRs.
+** When the TOE asserts its identity using an X.509 certificate (“assert” case), the TOE shall request certificates from an external CA for communications with external entities, and may obtain certificates from an embedded CA for communications between components of a distributed TOE (e.g., during component registration or FPT_ITT.1 exchanges).
+** If an embedded CA is used, the ST and TSS should describe whether issuance is performed automatically over a secure channel or manually by an administrator, to maintain consistency with selections in FCO_CPC_EXT.1 and FTP_TRP.1.3/Join.
 
 If the TOE implements mutual authentication or acts as a server, there is no expectation of performing any checks on TOE’s own leaf certificate during authentication.
 
