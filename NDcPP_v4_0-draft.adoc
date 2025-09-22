@@ -1853,11 +1853,7 @@ _If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in
 
 ==== Authentication using X.509 certificates (Extended)
 
-Please see Appendix B.3.1 for a comprehensive description of the applicablity and usage of the X.509 Functional Package.
-
-Support for X.509 certificates is optional in the context of FPT_ITT.1 (FTP_ITC.1 and FTP_TRP.1/Admin are discussed elsewhere). This is because the use of FPT_ITT.1 itself as a registration channel is optional, so it's further optional to implement that using a mechanism that relies on X.509 validation. 
-
-When X.509 is used for this channel, it is only necessary to support a minimum path length of two for the certificate chain. All other requirements apply as-is.
+Please see Appendix B.3.1 for a comprehensive description of the applicability and usage of the X.509 Functional Package.
 
 === Protection of the TSF (FPT)
 
@@ -1908,6 +1904,8 @@ _The selection at the end of FTP_TRP.1.1/Join recognises that in some cases conf
 _The assignment in FTP_TRP.1.3/Join ensures that the ST highlights any specific details needed to protect the registration environment._
 
 _Note that when the ST uses FTP_TRP.1/Join for the registration channel then this channel cannot be reused as the normal inter-component communication channel (the latter channel must meet FTP_ITC.1 or FPT_ITT.1)._
+
+_The trusted path used for joining might utilize X.509 certificates; however, there are no required X.509 SFRs associated with this trusted path as there are many ways the security of the joining path could be provided. It is up to the ST author to describe how the security of this trusted path is implemented; whether the security relies on X.509 SFRs, environmental constraints from FTP_TRP.1.3/Join, and/or some other method._
 
 _See Section B.3.1 for additional requirements._
 
@@ -2331,7 +2329,7 @@ A TOE may act as the client, the server, or both in TLS sessions. The requiremen
 
 ==== Authentication using X.509 certificates (Extended)
 
-Support for X.509 certificates is required if the TSF implements IPsec, TLS, or DTLS communications in FTP_ITC.1 or FTP_TRP.1/Admin (FPT_ITT.1 is a special case covered in Appendix A.4.1), or if the TSF implements SSH in a manner where X.509 certificates are used for authentication. X.509 support is also required if the TSF uses X.509 certificates as an integrity mechanism for software updates (i.e., when FPT_TUD_EXT.2 is claimed).
+Support for X.509 certificates is required if the TSF implements IPsec, TLS, or DTLS communications in FPT_ITT.1, FTP_ITC.1, or FTP_TRP.1/Admin (FPT_TRP.1/Join is a special case covered in Appendix A.5.1.1), or if the TSF implements SSH in a manner where X.509 certificates are used for authentication. X.509 support is also required if the TSF uses X.509 certificates as an integrity mechanism for software updates (i.e., when FPT_TUD_EXT.2 is claimed).
 
 The Functional Package for X.509 defines selections for the capability to assert identities and to verify identities in its mandatory SFR, FIA_XCU_EXT.1. The ST author selects "verify" in cases where the TOE is presented a certificate from an external entity that is using it to validate its identity (e.g., if the TOE is a TLS client, the TOE is a TLS server that requires mutual authentication, the TOE implements IPsec, the TOE uses code signing certificates to validate software or firmware updates). The ST author selects "assert" in cases where the TOE presents a certificate to an external entity (e.g., if the TOE is a TLS server, the TOE is a TLS client where the server requires mutual authentication, the TOE implements IPsec, or the TOE implements SSH and uses X.509 to validate the server). 
 
