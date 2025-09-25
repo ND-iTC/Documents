@@ -2356,7 +2356,7 @@ When certificate validation is claimed for communication with external entities,
 ** When the TOE asserts its identity using an X.509 certificate (“assert” case), the TOE shall request certificates from an external CA for communications with external entities, and may obtain certificates from an embedded CA for communications between components of a distributed TOE (e.g., during component registration or FPT_ITT.1 exchanges).
 ** If an embedded CA is used, the ST and TSS should describe whether issuance is performed automatically over a secure channel or manually by an administrator, to maintain consistency with selections in FCO_CPC_EXT.1 and FTP_TRP.1.3/Join.
 
-If the TOE implements mutual authentication or acts as a server, there is no expectation of performing any checks on TOE’s own leaf certificate during authentication.
+If the TOE implements mutual authentication or acts as a server, there is no expectation of performing any checks on TOE’s own leaf certificate or certificate chain during authentication. Note: This does not change revocation checking requirements on certificates presented to the TOE, even if the same certificate(s) used by the TOE are also presented to the TOE.
 
 ==== Authentication Failure Handling (FIA_AFL)
 If the TOE provides remote administration using a password-based authentication mechanism, FIA_AFL.1 specifies actions upon reaching the number of successive unsuccessful authentication attempts.
