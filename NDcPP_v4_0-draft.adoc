@@ -927,7 +927,7 @@ a|
 
 *_Application Note {counter:appnote_count}_*
 
-_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Appendix A and Appendix B. The ST author must therefore include the relevant additional events specified in the tables in link:#_Toc27041928[Table 9] and link:#_Toc27041929[Table 10]._
+_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Appendix A, Appendix B, PP-Module(s), and functional package(s). For all SFRs included in the ST, the ST must include the relevant additional auditable events specified in link:#_Toc27041928[Table 9] for optional SFRs, link:#_Toc27041929[Table 10] for selection-based SFRs, the claimed PP-Module(s), and and the claimed functional package(s). All audit events defined in Table 2 have to be included in the ST as they are mandatory._
 
 ===== FAU_GEN.2 User identity association
 
