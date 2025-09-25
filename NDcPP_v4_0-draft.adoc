@@ -844,7 +844,7 @@ Loss of communication with the audit server is problematic. While there are seve
 * _Changes to TSF data related to configuration changes (in addition to the information that a change occurred it shall be logged what has been changed)._
 * _Generating/import of, changing, or deleting of cryptographic keys (in addition to the action itself a unique key name or key reference shall be logged)._
 * _[selection: Resetting passwords (name of related Administrator account shall be logged), no other actions, [assignment: list of other uses of privileges]];_
-. _Specifically defined auditable events listed in_ _Table 2_ and applicable auditable events defined in the claimed PP-Module(s) and functional package(s).
+. _Specifically defined auditable events listed in_ _Table 2_.
 
 *_Application Note {counter:appnote_count}_*
 
