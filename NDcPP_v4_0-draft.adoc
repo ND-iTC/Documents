@@ -1933,9 +1933,9 @@ _For distributed TOEs, that implement displaying a warning when local storage sp
 
 _If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in which audit records might be “invisibly lost”._
 
-==== Cryptographic Support (FCS)
+=== Cryptographic Support (FCS)
 
-===== FCS_CKM.2 Cryptographic Key Distribution
+==== FCS_CKM.2 Cryptographic Key Distribution
 
 *FCS_CKM.2 Cryptographic Key Distribution*
 
@@ -1951,7 +1951,7 @@ _If “key encapsulation” is selected, FCS_COP.1/KeyEncap must be claimed, whi
 
 _If “key wrapping” is selected, FCS_COP.1/KeyWrap must be claimed, which specifies the relevant list of standards._
 
-===== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
+==== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
 
 *FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation*
 
@@ -1975,7 +1975,7 @@ _NIST SP 800-57 Part 1 Revision 5 Section 5.6.2 specifies that the size of key u
 
 FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping
 
-===== FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping
+==== FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping
 
 *FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping*
 
@@ -2225,9 +2225,9 @@ _It is acceptable for a TOE component to store audit information in multiple pla
 
 _TOE components are not required to monitor or audit connectivity or network outages between TOE components. This aspect is covered by the assumption A.COMPONENTS_RUNNING_
 
-==== Cryptographic Support (FCS)
+=== Cryptographic Support (FCS)
 
-===== FCS_COP.1/AEAD Cryptographic Operation – Authenticated Encryption with Associated Data
+==== FCS_COP.1/AEAD Cryptographic Operation – Authenticated Encryption with Associated Data
 
 This is a selection-based SFR, to be included in the ST if CCM mode or GCM mode are selected in FCS_COP.1/DataEncryption.
 
@@ -2258,7 +2258,7 @@ The following table provides the allowed choices for completion of the selection
 
 _The ST author should choose the cryptographic algorithms in which AES operates, parameters, and standards implemented to perform symmetric-key authenticated encryption/decryption._
 
-===== FCS_COP.1/SKC Cryptographic Operation - Symmetric Key Cryptography
+==== FCS_COP.1/SKC Cryptographic Operation - Symmetric Key Cryptography
 
 This is a selection-based SFR, to be included in the ST if CBC mode, CTR mode, or XTS mode are selected in FCS_COP.1/DataEncryption.
 
@@ -2292,7 +2292,7 @@ The following table provides the allowed choices for completion of the selection
 _The ST author should choose the cryptographic algorithms in which AES operates, parameters, and standards implemented to perform symmetric-key encryption/decryption without built-in authentication._
 
 
-===== FCS_COP.1/CMAC Cryptographic Operation - CMAC
+==== FCS_COP.1/CMAC Cryptographic Operation - CMAC
 
 This is a selection-based SFR, to be included in the ST if “AES-CMAC-128 (RFC 8573)” is selected for authenticating NTP packets in FCS_NTP_EXT.1.2.
 
@@ -2300,7 +2300,7 @@ This is a selection-based SFR, to be included in the ST if “AES-CMAC-128 (RFC 
 
 *FCS_COP.1.1/CMAC* The TSF shall perform _CMAC_ in accordance with a specified cryptographic algorithm _AES using CMAC mode_ and cryptographic key sizes _128 bits_ that meet the following: [selection: _ISO/IEC 9797-1:2011 subclause 7.6 (CMAC) and ISO/IEC 18033-3:2010 subclause 5.2 (AES), NIST SP 800-38B (CMAC) and NIST FIPS 197 (AES)_].
 
-===== FCS_RBG.2 Random Bit Generation (External Seeding - VS platform)
+==== FCS_RBG.2 Random Bit Generation (External Seeding - VS platform)
 
 This component is included if "TSF interface for seeding" is selected in FCS_RBG.1.2
 
@@ -2314,7 +2314,7 @@ _This requirement is claimed when a TOE uses one or more external sources of ent
 
 _The TSF interface for the purpose of seeding here is the interface used to gather entropy for initializing or reseed._
 
-===== FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
+==== FCS_RBG.3 Random Bit Generation (Internal Seeding - Single Source)
 
 This component is included if "TSF entropy source" is selected in FCS_RBG.1.2
 
@@ -2332,7 +2332,7 @@ _Software-based noise sources generate noise as a byproduct of their normal oper
 
 _The TOE collects enough input from the internal noise source such that the total measured entropy of the input is sufficient to initialize or reseed a DRBG. The ST author ensures that the assignment is completed with the number of bits of the input sufficient to initialize or reseed a DRBG._ 
 
-===== FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
+==== FCS_RBG.4 Random Bit Generation (Internal Seeding - Multiple Sources)
 
 This component is included if "multiple TSF entropy sources" is selected in FCS_RBG.1.2
 
@@ -2344,7 +2344,7 @@ This component is included if "multiple TSF entropy sources" is selected in FCS_
 
 _This requirement is claimed when a TOE uses two or more internal sources of entropy to initialize or reseed a DRBG. Seeding a DRBG is the same as initializing a DRBG.  FCS_RBG.5 defines the mechanism by which these sources are combined to ensure sufficient minimum entropy._ 
 
-===== FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)
+==== FCS_RBG.5 Random Bit Generation (Combining Entropy Sources)
 
 This component is included if "multiple TSF entropy sources" is selected in FCS_RBG.1.2
 
@@ -2358,7 +2358,7 @@ _This requirement is claimed when a TOE combines two or more sources of entropy 
 
 _One can apply NIST SP 800-90B (or AIS-31) statistical tests against internal noise sources (a.k.a. raw entropy) to confirm the min-entropy of the noise sources either in aggregate or individually. One should not apply NIST SP 800-90B (or AIS-31) statistical tests against external noise sources since the TOE is unable to enforce entropy requirements or conditioning requirements against external sources of entropy. However, the TSS may include estimates for min-entropy from external sources that contribute to the overall entropy requirements for the DRBG._
 
-===== FCS_COP.1/XOF Cryptographic Operation - Extendable-Output Function
+==== FCS_COP.1/XOF Cryptographic Operation - Extendable-Output Function
 
 This is a selection-based SFR, to be included in the ST only if LMS or XMSS is claimed in FCS_COP.1/SigVer
 
