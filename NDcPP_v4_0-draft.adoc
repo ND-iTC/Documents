@@ -7,8 +7,8 @@
 
 = collaborative Protection Profile for Network Devices
 
-Version: 4.0 draft +
-Date: 25-June-2025
+Version: 4.0 +
+Date: TBD-December-2025
 
 == Acknowledgements
 
@@ -73,6 +73,7 @@ CCDB-018, Version 1, 31 January, 2025.
 [cols=",,",options="header",]
 |===
 |*Version* |*Date* |*Description*
+|4.0 | TBD-Dec-2025 | Released for use
 |4.0 draft | 25-Jun-2025 | Incorporated comments received
 |3.0e | 06-Dec-2023 | Released for use
 |3.0 | 06-Apr-2023 | Incorporated comments received. Released for use
@@ -173,8 +174,8 @@ link:#_Toc27041932[Table 13: SFR Dependencies Rationale for Selection-Based SFRs
 PP Reference: collaborative Protection Profile for Network Devices
 
 
-PP Version: 4.0 draft +
-PP Date: 25-June-2025
+PP Version: 4.0 +
+PP Date: TBD-December-2025
 
 === TOE Overview
 
@@ -190,7 +191,7 @@ This cPP does not cover software-only NDs. We define software-only NDs as networ
 
 The intent of this document is to define the baseline set of common security functionality expected by all Network Devices, regardless of their ultimate security purpose or any additional security functionality the device may employ. This baseline set includes securing any remote management path, providing identification and authentication services for both local and remote logins, auditing security-related events, cryptographically validating the source of any update, and offering some protection against common network-based attacks.
 
-The aim is that any Network Device that meets this cPP will “behave well” on the network and can be trusted to do no harm. To accomplish this, the Network Device is expected to employ standards-based tunnelling protocols to include IPsec, TLS/DTLS, or SSH to protect the communication paths to external entities, and in the case of a distributed TOE, to protect the communications between the TOE components. For most of the allowed secure channel protocol selections it is also required that X.509 certificates be used for authentication purposes; use of certificates is supported as an option for code signing/digital signatures.
+The aim is that any Network Device that meets this cPP will “behave well” on the network and can be trusted to do no harm. To accomplish this, the Network Device is expected to employ standards-based tunnelling protocols to include IPsec, (D)TLS, or SSH to protect the communication paths to external entities, and in the case of a distributed TOE, to protect the communications between the TOE components. For most of the allowed secure channel protocol selections it is also required that X.509 certificates be used for authentication purposes; use of certificates is supported as an option for code signing/digital signatures.
 
 Additional security functionality that a Network Device may employ is outside the scope of this cPP, and such functionality will be specified in other device-type specific cPPs. Also, considered out of scope are virus and emailing scanning, intrusion detection/prevention capabilities and Network Address Translation (NAT) as a security function. It is expected that this cPP will be updated to expand the desired security functionality to increase resiliency, allow for varying implementations (such as software-only Network Devices), and keep current with technology enhancements. At this time, however, Exact Conformancefootnote:[Exact Conformance is specified as a subset of Strict Conformance – see the definition in Section 2.] with the cPP is required, and no additional functionality will be evaluated.
 
@@ -203,6 +204,11 @@ Case 1, illustrated in Figure 1, is where the TOE is represented by the vND alon
 [.text-center]
 image:extracted-media/media/vnd_case_1.png[image,width=166,height=277] +
 [#_Ref567439821]_Figure 1: vND evaluated configuration Case 1_
+
+To evaluate a vND-only TOE means:
+
+The VS(s), which are considered part of the Operational Environment, must be specified, including compatible version(s).
+The physical hardware, which is likewise considered part of the Operational Environment, must be described in terms of minimum requirements to run one instance of the TOE (e.g., CPU cores, RAM, disk space, NIC requirements).
 
 ==== vND as a pND Evaluation Configuration Option
 
@@ -234,7 +240,7 @@ Examples of devices that connect to a network but are not included to be evaluat
 As defined by the references [CC1], [CC2], [CC3], [CC4], [CCE] and [CC-SFRC], this cPP:
 
 * Conforms to the requirements of Common Criteria 2022, Revision 1
-* Is Part 2 extended, Part 3 conformant
+* Is CC Part 2 extended, CC Part 3 conformant
 * Does not claim conformance to any other PP.
 
 This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.1, APE_REQ.1 and APE_SPD.1.
@@ -244,7 +250,7 @@ This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_I
 The packages to which conformance can be claimed in conjunction with this cPP are:
 
 - Functional Package for SSH Version 2.0 (PKG_SSH_V2.0) conformant
-- Functional Package for Transport Layer Security (TLS) Version 2.1 (PKG_TLS_v2.0) conformant
+- Functional Package for Transport Layer Security (TLS) Version 2.1 (PKG_TLS_v2.1) conformant
 
 - Functional Package for X.509 Version 1.0 (PKG_X509_v1.0) conformant
 
@@ -268,14 +274,14 @@ The use of mandatory, optional and selection-based SFRs allows some customizatio
 The PP-Modules that are allowed to specify this cPP as a base-PP are specified in the 'Allowed-with' PP-Modules list at https://github.com/ND-iTC/Documents/blob/main/NDcPP_allowed_with_list.adoc.
 
 === Evaluation Methods
-The supporting document, "Evaluation Activies for Network Device cPP" must be used in conjunction with [CEM] when performing evaluations of an ST specifying this Network Device cPP.
+The supporting document, "Evaluation Activities for Network Device cPP" must be used in conjunction with [CEM] when performing evaluations of an ST specifying this Network Device cPP.
 The supporting document defines the evaluation methods and activities for this cPP and has been developed in accordance with [CC4]. The supporting document can be found at https://github.com/ND-iTC/Documents.
 
 == Introduction to Distributed TOEs
 
 This cPP includes support for distributed Network Device TOEs. Network Devices can sometimes be composed of multiple components operating as a logical whole. Oftentimes we see this architecture when dealing with products where a centralized management console is used to provide administration to dispersed components.
 
-Distributed TOEs might consist of combinations of different and similar/same types TOE components where 'type' is referring to the intended use of a component inside the overall TOE. TOE component types could for example be sensors (e.g. for IDS components) or TOE component acting as central nodes managing other nodes.
+Distributed TOEs might consist of combinations of different and similar/same types of TOE components where 'type' refers to the intended use of a component inside the overall TOE. TOE component types could for example be sensors (e.g. for IDS components) or TOE component acting as central nodes managing other nodes.
 
 There are a number of different architectures; but fundamentally, they are variations of the following model where the SFRs of this cPP can only be fulfilled if the two components are deployed and operate together.
 
@@ -284,7 +290,7 @@ image:extracted-media/media/d_toe_1.png[image,width=376,height=143]
 [.text-center]
 [#_Toc456887371]_Figure 3: Generalized Distributed TOE Model_
 
-Some Network Devices are designed to operate alongside a Management Component. A Network Device that operates in this manner, but still satisfies all SFRs in the cPP without the Management Component will not be considered a distributed TOE. It will be certified according to this cPP without the Management Component.
+Some Network Devices are designed to operate alongside a Management Component. A Network Device that operates in this manner but still satisfies all SFRs in the cPP without the Management Component will not be considered a distributed TOE. It will be certified according to this cPP without the Management Component.
 
 [.text-center]
 image:extracted-media/media/d_toe_2.png[image,width=352,height=136]
@@ -331,7 +337,7 @@ image:extracted-media/media/d_toe_6.png[image,width=349,height=276]
 [.text-center]
 [#_Toc456887376]_Figure 8: Distributed Network Devices plus Management Component required to fulfil cPP requirements_
 
-Where several Network Devices are managed by one Management Component, the TOE may also be considered to be distributed but the focus of the certification should be restricted to the simplest combination of Network Device and Management Component. By the use of an equivalency argument, the combination of multiple Network Devices together with one Management Component can then be regarded as certified solutionfootnote:[SD, B.4] describes how to define the components of a distributed TOE in terms of a “minimum configuration” and allowance for iteration of equivalent components.
+Where several Network Devices are managed by one Management Component, the TOE may also be considered to be distributed but the focus of the certification should be restricted to the simplest combination of Network Device and Management Component. By the use of an equivalency argument, the combination of multiple Network Devices together with one Management Component can then be regarded as certified solution. The Supporting Document footnote:[SD, B.4] describes how to define the components of a distributed TOE in terms of a “minimum configuration” and allowance for iteration of equivalent components.
 
 [.text-center]
 image:extracted-media/media/d_toe_7.png[image,width=364,height=282]
@@ -398,7 +404,7 @@ image:extracted-media/media/d_toe_13.png[image,width=517,height=292]
 
 Note that in the case where no registration channel is required, that is the 'joiner' and 'gatekeeper' are directly configured (Figure 14), enablement is implied as part of this direct configuration process.
 
-After registration, the components will communicate between themselves using a normal SSH/TLS/DTLS/IPsec/HTTPS channel (which is specified in an ST as an instance of FTP_ITC.1 or FPT_ITT.1 in terms of Section 6 and Appendix A). This channel for inter-component communications is specified at the top level with the new (extended) SFR FCO_CPC_EXT.1 (see Section A.6.1) and is in addition to the other communication channels required for communication with entities outside the TOE (which are specified in an ST as instances of FTP_ITC.1 and FTP_TRP.1).
+After registration, the components will communicate between themselves using a normal SSH/TLS/DTLS/IPsec/HTTPS channel (which is specified in an ST as an instance of FTP_ITC.1 or FPT_ITT.1 in terms of Section 6 and Appendix A). This channel for inter-component communications is specified at the top level with the (extended) SFR FCO_CPC_EXT.1 (see Section A.6.1) and is in addition to the other communication channels required for communication with entities outside the TOE (which are specified in an ST as instances of FTP_ITC.1 and FTP_TRP.1).
 
 === Allocation of Requirements in Distributed TOEs
 
@@ -479,7 +485,7 @@ The ST for a distributed TOE must include a mapping of SFRs to each of the compo
 
 If an SSH channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for Secure Shell referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
-If a TLS channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for TLS referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
+If a (D)TLS channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for TLS referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
 If communications between components relies on X.509 validation, then the TSF shall be evaluated against the version of the Functional Package for X.509 referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE. 
 
@@ -495,7 +501,7 @@ The threats for the Network Device are grouped according to functional areas of 
 
 A Network Device communicates with other Network Devices and other network entities. The endpoints of this communication can be geographically and logically distant and may pass through a variety of other systems. The intermediate systems may be untrusted providing an opportunity for unauthorised communication with the Network Device or for authorised communication to be compromised. The security functionality of the Network Device must be able to protect any critical network traffic (administration traffic, authentication traffic, audit traffic, etc.). The communication with the Network Device falls into two categories: authorised communication and unauthorised communication.
 
-authorised communication includes network traffic allowable by policy destined to and originating from the Network Device as it was designed and intended. This includes critical network traffic, such as Network Device administration and communication with an authentication or audit logging server, which requires a secure channel to protect the communication. The security functionality of the Network Device includes the capability to ensure that only authorised communications are allowed and the capability to provide a secure channel for critical network traffic. Any other communication with the Network Device is considered unauthorised communication. (Network traffic traversing the Network Device but not ultimately destined for the device, e.g. packets that are being routed, are not considered to be ‘communications with the Network Device’ – reference A.NO_THRU_TRAFFIC_PROTECTION in Section 4.2.3.)
+Authorised communication includes network traffic allowable by policy destined to and originating from the Network Device as it was designed and intended. This includes critical network traffic, such as Network Device administration and communication with an authentication or audit logging server, which requires a secure channel to protect the communication. The security functionality of the Network Device includes the capability to ensure that only authorised communications are allowed and the capability to provide a secure channel for critical network traffic. Any other communication with the Network Device is considered unauthorised communication. (Network traffic traversing the Network Device but not ultimately destined for the device, e.g. packets that are being routed, are not considered to be ‘communications with the Network Device’ – reference A.NO_THRU_TRAFFIC_PROTECTION in Section 4.2.3.)
 
 The primary threats to Network Device communications addressed in this cPP focus on an external, unauthorised entity attempting to access, modify, or otherwise disclose the critical network traffic. A poor choice of cryptographic algorithms or the use of non-standardized tunnelling protocols along with weak Administrator credentials, such as an easily guessable password or use of a default password, will allow a threat agent unauthorised access to the device. Weak or no cryptography provides little to no protection of the traffic allowing a threat agent to read, manipulate and/or control the critical data with little effort. Non-standardized tunnelling protocols not only limit the interoperability of the device but lack the assurance and confidence standardization provides through peer review.
 
@@ -682,7 +688,7 @@ The VS software is assumed to be updated by the VS Administrator on a regular ba
 
 ==== A.VS_ISOLATION (applies to vNDs only)
 
-For vNDs, it is assumed that the VS provides, and is configured to provide sufficient isolation between software running in VMs on the same physical platform. Furthermore, it is assumed that the VS adequately protects itself from software running inside VMs on the same physical platform.
+For vNDs, it is assumed that the VS implements and is configured to provide the necessary mechanisms to isolate resources of all VMs running on the same platform. Both virtual and physical resources require access control. It is assumed the VS enforces access control to all physical and virtual resources in support of isolation. In particular, it is assumed the VS implements mechanisms to isolate all resources associated with virtual networks and to limit a VM's access to only those virtual networks for which it has been configured. Furthermore, it is assumed that the VS adequately protects itself from software running inside VMs on the same platform.
 
 {empty}[OE.VM_CONFIGURATION]
 
@@ -1361,13 +1367,13 @@ In order to provide a trusted means for Administrators to interact with the TOE,
 
 _This requirement applies to Administrators and external IT entities of services available from the TOE directly, and not services available by connecting through the TOE. While it should be the case that few or no services are available to external entities prior to identification and authentication, if there are some available (perhaps ICMP echo) these should be listed in the assignment statement; if automated generation of cryptographic keys is supported without administrator authentication, the option "automated generation of cryptographic keys" should be selected; otherwise, the option “no other actions” should be selected._
 
-*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate[selection: no other mechanism, external authentication server]. The TSF shall provide the following local authentication mechanisms:[selection: none, password-based, [assignment: other authentication mechanism]]_.
+*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate_] and [selection: _no other mechanism, external authentication server_]. The TSF shall provide the following local authentication mechanisms:[selection: _none, password-based, [assignment: other authentication mechanism]_].
 
 *_Application Note {counter:appnote_count}_*
 
 _An authentication process consists of two basic steps: identification step (presenting the claimed attribute value (e.g., a user identifier) to the authentication subsystem); verification step (presenting or generating authentication information (e.g., a value signed with a private key) that acts as evidence to prove the binding between the attribute and that for which it is claimed)._
 
-_Remote authentication is when a user associated with the Security Administrator role remotely communicates with the TOE for the purpose of security management over a cryptographic protocol specified in FTP_TRP.1/Admin. Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author should select "none" from the final selection. See Application Note 23 for examples of compliant local administrative interfaces._
+_Remote authentication is when a user associated with the Security Administrator role remotely communicates with the TOE for the purpose of security management over a cryptographic protocol specified in FTP_TRP.1/Admin. Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author should select "none" from the final selection. See Application Note 26 for examples of compliant local administrative interfaces._
 
 _The TOE must support at least one authentication mechanism where the verification step is processed locally, as such “external authentication server” should not be the only available authentication method._
 
@@ -1453,7 +1459,7 @@ size)_;
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE must provide functionality for remote administration. Local administration is optional.This cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Remote administrative sessions are specified in FTP_TRP.1/Admin. Local administration is defined as administration using a dedicated physical interface that (from the TOE’s point of view) is directly connected to the device(s) the administrator interacts with and therefore falls under the physical protection (OE.PHYSICAL). Any administrator choice to extend a local console so it is remotely accessible (e.g. console server or remote KVM) is outside the scope of the NDcPP. The following are examples of compliant local administrative interfaces:_
+_The TOE must provide functionality for remote administration. Local administration is optional. This cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Remote administrative sessions are specified in FTP_TRP.1/Admin. Local administration is defined as administration using a dedicated physical interface that (from the TOE’s point of view) is directly connected to the device(s) the administrator interacts with and therefore falls under the physical protection (OE.PHYSICAL). Any administrator choice to extend a local console so it is remotely accessible (e.g. console server or remote KVM) is outside the scope of the NDcPP. The following are examples of compliant local administrative interfaces:_
 
 [loweralpha]
 . _RS-232 terminal._
@@ -1483,7 +1489,7 @@ _The selection “Ability to set the time which is used for time-stamps” shoul
 
 _The selection “Ability to configure NTP” should be included in the ST if the TOE uses NTP for timestamp configuration. If selected, FCS_NTP_EXT.1 must be included in the ST as well._
 
-_The selection “Ability to configure the reference identifier for the peer” should be included in the ST if the TOE allows the Administrator to specify the expected identity of a remote peer when establishing secure communications using a protocol included in the ST. _For TOEs that support only IP address and FQDN identifier types, configuration of the reference identifier may be the same as configuration of the peer’s name for the purposes of connection._
+_The selection “Ability to configure the reference identifier for the peer” should be included in the ST if the TOE allows the Administrator to specify the expected identity of a remote peer when establishing secure communications using a protocol included in the ST. For TOEs that support only IP address and FQDN identifier types, configuration of the reference identifier may be the same as configuration of the peer’s name for the purposes of connection._
 
 _The selection “Ability to manage the TOE's trust store and designate X509.v3 certificates as trust anchors" should be included in the ST if the TOE supports management and configuration of the TOE's trust store. This means the TOE supports X.509v3 certificates for some security functions. This only applies if the TOE claims conformance to the Functional Package for X.509._
 
@@ -1493,7 +1499,7 @@ _The selection "Ability to configure thresholds for SSH rekeying" may only be se
 
 _For distributed TOEs, the interaction between TOE components will be configurable (see FCO_CPC_EXT.1). Therefore, the ST author includes the selection "Ability to configure the interaction between TOE components" for distributed TOEs. A simple example would be the change of communication protocol according to FPT_ITT.1. Another example would be changing the management of a TOE component from direct remote administration to remote administration through another TOE component. A more complex use case would be if the realization of an SFR is achieved through two or more TOE components and the responsibilities between the two or more components could be modified._
 
-_For distributed TOEs, that implement a registration channel (as described in FCO_CPC_EXT.1.2), the ST author uses the selection “Ability to configure the cryptographic functionality” in this SFR, and its corresponding mapping in the TSS, to describe the configuration of any cryptographic aspects of the registration channel that can be modified by the operational environment in order to improve the channel security (reference the description of the content of Preparative Procedures in [SD, 3.6.1.2])._
+_For distributed TOEs, that implement a registration channel (as described in FCO_CPC_EXT.1.2), the ST author uses the selection “Ability to configure the cryptographic functionality” in this SFR, and its corresponding mapping in the TSS, to describe the configuration of any cryptographic aspects of the registration channel that can be modified by the operational environment in order to improve the channel security (reference the description of the content of Preparative Procedures in [SD, 3.4.1])._
 
 _If the TOE offers ability for a remote authorised IT entities or authorised remote Administrators to connect via an interface secured with SSH, then the ST author must select the option “Ability to manage the trusted public keys database” to account for management of public key authentication. It is acceptable for this management function to be implemented as part of general TOE management functionality or as a standalone management function._
 
@@ -1519,7 +1525,7 @@ are satisfied.
 
 *_Application Note {counter:appnote_count}_*
 
-_FMT_SMR.2.3 requires that a Security Administrator be able to administer the TOE through a remote mechanism. See Application Note 19 for the definition of remote administration._
+_FMT_SMR.2.3 requires that a Security Administrator be able to administer the TOE through a remote mechanism. See Application Note 22 for the definition of remote administration._
 
 _For distributed TOEs, not every TOE component is required to implement its own user management to fulfil this SFR. At least one component has to support authentication and identification of Security Administrators according to FIA_UIA_EXT.1. For the other TOE components authentication as Security Administrator can be realized through the use of a trusted channel (either according to FTP_ITC.1 or FPT_ITT.1) from a component that supports the authentication of Security Administrators according to FIA_UIA_EXT.1. The identification of users according to FIA_UIA_EXT.1.2 and the association of users with roles according to FMT_SMR.2.2 is done through the components that support the authentication of Security Administrators according to FIA_UIA_EXT.1.4. TOE components that authenticate Security Administrators through the use of a trusted channel are not required to support local administration of the component._
 
@@ -1626,7 +1632,7 @@ _The ST author selects “X.509 certificate” when the TOE uses X.509 certifica
 
 _The ST author selects ‘digital signature’ for all other digital mechanisms (e.g. X.509 certificates that do not meet the certificate validation requirements in the Functional Package for X.509, GPG, raw public key). The digital algorithm must be one of the algorithms specified in FCS_COP.1/SigVer._
 
-_The verification of the signature must be performed by the TOE itself._
+_The TOE itself must perform the verification of the update signature, regardless of whether the update is authenticated using an X.509 certificate or another digital signature mechanism._
 
 _For distributed TOEs, all TOE components must support Trusted Update. The verification of the signature on the update should be done by each TOE component itself (signature verification)._
 
@@ -1712,8 +1718,7 @@ _If the TOE claims FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication)
 
 _If "TLS" or "DTLS" is selected, then the TSF is validated against the applicable requirements of the Functional Package for TLS._
 
-_If "SSH" is selected, then the TSF is be validated against the applicable requirements of the Functional Package for SSH._
-
+_If "SSH" is selected, then the TSF is validated against the applicable requirements of the Functional Package for SSH._
 
 
 
@@ -2015,7 +2020,7 @@ _NIST 800-57p1rev5 sec. 5.6.2 specifies that the size of key used to protect the
 
 ==== Authentication using X.509 certificates (Extended)
 
-Please see Appendix B.4.1 for a comprehensive description of the applicablity and usage of the X.509 Functional Package.
+Please see Appendix B.3.1 for a comprehensive description of the applicability and usage of the X.509 Functional Package.
 
 Support for X.509 certificates is optional in the context of FPT_ITT.1 (FTP_ITC.1 and FTP_TRP.1/Admin are discussed elsewhere). This is because the use of FPT_ITT.1 itself as a registration channel is optional, so it's further optional to implement that using a mechanism that relies on X.509 validation. 
 
@@ -2039,7 +2044,7 @@ _This channel may also be used as the registration channel for the registration 
 
 _If "TLS" or "DTLS" is selected, then the TSF is validated against the applicable requirements of the Functional Package for TLS. Additionally, the reference identifier established for the server (FCS_DTLSC_EXT.1.5 or FCS_TLSC_EXT.1.5 in the Functional Package for TLS) may be established through a “gatekeeper” discovery process. The TSS should describe the discovery process and highlight how the reference identifier is supplied to the “joining” component._
 
-_If "SSH" is selected, then the TSF is be validated against the applicable requirements of the Functional Package for SSH._
+_If "SSH" is selected, then the TSF is validated against the applicable requirements of the Functional Package for SSH._
 
 
 === Trusted path/channels (FTP)
@@ -2094,9 +2099,9 @@ for at least _TSF data_.
 
 *FCO_CPC_EXT.1.3* The TSF shall enable a Security Administrator to disable communications between any pair of TOE components.
 
-_Application Note {counter:appnote_count}_*
+*_Application Note {counter:appnote_count}_*
 
-_This SFR is on*ly applicable if the TOE is distributed and therefore has multiple components that need to communicate via an internal TSF channel. When creating the TSF from the initial pair of components, either of these components may be identified as the TSF for the purposes of satisfying the meaning of ‘TSF’ in this SFR._
+_This SFR is only applicable if the TOE is distributed and therefore has multiple components that need to communicate via an internal TSF channel. When creating the TSF from the initial pair of components, either of these components may be identified as the TSF for the purposes of satisfying the meaning of ‘TSF’ in this SFR._
 
 _The intention of this requirement is to ensure that there is a registration process that includes a positive enablement step by an Administrator before components joining a distributed TOE can communicate with the other components of the TOE and before the new component can act as part of the TSF. The registration process may itself involve communication with the joining component: many Network Devices use a bespoke process for this, and the security requirements for the ‘registration communication’ are then defined in FCO_CPC_EXT.1.2. Use of this ‘registration communication’ channel is not deemed inconsistent with the requirement of FCO_CPC_EXT.1.1 (i.e., the registration channel can be used before the enablement step, but only in order to complete the registration process)._
 
@@ -2399,7 +2404,7 @@ The endpoints of Network Device communication can be geographically and logicall
 
 IPsec is not a required component of this cPP. If a TOE implements IPsec, a corresponding selection in FTP_ITC.1, FPT_ITT.1 and/or FTP_TRP.1/Admin should have been made that defines what the IPsec protocol is implemented to protect.
 
-IPsec is a peer to peer protocol and as such does not need to be separated into client and server requirements.
+IPsec is a peer-to-peer protocol and as such does not need to be separated into client and server requirements.
 
 *FCS_IPSEC_EXT.1 IPsec Protocol*
 
@@ -2463,7 +2468,7 @@ _]_
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must be include a rekey time that causes a rekey to occur at or slightly before 24 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 23h 59min to ensure the actual rekey is performed no later than 24h, while other TOEs might automatically ensure rekeying is performed prior to the configured time._
+_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must include a rekey time that causes a rekey to occur at or slightly before 24 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 23h 59min to ensure the actual rekey is performed no later than 24h, while other TOEs might automatically ensure rekeying is performed prior to the configured time._
 
 _This requirement must be accomplished by providing Security Administrator-configurable lifetimes. Hardcoded limits do not meet this requirement._
 
@@ -2487,7 +2492,7 @@ _]_
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must be include a rekey time that causes a rekey to occur at or slightly before 8 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 7h 59min to ensure the actual rekey is performed no later than 8h, while other TOEs might automatically ensure rekeying is performed
+_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must include a rekey time that causes a rekey to occur at or slightly before 8 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 7h 59min to ensure the actual rekey is performed no later than 8h, while other TOEs might automatically ensure rekeying is performed
 prior to the configured time._
 
 _This requirement must be accomplished by providing Security Administrator-configurable lifetimes. Hardcoded limits do not meet this requirement._
@@ -2603,10 +2608,10 @@ When certificate validation is claimed for communication with external entities,
 
 * Iteration naming: For consistency, use the iteration "/Rev" for SFR claims related to validating X.509 certificates presented by the operational environment, and use "/ITT" for SFR claims related to validating X.509 certificates presented by another component of a distributed TOE. Both the validation of X.509 certificates requested from an external CA and verification of external entities using X.509 certificates should be included in the appropriate FIA_X509_EXT.1 iteration. If both "assert" and "verify" related behavior are included in an FIA_X509_EXT.1 iteration, the behavior should be disambiguated in the TSS.
 * FIA_X509_EXT.1.1: Either an unlimited maximum path length must be selected or a maximum path length of three or greater must be claimed, unless the certificate is used for FPT_ITT.1 communications, in which case a path length of two is permissible (i.e., certificates used between components of a distributed TOE do not require support for intermediate CAs). 
-* Revocation Checking related to validating X.509 certificates presented by the operational environment: At least one of CRL or OCSP (except local OCSP responder; the selection of "local OCSP responder" is not allowed) must be supported for revocation checking. If "cached CRL" is selected, the TOE must refresh the CRL cache from a network source without administrator interaction.
-* Revocation Checking related to validating X.509 certificates presented by another component of a distributed TOE: At least one of CRL, OCSP, Based on validity period, or Direct association with Certificate Authority must be supported for revocation checking. The TOE must perform revocation checking without administrator interaction.
+* FIA_X509_EXT.1.1: Revocation Checking related to validating X.509 certificates presented to the TOE and issued by an external CA: At least one of CRL or OCSP (except local OCSP responder; the selection of "local OCSP responder" is not allowed) must be supported for revocation checking. If "cached CRL" is selected, the TOE must refresh the CRL cache from a network source without administrator interaction. This applies to certificates presented by both a non-TOE entity and another component of a distributed TOE.
+* FIA_X509_EXT.1.1: Revocation Checking related to validating X.509 certificates presented by another component of a distributed TOE and issued by an embedded CA: At least one of CRL, OCSP, Based on validity period, or Direct association with Certificate Authority must be supported for revocation checking. The TOE must perform revocation checking without administrator interaction.
 * Revocation Checking of the X.509 certificate the TOE presents to an external entity: Any method of revocation checking may be selected, including the selection of "Administrative notification of revocation."
-* FIA_XCU_EXT.2.1: "Request certificates from an external CA" must be selected unless the certificate is used for FPT_ITT.1 communications, in which case a the use of an embedded CA is allowed.
+* FIA_XCU_EXT.2.1: "Request certificates from an external CA" must be selected unless the certificate is used for FPT_ITT.1 communications, in which case the use of an embedded CA is allowed.
 
 ==== Authentication Failure Handling (FIA_AFL)
 If the TOE provides remote administration using a password-based authentication mechanism, FIA_AFL.1 specifies actions upon reaching the number of successive unsuccessful authentication attempts.
@@ -2626,7 +2631,7 @@ _This requirement applies to a defined number of successive unsuccessful remote 
 _The TSS describes how the TOE ensures that authentication failures by remote Administrators cannot lead to a situation where no Administrator access is available, either permanently or temporarily (e.g. by providing local logon which is not subject to blocking). The Operational Guidance describes, and identifies the importance of, any actions that are required in order to ensure that Administrator access will always be maintained, even if remote administration is made permanently or temporarily unavailable due to blocking of accounts as a result of FIA_AFL.1._
 
 ==== Protected authentication feedback (FIA_UAU)
-If the TOE provides a password-based local authentication mechanism passwords must be obscured during logon at the local console to avoid attacks where an attacker might observe a password being typed by an Administrator.
+If the TOE provides a password-based local authentication mechanism, passwords must be obscured during logon at the local console to avoid attacks where an attacker might observe a password being typed by an Administrator.
 
 ===== FIA_UAU.7 Protected authentication feedback
 
@@ -3299,7 +3304,7 @@ Dependencies: FTA_TAB.1 Default TOE access banners
 
 *FIA_UIA_EXT.1.2* The TSF shall require each administrative user to be successfully identified and authenticated before allowing any other TSF-mediated actions on behalf of that administrative user.
 
-*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate [selection: no other mechanism, external authentication server]. The TSF shall provide the following local authentication mechanisms:[selection: none, password-based, [assignment: other authentication mechanism]]_.
+*FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate_] and [selection: _no other mechanism, external authentication server_]. The TSF shall provide the following local authentication mechanisms:[selection: _none, password-based, [assignment: other authentication mechanism]_].
 
 *FIA_UIA_EXT.1.4* The TSF shall authenticate any administrative user's claimed identity according to each authentication mechanism specified in FIA_UIA_EXT.1.3.
 
