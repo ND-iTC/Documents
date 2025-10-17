@@ -1990,7 +1990,6 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |Identity if new/removed time server
 |FIA_AFL.1 |Unsuccessful login attempts limit is met or exceeded. |Origin of the attempt (e.g., IP address).
 |FIA_PMG_EXT.1 |None. |None.
-|FIA_TSM_EXT.1 |Any addition, replacement, or removal of trust anchors in the TOE's trust store |Identification of trust anchor certificate
 |FIA_UAU.7 |None. |None.
 |FMT_MOF.1/Services |None. |None.
 |FMT_MTD.1/CryptoKeys |None. |None.
@@ -2014,7 +2013,6 @@ _TLS is not a required component of this cPP. If a TOE implements TLS or DTLS an
 
 _X.509 is not a required component of this cPP. If a TOE implements a trusted protocol or integrity verification mechanism that requires the TSF to validate X.509 certificates or to use X.509 certificates to assert its own identity, the ST should include applicable auditable events for any relevant SFR claims from the Functional Package for X.509._
 
-_The audit event “Unsuccessful attempt to validate a certificate” for FIA_X509_EXT.1 requires the Additional Audit Record Contents of “Reason for failure of certificate validation.” A generic audit record telling the Security Administrator that ‘something is wrong due to certificates’ is not considered as containing sufficient information because basic information necessary to identify and resolve the issue is missing. The audit record(s) should inform the Security Administrator categorically about the type of error that was encountered. In simple scenarios with only one underlying root cause a simple message might be sufficient (e.g., ‘expired certificate’) whereas in more complex scenarios the granularity of error messages should be higher (e.g., that there is path validation issue due to a specific reason). This cPP only specifies a general guidance on the subject to avoid codifying requirements which may be implementation independent._
 
 === Security audit (FAU)
 
