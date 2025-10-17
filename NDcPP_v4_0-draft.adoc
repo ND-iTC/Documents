@@ -483,11 +483,11 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 
 The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE. (Note that this deliverable is examined as part of the ASE_TSS.1 and AVA_VAN.1 Evaluation Activities as described in [SD, 5.1.2] and [SD, 5.6.1.1] respectively.) The ST for a distributed TOE may also introduce a ‘minimum configuration’ and identify components that may have instances added to an operational configuration without affecting the validity of the CC certification. [SD, B.4] describes Evaluation Activities relating to these equivalency aspects of a distributed TOE (and hence what is expected in the ST).
 
-If an SSH channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for Secure Shell referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
+If an SSH channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for Secure Shell referenced in Section 2.1. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
 If a (D)TLS channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for TLS referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
-If communications between components relies on X.509 validation, then the TSF shall be evaluated against the version of the Functional Package for X.509 referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE. 
+If communications between components relies on X.509 validation, then the TSF shall be evaluated against the version of the Functional Package for X.509 referenced in Section 2.1. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE. 
 
 == Security Problem Definition
 
@@ -538,7 +538,7 @@ SFR Rationale:
 
 * The general use of secure protocols for identified communication channels is described at the top level in FTP_ITC.1 and FTP_TRP.1/Admin; for distributed TOEs the requirements for inter-component communications are addressed by the requirements in FPT_ITT.1.
 * Requirements for the use of secure communication protocols are set for allowed protocols in FCS_IPSEC_EXT.1, the Functional Package for SSH, and the Functional Package for TLS.
-* Requirements for the use of secure communication protocols implemented by the packages specified in Section 2.2 may be found in the respective package's document.
+* Requirements for the use of secure communication protocols implemented by the packages specified in Section 2.1 may be found in the respective package's document.
 * Optional and selection-based requirements for use of public key certificates to support secure protocols are defined in the Functional Package for X.509.
 
 
@@ -870,7 +870,7 @@ _If the list of ‘administrative actions’ appears to be incomplete, the assig
 
 _The requirement to audit the "Generating/import of, changing, or deleting of cryptographic keys" refers to all types of cryptographic keys which are intended to be used longer than for just one session (i.e., it does not refer to ephemeral keys/session keys). The requirement applies to all named changes independently from how they are invoked. A cryptographic key could e.g. be generated automatically during initial start-up without administrator intervention or through administrator intervention. This requirement also applies to the management of cryptographic keys by adding, replacing or removing trust anchors in the TOE's trust store. In all related cases the changes to cryptographic keys need to be audited together with a unique key name, key reference or unique identifier for the corresponding certificate._
 
-_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST. This must also include the relevant parts of Table 4 and Table 5 for optional and selection-based SFRs included in the ST._
+_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST.
 
 _For distributed TOEs, each component must generate an audit record for each of the SFRs that it implements. If more than one TOE component is involved when an audit event is triggered, the event has to be audited on each component (e.g. rejection of a connection by one component while attempting to establish a secure communication channel between two components should result in an audit event being generated by both components). This is not limited to error cases but also includes events about successful actions like successful build up/tear down of a secure communication channel between TOE components._
 
@@ -890,7 +890,7 @@ _With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘servi
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST. This must also include the relevant parts of Table 4 and Table 5 for optional and selection-based SFRs included in the ST. All audit events defined in Table 2 have to be included in the ST as they are mandatory. If the TOE does not implement functionality that enables the administrator to configure local audit settings, then item FAU_STG_EXT.1 in Table 2 should be considered ‘trivially satisfied’ and the ST author should include an explanation that the local audit is not configurable in the TSS._
+_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST. If the TOE does not implement functionality that enables the administrator to configure local audit settings, then item FAU_STG_EXT.1 in Table 2 should be considered ‘trivially satisfied’ and the ST author should include an explanation that the local audit is not configurable in the TSS._
 
 _The date and time information for any audit event should be recorded as part of each audit record to ensure the timing of the event can be unambiguously determined from the data contained in the audit record. The representation of date and time information recorded for each event needs to allow unambiguous determination of at least day, month and year information for the date and hours, minutes and second information for the time._
 
@@ -945,7 +945,7 @@ a|
 
 *_Application Note {counter:appnote_count}_*
 
-_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Appendix A and Appendix B. The ST author must therefore include the relevant additional events specified in the tables in Table 4 and Table 5._
+_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Appendix A, Appendix B, PP-Module(s), and functional package(s). For all SFRs included in the ST, the ST must include the relevant additional auditable events specified in link:#_Toc27041928[Table 9] for optional SFRs, link:#_Toc27041929[Table 10] for selection-based SFRs, the claimed PP-Module(s), and and the claimed functional package(s). All audit events defined in Table 2 have to be included in the ST as they are mandatory._
 
 ===== FAU_GEN.2 User identity association
 
@@ -1716,11 +1716,11 @@ _Where X.509 certificates are used to authenticate remote endpoints in support o
 
 _If the TOE claims FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication) from the Functional Package for TLS and the TOE passes presented identifiers of clients used for client authentication to a directory server for comparison, then the connection to the directory server used to verify presented identifiers of TLS clients need to be protected by a trusted channel (i.e., FTP_ITC.1). If a trusted channel is used for the integrity protection for communication between the TOE and a directory server, then the directory server must be added to the assignment for other capabilities in FTP_ITC.1. Note that the directory server is only expected to handle the comparison of the presented identifier but not to perform full X.509 certificate validation on behalf of the TOE._
 
+_See Section B.3.1 for additional requirements._
+
 _If "TLS" or "DTLS" is selected, then the TSF is validated against the applicable requirements of the Functional Package for TLS._
 
 _If "SSH" is selected, then the TSF is validated against the applicable requirements of the Functional Package for SSH._
-
-
 
 ==== Trusted path (FTP_TRP)
 
@@ -1736,7 +1736,9 @@ _If "SSH" is selected, then the TSF is validated against the applicable requirem
 
 *_Application Note {counter:appnote_count}_*
 
-_This requirement ensures that authorised remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection, or the protocol requirements of the packages specified in Section 2.2 are included in the ST. Where X.509 certificates are used to authenticate authorised Administrators, FIA_X509_EXT.1 in the Functional Package for X.509 is to be used (which requires checking certificate revocation, implementing a trust store, and supporting a certificate chain)._
+_This requirement ensures that authorised remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection, or the protocol requirements of the packages specified in Section 2.1 are included in the ST. Where X.509 certificates are used to authenticate authorised Administrators, FIA_X509_EXT.1 in the Functional Package for X.509 is to be used (which requires checking certificate revocation, implementing a trust store, and supporting a certificate chain)._
+
+_See Section B.3.1 for additional requirements._
 
 _If "TLS" or "DTLS" is selected, then the TSF is validated against the applicable requirements of the Functional Package for TLS._
 
@@ -2022,10 +2024,6 @@ _NIST 800-57p1rev5 sec. 5.6.2 specifies that the size of key used to protect the
 
 Please see Appendix B.3.1 for a comprehensive description of the applicability and usage of the X.509 Functional Package.
 
-Support for X.509 certificates is optional in the context of FPT_ITT.1 (FTP_ITC.1 and FTP_TRP.1/Admin are discussed elsewhere). This is because the use of FPT_ITT.1 itself as a registration channel is optional, so it's further optional to implement that using a mechanism that relies on X.509 validation. 
-
-When X.509 is used for this channel, it is only necessary to support a minimum path length of two for the certificate chain. All other requirements apply as-is.
-
 === Protection of the TSF (FPT)
 
 ==== Internal TOE TSF data transfer (FPT_ITT)
@@ -2046,6 +2044,7 @@ _If "TLS" or "DTLS" is selected, then the TSF is validated against the applicabl
 
 _If "SSH" is selected, then the TSF is validated against the applicable requirements of the Functional Package for SSH._
 
+_See Section B.3.1 for additional requirements._
 
 === Trusted path/channels (FTP)
 
@@ -2074,6 +2073,10 @@ _The selection at the end of FTP_TRP.1.1/Join recognises that in some cases conf
 _The assignment in FTP_TRP.1.3/Join ensures that the ST highlights any specific details needed to protect the registration environment._
 
 _Note that when the ST uses FTP_TRP.1/Join for the registration channel then this channel cannot be reused as the normal inter-component communication channel (the latter channel must meet FTP_ITC.1 or FPT_ITT.1)._
+
+_The trusted path used for joining might utilize X.509 certificates; however, there are no required X.509 SFRs associated with this trusted path as there are many ways the security of the joining path could be provided. It is up to the ST author to describe how the security of this trusted path is implemented; whether the security relies on X.509 SFRs, environmental constraints from FTP_TRP.1.3/Join, and/or some other method._
+
+_See Section B.3.1 for additional requirements._
 
 _Specific requirements for Preparative Procedures relating to FTP_TRP.1/Join are defined in the Evaluation Activities in [SD]._
 
@@ -2182,7 +2185,8 @@ _SSH is not a required component of this cPP. If a TOE implements SSH and the ST
 
 _TLS is not a required component of this cPP. If a TOE implements TLS or DTLS and the ST author selects TLS or DTLS in FTP_ITC.1.1, FTP_TRP.1.1/Admin, or FPT_ITT.1.1, the ST should include the auditable events for any relevant SFR claims from the Functional Package for TLS._
 
-_X.509 is not a required component of this cPP. If a TOE implements a trusted protocol or integrity verification mechanism that requires the TSF to validate X.509 certificates or to use X.509 certificates to assert its own identity, the ST should include the auditable events for any relevant SFR claims from the Functional Package for X.509._
+_X.509 is not a required component of this cPP. If a TOE implements a trusted protocol or integrity verification mechanism that requires the TSF to validate X.509 certificates or to use X.509 certificates to assert its own identity, the ST should include applicable auditable events for any relevant SFR claims from the Functional Package for X.509._
+
 
 === Security audit (FAU)
 
@@ -2210,7 +2214,7 @@ The TSF, understood here as the entire distributed system, has to satisfy all ma
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE must be able to generate audit records for each TOE component. Some TOE components of a distributed TOE might not implement the complete TSF of the overall TOE but only a subset of the TSF. The audit records for each TOE component need to cover all security relevant audit events according to the subset of the TSF implemented by this particular TOE component but not necessarily all security relevant audit events according to the TSF of the overall TOE. If a security-relevant event can occur on multiple TOE components, it needs to cause generation of an audit record uniquely identifying the component associated with the event. The ST author should identify for each TOE component which of the overall required audit events defined in FAU_GEN.1.1 are logged. The ST author may decide to do this by providing a corresponding table. The information provided needs to be in agreement with Table 1. The overall TOE needs to cover all auditable events listed in Table 2 (and Tables 4 and 5 as applicable to the overall TOE)._
+_The TOE must be able to generate audit records for each TOE component. Some TOE components of a distributed TOE might not implement the complete TSF of the overall TOE but only a subset of the TSF. The audit records for each TOE component need to cover all security relevant audit events according to the subset of the TSF implemented by this particular TOE component but not necessarily all security relevant audit events according to the TSF of the overall TOE. If a security-relevant event can occur on multiple TOE components, it needs to cause generation of an audit record uniquely identifying the component associated with the event. The ST author should identify for each TOE component which of the overall required audit events defined in FAU_GEN.1.1 are logged. The ST author may decide to do this by providing a corresponding table. The information provided needs to be in agreement with Table 1. The overall TOE needs to cover all auditable events listed in Table 2 (and link:#_Toc27041928[Table 9], link:#_Toc27041929[Table 10], the claimed PP-Module(s), and and the claimed functional package(s) as applicable to the overall TOE)._
 
 ==== Security audit event storage (Extended - FAU_STG_EXT)
 
@@ -2396,7 +2400,7 @@ A TOE may act as the client, the server, or both in DTLS sessions. The requireme
 
 To ensure audit requirements are properly met, a DTLS receiver may need to monitor the DTLS connection state at the application layer. When no data is received from a DTLS connection for a long time (where the application decides what ‘long’ means), the receiver should send a close_notify alert message and close the connection.
 
-If the TOE acts as the server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSS_EXT requirements. In this case the TOE needs to claim at least the FCS_DTLSS_EXT.1 requirements in Section B.3.1.1 (no support for mutual authentication). If the TOE acts as DTLS server and in addition also supports mutual authentication, the FCS_DTLSS_EXT.2 requirements in Section A.7.1.1 need to be claimed in addition. If the TOE acts as both a client and server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSC_EXT and FCS_DTLSS_EXT requirements.
+If the TOE acts as the server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSS_EXT requirements. In this case the TOE needs to claim at least the FCS_DTLSS_EXT.1. If the TOE acts as DTLS server and in addition also supports mutual authentication, the FCS_DTLSS_EXT.2 need to be claimed in addition. If the TOE acts as both a client and server during the claimed DTLS sessions, the ST author should claim the corresponding FCS_DTLSC_EXT and FCS_DTLSS_EXT requirements.
 
 ===== FCS_IPSEC_EXT.1 IPsec Protocol
 
@@ -2597,21 +2601,34 @@ A TOE may act as the client, the server, or both in TLS sessions. The requiremen
 
 ==== Authentication using X.509 certificates (Extended)
 
-Support for X.509 certificates is required if the TSF implements IPsec, TLS, or DTLS communications in FTP_ITC.1 or FTP_TRP.1/Admin (FPT_ITT.1 is a special case covered in Appendix A.4.1.1), or if the TSF implements SSH in a manner where X.509 certificates are used for authentication. X.509 support is also required if the TSF uses X.509 certificates as an integrity mechanism for software updates (i.e., when FPT_TUD_EXT.2 is claimed).
+Support for X.509 certificates is required if the TSF implements IPsec, TLS, or DTLS communications in FPT_ITT.1, FTP_ITC.1, or FTP_TRP.1/Admin (FPT_TRP.1/Join is a special case covered in Appendix A.5.1.1), or if the TSF implements SSH in a manner where X.509 certificates are used for authentication. X.509 support is also required if the TSF uses X.509 certificates as an integrity mechanism for software updates (i.e., when FPT_TUD_EXT.2 is claimed).
 
 The Functional Package for X.509 defines selections for the capability to assert identities and to verify identities in its mandatory SFR, FIA_XCU_EXT.1. The ST author selects "verify" in cases where the TOE is presented a certificate from an external entity that is using it to validate its identity (e.g., if the TOE is a TLS client, the TOE is a TLS server that requires mutual authentication, the TOE implements IPsec, the TOE uses code signing certificates to validate software or firmware updates). The ST author selects "assert" in cases where the TOE presents a certificate to an external entity (e.g., if the TOE is a TLS server, the TOE is a TLS client where the server requires mutual authentication, the TOE implements IPsec, or the TOE implements SSH and uses X.509 to validate the server). 
 
-
 In all cases, the relevant SFR dependencies in the Functional Package for X.509 are claimed. For certificate verification, this includes FIA_X509_EXT.1 and FIA_X509_EXT.2. For certificate assertion, this includes FIA_XCU_EXT.2 (and FIA_X509_EXT.3 in cases where the TOE's certificate is obtained from an external CA rather than acting as its own CA). TLS requirements are addressed through the NIAP Functional Package for TLS.
+
+Generally, the validation of a X.509v3 leaf certificate comprises of several steps:
+
+* A certificate Revocation Check refers to the process of determining the current revocation status of an otherwise structurally valid certificate. This must be performed every time a certificate is used for authentication. This check must be performed for each certificate in the chain up to, but not including the trust anchor. This means that intermediate CA certificates that are not trust anchors, and the leaf certificate must be checked. It is not mandatory to check the revocation status of any CA certificate designated a trust anchor, however if such check is performed it must be handled consistently with how other certificates are checked.
+* An expiration check must be performed. This check must be conducted for each certificate in the chain, up to and including the trust anchor.
+* The continuity of the chain must be checked, showing that the signature on each certificate that is presented to the TOE is valid and the chain terminates at the trust anchor.
+* The presence of relevant extensions in each certificate in the chain such as the extendedKeyUsage parameters of the leaf certificate must correspond to SFR-relevant functionality. For example, a peer acting as a web server should have TLS Web Server Authentication listed as an extendedKeyUsage parameter of its X.509v3 certificate. It should be checked that the relevant extensions in each certificate in the chain, such as the extendedKeyUsage parameters of the leaf certificate, correspond to the SFR-relevant functionality they are used with."
 
 When certificate validation is claimed for communication with external entities, the following restrictions are applied to the Functional Package for X.509: 
 
 * Iteration naming: For consistency, use the iteration "/Rev" for SFR claims related to validating X.509 certificates presented by the operational environment, and use "/ITT" for SFR claims related to validating X.509 certificates presented by another component of a distributed TOE. Both the validation of X.509 certificates requested from an external CA and verification of external entities using X.509 certificates should be included in the appropriate FIA_X509_EXT.1 iteration. If both "assert" and "verify" related behavior are included in an FIA_X509_EXT.1 iteration, the behavior should be disambiguated in the TSS.
+* All FIA_X509_EXT requirements: In [selection: invoke platform-provided functionality, implement], must select "implement".
 * FIA_X509_EXT.1.1: Either an unlimited maximum path length must be selected or a maximum path length of three or greater must be claimed, unless the certificate is used for FPT_ITT.1 communications, in which case a path length of two is permissible (i.e., certificates used between components of a distributed TOE do not require support for intermediate CAs). 
 * FIA_X509_EXT.1.1: Revocation Checking related to validating X.509 certificates presented to the TOE and issued by an external CA: At least one of CRL or OCSP (except local OCSP responder; the selection of "local OCSP responder" is not allowed) must be supported for revocation checking. If "cached CRL" is selected, the TOE must refresh the CRL cache from a network source without administrator interaction. This applies to certificates presented by both a non-TOE entity and another component of a distributed TOE.
 * FIA_X509_EXT.1.1: Revocation Checking related to validating X.509 certificates presented by another component of a distributed TOE and issued by an embedded CA: At least one of CRL, OCSP, Based on validity period, or Direct association with Certificate Authority must be supported for revocation checking. The TOE must perform revocation checking without administrator interaction.
-* Revocation Checking of the X.509 certificate the TOE presents to an external entity: Any method of revocation checking may be selected, including the selection of "Administrative notification of revocation."
-* FIA_XCU_EXT.2.1: "Request certificates from an external CA" must be selected unless the certificate is used for FPT_ITT.1 communications, in which case the use of an embedded CA is allowed.
+* FIA_X509_EXT.1.1: Revocation Checking of the X.509 certificate the TOE presents to an external entity: Any method of revocation checking may be selected, including the selection of "Administrative notification of revocation."
+* FIA_X509_EXT.1.2: When specifying processing of the extensions, must select "basicConstraints" and "extendedKeyUsage".
+* FIA_XCU_EXT.2.1:
+** When the TOE verifies X.509 certificates (“verify” case), the TOE is not required to generate CSRs.
+** When the TOE asserts its identity using an X.509 certificate (“assert” case), the TOE shall request certificates from an external CA for communications with external entities, and may obtain certificates from an embedded CA for communications between components of a distributed TOE (e.g., during component registration or FPT_ITT.1 exchanges).
+** If an embedded CA is used, the ST and TSS should describe whether issuance is performed automatically over a secure channel or manually by an administrator, to maintain consistency with selections in FCO_CPC_EXT.1 and FTP_TRP.1.3/Join.
+
+If the TOE implements mutual authentication or acts as a server, there is no expectation of performing any checks on TOE’s own leaf certificate or certificate chain during authentication. Note: This does not change revocation checking requirements on certificates presented to the TOE, even if the same certificate(s) used by the TOE are also presented to the TOE.
 
 ==== Authentication Failure Handling (FIA_AFL)
 If the TOE provides remote administration using a password-based authentication mechanism, FIA_AFL.1 specifies actions upon reaching the number of successive unsuccessful authentication attempts.
