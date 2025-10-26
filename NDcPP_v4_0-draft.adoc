@@ -239,11 +239,12 @@ Examples of devices that connect to a network but are not included to be evaluat
 
 As defined by the references [CC1], [CC2], [CC3], [CC4], [CCE] and [CC-SFRC], this cPP:
 
-* Conforms to the requirements of Common Criteria 2022, Revision 1
+* Conforms to the requirements of Common Criteria 2022, Revision 1 with errata and interpretations as of July 22, 2024.
 * Is CC Part 2 extended, CC Part 3 conformant
 * Does not claim conformance to any other PP.
 
-This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.1, APE_REQ.1 and APE_SPD.1.
+This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.1, APE_REQ.1 and APE_SPD.1. +
+This cPP follows the Direct Rationale approach.
 
 === Package Claims
 
