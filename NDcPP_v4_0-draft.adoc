@@ -239,11 +239,12 @@ Examples of devices that connect to a network but are not included to be evaluat
 
 As defined by the references [CC1], [CC2], [CC3], [CC4], [CCE] and [CC-SFRC], this cPP:
 
-* Conforms to the requirements of Common Criteria 2022, Revision 1
+* Conforms to the requirements of Common Criteria 2022, Revision 1 with errata and interpretations as of July 22, 2024.
 * Is CC Part 2 extended, CC Part 3 conformant
 * Does not claim conformance to any other PP.
 
-This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.1, APE_REQ.1 and APE_SPD.1.
+This cPP satisfies the following Assurance Families: APE_CCL.1, APE_ECD.1, APE_INT.1, APE_OBJ.1, APE_REQ.1 and APE_SPD.1. +
+This cPP follows the Direct Rationale approach.
 
 === Package Claims
 
@@ -582,7 +583,7 @@ SFR Rationale:
 * Requirements for basic auditing capabilities are specified in FAU_GEN.1 and FAU_GEN.2, with timestamps provided according to FPT_STM_EXT.1 and if applicable, protection of NTP channels in FCS_NTP_EXT.1.
 * Requirements for protecting audit records stored on the TOE are specified in FAU_STG.2.
 * Requirements for secure storage and transmission of local audit records to an external IT entity via a secure channel are specified in FAU_STG_EXT.1 and FAU_STG_EXT.4.
-* Optional additional requirements for dealing with potential loss of locally stored audit records are specified in FAU_STG_EXT.3, and FAU_STG_EXT.4.
+* Optional additional requirements for dealing with potential loss of locally stored audit records are specified in FAU_STG_EXT.2, FAU_STG_EXT.3, and FAU_STG_EXT.4.
 * Optional additional requirements for viewing locally stored audit records are specified in FAU_SAR.1
 * If (optionally) configuration of the audit functionality is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MOF.1/Functions.
 
@@ -628,7 +629,7 @@ The Network Device is assumed to be physically protected in its operational envi
 
 ==== A.LIMITED_FUNCTIONALITY
 
-The device is assumed to provide networking functionality as its core function and not provide functionality/services that could be deemed as general purpose computing. For example, the device should not provide a computing platform for general purpose applications (unrelated to networking functionality).
+The device is assumed to provide networking functionality as its core function. TOE administrators are assumed to treat the TOE as not being a general-purpose computing platform and will not attempt to install or execute any non-TOE software or enable functionality unrelated to the TOE’s networking purpose, regardless of whether the platform provides an interface that could technically permit such actions.
 
 NOTE: For a virtual TOE evaluated as a pND, following Case 2 vNDs as specified in Section 1.2, the VS is considered part of the TOE with only one vND instance for each physical hardware platform. The exception being where components of a distributed TOE run inside more than one virtual machine (VM) on a single VS. In Case 2 vND, no non-TOE guest VMs are allowed on the platform.
 
@@ -899,7 +900,7 @@ _The date and time information for any audit event should be recorded as part of
 |*Requirement* |*Auditable Events* |*Additional Audit Record Contents*
 |FAU_GEN.1 |None. |None.
 |FAU_GEN.2 |None. |None.
-|FAU_STG_EXT.2 |Configuration of local audit settings. |Identity of account making changes to the audit configuration.
+|FAU_STG_EXT.1 |Configuration of local audit settings. |Identity of account making changes to the audit configuration.
 |FCS_CKM.1/AKG |None. |None.
 |FCS_CKM.6 |None. |None.
 |FCS_CKM_EXT.7 |None. |None.
@@ -1697,8 +1698,7 @@ In addition to providing protection from disclosure (and detection of modificati
 *FTP_ITC.1 Inter-TSF trusted channel*
 
 
-*FTP_ITC.1.1* The TSF shall provide a communication channel between itself and another trusted IT product that is logically distinct from other communication channels and provides assured identification of its endpoints and protection of the channel data from modification or
-disclosure.
+*FTP_ITC.1.1* The TSF shall *be capable of using [selection: _IPsec, SSH, TLS, DTLS, HTTPS_] to* provide a *trusted* communication channel between itself and +++<del>+++another trusted IT product+++</del>+++ *authorized IT entities supporting the following capabilities: audit server, [selection: _authentication server, [assignment: other capabilities], no other capabilities_]* that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from +++<del>+++modification or+++</del>+++ disclosure *and detection of modification of the channel data*.
 
 *FTP_ITC.1.2* The TSF shall permit [selection: _the TSF, +++<del>+++another trusted IT product,+++</del>+++ *the authorised IT entities_*] to initiate communication via the trusted channel.
 
@@ -1839,7 +1839,7 @@ Testing is specified for functional aspects of the system as well as aspects tha
 
 ==== Independent testing – Conformance (ATE_IND.1)
 
-Testing is performed to confirm the functionality described in the TSS as well as the guidance documentation (includes “evaluated configuration” instructions). The focus of the testing is to confirm that the requirements specified in Section 5.1.7 are being met. The Evaluation Activities in [SD] identify the specific testing activities necessary to verify compliance with the SFRs. The evaluator produces a test report documenting the plan for and results of testing, as well as coverage arguments focused on the platform/TOE combinations that are claiming conformance to this cPP.
+Testing is performed to confirm the functionality described in the TSS as well as the guidance documentation (includes “evaluated configuration” instructions). The Evaluation Activities in [SD] identify the specific testing activities necessary to verify compliance with the SFRs. The evaluator produces a test report documenting the plan for and results of testing, as well as coverage arguments focused on the platform/TOE combinations that are claiming conformance to this cPP.
 
 === Class AVA: Vulnerability assessment
 
@@ -2233,6 +2233,22 @@ _If a component of a distributed TOE collects data from other components and the
 _It is acceptable for a TOE component to store audit information in multiple places (e.g. for redundancy), whether locally in the TOE component itself and in another TOE component, or in more than one other TOE component._
 
 _TOE components are not required to monitor or audit connectivity or network outages between TOE components. This aspect is covered by the assumption A.COMPONENTS_RUNNING_
+
+===== FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
+
+This SFR needs to be added to the ST for evaluation of distributed TOEs which contain TOE components that aren't storing audit data locally but sending it to another TOE component for storage. This SFR needs to be fulfilled in addition to the general SFRs on Protected Audit Event Storage for all types of TOEs (distributed, non-distributed).
+
+*FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs*
+
+*FAU_STG_EXT.5.1* Each TOE component which does not store security audit data locally shall be able to buffer security audit data locally until it has been transferred to another TOE component that stores or forwards it. All transfer of audit records between TOE components shall use a protected channel according to [selection: _FPT_ITT.1, FTP_ITC.1_].
+
+*_Application Note {counter:appnote_count}_*
+
+_If a component of a distributed TOE collects data from other components and then forwards it to another component or external IT entity (cf. FAU_STG_EXT.1.1) then the operations in this SFR must be performed in a way to cover the storage space action(s) for all of the audit data that the TOE collects (i.e. not just for the data generated by the collecting component for itself)._
+
+_It is acceptable for a TOE component to store audit information in multiple places (e.g. for redundancy), whether locally in the TOE component itself and in another TOE component, or in more than one other TOE component._
+
+_TOE components are not required to monitor or audit connectivity or network outages between TOE components. This aspect is covered by the assumption A.COMPONENTS_RUNNING._
 
 === Cryptographic Support (FCS)
 
