@@ -445,6 +445,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FCS_COP.1/KeyWrap |Cryptographic Operation - Key Wrapping |One
 |FCS_COP.1/AEAD |Cryptographic Operation – Authenticated Encryption with Associated Data |All
 |FCS_COP.1/SKC |Cryptographic Operation - Symmetric Key Cryptography |All
+|FCS_IPSEC_EXT.1 |IPsec Protocol |Feature Dependent
 |FCS_NTP_EXT.1 |NTP Protocol |Feature Dependent
 |FCS_RBG.1 |Random Bit Generation (RBG) |All
 |FCS_RBG.2 |Random Bit Generation (External Seeding - VS platform) | Feature Dependent
