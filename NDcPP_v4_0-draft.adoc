@@ -28,7 +28,7 @@ The scope of the cPP within the development and evaluation process is described 
 
 The target audiences of this cPP are developers, CC consumers, system integrators, evaluators and schemes.
 
-Although the cPP and associated supporting document (SD) may contain minor editorial errors, cPPs are recognized as living documents and the iTCs are dedicated to ongoing updates and revisions. Please report any issues to the ND iTC.
+Although the cPP and associated supporting document (SD) may contain minor editorial errors, cPPs are recognised as living documents and the iTCs are dedicated to ongoing updates and revisions. Please report any issues to the ND iTC.
 
 === Related Documents
 
@@ -268,7 +268,7 @@ Appendix B, Selection-Based Security Requirements gives the selection-based secu
 
 While iteration of SFRs from the cPP is allowed, no additional security requirements (from the [CC2], [CC-SFRC], [CC3]], or definitions of extended components that are not already included in this cPP) are allowed to be included in the ST. 
 
-The use of mandatory, optional and selection-based SFRs allows some customization when modelling the TOE. However, this does not work for the SPD in Section 4 and the security objectives in Section 5. Some parts in these sections are marked as "(applies to ... only)" (e.g. "(applies to distributed TOEs only)", "(applies to vNDs only)"). These parts only need to be included in the ST for TOEs that comply with the corresponding conditions (i.e., parts marked as "(applies to distributed TOEs only)" only need to be included in STs for distributed TOEs and shall be omitted otherwise).
+The use of mandatory, optional and selection-based SFRs allows some customization when modeling the TOE. However, this does not work for the SPD in Section 4 and the security objectives in Section 5. Some parts in these sections are marked as "(applies to ... only)" (e.g. "(applies to distributed TOEs only)", "(applies to vNDs only)"). These parts only need to be included in the ST for TOEs that comply with the corresponding conditions (i.e., parts marked as "(applies to distributed TOEs only)" only need to be included in STs for distributed TOEs and shall be omitted otherwise).
 
 === Modules
 
@@ -459,7 +459,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FIA_UAU.7 |Protected Authentication Feedback |Feature Dependent
 |FMT_MOF.1/AutoUpdate |Management of Security Functions Behaviour |Feature Dependent
 |FMT_MOF.1/ManualUpdate |Management of Security Functions Behaviour |Feature Dependent
-|FMT_MOF.1/Services |Management of Security Functions Behavior |Feature Dependent
+|FMT_MOF.1/Services |Management of Security Functions Behaviour |Feature Dependent
 |FMT_MOF.1/Functions |Management of Security Functions Behaviour |Feature Dependent
 |FMT_MTD.1/CoreData |Management of TSF Data |All
 |FMT_MTD.1/CryptoKeys |Management of TSF Data |Feature Dependent
@@ -523,7 +523,7 @@ SFR Rationale:
 
 ===== T.WEAK_CRYPTOGRAPHY
 
-Threat agents may exploit weak cryptographic algorithms or perform an exhaustive search against a weak cryptographic key to gain access to critical security parameters or manipulate TSF data. Flawed or deprecated cryptographic algorithms, insecure modes of operation, predictable pseudorandom numbers, and too-small key sizes might allow attackers to compromise secure communications, gain unauthorized access, or allow to intercept and decrypt sensitive data.
+Threat agents may exploit weak cryptographic algorithms or perform an exhaustive search against a weak cryptographic key to gain access to critical security parameters or manipulate TSF data. Flawed or deprecated cryptographic algorithms, insecure modes of operation, predictable pseudorandom numbers, and too-small key sizes might allow attackers to compromise secure communications, gain unauthorised access, or allow to intercept and decrypt sensitive data.
 
 SFR Rationale:
 
@@ -1009,7 +1009,7 @@ _Persistent logging is defined as any record(s) that are retained through power 
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author may use the "other action" assignment to describe other measurable behavior (e.g. frequency of log file rotation based on size and/or age of log files)._
+_The ST author may use the "other action" assignment to describe other measurable behaviour (e.g. frequency of log file rotation based on size and/or age of log files)._
 
 _For distributed TOEs, each component is not required to store generated audit data locally, but the overall TOE needs to be able to store audit data locally. Each component must at least provide the ability to temporarily buffer audit information locally to ensure that audit records are preserved in case of network connectivity issues. Buffering audit information locally, does not necessarily involve non-volatile memory: audit information could be buffered in volatile memory. However, the local storage of audit information in the sense of FAU_STG_EXT.1.5 needs to be done in non-volatile memory. For every component which performs local storage of audit information, the behaviour when local storage is exhausted needs to be described. For every component which is buffering audit information instead of storing audit information locally itself, it needs to be described what happens in case the buffer space is exhausted._
 
@@ -1649,7 +1649,7 @@ _For distributed TOEs, all TOE components have to perform self-tests. This does 
 
 *_Application Note {counter:appnote_count}_*
 
-_For failed self-tests related to enforcing SFRs as defined in FPT_TST_EXT.1.1, the reaction of the TOE to each failure is described in the ST. FPT_TST_EXT.1.2 supports two modeling approaches. In the first, the TOE reacts in the same way to all self-test failures that enforce SFRs by selecting “all failures” in the first selection and identifying the corresponding reaction in the second selection. In the second approach, the TOE may define different reactions for specific self-test failures by listing the failures in the first selection and the associated reactions in the second. In this latter case, the ST should clearly identify which self-test failure corresponds to each defined TOE behavior._
+_For failed self-tests related to enforcing SFRs as defined in FPT_TST_EXT.1.1, the reaction of the TOE to each failure is described in the ST. FPT_TST_EXT.1.2 supports two modeling approaches. In the first, the TOE reacts in the same way to all self-test failures that enforce SFRs by selecting “all failures” in the first selection and identifying the corresponding reaction in the second selection. In the second approach, the TOE may define different reactions for specific self-test failures by listing the failures in the first selection and the associated reactions in the second. In this latter case, the ST should clearly identify which self-test failure corresponds to each defined TOE behaviour._
 
 ==== Trusted update (FPT_TUD_EXT)
 
@@ -1746,7 +1746,7 @@ In addition to providing protection from disclosure (and detection of modificati
 *FTP_ITC.1 Inter-TSF trusted channel*
 
 
-*FTP_ITC.1.1* The TSF shall *be capable of using [selection: _IPsec, SSH, TLS, DTLS, HTTPS_] to* provide a *trusted* communication channel between itself and +++<del>+++another trusted IT product+++</del>+++ *authorized IT entities supporting the following capabilities: audit server, [selection: _authentication server, [assignment: other capabilities], no other capabilities_]* that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from +++<del>+++modification or+++</del>+++ disclosure *and detection of modification of the channel data*.
+*FTP_ITC.1.1* The TSF shall *be capable of using [selection: _IPsec, SSH, TLS, DTLS, HTTPS_] to* provide a *trusted* communication channel between itself and +++<del>+++another trusted IT product+++</del>+++ *authorised IT entities supporting the following capabilities: audit server, [selection: _authentication server, [assignment: other capabilities], no other capabilities_]* that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from +++<del>+++modification or+++</del>+++ disclosure *and detection of modification of the channel data*.
 
 *FTP_ITC.1.2* The TSF shall permit [selection: _the TSF, +++<del>+++another trusted IT product,+++</del>+++ *the authorised IT entities_*] to initiate communication via the trusted channel.
 
@@ -1938,7 +1938,7 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 
 *_Application Note {counter:appnote_count}_*
 
-_Audit events related to failures of certain functions should include sufficient information to inform the Security Administrator about the type of error. The level of detail that must be provided should enable the Security Administrator to diagnose and fix issues based on the information provided in audit records. In simple scenarios with only one underlying root cause, a single error message may be sufficient. Alternatively, scenarios where there are multiple possible failure conditions may require more detailed reporting to determine the one that applies to the TOE's incorrect behavior. The NDcPP only specifies a general guidance on the subject to avoid specifying requirements which are not implementation independent._
+_Audit events related to failures of certain functions should include sufficient information to inform the Security Administrator about the type of error. The level of detail that must be provided should enable the Security Administrator to diagnose and fix issues based on the information provided in audit records. In simple scenarios with only one underlying root cause, a single error message may be sufficient. Alternatively, scenarios where there are multiple possible failure conditions may require more detailed reporting to determine the one that applies to the TOE's incorrect behaviour. The NDcPP only specifies a general guidance on the subject to avoid specifying requirements which are not implementation independent._
 
 === Security audit (FAU)
 
@@ -2227,7 +2227,7 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 
 *_Application Note {counter:appnote_count}_*
 
-_Audit events related to failures of certain functions should include sufficient information to inform the Security Administrator about the type of error. The level of detail that must be provided should enable the Security Administrator to diagnose and fix issues based on the information provided in audit records. In simple scenarios with only one underlying root cause, a single error message may be sufficient. Alternatively, scenarios where there are multiple possible failure conditions may require more detailed reporting to determine the one that applies to the TOE's incorrect behavior. The NDcPP only specifies a general guidance on the subject to avoid specifying requirements which are not implementation independent._
+_Audit events related to failures of certain functions should include sufficient information to inform the Security Administrator about the type of error. The level of detail that must be provided should enable the Security Administrator to diagnose and fix issues based on the information provided in audit records. In simple scenarios with only one underlying root cause, a single error message may be sufficient. Alternatively, scenarios where there are multiple possible failure conditions may require more detailed reporting to determine the one that applies to the TOE's incorrect behaviour. The NDcPP only specifies a general guidance on the subject to avoid specifying requirements which are not implementation independent._
 
 _SSH is not a required component of this cPP. If a TOE implements SSH and the ST author selects SSH in FTP_ITC.1.1, FTP_TRP.1.1/Admin, or FPT_ITT.1.1, the ST should include the auditable events for any relevant SFR claims from the Functional Package for SSH._
 
@@ -2680,7 +2680,7 @@ Generally, the validation of a X.509v3 leaf certificate comprises of several ste
 
 When certificate validation is claimed for communication with external entities, the following restrictions are applied to the Functional Package for X.509: 
 
-* Iteration naming: For consistency, use the iteration "/Rev" for SFR claims related to validating X.509 certificates presented by the operational environment, and use "/ITT" for SFR claims related to validating X.509 certificates presented by another component of a distributed TOE. Both the validation of X.509 certificates requested from an external CA and verification of external entities using X.509 certificates should be included in the appropriate FIA_X509_EXT.1 iteration. If both "assert" and "verify" related behavior are included in an FIA_X509_EXT.1 iteration, the behavior should be disambiguated in the TSS.
+* Iteration naming: For consistency, use the iteration "/Rev" for SFR claims related to validating X.509 certificates presented by the operational environment, and use "/ITT" for SFR claims related to validating X.509 certificates presented by another component of a distributed TOE. Both the validation of X.509 certificates requested from an external CA and verification of external entities using X.509 certificates should be included in the appropriate FIA_X509_EXT.1 iteration. If both "assert" and "verify" related behaviour are included in an FIA_X509_EXT.1 iteration, the behaviour should be disambiguated in the TSS.
 * All FIA_X509_EXT requirements: In [selection: invoke platform-provided functionality, implement], must select "implement".
 * FIA_X509_EXT.1.1: Either an unlimited maximum path length must be selected or a maximum path length of three or greater must be claimed, unless the certificate is used for FPT_ITT.1 communications, in which case a path length of two is permissible (i.e., certificates used between components of a distributed TOE do not require support for intermediate CAs). 
 * FIA_X509_EXT.1.1: Revocation Checking related to validating X.509 certificates presented to the TOE and issued by an external CA: At least one of CRL or OCSP (except local OCSP responder; the selection of "local OCSP responder" is not allowed) must be supported for revocation checking. If "cached CRL" is selected, the TOE must refresh the CRL cache from a network source without administrator interaction. This applies to certificates presented by both a non-TOE entity and another component of a distributed TOE.
@@ -3396,7 +3396,7 @@ Dependencies: FTA_TAB.1 Default TOE access banners
 
 *Family Behaviour*
 
-Components in this family address the requirements for managing and protecting TSF data, such as cryptographic keys. This is a new family modelled after the FPT_PTD Class.
+Components in this family address the requirements for managing and protecting TSF data, such as cryptographic keys. This is a new family modeled after the FPT_PTD Class.
 
 *Component Levelling*
 
