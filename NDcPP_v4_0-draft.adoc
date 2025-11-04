@@ -280,7 +280,7 @@ The supporting document defines the evaluation methods and activities for this c
 
 == Introduction to Distributed TOEs
 
-This cPP includes support for distributed Network Device TOEs. Network Devices can sometimes be composed of multiple components operating as a logical whole. Oftentimes we see this architecture when dealing with products where a centralized management console is used to provide administration to dispersed components.
+This cPP includes support for distributed Network Device TOEs. Network Devices can sometimes be composed of multiple components operating as a logical whole. This architecture can be found in products where a centralized management console is used to provide administration to remote components.
 
 Distributed TOEs might consist of combinations of different and similar/same types of TOE components where 'type' refers to the intended use of a component inside the overall TOE. TOE component types could for example be sensors (e.g. for IDS components) or TOE component acting as central nodes managing other nodes.
 
