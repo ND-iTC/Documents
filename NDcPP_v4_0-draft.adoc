@@ -516,7 +516,7 @@ SFR Rationale:
 * The Administrator role is defined in FMT_SMR.2 and the relevant administration capabilities are defined in FMT_SMF.1 and FMT_MTD.1/CoreData, with optional additional capabilities in FMT_MOF.1/Services and FMT_MOF.1/Functions
 * The actions allowed before authentication of an Administrator are constrained by FIA_UIA_EXT.1, and include the advisory notice and consent warning message displayed according to FTA_TAB.1
 * The requirement for the Administrator authentication process is described in FIA_UIA_EXT.1
-* Locking of Administrator sessions is ensured by FTA_SSL_EXT.1 (for local sessions), FTA_SSL.3 (for remote sessions), and FTA_SSL.4 (for all interactive sessions)
+* Locking of Administrator sessions is ensured by FTA_SSL_EXT.1 (for local sessions) and FTA_SSL.3 (for remote sessions). Note: FTA_SSL_EXT.1 is a selection-based SFR that allows the ST author to choose between session locking and session termination. This rationale applies to the session locking option, not to session termination.
 * The secure channel used for remote Administrator connections is specified in FTP_TRP.1/Admin
 * (Malicious actions carried out from an Administrator session are separately addressed by T.UNDETECTED_ACTIVITY)
 * If the TOE provides remote administration using a password-based authentication mechanism, FIA_AFL.1 provides actions on reaching a threshold number of consecutive password failures.

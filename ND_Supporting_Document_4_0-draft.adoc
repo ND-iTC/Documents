@@ -1060,6 +1060,7 @@ The test values are defined as follows:
 === Security management (FMT)
 
 ==== General Requirements for Distributed TOEs
+For distributed TOEs, the evaluation activities defined in this chapter shall be performed.
 
 ===== TSS
 [arabic, start=187]
@@ -1114,8 +1115,8 @@ The test values are defined as follows:
 
 ===== TSS (containing also requirements on Guidance Documentation and Tests)
 [arabic, start=200]
-. The evaluator shall examine the TSS, Guidance Documentation and the TOE as observed during all other testing and shall confirm that the management functions specified in FMT_SMF.1 are provided by the TOE. The evaluator shall confirm that the TSS details which security management functions are available through the local and/or remote administration interfaces.
-. The evaluator shall examine the TSS and Guidance Documentation to verify they both describe the local administrative interface. The evaluator shall ensure the Guidance Documentation includes appropriate warnings for the administrator to ensure the interface is local.
+. The evaluator shall examine the TSS and Guidance Documentation and confirm that each management function specified in FMT_SMF.1 is adequately described. The evaluator shall confirm that the TSS details which security management functions are available through the local and/or remote administration interfaces.
+. [Conditional] The evaluator shall examine the TSS and Guidance Documentation to verify they both describe the local administrative interface. The evaluator shall ensure the Guidance Documentation includes appropriate warnings for the administrator to ensure the interface is local.
 . For distributed TOEs, with the option 'ability to configure the interaction between TOE components' the evaluator shall examine that the ways to configure the interaction between TOE components is detailed in the TSS and Guidance Documentation. The evaluator shall check that the TOE behaviour observed during testing of the configured SFRs is as described in the TSS and Guidance Documentation.
 . (If 'configure local audit' is selected) The evaluator shall examine the TSS and Guidance Documentation to ensure that a description of the logging implementation is described in enough detail to determine how log files are maintained on the TOE.
 
@@ -1242,7 +1243,7 @@ then all three methods of administration must be exercised during the evaluation
 . The evaluator shall perform the following tests:
 [loweralpha]
 .. Test 1: The evaluator shall perform the version verification activity to determine the current version of the product. If a trusted update can be installed on the TOE with a delayed activation, the evaluator shall also query the most recently installed version (for this test the TOE shall be in a state where these two versions match). The evaluator will obtain a legitimate update using procedures described in the guidance documentation and verify that it has been successfully installed on the TOE. For some TOEs loading the update onto the TOE and activation of the update are separate steps (‘activation’ could be performed e.g. by a distinct activation step or by rebooting the device). In that case, the evaluator shall verify after loading the update onto the TOE but before activation of the update that the current version of the product did not change but the most recently installed version has changed to the new product version. After the update, the evaluator shall perform the version verification activity again to verify the version correctly corresponds to that of the update and that current version of the product and most recently installed version match again.
-.. Test 2 [conditional]: If the TOE itself verifies a digital signature in order to authorise the installation of an image to update the TOE, the following test shall be performed (otherwise the test shall be omitted). The evaluator shall first confirm that no updates are pending and then perform the version verification activity to determine the current version of the product, verifying that it is different from the version claimed in the update(s) to be used in this test. The evaluator shall obtain or produce illegitimate updates as defined below and attempt to install them on the TOE. The evaluator shall verify that the TOE rejects all of the illegitimate updates. The evaluator shall perform this test using all of the following forms of illegitimate updates:
+.. Test 2: If the TOE itself verifies a digital signature in order to authorise the installation of an image to update the TOE, the following test shall be performed (otherwise the test shall be omitted). The evaluator shall first confirm that no updates are pending and then perform the version verification activity to determine the current version of the product, verifying that it is different from the version claimed in the update(s) to be used in this test. The evaluator shall obtain or produce illegitimate updates as defined below and attempt to install them on the TOE. The evaluator shall verify that the TOE rejects all of the illegitimate updates. The evaluator shall perform this test using all of the following forms of illegitimate updates:
 [lowerroman]
 ... A modified version (e.g. using a hex editor) of a legitimately signed update
 ... An image that has not been signed
@@ -1304,7 +1305,7 @@ then all three methods of administration must be exercised during the evaluation
 [arabic, start=247]
 . The evaluator shall also perform the following test:
 [loweralpha]
-.. Test 1: The evaluator shall follow the guidance documentation to configure a notice and consent warning message. The evaluator shall then, for each method of access specified in the TSS, establish a session with the TOE. The evaluator shall verify that the notice and consent warning message is displayed in each instance.
+.. Test 1: The evaluator shall follow the guidance documentation to configure a notice and consent warning message. The evaluator shall then, for each method of human interactive access specified in the TSS, establish a session with the TOE. The evaluator shall verify that the notice and consent warning message is displayed in each instance.
 
 === Trusted path/channels (FTP)
 
@@ -1736,7 +1737,6 @@ Some TOEs may set up the registration channel before the enablement step is carr
 [lowerroman]
 ... If the registration channel is not subsequently used for inter-component communication, and in all cases where the second selection in FCO_CPC_EXT.1.2 is made (i.e., using FTP_TRP.1/Join) then the evaluator shall confirm that the registration channel can no longer be used after the registration process has completed, by attempting to use the channel to communicate with each of the endpoints after registration has completed.
 ... If the registration channel is subsequently used for inter-component communication then the evaluator shall confirm that any aspects identified in the operational guidance as necessary to meet the requirements for a steady-state inter-component channel (as in FTP_ITC.1 or FPT_ITT.1) can indeed be carried out (e.g. there might be a requirement to replace the default key pair and/or public key certificate). 
-
 [loweralpha, start=6]
 .. Test 5: For each aspect of the security of the registration channel that operational guidance states can be modified by the operational environment in order to improve the channel security (see AGD_PRE.1 refinement item 2 in (see the requirements on Preparative Procedures in 3.5.1.2), the evaluator shall confirm, by following the procedure described in the operational guidance, that this modification can be successfully carried out.
 
@@ -3057,8 +3057,9 @@ As the search terms can contain proprietary information and there is a possibili
 
 ==== Type 4 Hypotheses – Tool-Generated
 [arabic, start=590]
-. The evaluator is recommended but not mandated to perform Fuzz Testing to generate Type 4 flaw hypotheses. Fuzz testing is a method where a set of randomly generated inputs is used to induce an observable fault. If this approach is selected, the evaluator shall e.g. identify a protocol implementing one or more SFR-enforcing TSFI(s) and conduct fuzz testing by varying selected fields in that protocol. For example, if the TOE’s remote administrative interface is secured with TLS, Fuzz Testing of the SSL record header or the TLS handshake message would be appropriate. Any results that are unexpected (e.g., core dumps, inappropriate errors, or unplanned reboots) should be investigated and resolved.
-If Fuzz Testing is performed, the evaluator shall focus on security-relevant parts of the TOE that have not been subjected to Fuzz Testing multiple times (like publicly available libraries), but instead focus on custom parts of the TOE (if such information is available to the evaluator).
+. The evaluator is recommended but not mandated to perform Fuzz Testing to generate Type 4 flaw hypotheses. Fuzz testing is a method where a set of randomly generated inputs is used to induce an observable fault. If this approach is selected, the evaluator shall e.g. identify a protocol implementing one or more SFR-enforcing TSFI(s) and conduct fuzz testing by varying selected fields in that protocol. For example, if the TOE’s remote administrative interface is secured with TLS, Fuzz Testing of the SSL record header or the TLS handshake message would be appropriate. Any results that are unexpected (e.g., core dumps, inappropriate errors, or unplanned reboots) should be investigated and resolved. If Fuzz Testing is performed, the evaluator shall focus on security-relevant parts of the TOE that have not been subjected to Fuzz Testing multiple times (like publicly available libraries), but instead focus on custom parts of the TOE (if such information is available to the evaluator).
+
+. Additionally, the evaluator shall utilize an automated port scanning tool as part of the vulnerability assessment process. It is up to the evaluator to select the applicable tools, however there is an expectation that any utilized tool is actively maintained.
 
 . The iTC has not identified a specific tool to be used in accomplishing the above flaw hypothesis generation activity, so any tool used by the evaluation team is acceptable. The evaluation team shall record in the test report the name, version, parameters, and results of all test tools used for this activity.
 . If the evaluators discover a Type 4 flaw that they believe should be considered as a Type 2 flaw in future versions of this cPP, they should work with their CB to determine the appropriate means of submitting the flaw for consideration by the iTC.
