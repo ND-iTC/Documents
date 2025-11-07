@@ -2010,7 +2010,8 @@ _If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in
 
 *_Application Note {counter:appnote_count}_*
 
-_This requirement specifies key transport schemes.  Key transport schemes refer to cases in which one party has a key to share with another party.  For key agreement see FCS_CKM_EXT.7._
+_This requirement specifies key transport schemes.  For key agreement see FCS_CKM_EXT.7._ 
+_Key transport schemes refer to cases in which one party has a key to share with another party. Key encapsulation is used when ML-KEM is used as the method of key establishment. Key wrapping and encrypted channels are used in support of wireless LAN communications._  
 
 _If “key encapsulation” is selected, FCS_COP.1/KeyEncap from Appendix B must be claimed, which specifies the relevant list of standards._
 
