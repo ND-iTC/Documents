@@ -2644,7 +2644,7 @@ This SFR is not applicable if the TOE cannot be configured to operate as an NTP 
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE has to support configuration of at least 3 time sources though it is not mandated that the TOE is configured to always use at least 3 time sources._
+_The TOE has to support configuration of at least three time sources though it is not mandated that the TOE is configured to always use at least three time sources._
 
 
 ===== FCS_TLSC_EXT & FCS_TLSS_EXT TLS Protocol
