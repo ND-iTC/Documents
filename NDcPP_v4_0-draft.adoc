@@ -432,6 +432,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_STG_EXT.5 |Protected Remote Audit Event Storage for Distributed TOEs |Feature Dependent
 |FCO_CPC_EXT.1 |Component Registration Channel Definition |All
 |FCS_CKM.1/AKG |Cryptographic Key Generation – Asymmetric Key |Onefootnote:[The overall TOE is required to support on-board key generation and (if the TOE uses X.509 certificates as in Appendix B.4.1) RFC 2986 Certificate Request generation. If not all TOE components are supporting on- board key generation (and generation of certificate requests, where applicable), the TOE shall support distribution of keys to the TOE components that are not supporting key generation themselves. Depending on the life-cycle phase, either a secure registration channel shall be used for key distribution at the point where the component is joined to the TOE or an inter-component secure channel shall be used for key distribution post-registration.]
+|FCS_CKM.1/SKG |Cryptographic Key Generation - Symmetric Key |All
 |FCS_CKM.6 |Timing and Event of Cryptographic Key Destruction |All
 |FCS_CKM_EXT.7 |Cryptographic Key Agreement |All
 |FCS_COP.1/DataEncryption |Cryptographic Operation (AES Data Encryption/Decryption) |All
@@ -527,7 +528,7 @@ Threat agents may exploit weak cryptographic algorithms or perform an exhaustive
 
 SFR Rationale:
 
-* Requirements for key generation and key agreement are set in FCS_CKM.1/AKG and FCS_CKM_EXT.7 respectively
+* Requirements for key generation and key agreement are set in FCS_CKM.1/AKG, FCS_CKM.1/SKG, and FCS_CKM_EXT.7 
 * Requirements for use of cryptographic schemes are set in FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/SigVer, FCS_COP.1/CMAC, FCS_COP.1/Hash, and FCS_COP.1/KeyedHash
 * Requirements for random bit generation to support key generation and secure protocols (see SFRs resulting from T.UNTRUSTED_COMMUNICATION_CHANNELS) are set in FCS_RBG.1
 * Management of cryptographic functions is specified in FMT_SMF.1
@@ -903,6 +904,7 @@ _The date and time information for any audit event should be recorded as part of
 |FAU_GEN.2 |None. |None.
 |FAU_STG_EXT.1 |Configuration of local audit settings. |Identity of account making changes to the audit configuration.
 |FCS_CKM.1/AKG |None. |None.
+|FCS_CKM.1/SKG |None. |None.
 |FCS_CKM.6 |None. |None.
 |FCS_CKM_EXT.7 |None. |None.
 |FCS_COP.1/DataEncryption |None. |None.
@@ -1033,7 +1035,7 @@ The following table provides the allowed choices for completion of the selection
 
 [cols=",,,",options="header",]
 |===
-|*Identifer* |*Cryptographic Key Generation Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
+|*Identifier* |*Cryptographic Key Generation Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
 |RSA|RSA|Modulus of size [selection: _2048, 3072, 4096, 6144, 8192_] bits |NIST FIPS PUB 186-5 (Section A.1.1)
 |ECC-ERB|ECC-ERB - Extra Random Bits|Elliptic Curve [selection: _P-256, P-384, P-521_] |NIST FIPS PUB 186-5 (Section A.2.1), NIST SP 800-186 (Section 3) [NIST Curves]
 
@@ -1090,6 +1092,22 @@ _For Finite Field Cryptography (FFC), “FFC-ERB” or “FFC–RS” may be cla
 _When generating ECC key pairs for digital signature generation and if “ECDSA” is claimed in FCS_COP.1/SigGen, then “ECC–ERB” or “ECC–RS” must be claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._ 
 
 _When key generation is used for device authentication, other than non-X.509 SSH authentication algorithm, the public key is expected to be associated with an X.509v3 certificate._
+
+===== FCS_CKM.1/SKG Cryptographic Key Generation - Symmetric Key
+
+*FCS_CKM.1.1/SKG Cryptographic Key Generation - Symmetric Key*
+
+*FCS_CKM.1.1/SKG* The TSF shall generate *symmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm: [selection: _cryptographic key generation algorithm_] and specified cryptographic key sizes [selection: _cryptographic key sizes_] that meet the following: [selection: _list of standards_].
+
+The following table provides the allowed choices for completion of the selection operations of FCS_CKM.1.1/SKG.
+
+[cols=",,,",options="header",]
+|===
+|*Identifier* |*Cryptographic Key Generation Algorithm* |*Cryptographic Key Sizes* |*List of Standards*
+|RSK|Direct Generation from a Random Bit Generator as specified in FCS_RBG.1|[selection: _256, 384, 512_] bits |NIST SP 800-133 Revision 2 (Section 6.1)[Direct generation of symmetric keys]
+|===
+
+[#_Ref237676489]_Table #: Allowed choices for FCS_CKM.1.1/SKG_
 
 ===== FCS_CKM.6 Timing and Event of Cryptographic Key Destruction
 
@@ -1911,8 +1929,6 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 |FAU_STG_EXT.2 |None. |None.
 |FAU_STG_EXT.3 |Low storage space for audit data. |None.
 |FCS_CKM.2 |None. |None.
-|FCS_COP.1/KeyEncap |None. |None.
-|FCS_COP.1/KeyWrap |None. |None.
 |FCO_CPC_EXT.1 a|
 * Enabling communications between a pair of components.
 * Disabling communications between a pair of components.
@@ -1996,69 +2012,9 @@ _If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in
 
 _This requirement specifies key transport schemes.  Key transport schemes refer to cases in which one party has a key to share with another party.  For key agreement see FCS_CKM_EXT.7._
 
-_If “key encapsulation” is selected, FCS_COP.1/KeyEncap must be claimed, which specifies the relevant list of standards._
+_If “key encapsulation” is selected, FCS_COP.1/KeyEncap from Appendix B must be claimed, which specifies the relevant list of standards._
 
-_If “key wrapping” is selected, FCS_COP.1/KeyWrap must be claimed, which specifies the relevant list of standards._
-
-==== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
-
-*FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation*
-
-*FCS_COP.1.1/KeyEncap* The TSF shall perform _key encapsulation_ in accordance with a specified cryptographic algorithm [selection: _cryptographic algorithm_] and cryptographic key sizes [selection: _cryptographic key sizes_] that meet the following: [selection: _List of standards_]
-
-The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap. 
-
-[cols=",,,",options="header",]
-|===
-|*Identifier* |*Cryptographic Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
-|KAS1|RSASVE|[selection: _2048, 3072, 4096, 6144, 8192_] bits |NIST SP 800-56B Revision 2 (Section 7.2.1)
-|KTS-OAEP|RSA-OAEP|[selection: _2048, 3072, 4096, 6144, 8192_] bits |NIST SP 800-56B Revision 2 (Section 6.3 and 9)
-|ML-KEM|ML-KEM|Parameter set = ML-KEM-1024 |NIST FIPS 203
-|===
-
-[#_Ref237676489]_Table #: Allowed choices for FCS_COP.1/KeyEncap_
-
-*_Application Note {counter:appnote_count}_*
-
-_NIST SP 800-57 Part 1 Revision 5 Section 5.6.2 specifies that the size of key used to protect the key being transported should be at least the security strength of the key it is protecting._
-
-FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping
-
-==== FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping
-
-*FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping*
-
-*FCS_COP.1.1/KeyWrap* The TSF shall perform _key wrapping_ in accordance with a specified cryptographic algorithm [selection: _cryptographic algorithm_] and cryptographic key sizes [selection: _cryptographic key sizes_] that meet the following: [selection: _list of standards_] 
-
-The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/KeyWrap. 
-
-[cols=",,,",options="header",]
-|===
-|*Identifier* |*Cryptographic Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
-|AES-KW|AES in KW mode|256 bits |[selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] [AES]
-
-[selection: _ISO/IEC 19772:2020 (clause 6), NIST SP 800-38F (Section 6.2)_] [KW mode]
-
-
-|AES-KWP|AES in KWP mode|256 bits |[selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] [AES]
-
-NIST SP 800-38F (Section 6.3) [KWP mode]
-
-
-|AES-CCM|AES in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits|256 bits |[selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] [AES]
-
-[selection: _ISO/IEC 19772:2020 (clause 7), NIST SP 800-38C CCM]
-
-
-|AES-GCM|AES in GCM mode with non-repeating IVs using [selection: _deterministic, RBG-based_], IV construction; the tag must be of length [selection: _96, 104, 112, 120, 128_] bits.|[selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] [AES]
-
-[selection: _ISO/IEC 19772:2020 (clause 10), NIST SP 800-38D GCM]
-
-|===
-
-*_Application Note {counter:appnote_count}_*
-
-_NIST 800-57p1rev5 sec. 5.6.2 specifies that the size of key used to protect the key being transported should be at least the security strength of the key it is protecting._
+_If “key wrapping” is selected, FCS_COP.1/KeyWrap from Appendix B must be claimed, which specifies the relevant list of standards._
 
 === Identification and Authentication (FIA)
 
@@ -2192,6 +2148,8 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |FAU_STG_EXT.4 |None |None
 |FAU_STG_EXT.5 |None |None
 |FCS_COP.1/AEAD |None |None
+|FCS_COP.1/KeyEncap |None. |None.
+|FCS_COP.1/KeyWrap |None. |None.
 |FCS_COP.1/SKC |None |None
 |FCS_COP.1/CMAC |None |None
 |FCS_RBG.2 |None |None
@@ -2307,7 +2265,7 @@ The following table provides the allowed choices for completion of the selection
 
 [cols=",,,",options="header",]
 |===
-|*Identifer* |*Cryptographic Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
+|*Identifier* |*Cryptographic Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
 |AES-CCM|AES in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits|[selection: _128, 256_] bits |[selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] [AES]
 
 [selection: _ISO/IEC 19772:2020 (Clause 7), NIST SP 800-38C_] [CCM] 
@@ -2325,6 +2283,61 @@ The following table provides the allowed choices for completion of the selection
 
 _The ST author should choose the cryptographic algorithms in which AES operates, parameters, and standards implemented to perform symmetric-key authenticated encryption/decryption._
 
+
+==== FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation
+
+This is a selection-based SFR, to be included in the ST if “key encapsulation” is selected in FCS_CKM.2.1.
+
+*FCS_COP.1/KeyEncap Cryptographic Operation - Key Encapsulation*
+
+*FCS_COP.1.1/KeyEncap* The TSF shall perform _key encapsulation_ in accordance with a specified cryptographic algorithm [selection: _cryptographic algorithm_] and cryptographic key sizes [selection: _cryptographic key sizes_] that meet the following: [selection: _List of standards_]
+
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/KeyEncap. 
+
+[cols=",,,",options="header",]
+|===
+|*Identifier* |*Cryptographic Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
+|ML-KEM|ML-KEM|Parameter set = ML-KEM-1024 |NIST FIPS 203
+|===
+
+[#_Ref237676489]_Table #: Allowed choices for FCS_COP.1/KeyEncap_
+
+*_Application Note {counter:appnote_count}_*
+
+_The only anticipated use of key encapsulation is the use of ML-KEM as part of key establishment for trusted communication._
+
+==== FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping
+
+This is a selection-based SFR, to be included in the ST if “key wrapping” is selected in FCS_CKM.2.1.
+
+*FCS_COP.1/KeyWrap Cryptographic Operation - Key Wrapping*
+
+*FCS_COP.1.1/KeyWrap* The TSF shall perform _key wrapping_ in accordance with a specified cryptographic algorithm [selection: _cryptographic algorithm_] and cryptographic key sizes [selection: _cryptographic key sizes_] that meet the following: [selection: _list of standards_] 
+
+The following table provides the allowed choices for completion of the selection operations of FCS_COP.1/KeyWrap. 
+
+[cols=",,,",options="header",]
+|===
+|*Identifier* |*Cryptographic Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
+|AES-KW|AES in KW mode|256 bits |[selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] [AES]
+
+[selection: _ISO/IEC 19772:2020 (clause 6), NIST SP 800-38F (Section 6.2)_] [KW mode]
+
+|AES-KWP|AES in KWP mode|256 bits |[selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] [AES]
+NIST SP 800-38F (Section 6.3) [KWP mode]
+
+|AES-CCM|AES in CCM mode with unpredictable, non-repeating nonce, minimum size of 64 bits|256 bits |[selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] [AES]
+[selection: _ISO/IEC 19772:2020 (clause 7), NIST SP 800-38C CCM_]
+
+|AES-GCM|AES in GCM mode with non-repeating IVs using [selection: _deterministic, RBG-based_], IV construction; the tag must be of length [selection: _96, 104, 112, 120, 128_] bits. |256 bits|[selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] [AES]
+[selection: _ISO/IEC 19772:2020 (clause 10), NIST SP 800-38D GCM_]
+
+|===
+
+*_Application Note {counter:appnote_count}_*
+
+_NIST 800-57p1rev5 sec. 5.6.2 specifies that the size of key used to protect the key being transported should be at least the security strength of the key it is protecting._
+
 ==== FCS_COP.1/SKC Cryptographic Operation - Symmetric Key Cryptography
 
 This is a selection-based SFR, to be included in the ST if CBC mode, CTR mode, or XTS mode are selected in FCS_COP.1/DataEncryption.
@@ -2337,7 +2350,7 @@ The following table provides the allowed choices for completion of the selection
 
 [cols=",,,",options="header",]
 |===
-|*Identifer* |*Cryptographic Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
+|*Identifier* |*Cryptographic Algorithm* |*Cryptographic Algorithm Parameters* |*List of Standards*
 |AES-CBC|AES in CBC mode with non-repeating and unpredictable IVs|[selection: _128, 256_] bits |[selection: _ISO/IEC 18033-3:2010 (Subclause 5.2), FIPS PUB 197_] [AES]
 
 [selection: _ISO/IEC 10116:2017 (Clause 7), NIST SP 800-38A_] [CBC] 
