@@ -1192,9 +1192,9 @@ _For Key Transport, see FCS_CKM.2 in Appendix A._
 
 * _XTS mode as defined in FCS_COP.1/SKC_,
 
-* _CCM mode as defined ih FCS_COP.1/AEAD_,
+* _CCM mode as defined in FCS_COP.1/AEAD_,
 
-* _GCM mode as defined FCS_COP.1/AEAD_
+* _GCM mode as defined in FCS_COP.1/AEAD_
 
 ].
 
@@ -1989,8 +1989,6 @@ _If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in
 ==== FCS_CKM.2 Cryptographic Key Distribution
 
 *FCS_CKM.2 Cryptographic Key Distribution*
-
-*FCS_CKM.2.1* The TSF shall distribute cryptographic keys in accordance with a specified cryptographic key distribution method [selection: _key encapsulation, key wrapping, encrypted channels_] that meets the following: [none]. 
 
 *FCS_CKM.2.1* The TSF shall *perform* cryptographic *key establishment* in accordance with a specified cryptographic key *establishment* method: [selection: _key encapsulation, key wrapping, encrypted channels_] that meets the following: _none_. 
 
