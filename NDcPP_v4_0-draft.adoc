@@ -47,10 +47,10 @@ Part 3: Security assurance requirements, +
 CCMB-2022-11-003, CC:2022 Revision 1, November 2022.
 |[CC4] |Common Criteria for Information Technology Security Evaluation, +
 Part 4: Framework for the specification of evaluation methods and activities, +
-CCCMB-2022-11-004, CC:2022 Revision 1, November 2022.
+CCMB-2022-11-004, CC:2022 Revision 1, November 2022.
 |[CCE] |Common Criteria for Information Technology Security Evaluation, +
 Errata and interpretation for CC:2022 (Release 1) and CEM:2022 (Release 1)
-CCCMB-002, Version 1.1, July 22, 2024.
+CCMB-002, Version 1.1, July 22, 2024.
 |[CEM] |Common Methodology for Information Technology Security Evaluation, +
 Evaluation methodology, +
 CCMB-2022-11-006, CEM:2022, Revision 1, November 2022.
