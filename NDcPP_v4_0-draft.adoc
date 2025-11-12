@@ -443,9 +443,9 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FCS_COP.1/CMAC |Cryptographic Operation (CMAC) |Feature Dependent
 |FCS_COP.1/Hash |Cryptographic Operation - Hashing |All
 |FCS_COP.1/KeyedHash |Cryptographic Operation - Keyed Hash |All
-|FCS_CKM.2 |Cryptographic Key Distribution |One
-|FCS_COP.1/KeyEncap |Cryptographic Operation - Key Encapsulation |One
-|FCS_COP.1/KeyWrap |Cryptographic Operation - Key Wrapping |One
+|FCS_CKM.2 |Cryptographic Key Distribution |Feature Dependent
+|FCS_COP.1/KeyEncap |Cryptographic Operation - Key Encapsulation |Feature Dependent
+|FCS_COP.1/KeyWrap |Cryptographic Operation - Key Wrapping |Feature Dependent
 |FCS_COP.1/AEAD |Cryptographic Operation – Authenticated Encryption with Associated Data |All
 |FCS_COP.1/SKC |Cryptographic Operation - Symmetric Key Cryptography |All
 |FCS_IPSEC_EXT.1 |IPsec Protocol |Feature Dependent
@@ -1019,6 +1019,10 @@ _For distributed TOEs, each component is not required to store generated audit d
 
 *FAU_STG_EXT.1.6* The TSF shall provide the following mechanisms for administrative access to locally stored audit records [_selection: none, manual export, ability to view locally_].
 
+*_Application Note {counter:appnote_count}_*
+
+If "ability to view locally" is selected in FAU_STG_EXT.1.6, then FAU_SAR.1 from Appendix B must be included in the ST.
+
 === Cryptographic Support (FCS)
 
 This section defines cryptographic requirements that underlie the other security properties of the TOE, covering key generation and random bit generation, key agreement methods, key destruction, and the various types of cryptographic operation to provide AES encryption/decryption, signature generation and verification, hash generation, and keyed hash generation.
@@ -1090,6 +1094,8 @@ _For RSA the choice of the modulus implies the resulting key sizes of the public
 _When generating ECC keys pairs for key agreement and if “ECDH” is claimed in FCS_CKM_EXT.7, then “ECC–ERB” or “ECC–RS” must be claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._
 
 _For Finite Field Cryptography (FFC), “FFC-ERB” or “FFC–RS” may be claimed only for generating private and public keys when “DH” is claimed in FCS_CKM_EXT.7._
+
+_The MODP Diffie-Hellman groups do not necessarily adhere to the protocol restrictions specified as IKE groups.  MODP Diffie-Hellman groups may also used in other protocols such as TLS 1.2._
 
 _When generating ECC key pairs for digital signature generation and if “ECDSA” is claimed in FCS_COP.1/SigGen, then “ECC–ERB” or “ECC–RS” must be claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._ 
 
