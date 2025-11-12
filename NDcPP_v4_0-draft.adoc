@@ -425,9 +425,9 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FCS_COP.1/CMAC |Cryptographic Operation (CMAC) |Feature Dependent
 |FCS_COP.1/Hash |Cryptographic Operation - Hashing |All
 |FCS_COP.1/KeyedHash |Cryptographic Operation - Keyed Hash |All
-|FCS_CKM.2 |Cryptographic Key Distribution |One
-|FCS_COP.1/KeyEncap |Cryptographic Operation - Key Encapsulation |One
-|FCS_COP.1/KeyWrap |Cryptographic Operation - Key Wrapping |One
+|FCS_CKM.2 |Cryptographic Key Distribution |Feature Dependent
+|FCS_COP.1/KeyEncap |Cryptographic Operation - Key Encapsulation |Feature Dependent
+|FCS_COP.1/KeyWrap |Cryptographic Operation - Key Wrapping |Feature Dependent
 |FCS_COP.1/AEAD |Cryptographic Operation – Authenticated Encryption with Associated Data |All
 |FCS_COP.1/SKC |Cryptographic Operation - Symmetric Key Cryptography |All
 |FCS_IPSEC_EXT.1 |IPsec Protocol |Feature Dependent
@@ -1000,6 +1000,10 @@ _The ST author may use the "other action" assignment to describe other measurabl
 _For distributed TOEs, each component is not required to store generated audit data locally, but the overall TOE needs to be able to store audit data locally. Each component must at least provide the ability to temporarily buffer audit information locally to ensure that audit records are preserved in case of network connectivity issues. Buffering audit information locally, does not necessarily involve non-volatile memory: audit information could be buffered in volatile memory. However, the local storage of audit information in the sense of FAU_STG_EXT.1.5 needs to be done in non-volatile memory. For every component which performs local storage of audit information, the behaviour when local storage is exhausted needs to be described. For every component which is buffering audit information instead of storing audit information locally itself, it needs to be described what happens in case the buffer space is exhausted._
 
 *FAU_STG_EXT.1.6* The TSF shall provide the following mechanisms for administrative access to locally stored audit records [_selection: none, manual export, ability to view locally_].
+
+*_Application Note {counter:appnote_count}_*
+
+If "ability to view locally" is selected in FAU_STG_EXT.1.6, then FAU_SAR.1 from Appendix B must be included in the ST.
 
 === Cryptographic Support (FCS)
 
