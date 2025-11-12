@@ -1306,11 +1306,11 @@ then all three methods of administration must be exercised during the evaluation
 [lowerroman]
 ... A modified version (e.g., using a hex editor) of a legitimately signed update
 ... An image that has not been signed
-... An image signed with an invalid signature (e.g., by using a different key as expected for creating the signature or by manual modification of a legitimate signature)
+... An otherwise valid image with a properly formed signature that was signed by an unknown key. The purpose of this test is to verify the TOE would only accept images signed by an explicitly trusted key (or a key associated with a trusted certificate).
 ... The handling of version information of the most recently installed version might differ between different TOEs depending on the point in time when an attempted update is rejected. The evaluator shall verify that the TOE handles the most recently installed version information for that case as described in the guidance documentation. After the TOE has rejected the update, the evaluator shall verify that both the current version and most recently installed version reflect the same version information as prior to the update attempt.
 [loweralpha, start=3]
 [arabic, start=238]
-. The evaluator shall perform Test 1 and Test 2  for all supported methds (manual updates, automatic checking for updates, automatic updates).
+. The evaluator shall perform Test 1 and Test 2  for all supported methods (manual updates, automatic checking for updates, automatic updates).
 . For distributed TOEs, the evaluator shall perform Test 1 and Test 2 for all TOE components.
 
 === TOE Access (FTA)

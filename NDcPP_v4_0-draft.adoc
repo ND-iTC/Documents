@@ -179,7 +179,7 @@ The aim is that any Network Device that meets this cPP will “behave well” on
 
 Additional security functionality that a Network Device may employ is outside the scope of this cPP, and such functionality will be specified in other device-type specific cPPs. Also, considered out of scope are virus and emailing scanning, intrusion detection/prevention capabilities and Network Address Translation (NAT) as a security function. It is expected that this cPP will be updated to expand the desired security functionality to increase resiliency, allow for varying implementations (such as software-only Network Devices), and keep current with technology enhancements. At this time, however, Exact Conformancefootnote:[Exact Conformance is specified as a subset of Strict Conformance – see the definition in Section 2.] with the cPP is required, and no additional functionality will be evaluated.
 
-This cPP supports two evaluated configuration options.
+In addition to a physical network device, this cPP supports two virtual network device configuration options.
 
 ==== vND only Evaluation Configuration Option
 
