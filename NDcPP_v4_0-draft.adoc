@@ -1095,7 +1095,7 @@ _When generating ECC keys pairs for key agreement and if “ECDH” is claimed i
 
 _For Finite Field Cryptography (FFC), “FFC-ERB” or “FFC–RS” may be claimed only for generating private and public keys when “DH” is claimed in FCS_CKM_EXT.7._
 
-_The MODP Diffie-Hellman groups do not necessarily adhere to the protocol restrictions specified as IKE groups.  MODP Diffie-Hellman groups may also used in other protocols such as TLS 1.2._
+_The MODP Diffie-Hellman groups do not necessarily adhere to the protocol restrictions specified as IKE groups.  MODP Diffie-Hellman groups may also be used in other protocols such as TLS 1.2._
 
 _When generating ECC key pairs for digital signature generation and if “ECDSA” is claimed in FCS_COP.1/SigGen, then “ECC–ERB” or “ECC–RS” must be claimed. The sizes of the private key, which is a scalar, and the public key, which is a point on the elliptic curve, are determined by the choice of the curve._ 
 
