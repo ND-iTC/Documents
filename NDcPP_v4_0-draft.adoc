@@ -93,75 +93,59 @@ CCDB-018, Version 1, 31 January, 2025.
 
 toc::[]
 
-*List of Figures and Tables*
+*List of Figures*
 
-link:#_Ref567439821[Figure 1: vND evaluated configuration Case 1]
+<<fig-1-vnd-case1,Figure 1: vND evaluated configuration Case 1>>
 
-link:#_Ref557439821[Figure 2: vND evaluated configuration Case 2]
+<<fig-2-vnd-case2,Figure 2: vND evaluated configuration Case 2>>
 
-link:#_Toc456887371[Figure 3: Generalized Distributed TOE Model]
+<<fig-3-generalized-model,Figure 3: Generalized Distributed TOE Model>>
 
-link:#_Ref17189087[Figure 4: Non-distributed TOE use case]
+<<fig-4-non-distributed,Figure 4: Non-distributed TOE use case>>
 
-link:#_Toc456887372[Figure 5: Basic distributed TOE use case]
+<<fig-5-basic-distributed,Figure 5: Basic distributed TOE use case>>
 
-link:#_Ref443655034[Figure 6: Distributed TOE use case with Management Component out of scope]
+<<fig-6-mgmt-out-of-scope,Figure 6: Distributed TOE use case with Management Component out of scope>>
 
-link:#_Toc456887375[Figure 7: Management Component required to fulfil cPP requirements]
+<<fig-7-mgmt-fulfil-cpp,Figure 7: Management Component required to fulfil cPP requirements>>
 
-link:#_Toc456887376[Figure 8: Distributed Network Devices plus Management Component required to fulfil cPP requirements]
+<<fig-8-dnd-mgmt-fulfil-cpp,Figure 8: Distributed Network Devices plus Management Component required to fulfil cPP requirements>>
 
-link:#_Toc456887377[Figure 9: Distributed TOE extended through equivalency argument]
+<<fig-9-equivalency-extended,Figure 9: Distributed TOE extended through equivalency argument>>
 
-link:#_Ref463365882[Figure 10: Unsupported Enterprise Management use case]
+<<fig-10-unsupported-enterprise,Figure 10: Unsupported Enterprise Management use case>>
 
-link:#_Toc456887379[Figure 11: Unsupported use case with Multiple Management Components]
+<<fig-11-unsupported-multi-mgmt,Figure 11: Unsupported use case with Multiple Management Components>>
 
-link:#_Ref476931288[Figure 12: Distributed TOE registration using channel satisfying FPT_ITT.1 or FTP_ITC.1]
+<<fig-12-registration-itt-itc,Figure 12: Distributed TOE registration using channel satisfying FPT_ITT.1 or FTP_ITC.1>>
 
-link:#_Ref476931310[Figure 13: Distributed TOE registration using channel satisfying FTP_TRP.1/Join]
+*List of Tables*
 
-link:#_Ref476931325[Figure 14: Distributed TOE registration without a registration channel]
+<<table-1-sfr-distributed,Table 1: Security Functional Requirements for Distributed TOEs>>
 
-link:#_Toc456887383[Figure 15: Joiner enablement options for Distributed TOEs]
+<<table-2-sfr-and-audit,Table 2: Security Functional Requirements and Auditable Events>>
 
-link:#_Ref399516751[Figure 16: Protected Communications SFR Architecture]
+<<table-3-fcs-ckm11-akg,Table 3: Allowed choices for FCS_CKM.1.1/AKG>>
 
-link:#_Ref399517041[Figure 17: Administrator Authentication SFR Architecture]
+<<table-4-fcs-cop11-siggen,Table 4: Allowed choices for FCS_COP.1.1/SigGen>>
 
-link:#_Toc27125738[Figure 18: Correct Operation SFR Architecture]
+<<table-5-fcs-cop11-sigver,Table 5: Allowed choices for FCS_COP.1.1/SigVer>>
 
-link:#_Toc27125739[Figure 19: Trusted Update and Audit SFR Architecture]
+<<table-6-fcs-cop11-keyedhash,Table 6: Allowed choices for FCS_COP.1.1/KeyedHash>>
 
-link:#_Ref399850426[Figure 20: Management SFR Architecture]
+<<table-7-fcs-rbg11,Table 7: Allowed choices for FCS_RBG.1.1>>
 
-link:#_Ref443496257[Figure 21: Distributed TOE SFR Architecture]
+<<table-8-sar,Table 8: Security Assurance Requirements>>
 
-link:#_Ref443331358[Table 1: Security Functional Requirements for Distributed TOEs]
+<<table-9-optional-sfr-audit,Table 9: TOE Optional SFRs and Auditable Events>>
 
-link:#_Ref397359830[Table 2: Security Functional Requirements and Auditable Events]
+<<table-10-selection-sfr-audit,Table 10: Selection-Based SFRs and Auditable Events>>
 
-link:#_Ref237676489[Table 3: Security Assurance Requirements]
+<<table-11-deps-mandatory,Table 11: SFR Dependencies Rationale for Mandatory SFRs>>
 
-link:#_Ref397655544[Table 4: TOE Optional SFRs and Auditable Events]
+<<table-12-deps-optional,Table 12: SFR Dependencies Rationale for Optional SFRs>>
 
-link:#_Ref397655557[Table 5: Selection-Based SFRs and Auditable Events]
-
-link:#_Toc456887395[Table 6: SFR Dependencies Rationale for Mandatory SFRs]
-
-link:#_Toc456887396[Table 7: SFR Dependencies Rationale for Optional SFRs]
-
-link:#_Toc27041927[Table 8: SFR Dependencies Rationale for Selection-Based SFRs]
-
-link:#_Toc27041928[Table 9: TOE Optional SFRs and Auditable Events]
-
-link:#_Toc27041929[Table 10: Selection-Based SFRs and Auditable Events]
-
-link:#_Toc27041930[Table 11: SFR Dependencies Rationale for Mandatory SFRs]
-
-link:#_Toc27041931[Table 12: SFR Dependencies Rationale for Optional SFRs]
-
-link:#_Toc27041932[Table 13: SFR Dependencies Rationale for Selection-Based SFRs]
+<<table-13-deps-selection,Table 13: SFR Dependencies Rationale for Selection-Based SFRs>>
 
 
 :sectnums: all
@@ -203,7 +187,7 @@ Case 1, illustrated in Figure 1, is where the TOE is represented by the vND alon
 
 [.text-center]
 image:extracted-media/media/vnd_case_1.png[image,width=166,height=277] +
-[#_Ref567439821]_Figure 1: vND evaluated configuration Case 1_
+[[fig-1-vnd-case1]]_Figure 1: vND evaluated configuration Case 1_
 
 To evaluate a vND-only TOE means:
 
@@ -482,7 +466,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FTP_TRP.1/Join |Trusted Path |Feature Dependent
 |===
 
-[#_Ref443331358]_Table 1: Security Functional Requirements for Distributed TOEs_
+[[table-1-sfr-distributed]]_Table 1: Security Functional Requirements for Distributed TOEs_
 
 The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE. (Note that this deliverable is examined as part of the ASE_TSS.1 and AVA_VAN.1 Evaluation Activities as described in [SD, 5.1.2] and [SD, 5.6.1.1] respectively.) The ST for a distributed TOE may also introduce a ‘minimum configuration’ and identify components that may have instances added to an operational configuration without affecting the validity of the CC certification. [SD, B.4] describes Evaluation Activities relating to these equivalency aspects of a distributed TOE (and hence what is expected in the ST).
 
@@ -873,7 +857,7 @@ _If the list of ‘administrative actions’ appears to be incomplete, the assig
 
 _The requirement to audit the "Generating/import of, changing, or deleting of cryptographic keys" refers to all types of cryptographic keys which are intended to be used longer than for just one session (i.e., it does not refer to ephemeral keys/session keys). The requirement applies to all named changes independently from how they are invoked. A cryptographic key could be generated automatically during initial start-up without administrator intervention or through administrator intervention. This requirement also applies to the management of cryptographic keys by adding, replacing or removing trust anchors in the TOE's trust store. In all related cases the changes to cryptographic keys need to be audited together with a unique key name, key reference or unique identifier for the corresponding certificate._
 
-_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST.
+_The ST author replaces the cross-reference to the table of audit events with an appropriate cross-reference for the ST._
 
 _For distributed TOEs, each component must generate an audit record for each of the SFRs that it implements. If more than one TOE component is involved when an audit event is triggered, the event has to be audited on each component (e.g., rejection of a connection by one component while attempting to establish a secure communication channel between two components should result in an audit event being generated by both components). This is not limited to error cases but also includes events about successful actions like successful build up/tear down of a secure communication channel between TOE components._
 
@@ -945,11 +929,11 @@ a|
 * Reason for failure
 |===
 
-[#_Ref397359830]_Table 2: Security Functional Requirements and Auditable Events_
+[[table-2-sfr-and-audit]]_Table 2: Security Functional Requirements and Auditable Events_
 
 *_Application Note {counter:appnote_count}_*
 
-_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Appendix A, Appendix B, PP-Module(s), and functional package(s). For all SFRs included in the ST, the ST must include the relevant additional auditable events specified in link:#_Toc27041928[Table 9] for optional SFRs, link:#_Toc27041929[Table 10] for selection-based SFRs, the claimed PP-Module(s), and the claimed functional package(s). All audit events defined in Table 2 have to be included in the ST as they are mandatory._
+_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Appendix A, Appendix B, PP-Module(s), and functional package(s). For all SFRs included in the ST, the ST must include the relevant additional auditable events specified in Table 9 for optional SFRs, Table 10 for selection-based SFRs, the claimed PP-Module(s), and the claimed functional package(s). All audit events defined in Table 2 have to be included in the ST as they are mandatory._
 
 ===== FAU_GEN.2 User identity association
 
@@ -1077,7 +1061,7 @@ Tree height = [selection: _10, 16, 20_]|RFC 8391 [XMSS], NIST SP 800-208 [parame
 |ML-DSA|ML-DSA|Parameter set = ML-DSA-87|NIST FIPS PUB 204
 |===
 
-[#_Ref237676489]_Table 3: Allowed choices for FCS_CKM.1.1/AKG_
+[[table-3-fcs-ckm11-akg]]_Table 3: Allowed choices for FCS_CKM.1.1/AKG_
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1181,7 +1165,7 @@ The following table provides the allowed choices for completion of the selection
 NIST SP 800-186 (Section 3.2.1) [NIST Curves]
 |===
 
-[#_Ref237676489]_Table #: Allowed choices for FCS_CKM_EXT.7.1_
+[#_Ref237676489]_Table 5: Allowed choices for FCS_CKM_EXT.7.1_
 
 
 *_Application Note {counter:appnote_count}_*
@@ -1241,7 +1225,7 @@ NIST SP-800 186 (Section 4) [NIST Curves]
 |Module-Lattice-Based Digital Signature Algorithm|ML-DSA-87|NIST FIPS PUB 204 (Section 5.2)
 |===
 
-[#_Ref397655544]_Table 4: Allowed choices for FCS_COP.1.1/SigGen
+[#_Ref397655544]_Table 6: Allowed choices for FCS_COP.1.1/SigGen_
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1282,7 +1266,7 @@ Tree height = [selection: _10, 16, 20_]|RFC 8391 [XMSS], NIST SP 800-208 [parame
 |ML-DSA|ML-DSA-87|NIST FIPS PUB 204 (Section 5.3)
 |===
 
-[#_Ref397655557]_Table 5: Allowed choices for FCS_COP.1.1/SigVer
+[#_Ref397655557]_Table 5: Allowed choices for FCS_COP.1.1/SigVer_
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1647,7 +1631,7 @@ In order to detect some number of failures of underlying security mechanisms use
 
 *FPT_TST_EXT.1 TSF testing*
 
-*FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
+*FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests:
 
 * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
 * _Prior to providing any cryptographic service and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
