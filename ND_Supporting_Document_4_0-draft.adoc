@@ -53,11 +53,11 @@ toc::[]
 
 *List of Tables*
 
-link:#_Toc473308377[Table 1: Mapping of ADV_FSP.1 CEM Work Units to Evaluation Activities]
+<<sd-table-1-adv-fsp-mapping,Table 1: Mapping of ADV_FSP.1 CEM Work Units to Evaluation Activities>>
 
-link:#_Ref453153408[Table 2: Mapping of AVA_VAN.1 CEM Work Units to Evaluation Activities]
+<<sd-table-2-ava-van-mapping,Table 2: Mapping of AVA_VAN.1 CEM Work Units to Evaluation Activities>>
 
-link:#_Toc412821715[Table 3: Evaluation Equivalency Analysis]
+<<sd-table-3-equivalency-analysis,Table 3: Evaluation Equivalency Analysis>>
 
 :sectnums: all
 :sectnumlevels: 4
@@ -2772,7 +2772,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 |EAs that are associated with the SFRs in Section 2, and, if applicable, Sections 3 and 4, are performed to ensure that all the SFRs where the security functionality is externally visible (i.e., at the TSFI) are addressed, and that the description of the interfaces is accurate with respect to the specification captured in the SFRs. Therefore, the intent of this work unit is covered.
 |===
 
-[#_Toc473308377]_Table 1: Mapping of ADV_FSP.1 CEM Work Units to Evaluation Activities_
+[[sd-table-1-adv-fsp-mapping]]_Table 1: Mapping of ADV_FSP.1 CEM Work Units to Evaluation Activities_
 
 ===== Evaluation Activity
 [arabic, start=527]
@@ -2944,7 +2944,7 @@ The calibration of test resources specified in the last paragraph of the work un
 |Replace the CEM work unit with the reporting called for in Appendix A.3.
 |===
 
-[#_Ref453153408]_Table 2: Mapping of AVA_VAN.1 CEM Work Units to Evaluation Activities_
+[[sd-table-2-ava-van-mapping]]_Table 2: Mapping of AVA_VAN.1 CEM Work Units to Evaluation Activities_
 
 [arabic, start=566]
 . Because of the level of detail required for the evaluation activities, the bulk of the instructions are contained in Appendix A, while an “outline” of the assurance activity is provided below.
@@ -3177,7 +3177,7 @@ https://www.rapid7.com/db/?type=nexpose
 | |Different |If the functionality provided by different TOE model variations differ, a determination must be made if the functional differences affect cPP-specified functionality. If cPP-specific functionality differs between models, the models are not considered equivalent and must be tested separately. In these cases, the evaluator has the option of only retesting the functionality that differs model-to-model. If the functional differences only affect non-cPP specified functionality, the model variations may still be considered equivalent. For each difference the evaluator must provide an explanation of why the difference does or does not affect cPP specified functionality.
 |===
 
-[#_Toc412821715]_Table 3: Evaluation Equivalency Analysis_
+[[sd-table-3-equivalency-analysis]]_Table 3: Evaluation Equivalency Analysis_
 
 === Test Presentation/Truth in Advertising
 [arabic, start=611]
