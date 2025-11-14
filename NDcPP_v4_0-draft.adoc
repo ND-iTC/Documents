@@ -145,9 +145,9 @@ toc::[]
 
 <<table-3-fcs-ckm11-akg,Table 3: Allowed choices for FCS_CKM.1.1/AKG>>
 
-<<table-4-fcs-ckm11-akg,Table 4: Allowed choices for FCS_CKM.1.1/SKG>>
+<<table-4-fcs-ckm11-skg,Table 4: Allowed choices for FCS_CKM.1.1/SKG>>
 
-<<table-5-fcs-ckm71,Table 5: Allowed choices for FCS_CKM.7.1>>
+<<table-5-fcs-ckm71,Table 5: Allowed choices for FCS_CKM_EXT.7.1>>
 
 <<table-6-fcs-cop11-siggen,Table 6: Allowed choices for FCS_COP.1.1/SigGen>>
 
@@ -175,7 +175,7 @@ toc::[]
 
 <<table-18-fcs-cop11-xof,Table 18: Allowed choices for FCS_COP.1.1/XOF>>
 
-<<table-19-fcs-ckm71,Table 19: Allowed choices for FCS_CKM_EXT.7.1>>
+<<table-19-fcs-ckm71ext,Table 19: Allowed choices for FCS_CKM_EXT.7.1>>
 
 <<table-20-deps-mandatory,Table 20: SFR Dependencies Rationale for Mandatory SFRs>>
 
@@ -508,7 +508,7 @@ The ST for a distributed TOE must include a mapping of SFRs to each of the compo
 
 If an SSH channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for Secure Shell referenced in Section 2.1. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
-If a (D)TLS channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for TLS referenced in Section 2.2. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
+If a (D)TLS channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for TLS referenced in Section 2.1. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
 If communications between components relies on X.509 validation, then the TSF shall be evaluated against the version of the Functional Package for X.509 referenced in Section 2.1. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE. 
 
@@ -3146,7 +3146,7 @@ NIST SP 800-186 (Section 3.2.1) [NIST Curves]
 
 |===
 
-[[table-19-fcs-ckm71]]_Table 19: Allowed choices for FCS_CKM_EXT.7.1_
+[[table-19-fcs-ckm71ext]]_Table 19: Allowed choices for FCS_CKM_EXT.7.1_
 
 ===== FCS_IPSEC_EXT.1 IPsec Protocol
 
