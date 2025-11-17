@@ -401,7 +401,7 @@ image:extracted-media/media/d_toe_10.png[image,width=542,height=265]
 [.text-center]
 [[fig-12-registration-itt-itc]]_Figure 12: Distributed TOE registration using channel satisfying FPT_ITT.1 or FTP_ITC.1_
 
-The second approach (Figure 13) utilises an alternative registration channel and supports use-cases where the channel relies on environmental security constraints to provide the necessary protection of the registration exchange.
+The second approach (Figure 13) utilises an alternative registration channel and supports use cases where the channel relies on environmental security constraints to provide the necessary protection of the registration exchange.
 
 [.text-center]
 image:extracted-media/media/d_toe_11.png[image,width=532,height=253]
