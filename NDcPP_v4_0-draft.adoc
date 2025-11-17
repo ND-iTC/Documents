@@ -408,7 +408,7 @@ image:extracted-media/media/d_toe_11.png[image,width=532,height=253]
 [.text-center]
 [[fig-13-registration-trp-join]]_Figure 13: Distributed TOE registration using channel satisfying FTP_TRP.1/Join_
 
-The final approach (Figure 14) supports use-cases where registration is performed manually through direct configuration of both the joiner and gatekeeper devices. Once configured, the two components establish an internal TSF channel that satisfies FPT_ITT.1 or FTP_ITC.1.
+The final approach (Figure 14) supports use cases where registration is performed manually through direct configuration of both the joiner and gatekeeper devices. Once configured, the two components establish an internal TSF channel that satisfies FPT_ITT.1 or FTP_ITC.1.
 
 [.text-center]
 image:extracted-media/media/d_toe_12.png[image,width=388,height=237]
