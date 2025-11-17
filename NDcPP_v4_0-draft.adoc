@@ -237,7 +237,7 @@ image:extracted-media/media/vnd_case_2.jpg[image,width=166,height=277]
 [.text-center]
 [[fig-2-vnd-case2]]Figure 2: vND evaluated configuration Case 2_
 
-To evaluate a vND as a pND means that:
+To evaluate a vND as a pND means:
 
 * The VS is considered part of the ND's software stack, and thus is part of the TOE and must satisfy the relevant SFRs (e.g., by treating hypervisor Administrators as Security Administrators).
 * vNDs that can run on multiple VSs must be tested on each claimed VS unless the developer can successfully argue equivalence.
