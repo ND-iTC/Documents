@@ -415,7 +415,7 @@ image:extracted-media/media/d_toe_12.png[image,width=388,height=237]
 [.text-center]
 [[fig-14-registration-no-channel]]_Figure 14: Distributed TOE registration without a registration channel_
 
-In each case, during the registration process, the Security Administrator must positively enable the joining components before it can act as part of the TSF. The following figure illustrates the approaches that this enablement step may take.
+In each case, during the registration process, the Security Administrator must positively enable the joining components before they can act as part of the TSF. The following figure illustrates the approaches that this enablement step may take.
 
 [.text-center]
 image:extracted-media/media/d_toe_13.png[image,width=517,height=292]
