@@ -422,7 +422,7 @@ image:extracted-media/media/d_toe_13.png[image,width=517,height=292]
 [.text-center]
 [[fig-15-joiner-options]]_Figure 15: Joiner enablement options for Distributed TOEs_
 
-Note that in the case where no registration channel is required, that is the 'joiner' and 'gatekeeper' are directly configured (Figure 14), enablement is implied as part of this direct configuration process.
+Note that in the case where no registration channel is required (i.e., the 'joiner' and 'gatekeeper' are directly configured (Figure 14)), enablement is implied as part of this direct configuration process.
 
 After registration, the components will communicate between themselves using a normal SSH/TLS/DTLS/IPsec/HTTPS channel (which is specified in an ST as an instance of FTP_ITC.1 or FPT_ITT.1 in terms of Section 6 and Appendix A). This channel for inter-component communications is specified at the top level with the (extended) SFR FCO_CPC_EXT.1 (see Section A.6.1) and is in addition to the other communication channels required for communication with entities outside the TOE (which are specified in an ST as instances of FTP_ITC.1 and FTP_TRP.1).
 
