@@ -144,33 +144,33 @@ toc::[]
 
 <<table-3-fcs-ckm11-akg,Table 3: Allowed choices for FCS_CKM.1.1/AKG>>
 
-<<table-4-fcs-ckm11-skg,Table 4: Allowed choices for FCS_CKM.1.1/SKG>>
+<<table-4-fcs-ckm71,Table 4: Allowed choices for FCS_CKM_EXT.7.1>>
 
-<<table-5-fcs-ckm71,Table 5: Allowed choices for FCS_CKM_EXT.7.1>>
+<<table-5-fcs-cop11-siggen,Table 5: Allowed choices for FCS_COP.1.1/SigGen>>
 
-<<table-6-fcs-cop11-siggen,Table 6: Allowed choices for FCS_COP.1.1/SigGen>>
+<<table-6-fcs-cop11-sigver,Table 6: Allowed choices for FCS_COP.1.1/SigVer>>
 
-<<table-7-fcs-cop11-sigver,Table 7: Allowed choices for FCS_COP.1.1/SigVer>>
+<<table-7-fcs-cop11-keyedhash,Table 7: Allowed choices for FCS_COP.1.1/KeyedHash>>
 
-<<table-8-fcs-cop11-keyedhash,Table 8: Allowed choices for FCS_COP.1.1/KeyedHash>>
+<<table-8-fcs-rbg11,Table 8: Allowed choices for FCS_RBG.1.1>>
 
-<<table-9-fcs-rbg11,Table 9: Allowed choices for FCS_RBG.1.1>>
+<<table-9-fmt-smf11,Table 9: FMT_SMF.1.1 Management Function Guidance>>
 
-<<table-10-fmt-smf11,Table 10: FMT_SMF.1.1 Management Function Guidance>>
+<<table-10-sar,Table 10: Security Assurance Requirements>>
 
-<<table-11-sar,Table 11: Security Assurance Requirements>>
+<<table-11-optional-sfr-audit,Table 11: TOE Optional SFRs and Auditable Events>>
 
-<<table-12-optional-sfr-audit,Table 12: TOE Optional SFRs and Auditable Events>>
+<<table-12-selection-sfr-audit,Table 12: Selection-Based SFRs and Auditable Events>>
 
-<<table-13-selection-sfr-audit,Table 13: Selection-Based SFRs and Auditable Events>>
+<<table-13-fcs-cop1-aead,Table 13: Allowed choices for FCS_COP.1/AEAD>>
 
-<<table-14-fcs-cop1-aead,Table 14: Allowed choices for FCS_COP.1/AEAD>>
+<<table-14-fcs-cop1-keyencap,Table 14: Allowed choices for FCS_COP.1/KeyEncap>>
 
-<<table-15-fcs-cop1-keyencap,Table 15: Allowed choices for FCS_COP.1/KeyEncap>>
+<<table-15-fcs-cop1-keywrap,Table 15: Allowed choices for FCS_COP.1/KeyWrap>>
 
-<<table-16-fcs-cop1-keywrap,Table 16: Allowed choices for FCS_COP.1/KeyWrap>>
+<<table-16-fcs-cop1-skc,Table 16: Allowed choices for FCS_COP.1/SKC>>
 
-<<table-17-fcs-cop1-skc,Table 17: Allowed choices for FCS_COP.1/SKC>>
+<<table-17-fcs-ckm11-skg,Table 17: Allowed choices for FCS_CKM.1.1/SKG>>
 
 <<table-18-fcs-cop11-xof,Table 18: Allowed choices for FCS_COP.1.1/XOF>>
 
@@ -451,7 +451,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_STG_EXT.5 |Protected Remote Audit Event Storage for Distributed TOEs |Feature Dependent
 |FCO_CPC_EXT.1 |Component Registration Channel Definition |All
 |FCS_CKM.1/AKG |Cryptographic Key Generation – Asymmetric Key |Onefootnote:[The overall TOE is required to support on-board key generation and (if the TOE uses X.509 certificates as in Appendix B.4.1) RFC 2986 Certificate Request generation. If not all TOE components are supporting on- board key generation (and generation of certificate requests, where applicable), the TOE shall support distribution of keys to the TOE components that are not supporting key generation themselves. Depending on the life-cycle phase, either a secure registration channel shall be used for key distribution at the point where the component is joined to the TOE or an inter-component secure channel shall be used for key distribution post-registration.]
-|FCS_CKM.1/SKG |Cryptographic Key Generation - Symmetric Key |All
+|FCS_CKM.1/SKG |Cryptographic Key Generation - Symmetric Key |Feature Dependent
 |FCS_CKM.6 |Timing and Event of Cryptographic Key Destruction |All
 |FCS_CKM_EXT.7 |Cryptographic Key Agreement |All
 |FCS_COP.1/DataEncryption |Cryptographic Operation (AES Data Encryption/Decryption) |All
@@ -925,7 +925,6 @@ _The date and time information for any audit event should be recorded as part of
 |FAU_GEN.2 |None. |None.
 |FAU_STG_EXT.1 |Configuration of local audit settings. |Identity of account making changes to the audit configuration.
 |FCS_CKM.1/AKG |None. |None.
-|FCS_CKM.1/SKG |None. |None.
 |FCS_CKM.6 |None. |None.
 |FCS_CKM_EXT.7 |None. |None.
 |FCS_COP.1/DataEncryption |None. |None.
@@ -970,7 +969,7 @@ a|
 
 *_Application Note {counter:appnote_count}_*
 
-_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Appendix A, Appendix B, PP-Module(s), and functional package(s). For all SFRs included in the ST, the ST must include the relevant additional auditable events specified in Table 12 for optional SFRs, Table 13 for selection-based SFRs, the claimed PP-Module(s), and the claimed functional package(s). All audit events defined in Table 2 have to be included in the ST as they are mandatory._
+_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Appendix A, Appendix B, PP-Module(s), and functional package(s). For all SFRs included in the ST, the ST must include the relevant additional auditable events specified in Table 11 for optional SFRs, Table 12 for selection-based SFRs, the claimed PP-Module(s), and the claimed functional package(s). All audit events defined in Table 2 have to be included in the ST as they are mandatory._
 
 ===== FAU_GEN.2 User identity association
 
@@ -1120,22 +1119,6 @@ _When generating ECC key pairs for digital signature generation and if “ECDSA�
 
 _When key generation is used for device authentication, other than non-X.509 SSH authentication algorithm, the public key is expected to be associated with an X.509v3 certificate._
 
-===== FCS_CKM.1/SKG Cryptographic Key Generation - Symmetric Key
-
-*FCS_CKM.1.1/SKG Cryptographic Key Generation - Symmetric Key*
-
-*FCS_CKM.1.1/SKG* The TSF shall generate *symmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm: [selection: _cryptographic key generation algorithm_] and specified cryptographic key sizes [selection: _cryptographic key sizes_] that meet the following: [selection: _list of standards_].
-
-The following table provides the allowed choices for completion of the selection operations of FCS_CKM.1.1/SKG.
-
-[cols=",,,",options="header",]
-|===
-|*Identifier* |*Cryptographic Key Generation Algorithm* |*Cryptographic Key Sizes* |*List of Standards*
-|RSK|Direct Generation from a Random Bit Generator as specified in FCS_RBG.1|[selection: _256, 384, 512_] bits |NIST SP 800-133 Revision 2 (Section 6.1)[Direct generation of symmetric keys]
-|===
-
-[[table-4-fcs-ckm11-skg]]_Table 4: Allowed choices for FCS_CKM.1.1/SKG_
-
 ===== FCS_CKM.6 Timing and Event of Cryptographic Key Destruction
 
 *FCS_CKM.6 Timing and Event of Cryptographic Key Destruction*
@@ -1208,7 +1191,7 @@ The following table provides the allowed choices for completion of the selection
 NIST SP 800-186 (Section 3.2.1) [NIST Curves]
 |===
 
-[[table-5-fcs-ckm71]]_Table 5: Allowed choices for FCS_CKM_EXT.7.1_
+[[table-4-fcs-ckm71]]_Table 4: Allowed choices for FCS_CKM_EXT.7.1_
 
 
 *_Application Note {counter:appnote_count}_*
@@ -1268,7 +1251,7 @@ NIST SP-800 186 (Section 4) [NIST Curves]
 |Module-Lattice-Based Digital Signature Algorithm|ML-DSA-87|NIST FIPS PUB 204 (Section 5.2)
 |===
 
-[[table-6-fcs-cop11-siggen]]_Table 6: Allowed choices for FCS_COP.1.1/SigGen_
+[[table-5-fcs-cop11-siggen]]_Table 5: Allowed choices for FCS_COP.1.1/SigGen_
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1309,7 +1292,7 @@ Tree height = [selection: _10, 16, 20_]|RFC 8391 [XMSS], NIST SP 800-208 [parame
 |ML-DSA|ML-DSA-87|NIST FIPS PUB 204 (Section 5.3)
 |===
 
-[[table-7-fcs-cop11-sigver]]_Table 7: Allowed choices for FCS_COP.1.1/SigVer_
+[[table-6-fcs-cop11-sigver]]_Table 6: Allowed choices for FCS_COP.1.1/SigVer_
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1339,7 +1322,7 @@ The following table provides the allowed choices for completion of the selection
 |HMAC-SHA-512|[selection: _512 (ISO, FIPS), 384 (FIPS), 256 (FIPS)_] bits|[selection: _ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”), FIPS PUB 198-1_]
 |===
 
-[[table-8-fcs-cop11-keyedhash]]_Table 8: Allowed choices for FCS_COP.1.1/KeyedHash
+[[table-7-fcs-cop11-keyedhash]]_Table 7: Allowed choices for FCS_COP.1.1/KeyedHash
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1363,7 +1346,7 @@ The following table provides the allowed choices for completion of the selection
 |CTR_DRBG|CTR_DRBG with [selection: AES-128, AES-192, AES-256] |[selection: ISO/IEC 18031: 2025 (Section C.3.2), NIST SP800-90A Revision 1 Section 10.2.1]
 |===
 
-[[table-9-fcs-rbg11]]_Table 9: Allowed choices for FCS_RBG.1.1
+[[table-8-fcs-rbg11]]_Table 8: Allowed choices for FCS_RBG.1.1
 
 *FCS_RBG.1.2* The TSF shall use a [selection: TSF entropy source [assignment: _name of entropy source_], *multiple TSF entropy sources [assignment: _name of entropy sources_]*, TSF interface for seeding] for initialized seeding.
 
@@ -1599,7 +1582,7 @@ size)_;
 | If the TOE offers the ability for the Security Administrator to configure the audit behaviour, configure the services available prior to identification or authentication, or if any of the cryptographic functionality on the TOE can be configured, or if the ST is describing a distributed TOE, then the ST author makes the appropriate choice or choices in the second selection, otherwise select the option "No other capabilities" (in the latter case the selection may alternatively be left blank in the ST).
 |===
 
-[[table-10-fmt-smf11]]_Table 10: FMT_SMF.1.1 Management Function Guidance_
+[[table-9-fmt-smf11]]_Table 9: FMT_SMF.1.1 Management Function Guidance_
 
 ==== Security management roles (FMT_SMR)
 
@@ -1843,7 +1826,7 @@ This section lists the set of SARs from CC part 3 that are required in evaluatio
 
 The general model for evaluation of TOEs against STs written to conform to this cPP is as follows: after the ST has been approved for evaluation, the ITSEF will obtain the TOE, supporting environmental IT (if required), and the guidance documentation for the TOE. The ITSEF is expected to perform actions mandated by the Common Evaluation Methodology (CEM) for the ASE and ALC SARs. The ITSEF also performs the Evaluation Activities contained within the SD, which are intended to be an interpretation of the other CEM assurance requirements as they apply to the specific technology instantiated in the TOE. The Evaluation Activities that are captured in [SD] also provide clarification as to what the developer needs to provide to demonstrate the TOE is compliant with the cPP.
 
-The TOE security assurance requirements are identified in Table 11.
+The TOE security assurance requirements are identified in Table 10.
 
 [cols=",",]
 |===
@@ -1864,7 +1847,7 @@ The TOE security assurance requirements are identified in Table 11.
 |Vulnerability Assessment (AVA) |Vulnerability survey (AVA_VAN.1)
 |===
 
-[[table-11-sar]]_Table 11: Security Assurance Requirements_
+[[table-10-sar]]_Table 10: Security Assurance Requirements_
 
 === ASE: Security Target
 
@@ -1975,7 +1958,7 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 |None.
 |===
 
-[[table-12-optional-sfr-audit]]_Table 12: TOE Optional SFRs and Auditable Events_
+[[table-11-optional-sfr-audit]]_Table 11: TOE Optional SFRs and Auditable Events_
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2181,6 +2164,7 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |FCS_COP.1/KeyEncap |None. |None.
 |FCS_COP.1/KeyWrap |None. |None.
 |FCS_COP.1/SKC |None. |None.
+|FCS_COP.1/SKG |None. |None.
 |FCS_COP.1/CMAC |None. |None.
 |FCS_RBG.2 |None. |None.
 |FCS_RBG.3 |None. |None.
@@ -2205,7 +2189,7 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |FTA_SSL_EXT.1 (if “terminate the session” is selected) |The termination of a local session by the session lock. |None.
 |===
 
-[[table-13-selection-sfr-audit]]_Table 13: Selection-Based SFRs and Auditable Events_
+[[table-12-selection-sfr-audit]]_Table 12: Selection-Based SFRs and Auditable Events_
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2244,7 +2228,7 @@ The TSF, understood here as the entire distributed system, has to satisfy all ma
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE must be able to generate audit records for each TOE component. Some TOE components of a distributed TOE might not implement the complete TSF of the overall TOE but only a subset of the TSF. The audit records for each TOE component need to cover all security relevant audit events according to the subset of the TSF implemented by this particular TOE component but not necessarily all security relevant audit events according to the TSF of the overall TOE. If a security-relevant event can occur on multiple TOE components, it needs to cause generation of an audit record uniquely identifying the component associated with the event. The ST author should identify for each TOE component which of the overall required audit events defined in FAU_GEN.1.1 are logged. The ST author may decide to do this by providing a corresponding table. The information provided needs to be in agreement with Table 1. The overall TOE needs to cover all auditable events listed in Table 2 (and Table 12, Table 13, the claimed PP-Module(s), and the claimed functional package(s) as applicable to the overall TOE)._
+_The TOE must be able to generate audit records for each TOE component. Some TOE components of a distributed TOE might not implement the complete TSF of the overall TOE but only a subset of the TSF. The audit records for each TOE component need to cover all security relevant audit events according to the subset of the TSF implemented by this particular TOE component but not necessarily all security relevant audit events according to the TSF of the overall TOE. If a security-relevant event can occur on multiple TOE components, it needs to cause generation of an audit record uniquely identifying the component associated with the event. The ST author should identify for each TOE component which of the overall required audit events defined in FAU_GEN.1.1 are logged. The ST author may decide to do this by providing a corresponding table. The information provided needs to be in agreement with Table 1. The overall TOE needs to cover all auditable events listed in Table 2 (and Table 11, Table 12, the claimed PP-Module(s), and the claimed functional package(s) as applicable to the overall TOE)._
 
 ==== Security audit event storage (Extended - FAU_STG_EXT)
 
@@ -2307,7 +2291,7 @@ The following table provides the allowed choices for completion of the selection
 
 |===
 
-[[table-14-fcs-cop1-aead]]_Table 14: Allowed choices for FCS_COP.1/AEAD_
+[[table-13-fcs-cop1-aead]]_Table 13: Allowed choices for FCS_COP.1/AEAD_
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2330,7 +2314,7 @@ The following table provides the allowed choices for completion of the selection
 |ML-KEM|ML-KEM|Parameter set = ML-KEM-1024 |NIST FIPS 203
 |===
 
-[[table-15-fcs-cop1-keyencap]]_Table 15: Allowed choices for FCS_COP.1/KeyEncap_
+[[table-14-fcs-cop1-keyencap]]_Table 14: Allowed choices for FCS_COP.1/KeyEncap_
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2364,7 +2348,7 @@ NIST SP 800-38F (Section 6.3) [KWP mode]
 
 |===
 
-[[table-16-fcs-cop1-keywrap]]_Table 16: Allowed choices for FCS_COP.1/KeyWrap_
+[[table-15-fcs-cop1-keywrap]]_Table 15: Allowed choices for FCS_COP.1/KeyWrap_
 
 *_Application Note {counter:appnote_count}_*
 
@@ -2397,13 +2381,31 @@ The following table provides the allowed choices for completion of the selection
 
 |===
 
-[[table-17-fcs-cop1-skc]]_Table 17: Allowed choices for FCS_COP.1/SKC_
+[[table-16-fcs-cop1-skc]]_Table 16: Allowed choices for FCS_COP.1/SKC_
 
 
 *_Application Note {counter:appnote_count}_*
 
 _The ST author should choose the cryptographic algorithms in which AES operates, parameters, and standards implemented to perform symmetric-key encryption/decryption without built-in authentication._
 
+===== FCS_CKM.1/SKG Cryptographic Key Generation - Symmetric Key
+
+This is a selection-based SFR, to be included in the ST if “generate 256 bit-based pre-shared keys via FCS_RBG.1” is selected in FIA_PSK_EXT.1.2, or as deemed necessary by claimed PP Modules.
+
+*FCS_CKM.1.1/SKG Cryptographic Key Generation - Symmetric Key*
+
+*FCS_CKM.1.1/SKG* The TSF shall generate *symmetric* cryptographic keys in accordance with a specified cryptographic key generation algorithm: [selection: _cryptographic key generation algorithm_] and specified cryptographic key sizes [selection: _cryptographic key sizes_] that meet the following: [selection: _list of standards_].
+
+The following table provides the allowed choices for completion of the selection operations of FCS_CKM.1.1/SKG.
+
+[cols=",,,",options="header",]
+|===
+|*Identifier* |*Cryptographic Key Generation Algorithm* |*Cryptographic Key Sizes* |*List of Standards*
+|RSK|Direct Generation from a Random Bit Generator as specified in FCS_RBG.1|[selection: _256, 384, 512_] bits |NIST SP 800-133 Revision 2 (Section 6.1)[Direct generation of symmetric keys]
+|===
+
+
+[[table-17-fcs-ckm11-skg]]_Table 17: Allowed choices for FCS_CKM.1.1/SKG_
 
 ==== FCS_COP.1/CMAC Cryptographic Operation - CMAC
 
