@@ -4,6 +4,7 @@
 :toc-placement!:
 :doctype: book
 :data-uri:
+:appendix-caption: Annex
 
 = collaborative Protection Profile for Network Devices
 
@@ -281,9 +282,9 @@ In order to be conformant to this cPP, a TOE must demonstrate Exact Conformance 
 
 For this cPP, Exact Conformance means that the Security Target (ST) must contain all of the Security Functional Requirements in Section 6 (Mandatory Security Functional Requirements) and in Section 7 (Mandatory Security Assurance Requirements) of this cPP. No security requirements given in Section 6 or Section 7 of this cPP are allowed to be omitted. 
 
-Optionally, security requirements from Appendix A, Optional Security Requirements can be included in the ST.
+Optionally, security requirements from Annex A, Optional Security Requirements can be included in the ST.
 
-Appendix B, Selection-Based Security Requirements gives the selection-based security requirements of this cPP, some of which will be mandatory according to the selections made in other security requirements.
+Annex B, Selection-Based Security Requirements gives the selection-based security requirements of this cPP, some of which will be mandatory according to the selections made in other security requirements.
 
 While iteration of SFRs from the cPP is allowed, no additional security requirements (from the [CC2], [CC-SFRC], [CC3]], or definitions of extended components that are not already included in this cPP) are allowed to be included in the ST. 
 
@@ -422,9 +423,9 @@ image:extracted-media/media/d_toe_13.png[image,width=517,height=292]
 [.text-center]
 [[fig-15-joiner-options]]_Figure 15: Joiner enablement options for Distributed TOEs_
 
-Note that in the case where no registration channel is required (i.e., the 'joiner' and 'gatekeeper' are directly configured (Figure 14)), enablement is implied as part of this direct configuration process.
+Note: In the case where no registration channel is required (i.e., the 'joiner' and 'gatekeeper' are directly configured (Figure 14)), enablement is implied as part of this direct configuration process.
 
-After registration, the components will communicate between themselves using a normal SSH/TLS/DTLS/IPsec/HTTPS channel (which is specified in an ST as an instance of FTP_ITC.1 or FPT_ITT.1 in terms of Section 6 and Appendix A). This channel for inter-component communications is specified at the top level with the (extended) SFR FCO_CPC_EXT.1 (see Section A.6.1) and is in addition to the other communication channels required for communication with entities outside the TOE (which are specified in an ST as instances of FTP_ITC.1 and FTP_TRP.1).
+After registration, the components will communicate between themselves using a normal SSH/TLS/DTLS/IPsec/HTTPS channel (which is specified in an ST as an instance of FTP_ITC.1 or FPT_ITT.1 in terms of Section 6 and Annex A). This channel for inter-component communications is specified at the top level with the (extended) SFR FCO_CPC_EXT.1 (see Section A.6.1) and is in addition to the other communication channels required for communication with entities outside the TOE (which are specified in an ST as instances of FTP_ITC.1 and FTP_TRP.1).
 
 === Allocation of Requirements in Distributed TOEs
 
@@ -432,7 +433,7 @@ For a distributed TOE, the security functional requirements in this cPP need to 
 
 * *All Components (“All”)* – All components that comprise the distributed TOE must independently satisfy the requirement.
 * *At least one Component (“One”)* – This requirement must be fulfilled by at least one component within the distributed TOE.
-* *Feature Dependent (“Feature Dependent”)* – These requirements will only be fulfilled where the feature is implemented by the distributed TOE component (note that the requirement to meet the cPP as a whole requires that at least one component implements these requirements if they are specified in Section 6).
+* *Feature Dependent (“Feature Dependent”)* – These requirements will only be fulfilled where the feature is implemented by the distributed TOE component (Note: The requirement to meet the cPP as a whole requires that at least one component implements these requirements if they are specified in Section 6).
 
 Table 1 specifies how each of the SFRs in this cPP must be met, using the categories above.
 
@@ -450,7 +451,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_STG_EXT.4 |Protected Local Audit Event Storage for Distributed TOEs |Feature Dependent
 |FAU_STG_EXT.5 |Protected Remote Audit Event Storage for Distributed TOEs |Feature Dependent
 |FCO_CPC_EXT.1 |Component Registration Channel Definition |All
-|FCS_CKM.1/AKG |Cryptographic Key Generation – Asymmetric Key |Onefootnote:[The overall TOE is required to support on-board key generation and (if the TOE uses X.509 certificates as in Appendix B.4.1) RFC 2986 Certificate Request generation. If not all TOE components are supporting on- board key generation (and generation of certificate requests, where applicable), the TOE shall support distribution of keys to the TOE components that are not supporting key generation themselves. Depending on the life-cycle phase, either a secure registration channel shall be used for key distribution at the point where the component is joined to the TOE or an inter-component secure channel shall be used for key distribution post-registration.]
+|FCS_CKM.1/AKG |Cryptographic Key Generation – Asymmetric Key |Onefootnote:[The overall TOE is required to support on-board key generation and (if the TOE uses X.509 certificates as in Annex B.4.1) RFC 2986 Certificate Request generation. If not all TOE components are supporting on- board key generation (and generation of certificate requests, where applicable), the TOE shall support distribution of keys to the TOE components that are not supporting key generation themselves. Depending on the life-cycle phase, either a secure registration channel shall be used for key distribution at the point where the component is joined to the TOE or an inter-component secure channel shall be used for key distribution post-registration.]
 |FCS_CKM.1/SKG |Cryptographic Key Generation - Symmetric Key |All
 |FCS_CKM.6 |Timing and Event of Cryptographic Key Destruction |All
 |FCS_CKM_EXT.7 |Cryptographic Key Agreement |All
@@ -503,7 +504,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 
 [[table-1-sfr-distributed]]_Table 1: Security Functional Requirements for Distributed TOEs_
 
-The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE. (Note that this deliverable is examined as part of the ASE_TSS.1 and AVA_VAN.1 Evaluation Activities as described in [SD, 5.1.2] and [SD, 5.6.1.1] respectively.) The ST for a distributed TOE may also introduce a ‘minimum configuration’ and identify components that may have instances added to an operational configuration without affecting the validity of the CC certification. [SD, B.4] describes Evaluation Activities relating to these equivalency aspects of a distributed TOE (and hence what is expected in the ST).
+The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE. (Note: This deliverable is examined as part of the ASE_TSS.1 and AVA_VAN.1 Evaluation Activities as described in [SD, 5.1.2] and [SD, 5.6.1.1] respectively.) The ST for a distributed TOE may also introduce a ‘minimum configuration’ and identify components that may have instances added to an operational configuration without affecting the validity of the CC certification. [SD, B.4] describes Evaluation Activities relating to these equivalency aspects of a distributed TOE (and hence what is expected in the ST).
 
 If an SSH channel is used for communication between the components, then the TSF shall be evaluated against the version of the Functional Package for Secure Shell referenced in Section 2.1. The SFR requirements in the functional package shall be considered "Feature Dependent" for the allocation of the SFRs for the Distributed TOE.
 
@@ -517,7 +518,7 @@ A Network Device has a network infrastructure role that it is designed to provid
 
 === Threats
 
-The threats for the Network Device are grouped according to functional areas of the device in the sections below. The description of each threat is then followed by a rationale describing how it is addressed by the SFRs in Section 6, Appendix A, and Appendix B.
+The threats for the Network Device are grouped according to functional areas of the device in the sections below. The description of each threat is then followed by a rationale describing how it is addressed by the SFRs in Section 6, Annex A, and Annex B.
 
 ==== Communications with the Network Device
 
@@ -593,7 +594,7 @@ SFR Rationale:
 
 Auditing of Network Device activities is a valuable tool for Administrators to monitor the status of the device. It provides the means for Administrator accountability, security functionality activity reporting, reconstruction of events, and problem analysis. Processing performed in response to device activities may give indications of a failure or compromise of the security functionality. When indications of activity that impact the security functionality are not generated and monitored, it is possible for such activities to occur without Administrator awareness. Further, if records are not generated and retained, reconstruction of the network and the ability to understand the extent of any compromise could be negatively affected. Additional concerns are the protection of the audit data that is recorded from alteration or unauthorised deletion. This could occur within the TOE, or while the audit data is in transit to an external storage device.
 
-Note: this cPP requires that the Network Device generate the audit data and have the capability to send the audit data to a trusted network entity (e.g., a syslog server).
+Note: This cPP requires that the Network Device generate the audit data and have the capability to send the audit data to a trusted network entity (e.g., a syslog server).
 
 ===== T.UNDETECTED_ACTIVITY
 
@@ -652,7 +653,7 @@ The Network Device is assumed to be physically protected in its operational envi
 
 The device is assumed to provide networking functionality as its core function. TOE administrators are assumed to treat the TOE as not being a general-purpose computing platform and will not attempt to install or execute any non-TOE software or enable functionality unrelated to the TOE’s networking purpose, regardless of whether the platform provides an interface that could technically permit such actions.
 
-NOTE: For a virtual TOE evaluated as a pND, following Case 2 vNDs as specified in Section 1.2, the VS is considered part of the TOE with only one vND instance for each physical hardware platform. The exception being where components of a distributed TOE run inside more than one virtual machine (VM) on a single VS. In Case 2 vND, no non-TOE guest VMs are allowed on the platform.
+Note: For a virtual TOE evaluated as a pND, following Case 2 vNDs as specified in Section 1.2, the VS is considered part of the TOE with only one vND instance for each physical hardware platform. The exception being where components of a distributed TOE run inside more than one virtual machine (VM) on a single VS. In Case 2 vND, no non-TOE guest VMs are allowed on the platform.
 
 {empty}[OE.NO_GENERAL_PURPOSE]
 
@@ -660,7 +661,7 @@ NOTE: For a virtual TOE evaluated as a pND, following Case 2 vNDs as specified i
 
 A standard/generic Network Device does not provide any assurance regarding the protection of traffic that traverses it. The intent is for the Network Device to protect data that originates on or is destined to the device itself, to include administrative data and audit data. 
 
-NOTE: Traffic that is traversing the Network Device, destined for another network entity, is not covered by the ND cPP. Additional protection will be covered by cPPs and PP-Modules for particular types of Network Devices (e.g., firewall).
+Note: Traffic that is traversing the Network Device, destined for another network entity, is not covered by the ND cPP. Additional protection will be covered by cPPs and PP-Modules for particular types of Network Devices (e.g., firewall).
 
 {empty}[OE.NO_THRU_TRAFFIC_PROTECTION]
 
@@ -722,7 +723,7 @@ For vNDs, it is assumed that the VS and VMs are correctly configured to support 
 
 === Organizational Security Policy
 
-An organizational security policy is a set of rules, practices, and procedures imposed by an organization to address its security needs. The description of each policy is then followed by a rationale describing how it is addressed by the SFRs in Section 6, Appendix A, and Appendix B.
+An organizational security policy is a set of rules, practices, and procedures imposed by an organization to address its security needs. The description of each policy is then followed by a rationale describing how it is addressed by the SFRs in Section 6, Annex A, and Annex B.
 
 ==== P.ACCESS_BANNER
 
@@ -787,9 +788,9 @@ If possible, the VS should be configured to make use of features that leverage t
 
 The individual security functional requirements are specified in the sections below. 
 
-In this section the mandatory SFRs that any conformant TOE must meet are presented. Based on selections made in these SFRs it will also be necessary to include some of the selection-based SFRs in Appendix B. 
+In this section the mandatory SFRs that any conformant TOE must meet are presented. Based on selections made in these SFRs it will also be necessary to include some of the selection-based SFRs in Annex B. 
 
-Additional optional SFRs may also be adopted from those listed in Appendix A.
+Additional optional SFRs may also be adopted from those listed in Annex A.
 
 For a distributed TOE, the ST author should reference Table 1 for guidance on how each SFR should be met. The table details whether SFRs should be met by all TOE components, by at least one TOE component or whether they are dependent upon the feature being implemented by the TOE component. The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE.
 
@@ -822,9 +823,9 @@ Where compliance to RFCs is referred to in SFRs, this is intended to be demonstr
 
 === SFR Architecture
 
-Figure 16, Figure 17, Figure 18, Figure 19, Figure 20, and Figure 21 give a graphical presentation of the connections between the Security Functional Requirements in Sections 6.3-6.9, Appendix A and Appendix B, and the underlying functional areas and operations that the TOE provides. The diagrams provide a context for SFRs that relates to their use in the TOE, whereas other sections define the SFRs grouped by the abstract class and family groupings in [CC2].
+Figure 16, Figure 17, Figure 18, Figure 19, Figure 20, and Figure 21 give a graphical presentation of the connections between the Security Functional Requirements in Sections 6.3-6.9, Annex A and Annex B, and the underlying functional areas and operations that the TOE provides. The diagrams provide a context for SFRs that relates to their use in the TOE, whereas other sections define the SFRs grouped by the abstract class and family groupings in [CC2].
 
-In the diagrams, the SFRs from Appendix B are both described as ‘Discretionary’, meaning that their inclusion in an ST will depend on the particular properties of a product. The SFRs from Appendix B that are required by an ST are determined by the selections made in other SFRs. For example: FTP_ITC.1 and FTP_TRP.1/Admin (in Sections 6.9.1.1 and 6.9.2.1 respectively) each contain selections of a protocol to be used for the type of secure channel described by the SFR. The selection of the protocol(s) here determines which of the protocol-specific SFRs in Section B.4.1 are also required in the ST. SFRs in Appendix A can be included in the ST if they are provided by the TOE, but are not mandatory in order for a TOE to claim conformance to this cPP.
+In the diagrams, the SFRs from Annex B are both described as ‘Discretionary’, meaning that their inclusion in an ST will depend on the particular properties of a product. The SFRs from Annex B that are required by an ST are determined by the selections made in other SFRs. For example: FTP_ITC.1 and FTP_TRP.1/Admin (in Sections 6.9.1.1 and 6.9.2.1 respectively) each contain selections of a protocol to be used for the type of secure channel described by the SFR. The selection of the protocol(s) here determines which of the protocol-specific SFRs in Section B.4.1 are also required in the ST. SFRs in Annex A can be included in the ST if they are provided by the TOE, but are not mandatory in order for a TOE to claim conformance to this cPP.
 
 [.text-center]
 image:extracted-media/media/arch_1_v4.png[image]
@@ -942,7 +943,7 @@ _The date and time information for any audit event should be recorded as part of
 |FPT_SKP_EXT.1 |None. |None.
 |FPT_TST_EXT.1 |None. |None.
 |FPT_TUD_EXT.1 |Initiation of update; result of the update attempt (success or failure). |None.
-|FPT_STM_EXT.1 |Discontinuous changes to time - either Administrator actuated or changed via an automated process. (Note that no continuous changes to time need to be logged. See also application note on FPT_STM_EXT.1). |For discontinuous changes to time: The old and new values for the time. Origin of the attempt to change time for success and failure (e.g., IP address).
+|FPT_STM_EXT.1 |Discontinuous changes to time - either Administrator actuated or changed via an automated process. (Note: No continuous changes to time need to be logged. See also application note on FPT_STM_EXT.1). |For discontinuous changes to time: The old and new values for the time. Origin of the attempt to change time for success and failure (e.g., IP address).
 |FTA_SSL.3 |The termination of a remote session by the session locking mechanism. |None.
 |FTA_SSL.4 |The termination of an interactive session. |None.
 |FTA_TAB.1 |None. |None.
@@ -970,7 +971,7 @@ a|
 
 *_Application Note {counter:appnote_count}_*
 
-_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Appendix A, Appendix B, PP-Module(s), and functional package(s). For all SFRs included in the ST, the ST must include the relevant additional auditable events specified in Table 12 for optional SFRs, Table 13 for selection-based SFRs, the claimed PP-Module(s), and the claimed functional package(s). All audit events defined in Table 2 have to be included in the ST as they are mandatory._
+_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Annex A, Annex B, PP-Module(s), and functional package(s). For all SFRs included in the ST, the ST must include the relevant additional auditable events specified in Table 12 for optional SFRs, Table 13 for selection-based SFRs, the claimed PP-Module(s), and the claimed functional package(s). All audit events defined in Table 2 have to be included in the ST as they are mandatory._
 
 ===== FAU_GEN.2 User identity association
 
@@ -1040,13 +1041,13 @@ _For distributed TOEs, each component is not required to store generated audit d
 
 *_Application Note {counter:appnote_count}_*
 
-_If "ability to view locally" is selected in FAU_STG_EXT.1.6, then FAU_SAR.1 from Appendix B must be included in the ST._
+_If "ability to view locally" is selected in FAU_STG_EXT.1.6, then FAU_SAR.1 from Annex B must be included in the ST._
 
 === Cryptographic Support (FCS)
 
 This section defines cryptographic requirements that underlie the other security properties of the TOE, covering key generation and random bit generation, key agreement methods, key destruction, and the various types of cryptographic operation to provide AES encryption/decryption, signature generation and verification, hash generation, and keyed hash generation.
 
-These SFRs support the implementation of the selection-based protocol-level SFRs in Appendix B.
+These SFRs support the implementation of the selection-based protocol-level SFRs in Annex B.
 
 ==== Cryptographic Key Management (FCS_CKM)
 
@@ -1221,7 +1222,7 @@ _The elliptic curves used for the key agreement scheme correlate with the curves
 
 _The static domain parameters approved for the finite field-based key agreement scheme are specified by the key generation according to FCS_CKM.1.1/AKG._
 
-_For Key Transport, see FCS_CKM.2 in Appendix A._
+_For Key Transport, see FCS_CKM.2 in Annex A._
 
 ==== Cryptographic Operation (FCS_COP)
 
@@ -1247,9 +1248,9 @@ _For Key Transport, see FCS_CKM.2 in Appendix A._
 
 _The ST author selects the mode or modes in which AES operates._ 
 
-_If CBC mode, CTR mode, or XTS mode is selected then FCS_COP.1/SKC from Appendix B must be included._ 
+_If CBC mode, CTR mode, or XTS mode is selected then FCS_COP.1/SKC from Annex B must be included._ 
 
-_If CCM mode or GCM mode is selected then FCS_COP.1/AEAD from Appendix B must be included._
+_If CCM mode or GCM mode is selected then FCS_COP.1/AEAD from Annex B must be included._
 
 *FCS_COP.1/SigGen Cryptographic Operation - Signature Generation* 
 
@@ -1315,7 +1316,7 @@ Tree height = [selection: _10, 16, 20_]|RFC 8391 [XMSS], NIST SP 800-208 [parame
 
 _The ST Author should choose the algorithm implemented to perform verification of digital signatures. For the algorithm chosen, the ST Author should make the appropriate assignments/selections to specify the parameters that are implemented for that algorithm. In particular, if ECDSA is selected as one of the signature algorithms, the key size specified must match the selection for the curve used in the algorithm._
 
-_If LMS or XMSS is selected, then FCS_COP.1/XOF from Appendix B must be included._ 
+_If LMS or XMSS is selected, then FCS_COP.1/XOF from Annex B must be included._ 
 
 *FCS_COP.1/Hash Cryptographic Operation - Hashing*
 
@@ -1371,11 +1372,11 @@ The following table provides the allowed choices for completion of the selection
 
 _For the selection in this requirement, the ST author selects "TSF entropy source" if a single entropy source is used as input to the DRBG. The ST author selects "multiple TSF entropy sources" if a seed is formed from a combination of two or more entropy sources within the TOE boundary. If the TSF implements two or more separate DRBGs that are seeded in separate manners, this SFR should be iterated for each DRBG. If multiple distinct entropy sources exist such that each DRBG only uses one of them, then each iteration would select "TSF entropy source"; "multiple TSF entropy sources" is only selected if a single DRBG uses multiple entropy sources for its seed. The ST author selects "TSF interface for seeding" if entropy source data is generated outside the TOE boundary._ 
 
-_If "TSF entropy source" is selected in FCS_RBG.1.2, FCS_RBG.3 must be claimed from Appendix B._
+_If "TSF entropy source" is selected in FCS_RBG.1.2, FCS_RBG.3 must be claimed from Annex B._
 
-_If "multiple TSF entropy sources" is selected in FCS_RBG.1.2, FCS_RBG.4 and FCS_RBG.5 must be claimed from Appendix B._
+_If "multiple TSF entropy sources" is selected in FCS_RBG.1.2, FCS_RBG.4 and FCS_RBG.5 must be claimed from Annex B._
 
-_If "TSF interface for seeding" is selected in FCS_RBG.1.2, FCS_RBG.2 must be claimed from Appendix B._
+_If "TSF interface for seeding" is selected in FCS_RBG.1.2, FCS_RBG.2 must be claimed from Annex B._
 
 *FCS_RBG.1.3* The TSF shall update the DRBG state by [selection: reseeding, uninstantiating and re-instantiating] using a [selection: TSF entropy source [assignment: _name of entropy source_], *multiple TSF entropy sources [assignment: _name of entropy sources_]*, TSF interface for obtaining entropy [assignment: _name of the interface_]] in the following situations: [selection:
 
@@ -1430,7 +1431,7 @@ _Local administration is defined as administration using a dedicated physical in
 
 _The TOE must support at least one authentication mechanism where the verification step is processed locally, as such “external authentication server” should not be the only available authentication method._
 
-_The ST author selects the authentication mechanisms necessary to support remote administration. If "Web GUI password" or "SSH password" is selected for remote authentication mechanism the ST author specifies an appropriate cryptographic protocol in FTP_TRP.1/Admin (e.g., "HTTPS" or "SSH") and includes FIA_AFL.1, FIA_PMG_EXT.1, FPT_APW_EXT.1 from Appendix B._
+_The ST author selects the authentication mechanisms necessary to support remote administration. If "Web GUI password" or "SSH password" is selected for remote authentication mechanism the ST author specifies an appropriate cryptographic protocol in FTP_TRP.1/Admin (e.g., "HTTPS" or "SSH") and includes FIA_AFL.1, FIA_PMG_EXT.1, FPT_APW_EXT.1 from Annex B._
 
 _If integration with an external X.500 Directory is supported and enabled, the "external authentication server" must be selected and an appropriate cryptographic protocol with each "authentication server" must be selected in FTP_ITC.1. Since the identity verification step is performed remotely, FIA_AFL.1, FIA_PMG_EXT.1, FPT_APW_EXT.1 requirements are not enforced by the TOE and therefore are not applicable to the “external authentication server” selection._
 
@@ -1470,7 +1471,7 @@ _FMT_MOF.1/ManualUpdate restricts the initiation of manual updates to Security A
 
 *_Application Note {counter:appnote_count}_*
 
-_The word ‘manage’ includes but is not limited to create, initialize, view, change default, modify, delete, clear, and append. This SFR includes also the resetting of administrative passwords by the Security Administrator. The identifier ‘CoreData’ has been added here to separate this iteration of FMT_MTD.1 from the optional iteration of FMT_MTD.1 defined in Appendix A.4.2.1 (FMT_MTD.1/CryptoKeys)._
+_The word ‘manage’ includes but is not limited to create, initialize, view, change default, modify, delete, clear, and append. This SFR includes also the resetting of administrative passwords by the Security Administrator. The identifier ‘CoreData’ has been added here to separate this iteration of FMT_MTD.1 from the optional iteration of FMT_MTD.1 defined in Annex A.4.2.1 (FMT_MTD.1/CryptoKeys)._
 
 ==== Specification of Management Functions (FMT_SMF)
 
@@ -1517,86 +1518,86 @@ size)_;
 | FMT_SMF.1.1 Management Function
 | Management Function Guidance
 
-| Ability to administer the TOE remotely
-| The TOE must provide functionality for remote administration. Local administration is optional. This cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Remote administrative sessions are specified in FTP_TRP.1/Admin.
+| _Ability to administer the TOE remotely_
+| _The TOE must provide functionality for remote administration. Local administration is optional. This cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Remote administrative sessions are specified in FTP_TRP.1/Admin._
 
-| Ability to configure the access banner
-| The TOE must provide functionality to configure the access banner for FTA_TAB.1 and the session inactivity time(s) for FTA_SSL.3 and (if included) FTA_SSL_EXT.1, though an access banner is only required for each interactive (human-computer) interface (HCI), not for any programmatic interface [application programming interface (API), e.g., REST API].
+| _Ability to configure the access banner_
+| _The TOE must provide functionality to configure the access banner for FTA_TAB.1 and the session inactivity time(s) for FTA_SSL.3 and (if included) FTA_SSL_EXT.1, though an access banner is only required for each interactive (human-computer) interface (HCI), not for any programmatic interface [application programming interface (API), e.g., REST API]._
 
-| Ability to configure the remote session inactivity time before session termination
-| The TOE must provide functionality to configure the access banner for FTA_TAB.1 and the session inactivity time(s) for FTA_SSL.3 and (if included) FTA_SSL_EXT.1, though an access banner is only required for each interactive (human-computer) interface (HCI), not for any programmatic interface [application programming interface (API), e.g., REST API].
+| _Ability to configure the remote session inactivity time before session termination_
+| _The TOE must provide functionality to configure the access banner for FTA_TAB.1 and the session inactivity time(s) for FTA_SSL.3 and (if included) FTA_SSL_EXT.1, though an access banner is only required for each interactive (human-computer) interface (HCI), not for any programmatic interface [application programming interface (API), e.g., REST API]._
 
-| Ability to update the TOE, and to verify the updates using digital signature capability prior to installing those updates
-| The option “Ability to update the TOE, and to verify the updates using digital signature capability prior to installing those updates” includes the relevant management functions from FMT_MOF.1/ManualUpdate and FPT_TUD_EXT.1. Based on selections in FPT_TUD_EXT.1.2, FMT_MOF.1/AutoUpdate must be included if the option “Ability to enable or disable automatic checking for updates or automatic updates” is included in the ST.
+| _Ability to update the TOE, and to verify the updates using digital signature capability prior to installing those updates_
+| _The option “Ability to update the TOE, and to verify the updates using digital signature capability prior to installing those updates” includes the relevant management functions from FMT_MOF.1/ManualUpdate and FPT_TUD_EXT.1. Based on selections in FPT_TUD_EXT.1.2, FMT_MOF.1/AutoUpdate must be included if the option “Ability to enable or disable automatic checking for updates or automatic updates” is included in the ST._
 
-| Ability to start and stop services
-| The selection "Ability to start and stop services" should be included in the ST if the TOE supports starting and stopping services of the TOE. If this selection is included in the ST, FMT_MOF.1/Services must be claimed in the ST.
+| _Ability to start and stop services_
+| _The selection "Ability to start and stop services" should be included in the ST if the TOE supports starting and stopping services of the TOE. If this selection is included in the ST, FMT_MOF.1/Services must be claimed in the ST._
 
-| Ability to configure local audit behaviour (e.g., changes to storage locations for audit; changes to behaviour when local audit storage space is full; changes to local audit storage size)
-| The selection “Ability to configure local audit behaviour” includes the relevant management functions from FMT_MOF.1/Services and FMT_MOF.1/Functions, (for all of these SFRs that are included in the ST) and is intended to cover security relevant configuration options (if any) to the audit behaviour (like changes to the behaviour when the local audit storage space is full). The option "Ability to modify the behaviour of the transmission of audit data to an external IT entity" is intended to cover the management functionalities related to the transmission of local audit information to an external IT entity.
+| _Ability to configure local audit behaviour (e.g., changes to storage locations for audit; changes to behaviour when local audit storage space is full; changes to local audit storage size)_
+| _The selection “Ability to configure local audit behaviour” includes the relevant management functions from FMT_MOF.1/Services and FMT_MOF.1/Functions, (for all of these SFRs that are included in the ST) and is intended to cover security relevant configuration options (if any) to the audit behaviour (like changes to the behaviour when the local audit storage space is full). The option "Ability to modify the behaviour of the transmission of audit data to an external IT entity" is intended to cover the management functionalities related to the transmission of local audit information to an external IT entity._
 
-| Ability to modify the behaviour of the transmission of audit data to an external IT entity
-| The option "Ability to modify the behaviour of the transmission of audit data to an external IT entity" is intended to cover the management functionalities related to the transmission of local audit information to an external IT entity.
+| _Ability to modify the behaviour of the transmission of audit data to an external IT entity_
+| _The option "Ability to modify the behaviour of the transmission of audit data to an external IT entity" is intended to cover the management functionalities related to the transmission of local audit information to an external IT entity._
 
-| Ability to configure the list of TOE-provided services available before an entity is identified and authenticated, as specified in FIA_UIA_EXT.1
-| The selection "Ability to configure the list of TOE-provided services available before an entity is identified and authenticated, as specified in FIA_UIA_EXT.1" should be included in the ST if the TOE supports configuration of the list of TOE-provided services which are available before any entity is identified and authenticated. The term 'list' refers to the resulting list of available services as a result of the configuration activities. The configuration activity itself does not necessarily have to be modification of a list but could be any type of activation and deactivation procedure.
+| _Ability to configure the list of TOE-provided services available before an entity is identified and authenticated, as specified in FIA_UIA_EXT.1_
+| _The selection "Ability to configure the list of TOE-provided services available before an entity is identified and authenticated, as specified in FIA_UIA_EXT.1" should be included in the ST if the TOE supports configuration of the list of TOE-provided services which are available before any entity is identified and authenticated. The term 'list' refers to the resulting list of available services as a result of the configuration activities. The configuration activity itself does not necessarily have to be modification of a list but could be any type of activation and deactivation procedure._
 
-| Ability to manage the cryptographic keys
-| The selection "Ability to manage the cryptographic keys" should be included in the ST if the TOE supports management of cryptographic keys (e.g., generation of cryptographic keys). If this selection is included in the ST, FMT_MTD.1/CryptoKeys must be claimed in the ST.
+| _Ability to manage the cryptographic keys_
+| _The selection "Ability to manage the cryptographic keys" should be included in the ST if the TOE supports management of cryptographic keys (e.g., generation of cryptographic keys). If this selection is included in the ST, FMT_MTD.1/CryptoKeys must be claimed in the ST._
 
-| Ability to configure the cryptographic functionality
-| For distributed TOEs, that implement a registration channel (as described in FCO_CPC_EXT.1.2), the ST author uses the selection “Ability to configure the cryptographic functionality” in this SFR, and its corresponding mapping in the TSS, to describe the configuration of any cryptographic aspects of the registration channel that can be modified by the operational environment in order to improve the channel security (reference the description of the content of Preparative Procedures in [SD, 3.4.1]).
+| _Ability to configure the cryptographic functionality_
+| _For distributed TOEs, that implement a registration channel (as described in FCO_CPC_EXT.1.2), the ST author uses the selection “Ability to configure the cryptographic functionality” in this SFR, and its corresponding mapping in the TSS, to describe the configuration of any cryptographic aspects of the registration channel that can be modified by the operational environment in order to improve the channel security (reference the description of the content of Preparative Procedures in [SD, 3.4.1])._
 
-| Ability to configure thresholds for SSH rekeying
-| The selection "Ability to configure thresholds for SSH rekeying" may only be selected if SSH is selected within FTP_ITC.1, FTP_TRP.1 or FPT_ITT.1. This only applies if the TOE claims conformance to the Functional Package for SSH and the rekey threshold is configurable.
+| _Ability to configure thresholds for SSH rekeying_
+| _The selection "Ability to configure thresholds for SSH rekeying" may only be selected if SSH is selected within FTP_ITC.1, FTP_TRP.1 or FPT_ITT.1. This only applies if the TOE claims conformance to the Functional Package for SSH and the rekey threshold is configurable._
 
-| Ability to configure the lifetime for IPsec SAs
-| The selection “Ability to configure lifetime for IPsec SAs” must be included in the ST if the TOE supports secure communication via IPsec and the FCS_IPSEC_EXT.1 requirements are included in the ST. The configuration of the lifetime for IPsec SAs needs to be in line with the selection in FCS_IPSEC_EXT.1.7.
+| _Ability to configure the lifetime for IPsec SAs_
+| _The selection “Ability to configure lifetime for IPsec SAs” must be included in the ST if the TOE supports secure communication via IPsec and the FCS_IPSEC_EXT.1 requirements are included in the ST. The configuration of the lifetime for IPsec SAs needs to be in line with the selection in FCS_IPSEC_EXT.1.7._
 
-| Ability to configure the list of supported (D)TLS ciphers
-| The selection "Ability to configure the list of supported (D)TLS ciphers" must be included in the ST if the TOE implements TLS or DTLS and the supported ciphersuites are configurable. This only applies if the TOE claims conformance to the Functional Package for TLS, and only if such a configuration option exists.
+| _Ability to configure the list of supported (D)TLS ciphers_
+| _The selection "Ability to configure the list of supported (D)TLS ciphers" must be included in the ST if the TOE implements TLS or DTLS and the supported ciphersuites are configurable. This only applies if the TOE claims conformance to the Functional Package for TLS, and only if such a configuration option exists._
 
-| Ability to configure the interaction between TOE components
-| For distributed TOEs, the interaction between TOE components will be configurable (see FCO_CPC_EXT.1). Therefore, the ST author includes the selection "Ability to configure the interaction between TOE components" for distributed TOEs. A simple example would be the change of communication protocol according to FPT_ITT.1. Another example would be changing the management of a TOE component from direct remote administration to remote administration through another TOE component. A more complex use case would be if the realization of an SFR is achieved through two or more TOE components and the responsibilities between the two or more components could be modified.
+| _Ability to configure the interaction between TOE components_
+| _For distributed TOEs, the interaction between TOE components will be configurable (see FCO_CPC_EXT.1). Therefore, the ST author includes the selection "Ability to configure the interaction between TOE components" for distributed TOEs. A simple example would be the change of communication protocol according to FPT_ITT.1. Another example would be changing the management of a TOE component from direct remote administration to remote administration through another TOE component. A more complex use case would be if the realization of an SFR is achieved through two or more TOE components and the responsibilities between the two or more components could be modified._
 
-| Ability to enable or disable automatic checking for updates or automatic updates
-| Based on selections in FPT_TUD_EXT.1.2, FMT_MOF.1/AutoUpdate must be included if the option “Ability to enable or disable automatic checking for updates or automatic updates” is included in the ST.
+| _Ability to enable or disable automatic checking for updates or automatic updates_
+| _Based on selections in FPT_TUD_EXT.1.2, FMT_MOF.1/AutoUpdate must be included if the option “Ability to enable or disable automatic checking for updates or automatic updates” is included in the ST._
 
-| Ability to re-enable an Administrator account
-| If the TOE offers the ability for a remote Administrator account to be disabled in line with FIA_AFL.1 then the ST author must select the option “Ability to re-enable an Administrator account” to allow the account to be re-enabled by a local Administrator.
+| _Ability to re-enable an Administrator account_
+| _If the TOE offers the ability for a remote Administrator account to be disabled in line with FIA_AFL.1 then the ST author must select the option “Ability to re-enable an Administrator account” to allow the account to be re-enabled by a local Administrator._
 
-| Ability to set the time which is used for time-stamps
-| The selection “Ability to set the time which is used for time-stamps” should be included in the ST if the TOE allows the Administrator to set the time of the device which is then used in time stamps. This option should not be selected if the TOE does not allow manual time setting but only relies on synchronization with external time sources like NTP servers.
+| _Ability to set the time which is used for time-stamps_
+| _The selection “Ability to set the time which is used for time-stamps” should be included in the ST if the TOE allows the Administrator to set the time of the device which is then used in time stamps. This option should not be selected if the TOE does not allow manual time setting but only relies on synchronization with external time sources like NTP servers._
 
-| Ability to configure NTP
-| The selection “Ability to configure NTP” should be included in the ST if the TOE uses NTP for timestamp configuration. If selected, FCS_NTP_EXT.1 must be included in the ST as well.
+| _Ability to configure NTP_
+| _The selection “Ability to configure NTP” should be included in the ST if the TOE uses NTP for timestamp configuration. If selected, FCS_NTP_EXT.1 must be included in the ST as well._
 
-| Ability to configure the reference identifier for the peer
-| The selection “Ability to configure the reference identifier for the peer” should be included in the ST if the TOE allows the Administrator to specify the expected identity of a remote peer when establishing secure communications using a protocol included in the ST. For TOEs that support only IP address and FQDN identifier types, configuration of the reference identifier may be the same as configuration of the peer’s name for the purposes of connection.
+| _Ability to configure the reference identifier for the peer_
+| _The selection “Ability to configure the reference identifier for the peer” should be included in the ST if the TOE allows the Administrator to specify the expected identity of a remote peer when establishing secure communications using a protocol included in the ST. For TOEs that support only IP address and FQDN identifier types, configuration of the reference identifier may be the same as configuration of the peer’s name for the purposes of connection._
 
-| Ability to manage the TOE’s trust store and designate X509.v3 certificates as trust anchors
-| The selection “Ability to manage the TOE’s trust store and designate X509.v3 certificates as trust anchors" should be included in the ST if the TOE supports management and configuration of the TOE’s trust store. This means the TOE supports X.509v3 certificates for some security functions. This only applies if the TOE claims conformance to the Functional Package for X.509.
+| _Ability to manage the TOE’s trust store and designate X509.v3 certificates as trust anchors_
+| _The selection “Ability to manage the TOE’s trust store and designate X509.v3 certificates as trust anchors" should be included in the ST if the TOE supports management and configuration of the TOE’s trust store. This means the TOE supports X.509v3 certificates for some security functions. This only applies if the TOE claims conformance to the Functional Package for X.509._
 
-| Ability to generate Certificate Signing Request (CSR) and process CA certificate response
-| The selection "Ability to generate Certificate Signing Request (CSR) and process CA certificate response" must be included in the ST if the TOE implements Certificate Request or Enrollment Request processes. This only applies if the TOE claims conformance to the Functional Package for X.509, and only when FIA_X509_EXT.3 from the functional package is claimed.
+| _Ability to generate Certificate Signing Request (CSR) and process CA certificate response_
+| _The selection "Ability to generate Certificate Signing Request (CSR) and process CA certificate response" must be included in the ST if the TOE implements Certificate Request or Enrollment Request processes. This only applies if the TOE claims conformance to the Functional Package for X.509, and only when FIA_X509_EXT.3 from the functional package is claimed._
 
-| Ability to administer the TOE locally
-| The TOE must provide functionality for remote administration. Local administration is optional. This cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Remote administrative sessions are specified in FTP_TRP.1/Admin.
+| _Ability to administer the TOE locally_
+| _The TOE must provide functionality for remote administration. Local administration is optional. This cPP does not mandate a specific security management function to be available either through the local administration interface, the remote administration interface or both. Remote administrative sessions are specified in FTP_TRP.1/Admin._
 
-| Ability to configure the local session inactivity time before session termination or locking
-| The TOE must provide functionality to configure the access banner for FTA_TAB.1 and the session inactivity time(s) for FTA_SSL.3 and (if included) FTA_SSL_EXT.1, though an access banner is only required for each interactive (human-computer) interface (HCI), not for any programmatic interface [application programming interface (API), e.g., REST API].
+| _Ability to configure the local session inactivity time before session termination or locking_
+| _The TOE must provide functionality to configure the access banner for FTA_TAB.1 and the session inactivity time(s) for FTA_SSL.3 and (if included) FTA_SSL_EXT.1, though an access banner is only required for each interactive (human-computer) interface (HCI), not for any programmatic interface [application programming interface (API), e.g., REST API]._
 
-| Ability to configure the authentication failure parameters for FIA_AFL.1
-| This management function enables administrators to configure parameters related to authentication failure, such as the threshold for unsuccessful login attempts and the actions the TOE takes when that threshold is reached (e.g., account lockout, notification, or timed delays).
+| _Ability to configure the authentication failure parameters for FIA_AFL.1_
+| _This management function enables administrators to configure parameters related to authentication failure, such as the threshold for unsuccessful login attempts and the actions the TOE takes when that threshold is reached (e.g., account lockout, notification, or timed delays)._
 
-| Ability to manage the trusted public keys database
-| If the TOE offers ability for a remote authorised IT entities or authorised remote Administrators to connect via an interface secured with SSH, then the ST author must select the option “Ability to manage the trusted public keys database” to account for management of public key authentication. It is acceptable for this management function to be implemented as part of general TOE management functionality or as a standalone management function.
+| _Ability to manage the trusted public keys database_
+| _If the TOE offers ability for a remote authorised IT entities or authorised remote Administrators to connect via an interface secured with SSH, then the ST author must select the option “Ability to manage the trusted public keys database” to account for management of public key authentication. It is acceptable for this management function to be implemented as part of general TOE management functionality or as a standalone management function._
 
-| Ability to manage the public key or certificate used to validate the digital update
-| If the TOE offers the ability to modify the public key used to validate the digital update, then the ST author must select the option “Ability to manage the public key or certificate used to validate the digital update”. There is no requirement to implement this as a standalone management function, it is acceptable for this management function to be implemented as part of the trusted update (FPT_TUD_EXT.1) functionality.
+| _Ability to manage the public key or certificate used to validate the digital update_
+| _If the TOE offers the ability to modify the public key used to validate the digital update, then the ST author must select the option “Ability to manage the public key or certificate used to validate the digital update”. There is no requirement to implement this as a standalone management function, it is acceptable for this management function to be implemented as part of the trusted update (FPT_TUD_EXT.1) functionality._
 
-| No other capabilities
-| If the TOE offers the ability for the Security Administrator to configure the audit behaviour, configure the services available prior to identification or authentication, or if any of the cryptographic functionality on the TOE can be configured, or if the ST is describing a distributed TOE, then the ST author makes the appropriate choice or choices in the second selection, otherwise select the option "No other capabilities" (in the latter case the selection may alternatively be left blank in the ST).
+| _No other capabilities_
+| _If the TOE offers the ability for the Security Administrator to configure the audit behaviour, configure the services available prior to identification or authentication, or if any of the cryptographic functionality on the TOE can be configured, or if the ST is describing a distributed TOE, then the ST author makes the appropriate choice or choices in the second selection, otherwise select the option "No other capabilities" (in the latter case the selection may alternatively be left blank in the ST)._
 |===
 
 [[table-10-fmt-smf11]]_Table 10: FMT_SMF.1.1 Management Function Guidance_
@@ -1744,7 +1745,7 @@ _All discrete firmware and software elements (e.g., applications, drivers, and k
 
 === TOE access (FTA)
 
-This section specifies requirements associated with security of administrative sessions carried out on the TOE. In particular, remote sessions are monitored for inactivity and either locked or terminated when a threshold time period is reached. If the TOE supports local administration the ST author includes FTA_SSL_EXT.1 from Appendix B and local sessionsfootnote:[Refer to Application Note 22 for the definition of local and remote sessions.] must also monitored for inactivity and either locked or terminated when a threshold time period is reached. Administrators must also be able to positively terminate their own interactive sessions and must have an advisory notice displayed at the start of each session.
+This section specifies requirements associated with security of administrative sessions carried out on the TOE. In particular, remote sessions are monitored for inactivity and either locked or terminated when a threshold time period is reached. If the TOE supports local administration the ST author includes FTA_SSL_EXT.1 from Annex B and local sessionsfootnote:[Refer to Application Note 22 for the definition of local and remote sessions.] must also monitored for inactivity and either locked or terminated when a threshold time period is reached. Administrators must also be able to positively terminate their own interactive sessions and must have an advisory notice displayed at the start of each session.
 
 ==== Session locking and termination (FTA_SSL)
 
@@ -1797,7 +1798,7 @@ In addition to providing protection from disclosure (and detection of modificati
 
 *_Application Note {counter:appnote_count}_*
 
-_The intent of the above requirement is to provide a means by which a cryptographic protocol may be used to protect external communications with authorised IT entities that the TOE interacts with to perform its functions. The TOE uses at least one of the listed protocols for communications with the server that collects the audit information. If it communicates with an authentication server (e.g., RADIUS), then the ST author chooses “authentication server” in FTP_ITC.1.1 and this connection must be capable of being protected by one of the listed protocols. If other authorised IT entities are protected, the ST author makes the appropriate assignments (for those entities) and selections (for the protocols that are used to protect those connections). The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection are included in the ST._
+_The intent of the above requirement is to provide a means by which a cryptographic protocol may be used to protect external communications with authorised IT entities that the TOE interacts with to perform its functions. The TOE uses at least one of the listed protocols for communications with the server that collects the audit information. If it communicates with an authentication server (e.g., RADIUS), then the ST author chooses “authentication server” in FTP_ITC.1.1 and this connection must be capable of being protected by one of the listed protocols. If other authorised IT entities are protected, the ST author makes the appropriate assignments (for those entities) and selections (for the protocols that are used to protect those connections). The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Annex B corresponding to their selection are included in the ST._
 
 _While there are no requirements on the party initiating the communication, the ST author lists in the assignment for FTP_ITC.1.3 the services for which the TOE can initiate the communication with the authorised IT entity._
 
@@ -1805,7 +1806,7 @@ _The requirement implies that not only are communications protected when they ar
 
 _Where X.509 certificates are used to authenticate remote endpoints in support of an FTP_ITC.1 channel, relevant SFR claims from the Functional Package for X.509 must be used. This requires support for attributes such as certificate revocation status and intermediate CAs._
 
-_If the TOE claims FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication) from the Functional Package for TLS and the TOE passes presented identifiers of clients used for client authentication to a directory server for comparison, then the connection to the directory server used to verify presented identifiers of TLS clients needs to be protected by a trusted channel (i.e., FTP_ITC.1). If a trusted channel is used for the integrity protection for communication between the TOE and a directory server, then the directory server must be added to the assignment for other capabilities in FTP_ITC.1. Note that the directory server is only expected to handle the comparison of the presented identifier but not to perform full X.509 certificate validation on behalf of the TOE._
+_If the TOE claims FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication) from the Functional Package for TLS and the TOE passes presented identifiers of clients used for client authentication to a directory server for comparison, then the connection to the directory server used to verify presented identifiers of TLS clients needs to be protected by a trusted channel (i.e., FTP_ITC.1). If a trusted channel is used for the integrity protection for communication between the TOE and a directory server, then the directory server must be added to the assignment for other capabilities in FTP_ITC.1. Note: The directory server is only expected to handle the comparison of the presented identifier but not to perform full X.509 certificate validation on behalf of the TOE._
 
 _See Section B.4.1 for additional requirements._
 
@@ -1827,7 +1828,7 @@ _If "SSH" is selected, then the TSF is validated against the applicable requirem
 
 *_Application Note {counter:appnote_count}_*
 
-_This requirement ensures that authorised remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Appendix B corresponding to their selection, or the protocol requirements of the packages specified in Section 2.1 are included in the ST. Where X.509 certificates are used to authenticate authorised Administrators, FIA_X509_EXT.1 in the Functional Package for X.509 is to be used (which requires checking certificate revocation, implementing a trust store, and supporting a certificate chain)._
+_This requirement ensures that authorised remote Administrators initiate all communication with the TOE via a human-interactive trusted path, and that all communication with the TOE by remote Administrators is performed over this path. The data passed in this trusted communication channel is encrypted as defined by the protocol chosen in the first selection. The ST author selects the mechanism or mechanisms supported by the TOE, and then ensures that the detailed protocol requirements in Annex B corresponding to their selection, or the protocol requirements of the packages specified in Section 2.1 are included in the ST. Where X.509 certificates are used to authenticate authorised Administrators, FIA_X509_EXT.1 in the Functional Package for X.509 is to be used (which requires checking certificate revocation, implementing a trust store, and supporting a certificate chain)._
 
 _See Section B.4.1 for additional requirements._
 
@@ -1841,7 +1842,7 @@ This cPP identifies the Security Assurance Requirements (SARs) to frame the exte
 
 This section lists the set of SARs from CC part 3 that are required in evaluations against this cPP. Individual Evaluation Activities to be performed are specified in [SD].
 
-The general model for evaluation of TOEs against STs written to conform to this cPP is as follows: after the ST has been approved for evaluation, the ITSEF will obtain the TOE, supporting environmental IT (if required), and the guidance documentation for the TOE. The ITSEF is expected to perform actions mandated by the Common Evaluation Methodology (CEM) for the ASE and ALC SARs. The ITSEF also performs the Evaluation Activities contained within the SD, which are intended to be an interpretation of the other CEM assurance requirements as they apply to the specific technology instantiated in the TOE. The Evaluation Activities that are captured in [SD] also provide clarification as to what the developer needs to provide to demonstrate the TOE is compliant with the cPP.
+The general model for evaluation of TOEs against STs written to conform to this cPP is as follows: after the ST has been approved for evaluation, the IT Security Evaluation Facility (ITSEF) will obtain the TOE, supporting environmental IT (if required), and the guidance documentation for the TOE. The ITSEF is expected to perform actions mandated by the Common Evaluation Methodology (CEM) for the ASE and ALC SARs. The ITSEF also performs the Evaluation Activities contained within the SD, which are intended to be an interpretation of the other CEM assurance requirements as they apply to the specific technology instantiated in the TOE. The Evaluation Activities that are captured in [SD] also provide clarification as to what the developer needs to provide to demonstrate the TOE is compliant with the cPP.
 
 The TOE security assurance requirements are identified in Table 11.
 
@@ -1870,7 +1871,7 @@ The TOE security assurance requirements are identified in Table 11.
 
 The ST is evaluated as per ASE activities defined in the CEM. In addition, there may be Evaluation Activities specified within [SD] that call for necessary descriptions to be included in the TSS that are specific to the TOE technology type.
 
-Appendix D provides a description of the information expected to be provided regarding the quality of entropy in the random bit generator.
+Annex D provides a description of the information expected to be provided regarding the quality of entropy in the random bit generator.
 
 *ASE_TSS.1.1C Refinement:* The TOE summary specification shall describe how the TOE meets each SFR. *In the case of entropy analysis, the TSS is used in conjunction with required supplementary information on Entropy.*
 
@@ -1938,14 +1939,14 @@ The iTC is expected to survey open sources to discover what vulnerabilities have
 
 ==== Vulnerability survey (AVA_VAN.1)
 
-[SD, Appendix A] provides a guide to the evaluator in performing a vulnerability survey.
+[SD, Annex A] provides a guide to the evaluator in performing a vulnerability survey.
 
 [appendix]
 == Optional Security Requirements
 
 As indicated in the introduction to this cPP, the baseline requirements (those that must be performed by the TOE) are contained in the body of this cPP. Additionally, there are two other types of requirements specified in Appendices A and B.
 
-The first type (in this Appendix) comprises requirements that can be included in the ST but are not mandatory for a TOE to claim conformance to this cPP. The second type (in Appendix B) comprises requirements based on selections in other SFRs from the cPP: if certain selections are made, then additional requirements in that appendix will need to be included in the body of the ST (e.g., cryptographic protocols selected in a trusted channel requirement).
+The first type (in this Annex) comprises requirements that can be included in the ST but are not mandatory for a TOE to claim conformance to this cPP. The second type (in Annex B) comprises requirements based on selections in other SFRs from the cPP: if certain selections are made, then additional requirements in that Annex will need to be included in the body of the ST (e.g., cryptographic protocols selected in a trusted channel requirement).
 
 If a TOE fulfils any of the optional requirements, the developer is encouraged to add the related functionality to the ST. Therefore, in the application notes of this section the wording "This option should be chosen..." is repeatedly used. But it also is used to emphasize that this option should only be chosen if the TOE provides the related functionality and that it is not necessary to implement the related functionality to be compliant to the cPP. ST authors are free to choose none, some or all SFRs defined in this section. Just the fact that a product supports a certain functionality does not mandate to add any SFR or SAR defined in this section.
 
@@ -2042,15 +2043,15 @@ _If FAU_STG_EXT.3 is added to the ST, the ST has to make clear any situations in
 _This requirement specifies key transport schemes.  For key agreement see FCS_CKM_EXT.7._ 
 _Key transport schemes refer to cases in which one party has a key to share with another party. Key encapsulation is used when ML-KEM is used as the method of key establishment. Key wrapping and encrypted channels are used in support of wireless LAN communications._  
 
-_If “key encapsulation” is selected, FCS_COP.1/KeyEncap from Appendix B must be claimed, which specifies the relevant list of standards._
+_If “key encapsulation” is selected, FCS_COP.1/KeyEncap from Annex B must be claimed, which specifies the relevant list of standards._
 
-_If “key wrapping” is selected, FCS_COP.1/KeyWrap from Appendix B must be claimed, which specifies the relevant list of standards._
+_If “key wrapping” is selected, FCS_COP.1/KeyWrap from Annex B must be claimed, which specifies the relevant list of standards._
 
 === Identification and Authentication (FIA)
 
 ==== Authentication using X.509 certificates (Extended)
 
-Please see Appendix B.4.1 for a comprehensive description of the applicability and usage of the X.509 Functional Package.
+Please see Annex B.4.1 for a comprehensive description of the applicability and usage of the X.509 Functional Package.
 
 === Protection of the TSF (FPT)
 
@@ -2100,7 +2101,7 @@ _The selection at the end of FTP_TRP.1.1/Join recognises that in some cases conf
 
 _The assignment in FTP_TRP.1.3/Join ensures that the ST highlights any specific details needed to protect the registration environment._
 
-_Note that when the ST uses FTP_TRP.1/Join for the registration channel then this channel cannot be reused as the normal inter-component communication channel (the latter channel must meet FTP_ITC.1 or FPT_ITT.1)._
+_Note: When the ST uses FTP_TRP.1/Join for the registration channel then this channel cannot be reused as the normal inter-component communication channel (the latter channel must meet FTP_ITC.1 or FPT_ITT.1)._
 
 _The trusted path used for joining might utilise X.509 certificates; however, there are no required X.509 SFRs associated with this trusted path as there are many ways the security of the joining path could be provided. It is up to the ST author to describe how the security of this trusted path is implemented; whether the security relies on X.509 SFRs, environmental constraints from FTP_TRP.1.3/Join, and/or some other method._
 
@@ -2138,11 +2139,11 @@ _The intention of this requirement is to ensure that there is a registration pro
 
 _The channel selection (for the registration channel) in FCO_CPC_EXT.1.2 is essentially a choice between the use of a normal secure channel that is equivalent to a channel used to communicate with external IT entities (FTP_ITC.1) or existing TOE components (FPT_ITT.1), or else a separate type of channel that is specific to registration (FTP_TRP.1/Join). If the TOE does not require a communications channel for registration (e.g., because the registration is achieved entirely by configuration actions by an Administrator at each of the components) then the main selection in FCO_CPC_EXT.1.2 is completed with the ‘No channel’ option._
 
-_If the ST author selects the FTP_ITC.1/FPT_ITT.1 channel type in the main selection in FCO_CPC_EXT.1.2 then the TSS identifies the relevant SFR iteration that specifies the channel used. If the ST author selects the FTP_TRP.1/Join channel type, then the TOE Summary Specification (possibly with support from the operational guidance) describes details of the channel and the mechanisms that it uses (and describes how the registration process ensures that the channel can only be used by the intended joiner and gatekeeper). Note that the FTP_TRP.1/Join channel type may require support from security measures in the operational environment (see the definition of FTP_TRP.1/Join for details)._
+_If the ST author selects the FTP_ITC.1/FPT_ITT.1 channel type in the main selection in FCO_CPC_EXT.1.2 then the TSS identifies the relevant SFR iteration that specifies the channel used. If the ST author selects the FTP_TRP.1/Join channel type, then the TOE Summary Specification (possibly with support from the operational guidance) describes details of the channel and the mechanisms that it uses (and describes how the registration process ensures that the channel can only be used by the intended joiner and gatekeeper). Note: The FTP_TRP.1/Join channel type may require support from security measures in the operational environment (see the definition of FTP_TRP.1/Join for details)._
 
 _If the ST author selects the FTP_ITC.1/FPT_ITT.1 channel type in the main selection in FCO_CPC_EXT.1.2 then the ST identifies the registration channel as a separate iteration of FTP_ITC.1 or FPT_ITT.1 and gives the iteration identifier (e.g., “FPT_ITT.1/Join”) in an ST Application Note for FCO_CPC_EXT.1._
 
-_Note that the channel set up and used for registration may be adopted as a continuing internal communication channel (i.e., between different TOE components) provided that the channel meets the requirements of FTP_ITC.1 or FPT_ITT.1. Otherwise, the registration channel is closed after use and a separate channel is used for the internal communications._
+_Note: The channel set up and used for registration may be adopted as a continuing internal communication channel (i.e., between different TOE components) provided that the channel meets the requirements of FTP_ITC.1 or FPT_ITT.1. Otherwise, the registration channel is closed after use and a separate channel is used for the internal communications._
 
 _Specific requirements for Preparative Procedures relating to FCO_CPC_EXT.1 are defined in the Evaluation Activities in [SD]._
 
@@ -2654,9 +2655,9 @@ _The ST author chooses either or both of the IKE selections based on what is imp
 
 *_Application Note {counter:appnote_count}_*
 
-_At least one public-key-based Peer Authentication method is required in order to conform to this cPP; one or more of the public key schemes is chosen by the ST author to reflect what is implemented. The ST author also ensures that appropriate FCS requirements reflecting the algorithms used (and key generation capabilities, if provided) are listed to support those methods. Note that the TSS will elaborate on the way in which these algorithms are to be used (for example, RFC 2409 specifies three authentication methods using public keys; each one supported will be described in the TSS)._
+_At least one public-key-based Peer Authentication method is required in order to conform to this cPP; one or more of the public key schemes is chosen by the ST author to reflect what is implemented. The ST author also ensures that appropriate FCS requirements reflecting the algorithms used (and key generation capabilities, if provided) are listed to support those methods. Note: The TSS will elaborate on the way in which these algorithms are to be used (for example, RFC 2409 specifies three authentication methods using public keys; each one supported will be described in the TSS)._
 
-_If the selection “Pre-shared Keys that conform to RFC 8784” is chosen, the selection-based requirement FIA_PSK_EXT.1 in Appendix B must be claimed._
+_If the selection “Pre-shared Keys that conform to RFC 8784” is chosen, the selection-based requirement FIA_PSK_EXT.1 in Annex B must be claimed._
 
 *FCS_IPSEC_EXT.1.14* The TSF shall only establish a trusted channel if the presented identifier in the received certificate matches the configured reference identifier, where the presented and reference identifiers are of the following fields and types: [selection: _SAN: IP address, SAN: Fully Qualified Domain Name (FQDN), SAN: user FQDN, CN: IP address, CN: Fully Qualified Domain Name (FQDN), CN: user FQDN, Distinguished Name (DN)_] and [selection: _no other reference identifier type, [assignment: other supported reference identifier types]_].
 
@@ -2706,7 +2707,7 @@ A TOE may act as the client, the server, or both in TLS sessions. The requiremen
 
 ==== Authentication using X.509 certificates (Extended)
 
-Support for X.509 certificates is required if the TSF implements IPsec, TLS, or DTLS communications in FPT_ITT.1, FTP_ITC.1, or FTP_TRP.1/Admin (FPT_TRP.1/Join is a special case covered in Appendix A.5.1.1), or if the TSF implements SSH in a manner where X.509 certificates are used for authentication. X.509 support is also required if the TSF uses X.509 certificates as an integrity mechanism for software updates (i.e., when FPT_TUD_EXT.2 is claimed).
+Support for X.509 certificates is required if the TSF implements IPsec, TLS, or DTLS communications in FPT_ITT.1, FTP_ITC.1, or FTP_TRP.1/Admin (FPT_TRP.1/Join is a special case covered in Annex A.5.1.1), or if the TSF implements SSH in a manner where X.509 certificates are used for authentication. X.509 support is also required if the TSF uses X.509 certificates as an integrity mechanism for software updates (i.e., when FPT_TUD_EXT.2 is claimed).
 
 The Functional Package for X.509 defines selections for the capability to assert identities and to verify identities in its mandatory SFR, FIA_XCU_EXT.1. The ST author selects "verify" in cases where the TOE is presented a certificate from an external entity that is using it to validate its identity (e.g., if the TOE is a TLS client, the TOE is a TLS server that requires mutual authentication, the TOE implements IPsec, the TOE uses code signing certificates to validate software or firmware updates). The ST author selects "assert" in cases where the TOE presents a certificate to an external entity (e.g., if the TOE is a TLS server, the TOE is a TLS client where the server requires mutual authentication, the TOE implements IPsec, or the TOE implements SSH and uses X.509 to validate the server). 
 
@@ -2920,9 +2921,9 @@ _An interactive session governed by this SFR is a session in which an authentica
 [appendix]
 == Extended Component Definitions
 
-This appendix contains the definitions for the extended requirements that are used in the cPP, including those used in Appendices A and B.
+This Annex contains the definitions for the extended requirements that are used in the cPP, including those used in Appendices A and B.
 
-(Note: formatting conventions for selections and assignments in this Appendix are those in [CC2].)
+(Note: Formatting conventions for selections and assignments in this Annex are those in [CC2].)
 
 === Security audit (FAU)
 
@@ -3711,7 +3712,7 @@ FCO_CPC_EXT.1 Component registration channel definition, requires the TSF to sup
 
 There are no management activities foreseen. 
 
-Note that elements of the SFR already specify certain constraints on communication in order to ensure that the process of forming a distributed TOE is a controlled activity.
+Note: Elements of the SFR already specify certain constraints on communication in order to ensure that the process of forming a distributed TOE is a controlled activity.
 
 *Audit: FCO_CPC_EXT.1*
 
@@ -3740,7 +3741,7 @@ Dependencies: No other components
 [appendix]
 == Entropy Documentation and Assessment
 
-This appendix describes the required supplementary information for each entropy source used by the TOE.
+This Annex describes the required supplementary information for each entropy source used by the TOE.
 
 The documentation of the entropy source(s) should be detailed enough that, after reading, the evaluator will thoroughly understand the entropy source and why it can be relied upon to provide sufficient entropy. This documentation should include multiple detailed sections: design description, entropy justification, operating conditions, and health testing. This documentation is not required to be part of the TSS.
 
@@ -4262,342 +4263,158 @@ See [CC1] for other Common Criteria abbreviations and terminology.
 
 [cols=",",options="header",]
 |===
-a|
+a|*Acronym*
+a|*Meaning*
 
-*Acronym*
+a|*AEAD*
+a|Authenticated Encryption with Associated Data
 
+a|*AES*
+a|Advanced Encryption Standard
 
-a|
+a|*CA*
+a|Certificate Authority
 
-*Meaning*
-
-
-a|
-
-*AEAD*
-
-
-a|
-
-Authenticated Encryption with Associated Data
+a|*CBC*
+a|Cipher Block Chaining
 
 
-a|
+a|*CRL*
+a|Certificate Revocation List
 
-*AES*
+a|*DH*
+a|Diffie-Hellman
 
+a|*DSA*
+a|Digital Signature Algorithm
 
-a|
+a|*DTLS*
+a|Datagram Transport Layer Security
 
-Advanced Encryption Standard
+a|*ECDH*
+a|Elliptic Curve Diffie Hellman
 
-
-a|
-
-*CA*
-
-
-a|
-
-Certificate Authority
-
+a|*ECDSA*
+a|Elliptic Curve Digital Signature Algorithm
 
 a|
-
-*CBC*
-
-
-a|
-
-Cipher Block Chaining
-
-
-a|
-
-*CRL*
-
-
-a|
-
-Certificate Revocation List
-
-
-a|
-
-*DH*
-
-
-a|
-
-Diffie-Hellman
-
-
-a|
-
-*DSA*
-
-
-a|
-
-Digital Signature Algorithm
-
-
-a|
-
-*DTLS*
-
-
-a|
-
-Datagram Transport Layer Security
-
-
-a|
-
-*ECDH*
-
-
-a|
-
-Elliptic Curve Diffie Hellman
-
-
-a|
-
-*ECDSA*
-
-
-a|
-
-Elliptic Curve Digital Signature Algorithm
-
-
-a|
-
 *EEPROM*
-
-
 a|
-
 Electrically Erasable Programmable Read-Only Memory
 
-
 a|
-
 *FIPS*
-
-
 a|
-
 Federal Information Processing Standards
 
-
 a|
-
 *GCM*
-
-
 a|
-
 Galois Counter Mode
 
-
 a|
-
 *HMAC*
-
-
 a|
-
 Keyed-Hash Message Authentication Code
 
-
 a|
-
 *HTTPS*
-
-
 a|
-
 Hypertext Transfer Protocol Secure
 
-
 a|
-
 *IP*
-
-
 a|
-
 Internet Protocol
 
-
 a|
-
 *IPsec*
-
-
 a|
-
 Internet Protocol Security
 
+a|
+*ITSEF*
+a|
+IT Security Evaluation Facility
 
 a|
-
 *ND*
-
-
 a|
-
 Network Device
 
 a|
-
 *NIAP*
-
-
 a|
-
 National Information Assurance Partnership
 
-
 a|
-
 *NIST*
-
-
 a|
-
 National Institute of Standards and Technology
 
-
 a|
-
 *NTP*
-
-
 a|
-
 Network Time Protocol
 
-
 a|
-
 *OCSP*
-
-
 a|
-
 Online Certificate Status Protocol
-
-
 a|
 
 *pND*
-
-
 a|
-
 Physical Network Device
 
-
 a|
-
 *PP*
-
-
 a|
-
 Protection Profile
 
-
 a|
-
 *RBG*
-
-
 a|
-
 Random Bit Generator
 
-
 a|
-
 *RSA*
-
-
 a|
-
 Rivest Shamir Adleman Algorithm
 
-
 a|
-
 *SD*
-
-
 a|
-
 Supporting Document
 
-
 a|
-
 *SHA*
-
-
 a|
-
 Secure Hash Algorithm
-
-
 a|
 
 *SSH*
-
-
 a|
-
 Secure Shell
-
-
 a|
 
 *ST*
-
-
 a|
-
 Security Target
-
-
 a|
 
 *TLS*
-
-
 a|
-
 Transport Layer Security
-
-
 a|
 
 *TOE*
-
-
 a|
-
 Target of Evaluation
 
-
 a|
-
 *TSF*
-
-
 a|
-
 TOE Security Functionality
 
 TSF = TOE for pND or Case 1 vND according to Section 1.2
@@ -4608,51 +4425,26 @@ TSF = TOE + VS for Case 2 vND (vND evaluated as a pND) according to Section 1.2
 a|
 
 *TSS*
-
-
 a|
-
 TOE Summary Specification
-
-
 a|
 
 *VM*
-
-
 a|
-
 Virtual Machine
-
-
 a|
 
 *vND*
-
-
 a|
-
 Virtual Network Device
-
-
 a|
 
 *VPN*
-
-
 a|
-
 Virtual Private Network
-
-
 a|
 
 *VS*
-
-
 a|
-
 virtualization System
-
-
 |===

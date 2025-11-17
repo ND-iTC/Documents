@@ -4,6 +4,7 @@
 :toc-placement!:
 :doctype: book
 :data-uri:
+:appendix-caption: Annex
 
 = Supporting Document - Evaluation Activities for Network Device cPP
 
