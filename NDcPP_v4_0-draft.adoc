@@ -2388,7 +2388,7 @@ The following table provides the allowed choices for completion of the selection
 
 _The ST author should choose the cryptographic algorithms in which AES operates, parameters, and standards implemented to perform symmetric-key encryption/decryption without built-in authentication._
 
-===== FCS_CKM.1/SKG Cryptographic Key Generation - Symmetric Key
+==== FCS_CKM.1/SKG Cryptographic Key Generation - Symmetric Key
 
 This is a selection-based SFR, to be included in the ST if “generate 256 bit-based pre-shared keys via FCS_RBG.1” is selected in FIA_PSK_EXT.1.2, or as deemed necessary by claimed PP Modules.
 
