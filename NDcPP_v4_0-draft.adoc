@@ -2802,6 +2802,7 @@ The TOE may support pre-shared keys for use in the IPsec protocol that conform t
 *_Application Note {counter:appnote_count}_*
 
 _Generated PSKs are expected to be shared between components via an out-of-band mechanism._
+_If the TOE is capable of generating PSKs via the DRBG, then FCS_CKM.1/SKG must be included._
 
 === Protection of the TSF (FPT)
 If the TOE provides a password-based authentication mechanism there must be no interface provided for specifically reading the password or password file such that the passwords are displayed in plain text.
