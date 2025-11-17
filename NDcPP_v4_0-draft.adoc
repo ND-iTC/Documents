@@ -301,9 +301,9 @@ The supporting document defines the evaluation methods and activities for this c
 
 This cPP includes support for distributed Network Device TOEs. Network Devices can sometimes be composed of multiple components operating as a logical whole. This architecture can be found in products where a centralized management console is used to provide administration to remote components.
 
-Distributed TOEs might consist of combinations of different and similar/same types of TOE components where 'type' refers to the intended use of a component inside the overall TOE. TOE component types could for example be sensors (e.g., for IDS components) or TOE component acting as central nodes managing other nodes.
+Distributed TOEs might consist of combinations of different and similar/same types of TOE components where 'type' refers to the intended use of a component inside the overall TOE. TOE component types could for example be sensors (e.g., for IDS components) or TOE components acting as central nodes managing other nodes.
 
-There are a number of different architectures; but fundamentally, they are variations of the following model where the SFRs of this cPP can only be fulfilled if the two components are deployed and operate together.
+There are a number of different architectures, but fundamentally, they are variations of the following model where the SFRs of this cPP can only be fulfilled if the two components are deployed and operate together.
 
 [.text-center]
 image:extracted-media/media/d_toe_1.png[image,width=376,height=143]
@@ -521,11 +521,11 @@ The threats for the Network Device are grouped according to functional areas of 
 
 ==== Communications with the Network Device
 
-A Network Device communicates with other Network Devices and other network entities. The endpoints of this communication can be geographically and logically distant and may pass through a variety of other systems. The intermediate systems may be untrusted providing an opportunity for unauthorised communication with the Network Device or for authorised communication to be compromised. The security functionality of the Network Device must be able to protect any critical network traffic (administration traffic, authentication traffic, audit traffic, etc.). The communication with the Network Device falls into two categories: authorised communication and unauthorised communication.
+A Network Device communicates with other Network Devices and other network entities. The endpoints of this communication can be geographically and logically distant and may pass through a variety of other systems. The intermediate systems may be untrusted, providing an opportunity for unauthorised communication with the Network Device or for authorised communication to be compromised. The security functionality of the Network Device must be able to protect any critical network traffic (administration traffic, authentication traffic, audit traffic, etc.). The communication with the Network Device falls into two categories: authorised communication and unauthorised communication.
 
 Authorised communication includes network traffic allowable by policy destined to and originating from the Network Device as it was designed and intended. This includes critical network traffic, such as Network Device administration and communication with an authentication or audit logging server, which requires a secure channel to protect the communication. The security functionality of the Network Device includes the capability to ensure that only authorised communications are allowed and the capability to provide a secure channel for critical network traffic. Any other communication with the Network Device is considered unauthorised communication. (Network traffic traversing the Network Device but not ultimately destined for the device, e.g., packets that are being routed, are not considered to be ‘communications with the Network Device’ – reference A.NO_THRU_TRAFFIC_PROTECTION in Section 4.2.3.)
 
-The primary threats to Network Device communications addressed in this cPP focus on an external, unauthorised entity attempting to access, modify, or otherwise disclose the critical network traffic. A poor choice of cryptographic algorithms or the use of non-standardized tunnelling protocols along with weak Administrator credentials, such as an easily guessable password or use of a default password, will allow a threat agent unauthorised access to the device. Weak or no cryptography provides little to no protection of the traffic allowing a threat agent to read, manipulate and/or control the critical data with little effort. Non-standardized tunnelling protocols not only limit the interoperability of the device but lack the assurance and confidence standardization provides through peer review.
+The primary threats to Network Device communications addressed in this cPP focus on an external, unauthorised entities attempting to access, modify, or otherwise disclose the critical network traffic. A poor choice of cryptographic algorithms or the use of non-standardized tunnelling protocols along with weak Administrator credentials, such as an easily guessable password or use of a default password, will allow a threat agent unauthorised access to the device. Weak or no cryptography provides little to no protection of the traffic allowing a threat agent to read, manipulate and/or control the critical data with little effort. Non-standardized tunnelling protocols not only limit the interoperability of the device but lack the assurance and confidence standardization provides through peer review.
 
 ===== T.UNAUTHORISED_ADMINISTRATOR_ACCESS
 
@@ -538,7 +538,7 @@ SFR Rationale:
 * The requirement for the Administrator authentication process is described in FIA_UIA_EXT.1
 * Locking of Administrator sessions is ensured by FTA_SSL_EXT.1 (for local sessions) and FTA_SSL.3 (for remote sessions). Note: FTA_SSL_EXT.1 is a selection-based SFR that allows the ST author to choose between session locking and session termination. This rationale applies to the session locking option, not to session termination.
 * The secure channel used for remote Administrator connections is specified in FTP_TRP.1/Admin
-* (Malicious actions carried out from an Administrator session are separately addressed by T.UNDETECTED_ACTIVITY)
+* Malicious actions carried out from an Administrator session are separately addressed by T.UNDETECTED_ACTIVITY.
 * If the TOE provides remote administration using a password-based authentication mechanism, FIA_AFL.1 provides actions on reaching a threshold number of consecutive password failures.
 
 ===== T.WEAK_CRYPTOGRAPHY
@@ -593,7 +593,7 @@ SFR Rationale:
 
 Auditing of Network Device activities is a valuable tool for Administrators to monitor the status of the device. It provides the means for Administrator accountability, security functionality activity reporting, reconstruction of events, and problem analysis. Processing performed in response to device activities may give indications of a failure or compromise of the security functionality. When indications of activity that impact the security functionality are not generated and monitored, it is possible for such activities to occur without Administrator awareness. Further, if records are not generated and retained, reconstruction of the network and the ability to understand the extent of any compromise could be negatively affected. Additional concerns are the protection of the audit data that is recorded from alteration or unauthorised deletion. This could occur within the TOE, or while the audit data is in transit to an external storage device.
 
-Note this cPP requires that the Network Device generate the audit data and have the capability to send the audit data to a trusted network entity (e.g., a syslog server).
+Note: this cPP requires that the Network Device generate the audit data and have the capability to send the audit data to a trusted network entity (e.g., a syslog server).
 
 ===== T.UNDETECTED_ACTIVITY
 
@@ -666,7 +666,7 @@ NOTE: Traffic that is traversing the Network Device, destined for another networ
 
 ==== A.TRUSTED_ADMINISTRATOR
 
-The Security Administrator(s) for the Network Device are assumed to be trusted and to act in the best interest of security for the organization. This includes appropriately trained, following policy, and adhering to guidance documentation. Administrators are trusted to ensure passwords/credentials have sufficient strength and entropy and to lack malicious intent when administering the device. The Network Device is not expected to be capable of defending against a malicious Administrator that actively works to bypass or compromise the security of the device.
+The Security Administrator(s) for the Network Device are assumed to be trusted and to act in the best interest of security for the organization. This includes appropriate training, following policy, and adhering to guidance documentation. Administrators are trusted to ensure passwords/credentials have sufficient strength and entropy and to lack malicious intent when administering the device. The Network Device is not expected to be capable of defending against a malicious Administrator that actively works to bypass or compromise the security of the device.
 
 For TOEs supporting X.509v3 certificate-based authentication, the Security Administrator(s) are expected to fully validate (e.g., offline verification) any CA certificate (root CA certificate or intermediate CA certificate) loaded into the TOE’s trust store (aka 'root store', ' trusted CA Key Store', or similar) as a trust anchor prior to use (e.g., offline verification).
 
@@ -680,7 +680,7 @@ The Network Device firmware and software is assumed to be updated by an Administ
 
 ==== A.ADMIN_CREDENTIALS_SECURE
 
-The Administrator’s credentials (private key) used to access the Network Device are protected by the platform on which they reside.
+The Administrator’s credentials (private keys) used to access the Network Device are protected by the platform on which they reside.
 
 {empty}[OE.ADMIN_CREDENTIALS_SECURE]
 
@@ -754,15 +754,15 @@ The TOE does not provide any protection of traffic that traverses it. It is assu
 
 Security Administrators are trusted to follow and apply all guidance documentation in a trusted manner. For vNDs, this includes the VS Administrator responsible for configuring the VMs that implement ND functionality.
 
-For TOEs supporting X.509v3 certificate-based authentication, the Security Administrator(s) are assumed to monitor the revocation status of all certificates in the TOE's trust store and to remove any certificate from the TOE’s trust store in case such certificate can no longer be trusted.
+For TOEs supporting X.509v3 certificate-based authentication, the Security Administrator is assumed to monitor the revocation status of all certificates in the TOE's trust store and to remove any certificate from the TOE’s trust store in case such certificate can no longer be trusted.
 
 ==== OE.UPDATES
 
-The TOE firmware and software is updated by an Administrator on a regular basis in response to the release of product updates due to known vulnerabilities.
+The TOE firmware and software are updated by an Administrator on a regular basis in response to the release of product updates due to known vulnerabilities.
 
 ==== OE.ADMIN_CREDENTIALS_SECURE
 
-The Administrator’s credentials (private key) used to access the TOE must be protected on any other platform on which they reside.
+The Administrator’s credentials (private keys) used to access the TOE must be protected on any other platform on which they reside.
 
 ==== OE.COMPONENTS_RUNNING (applies to distributed TOEs only)
 
@@ -791,7 +791,9 @@ In this section the mandatory SFRs that any conformant TOE must meet are present
 
 Additional optional SFRs may also be adopted from those listed in Appendix A.
 
-For a distributed TOE, the ST author should reference Table 1 for guidance on how each SFR should be met. The table details whether SFRs should be met by all TOE components, by at least one TOE component or whether they are dependent upon the feature being implemented by the TOE component. The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE. (Note that this deliverable is examined as part of the ASE_TSS.1 and AVA_VAN.1 Evaluation Activities as described in [SD, 5.1.2] and [SD, 5.6.1.1] respectively.
+For a distributed TOE, the ST author should reference Table 1 for guidance on how each SFR should be met. The table details whether SFRs should be met by all TOE components, by at least one TOE component or whether they are dependent upon the feature being implemented by the TOE component. The ST for a distributed TOE must include a mapping of SFRs to each of the components of the TOE.
+
+Note: This deliverable is examined as part of the ASE_TSS.1 and AVA_VAN.1 Evaluation Activities as described in [SD, 5.1.2] and [SD, 5.6.1.1] respectively.
 
 The Evaluation Activities defined in [SD] describe actions that the evaluator will take in order to determine compliance of a particular TOE with the SFRs. The content of these Evaluation Activities will therefore provide more insight into deliverables required from TOE Developers.
 
@@ -933,14 +935,14 @@ _The date and time information for any audit event should be recorded as part of
 |FCS_COP.1/KeyedHash |None. |None.
 |FCS_RBG.1 |None. |None.
 |FIA_UIA_EXT.1 |All use of identification and authentication mechanisms. |Origin of the attempt (e.g., IP address).
-|FMT_MOF.1/ManualUpdate |Any attempt to initiate a manual update |None.
+|FMT_MOF.1/ManualUpdate |Any attempt to initiate a manual update. |None.
 |FMT_MTD.1/CoreData |None. |None.
 |FMT_SMF.1 |All management activities of TSF data. |None.
 |FMT_SMR.2 |None. |None.
 |FPT_SKP_EXT.1 |None. |None.
 |FPT_TST_EXT.1 |None. |None.
-|FPT_TUD_EXT.1 |Initiation of update; result of the update attempt (success or failure) |None.
-|FPT_STM_EXT.1 |Discontinuous changes to time - either Administrator actuated or changed via an automated process. (Note that no continuous changes to time need to be logged. See also application note on FPT_STM_EXT.1) |For discontinuous changes to time: The old and new values for the time. Origin of the attempt to change time for success and failure (e.g., IP address).
+|FPT_TUD_EXT.1 |Initiation of update; result of the update attempt (success or failure). |None.
+|FPT_STM_EXT.1 |Discontinuous changes to time - either Administrator actuated or changed via an automated process. (Note that no continuous changes to time need to be logged. See also application note on FPT_STM_EXT.1). |For discontinuous changes to time: The old and new values for the time. Origin of the attempt to change time for success and failure (e.g., IP address).
 |FTA_SSL.3 |The termination of a remote session by the session locking mechanism. |None.
 |FTA_SSL.4 |The termination of an interactive session. |None.
 |FTA_TAB.1 |None. |None.
@@ -950,18 +952,18 @@ _The date and time information for any audit event should be recorded as part of
 * Failure of the trusted channel functions.
 
 a|
-* None
-* None
-* Reason for failure
+* None.
+* None.
+* Reason for failure.
 |FTP_TRP.1/Admin a|
 * Initiation of the trusted path.
 * Termination of the trusted path.
 * Failure of the trusted path functions.
 
 a|
-* None
-* None
-* Reason for failure
+* None.
+* None.
+* Reason for failure.
 |===
 
 [[table-2-sfr-and-audit]]_Table 2: Security Functional Requirements and Auditable Events_
@@ -1010,7 +1012,7 @@ _If the TOE is a standalone TOE (i.e., not a distributed TOE) the option 'The TO
 
 _If the TOE is a distributed TOE, the option 'The TOE should be a distributed TOE that stores audit data on the following TOE components: [assignment: identification of TOE components]' must be selected and the TOE components which store audit data locally must be listed in the assignment. Since all TOEs are required to provide functions to store audit data locally this option needs to be selected for all distributed TOEs. In addition, FAU_GEN_EXT.1 and FAU_STG_EXT.4 must be claimed in the ST. If the distributed TOE consists only of components which are storing audit data locally, it is sufficient to select only the option 'The TOE should be a distributed TOE that stores audit data on the following TOE components: [assignment: identification of TOE components]' and add FAU_GEN_EXT.1 and FAU_STG_EXT.4._
 
-_If the TOE is a distributed TOE and some TOE components are not storing audit data locally, the option 'The TOE should be a distributed TOE with storage of audit data provided externally for the following TOE components: [assignment: list of TOE components that do not store audit data locally and the other TOE components to which they transmit their generated audit data]' must be selected in addition to the option 'The TOE should be a distributed TOE that stores audit data on the following TOE components: [assignment: identification of TOE components]'. In that case FAU_STG_EXT.5 must be claimed in the ST in addition to FAU_GEN_EXT.1 and FAU_STG_EXT.4. For the option 'The TOE should be a distributed TOE with storage of audit data provided externally for the following TOE components: [assignment: list of TOE components that do not store audit data locally and the other TOE components to which they transmit their generated audit data]' the TOE components that to not store audit data locally should be mapped to the TOE components to which they transmit their generated audit data._
+_If the TOE is a distributed TOE and some TOE components are not storing audit data locally, the option 'The TOE should be a distributed TOE with storage of audit data provided externally for the following TOE components: [assignment: list of TOE components that do not store audit data locally and the other TOE components to which they transmit their generated audit data]' must be selected in addition to the option 'The TOE should be a distributed TOE that stores audit data on the following TOE components: [assignment: identification of TOE components]'. In that case FAU_STG_EXT.5 must be claimed in the ST in addition to FAU_GEN_EXT.1 and FAU_STG_EXT.4. For the option 'The TOE should be a distributed TOE with storage of audit data provided externally for the following TOE components: [assignment: list of TOE components that do not store audit data locally and the other TOE components to which they transmit their generated audit data]' the TOE components that do not store audit data locally should be mapped to the TOE components to which they transmit their generated audit data._
 
 _For distributed TOEs, this SFR can be fulfilled either by every TOE component storing its own security audit data locally or by one or more TOE components storing audit data locally and other TOE components which are not storing audit information locally sending security audit data to other TOE components for local storage. For the transfer of security audit data between TOE components a protected channel according to FTP_ITC.1 or FPT_ITT.1 must be used. The TSS describes which TOE components store security audit data locally and which TOE components do not store security audit data locally. For the latter, the TSS describes which other TOE component the audit data is stored locally._
 
@@ -1024,7 +1026,7 @@ _For vNDs, local storage is any storage accessible by TOE software. In a virtual
 
 *_Application Note {counter:appnote_count}_*
 
-_Persistent logging is defined as any record(s) that are retained through power off, power failure, or reboot. This requirement allows for the TSF to implement logging either persistent log records or non-persistent log records that may be cleared on reboot of the TOE._
+_Persistent logging is defined as any record(s) that is retained through power off, power failure, or reboot. This requirement allows for the TSF to implement logging either persistent log records or non-persistent log records that may be cleared on reboot of the TOE._
 
 *FAU_STG_EXT.1.5* The TSF shall [_selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_] when the local storage space for audit data is full.
 
@@ -1038,7 +1040,7 @@ _For distributed TOEs, each component is not required to store generated audit d
 
 *_Application Note {counter:appnote_count}_*
 
-If "ability to view locally" is selected in FAU_STG_EXT.1.6, then FAU_SAR.1 from Appendix B must be included in the ST.
+_If "ability to view locally" is selected in FAU_STG_EXT.1.6, then FAU_SAR.1 from Appendix B must be included in the ST._
 
 === Cryptographic Support (FCS)
 
@@ -1313,7 +1315,7 @@ Tree height = [selection: _10, 16, 20_]|RFC 8391 [XMSS], NIST SP 800-208 [parame
 
 _The ST Author should choose the algorithm implemented to perform verification of digital signatures. For the algorithm chosen, the ST Author should make the appropriate assignments/selections to specify the parameters that are implemented for that algorithm. In particular, if ECDSA is selected as one of the signature algorithms, the key size specified must match the selection for the curve used in the algorithm._
 
-_If LMS or XMSS selected, then FCS_COP.1/XOF from Appendix B must be included._ 
+_If LMS or XMSS is selected, then FCS_COP.1/XOF from Appendix B must be included._ 
 
 *FCS_COP.1/Hash Cryptographic Operation - Hashing*
 
@@ -1418,7 +1420,7 @@ _This requirement applies to Administrators and external IT entities of services
 
 _An authentication process consists of two basic steps: identification step (presenting the claimed attribute value (e.g., a user identifier) to the authentication subsystem); verification step (presenting or generating authentication information (e.g., a value signed with a private key) that acts as evidence to prove the binding between the attribute and that for which it is claimed)._
 
-_Remote authentication is when a user associated with the Security Administrator role remotely communicates with the TOE for the purpose of security management over a cryptographic protocol specified in FTP_TRP.1/Admin. Local authentication mechanisms are defined as those that occur at a local administrative interfaces using a console. If no local authentication mechanism is supported by the TOE, the ST author should select "none" from the final selection. See Application Note 26 for examples of compliant local administrative interfaces._
+_Remote authentication is when a user associated with the Security Administrator role remotely communicates with the TOE for the purpose of security management over a cryptographic protocol specified in FTP_TRP.1/Admin. Local authentication mechanisms are defined as those that occur at a local administrative interface using a console. If no local authentication mechanism is supported by the TOE, the ST author should select "none" from the final selection. See Application Note 26 for examples of compliant local administrative interfaces._
 
 _Local administration is defined as administration using a dedicated physical interface that (from the TOE’s point of view) is directly connected to the device(s) the administrator interacts with and therefore falls under the physical protection (OE.PHYSICAL). Any administrator choice to extend a local console so it is remotely accessible (e.g., console server or remote KVM) is outside the scope of the NDcPP. The following are examples of compliant local administrative interfaces:_
 
@@ -1803,7 +1805,7 @@ _The requirement implies that not only are communications protected when they ar
 
 _Where X.509 certificates are used to authenticate remote endpoints in support of an FTP_ITC.1 channel, relevant SFR claims from the Functional Package for X.509 must be used. This requires support for attributes such as certificate revocation status and intermediate CAs._
 
-_If the TOE claims FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication) from the Functional Package for TLS and the TOE passes presented identifiers of clients used for client authentication to a directory server for comparison, then the connection to the directory server used to verify presented identifiers of TLS clients need to be protected by a trusted channel (i.e., FTP_ITC.1). If a trusted channel is used for the integrity protection for communication between the TOE and a directory server, then the directory server must be added to the assignment for other capabilities in FTP_ITC.1. Note that the directory server is only expected to handle the comparison of the presented identifier but not to perform full X.509 certificate validation on behalf of the TOE._
+_If the TOE claims FCS_TLSS_EXT.2 (TLS Server Support for Mutual Authentication) from the Functional Package for TLS and the TOE passes presented identifiers of clients used for client authentication to a directory server for comparison, then the connection to the directory server used to verify presented identifiers of TLS clients needs to be protected by a trusted channel (i.e., FTP_ITC.1). If a trusted channel is used for the integrity protection for communication between the TOE and a directory server, then the directory server must be added to the assignment for other capabilities in FTP_ITC.1. Note that the directory server is only expected to handle the comparison of the presented identifier but not to perform full X.509 certificate validation on behalf of the TOE._
 
 _See Section B.4.1 for additional requirements._
 
@@ -2171,25 +2173,25 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 [cols=",,",options="header",]
 |===
 |*Requirements* |*Auditable Events* |*Additional Audit Record Contents*
-|FAU_SAR.1 |None |None
-|FAU_GEN_EXT.1 |None |None
-|FAU_STG_EXT.4 |None |None
-|FAU_STG_EXT.5 |None |None
-|FCS_COP.1/AEAD |None |None
+|FAU_SAR.1 |None. |None.
+|FAU_GEN_EXT.1 |None. |None.
+|FAU_STG_EXT.4 |None.|None.
+|FAU_STG_EXT.5 |None. |None.
+|FCS_COP.1/AEAD |None. |None.
 |FCS_COP.1/KeyEncap |None. |None.
 |FCS_COP.1/KeyWrap |None. |None.
-|FCS_COP.1/SKC |None |None
-|FCS_COP.1/CMAC |None |None
-|FCS_RBG.2 |None |None
-|FCS_RBG.3 |None |None
-|FCS_RBG.4 |None |None
-|FCS_RBG.5 |None |None
-|FCS_COP.1/XOF |None |None
-|FCS_IPSEC_EXT.1 |Failure to establish an IPsec SA. |Reason for failure
+|FCS_COP.1/SKC |None. |None.
+|FCS_COP.1/CMAC |None. |None.
+|FCS_RBG.2 |None. |None.
+|FCS_RBG.3 |None. |None.
+|FCS_RBG.4 |None. |None.
+|FCS_RBG.5 |None. |None.
+|FCS_COP.1/XOF |None. |None.
+|FCS_IPSEC_EXT.1 |Failure to establish an IPsec SA. |Reason for failure.
 |FCS_NTP_EXT.1 a|
-* Configuration of a new time server
-* Removal of configured time server
-|Identity if new/removed time server
+* Configuration of a new time server.
+* Removal of configured time server.
+|Identity if new/removed time server.
 |FIA_AFL.1 |Unsuccessful login attempts limit is met or exceeded. |Origin of the attempt (e.g., IP address).
 |FIA_PMG_EXT.1 |None. |None.
 |FIA_UAU.7 |None. |None.
@@ -2198,9 +2200,9 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |FMT_MOF.1/AutoUpdate |None. |None.
 |FMT_MOF.1/Functions |None. |None.
 |FPT_APW_EXT.1 |None. |None.
-|FPT_TUD_EXT.2 |Failure of update |Reason for failure (including identifier of invalid certificate)
+|FPT_TUD_EXT.2 |Failure of update. |Reason for failure (including identifier of invalid certificate).
 |FTA_SSL_EXT.1 (if “lock the session” is selected) |Any attempts at unlocking of an interactive session. |None.
-|FTA_SSL_EXT.1 (if “terminate the session” is selected) |The termination of a local session by the session lock |None.
+|FTA_SSL_EXT.1 (if “terminate the session” is selected) |The termination of a local session by the session lock. |None.
 |===
 
 [[table-13-selection-sfr-audit]]_Table 13: Selection-Based SFRs and Auditable Events_
@@ -2264,7 +2266,7 @@ _TOE components are not required to monitor or audit connectivity or network out
 
 ===== FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
 
-This SFR needs to be added to the ST for evaluation of distributed TOEs which contain TOE components that aren't storing audit data locally but sending it to another TOE component for storage. This SFR needs to be fulfilled in addition to the general SFRs on Protected Audit Event Storage for all types of TOEs (distributed, non-distributed).
+This SFR needs to be added to the ST for evaluation of distributed TOEs which contain TOE components that aren't storing audit data locally but are sending it to another TOE component for storage. This SFR needs to be fulfilled in addition to the general SFRs on Protected Audit Event Storage for all types of TOEs (distributed, non-distributed).
 
 *FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs*
 
@@ -2575,7 +2577,7 @@ _]_
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must include a rekey time that causes a rekey to occur at or slightly before 24 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 23h 59min to ensure the actual rekey is performed no later than 24h, while other TOEs might automatically ensure rekeying is performed prior to the configured time._
+_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must include a rekey time that causes a rekey to occur at or slightly before 24 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 23h 59min to ensure the actual rekey is performed no later than 24h), while other TOEs might automatically ensure rekeying is performed prior to the configured time._
 
 _This requirement must be accomplished by providing Security Administrator-configurable lifetimes. Hardcoded limits do not meet this requirement._
 
@@ -2599,7 +2601,7 @@ _]_
 
 *_Application Note {counter:appnote_count}_*
 
-_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must include a rekey time that causes a rekey to occur at or slightly before 8 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 7h 59min to ensure the actual rekey is performed no later than 8h, while other TOEs might automatically ensure rekeying is performed
+_The ST author chooses either the IKEv1 requirements or IKEv2 requirements (or both, depending on the selection in FCS_IPSEC_EXT.1.5). The ST author chooses either volume-based lifetimes or time-based lifetimes (or a combination). The range between the minimum and maximum rekeys time must include a rekey time that causes a rekey to occur at or slightly before 8 hours. The exact values supported may vary by TOE implementation. Some TOEs might require the administrators to ensure rekeying prior to the desired time (e.g., configure a time value of 7h 59min to ensure the actual rekey is performed no later than 8h), while other TOEs might automatically ensure rekeying is performed
 prior to the configured time._
 
 _This requirement must be accomplished by providing Security Administrator-configurable lifetimes. Hardcoded limits do not meet this requirement._
@@ -2712,10 +2714,10 @@ In all cases, the relevant SFR dependencies in the Functional Package for X.509 
 
 Generally, the validation of a X.509v3 leaf certificate comprises of several steps:
 
-* A certificate Revocation Check refers to the process of determining the current revocation status of an otherwise structurally valid certificate. This must be performed every time a certificate is used for authentication. This check must be performed for each certificate in the chain up to, but not including the trust anchor. This means that intermediate CA certificates that are not trust anchors, and the leaf certificate must be checked. It is not mandatory to check the revocation status of any CA certificate designated a trust anchor, however if such check is performed it must be handled consistently with how other certificates are checked.
+* A certificate Revocation Check refers to the process of determining the current revocation status of an otherwise structurally valid certificate. This must be performed every time a certificate is used for authentication. This check must be performed for each certificate in the chain up to, but not including, the trust anchor. This means that intermediate CA certificates that are not trust anchors, and the leaf certificate must be checked. It is not mandatory to check the revocation status of any CA certificate designated a trust anchor, however if such check is performed it must be handled consistently with how other certificates are checked.
 * An expiration check must be performed. This check must be conducted for each certificate in the chain, up to and including the trust anchor.
 * The continuity of the chain must be checked, showing that the signature on each certificate that is presented to the TOE is valid and the chain terminates at the trust anchor.
-* The presence of relevant extensions in each certificate in the chain such as the extendedKeyUsage parameters of the leaf certificate must correspond to SFR-relevant functionality. For example, a peer acting as a web server should have TLS Web Server Authentication listed as an extendedKeyUsage parameter of its X.509v3 certificate. It should be checked that the relevant extensions in each certificate in the chain, such as the extendedKeyUsage parameters of the leaf certificate, correspond to the SFR-relevant functionality they are used with."
+* The presence of relevant extensions in each certificate in the chain such as the extendedKeyUsage parameters of the leaf certificate must correspond to SFR-relevant functionality. For example, a peer acting as a web server should have TLS Web Server Authentication listed as an extendedKeyUsage parameter of its X.509v3 certificate. It should be checked that the relevant extensions in each certificate in the chain, such as the extendedKeyUsage parameters of the leaf certificate, correspond to the SFR-relevant functionality they are used with.
 
 When certificate validation is claimed for communication with external entities, the following restrictions are applied to the Functional Package for X.509: 
 
