@@ -414,26 +414,6 @@ The evaluator shall verify the correctness of the TSF’s implementation by comp
 
 Note: The number of test cases is limited due to the extreme amount of time it can take to generate XMSS trees.
 
-==== FCS_CKM.1/SKG Cryptographic Key Generation – Symmetric Key
-
-===== TSS
-[arabic, start=70]
-. The evaluator shall examine the TSS to verify that it describes how the TOE obtains a symmetric cryptographic key through direct generation from a random bit generator as specified in FCS_RBG.1. The evaluator shall review the TSS to verify that it describes how the functionality described by FCS_RBG.1 is invoked.
-
-. The evaluator shall examine the TSS to verify that it identifies the usage, and key lifecycle for keys generated using each selected algorithm.
-
-. If the TOE uses the generated key in a key chain/hierarchy then the evaluator shall verify that the TSS describes how the key is used as part of the key chain/hierarchy.
-
-===== Guidance Documentation
-[arabic, start=73]
-. The evaluator shall verify that the AGD instructs the administrator how to configure the TOE to use the RBG to generate symmetric keys for all uses identified in the ST. 
-
-===== Tests
-[arabic, start=74]
-. The following tests are conditional based upon the selections made in the SFR. The evaluator shall perform the following test or witness respective tests executed by the developer. The tests must be executed on a platform that is as close as practically possible to the operational platform (but which may be instrumented in terms of, for example, use of a debug mode). Where the test is not carried out on the TOE itself, the test platform shall be identified and the differences between test environment and TOE execution environment shall be described.
-
-. To test the TOE’s ability to generate symmetric cryptographic keys using a random bit generator, the evaluator shall configure the symmetric cryptographic key generation capability for each claimed key size. The evaluator shall use the description of the RBG interface to verify that the TOE requests and receives an amount of RBG output greater than or equal to the requested key size. 
-
 ==== FCS_CKM.6 Timing and Event of Cryptographic Key Destruction
 
 ===== TSS
