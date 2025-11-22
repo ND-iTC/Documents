@@ -4230,17 +4230,38 @@ FMT_SMF.1 included
 
 [cols=",",]
 |===
-|*Term* |*Meaning*
-|*Administrator* |See Security Administrator.
-|*Assurance* |Grounds for confidence that a TOE meets the SFRs [CC1].
-|*Security Administrator* |The terms “Administrator” and “Security Administrator” are used interchangeably in this document at present and are used to represent a person that has authorised access to the TOE to perform configuration and management tasks.
-|*Target of Evaluation* |A set of software, firmware and/or hardware possibly accompanied by guidance. [CC1]
-|*TOE Security Functionality (TSF)* |A set consisting of all hardware, software, and firmware of the TOE that must be relied upon for the correct enforcement of the SFRs. [CC1]
-|*TSF Data* |Data for the operation of the TOE upon which the enforcement of the requirements relies (e.g., SFR-relevant configuration data and SFR-relevant audit data).
-|*Virtual Machine (VM)* | A virtualized hardware environment in which an operating system may execute.
-|*Virtual Machine Manager (VMM)* |A collection of software components responsible for enabling VMs to function as expected by the software executing within them. Generally, the VMM consists of a Hypervisor, Service VMs, and other components of the VS, such as virtual devices, binary translation systems, and physical device drivers. It manages concurrent execution of all VMs and virtualizes platform resources as needed.
-|*Virtualization System (VS)* |A software product that enables multiple independent computing systems to execute on the same physical hardware platform without interference from one another. For the purposes of this document, the VS consists of a Virtual Machine Manager (VMM), Virtual Machine abstractions, a management subsystem, and other components.
 
+|*Term* |*Meaning*
+
+|*Administrator* |See Security Administrator.
+
+|*Assurance* |Grounds for confidence that a TOE meets the SFRs [CC1].
+
+|*IKE groups* |Internet Key Exchange Diffie-Hellman groups. Specifically refers to the MODP (Modular Exponential) groups defined in RFC 3526 (e.g., MODP-2048, MODP-3072) used for key agreement in IKE/IPsec protocols.
+
+|*NIST Curves* |NIST-approved elliptic curves specified in NIST SP 800-186. Refers to the P-256, P-384, and P-521 curves defined in FIPS 186-5 for elliptic curve cryptography.
+
+|*PKCS #1 v2.2* |Public-Key Cryptography Standards #1 version 2.2. RSA cryptography standard published as RFC 8017, specifying RSA encryption and signature schemes.
+
+|*RSASSA-PKCS1-v1_5* |RSA Signature Scheme with Appendix using PKCS1 v1.5 padding. A digital signature scheme specified in RFC 8017 Section 8.2 and FIPS 186-5 Section 5.4.
+
+|*RSASSA-PSS* |RSA Signature Scheme with Appendix using Probabilistic Signature Scheme. A digital signature scheme specified in RFC 8017 Section 8.1 and FIPS 186-5 Section 5.4.
+
+|*Security Administrator* |The terms “Administrator” and “Security Administrator” are used interchangeably in this document at present and are used to represent a person that has authorised access to the TOE to perform configuration and management tasks.
+
+|*Target of Evaluation* |A set of software, firmware and/or hardware possibly accompanied by guidance. [CC1]
+
+|*TLS groups* |Transport Layer Security Diffie-Hellman groups. Specifically refers to the ffdhe (finite field Diffie-Hellman ephemeral) groups defined in RFC 7919 (e.g., ffdhe-2048, ffdhe-3072) used for key agreement in TLS protocols.
+
+|*TOE Security Functionality (TSF)* |A set consisting of all hardware, software, and firmware of the TOE that must be relied upon for the correct enforcement of the SFRs. [CC1]
+
+|*TSF Data* |Data for the operation of the TOE upon which the enforcement of the requirements relies (e.g., SFR-relevant configuration data and SFR-relevant audit data).
+
+|*Virtual Machine (VM)* | A virtualized hardware environment in which an operating system may execute.
+
+|*Virtual Machine Manager (VMM)* |A collection of software components responsible for enabling VMs to function as expected by the software executing within them. Generally, the VMM consists of a Hypervisor, Service VMs, and other components of the VS, such as virtual devices, binary translation systems, and physical device drivers. It manages concurrent execution of all VMs and virtualizes platform resources as needed.
+
+|*Virtualization System (VS)* |A software product that enables multiple independent computing systems to execute on the same physical hardware platform without interference from one another. For the purposes of this document, the VS consists of a Virtual Machine Manager (VMM), Virtual Machine abstractions, a management subsystem, and other components.
 |===
 
 See [CC1] for other Common Criteria abbreviations and terminology.
@@ -4258,18 +4279,47 @@ a|Authenticated Encryption with Associated Data
 a|*AES*
 a|Advanced Encryption Standard
 
+a|*AGD*
+a|Assurance: Guidance Documents
+
+a|*AKG*
+a|Asymmetric Key Generation
+
+a|*API*
+a|Application Programming Interface
+
 a|*CA*
 a|Certificate Authority
 
 a|*CBC*
 a|Cipher Block Chaining
 
+a|*CCM*
+a|Counter with CBC-MAC
+
+a|*CMAC*
+a|Cipher-based Message Authentication Code
+
+a|*CN*
+a|Common Name
+
+a|*cPP*
+a|collaborative Protection Profile
 
 a|*CRL*
 a|Certificate Revocation List
 
+a|*CTR*
+a|Counter (mode)
+
 a|*DH*
 a|Diffie-Hellman
+
+a|*DN*
+a|Distinguished Name
+
+a|*DRBG*
+a|Deterministic Random Bit Generator
 
 a|*DSA*
 a|Digital Signature Algorithm
@@ -4277,155 +4327,165 @@ a|Digital Signature Algorithm
 a|*DTLS*
 a|Datagram Transport Layer Security
 
+a|*ECC*
+a|Elliptic Curve Cryptography
+
+a|*ECDH*
+a|Elliptic Curve Diffie Hellman
+
 a|*ECDH*
 a|Elliptic Curve Diffie Hellman
 
 a|*ECDSA*
 a|Elliptic Curve Digital Signature Algorithm
 
-a|
-*EEPROM*
-a|
-Electrically Erasable Programmable Read-Only Memory
+a|*EEPROM*
+a|Electrically Erasable Programmable Read-Only Memory
 
-a|
-*FIPS*
-a|
-Federal Information Processing Standards
+a|*FQDN*
+a|Fully Qualified Domain Name
 
-a|
-*GCM*
-a|
-Galois Counter Mode
+a|*FIPS*
+a|Federal Information Processing Standards
 
-a|
-*HMAC*
-a|
-Keyed-Hash Message Authentication Code
+a|*GCM*
+a|Galois Counter Mode
 
-a|
-*HTTPS*
-a|
-Hypertext Transfer Protocol Secure
+a|*HMAC*
+a|Keyed-Hash Message Authentication Code
 
-a|
-*IP*
-a|
-Internet Protocol
+a|*HTTPS*
+a|Hypertext Transfer Protocol Secure
 
-a|
-*IPsec*
-a|
-Internet Protocol Security
+a|*IKE*
+a|Internet Key Exchange
 
-a|
-*ITSEF*
-a|
-IT Security Evaluation Facility
+a|*iTC*
+a|International Technical Community
 
-a|
-*ND*
-a|
-Network Device
+a|*IV*
+a|Initialization Vector
 
-a|
-*NIAP*
-a|
-National Information Assurance Partnership
+a|*IP*
+a|Internet Protocol
 
-a|
-*NIST*
-a|
-National Institute of Standards and Technology
+a|*IPsec*
+a|Internet Protocol Security
 
-a|
-*NTP*
-a|
-Network Time Protocol
+a|*ITSEF*
+a|IT Security Evaluation Facility
 
-a|
-*OCSP*
-a|
-Online Certificate Status Protocol
-a|
+a|*LMS*
+a|Leighton-Micali Signature
 
-*pND*
-a|
-Physical Network Device
+a|*MAC*
+a|Message Authentication Code
 
-a|
-*PP*
-a|
-Protection Profile
+a|*MD*
+a|Message Digest
 
-a|
-*RBG*
-a|
-Random Bit Generator
+a|*ML-DSA*
+a|Module-Lattice-Based Digital Signature Algorithm
 
-a|
-*RSA*
-a|
-Rivest Shamir Adleman Algorithm
+a|*ML-KEM*
+a|Module-Lattice-Based Key Encapsulation Mechanism
 
-a|
-*SD*
-a|
-Supporting Document
+a|*MODP*
+a|Modular Exponential (Diffie-Hellman group type)
 
-a|
-*SHA*
-a|
-Secure Hash Algorithm
-a|
+a|*ND*
+a|Network Device
 
-*SSH*
-a|
-Secure Shell
-a|
+a|*NIAP*
+a|National Information Assurance Partnership
 
-*ST*
-a|
-Security Target
-a|
+a|*NIST*
+a|National Institute of Standards and Technology
 
-*TLS*
-a|
-Transport Layer Security
-a|
+a|*NTP*
+a|Network Time Protocol
 
-*TOE*
-a|
-Target of Evaluation
+a|*OE*
+a|Operational Environment
 
-a|
-*TSF*
-a|
-TOE Security Functionality
+a|*OCSP*
+a|Online Certificate Status Protocol
 
-a|
+a|*pND*
+a|Physical Network Device
 
-*TSS*
-a|
-TOE Summary Specification
-a|
+a|*PP*
+a|Protection Profile
 
-*VM*
-a|
-Virtual Machine
-a|
+a|*SA*
+a|Security Association (IPsec)
 
-*vND*
-a|
-Virtual Network Device
-a|
+a|*SAN*
+a|Subject Alternative Name
 
-*VPN*
-a|
-Virtual Private Network
-a|
+a|*SAR*
+a|Security Assurance Requirement
 
-*VS*
-a|
-virtualization System
+a|*RBG*
+a|Random Bit Generator
+
+a|*RSA*
+a|Rivest Shamir Adleman Algorithm
+
+a|*SD*
+a|Supporting Document
+
+a|*SFR*
+a|Security Functional Requirement
+
+a|*SKC*
+a|Symmetric Key Cryptography
+
+a|*SPD*
+a|Security Policy Database
+
+a|*SHA*
+a|Secure Hash Algorithm
+
+a|*SSH*
+a|Secure Shell
+
+a|*ST*
+a|Security Target
+
+a|*TLS*
+a|Transport Layer Security
+
+a|*TOE*
+a|Target of Evaluation
+
+a|*TSF*
+a|TOE Security Functionality
+
+a|*TSFI*
+a|SF Interface
+
+a|*TSS*
+a|TOE Summary Specification
+
+a|*VM*
+a|Virtual Machine
+
+a|*vND*
+a|Virtual Network Device
+
+a|*VPN*
+a|Virtual Private Network
+
+a|*VS*
+a|virtualization System
+
+a|*XMSS*
+a|eXtended Merkle Signature Scheme
+
+a|*XOF*
+a|eXtendable Output Function
+
+a|*XTS*
+a|XEX-based Tweaked-codebook mode with ciphertext Stealing
 |===
