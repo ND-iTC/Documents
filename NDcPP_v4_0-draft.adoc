@@ -3925,8 +3925,7 @@ FCS_COP.1/Hash included
 
 FCS_COP.1/SKC included
 
-FPT_TST_EXT included
-
+FPT_TST_EXT.1 included, which extends FPT_TST.1 with additional requirements for cryptographic self-tests and failure response.
 
 |FIA_UIA_EXT.1 |FTA_TAB.1 |FTA_TAB.1 included
 
