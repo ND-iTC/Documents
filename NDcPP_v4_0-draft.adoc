@@ -23,7 +23,7 @@ This document presents the Common Criteria (CC) collaborative Protection Profile
 
 === Scope of Document
 
-The scope of the cPP within the development and evaluation process is described in the Common Criteria for Information Technology Security Evaluation [CC]. In particular, a cPP defines the IT security requirements of a generic type of TOE and specifies the functional and assurance security measures to be offered by that TOE to meet stated requirements [CC1, Section C.1].
+The scope of the cPP within the development and evaluation process is described in the Common Criteria for Information Technology Security Evaluation [CC]. In particular, a cPP defines the IT security requirements of a generic type of TOE and specifies the functional and assurance security measures to be offered by that TOE to meet stated requirements [CC1, Section B.1].
 
 === Intended Readership
 
@@ -211,7 +211,7 @@ The intent of this document is to define the baseline set of common security fun
 
 The aim is that any Network Device that meets this cPP will “behave well” on the network and can be trusted to do no harm. To accomplish this, the Network Device is expected to employ standards-based tunnelling protocols to include IPsec, (D)TLS, or SSH to protect the communication paths to external entities, and in the case of a distributed TOE, to protect the communications between the TOE components. For most of the allowed secure channel protocol selections it is also required that X.509 certificates be used for authentication purposes; use of certificates is supported as an option for code signing/digital signatures.
 
-Additional security functionality that a Network Device may employ is outside the scope of this cPP, and such functionality will be specified in other device-type specific cPPs. Also, considered out of scope are virus and emailing scanning, intrusion detection/prevention capabilities and Network Address Translation (NAT) as a security function. It is expected that this cPP will be updated to expand the desired security functionality to increase resiliency, allow for varying implementations (such as software-only Network Devices), and keep current with technology enhancements. At this time, however, Exact Conformancefootnote:[Exact Conformance is specified as a subset of Strict Conformance – see the definition in Section 2.] with the cPP is required, and no additional functionality will be evaluated.
+Additional security functionality that a Network Device may employ is outside the scope of this cPP, and such functionality will be specified in other device-type specific cPPs. Also, considered out of scope are virus and emailing scanning, intrusion detection/prevention capabilities and Network Address Translation (NAT) as a security function. It is expected that this cPP will be updated to expand the desired security functionality to increase resiliency, allow for varying implementations (such as software-only Network Devices), and keep current with technology enhancements. At this time, however, Exact Conformancefootnote:[Exact Conformance is defined in [CC1], Section E.4.] with the cPP is required, and no additional functionality will be evaluated.
 
 In addition to a physical network device, this cPP supports two virtual network device configuration options.
 
@@ -276,7 +276,7 @@ The packages to which conformance can be claimed in conjunction with this cPP ar
 All cryptographic selections in the above packages must comply with the FCS_COP and FCS_CKM requirements of this cPP.
 
 === Conformance type
-In order to be conformant to this cPP, a TOE must demonstrate Exact Conformance to it. 
+In order to be conformant to this cPP, a TOE must demonstrate Exact Conformance as defined in [CC1], Section E.4.
 
 For this cPP, Exact Conformance means that the Security Target (ST) must contain all of the Security Functional Requirements in Section 6 (Mandatory Security Functional Requirements) and in Section 7 (Mandatory Security Assurance Requirements) of this cPP. No security requirements given in Section 6 or Section 7 of this cPP are allowed to be omitted. 
 
@@ -919,7 +919,7 @@ _The date and time information for any audit event should be recorded as part of
 
 [cols=",,",options="header",]
 |===
-|*Requirement* |*Auditable Events* |*Additional Audit Record Contents*
+|*Requirement* |*Auditable Events* |*Additional Audit Data Contents*
 |FAU_GEN.1 |None. |None.
 |FAU_GEN.2 |None. |None.
 |FAU_STG_EXT.1 |Configuration of local audit settings. |Identity of account making changes to the audit configuration.
@@ -1305,7 +1305,7 @@ _If LMS or XMSS is selected, then FCS_COP.1/XOF from Annex B must be included._
 
 *_Application Note {counter:appnote_count}_*
 
-_The hash function selection should have an output length that is the same or greater than the security strength of the algorithm used for signature generation. For example, the TOE should choose SHA-384 for 3072-bit RSA, 4096-bit RSA, or ECC with P-384; and SHA-512 for ECC with P-521. The ST author selects the standard based on the algorithms selected. SHA3 hashes may be used only for image signing or boot integrity verification._ 
+_The hash function selection should have an output length that is the same or greater than the security strength of the algorithm used for signature generation. For example, the TOE should choose SHA-384 for 3072-bit RSA, 4096-bit RSA, or ECC with P-384; and SHA-512 for ECC with P-521. The ST author selects the standard based on the algorithms selected. For FCS_COP.1.1/Hash, SHA3 hashes may be used only for image signing or boot integrity verification._ 
 
 *FCS_COP.1/KeyedHash Cryptographic Operation - Keyed Hash*
 
@@ -1345,7 +1345,7 @@ The following table provides the allowed choices for completion of the selection
 |CTR_DRBG|CTR_DRBG with [selection: AES-128, AES-192, AES-256] |[selection: ISO/IEC 18031: 2025 (Section C.3.2), NIST SP800-90A Revision 1 Section 10.2.1]
 |===
 
-[[table-8-fcs-rbg11]]_Table 8: Allowed choices for FCS_RBG.1.1
+[[table-8-fcs-rbg11]]_Table 8: Allowed choices for FCS_RBG.1.1_
 
 *FCS_RBG.1.2* The TSF shall use a [selection: TSF entropy source [assignment: _name of entropy source_], *multiple TSF entropy sources [assignment: _name of entropy sources_]*, TSF interface for seeding] for initialized seeding.
 
@@ -1583,6 +1583,8 @@ size)_;
 
 [[table-9-fmt-smf11]]_Table 9: FMT_SMF.1.1 Management Function Guidance_
 
+_With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘services’ refers to trusted path and trusted channel communications, on demand self-tests, trusted update and Administrator sessions (that exist under the trusted path) (e.g., netconf)._
+
 ==== Security management roles (FMT_SMR)
 
 ===== FMT_SMR.2 Restrictions on security roles
@@ -1603,7 +1605,7 @@ are satisfied.
 
 *_Application Note {counter:appnote_count}_*
 
-_FMT_SMR.2.3 requires that a Security Administrator be able to administer the TOE through a remote mechanism. See Application Note 22 for the definition of remote administration._
+_FMT_SMR.2.3 requires that a Security Administrator be able to administer the TOE through a remote mechanism. See Application Note 23 for the definition of remote administration._
 
 _For distributed TOEs, not every TOE component is required to implement its own user management to fulfil this SFR. At least one component has to support authentication and identification of Security Administrators according to FIA_UIA_EXT.1. For the other TOE components authentication as Security Administrator can be realized through the use of a trusted channel (either according to FTP_ITC.1 or FPT_ITT.1) from a component that supports the authentication of Security Administrators according to FIA_UIA_EXT.1. The identification of users according to FIA_UIA_EXT.1.2 and the association of users with roles according to FMT_SMR.2.2 is done through the components that support the authentication of Security Administrators according to FIA_UIA_EXT.1.4. TOE components that authenticate Security Administrators through the use of a trusted channel are not required to support local administration of the component._
 
@@ -1726,7 +1728,7 @@ _All discrete firmware and software elements (e.g., applications, drivers, and k
 
 === TOE access (FTA)
 
-This section specifies requirements associated with security of administrative sessions carried out on the TOE. In particular, remote sessions are monitored for inactivity and either locked or terminated when a threshold time period is reached. If the TOE supports local administration the ST author includes FTA_SSL_EXT.1 from Annex B and local sessionsfootnote:[Refer to Application Note 22 for the definition of local and remote sessions.] must also monitored for inactivity and either locked or terminated when a threshold time period is reached. Administrators must also be able to positively terminate their own interactive sessions and must have an advisory notice displayed at the start of each session.
+This section specifies requirements associated with security of administrative sessions carried out on the TOE. In particular, remote sessions are monitored for inactivity and either locked or terminated when a threshold time period is reached. If the TOE supports local administration the ST author includes FTA_SSL_EXT.1 from Annex B and local sessionsfootnote:[Refer to Application Note 23 for the definition of local and remote sessions.] must also monitored for inactivity and either locked or terminated when a threshold time period is reached. Administrators must also be able to positively terminate their own interactive sessions and must have an advisory notice displayed at the start of each session.
 
 ==== Session locking and termination (FTA_SSL)
 
@@ -1771,7 +1773,7 @@ In addition to providing protection from disclosure (and detection of modificati
 *FTP_ITC.1 Inter-TSF trusted channel*
 
 
-*FTP_ITC.1.1* The TSF shall *be capable of using [selection: _IPsec, SSH, TLS, DTLS, HTTPS_] to* provide a *trusted* communication channel between itself and +++<del>+++another trusted IT product+++</del>+++ *authorised IT entities supporting the following capabilities: audit server, [selection: _authentication server, [assignment: other capabilities], no other capabilities_]* that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from +++<del>+++modification or+++</del>+++ disclosure *and detection of modification of the channel data*.
+*FTP_ITC.1.1* The TSF shall *be capable of using [selection: _IPsec, SSH as defined in the Functional Package for SSH, TLS as defined in the Functional Package for TLS, DTLS as defined in the Functional Package for TLS, HTTPS_] to* provide a *trusted* communication channel between itself and +++<del>+++another trusted IT product+++</del>+++ *authorised IT entities supporting the following capabilities: audit server, [selection: _authentication server, [assignment: other capabilities], no other capabilities_]* that is logically distinct from other communication channels and provides assured identification of its end points and protection of the channel data from +++<del>+++modification or+++</del>+++ disclosure *and detection of modification of the channel data*.
 
 *FTP_ITC.1.2* The TSF shall permit [selection: _the TSF, +++<del>+++another trusted IT product,+++</del>+++ *the authorised IT entities_*] to initiate communication via the trusted channel.
 
@@ -1935,7 +1937,7 @@ If a TOE fulfils any of the optional requirements, the developer is encouraged t
 
 [cols=",,",options="header",]
 |===
-|*Requirement* |*Auditable Events* |*Additional Audit Record Contents*
+|*Requirement* |*Auditable Events* |*Additional Audit Data Contents*
 |FAU_STG.2 |None. |None.
 |FAU_STG_EXT.2 |None. |None.
 |FAU_STG_EXT.3 |Low storage space for audit data. |None.
@@ -1965,7 +1967,7 @@ _Audit events related to failures of certain functions should include sufficient
 
 === Security audit (FAU)
 
-==== Protected audit data storage (FAU_STG.2 & Extended – FAU_STG_EXT)
+==== Protected audit data storage (FAU_STG.2 and Extended – FAU_STG_EXT)
 
 The local storage space for audit data of a Network Device is limited, and if the local storage space is exceeded then audit data might be lost. A security Administrator might be interested in the number of dropped, overwritten, etc. audit records. This number might serve as an indication if a severe problem has occurred after the storage space was exceeded that continuously generated audit data. Therefore, FAU_STG_EXT.2 and FAU_STG_EXT.3 are defined to express these optional capabilities of a Network Device.
 
@@ -2154,7 +2156,7 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 
 [cols=",,",options="header",]
 |===
-|*Requirements* |*Auditable Events* |*Additional Audit Record Contents*
+|*Requirement* |*Auditable Events* |*Additional Audit Data Contents*
 |FAU_SAR.1 |None. |None.
 |FAU_GEN_EXT.1 |None. |None.
 |FAU_STG_EXT.4 |None.|None.
@@ -2176,6 +2178,7 @@ As indicated in the introduction to this cPP, the baseline requirements (those t
 |Identity if new/removed time server.
 |FIA_AFL.1 |Unsuccessful login attempts limit is met or exceeded. |Origin of the attempt (e.g., IP address).
 |FIA_PMG_EXT.1 |None. |None.
+|FIA_PSK_EXT.1 |None. |None.
 |FIA_UAU.7 |None. |None.
 |FMT_MOF.1/Services |None. |None.
 |FMT_MTD.1/CryptoKeys |None. |None.
@@ -2350,7 +2353,7 @@ NIST SP 800-38F (Section 6.3) [KWP mode]
 
 *_Application Note {counter:appnote_count}_*
 
-_NIST 800-57p1rev5 sec. 5.6.2 specifies that the size of key used to protect the key being transported should be at least the security strength of the key it is protecting._
+_NIST SP 800-57 Part 1 Revision 5, Section 5.6.2 specifies that the size of key used to protect the key being transported should be at least the security strength of the key it is protecting._
 
 ==== FCS_COP.1/SKC Cryptographic Operation - Symmetric Key Cryptography
 
@@ -2477,7 +2480,7 @@ _Since LMS and XMSS use both SHAKE128 and SHAKE256 internally, claiming and test
 
 ==== Cryptographic Protocols (Extended – FCS_DTLSC_EXT, FCS_DTLSS_EXT, FCS_IPSEC_EXT, FCS_NTP_EXT, FCS_TLSC_EXT, FCS_TLSS_EXT)
 
-===== FCS_DTLSC_EXT & FCS_DTLSS_EXT DTLS Protocol
+===== FCS_DTLSC_EXT and FCS_DTLSS_EXT DTLS Protocol
 
 Datagram TLS (DTLS) is not a required component of the NDcPP. If a TOE implements DTLS, a corresponding selection in FTP_ITC.1, FTP_TRP.1/Admin, or FPT_ITT.1 should be made to define what the DTLS protocol is implemented to protect. If a corresponding option to support DTLS has been selected in at least one of the SFRs named above, the corresponding selection-based DTLS-related SFRs should be added to the ST from the Functional Package for TLS. 
 
@@ -2663,7 +2666,7 @@ This SFR is not applicable if the TOE cannot be configured to operate as an NTP 
 *FCS_NTP_EXT.1.2* The TSF shall update its system time using [selection:
 
 * Authentication using [selection: _SHA256, SHA384, SHA512, AES-CMAC-128 (RFC 8573), AES-CBC-128, AES-CBC-256_] as the message digest algorithm(s);
-* [selection: _IPsec, DTLS_] to provide trusted communication between itself and an NTP time source.
+* [selection: _IPsec, DTLS as defined in the Functional Package for TLS_] to provide trusted communication between itself and an NTP time source.
 
 ].
 
@@ -2676,7 +2679,7 @@ This SFR is not applicable if the TOE cannot be configured to operate as an NTP 
 _The TOE has to support configuration of at least three time sources though it is not mandated that the TOE is configured to always use at least three time sources._
 
 
-===== FCS_TLSC_EXT & FCS_TLSS_EXT TLS Protocol
+===== FCS_TLSC_EXT and FCS_TLSS_EXT TLS Protocol
 
 TLS is not a required component of this cPP. If a TOE implements TLS, a corresponding selection in FPT_ITT.1, FTP_ITC.1, or FTP_TRP.1/Admin should be made to define what the TLS protocol is implemented to protect. If a corresponding option to support TLS has been selected in at least one of the SFRs named above, the corresponding selection-based TLS-related SFRs should be added to the ST from the Functional Package for TLS. 
 
@@ -2769,7 +2772,7 @@ _The ST author selects the special characters that are supported by the TOE. The
 
 _The second assignment should be configured with the largest minimum password length the Security Administrator can configure._
 
-==== FIA_PSK_EXT.1 Pre-Shared Key Composition
+==== Pre-Shared Key Composition (Extended - FIA_PSK_EXT)
 
 The TOE may support pre-shared keys for use in the IPsec protocol that conform to RFC 8784.
 
@@ -2839,6 +2842,8 @@ _It is acceptable to provide a manual method for an administrator to provide rev
 _FMT_MOF.1/Services should only be chosen if the Security Administrator has the ability to start and stop services and the corresponding option has been selected in FMT_SMF.1._
 
 _In FMT_MOF.1.1/Services 'enable and disable' have been refined to 'start and stop' and 'the functions: [assignment: list of functions]' has been refined to 'services'._
+
+_With respect to FAU_GEN.1.1, FMT_SMF.1 and FMT_MOF.1/Services the term ‘services’ refers to trusted path and trusted channel communications, on demand self-tests, trusted update and Administrator sessions (that exist under the trusted path) (e.g., netconf)._
 
 ===== FMT_MOF.1/AutoUpdate Management of security functions behaviour
 
@@ -3291,7 +3296,7 @@ Dependencies:
 *FCS_NTP_EXT.1.2* The TSF shall update its system time using [selection:
 
 * Authentication using [selection: _SHA256, SHA384, SHA512, AES-CBC-128, AES-CBC-256_] as the message digest algorithm(s);
-* [selection: _IPsec, DTLS_] to provide trusted communication between itself and an NTP time source.
+* [selection: _IPsec, DTLS as defined in the Functional Package for TLS_] to provide trusted communication between itself and an NTP time source.
 
 ].
 
@@ -3969,10 +3974,10 @@ FAU_GEN.1
 
 FAU_STG_EXT.1
 
-|FAU_GEN.1 & FAU_STG_EXT.1 included
+|FAU_GEN.1 and FAU_STG_EXT.1 included
 |FAU_STG_EXT.3 |FAU_GEN.1
 
-FAU_STG_EXT.1|FAU_GEN.1 & FAU_STG_EXT.1 included
+FAU_STG_EXT.1|FAU_GEN.1 and FAU_STG_EXT.1 included
 
 |FCS_CKM.2 a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1/AKG or FCS_CKM.5 or FCS_CKM_EXT.8 or FCS_CKM_EXT.3
@@ -4173,7 +4178,7 @@ FCS_CKM.6 included
 |FIA_AFL.1 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication
 |FIA_UAU.7 |FIA_UAU.1 |Satisfied by FIA_UIA_EXT.1, which specifies the relevant Administrator authentication
 |FIA_PMG_EXT.1 |None |
-
+|FIA_PSK_EXT.1 |None |
 |FPT_APW_EXT.1 |None |
 |FPT_TUD_EXT.2 |FPT_TUD_EXT.1 |FPT_TUD_EXT.1 included
 |FMT_MOF.1/AutoUpdate a|
@@ -4397,11 +4402,6 @@ a|
 *TSF*
 a|
 TOE Security Functionality
-
-TSF = TOE for pND or Case 1 vND according to Section 1.2
-
-TSF = TOE + VS for Case 2 vND (vND evaluated as a pND) according to Section 1.2
-
 
 a|
 

@@ -188,7 +188,7 @@ _Additional Note for Distributed TOEs_
 
 ==== FAU_GEN.2 User identity association
 
-===== TSS & Guidance Documentation
+===== TSS and Guidance Documentation
 [arabic, start=31]
 . The TSS and Guidance Documentation requirements for FAU_GEN.2 are already covered by the TSS and Guidance Documentation requirements for FAU_GEN.1.
 
@@ -562,7 +562,7 @@ Note: The number of test cases is limited due to the extreme amount of time it c
 [arabic, start=111]
 . To test the TOE’s ability to generate cryptographic digital signature using LMS, the evaluator shall perform the Algorithm Functional Test using the following input parameters:
 * Hash algorithm [SHA-256/192, SHAKE256/192, SHA-256, SHAKE256]
-* Winterlitz [1, 2, 4, 8]
+* Winternitz [1, 2, 4, 8]
 * Tree height [5, 10, 15, 20, 25]
 
 *Algorithm Functional Test*
@@ -814,7 +814,7 @@ The test values are defined as follows:
 [arabic, start=131]
 . To test the TOE’s ability to verify cryptographic digital signature using LMS, the evaluator shall perform the Algorithm Functional Test using the following input parameters
 * Hash algorithm [SHA-256/192, SHAKE256/192, SHA-256, SHAKE256]
-* Winterlitz [1, 2, 4, 8]
+* Winternitz[1, 2, 4, 8]
 * Tree height [5, 10, 15, 20, 25]
 
 *Algorithm Functional Test*
@@ -1151,7 +1151,7 @@ For distributed TOEs, the evaluation activities defined in this chapter shall be
 ==== FMT_SMF.1 Specification of Management Functions
 
 [arabic, start=200]
-. The security management functions for FMT_SMF.1 are distributed throughout the cPP and are included as part of the requirements in FTA_SSL_EXT.1, FTA_SSL.3, FTA_TAB.1, FMT_MOF.1/ManualUpdate, FMT_MOF.1/AutoUpdate (if included in the ST), FIA_AFL.1, FPT_TUD_EXT.1.2 & FPT_TUD_EXT.2.2 (if included in the ST and if an administrator-configurable action is included as per Application Note 65 of FPT_TUD_EXT.2.4 in the cPP), FMT_MOF.1/Services, and FMT_MOF.1/Functions (for all of these SFRs that are included in the ST), FMT_MTD, FPT_TST_EXT, and any cryptographic management functions specified in the reference standards. If the TOE claims conformance to the Functional Package for X.509, any management functions defined there are relevant to this SFR as well. Compliance to these requirements satisfies compliance with FMT_SMF.1.
+. The security management functions for FMT_SMF.1 are distributed throughout the cPP and are included as part of the requirements in FTA_SSL_EXT.1, FTA_SSL.3, FTA_TAB.1, FMT_MOF.1/ManualUpdate, FMT_MOF.1/AutoUpdate (if included in the ST), FIA_AFL.1, FPT_TUD_EXT.1.2 and FPT_TUD_EXT.2.2 (if included in the ST and if an administrator-configurable action is included as per Application Note 65 of FPT_TUD_EXT.2.4 in the cPP), FMT_MOF.1/Services, and FMT_MOF.1/Functions (for all of these SFRs that are included in the ST), FMT_MTD, FPT_TST_EXT, and any cryptographic management functions specified in the reference standards. If the TOE claims conformance to the Functional Package for X.509, any management functions defined there are relevant to this SFR as well. Compliance to these requirements satisfies compliance with FMT_SMF.1.
 
 ===== TSS (containing also requirements on Guidance Documentation and Tests)
 [arabic, start=201]
@@ -1642,7 +1642,7 @@ Some TOEs may set up the registration channel before the enablement step is carr
 [arabic, start=311]
 . For distributed TOEs, the requirements on TSS, Guidance Documentation and Tests regarding FAU_GEN_EXT.1 are already covered by the corresponding requirements for FAU_GEN.1.
 
-==== FAU_STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs & FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
+==== FAU_STG_EXT.4 Protected Local Audit Event Storage for Distributed TOEs and FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
 
 ===== TSS
 [arabic, start=312]
@@ -3112,7 +3112,7 @@ https://www.tenable.com/plugins
 https://www.zerodayinitiative.com/advisories/published/
 . Exploit Database (Offensive Security): +
 https://www.exploit-db.com/
-. Rapid7 Vulnerability & Exploit Database: +
+. Rapid7 Vulnerability and Exploit Database: +
 https://www.rapid7.com/db/?type=nexpose
 
 [appendix]
