@@ -3983,7 +3983,7 @@ FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1/AKG or FCS_CKM.5 or FCS_CKM_EXT.8 or FCS_CKM
 
 FCS_CKM.6 
 
-FCS_COP.1/KeyEncap, or FCS_COP.1/KeyWrap or FTP_PRO.1 
+FCS_COP.1/KeyEncap, or FCS_COP.1/KeyWrap
 
 a|
 FCS_CKM.1/AKG included
@@ -3993,12 +3993,6 @@ FCS_CKM.6 included
 FCS_COP.1/KeyEncap included
 
 FCS_COP.1/KeyWrap included
-
-FTP_ITC.1 included
-
-FTP_TRP.1/Admin included
-
-FPT_ITT.1 included
 
 |FCS_COP.1/KeyEncap a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1/AKG or FCS_CKM.5 or FCS_CKM_EXT.7 or FCS_CKM_EXT.8 
