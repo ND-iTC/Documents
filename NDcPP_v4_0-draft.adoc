@@ -3981,18 +3981,16 @@ FAU_STG_EXT.1|FAU_GEN.1 and FAU_STG_EXT.1 included
 |FCS_CKM.2 a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1/AKG or FCS_CKM.5 or FCS_CKM_EXT.8 or FCS_CKM_EXT.3
 
-FCS_CKM.6 
+FCS_CKM.3
+
+FCS_CKM.6
 
 FCS_COP.1/KeyEncap, or FCS_COP.1/KeyWrap
 
 a|
-FCS_CKM.1/AKG included
-
-FCS_CKM.6 included
-
+FCS_CKM.1/AKG included  
+FCS_CKM.6 included  
 FCS_COP.1/KeyEncap included
-
-FCS_COP.1/KeyWrap included
 
 |FCS_COP.1/KeyEncap a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1/AKG or FCS_CKM.5 or FCS_CKM_EXT.7 or FCS_CKM_EXT.8 

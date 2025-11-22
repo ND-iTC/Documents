@@ -93,7 +93,7 @@ toc::[]
 
 ==== Glossary
 [arabic, start=13]
-. For definitions of standard CC terminology see [CC] part 1.
+. For definitions of standard CC terminology see [CC1].
 
 [cols="30%,60%",options="header",width=90%]
 |===
@@ -1502,7 +1502,7 @@ In the case that no other users than the Security Administrator can be defined, 
 
 ===== Tests
 [arabic, start=282]
-. Specific testing for this component is covered by testing for the claimed components in FCS_COP.1/KeyEncap, FCS_COP.1/KeyWrap, FTP_ITC.1, FTP_TRP.1/Admin, or FPT_ITT.1.
+. Specific testing for this component is covered by testing for the claimed components in FCS_COP.1/KeyEncap, FCS_COP.1/KeyWrap, and the applicable key establishment or key derivation mechanisms claimed under FCS_CKM.1/AKG, FCS_CKM.5, FCS_CKM_EXT.8, or FCS_CKM_EXT.3.
 
 === Protection of the TSF (FPT)
 
