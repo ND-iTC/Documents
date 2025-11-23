@@ -21,7 +21,7 @@ This is a Supporting Document (SD), intended to complement the Common Criteria (
 
 Supporting documents may be “Guidance Documents”, that highlight specific approaches and application of the standard to areas where no mutual recognition of its application is required, and as such, are not of normative nature, or “Mandatory Technical Documents”, whose application is mandatory for evaluations whose scope is covered by that of the supporting document. The usage of the latter class is not only mandatory, but certificates issued as a result of their application are recognised under the Common Criteria Recognition Arrangement (CCRA). This SD shall be considered a Mandatory Technical Document.
 
-This SD has been developed by the ND iTC, in accordance with part 4 of [CC]. The SD is intended to be used to support the evaluations of products against the collaborative Protection Profile (cPP) identified in Section 1.1.
+This SD has been developed by the ND iTC, in accordance with [CC4]. The SD is intended to be used to support the evaluations of products against the collaborative Protection Profile (cPP) identified in Section 1.1.
 
 *Technical Editor:* Network Device International Technical Community (ND iTC)
 
@@ -2991,10 +2991,6 @@ CCMB-2022-11-003, Version CC:2022 Revision 1, November 2022
 [CC4] Common Criteria for Information Technology Security Evaluation, +
 Part 4: Framework for the specification of evaluation methods and activities +
 CCMB-2022-11-004, Version CC:2022 Revision 1, November 2022
-
-[CC5] Common Criteria for Information Technology Security Evaluation, +
-Part 5: Pre-defined packages of security requirements +
-CCMB-2022-11-005, Version CC:2022 Revision 1, November 2022
 
 [CEM] Common Methodology for Information Technology Security Evaluation, +
 Evaluation Methodology, +

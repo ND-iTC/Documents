@@ -284,7 +284,7 @@ Optionally, security requirements from Annex A, Optional Security Requirements c
 
 Annex B, Selection-Based Security Requirements gives the selection-based security requirements of this cPP, some of which will be mandatory according to the selections made in other security requirements.
 
-While iteration of SFRs from the cPP is allowed, no additional security requirements (from the [CC2], [CC-SFRC], [CC3]], or definitions of extended components that are not already included in this cPP) are allowed to be included in the ST. 
+While iteration of SFRs from the cPP is allowed, no additional security requirements (from the [CC2], [CC-SFRC], [CC3], or definitions of extended components that are not already included in this cPP) are allowed to be included in the ST. 
 
 The use of mandatory, optional and selection-based SFRs allows some customization when modeling the TOE. However, this does not work for the SPD in Section 4 and the security objectives in Section 5. Some parts in these sections are marked as "(applies to ... only)" (e.g., "(applies to distributed TOEs only)", "(applies to vNDs only)"). These parts only need to be included in the ST for TOEs that comply with the corresponding conditions (i.e., parts marked as "(applies to distributed TOEs only)" only need to be included in STs for distributed TOEs and shall be omitted otherwise).
 
@@ -4139,7 +4139,15 @@ FCS_CKM.1/AKG included
 
 FCS_CKM.2 included
 
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/SigVer, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+FCS_COP.1/DataEncryption
+
+FCS_COP.1/SigGen
+
+FCS_COP.1/SigVer
+
+FCS_COP.1/Hash
+
+FCS_COP.1/KeyedHash included
 
 FCS_RBG.1 included
 
