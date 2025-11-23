@@ -1637,7 +1637,7 @@ _The intent of this requirement is for the device to protect keys, key material,
 
 *FPT_STM_EXT.1.1* The TSF shall be able to provide reliable time stamps for its own use.
 
-*FPT_STM_EXT.1.2* The TSF shall [selection: _allow the Security Administrator to set the time, synchronize time with an NTP server, obtain time from the underlying virtualization system_].
+*FPT_STM_EXT.1.2* The TSF shall [selection: _allow the Security Administrator to set the time, synchronise time with an NTP server, obtain time from the underlying virtualization system_].
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1723,7 +1723,6 @@ _If “X.509 certificate” is selected, certificates are validated in accordanc
 _‘Update’ in the context of this SFR refers to the process of replacing a non-volatile (NV), system resident software component with another. The former is referred to as the NV image, and the latter is the update image. While the update image is typically newer than the NV image, this is not a requirement. There are legitimate cases where the system owner may want to rollback a component to an older version (e.g., when the component manufacturer releases a faulty update, or when the system relies on an undocumented feature no longer present in the update). Likewise, the owner may want to update with the same version as the NV image to recover from faulty storage._
 
 _All discrete firmware and software elements (e.g., applications, drivers, and kernel) of the TSF need to be protected, (i.e., they should be digitally signed by the corresponding manufacturer and subsequently verified by the mechanism performing the update)._
-
 
 
 === TOE access (FTA)
@@ -2104,13 +2103,7 @@ The SFR in this section defines the top-level requirement for control over the w
 
 *FCO_CPC_EXT.1.1* The TSF shall require a Security Administrator to enable communications between any pair of TOE components before such communication can take place.
 
-*FCO_CPC_EXT.1.2* The TSF shall implement a registration process in which components establish and use a communications channel that uses [selection:
-
-* _A channel that meets the secure channel requirements in [selection: FTP_ITC.1, FPT_ITT.1],_
-* _A channel that meets the secure registration channel requirements in FTP_TRP.1/ Join,_
-* _No channel]_
-
-for at least _TSF data_.
+*FCO_CPC_EXT.1.2* The TSF shall implement a registration process in which components establish and use a communications channel that uses [assignment: _list of different types of channel given in the form of a selection_] for at least [assignment: _type of data for which the channel must be used_].
 
 *FCO_CPC_EXT.1.3* The TSF shall enable a Security Administrator to disable communications between any pair of TOE components.
 
@@ -2527,6 +2520,7 @@ _When an AES-CBC algorithm is selected, at least one SHA-based HMAC must also be
 *FCS_IPSEC_EXT.1.5* The TSF shall implement the protocol: [selection:
 
 * _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, RFC 4109, [selection: no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
+
 * _IKEv2 as defined in RFC 7296 [selection: with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 7296, Section 2.23], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
 
 ].
@@ -2994,7 +2988,7 @@ Dependencies:
 * FAU_GEN.1 Audit data generation
 * FTP_ITC.1 Inter-TSF Trusted Channel
 
-*FAU_STG_EXT.1.1* The TSF shall be able to transmit the generated audit data to an external IT entity using a trusted channel according to FTP_ITC.1
+*FAU_STG_EXT.1.1* The TSF shall be able to transmit the generated audit data to an external IT entity using a trusted channel according to FTP_ITC.1.
 
 *FAU_STG_EXT.1.2* The TSF shall be able to store generated audit data on the TOE itself. In addition [selection:
 
@@ -3004,7 +2998,7 @@ Dependencies:
 
 *FAU_STG_EXT.1.3* The TSF shall maintain a [_selection: log file, database, buffer, [assignment: other local logging method]_] of audit records in the event that an interruption of communication with the remote audit server occurs.
 
-*FAU_STG_EXT.1.4* The TSF shall be able to store [_selection: persistent, non-persistent_] audit records locally with a minimum storage size of [_assignment: number of records, file/buffer size(s)_].
+*FAU_STG_EXT.1.4* The TSF shall be able to store [_selection: persistent, non-persistent_] audit records locally with a minimum storage size of [_assignment: number of records and/or file/buffer size(s)_].
 
 *FAU_STG_EXT.1.5* The TSF shall [_selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_] when the local storage space for audit data is full.
 
@@ -3047,7 +3041,7 @@ Dependencies:
 * FAU_GEN_EXT.1 Security Audit data generation for Distributed TOE Components
 * [FPT_ITT.1 Intra-TSF Trusted Channel or FTP_ITC.1 Inter-TSF Trusted Channel]
 
-*FAU_STG_EXT.4.1* The TSF of each TOE component which stores security audit data locally shall perform the following actions when the local storage space for audit data is full: _[assignment:_ _table of components and for each component its action chosen according to the following:_ [selection: _drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_]].
+*FAU_STG_EXT.4.1* The TSF of each TOE component which stores security audit data locally shall perform the following actions when the local storage space for audit data is full: [_assignment: table of components and for each component its action chosen according to the following: [selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_]].
 
 ===== FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
 
@@ -3060,7 +3054,7 @@ Dependencies:
 * FAU_GEN_EXT.1 Security Audit data generation for Distributed TOE Components
 * [FPT_ITT.1 Intra-TSF Trusted Channel or FTP_ITC.1 Inter-TSF Trusted Channel]
 
-*FAU_STG_EXT.5.1* Each TOE component which does not store security audit data locally shall be able to buffer security audit data locally until it has been transferred to another TOE component that stores or forwards it. All transfer of audit records between TOE components shall use a protected channel according to _[selection: FPT_ITT.1, FTP_ITC.1]_.
+*FAU_STG_EXT.5.1* Each TOE component which does not store security audit data locally shall be able to buffer security audit data locally until it has been transferred to another TOE component that stores or forwards it. All transfer of audit records between TOE components shall use a protected channel according to [selection: _FPT_ITT.1, FTP_ITC.1_].
 
 
 === Cryptographic Support (FCS)
@@ -3194,11 +3188,11 @@ Dependencies:
 
 *FCS_IPSEC_EXT.1.5* The TSF shall implement the protocol: [selection:
 
-* _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, 4109, [selection: no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
+* _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, RFC 4109, [selection: no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
 
 * _IKEv2 as defined in RFC 7296 [selection: with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 7296, Section 2.23], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
 
-*FCS_IPSEC_EXT.1.6* The TSF shall ensure the encrypted payload in the [selection: _IKEv1, IKEv2_] protocol uses the cryptographic algorithms [selection: _AES-CBC-128, AES_CBC-192 AES-CBC-256 (specified in RFC 3602), AES-GCM-128, AES-GCM-192, AES-GCM-256 (specified in RFC 5282)_].
+*FCS_IPSEC_EXT.1.6* The TSF shall ensure the encrypted payload in the [selection: _IKEv1, IKEv2_] protocol uses the cryptographic algorithms [selection: _AES-CBC-128, AES-CBC-192, AES-CBC-256 (specified in RFC 3602), AES-GCM-128, AES-GCM-192, AES-GCM-256 (specified in RFC 5282)_].
 
 *FCS_IPSEC_EXT.1.7* The TSF shall ensure that [selection:
 
@@ -3237,7 +3231,7 @@ _]_
 
 ].
 
-*FCS_IPSEC_EXT.1.9* The TSF shall generate the secret value x used in the IKE Diffie-Hellman key exchange (“x” in g^x^ mod p) using the random bit generator specified in FCS_RBG.1, and having a length of at least _[assignment: (one or more) number(s) of bits that is at least twice the security strength of the negotiated Diffie-Hellman group_] bits.
+*FCS_IPSEC_EXT.1.9* The TSF shall generate the secret value x used in the IKE Diffie-Hellman key exchange (“x” in g^x mod p) using the random bit generator specified in FCS_RBG.1, and having a length of at least [assignment: _(one or more) number(s) of bits that is at least twice the security strength of the negotiated Diffie-Hellman group_] bits.
 
 *FCS_IPSEC_EXT.1.10* The TSF shall generate nonces used in [selection: _IKEv1, IKEv2_] exchanges of length [selection:
 
@@ -3248,12 +3242,13 @@ _]_
 
 *FCS_IPSEC_EXT.1.11* The TSF shall ensure that IKE protocols implement DH Group(s) [selection:
 
-* _[selection: 14 (2048-bit MODP), 15 (3072-bit MODP), 16 (4096-bit MODP), 17 (6144-bit MODP), 18 (8192-bit MODP)] according to RFC 3526,_
-* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),21 (521-bit Random ECP)] according to RFC 5114._
+* [selection: _14 (2048-bit MODP), 15 (3072-bit MODP), 16 (4096-bit MODP), 17 (6144-bit MODP), 18 (8192-bit MODP)] according to RFC 3526,_
 
-_]._
+* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),_ _21 (521-bit Random ECP)] according to RFC 5114._
 
-*FCS_IPSEC_EXT.1.12* The TSF shall be able to ensure by default that the strength of the symmetric algorithm (in terms of the number of bits in the key) negotiated to protect the [selection: _IKEv1 Phase 1, IKEv2 IKE_SA_] connection is greater than or equal to the strength of the symmetric algorithm (in terms of the number of bits in the key) negotiated to protect the [selection: _IKEv1 Phase 2, IKEv2 CHILD_SA_] connection.
+].
+
+*FCS_IPSEC_EXT.1.12* The TSF shall be able to ensure that the strength of the symmetric algorithm (in terms of the number of bits in the key) negotiated to protect the [selection: _IKEv1 Phase 1, IKEv2 IKE_SA_] connection is greater than or equal to the strength of the symmetric algorithm (in terms of the number of bits in the key) negotiated to protect the [selection: _IKEv1 Phase 2, IKEv2 CHILD_SA_] connection.
 
 *FCS_IPSEC_EXT.1.13* The TSF shall ensure that all IKE protocols perform peer authentication using [selection: _RSA, ECDSA_] that use X.509v3 certificates that conform to RFC 4945 and [selection: _Pre-shared Keys that conform to RFC 8784, no other method_].
 
@@ -3295,7 +3290,7 @@ Dependencies:
 
 *FCS_NTP_EXT.1.2* The TSF shall update its system time using [selection:
 
-* Authentication using [selection: _SHA256, SHA384, SHA512, AES-CBC-128, AES-CBC-256_] as the message digest algorithm(s);
+* Authentication using [selection: _SHA256, SHA384, SHA512, AES-CMAC-128 (RFC 8573), AES-CBC-128, AES-CBC-256_] as the message digest algorithm(s);
 * [selection: _IPsec, DTLS as defined in the Functional Package for TLS_] to provide trusted communication between itself and an NTP time source.
 
 ].
@@ -3338,8 +3333,8 @@ Dependencies: No other components
 *FIA_PMG_EXT.1.1* The TSF shall provide the following password management capabilities for administrative passwords:
 
 [loweralpha]
-. Passwords shall be able to be composed of any combination of upper and lower case letters, numbers, and the following special characters: [selection: _“!”, “@”, “#”, “$”, “%”, “^”, “&”, “*”, “(“, “)”, [assignment: other characters]_];
-. Minimum password length shall _be configurable to between [assignment: minimum number of characters supported by the TOE] and [assignment: number of characters greater than or equal to 15] characters._
+. Passwords shall be able to be composed of any combination of upper and lower case letters, numbers and the following special characters: [selection: _"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", [assignment: other characters]_];
+. Minimum password length shall be _configurable to between [assignment: minimum number of characters supported by the TOE] and [assignment: number of characters greater than or equal to 15] characters._
 
 ==== Pre-Shared Key Composition (FIA_PSK_EXT)
 
@@ -3525,14 +3520,13 @@ Hierarchical to: No other components
 
 Dependencies: No other components
 
-*FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
+*FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests:
 
 * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
-* _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* _Prior to providing any cryptographic service and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: ‘list an identifier for each self-test that is additional to those identified in the first two bullet points’]._
 
-* [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: describe self-test objective]._
-
-to demonstrate the correct operation of the TSF: [assignment: _list of self-tests run by the TSF_] and if failure detected [assignment: _describe resulting error state_].
+to demonstrate the correct operation of the TSF.
 
 *FPT_TST_EXT.1.2* The TSF shall respond to [selection: _all failures, [assignment: list of failures detected by self-tests_]] by [selection: _entering a maintenance mode, rebooting, [assignment: other methods to enter a secure state_]].
 
@@ -3576,9 +3570,9 @@ Hierarchical to: No other components
 
 Dependencies: FCS_COP.1/SigVer Cryptographic operation (for Cryptographic Signature and Verification), or FCS_COP.1/Hash Cryptographic operation (for cryptographic hashing)
 
-*FPT_TUD_EXT.1.1* The TSF shall provide [assignment: _Administrators_] the ability to query the currently executing version of the TOE firmware/software and [selection: _the most recently installed version of the TOE firmware/software; no other TOE firmware/software version_].
+*FPT_TUD_EXT.1.1* The TSF shall provide _Security Administrators_ the ability to query the currently executing version of the TOE firmware/software and [selection: _the most recently installed version of the TOE firmware/software; no other TOE firmware/software version_].
 
-*FPT_TUD_EXT.1.2* The TSF shall provide [assignment: _Administrators_] the ability to manually initiate updates to TOE firmware/software and [selection: _support automatic checking for updates, support automatic updates, no other update mechanism_].
+*FPT_TUD_EXT.1.2* The TSF shall provide _Security Administrators_ the ability to manually initiate updates to TOE firmware/software and [selection: _support automatic checking for updates, support automatic updates, no other update mechanism_].
 
 *FPT_TUD_EXT.1.3* The TSF shall provide means to authenticate firmware/software updates to the TOE using a [selection: _X.509 certificate, digital signature_] prior to installing those updates.
 
