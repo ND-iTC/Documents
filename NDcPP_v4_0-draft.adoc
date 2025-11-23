@@ -2593,9 +2593,10 @@ _For DH groups 19 and 20, the ‘x’ value is the point multiplier for the gene
 
 _Since the implementation may allow different Diffie-Hellman groups to be negotiated for use in forming the SAs, the assignment in FCS_IPSEC_EXT.1.9 may contain multiple values. For each DH group supported, the ST author consults Table 2 in NIST SP 800-57 “Recommendation for Key Management –Part 1: General” to determine the security strength (‘bits of security’) associated with the DH group. Each unique value is then used to fill in the assignment for this element. For example, suppose the implementation supports DH group 14 (2048-bit MODP) and group 20 (ECDH using NIST curve P-384). From Table 2, the bits of security value for group 14 is 112, and for group 20 is 192._
 
-*FCS_IPSEC_EXT.1.10* The TSF shall generate nonces used in [selection: _IKEv1, IKEv2_] exchanges of length [selection:
+*FCS_IPSEC_EXT.1.10* The TSF shall generate nonces used in [selection: _IKEv1, IKEv2_] protocol exchanges of length [selection:
 
 * _according to the security strength associated with the negotiated Diffie-Hellman group;_
+
 * _at least 128 bits in size and at least half the output size of the negotiated pseudorandom function (PRF) hash_
 
 ].
@@ -3233,9 +3234,10 @@ _]_
 
 *FCS_IPSEC_EXT.1.9* The TSF shall generate the secret value x used in the IKE Diffie-Hellman key exchange (“x” in g^x mod p) using the random bit generator specified in FCS_RBG.1, and having a length of at least [assignment: _(one or more) number(s) of bits that is at least twice the security strength of the negotiated Diffie-Hellman group_] bits.
 
-*FCS_IPSEC_EXT.1.10* The TSF shall generate nonces used in [selection: _IKEv1, IKEv2_] exchanges of length [selection:
+*FCS_IPSEC_EXT.1.10* The TSF shall generate nonces used in [selection: _IKEv1, IKEv2_] protocol exchanges of length [selection:
 
 * _according to the security strength associated with the negotiated Diffie-Hellman group;_
+
 * _at least 128 bits in size and at least half the output size of the negotiated pseudorandom function (PRF) hash_
 
 ].
