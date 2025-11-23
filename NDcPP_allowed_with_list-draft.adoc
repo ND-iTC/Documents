@@ -3,8 +3,8 @@
 [cols="1,2",options=,]
 |===
 
-|*Allowed-with list version*|4.0 draft
-|*Date*|25 June 2025
+|*Allowed-with list version*|4.0
+|*Date*|TBD November 2025
 
 |===
 
@@ -14,16 +14,15 @@ Inclusion of an object on one of these lists does not imply endorsement of the o
  
 Conformance claims from other Protection Profiles (apart from PP-Configurations that may be defined using the PP above and the allowed objects below) are not allowed by ND cPP. 
 
-== NDcPP v4.0 (draft)
-
+== NDcPP v4.0
 
 [cols="1,2",options=,]
 |===
 
 |cPP to which this list applies:|collaborative Protection Profile for Network Devices
-|Latest definitive cPP version:|v4.0 (draft), 25 June 2025
+|Latest definitive cPP version:|v4.0, TBD November 2025
 |Supporting Document for cPP:|Evaluation Activities for Network Device cPP
-|Latest definitive SD version:|v4.0 (draft), 25 June 2025
+|Latest definitive SD version:|v4.0, TBD November 2025
 
 |===
 
