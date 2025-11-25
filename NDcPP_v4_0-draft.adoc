@@ -211,7 +211,7 @@ The intent of this document is to define the baseline set of common security fun
 
 The aim is that any Network Device that meets this cPP will “behave well” on the network and can be trusted to do no harm. To accomplish this, the Network Device is expected to employ standards-based tunnelling protocols to include IPsec, (D)TLS, or SSH to protect the communication paths to external entities, and in the case of a distributed TOE, to protect the communications between the TOE components. For most of the allowed secure channel protocol selections it is also required that X.509 certificates be used for authentication purposes; use of certificates is supported as an option for code signing/digital signatures.
 
-Additional security functionality that a Network Device may employ is outside the scope of this cPP, and such functionality will be specified in other device-type specific cPPs. Also, considered out of scope are virus and emailing scanning, intrusion detection/prevention capabilities and Network Address Translation (NAT) as a security function. It is expected that this cPP will be updated to expand the desired security functionality to increase resiliency, allow for varying implementations (such as software-only Network Devices), and keep current with technology enhancements. At this time, however, Exact Conformancefootnote:[Exact Conformance is defined in [CC1], Section E.4.] with the cPP is required, and no additional functionality will be evaluated.
+Additional security functionality that a Network Device may employ is outside the scope of this cPP, and such functionality will be specified in other device-type specific cPPs. Also, considered out of scope are virus and emailing scanning, intrusion detection/prevention capabilities and Network Address Translation (NAT) as a security function. It is expected that this cPP will be updated to expand the desired security functionality to increase resiliency, allow for varying implementations (such as software-only Network Devices), and keep current with technology enhancements. At this time, however, Exact Conformancefootnote:[Exact Conformance is defined in [CC1\], Section E.4.] with the cPP is required, and no additional functionality will be evaluated.
 
 In addition to a physical network device, this cPP supports two virtual network device configuration options.
 
@@ -284,13 +284,13 @@ Optionally, security requirements from Annex A, Optional Security Requirements c
 
 Annex B, Selection-Based Security Requirements gives the selection-based security requirements of this cPP, some of which will be mandatory according to the selections made in other security requirements.
 
-While iteration of SFRs from the cPP is allowed, no additional security requirements (from the [CC2], [CC-SFRC], [CC3]], or definitions of extended components that are not already included in this cPP) are allowed to be included in the ST. 
+While iteration of SFRs from the cPP is allowed, no additional security requirements (from the [CC2], [CC-SFRC], [CC3], or definitions of extended components that are not already included in this cPP) are allowed to be included in the ST. 
 
 The use of mandatory, optional and selection-based SFRs allows some customization when modeling the TOE. However, this does not work for the SPD in Section 4 and the security objectives in Section 5. Some parts in these sections are marked as "(applies to ... only)" (e.g., "(applies to distributed TOEs only)", "(applies to vNDs only)"). These parts only need to be included in the ST for TOEs that comply with the corresponding conditions (i.e., parts marked as "(applies to distributed TOEs only)" only need to be included in STs for distributed TOEs and shall be omitted otherwise).
 
 === Modules
 
-The PP-Modules that are allowed to specify this cPP as a PP-Module base are specified in the 'Allowed-with' PP-Modules list at https://github.com/ND-iTC/Documents/blob/main/NDcPP_allowed_with_list.adoc.
+The PP-Modules that are allowed to specify this cPP as a PP-Module base are specified in the 'Allowed-with' PP-Modules list at https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html.
 
 === Evaluation Methods
 The supporting document, "Evaluation Activities for Network Device cPP" must be used in conjunction with [CEM] when performing evaluations of an ST specifying this Network Device cPP.
@@ -968,7 +968,7 @@ a|
 
 *_Application Note {counter:appnote_count}_*
 
-_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Annex A, Annex B, PP-Module(s), and functional package(s). For all SFRs included in the ST, the ST must include the relevant additional auditable events specified in Table 11 for optional SFRs, Table 12 for selection-based SFRs, the claimed PP-Module(s), and the claimed functional package(s). All audit events defined in Table 2 have to be included in the ST as they are mandatory._
+_Additional audit events will apply to the TOE depending on the optional and selection-based requirements adopted from Annex A, Annex B, PP-Module(s), and functional package(s). For all SFRs included in the ST, the ST must include the relevant additional auditable events specified in Table 10 for optional SFRs, Table 11 for selection-based SFRs, the claimed PP-Module(s), and the claimed functional package(s). All audit events defined in Table 2 have to be included in the ST as they are mandatory._
 
 ===== FAU_GEN.2 User identity association
 
@@ -1637,7 +1637,7 @@ _The intent of this requirement is for the device to protect keys, key material,
 
 *FPT_STM_EXT.1.1* The TSF shall be able to provide reliable time stamps for its own use.
 
-*FPT_STM_EXT.1.2* The TSF shall [selection: _allow the Security Administrator to set the time, synchronize time with an NTP server, obtain time from the underlying virtualization system_].
+*FPT_STM_EXT.1.2* The TSF shall [selection: _allow the Security Administrator to set the time, synchronise time with an NTP server, obtain time from the underlying virtualization system_].
 
 *_Application Note {counter:appnote_count}_*
 
@@ -1723,7 +1723,6 @@ _If “X.509 certificate” is selected, certificates are validated in accordanc
 _‘Update’ in the context of this SFR refers to the process of replacing a non-volatile (NV), system resident software component with another. The former is referred to as the NV image, and the latter is the update image. While the update image is typically newer than the NV image, this is not a requirement. There are legitimate cases where the system owner may want to rollback a component to an older version (e.g., when the component manufacturer releases a faulty update, or when the system relies on an undocumented feature no longer present in the update). Likewise, the owner may want to update with the same version as the NV image to recover from faulty storage._
 
 _All discrete firmware and software elements (e.g., applications, drivers, and kernel) of the TSF need to be protected, (i.e., they should be digitally signed by the corresponding manufacturer and subsequently verified by the mechanism performing the update)._
-
 
 
 === TOE access (FTA)
@@ -1827,7 +1826,7 @@ This section lists the set of SARs from CC part 3 that are required in evaluatio
 
 The general model for evaluation of TOEs against STs written to conform to this cPP is as follows: after the ST has been approved for evaluation, the IT Security Evaluation Facility (ITSEF) will obtain the TOE, supporting environmental IT (if required), and the guidance documentation for the TOE. The ITSEF is expected to perform actions mandated by the Common Evaluation Methodology (CEM) for the ASE and ALC SARs. The ITSEF also performs the Evaluation Activities contained within the SD, which are intended to be an interpretation of the other CEM assurance requirements as they apply to the specific technology instantiated in the TOE. The Evaluation Activities that are captured in [SD] also provide clarification as to what the developer needs to provide to demonstrate the TOE is compliant with the cPP.
 
-The TOE security assurance requirements are identified in Table 11.
+The TOE security assurance requirements are identified in Table 10.
 
 [cols=",",]
 |===
@@ -2104,13 +2103,7 @@ The SFR in this section defines the top-level requirement for control over the w
 
 *FCO_CPC_EXT.1.1* The TSF shall require a Security Administrator to enable communications between any pair of TOE components before such communication can take place.
 
-*FCO_CPC_EXT.1.2* The TSF shall implement a registration process in which components establish and use a communications channel that uses [selection:
-
-* _A channel that meets the secure channel requirements in [selection: FTP_ITC.1, FPT_ITT.1],_
-* _A channel that meets the secure registration channel requirements in FTP_TRP.1/ Join,_
-* _No channel]_
-
-for at least _TSF data_.
+*FCO_CPC_EXT.1.2* The TSF shall implement a registration process in which components establish and use a communications channel that uses [assignment: _list of different types of channel given in the form of a selection_] for at least [assignment: _type of data for which the channel must be used_].
 
 *FCO_CPC_EXT.1.3* The TSF shall enable a Security Administrator to disable communications between any pair of TOE components.
 
@@ -2229,7 +2222,7 @@ The TSF, understood here as the entire distributed system, has to satisfy all ma
 
 *_Application Note {counter:appnote_count}_*
 
-_The TOE must be able to generate audit records for each TOE component. Some TOE components of a distributed TOE might not implement the complete TSF of the overall TOE but only a subset of the TSF. The audit records for each TOE component need to cover all security relevant audit events according to the subset of the TSF implemented by this particular TOE component but not necessarily all security relevant audit events according to the TSF of the overall TOE. If a security-relevant event can occur on multiple TOE components, it needs to cause generation of an audit record uniquely identifying the component associated with the event. The ST author should identify for each TOE component which of the overall required audit events defined in FAU_GEN.1.1 are logged. The ST author may decide to do this by providing a corresponding table. The information provided needs to be in agreement with Table 1. The overall TOE needs to cover all auditable events listed in Table 2 (and Table 11, Table 12, the claimed PP-Module(s), and the claimed functional package(s) as applicable to the overall TOE)._
+_The TOE must be able to generate audit records for each TOE component. Some TOE components of a distributed TOE might not implement the complete TSF of the overall TOE but only a subset of the TSF. The audit records for each TOE component need to cover all security relevant audit events according to the subset of the TSF implemented by this particular TOE component but not necessarily all security relevant audit events according to the TSF of the overall TOE. If a security-relevant event can occur on multiple TOE components, it needs to cause generation of an audit record uniquely identifying the component associated with the event. The ST author should identify for each TOE component which of the overall required audit events defined in FAU_GEN.1.1 are logged. The ST author may decide to do this by providing a corresponding table. The information provided needs to be in agreement with Table 1. The overall TOE needs to cover all auditable events listed in Table 2 (and Table 10, Table 11, the claimed PP-Module(s), and the claimed functional package(s) as applicable to the overall TOE)._
 
 ==== Security audit event storage (Extended - FAU_STG_EXT)
 
@@ -2527,6 +2520,7 @@ _When an AES-CBC algorithm is selected, at least one SHA-based HMAC must also be
 *FCS_IPSEC_EXT.1.5* The TSF shall implement the protocol: [selection:
 
 * _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, RFC 4109, [selection: no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
+
 * _IKEv2 as defined in RFC 7296 [selection: with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 7296, Section 2.23], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
 
 ].
@@ -2599,9 +2593,10 @@ _For DH groups 19 and 20, the ‘x’ value is the point multiplier for the gene
 
 _Since the implementation may allow different Diffie-Hellman groups to be negotiated for use in forming the SAs, the assignment in FCS_IPSEC_EXT.1.9 may contain multiple values. For each DH group supported, the ST author consults Table 2 in NIST SP 800-57 “Recommendation for Key Management –Part 1: General” to determine the security strength (‘bits of security’) associated with the DH group. Each unique value is then used to fill in the assignment for this element. For example, suppose the implementation supports DH group 14 (2048-bit MODP) and group 20 (ECDH using NIST curve P-384). From Table 2, the bits of security value for group 14 is 112, and for group 20 is 192._
 
-*FCS_IPSEC_EXT.1.10* The TSF shall generate nonces used in [selection: _IKEv1, IKEv2_] exchanges of length [selection:
+*FCS_IPSEC_EXT.1.10* The TSF shall generate nonces used in [selection: _IKEv1, IKEv2_] protocol exchanges of length [selection:
 
 * _according to the security strength associated with the negotiated Diffie-Hellman group;_
+
 * _at least 128 bits in size and at least half the output size of the negotiated pseudorandom function (PRF) hash_
 
 ].
@@ -2994,7 +2989,7 @@ Dependencies:
 * FAU_GEN.1 Audit data generation
 * FTP_ITC.1 Inter-TSF Trusted Channel
 
-*FAU_STG_EXT.1.1* The TSF shall be able to transmit the generated audit data to an external IT entity using a trusted channel according to FTP_ITC.1
+*FAU_STG_EXT.1.1* The TSF shall be able to transmit the generated audit data to an external IT entity using a trusted channel according to FTP_ITC.1.
 
 *FAU_STG_EXT.1.2* The TSF shall be able to store generated audit data on the TOE itself. In addition [selection:
 
@@ -3004,7 +2999,7 @@ Dependencies:
 
 *FAU_STG_EXT.1.3* The TSF shall maintain a [_selection: log file, database, buffer, [assignment: other local logging method]_] of audit records in the event that an interruption of communication with the remote audit server occurs.
 
-*FAU_STG_EXT.1.4* The TSF shall be able to store [_selection: persistent, non-persistent_] audit records locally with a minimum storage size of [_assignment: number of records, file/buffer size(s)_].
+*FAU_STG_EXT.1.4* The TSF shall be able to store [_selection: persistent, non-persistent_] audit records locally with a minimum storage size of [_assignment: number of records and/or file/buffer size(s)_].
 
 *FAU_STG_EXT.1.5* The TSF shall [_selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_] when the local storage space for audit data is full.
 
@@ -3047,7 +3042,7 @@ Dependencies:
 * FAU_GEN_EXT.1 Security Audit data generation for Distributed TOE Components
 * [FPT_ITT.1 Intra-TSF Trusted Channel or FTP_ITC.1 Inter-TSF Trusted Channel]
 
-*FAU_STG_EXT.4.1* The TSF of each TOE component which stores security audit data locally shall perform the following actions when the local storage space for audit data is full: _[assignment:_ _table of components and for each component its action chosen according to the following:_ [selection: _drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_]].
+*FAU_STG_EXT.4.1* The TSF of each TOE component which stores security audit data locally shall perform the following actions when the local storage space for audit data is full: [_assignment: table of components and for each component its action chosen according to the following: [selection: drop new audit data, overwrite previous audit records according to the following rule: [assignment: rule for overwriting previous audit records], [assignment: other action]_]].
 
 ===== FAU_STG_EXT.5 Protected Remote Audit Event Storage for Distributed TOEs
 
@@ -3060,7 +3055,7 @@ Dependencies:
 * FAU_GEN_EXT.1 Security Audit data generation for Distributed TOE Components
 * [FPT_ITT.1 Intra-TSF Trusted Channel or FTP_ITC.1 Inter-TSF Trusted Channel]
 
-*FAU_STG_EXT.5.1* Each TOE component which does not store security audit data locally shall be able to buffer security audit data locally until it has been transferred to another TOE component that stores or forwards it. All transfer of audit records between TOE components shall use a protected channel according to _[selection: FPT_ITT.1, FTP_ITC.1]_.
+*FAU_STG_EXT.5.1* Each TOE component which does not store security audit data locally shall be able to buffer security audit data locally until it has been transferred to another TOE component that stores or forwards it. All transfer of audit records between TOE components shall use a protected channel according to [selection: _FPT_ITT.1, FTP_ITC.1_].
 
 
 === Cryptographic Support (FCS)
@@ -3194,11 +3189,11 @@ Dependencies:
 
 *FCS_IPSEC_EXT.1.5* The TSF shall implement the protocol: [selection:
 
-* _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, 4109, [selection: no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
+* _IKEv1, using Main Mode for Phase 1 exchanges, as defined in RFCs 2407, 2408, 2409, RFC 4109, [selection: no other RFCs for extended sequence numbers, RFC 4304 for extended sequence numbers], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
 
 * _IKEv2 as defined in RFC 7296 [selection: with no support for NAT traversal, with mandatory support for NAT traversal as specified in RFC 7296, Section 2.23], and [selection: no other RFCs for hash functions, RFC 4868 for hash functions]_
 
-*FCS_IPSEC_EXT.1.6* The TSF shall ensure the encrypted payload in the [selection: _IKEv1, IKEv2_] protocol uses the cryptographic algorithms [selection: _AES-CBC-128, AES_CBC-192 AES-CBC-256 (specified in RFC 3602), AES-GCM-128, AES-GCM-192, AES-GCM-256 (specified in RFC 5282)_].
+*FCS_IPSEC_EXT.1.6* The TSF shall ensure the encrypted payload in the [selection: _IKEv1, IKEv2_] protocol uses the cryptographic algorithms [selection: _AES-CBC-128, AES-CBC-192, AES-CBC-256 (specified in RFC 3602), AES-GCM-128, AES-GCM-192, AES-GCM-256 (specified in RFC 5282)_].
 
 *FCS_IPSEC_EXT.1.7* The TSF shall ensure that [selection:
 
@@ -3237,23 +3232,25 @@ _]_
 
 ].
 
-*FCS_IPSEC_EXT.1.9* The TSF shall generate the secret value x used in the IKE Diffie-Hellman key exchange (“x” in g^x^ mod p) using the random bit generator specified in FCS_RBG.1, and having a length of at least _[assignment: (one or more) number(s) of bits that is at least twice the security strength of the negotiated Diffie-Hellman group_] bits.
+*FCS_IPSEC_EXT.1.9* The TSF shall generate the secret value x used in the IKE Diffie-Hellman key exchange (“x” in g^x mod p) using the random bit generator specified in FCS_RBG.1, and having a length of at least [assignment: _(one or more) number(s) of bits that is at least twice the security strength of the negotiated Diffie-Hellman group_] bits.
 
-*FCS_IPSEC_EXT.1.10* The TSF shall generate nonces used in [selection: _IKEv1, IKEv2_] exchanges of length [selection:
+*FCS_IPSEC_EXT.1.10* The TSF shall generate nonces used in [selection: _IKEv1, IKEv2_] protocol exchanges of length [selection:
 
 * _according to the security strength associated with the negotiated Diffie-Hellman group;_
+
 * _at least 128 bits in size and at least half the output size of the negotiated pseudorandom function (PRF) hash_
 
 ].
 
 *FCS_IPSEC_EXT.1.11* The TSF shall ensure that IKE protocols implement DH Group(s) [selection:
 
-* _[selection: 14 (2048-bit MODP), 15 (3072-bit MODP), 16 (4096-bit MODP), 17 (6144-bit MODP), 18 (8192-bit MODP)] according to RFC 3526,_
-* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),21 (521-bit Random ECP)] according to RFC 5114._
+* [selection: _14 (2048-bit MODP), 15 (3072-bit MODP), 16 (4096-bit MODP), 17 (6144-bit MODP), 18 (8192-bit MODP)] according to RFC 3526,_
 
-_]._
+* [selection: _19 (256-bit Random ECP), 20 (384-bit Random ECP),_ _21 (521-bit Random ECP)] according to RFC 5114._
 
-*FCS_IPSEC_EXT.1.12* The TSF shall be able to ensure by default that the strength of the symmetric algorithm (in terms of the number of bits in the key) negotiated to protect the [selection: _IKEv1 Phase 1, IKEv2 IKE_SA_] connection is greater than or equal to the strength of the symmetric algorithm (in terms of the number of bits in the key) negotiated to protect the [selection: _IKEv1 Phase 2, IKEv2 CHILD_SA_] connection.
+].
+
+*FCS_IPSEC_EXT.1.12* The TSF shall be able to ensure that the strength of the symmetric algorithm (in terms of the number of bits in the key) negotiated to protect the [selection: _IKEv1 Phase 1, IKEv2 IKE_SA_] connection is greater than or equal to the strength of the symmetric algorithm (in terms of the number of bits in the key) negotiated to protect the [selection: _IKEv1 Phase 2, IKEv2 CHILD_SA_] connection.
 
 *FCS_IPSEC_EXT.1.13* The TSF shall ensure that all IKE protocols perform peer authentication using [selection: _RSA, ECDSA_] that use X.509v3 certificates that conform to RFC 4945 and [selection: _Pre-shared Keys that conform to RFC 8784, no other method_].
 
@@ -3295,7 +3292,7 @@ Dependencies:
 
 *FCS_NTP_EXT.1.2* The TSF shall update its system time using [selection:
 
-* Authentication using [selection: _SHA256, SHA384, SHA512, AES-CBC-128, AES-CBC-256_] as the message digest algorithm(s);
+* Authentication using [selection: _SHA256, SHA384, SHA512, AES-CMAC-128 (RFC 8573), AES-CBC-128, AES-CBC-256_] as the message digest algorithm(s);
 * [selection: _IPsec, DTLS as defined in the Functional Package for TLS_] to provide trusted communication between itself and an NTP time source.
 
 ].
@@ -3338,8 +3335,8 @@ Dependencies: No other components
 *FIA_PMG_EXT.1.1* The TSF shall provide the following password management capabilities for administrative passwords:
 
 [loweralpha]
-. Passwords shall be able to be composed of any combination of upper and lower case letters, numbers, and the following special characters: [selection: _“!”, “@”, “#”, “$”, “%”, “^”, “&”, “*”, “(“, “)”, [assignment: other characters]_];
-. Minimum password length shall _be configurable to between [assignment: minimum number of characters supported by the TOE] and [assignment: number of characters greater than or equal to 15] characters._
+. Passwords shall be able to be composed of any combination of upper and lower case letters, numbers and the following special characters: [selection: _"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", [assignment: other characters]_];
+. Minimum password length shall be _configurable to between [assignment: minimum number of characters supported by the TOE] and [assignment: number of characters greater than or equal to 15] characters._
 
 ==== Pre-Shared Key Composition (FIA_PSK_EXT)
 
@@ -3525,14 +3522,13 @@ Hierarchical to: No other components
 
 Dependencies: No other components
 
-*FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests [selection:
+*FPT_TST_EXT.1.1* The TSF shall run a suite of the following self-tests:
 
 * _During initial start-up (on power on) to verify the integrity of the TOE firmware and software;_
-* _During start-up (prior to providing any cryptographic services) and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* _Prior to providing any cryptographic service and [selection: at no other time, on-demand, continuously, [assignment: conditions under which self-tests should occur]] to verify correct operation of cryptographic implementation necessary to fulfil the TSF;_
+* [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: ‘list an identifier for each self-test that is additional to those identified in the first two bullet points’]._
 
-* [selection: _no other, start-up, on-demand, continuous, at the conditions [assignment: conditions under which self-tests should occur]] self-tests [assignment: describe self-test objective]._
-
-to demonstrate the correct operation of the TSF: [assignment: _list of self-tests run by the TSF_] and if failure detected [assignment: _describe resulting error state_].
+to demonstrate the correct operation of the TSF.
 
 *FPT_TST_EXT.1.2* The TSF shall respond to [selection: _all failures, [assignment: list of failures detected by self-tests_]] by [selection: _entering a maintenance mode, rebooting, [assignment: other methods to enter a secure state_]].
 
@@ -3576,9 +3572,9 @@ Hierarchical to: No other components
 
 Dependencies: FCS_COP.1/SigVer Cryptographic operation (for Cryptographic Signature and Verification), or FCS_COP.1/Hash Cryptographic operation (for cryptographic hashing)
 
-*FPT_TUD_EXT.1.1* The TSF shall provide [assignment: _Administrators_] the ability to query the currently executing version of the TOE firmware/software and [selection: _the most recently installed version of the TOE firmware/software; no other TOE firmware/software version_].
+*FPT_TUD_EXT.1.1* The TSF shall provide _Security Administrators_ the ability to query the currently executing version of the TOE firmware/software and [selection: _the most recently installed version of the TOE firmware/software; no other TOE firmware/software version_].
 
-*FPT_TUD_EXT.1.2* The TSF shall provide [assignment: _Administrators_] the ability to manually initiate updates to TOE firmware/software and [selection: _support automatic checking for updates, support automatic updates, no other update mechanism_].
+*FPT_TUD_EXT.1.2* The TSF shall provide _Security Administrators_ the ability to manually initiate updates to TOE firmware/software and [selection: _support automatic checking for updates, support automatic updates, no other update mechanism_].
 
 *FPT_TUD_EXT.1.3* The TSF shall provide means to authenticate firmware/software updates to the TOE using a [selection: _X.509 certificate, digital signature_] prior to installing those updates.
 
@@ -3925,8 +3921,7 @@ FCS_COP.1/Hash included
 
 FCS_COP.1/SKC included
 
-FPT_TST_EXT included
-
+FPT_TST_EXT.1 included, which extends FPT_TST.1 with additional requirements for cryptographic self-tests and failure response.
 
 |FIA_UIA_EXT.1 |FTA_TAB.1 |FTA_TAB.1 included
 
@@ -3982,24 +3977,16 @@ FAU_STG_EXT.1|FAU_GEN.1 and FAU_STG_EXT.1 included
 |FCS_CKM.2 a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1/AKG or FCS_CKM.5 or FCS_CKM_EXT.8 or FCS_CKM_EXT.3
 
-FCS_CKM.6 
+FCS_CKM.3
 
-FCS_COP.1/KeyEncap, or FCS_COP.1/KeyWrap or FTP_PRO.1 
+FCS_CKM.6
+
+FCS_COP.1/KeyEncap, or FCS_COP.1/KeyWrap
 
 a|
-FCS_CKM.1/AKG included
-
-FCS_CKM.6 included
-
+FCS_CKM.1/AKG included  
+FCS_CKM.6 included  
 FCS_COP.1/KeyEncap included
-
-FCS_COP.1/KeyWrap included
-
-FTP_ITC.1 included
-
-FTP_TRP.1/Admin included
-
-FPT_ITT.1 included
 
 |FCS_COP.1/KeyEncap a|
 FDP_ITC.1 or FDP_ITC.2 or FCS_CKM.1/AKG or FCS_CKM.5 or FCS_CKM_EXT.7 or FCS_CKM_EXT.8 
@@ -4154,7 +4141,15 @@ FCS_CKM.1/AKG included
 
 FCS_CKM.2 included
 
-FCS_COP.1/DataEncryption, FCS_COP.1/SigGen, FCS_COP.1/SigVer, FCS_COP.1/Hash, FCS_COP.1/KeyedHash included
+FCS_COP.1/DataEncryption
+
+FCS_COP.1/SigGen
+
+FCS_COP.1/SigVer
+
+FCS_COP.1/Hash
+
+FCS_COP.1/KeyedHash included
 
 FCS_RBG.1 included
 
@@ -4230,17 +4225,38 @@ FMT_SMF.1 included
 
 [cols=",",]
 |===
-|*Term* |*Meaning*
-|*Administrator* |See Security Administrator.
-|*Assurance* |Grounds for confidence that a TOE meets the SFRs [CC1].
-|*Security Administrator* |The terms “Administrator” and “Security Administrator” are used interchangeably in this document at present and are used to represent a person that has authorised access to the TOE to perform configuration and management tasks.
-|*Target of Evaluation* |A set of software, firmware and/or hardware possibly accompanied by guidance. [CC1]
-|*TOE Security Functionality (TSF)* |A set consisting of all hardware, software, and firmware of the TOE that must be relied upon for the correct enforcement of the SFRs. [CC1]
-|*TSF Data* |Data for the operation of the TOE upon which the enforcement of the requirements relies (e.g., SFR-relevant configuration data and SFR-relevant audit data).
-|*Virtual Machine (VM)* | A virtualized hardware environment in which an operating system may execute.
-|*Virtual Machine Manager (VMM)* |A collection of software components responsible for enabling VMs to function as expected by the software executing within them. Generally, the VMM consists of a Hypervisor, Service VMs, and other components of the VS, such as virtual devices, binary translation systems, and physical device drivers. It manages concurrent execution of all VMs and virtualizes platform resources as needed.
-|*Virtualization System (VS)* |A software product that enables multiple independent computing systems to execute on the same physical hardware platform without interference from one another. For the purposes of this document, the VS consists of a Virtual Machine Manager (VMM), Virtual Machine abstractions, a management subsystem, and other components.
 
+|*Term* |*Meaning*
+
+|*Administrator* |See Security Administrator.
+
+|*Assurance* |Grounds for confidence that a TOE meets the SFRs [CC1].
+
+|*IKE groups* |Internet Key Exchange Diffie-Hellman groups. Specifically refers to the MODP (Modular Exponential) groups defined in RFC 3526 (e.g., MODP-2048, MODP-3072) used for key agreement in IKE/IPsec protocols.
+
+|*NIST Curves* |NIST-approved elliptic curves specified in NIST SP 800-186. Refers to the P-256, P-384, and P-521 curves defined in FIPS 186-5 for elliptic curve cryptography.
+
+|*PKCS #1 v2.2* |Public-Key Cryptography Standards #1 version 2.2. RSA cryptography standard published as RFC 8017, specifying RSA encryption and signature schemes.
+
+|*RSASSA-PKCS1-v1_5* |RSA Signature Scheme with Appendix using PKCS1 v1.5 padding. A digital signature scheme specified in RFC 8017 Section 8.2 and FIPS 186-5 Section 5.4.
+
+|*RSASSA-PSS* |RSA Signature Scheme with Appendix using Probabilistic Signature Scheme. A digital signature scheme specified in RFC 8017 Section 8.1 and FIPS 186-5 Section 5.4.
+
+|*Security Administrator* |The terms “Administrator” and “Security Administrator” are used interchangeably in this document at present and are used to represent a person that has authorised access to the TOE to perform configuration and management tasks.
+
+|*Target of Evaluation* |A set of software, firmware and/or hardware possibly accompanied by guidance. [CC1]
+
+|*TLS groups* |Transport Layer Security Diffie-Hellman groups. Specifically refers to the ffdhe (finite field Diffie-Hellman ephemeral) groups defined in RFC 7919 (e.g., ffdhe-2048, ffdhe-3072) used for key agreement in TLS protocols.
+
+|*TOE Security Functionality (TSF)* |A set consisting of all hardware, software, and firmware of the TOE that must be relied upon for the correct enforcement of the SFRs. [CC1]
+
+|*TSF Data* |Data for the operation of the TOE upon which the enforcement of the requirements relies (e.g., SFR-relevant configuration data and SFR-relevant audit data).
+
+|*Virtual Machine (VM)* | A virtualized hardware environment in which an operating system may execute.
+
+|*Virtual Machine Manager (VMM)* |A collection of software components responsible for enabling VMs to function as expected by the software executing within them. Generally, the VMM consists of a Hypervisor, Service VMs, and other components of the VS, such as virtual devices, binary translation systems, and physical device drivers. It manages concurrent execution of all VMs and virtualizes platform resources as needed.
+
+|*Virtualization System (VS)* |A software product that enables multiple independent computing systems to execute on the same physical hardware platform without interference from one another. For the purposes of this document, the VS consists of a Virtual Machine Manager (VMM), Virtual Machine abstractions, a management subsystem, and other components.
 |===
 
 See [CC1] for other Common Criteria abbreviations and terminology.
@@ -4258,18 +4274,47 @@ a|Authenticated Encryption with Associated Data
 a|*AES*
 a|Advanced Encryption Standard
 
+a|*AGD*
+a|Assurance: Guidance Documents
+
+a|*AKG*
+a|Asymmetric Key Generation
+
+a|*API*
+a|Application Programming Interface
+
 a|*CA*
 a|Certificate Authority
 
 a|*CBC*
 a|Cipher Block Chaining
 
+a|*CCM*
+a|Counter with CBC-MAC
+
+a|*CMAC*
+a|Cipher-based Message Authentication Code
+
+a|*CN*
+a|Common Name
+
+a|*cPP*
+a|collaborative Protection Profile
 
 a|*CRL*
 a|Certificate Revocation List
 
+a|*CTR*
+a|Counter (mode)
+
 a|*DH*
 a|Diffie-Hellman
+
+a|*DN*
+a|Distinguished Name
+
+a|*DRBG*
+a|Deterministic Random Bit Generator
 
 a|*DSA*
 a|Digital Signature Algorithm
@@ -4277,155 +4322,162 @@ a|Digital Signature Algorithm
 a|*DTLS*
 a|Datagram Transport Layer Security
 
+a|*ECC*
+a|Elliptic Curve Cryptography
+
 a|*ECDH*
 a|Elliptic Curve Diffie Hellman
 
 a|*ECDSA*
 a|Elliptic Curve Digital Signature Algorithm
 
-a|
-*EEPROM*
-a|
-Electrically Erasable Programmable Read-Only Memory
+a|*EEPROM*
+a|Electrically Erasable Programmable Read-Only Memory
 
-a|
-*FIPS*
-a|
-Federal Information Processing Standards
+a|*FQDN*
+a|Fully Qualified Domain Name
 
-a|
-*GCM*
-a|
-Galois Counter Mode
+a|*FIPS*
+a|Federal Information Processing Standards
 
-a|
-*HMAC*
-a|
-Keyed-Hash Message Authentication Code
+a|*GCM*
+a|Galois Counter Mode
 
-a|
-*HTTPS*
-a|
-Hypertext Transfer Protocol Secure
+a|*HMAC*
+a|Keyed-Hash Message Authentication Code
 
-a|
-*IP*
-a|
-Internet Protocol
+a|*HTTPS*
+a|Hypertext Transfer Protocol Secure
 
-a|
-*IPsec*
-a|
-Internet Protocol Security
+a|*IKE*
+a|Internet Key Exchange
 
-a|
-*ITSEF*
-a|
-IT Security Evaluation Facility
+a|*iTC*
+a|International Technical Community
 
-a|
-*ND*
-a|
-Network Device
+a|*IV*
+a|Initialization Vector
 
-a|
-*NIAP*
-a|
-National Information Assurance Partnership
+a|*IP*
+a|Internet Protocol
 
-a|
-*NIST*
-a|
-National Institute of Standards and Technology
+a|*IPsec*
+a|Internet Protocol Security
 
-a|
-*NTP*
-a|
-Network Time Protocol
+a|*ITSEF*
+a|IT Security Evaluation Facility
 
-a|
-*OCSP*
-a|
-Online Certificate Status Protocol
-a|
+a|*LMS*
+a|Leighton-Micali Signature
 
-*pND*
-a|
-Physical Network Device
+a|*MAC*
+a|Message Authentication Code
 
-a|
-*PP*
-a|
-Protection Profile
+a|*MD*
+a|Message Digest
 
-a|
-*RBG*
-a|
-Random Bit Generator
+a|*ML-DSA*
+a|Module-Lattice-Based Digital Signature Algorithm
 
-a|
-*RSA*
-a|
-Rivest Shamir Adleman Algorithm
+a|*ML-KEM*
+a|Module-Lattice-Based Key Encapsulation Mechanism
 
-a|
-*SD*
-a|
-Supporting Document
+a|*MODP*
+a|Modular Exponential (Diffie-Hellman group type)
 
-a|
-*SHA*
-a|
-Secure Hash Algorithm
-a|
+a|*ND*
+a|Network Device
 
-*SSH*
-a|
-Secure Shell
-a|
+a|*NIAP*
+a|National Information Assurance Partnership
 
-*ST*
-a|
-Security Target
-a|
+a|*NIST*
+a|National Institute of Standards and Technology
 
-*TLS*
-a|
-Transport Layer Security
-a|
+a|*NTP*
+a|Network Time Protocol
 
-*TOE*
-a|
-Target of Evaluation
+a|*OE*
+a|Operational Environment
 
-a|
-*TSF*
-a|
-TOE Security Functionality
+a|*OCSP*
+a|Online Certificate Status Protocol
 
-a|
+a|*pND*
+a|Physical Network Device
 
-*TSS*
-a|
-TOE Summary Specification
-a|
+a|*PP*
+a|Protection Profile
 
-*VM*
-a|
-Virtual Machine
-a|
+a|*SA*
+a|Security Association (IPsec)
 
-*vND*
-a|
-Virtual Network Device
-a|
+a|*SAN*
+a|Subject Alternative Name
 
-*VPN*
-a|
-Virtual Private Network
-a|
+a|*SAR*
+a|Security Assurance Requirement
 
-*VS*
-a|
-virtualization System
+a|*RBG*
+a|Random Bit Generator
+
+a|*RSA*
+a|Rivest Shamir Adleman Algorithm
+
+a|*SD*
+a|Supporting Document
+
+a|*SFR*
+a|Security Functional Requirement
+
+a|*SKC*
+a|Symmetric Key Cryptography
+
+a|*SPD*
+a|Security Policy Database
+
+a|*SHA*
+a|Secure Hash Algorithm
+
+a|*SSH*
+a|Secure Shell
+
+a|*ST*
+a|Security Target
+
+a|*TLS*
+a|Transport Layer Security
+
+a|*TOE*
+a|Target of Evaluation
+
+a|*TSF*
+a|TOE Security Functionality
+
+a|*TSFI*
+a|SF Interface
+
+a|*TSS*
+a|TOE Summary Specification
+
+a|*VM*
+a|Virtual Machine
+
+a|*vND*
+a|Virtual Network Device
+
+a|*VPN*
+a|Virtual Private Network
+
+a|*VS*
+a|virtualization System
+
+a|*XMSS*
+a|eXtended Merkle Signature Scheme
+
+a|*XOF*
+a|eXtendable Output Function
+
+a|*XTS*
+a|XEX-based Tweaked-codebook mode with ciphertext Stealing
 |===
