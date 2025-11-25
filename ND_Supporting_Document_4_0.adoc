@@ -3137,7 +3137,7 @@ https://www.rapid7.com/db/?type=nexpose
 [appendix]
 == Network Device Equivalency Considerations
 === Introduction
-[arabic, start=599]
+[arabic, start=591]
 . This Annex provides a foundation for evaluators to determine whether a developer’s request for equivalency of products for different models wishing to claim conformance to the NDcPP is allowed.
 . For the purpose of evaluation, equivalency can be broken into two categories:
 * *Variations in models*: Separate TOE models/variations may include differences that could necessitate separate testing across each model. If there are no variations in any of the categories listed below, the models may be considered equivalent.
@@ -3151,7 +3151,7 @@ https://www.rapid7.com/db/?type=nexpose
 === Evaluator Guidance for Determining Equivalence
 
 ====  Strategy
-[arabic, start=603]
+[arabic, start=595]
 . When performing the equivalency analysis, the evaluator shall consider each factor independently. A factor may be any number of things at various levels of abstraction, ranging from the processor a device uses, to the underlying operating system and hardware platform a software application relies upon. Examples may be the various chip sets employed by the product, the type of network interface (different device drivers), storage media (solid state drive, spinning disk, EEPROM). It is important to consider how the difference in these factors may influence the TOE’s ability to enforce the SFRs. Each analysis of an individual factor will result in one of two outcomes,
 * For the particular factor, all variations of the TOE on all supported platforms are equivalent. In this case, testing may be performed on a single model in a single test environment and cover all supported models and environments.
 * For the particular factor, a subset of the product has been identified to require separate testing to ensure that it operates identically to all other equivalent TOE. The analysis would identify the specific combinations of models/testing environments that needed to be tested.
@@ -3160,7 +3160,7 @@ https://www.rapid7.com/db/?type=nexpose
 
 ====  Guidance for Network Devices
 
-[arabic, start=605]
+[arabic, start=597]
 . The following table provides a description of how an evaluator shall consider each of the factors that affect equivalency between TOE model variations and across operating environments. Additionally, the table also identifies scenarios that will result in additional separate testing across models.
 
 [cols="20%,15%,40%",options="header",]
@@ -3181,11 +3181,11 @@ https://www.rapid7.com/db/?type=nexpose
 [[sd-table-3-equivalency-analysis]]_Table 3: Evaluation Equivalency Analysis_
 
 === Test Presentation/Truth in Advertising
-[arabic, start=606]
+[arabic, start=598]
 . In addition to determining what to test, the evaluation results (and resulting Certification Report) must identify the actual TOE and environment combinations that have been tested. The analysis used to determine the testing subset may be considered proprietary and will only optionally be publicly included.
 
 === Evaluating Additional Components for a Distributed TOE
-[arabic, start=607]
+[arabic, start=599]
 . In the case of a distributed TOE, the Security Target will identify an evaluated configuration that consists of a number of separate TOE components chosen by the ST author, which collectively satisfy the requirements of the cPP. This evaluated configuration need not be the minimum set of components that could _possibly_ meet the cPP (e.g., if the TOE is intended for large enterprise deployments then the evaluated configuration might include some redundancy in components in order to support expected connectivity and loads), but because this is the main configuration referred to in the ST and the evaluation, it is treated in this section as the minimum configuration of interest and is referred to here as the ‘minimum configuration’ as well as the ‘evaluated configuration’.
 . In addition to the minimum configuration, the ST may also identify (at the author’s discretion, and subject to verification as described in this section) which TOE components can have instances added to an operational configuration without affecting the validity of the CC certification. The TOE description in the ST may include constraints on how such components are added, including required and/or prohibited configurations of the components.
 . Extra instances of a TOE component must have the same hardware and software as the original component included in the evaluated configuration.
@@ -3194,20 +3194,20 @@ https://www.rapid7.com/db/?type=nexpose
 ==== Evaluator Actions for Assessing the ST
 
 =====  TSS
-[arabic, start=611]
+[arabic, start=603]
 . The evaluator shall examine the TSS to confirm it identifies any extra/additional instances of specific TOE components allowed in the ST and what effects will occur when extra instances of distributed TOE components are added. The information in the TSS shall allow the evaluator to understand how a system with one specific TOE component behaves in comparison to a system with multiple instances of that same TOE component.  The TSS also shall describe how the additional TOE component instances maintain the SFRs to determine it is consistent with the role the singular TOE component plays in the evaluated configuration, and that the additional TOE components cannot be used in a way that the security functionality would be corrupted or bypassed. In general, any additional TOE component must not have a negative impact on other already-present components that are already part of the TOE.
 
 ==== Evaluator Actions for Assessing the Guidance Documentation
 
 =====  Guidance Documentation
-[arabic, start=612]
+[arabic, start=604]
 . The evaluator shall examine the description of the extra instances of TOE components in the guidance documentation to confirm that they are consistent with those identified as allowed in the ST. This includes confirmation that the result of applying the guidance documentation to configure the extra components will leave the TOE in a state such that the claims for SFR support in each component are as described in the ST and therefore that all SFRs continue to be met when the extra components are present.
 . The evaluator shall examine the secure communications described for the extra components to confirm that they are the same as described for the components in the minimum configuration (additional connections between allowed extra components and the components in the minimum configuration are allowed of course).
 
 ==== Evaluator Actions for Testing the TOE
 
 =====  Tests
-[arabic, start=614]
+[arabic, start=606]
 . The evaluator shall test the TOE in the minimum configuration as defined in the ST (and the guidance documentation).
 . If the description of the use of extra components in the ST and guidance documentation identifies any difference in the SFRs allocated to a component, or the scope of the SFRs involved (e.g., if different selections apply to different instances of the component) then the evaluator shall test these additional SFR cases that were not included in the minimum configuration.
 . In addition, the evaluator shall test the following aspects for each extra component that is identified as allowed in the distributed TOE:
