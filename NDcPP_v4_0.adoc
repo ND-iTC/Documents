@@ -9,7 +9,7 @@
 = collaborative Protection Profile for Network Devices
 
 Version: 4.0 +
-Date: TBD-November-2025
+Date: 25-November-2025
 
 == Acknowledgements
 
@@ -74,7 +74,7 @@ CCDB-018, Version 1, 31 January, 2025.
 [cols=",,",options="header",]
 |===
 |*Version* |*Date* |*Description*
-|4.0 | TBD-Nov-2025 | Released for use
+|4.0 | 25-Nov-2025 | Released for use
 |3.0e | 06-Dec-2023 | Released for use
 |3.0 | 06-Apr-2023 | Incorporated comments received. Released for use
 |2.2e | 23-Mar-2020 | Updated vND description. Released for use
@@ -193,7 +193,7 @@ PP Reference: collaborative Protection Profile for Network Devices
 
 
 PP Version: 4.0 +
-PP Date: TBD-November-2025
+PP Date: 25-November-2025
 
 === TOE Overview
 

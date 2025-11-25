@@ -9,7 +9,7 @@
 = Supporting Document - Evaluation Activities for Network Device cPP
 
 Version: 4.0
-Date: TBD November 2025
+Date: 25 November 2025
 
 == Acknowledgements
 
@@ -30,7 +30,7 @@ This SD has been developed by the ND iTC, in accordance with [CC4]. The SD is in
 [cols=",,",options="header",]
 |===
 |*Version* |*Date* |*Description*
-|4.0 |TBD-Nov-2025 |Released for use
+|4.0 |25-Nov-2025 |Released for use
 |3.0e |06-Dec-2023 |Released for use
 |3.0 |06-Apr-2023 |Incorporated comments received. Released for use
 |2.2 |20-Dec-2019 |Released for use
@@ -3007,7 +3007,7 @@ CCMB-2022-11-006, Version CC:2022, Revision 1, November 2022
 [FIPS 186-5] FIPS PUB 186-5, Digital Signature Standard (DSS), February 2023
 
 [NDcPP] collaborative Protection Profile for Network Devices, +
-Version 4.0, TBD November 2025
+Version 4.0, 25 November 2025
 
 [NIST SP800-56A] NIST Special Publication SP800-56A Revision 3: Recommendation for Pair-Wise Key Establishment Schemes Using Discrete Logarithm Cryptography, Apr 2018
 
