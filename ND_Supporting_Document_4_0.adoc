@@ -3,6 +3,7 @@
 :toc-title!:
 :toc-placement!:
 :doctype: book
+:chapter-label!:
 :data-uri:
 :appendix-caption: Annex
 
