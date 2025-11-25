@@ -109,59 +109,58 @@ toc::[]
 |===
 
 ==== Acronyms
-[cols="20%,90%",options="header",width=90%]
+[cols="20%,80%",options="header",width=90%]
 |===
-|*Acronym* | *Meaning* |
-*AGD* | Assurance: Guidance Documents |
-*API* | Application Programming Interface |
-*CA* | Certificate Authority |
-*CCM* | Counter with CBC-MAC |
-*CCRA* | Common Criteria Recognition Arrangement |
-*CEM* | Common Methodology for Information Technology Security Evaluation |
-*CMAC* | Cipher-based Message Authentication Code |
-*CN* | Common Name |
-*cPP* | collaborative Protection Profile |
-*CRL* | Certificate Revocation List |
-*CTR* | Counter (mode) |
-*CVE* | Common Vulnerabilities and Exposures (database) |
-*DHE* | Ephemeral Diffie-Hellman Key Exchange |
-*DN* | Distinguished Name |
-*DNS* | Domain Name Service |
-*DRBG* | Deterministic Random Bit Generator |
-*EA* | Evaluation Activity |
-*EC* | Elliptic Curve |
-*ECC* | Elliptic Curve Cryptography |
-*FFC* | Finite Field Cryptography |
-*FQDN* | Fully Qualified Domain Name |
-*I&A* | Identity and Authentication |
-*IKE* | Internet Key Exchange |
-*iTC* | International Technical Community |
-*IV* | Initialization Vector |
-*LMS* | Leighton-Micali Signature |
-*MAC* | Message Authentication Code |
-*MD* | Message Digest |
-*ML-DSA* | Module-Lattice-Based Digital Signature Algorithm |
-*ML-KEM* | Module-Lattice-Based Key Encapsulation Mechanism |
-*MODP* | Modular Exponential (Diffie-Hellman group type) |
-*NIST* | National Institute of Standards and Technology |
-*OE* | Operational Environment |
-*OCSP* | Online Certificate Status Protocol |
-*RBG* | Random Bit Generator |
-*SA* | Security Association (IPsec) |
-*SAN* | Subject Alternative Name |
-*SAR* | Security Assurance Requirement |
-*SD* | Supporting Document |
-*SFR* | Security Functional Requirement |
-*SPD* | Security Policy Database |
-*SSH* | Secure Shell |
-*TLS* | Transport Layer Security |
-*TSF* | TOE Security Functionality |
-*TSFI* | TSF Interface |
-*TSS* | TOE Summary Specification |
-*XMSS* | eXtended Merkle Signature Scheme |
-*XOF* | eXtendable Output Function |
-*XTS* | XEX-based Tweaked-codebook mode with ciphertext Stealing |
-
+|*Acronym* | *Meaning*
+|*AGD* | Assurance: Guidance Documents
+|*API* | Application Programming Interface
+|*CA* | Certificate Authority
+|*CCM* | Counter with CBC-MAC
+|*CCRA* | Common Criteria Recognition Arrangement
+|*CEM* | Common Methodology for Information Technology Security Evaluation
+|*CMAC* | Cipher-based Message Authentication Code
+|*CN* | Common Name
+|*cPP* | collaborative Protection Profile
+|*CRL* | Certificate Revocation List
+|*CTR* | Counter (mode)
+|*CVE* | Common Vulnerabilities and Exposures (database)
+|*DHE* | Ephemeral Diffie-Hellman Key Exchange
+|*DN* | Distinguished Name
+|*DNS* | Domain Name Service
+|*DRBG* | Deterministic Random Bit Generator
+|*EA* | Evaluation Activity
+|*EC* | Elliptic Curve
+|*ECC* | Elliptic Curve Cryptography
+|*FFC* | Finite Field Cryptography
+|*FQDN* | Fully Qualified Domain Name
+|*I&A* | Identity and Authentication
+|*IKE* | Internet Key Exchange
+|*iTC* | International Technical Community
+|*IV* | Initialization Vector
+|*LMS* | Leighton-Micali Signature
+|*MAC* | Message Authentication Code
+|*MD* | Message Digest
+|*ML-DSA* | Module-Lattice-Based Digital Signature Algorithm
+|*ML-KEM* | Module-Lattice-Based Key Encapsulation Mechanism
+|*MODP* | Modular Exponential (Diffie-Hellman group type)
+|*NIST* | National Institute of Standards and Technology
+|*OE* | Operational Environment
+|*OCSP* | Online Certificate Status Protocol
+|*RBG* | Random Bit Generator
+|*SA* | Security Association (IPsec)
+|*SAN* | Subject Alternative Name
+|*SAR* | Security Assurance Requirement
+|*SD* | Supporting Document
+|*SFR* | Security Functional Requirement
+|*SPD* | Security Policy Database
+|*SSH* | Secure Shell
+|*TLS* | Transport Layer Security
+|*TSF* | TOE Security Functionality
+|*TSFI* | TSF Interface
+|*TSS* | TOE Summary Specification
+|*XMSS* | eXtended Merkle Signature Scheme
+|*XOF* | eXtendable Output Function
+|*XTS* | XEX-based Tweaked-codebook mode with ciphertext Stealing
 |===
 
 == Evaluation Activities for SFRs

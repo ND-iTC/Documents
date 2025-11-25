@@ -58,7 +58,7 @@ Evaluation methodology, +
 CCMB-2022-11-006, CEM:2022, Revision 1, November 2022.
 |[CC-SFRC] |Common Criteria for Information Technology Security Evaluation, +
 Specification of Functional Requirements for Cryptography, +
-CCDB-018, Version 1, 31 January, 2025.
+CCDB-018, Version 1, 31 January 2025.
 |===
 
 *Other Documents*
@@ -239,7 +239,7 @@ image:extracted-media/media/vnd_case_2.jpg[image,width=166,height=277]
 
 To evaluate a vND as a pND means that:
 
-* The VS is considered part of the ND's software stack, and thus is part of the TOE and must satisfy the relevant SFRs (e.g., by treating hypervisor Administrators as Security Administrators).
+* The VS is considered part of the ND's software stack and thus is part of the TOE and must satisfy the relevant SFRs (e.g., by treating hypervisor Administrators as Security Administrators).
 * vNDs that can run on multiple VSs must be tested on each claimed VS unless the developer can successfully argue equivalence.
 * The physical hardware is likewise included in the TOE (as in the example included above). Therefore, vNDs must also be tested for each claimed hardware platform unless the developer can successfully argue equivalence.
 * There is only one vND instance for each physical hardware platform. The exception being a where components of the distributed TOE run inside more than one virtual machine (VM) on a single VS.
@@ -450,7 +450,7 @@ Table 1 specifies how each of the SFRs in this cPP must be met, using the catego
 |FAU_STG_EXT.4 |Protected Local Audit Event Storage for Distributed TOEs |Feature Dependent
 |FAU_STG_EXT.5 |Protected Remote Audit Event Storage for Distributed TOEs |Feature Dependent
 |FCO_CPC_EXT.1 |Component Registration Channel Definition |All
-|FCS_CKM.1/AKG |Cryptographic Key Generation – Asymmetric Key |Onefootnote:[The overall TOE is required to support on-board key generation and (if the TOE uses X.509 certificates as in Annex B.4.1) RFC 2986 Certificate Request generation. If not all TOE components are supporting on- board key generation (and generation of certificate requests, where applicable), the TOE shall support distribution of keys to the TOE components that are not supporting key generation themselves. Depending on the life-cycle phase, either a secure registration channel shall be used for key distribution at the point where the component is joined to the TOE or an inter-component secure channel shall be used for key distribution post-registration.]
+|FCS_CKM.1/AKG |Cryptographic Key Generation – Asymmetric Key |Onefootnote:[The overall TOE is required to support on-board key generation and (if the TOE uses X.509 certificates as in Annex B.4.1) RFC 2986 Certificate Request generation. If not, all TOE components are supporting on- board key generation (and generation of certificate requests, where applicable), the TOE shall support distribution of keys to the TOE components that are not supporting key generation themselves. Depending on the life-cycle phase, either a secure registration channel shall be used for key distribution at the point where the component is joined to the TOE or an inter-component secure channel shall be used for key distribution post-registration.]
 |FCS_CKM.6 |Timing and Event of Cryptographic Key Destruction |All
 |FCS_CKM_EXT.7 |Cryptographic Key Agreement |All
 |FCS_COP.1/DataEncryption |Cryptographic Operation (AES Data Encryption/Decryption) |All
@@ -554,7 +554,7 @@ SFR Rationale:
 
 ===== T.UNTRUSTED_COMMUNICATION_CHANNELS
 
-Threat agents may attempt to target Network Devices that do not use standardized secure tunnelling protocols to protect the critical network traffic. Attackers may take advantage of poorly designed protocols or poor key management to successfully perform man-in-the-middle attacks, replay attacks, etc. Successful attacks will result in loss of confidentiality and integrity of the critical network traffic, and potentially could lead to a compromise of the Network Device itself.
+Threat agents may attempt to target Network Devices that do not use standardized secure tunnelling protocols to protect the critical network traffic. Attackers may take advantage of poorly designed protocols or poor key management to successfully perform man-in-the-middle attacks, replay attacks, etc. Successful attacks will result in loss of confidentiality and integrity of the critical network traffic and potentially could lead to a compromise of the Network Device itself.
 
 SFR Rationale:
 
@@ -606,7 +606,7 @@ SFR Rationale:
 * Requirements for secure storage and transmission of local audit records to an external IT entity via a secure channel are specified in FAU_STG_EXT.1 and FAU_STG_EXT.4.
 * Optional additional requirements for dealing with potential loss of locally stored audit records are specified in FAU_STG_EXT.2, FAU_STG_EXT.3, and FAU_STG_EXT.4.
 * Optional additional requirements for viewing locally stored audit records are specified in FAU_SAR.1
-* If (optionally) configuration of the audit functionality is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MOF.1/Functions.
+* If (optionally) configuration of the audit functionality is provided by the TOE, then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MOF.1/Functions.
 
 ==== Administrator and Device Credentials and Data
 
@@ -622,7 +622,7 @@ SFR Rationale:
 
 * Protection of secret/private keys against compromise is specified in FPT_SKP_EXT.1
 * Secure destruction of keys is specified in FCS_CKM.6
-* If (optionally) management of keys is provided by the TOE then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MTD.1/CryptoKeys
+* If (optionally) management of keys is provided by the TOE, then this is specified in FMT_SMF.1 and confining this functionality to Security Administrators is required by FMT_MTD.1/CryptoKeys
 * If optional local administration using a password-based authentication mechanism is provided by the TOE, FIA_UAU.7 provides protection of password entry by providing only obscured feedback at the local console.
 * If the TOE provides password-based authentication mechanisms, requirements for password lengths and available characters are set in FIA_PMG_EXT.1. Requirements for secure storage of passwords are set in FPT_APW_EXT.1
 
@@ -824,7 +824,7 @@ Where compliance to RFCs is referred to in SFRs, this is intended to be demonstr
 
 Figure 16, Figure 17, Figure 18, Figure 19, Figure 20, and Figure 21 give a graphical presentation of the connections between the Security Functional Requirements in Sections 6.3-6.9, Annex A and Annex B, and the underlying functional areas and operations that the TOE provides. The diagrams provide a context for SFRs that relates to their use in the TOE, whereas other sections define the SFRs grouped by the abstract class and family groupings in [CC2].
 
-In the diagrams, the SFRs from Annex B are both described as ‘Discretionary’, meaning that their inclusion in an ST will depend on the particular properties of a product. The SFRs from Annex B that are required by an ST are determined by the selections made in other SFRs. For example: FTP_ITC.1 and FTP_TRP.1/Admin (in Sections 6.9.1.1 and 6.9.2.1 respectively) each contain selections of a protocol to be used for the type of secure channel described by the SFR. The selection of the protocol(s) here determines which of the protocol-specific SFRs in Section B.4.1 are also required in the ST. SFRs in Annex A can be included in the ST if they are provided by the TOE, but are not mandatory in order for a TOE to claim conformance to this cPP.
+In the diagrams, the SFRs from Annex B are both described as ‘Discretionary’, meaning that their inclusion in an ST will depend on the particular properties of a product. The SFRs from Annex B that are required by an ST are determined by the selections made in other SFRs. For example: FTP_ITC.1 and FTP_TRP.1/Admin (in Sections 6.9.1.1 and 6.9.2.1 respectively) each contain selections of a protocol to be used for the type of secure channel described by the SFR. The selection of the protocol(s) here determines which of the protocol-specific SFRs in Section B.4.1 are also required in the ST. SFRs in Annex A can be included in the ST if they are provided by the TOE but are not mandatory in order for a TOE to claim conformance to this cPP.
 
 [.text-center]
 image:extracted-media/media/arch_1_v4.png[image]
@@ -1166,7 +1166,7 @@ _Where different key destruction methods are used for different keys and/or diff
 
 _The selection for destruction of data in non-volatile memory includes block erase as an option, and this option applies only to flash memory. A block erase does not require a read verify, since the mappings of logical addresses to the erased memory locations are erased, as well as the data itself._
 
-_Some selections allow the assignment of “some value that does not contain any CSP.” This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG requirements, and not being any of the values listed as other selection options. The point of the phrase “does not contain any CSP” is to ensure that the overwritten data is carefully selected, and not taken from a general pool that might contain data that itself requires confidentiality protection._
+_Some selections allow the assignment of “some value that does not contain any CSP.” This means that the TOE uses some specified data not drawn from an RBG meeting FCS_RBG requirements and not being any of the values listed as other selection options. The point of the phrase “does not contain any CSP” is to ensure that the overwritten data is carefully selected and not taken from a general pool that might contain data that itself requires confidentiality protection._
 
 ===== FCS_CKM_EXT.7 Cryptographic Key Agreement
 
@@ -1232,7 +1232,7 @@ _The ST author selects the mode or modes in which AES operates._
 
 _If CBC mode, CTR mode, or XTS mode is selected then FCS_COP.1/SKC from Annex B must be included._ 
 
-_If CCM mode or GCM mode is selected then FCS_COP.1/AEAD from Annex B must be included._
+_If CCM mode or GCM mode is selected, then FCS_COP.1/AEAD from Annex B must be included._
 
 *FCS_COP.1/SigGen Cryptographic Operation - Signature Generation* 
 
@@ -1395,7 +1395,7 @@ In order to provide a trusted means for Administrators to interact with the TOE,
 
 *_Application Note {counter:appnote_count}_*
 
-_This requirement applies to Administrators and external IT entities of services available from the TOE directly, and not services available by connecting through the TOE. While it should be the case that few or no services are available to external entities prior to identification and authentication, if there are some available (perhaps ICMP echo) these should be listed in the assignment statement; if automated generation of cryptographic keys is supported without administrator authentication, the option "automated generation of cryptographic keys" should be selected; otherwise, the option “no other actions” should be selected._
+_This requirement applies to Administrators and external IT entities of services available from the TOE directly and not services available by connecting through the TOE. While it should be the case that few or no services are available to external entities prior to identification and authentication, if there are some available (perhaps ICMP echo) these should be listed in the assignment statement; if automated generation of cryptographic keys is supported without administrator authentication, the option "automated generation of cryptographic keys" should be selected; otherwise, the option “no other actions” should be selected._
 
 *FIA_UIA_EXT.1.3* The TSF shall provide the following remote authentication mechanisms [selection: _Web GUI password, SSH password, SSH public key, X.509 certificate_] and [selection: _no other mechanism, external authentication server_]. The TSF shall provide the following local authentication mechanisms:[selection: _none, password-based, [assignment: other authentication mechanism]_].
 
@@ -1546,7 +1546,7 @@ size)_;
 | _Based on selections in FPT_TUD_EXT.1.2, FMT_MOF.1/AutoUpdate must be included if the option “Ability to enable or disable automatic checking for updates or automatic updates” is included in the ST._
 
 | _Ability to re-enable an Administrator account_
-| _If the TOE offers the ability for a remote Administrator account to be disabled in line with FIA_AFL.1 then the ST author must select the option “Ability to re-enable an Administrator account” to allow the account to be re-enabled by a local Administrator._
+| _If the TOE offers the ability for a remote Administrator account to be disabled in line with FIA_AFL.1, then the ST author must select the option “Ability to re-enable an Administrator account” to allow the account to be re-enabled by a local Administrator._
 
 | _Ability to set the time which is used for time-stamps_
 | _The selection “Ability to set the time which is used for time-stamps” should be included in the ST if the TOE allows the Administrator to set the time of the device which is then used in time stamps. This option should not be selected if the TOE does not allow manual time setting but only relies on synchronization with external time sources like NTP servers._
@@ -2120,7 +2120,7 @@ _If the ST author selects the FTP_ITC.1/FPT_ITT.1 channel type in the main selec
 
 _If the ST author selects the FTP_ITC.1/FPT_ITT.1 channel type in the main selection in FCO_CPC_EXT.1.2 then the ST identifies the registration channel as a separate iteration of FTP_ITC.1 or FPT_ITT.1 and gives the iteration identifier (e.g., “FPT_ITT.1/Join”) in an ST Application Note for FCO_CPC_EXT.1._
 
-_Note: The channel set up and used for registration may be adopted as a continuing internal communication channel (i.e., between different TOE components) provided that the channel meets the requirements of FTP_ITC.1 or FPT_ITT.1. Otherwise, the registration channel is closed after use and a separate channel is used for the internal communications._
+_Note: The channel set up and used for registration may be adopted as a continuing internal communication channel (i.e., between different TOE components) provided that the channel meets the requirements of FTP_ITC.1 or FPT_ITT.1. Otherwise, the registration channel is closed after use, and a separate channel is used for the internal communications._
 
 _Specific requirements for Preparative Procedures relating to FCO_CPC_EXT.1 are defined in the Evaluation Activities in [SD]._
 
@@ -2416,7 +2416,7 @@ This component is included if "TSF entropy source" is selected in FCS_RBG.1.2
 
 *_Application Note {counter:appnote_count}_*
 
-_This requirement is claimed when a TOE uses a singe internal source of entropy to initialize or reseed a DRBG that is within the TOE boundary. Seeding a DRBG is the same as initializing a DRBG._
+_This requirement is claimed when a TOE uses a single internal source of entropy to initialize or reseed a DRBG that is within the TOE boundary. Seeding a DRBG is the same as initializing a DRBG._
 
 _Hardware-based noise sources are entropy sources whose primary function is noise generation, such as ring oscillators, diodes, and thermal noise. While a TOE may use software to collect the noise from these hardware sources, these are not software-based._
 
@@ -2695,7 +2695,7 @@ In all cases, the relevant SFR dependencies in the Functional Package for X.509 
 
 Generally, the validation of a X.509v3 leaf certificate comprises of several steps:
 
-* A certificate Revocation Check refers to the process of determining the current revocation status of an otherwise structurally valid certificate. This must be performed every time a certificate is used for authentication. This check must be performed for each certificate in the chain up to, but not including, the trust anchor. This means that intermediate CA certificates that are not trust anchors, and the leaf certificate must be checked. It is not mandatory to check the revocation status of any CA certificate designated a trust anchor, however if such check is performed it must be handled consistently with how other certificates are checked.
+* A certificate Revocation Check refers to the process of determining the current revocation status of an otherwise structurally valid certificate. This must be performed every time a certificate is used for authentication. This check must be performed for each certificate in the chain up to, but not including the trust anchor. This means that intermediate CA certificates that are not trust anchors, and the leaf certificate must be checked. It is not mandatory to check the revocation status of any CA certificate designated a trust anchor, however if such check is performed it must be handled consistently with how other certificates are checked.
 * An expiration check must be performed. This check must be conducted for each certificate in the chain, up to and including the trust anchor.
 * The continuity of the chain must be checked, showing that the signature on each certificate that is presented to the TOE is valid and the chain terminates at the trust anchor.
 * The presence of relevant extensions in each certificate in the chain such as the extendedKeyUsage parameters of the leaf certificate must correspond to SFR-relevant functionality. For example, a peer acting as a web server should have TLS Web Server Authentication listed as an extendedKeyUsage parameter of its X.509v3 certificate. It should be checked that the relevant extensions in each certificate in the chain, such as the extendedKeyUsage parameters of the leaf certificate, correspond to the SFR-relevant functionality they are used with.
@@ -2711,7 +2711,7 @@ When certificate validation is claimed for communication with external entities,
 * FIA_X509_EXT.1.2: When specifying processing of the extensions, must select "basicConstraints" and "extendedKeyUsage".
 * FIA_XCU_EXT.2.1:
 ** When the TOE verifies X.509 certificates (“verify” case), the TOE is not required to generate CSRs.
-** When the TOE asserts its identity using an X.509 certificate (“assert” case), the TOE shall request certificates from an external CA for communications with external entities, and may obtain certificates from an embedded CA for communications between components of a distributed TOE (e.g., during component registration or FPT_ITT.1 exchanges).
+** When the TOE asserts its identity using an X.509 certificate (“assert” case), the TOE shall request certificates from an external CA for communications with external entities and may obtain certificates from an embedded CA for communications between components of a distributed TOE (e.g., during component registration or FPT_ITT.1 exchanges).
 ** If an embedded CA is used, the ST and TSS should describe whether issuance is performed automatically over a secure channel or manually by an administrator, to maintain consistency with selections in FCO_CPC_EXT.1 and FTP_TRP.1.3/Join.
 
 If the TOE implements mutual authentication or acts as a server, there is no expectation of performing any checks on TOE’s own leaf certificate or certificate chain during authentication. Note: This does not change revocation checking requirements on certificates presented to the TOE, even if the same certificate(s) used by the TOE are also presented to the TOE.
@@ -2733,7 +2733,7 @@ _This requirement applies to a defined number of successive unsuccessful remote 
 
 _The TSS describes how the TOE ensures that authentication failures by remote Administrators cannot
 lead to a situation where no Administrator access is available, either permanently or temporarily (e.g.,
-by providing local logon which is not subject to blocking, or by allowing a reboot to clear the lockout
+by providing local logon, which is not subject to blocking, or by allowing a reboot to clear the lockout
 status and restore administrator access). The Operational Guidance describes, and identifies the importance of, any actions that are required in order to ensure that Administrator access will always be maintained, even if remote administration is made permanently or temporarily unavailable due to blocking of accounts as a result of FIA_AFL.1._
 
 ==== Protected authentication feedback (FIA_UAU)
@@ -2750,7 +2750,7 @@ If the TOE provides a password-based local authentication mechanism, passwords m
 _‘Obscured feedback’ implies the TSF does not produce a visible display of any authentication data entered by an administrator (such as the echoing of a password), although an obscured indication of progress may be provided (such as an asterisk for each character). It also implies that the TSF does not return any information during the authentication process to the administrator that may provide any indication of the authentication data._
 
 ==== Password Management (Extended – FIA_PMG_EXT)
-If the TOE provides a password-based authentication mechanism the Administrator must have the capability to compose a strong password and have mechanisms in place so that the password must be changed regularly.
+If the TOE provides a password-based authentication mechanism, the Administrator must have the capability to compose a strong password and have mechanisms in place so that the password must be changed regularly.
 
 ===== FIA_PMG_EXT.1 Password management
 
@@ -3734,7 +3734,7 @@ Documentation shall include the design of each entropy source as a whole, includ
 
 The documentation shall describe how unprocessed (raw) data was obtained for the analysis. This description shall be sufficiently detailed to explain at what point in the entropy source model the data was collected and what effects, if any, the process of data collection had on the overall entropy generation rate. The documentation should walk through the entropy source design indicating where the entropy comes from, where the entropy output is passed next, any post-processing of the raw outputs (hash, XOR, etc.), if/where it is stored and finally, how it is output from the entropy source. Any conditions placed on the process (e.g., blocking) should also be described in the entropy source design. Diagrams and examples are encouraged.
 
-This design must also include a description of the content of the security boundary of the entropy source and a description of how the security boundary ensures that an adversary outside the boundary cannot affect the entropy rate.
+This design must also include a description of the content of the security boundary of the entropy source, and a description of how the security boundary ensures that an adversary outside the boundary cannot affect the entropy rate.
 
 If implemented, the design description shall include a description of how third-party applications can add entropy to the RBG. A description of any RBG state saving between power-off and power-on shall be included.
 
