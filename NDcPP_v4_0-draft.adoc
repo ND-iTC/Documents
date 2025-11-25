@@ -290,7 +290,7 @@ The use of mandatory, optional and selection-based SFRs allows some customizatio
 
 === Modules
 
-The PP-Modules that are allowed to specify this cPP as a PP-Module base are specified in the 'Allowed-with' PP-Modules list at https://github.com/ND-iTC/Documents/blob/main/NDcPP_allowed_with_list.adoc.
+The PP-Modules that are allowed to specify this cPP as a PP-Module base are specified in the 'Allowed-with' PP-Modules list at https://nd-itc.github.io/AWL/NDcPP_allowed_with_list.html.
 
 === Evaluation Methods
 The supporting document, "Evaluation Activities for Network Device cPP" must be used in conjunction with [CEM] when performing evaluations of an ST specifying this Network Device cPP.
