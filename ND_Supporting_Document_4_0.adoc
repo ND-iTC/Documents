@@ -8,7 +8,7 @@
 
 = Supporting Document - Evaluation Activities for Network Device cPP
 
-Version: 4.0
+Version: 4.0 +
 Date: 25 November 2025
 
 == Acknowledgements
@@ -1038,7 +1038,7 @@ The test values are defined as follows:
 
 ==== FCS_RBG.1 Random Bit Generation (RBG)
 [arabic, start=164]
-. Documentation shall be produced—and the evaluator shall perform the activities—in accordance with Appendix D of [NDcPP].
+. Documentation shall be produced—and the evaluator shall perform the activities—in accordance with Annex D of [NDcPP].
 
 ===== TSS
 
@@ -1620,7 +1620,7 @@ For a non-virtualized TOE, the interruption shall not be performed at the virtua
 . (Note: Section 3.4.1 lists questions for which the evaluator shall determine and report answers through the combination of the TSS, Guidance Documentation, and Tests Evaluation Activities.)
 . The evaluator shall perform the following tests:
 [loweralpha]
-.. Test 1a: the evaluator shall confirm that a TOE component that is not currently a member of the distributed TOE cannot communicate with any other component of the TOE until the non-member is enabled by a Security Administrator, for each of the non-equivalent TOE componentsfootnote:[An ‘equivalent TOE component’ is a type of distributed TOE component that exhibits the same security characteristics, behaviour and role in the TSF as some other TOE component. In principle a distributed TOE could operate with only one instance of each equivalent TOE component, although the minimum configuration of the distributed TOE may include more than one instance (see discussion of the minimum configuration of a distributed TOE, in Appendix B.4). In practice a deployment of the TOE may include more than one instance of some equivalent TOE components for practical reasons, such as performance or the need to have separate instances for separate subnets or VLANs.], that it is required to communicate with (non-equivalent TOE components are as defined in the minimum configuration for the distributed TOE).
+.. Test 1a: the evaluator shall confirm that a TOE component that is not currently a member of the distributed TOE cannot communicate with any other component of the TOE until the non-member is enabled by a Security Administrator, for each of the non-equivalent TOE componentsfootnote:[An ‘equivalent TOE component’ is a type of distributed TOE component that exhibits the same security characteristics, behaviour and role in the TSF as some other TOE component. In principle a distributed TOE could operate with only one instance of each equivalent TOE component, although the minimum configuration of the distributed TOE may include more than one instance (see discussion of the minimum configuration of a distributed TOE, in Annex B.4). In practice a deployment of the TOE may include more than one instance of some equivalent TOE components for practical reasons, such as performance or the need to have separate instances for separate subnets or VLANs.], that it is required to communicate with (non-equivalent TOE components are as defined in the minimum configuration for the distributed TOE).
 .. Test 1b: the evaluator shall confirm that after enablement, a TOE component can only communicate with the other TOE components that it has been enabled for. This includes testing that the enabled communication is successful for the enabled TOE component pair, and that communication remains unsuccessful with any other TOE component for which communication has not been explicitly enabled.
 +
 Some TOEs may set up the registration channel before the enablement step is carried out, but in such a case the separate registered-components channel must not allow communications until after the enablement step has been completed.
@@ -2746,7 +2746,7 @@ When there is an implementation where other users than the Security Administrato
 The evaluator shall verify the sufficiency to fulfil the related SFRs. This includes checking that the TOE as a whole fully covers all SFRs and that all functionality that is required to be audited is in fact audited regardless of the component that carries it out.
 |===
 [arabic, start=517]
-. Note that additional Evaluation Activities for the TSS in the case of a distributed TOE are defined in Appendix B.4.
+. Note that additional Evaluation Activities for the TSS in the case of a distributed TOE are defined in Annex B.4.
 
 === ADV: Development
 
@@ -2799,7 +2799,7 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 === AGD: Guidance Documents
 [arabic, start=530]
 . It is not necessary for a TOE to provide separate documentation to meet the individual requirements of AGD_OPE and AGD_PRE. Although the EAs in this section are described under the traditionally separate AGD families, the mapping between the documentation provided by the developer and AGD_OPE and AGD_PRE requirements may be many-to-many, as long as all requirements are met in documentation that is delivered to Security Administrators and users (as appropriate) as part of the TOE.
-. Note that additional EAs for the guidance documentation in the case of a distributed TOE are defined in Appendix B.4.
+. Note that additional EAs for the guidance documentation in the case of a distributed TOE are defined in Annex B.4.
 
 ==== Operational User Guidance (AGD_OPE.1)
 [arabic, start=532]
@@ -2892,8 +2892,8 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 [arabic, start=555]
 . The focus of the testing is to confirm that the requirements specified in the SFRs are being met. Additionally, testing is performed to confirm the functionality described in the TSS, as well as the dependencies on the Operational guidance documentation is accurate.
 . The evaluator performs the CEM work units associated with the ATE_IND.1 SAR. Specific testing requirements and EAs are captured for each SFR in Sections 2, 3 and 4.
-. The evaluator shall consult Appendix B when determining the appropriate strategy for testing multiple variations or models of the TOE that may be under evaluation.
-. Note that additional Evaluation Activities relating to evaluator testing in the case of a distributed TOE are defined in Appendix B.4.
+. The evaluator shall consult Annex B when determining the appropriate strategy for testing multiple variations or models of the TOE that may be under evaluation.
+. Note that additional Evaluation Activities relating to evaluator testing in the case of a distributed TOE are defined in Annex B.4.
 
 === AVA: Vulnerability Assessment
 
@@ -2907,12 +2907,12 @@ Since the rest of the ADV_FSP.1 work units will have been satisfied upon complet
 |*CEM AVA_VAN.1 Work Units* |*Evaluation Activities*
 |AVA_VAN.1-1 The evaluator *_shall examine_* the TOE to determine that the test configuration is consistent with the configuration under evaluation as specified in the ST. |The evaluator shall perform the CEM activity as specified.
 
-The calibration of test resources specified in the last paragraph of the work unit AVA_VAN.1-1 of the [CEM] applies to the tools listed in Appendix A.1.4.
+The calibration of test resources specified in the last paragraph of the work unit AVA_VAN.1-1 of the [CEM] applies to the tools listed in Annex A.1.4.
 |AVA_VAN.1-2 The evaluator *_shall examine_* the TOE to determine that it has been installed properly and is in a known state
 |The evaluator shall perform the CEM activity as specified.
-|AVA_VAN.1-3 The evaluator *_shall examine_* sources of information publicly available to identify potential vulnerabilities in the TOE. |Replace CEM work unit with activities outlined in Appendix A.1.
-|AVA_VAN.1-4 The evaluator *_shall record_* in the ETR the identified potential vulnerabilities that are candidates for testing and applicable to the TOE in its operational environment. |Replace the CEM work unit with the analysis activities on the list of potential vulnerabilities in Appendix A.1, and documentation as specified in Appendix A.3.
-|AVA_VAN.1-5 The evaluator *_shall devise_* penetration tests, based on the independent search for potential vulnerabilities. |Replace the CEM work unit with the activities specified in Appendix A.2.
+|AVA_VAN.1-3 The evaluator *_shall examine_* sources of information publicly available to identify potential vulnerabilities in the TOE. |Replace CEM work unit with activities outlined in Annex A.1.
+|AVA_VAN.1-4 The evaluator *_shall record_* in the ETR the identified potential vulnerabilities that are candidates for testing and applicable to the TOE in its operational environment. |Replace the CEM work unit with the analysis activities on the list of potential vulnerabilities in Annex A.1, and documentation as specified in Annex A.3.
+|AVA_VAN.1-5 The evaluator *_shall devise_* penetration tests, based on the independent search for potential vulnerabilities. |Replace the CEM work unit with the activities specified in Annex A.2.
 |AVA_VAN.1-6 The evaluator *_shall produce_* penetration test documentation for the tests based on the list of potential vulnerabilities in sufficient detail to enable the tests to be repeatable. The test documentation shall include:
 
 {empty}a) identification of the potential vulnerability the TOE is being tested for;
@@ -2929,11 +2929,11 @@ The calibration of test resources specified in the last paragraph of the work un
 
 {empty}g) instructions to conclude the test and establish the necessary post-test state for the TOE.
 
-|The CEM work unit is captured in Appendix A.3; there are no substantive differences.
+|The CEM work unit is captured in Annex A.3; there are no substantive differences.
 |AVA_VAN.1-7 The evaluator *_shall conduct_* penetration testing. |The evaluator shall perform the CEM activity as specified.
 |AVA_VAN.1-8 The evaluator *_shall record_* the actual results of the penetration tests. |The evaluator shall perform the CEM activity as specified.
-|AVA_VAN.1-9 The evaluator *_shall report_* in the ETR the evaluator penetration testing effort, outlining the testing approach, configuration, depth and results. |Replace the CEM work unit with the reporting called for in Appendix A.3.
-|AVA_VAN.1-10 The evaluator *_shall examine_* the results of all penetration testing to determine that the TOE, in its operational environment, is resistant to an attacker possessing a Basic attack potential. |This work unit is not applicable for Type 1 and Type 2 flaws (as defined in Appendix A.1), as inclusion in this Supporting Document by the iTC makes any confirmed vulnerabilities stemming from these flaws subject to an attacker possessing a Basic attack potential.
+|AVA_VAN.1-9 The evaluator *_shall report_* in the ETR the evaluator penetration testing effort, outlining the testing approach, configuration, depth and results. |Replace the CEM work unit with the reporting called for in Annex A.3.
+|AVA_VAN.1-10 The evaluator *_shall examine_* the results of all penetration testing to determine that the TOE, in its operational environment, is resistant to an attacker possessing a Basic attack potential. |This work unit is not applicable for Type 1 and Type 2 flaws (as defined in Annex A.1), as inclusion in this Supporting Document by the iTC makes any confirmed vulnerabilities stemming from these flaws subject to an attacker possessing a Basic attack potential.
 |AVA_VAN.1-11 The evaluator *_shall report_* in the ETR all exploitable vulnerabilities and residual vulnerabilities, detailing for each:
 
 {empty}a) its source (e.g., CEM activity being undertaken when it was conceived, known to the evaluator, read in a publication);
@@ -2946,13 +2946,13 @@ The calibration of test resources specified in the last paragraph of the work un
 
 {empty}e) the amount of time, level of expertise, level of knowledge of the TOE, level of opportunity and the equipment required to perform the identified vulnerabilities, and the corresponding values using the tables 3 and 4 of Annex B.4.
 
-|Replace the CEM work unit with the reporting called for in Appendix A.3.
+|Replace the CEM work unit with the reporting called for in Annex A.3.
 |===
 
 [[sd-table-2-ava-van-mapping]]_Table 2: Mapping of AVA_VAN.1 CEM Work Units to Evaluation Activities_
 
 [arabic, start=561]
-. Because of the level of detail required for the evaluation activities, the bulk of the instructions are contained in Appendix A, while an “outline” of the assurance activity is provided below.
+. Because of the level of detail required for the evaluation activities, the bulk of the instructions are contained in Annex A, while an “outline” of the assurance activity is provided below.
 
 ===== Evaluation Activity (Documentation):
 [arabic, start=562]
@@ -2967,12 +2967,12 @@ The calibration of test resources specified in the last paragraph of the work un
 
 ===== Evaluation Activity:
 [arabic, start=566]
-. The evaluator shall formulate hypotheses in accordance with process defined in Appendix A. The evaluator shall document the flaw hypotheses generated for the TOE in the report in accordance with the guidelines in Appendix A.3. The evaluator shall perform vulnerability analysis in accordance with Appendix A.2. The results of the analysis shall be documented in the report according to Appendix A.3.
+. The evaluator shall formulate hypotheses in accordance with process defined in Annex A. The evaluator shall document the flaw hypotheses generated for the TOE in the report in accordance with the guidelines in Annex A.3. The evaluator shall perform vulnerability analysis in accordance with Annex A.2. The results of the analysis shall be documented in the report according to Annex A.3.
 
 == Required Supplementary Information
 [arabic, start=567]
 . This Supporting Document refers in various places to the possibility that ‘required supplementary information’ may need to be supplied as part of the deliverables for an evaluation. This term is intended to describe information that is not necessarily included in the Security Target or operational guidance, and that may not necessarily be public. Examples of such information could be entropy analysis, or description of a cryptographic key management architecture used in (or in support of) the TOE. The requirement for any such supplementary information will be identified in the relevant cPP.
-. The cPPs associated with this SD require an entropy analysis as described in [NDcPP, Appendix D].
+. The cPPs associated with this SD require an entropy analysis as described in [NDcPP, Annex D].
 
 == References
 
@@ -3023,15 +3023,15 @@ Version 4.0, 25 November 2025
 [arabic, start=569]
 . CEM Work Unit AVA_VAN.1-3 has been supplemented in this Supporting Document to provide a better-defined set of flaws to investigate and procedures to follow based on this particular technology. Terminology used is based on the flaw hypotheses methodology, where the evaluation team hypothesizes flaws and then either proves or disproves those flaws (a flaw is equivalent to a “potential vulnerability” as used in the CEM). Flaws are categorized into four “types” depending on how they are formulated:
 [arabic]
-.. A list of flaw hypotheses applicable to the technology described by the cPP (in this case, a network device) derived from public sources as documented in Appendix A.1.1 – this fixed set has been agreed by the iTC. Additionally, this will be supplemented with entries for a set of public sources (as indicated below) that are directly applicable to the TOE or its identified components (as defined by the process in Appendix A.1.1 below); this is to ensure that the evaluators include in their assessment applicable entries that have been discovered since the cPP was published;
-.. A list of flaw hypotheses listed in this document that are derived from lessons learned specific to that technology and other iTC input (that might be derived from other open sources and vulnerability databases, for example) as documented in Appendix A.1.2;
-.. A list of flaw hypotheses derived from information available to the evaluators; this includes the baseline evidence provided by the developer described in this Supporting Document (documentation associated with EAs, documentation described in Section 5.6.1.2, documentation described in Section 6), as well as other information (public and/or based on evaluator experience) as documented in Appendix A.1.3; and
-.. A list of flaw hypotheses that are generated through the use of TC-defined tools (e.g., nmap, fuzz testers) and their application as specified in Appendix A.1.4.
+.. A list of flaw hypotheses applicable to the technology described by the cPP (in this case, a network device) derived from public sources as documented in Annex A.1.1 – this fixed set has been agreed by the iTC. Additionally, this will be supplemented with entries for a set of public sources (as indicated below) that are directly applicable to the TOE or its identified components (as defined by the process in Annex A.1.1 below); this is to ensure that the evaluators include in their assessment applicable entries that have been discovered since the cPP was published;
+.. A list of flaw hypotheses listed in this document that are derived from lessons learned specific to that technology and other iTC input (that might be derived from other open sources and vulnerability databases, for example) as documented in Annex A.1.2;
+.. A list of flaw hypotheses derived from information available to the evaluators; this includes the baseline evidence provided by the developer described in this Supporting Document (documentation associated with EAs, documentation described in Section 5.6.1.2, documentation described in Section 6), as well as other information (public and/or based on evaluator experience) as documented in Annex A.1.3; and
+.. A list of flaw hypotheses that are generated through the use of TC-defined tools (e.g., nmap, fuzz testers) and their application as specified in Annex A.1.4.
 
 ==== Type 1 Hypotheses – Public-Vulnerability-Based
 [arabic, start=570]
-. The list of public sources of vulnerability information selected by the iTC is given in Appendix A.4.
-. The evaluators shall perform a search on the sources listed in Appendix A.4 to determine a list of potential flaw hypotheses that are specific to the TOE and its components as specified by the additional documentation mentioned above. Any duplicates – either in a specific entry, or in the flaw hypothesis that is generated from an entry from the same or a different source – can be noted and removed from consideration by the evaluation team.
+. The list of public sources of vulnerability information selected by the iTC is given in Annex A.4.
+. The evaluators shall perform a search on the sources listed in Annex A.4 to determine a list of potential flaw hypotheses that are specific to the TOE and its components as specified by the additional documentation mentioned above. Any duplicates – either in a specific entry, or in the flaw hypothesis that is generated from an entry from the same or a different source – can be noted and removed from consideration by the evaluation team.
 . According to Section 5.6.1.1, the developer shall provide documentation identifying the list of software and hardware components that compose the TOE. The evaluator shall independently verify this list for completeness by comparing it to the security functionality defined in the TSS of the ST and ensuring that all expected components are accounted for.
 Hardware components should identify at a minimum the processors used by the TOE. Software components that are in the scope of this requirement include libraries, frameworks, operating system and other major components that are independently identifiable and reusable (i.e., can be present in other products) components. The evaluator shall use the components list and determine that the TOE and its components are free of unmitigated vulnerabilities. It is expected that all remotely exploitable vulnerabilities present in the network device shall be considered as part of vulnerability assessment ("network device" is used to refer to the entire device and is not limited to the claimed security functionality).
 The search criteria to be used when searching the sources shall include:
@@ -3045,7 +3045,7 @@ As the search terms can contain proprietary information and there is a possibili
 
 ==== Type 2 Hypotheses – iTC-Sourced
 [arabic, start=574]
-. Appendix A.5 contains the list of flaw hypothesis generated by the iTC for this technology that must be considered by the evaluation team as flaw hypotheses in performing the vulnerability assessment.
+. Annex A.5 contains the list of flaw hypothesis generated by the iTC for this technology that must be considered by the evaluation team as flaw hypotheses in performing the vulnerability assessment.
 . If the evaluators discover a Type 3 or Type 4 flaw that they believe should be considered as a Type 2 flaw in future versions of this cPP, they should work with their CB to determine the appropriate means of submitting the flaw for consideration by the iTC.
 
 ==== Type 3 Hypotheses – Evaluation-Team-Generated
@@ -3069,26 +3069,26 @@ As the search terms can contain proprietary information and there is a possibili
 * During this process, the evaluator is free to interact with the developer to determine if the flaw exists, including requests to the developer for additional evidence (e.g., detailed design information, consultation with engineering staff).
 * In case of a confirmed flaw, the CB should be informed.
 * Should the developer object to the information being requested as being not compatible with the overall level of the evaluation activity/cPP and cannot provide evidence otherwise that the flaw is disproved, the evaluator shall prepare an appropriate set of materials as follows:
-[arabic, start=583]
+
 .. The source documents used in formulating the hypothesis, and why it represents a potential compromise against a specific TOE function;
 .. An argument why the flaw hypothesis could not be proven or disproved by the evidence provided so far;
 .. The type of information required to investigate the flaw hypothesis further.
 * The CB will then either approve or disapprove the request for additional information. If approved, the developer provides the requested evidence to disprove the flaw hypothesis (or, of course, acknowledge the flaw).
-* For each hypothesis, the evaluator shall note whether the flaw hypothesis has been successfully disproved, successfully proven to have identified a flaw, or requires further investigation. It is important to have the results documented as outlined in Appendix A.3 below.
+* For each hypothesis, the evaluator shall note whether the flaw hypothesis has been successfully disproved, successfully proven to have identified a flaw, or requires further investigation. It is important to have the results documented as outlined in Annex A.3 below.
 * If the evaluator finds a flaw, the evaluator shall report these flaws to the developer. All reported flaws must be addressed as follows:
 .. If the developer confirms that the flaw exists and that it is exploitable at Basic Attack Potential, then a change is made by the developer, and the resulting resolution is agreed by the evaluator and noted as part of the evaluation report.
 .. If the developer, the evaluator, and the CB agree that the flaw is exploitable only above Basic Attack Potential and does not require resolution for any other reason, then no change is made, and the flaw is noted as a residual vulnerability in the CB-internal report (ETR).
 .. If the developer and evaluator agree that the flaw is exploitable only above Basic Attack Potential, but it is deemed critical to fix because of technology-specific or cPP-specific aspects such as typical use cases or operational environments, then a change is made by the developer, and the resulting resolution is agreed by the evaluator and noted as part of the evaluation report.
 .. Disagreements between evaluator and developer regarding questions of the existence of a flaw, its attack potential, or whether it should be deemed critical to fix are resolved by the CB.
-. Any testing performed by the evaluator shall be documented in the test report as outlined in Appendix A.3 below.
-. As indicated in Appendix A.3, the public statement with respect to vulnerability analysis that is performed on TOEs conformant to the cPP is constrained to coverage of flaws associated with Types 1 and 2 (defined in Appendix A.1) flaw hypotheses only. The fact that the iTC generates these candidate hypotheses indicates these must be addressed.
+. Any testing performed by the evaluator shall be documented in the test report as outlined in Annex A.3 below.
+. As indicated in Annex A.3, the public statement with respect to vulnerability analysis that is performed on TOEs conformant to the cPP is constrained to coverage of flaws associated with Types 1 and 2 (defined in Annex A.1) flaw hypotheses only. The fact that the iTC generates these candidate hypotheses indicates these must be addressed.
 
 === Reporting
 [arabic, start=585]
 . The evaluators shall produce two reports on the testing effort; one that is public-facing (that is, included in the non-proprietary evaluation report, which is a subset of the Evaluation Technical Report (ETR)) and the complete ETR that is delivered to the overseeing CB.
 . The public-facing report contains:
-* The flaw identifiers returned when the procedures for searching public sources were followed according to instructions in the Supporting Document per Appendix A.1.1;
-* A statement that the evaluators have examined the Type 1 flaw hypotheses specified in this Supporting Document in Appendix A.1.1 (i.e., the flaws listed in the previous bullet) and the Type 2 flaw hypotheses specified in this Supporting Document by the iTC in Appendix A.1.2;
+* The flaw identifiers returned when the procedures for searching public sources were followed according to instructions in the Supporting Document per Annex A.1.1;
+* A statement that the evaluators have examined the Type 1 flaw hypotheses specified in this Supporting Document in Annex A.1.1 (i.e., the flaws listed in the previous bullet) and the Type 2 flaw hypotheses specified in this Supporting Document by the iTC in Annex A.1.2;
 . A statement that the evaluation team developed Types 3 and 4 flaw hypotheses in accordance with Sections A.1.3, A.1.4, and A.2, and that no residual vulnerabilities exist that are exploitable by attackers with Basic Attack Potential as defined by the CB in accordance with the guidance in the CEM. It should be noted that this is just a statement about the “fact of” Types 3 and 4 flaw hypotheses being developed, and that no specifics about the number of flaws, the flaws themselves, or the analysis pertaining to those flaws will be included in the public-facing report.
 . No other information is provided in the public-facing report.
 . The internal CB report contains, in addition to the information in the public-facing report:
@@ -3102,7 +3102,7 @@ As the search terms can contain proprietary information and there is a possibili
 ** Whether it is exploitable in its operational environment or not (i.e., exploitable or residual).
 ** The amount of time, level of expertise, level of knowledge of the TOE, level of opportunity and the equipment required to perform the identified vulnerabilities (see AVA_VAN.1-11);
 * How each flaw hypothesis was resolved (this includes whether the original flaw hypothesis was confirmed or disproved, and any analysis relating to whether a residual vulnerability is exploitable by an attacker with Basic Attack Potential) (see AVA_VAN1-10); and
-* In the case that actual testing was performed in the investigation (either as part of flaw hypothesis generation using tools specified by the iTC in Appendix A.1.4, or in proving/disproving a particular flaw) the steps followed in setting up the TOE (and any required test equipment); executing the test; post-test procedures; and the actual results (to a level of detail that allow repetition of the test, including the following:
+* In the case that actual testing was performed in the investigation (either as part of flaw hypothesis generation using tools specified by the iTC in Annex A.1.4, or in proving/disproving a particular flaw) the steps followed in setting up the TOE (and any required test equipment); executing the test; post-test procedures; and the actual results (to a level of detail that allow repetition of the test, including the following:
 ** Identification of the potential vulnerability the TOE was/is being tested for;
 ** Instructions to connect and setup all required test equipment as required to conduct the penetration test;
 ** Instructions to establish all penetration test prerequisite initial conditions;
@@ -3138,7 +3138,7 @@ https://www.rapid7.com/db/?type=nexpose
 == Network Device Equivalency Considerations
 === Introduction
 [arabic, start=599]
-. This appendix provides a foundation for evaluators to determine whether a developer’s request for equivalency of products for different models wishing to claim conformance to the NDcPP is allowed.
+. This Annex provides a foundation for evaluators to determine whether a developer’s request for equivalency of products for different models wishing to claim conformance to the NDcPP is allowed.
 . For the purpose of evaluation, equivalency can be broken into two categories:
 * *Variations in models*: Separate TOE models/variations may include differences that could necessitate separate testing across each model. If there are no variations in any of the categories listed below, the models may be considered equivalent.
 * *Variations in TOE dependencies on the environment (e.g., OS/platform the product is tested on)*: The method a TOE provides functionality (or the functionality itself) may vary depending upon the environment on which it is installed. If there is no difference in the TOE-provided functionality or in the manner in which the TOE provides the functionality, the models may be considered equivalent.

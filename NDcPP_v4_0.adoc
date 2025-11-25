@@ -1321,7 +1321,7 @@ The following table provides the allowed choices for completion of the selection
 |HMAC-SHA-512|[selection: _512 (ISO, FIPS), 384 (FIPS), 256 (FIPS)_] bits|[selection: _ISO/IEC 9797-2:2021 (Section 7 “MAC Algorithm 2”), FIPS PUB 198-1_]
 |===
 
-[[table-7-fcs-cop11-keyedhash]]_Table 7: Allowed choices for FCS_COP.1.1/KeyedHash
+[[table-7-fcs-cop11-keyedhash]]_Table 7: Allowed choices for FCS_COP.1.1/KeyedHash_
 
 *_Application Note {counter:appnote_count}_*
 
