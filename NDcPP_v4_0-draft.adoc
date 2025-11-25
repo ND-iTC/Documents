@@ -4328,9 +4328,6 @@ a|Elliptic Curve Cryptography
 a|*ECDH*
 a|Elliptic Curve Diffie Hellman
 
-a|*ECDH*
-a|Elliptic Curve Diffie Hellman
-
 a|*ECDSA*
 a|Elliptic Curve Digital Signature Algorithm
 
