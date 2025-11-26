@@ -1,10 +1,10 @@
-= ND iTC allowed-with list for Network Device cPP
+= ND iTC Allowed-with List for Network Device cPP
 
 [cols="1,2",options=,]
 |===
 
-|*Allowed-with list version*|3.0
-|*Date*|06 December 2023
+|*Allowed-with list version*|4.0
+|*Date*|25 November 2025
 
 |===
 
@@ -13,6 +13,35 @@ This document contains the lists of allowed packages and PP-Modules to which exa
 Inclusion of an object on one of these lists does not imply endorsement of the object by the NDFW iTC, nor does it imply that the relevant object has been checked for compliance with the assurance requirements applicable to a PP-Configuration or ST that uses the cPP in conjunction with the relevant object. 
  
 Conformance claims from other Protection Profiles (apart from PP-Configurations that may be defined using the PP above and the allowed objects below) are not allowed by ND cPP. 
+
+== NDcPP v4.0
+
+[cols="1,2",options=,]
+|===
+
+|cPP to which this list applies:|collaborative Protection Profile for Network Devices
+|Latest definitive cPP version:|v4.0, 25 November 2025
+|Supporting Document for cPP:|Evaluation Activities for Network Device cPP
+|Latest definitive SD version:|v4.0, 25 November 2025
+
+|===
+
+
+*Allowed PP-Modules:*
+
+[cols="0,1,2",options=,]
+|===
+
+.4+|1.|Object ID:|TBD
+
+|Object version:|TBD
+
+|Owner:|TBD
+
+|Notes:|none
+
+
+|===
 
 == NDcPP v3.0e
 
