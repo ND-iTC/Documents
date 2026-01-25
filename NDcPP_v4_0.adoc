@@ -1484,7 +1484,7 @@ size)_;
 ** _Ability to set the time which is used for time-stamps;_
 ** _Ability to configure NTP;_
 ** _Ability to configure the reference identifier for the peer;_
-** _Ability to manage the TOE's trust store and designate X509.v3 certificates as trust anchors;_
+** _Ability to manage the TOE's trust store and designate X.509v3 certificates as trust anchors;_
 ** _Ability to generate Certificate Signing Request (CSR) and process CA certificate response;_
 ** _Ability to administer the TOE locally;_
 ** _Ability to configure the local session inactivity time before session termination or locking;_
@@ -1557,8 +1557,8 @@ size)_;
 | _Ability to configure the reference identifier for the peer_
 | _The selection “Ability to configure the reference identifier for the peer” should be included in the ST if the TOE allows the Administrator to specify the expected identity of a remote peer when establishing secure communications using a protocol included in the ST. For TOEs that support only IP address and FQDN identifier types, configuration of the reference identifier may be the same as configuration of the peer’s name for the purposes of connection._
 
-| _Ability to manage the TOE’s trust store and designate X509.v3 certificates as trust anchors_
-| _The selection “Ability to manage the TOE’s trust store and designate X509.v3 certificates as trust anchors" should be included in the ST if the TOE supports management and configuration of the TOE’s trust store. This means the TOE supports X.509v3 certificates for some security functions. This only applies if the TOE claims conformance to the Functional Package for X.509._
+| _Ability to manage the TOE’s trust store and designate X.509v3 certificates as trust anchors_
+| _The selection “Ability to manage the TOE’s trust store and designate X.509v3 certificates as trust anchors" should be included in the ST if the TOE supports management and configuration of the TOE’s trust store. This means the TOE supports X.509v3 certificates for some security functions. This only applies if the TOE claims conformance to the Functional Package for X.509._
 
 | _Ability to generate Certificate Signing Request (CSR) and process CA certificate response_
 | _The selection "Ability to generate Certificate Signing Request (CSR) and process CA certificate response" must be included in the ST if the TOE implements Certificate Request or Enrollment Request processes. This only applies if the TOE claims conformance to the Functional Package for X.509, and only when FIA_X509_EXT.3 from the functional package is claimed._
